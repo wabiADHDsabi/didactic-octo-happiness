@@ -2987,7 +2987,7 @@ body.slim-screen-mode #cat-nav{top:42px}
     <div class="th" style="border-color:rgba(255,255,255,.1)">
       <span class="th-icon">&#9881;</span>
       <span class="th-label" style="color:var(--text)">Settings</span>
-      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-05-14</span>
+      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-05-15</span>
     </div>
     <div id="settings-body" style="display:flex;flex-direction:column;gap:0">
 
@@ -3502,6 +3502,67 @@ body.slim-screen-mode #cat-nav{top:42px}
     <div id="mc"></div>
   </div>
 </div>
+<script>
+// ── MOBILE DEBUG PANEL ──
+window._dbgErrors = [];
+window.onerror = function(msg, src, line, col, err){
+  window._dbgErrors.push('[ERR] '+msg+' ('+src.split('/').pop()+':'+line+')');
+  dbgUpdate();
+};
+var _origLog = console.log;
+console.log = function(){
+  window._dbgErrors.push('[LOG] '+Array.from(arguments).join(' '));
+  dbgUpdate();
+  _origLog.apply(console, arguments);
+};
+window.addEventListener('unhandledrejection', function(e){
+  window._dbgErrors.push('[PROMISE] '+(e.reason||'unknown'));
+  dbgUpdate();
+});
+var _origWarn = console.warn;
+console.warn = function(){
+  window._dbgErrors.push('[WARN] '+Array.from(arguments).join(' '));
+  dbgUpdate();
+  _origWarn.apply(console, arguments);
+};
+function dbgUpdate(){
+  var el = document.getElementById('_dbg_panel');
+  if(!el) return;
+  el.innerHTML = window._dbgErrors.slice(-10).map(function(e){
+    return '<div style="border-bottom:1px solid rgba(255,255,255,.08);padding:4px 0;word-break:break-all">'+e+'</div>';
+  }).join('');
+}
+function dbgShow(){
+  var el = document.getElementById('_dbg_panel');
+  if(el) el.style.display = el.style.display==='none'?'block':'none';
+}
+window.dbgJua = function(){
+  var el = document.getElementById('jua-body');
+  window._dbgErrors.push('[JUA] body exists:'+(!!el)+' JUA_DATA:'+(typeof JUA_DATA!=='undefined'?JUA_DATA.length:'UNDEF')+' juaState:'+(typeof juaState)+' juaRender:'+(typeof juaRender));
+  dbgUpdate();
+  if(typeof juaRender==='function') try{juaRender();}catch(e){window._dbgErrors.push('[JUA ERR] '+e.message);dbgUpdate();}
+};
+window.dbgQt = function(){
+  var el = document.getElementById('qtafsir-body');
+  var chk = 'checkpoints: '+JSON.stringify(window._dbgCheckpoints||{});
+  window._dbgErrors.push('[QT] body exists:'+(!!el)+' QT_DATA:'+(typeof QT_DATA!=='undefined'?QT_DATA.length:'UNDEF')+' qtState:'+(typeof qtState)+' qtRender:'+(typeof qtRender));
+  window._dbgErrors.push(chk);
+  dbgUpdate();
+  if(typeof qtRender==='function') try{qtRender();}catch(e){window._dbgErrors.push('[QT ERR] '+e.message);dbgUpdate();}
+};
+window.dbgQt = function(){
+  var el = document.getElementById('qtafsir-body');
+  window._dbgErrors.push('[QT] body exists:'+(!!el)+' QT_DATA:'+(typeof QT_DATA!=='undefined'?QT_DATA.length:'UNDEF')+' qtState:'+(typeof qtState)+' qtRender:'+(typeof qtRender));
+  dbgUpdate();
+  if(typeof qtRender==='function') try{qtRender();}catch(e){window._dbgErrors.push('[QT ERR] '+e.message);dbgUpdate();}
+};
+window.dbgJua = function(){
+  var el = document.getElementById('jua-body');
+  window._dbgErrors.push('[JUA] body exists:'+(!!el)+' JUA_DATA:'+(typeof JUA_DATA!=='undefined'?JUA_DATA.length:'UNDEF')+' juaRender:'+(typeof juaRender));
+  dbgUpdate();
+  if(typeof juaRender==='function') juaRender();
+};
+</script>
 <script src="dashboard-1.js"></script>
 <script src="dashboard-2.js"></script>
 <script src="dashboard-3.js"></script>
@@ -3613,59 +3674,13 @@ body.slim-screen-mode #cat-nav{top:42px}
   </div>
 
 
-<script>
-// ── MOBILE DEBUG PANEL ──
-window._dbgErrors = [];
-window.onerror = function(msg, src, line, col, err){
-  window._dbgErrors.push('[ERR] '+msg+' ('+src.split('/').pop()+':'+line+')');
-  dbgUpdate();
-};
-window.addEventListener('unhandledrejection', function(e){
-  window._dbgErrors.push('[PROMISE] '+(e.reason||'unknown'));
-  dbgUpdate();
-});
-var _origWarn = console.warn;
-console.warn = function(){
-  window._dbgErrors.push('[WARN] '+Array.from(arguments).join(' '));
-  dbgUpdate();
-  _origWarn.apply(console, arguments);
-};
-function dbgUpdate(){
-  var el = document.getElementById('_dbg_panel');
-  if(!el) return;
-  el.innerHTML = window._dbgErrors.slice(-10).map(function(e){
-    return '<div style="border-bottom:1px solid rgba(255,255,255,.08);padding:4px 0;word-break:break-all">'+e+'</div>';
-  }).join('');
-}
-function dbgShow(){
-  var el = document.getElementById('_dbg_panel');
-  if(el) el.style.display = el.style.display==='none'?'block':'none';
-}
-window.dbgJua = function(){
-  var el = document.getElementById('jua-body');
-  window._dbgErrors.push('[JUA] body exists:'+(!!el)+' JUA_DATA:'+(typeof JUA_DATA!=='undefined'?JUA_DATA.length:'UNDEF')+' juaState:'+(typeof juaState)+' juaRender:'+(typeof juaRender));
-  dbgUpdate();
-  if(typeof juaRender==='function') try{juaRender();}catch(e){window._dbgErrors.push('[JUA ERR] '+e.message);dbgUpdate();}
-};
-window.dbgQt = function(){
-  var el = document.getElementById('qtafsir-body');
-  window._dbgErrors.push('[QT] body exists:'+(!!el)+' QT_DATA:'+(typeof QT_DATA!=='undefined'?QT_DATA.length:'UNDEF')+' qtState:'+(typeof qtState)+' qtRender:'+(typeof qtRender));
-  dbgUpdate();
-  if(typeof qtRender==='function') try{qtRender();}catch(e){window._dbgErrors.push('[QT ERR] '+e.message);dbgUpdate();}
-};
-window.dbgJua = function(){
-  var el = document.getElementById('jua-body');
-  window._dbgErrors.push('[JUA] body exists:'+(!!el)+' JUA_DATA:'+(typeof JUA_DATA!=='undefined'?JUA_DATA.length:'UNDEF')+' juaRender:'+(typeof juaRender));
-  dbgUpdate();
-  if(typeof juaRender==='function') juaRender();
-};
-</script>
+
 <div id="_dbg_btn" onclick="dbgShow()" style="position:fixed;bottom:80px;right:10px;z-index:9999;background:rgba(255,0,0,.7);color:#fff;font-family:monospace;font-size:10px;padding:5px 10px;cursor:pointer;border-radius:4px">🐛 DEBUG</div>
 <div id="_dbg_panel" style="display:none;position:fixed;bottom:120px;right:10px;left:10px;z-index:9998;background:rgba(0,0,0,.95);border:1px solid rgba(255,0,0,.5);color:rgba(255,100,100,.9);font-family:monospace;font-size:10px;padding:8px;max-height:300px;overflow-y:auto">
   <div style="display:flex;justify-content:space-between;margin-bottom:6px">
     <span>CONSOLE</span>
     <span onclick="dbgJua()" style="cursor:pointer;color:#ffcc00">▶ JUA</span>&nbsp;<span onclick="dbgQt()" style="cursor:pointer;color:#88aaff">▶ QT</span>
-    <span onclick="window._dbgErrors=[];dbgUpdate()" style="cursor:pointer">CLEAR</span>
+    <span onclick="window._dbgErrors=[];dbgUpdate()" style="cursor:pointer">CLEAR</span>&nbsp;<span onclick="var t=window._dbgErrors.join('\n');if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}" style="cursor:pointer;color:#50fac8">COPY</span>
   </div>
   <div id="_dbg_panel" style="font-size:9px">No errors yet.</div>
 </div>
