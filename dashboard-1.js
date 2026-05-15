@@ -7005,18 +7005,30 @@ function qtRenderVerse(v, expanded, showMarkRead){
   h+='<div style="font-size:12px;color:var(--text);font-style:italic;margin-bottom:10px;line-height:1.6;border-left:2px solid rgba(255,204,0,.3);padding-left:10px">"'+v.english_meaning+'"</div>';
   // Explanation
   h+='<div style="font-size:11px;color:var(--dim);line-height:1.7;margin-bottom:10px">'+v.verse_explanation+'</div>';
-  // Scholars
+  // Scholars — always shown, each with a unique tinted background
   if(v.scholars_opinions&&v.scholars_opinions.length){
-    h+='<button data-qtscholars="1" style="width:100%;padding:7px;background:transparent;border:1px solid rgba(255,204,0,.15);color:rgba(255,204,0,.5);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px;margin-bottom:8px">';
-    h+=(expanded?'▲ HIDE':'▼ SCHOLARS ('+v.scholars_opinions.length+')')+'</button>';
-    if(expanded){
-      v.scholars_opinions.forEach(function(s){
-        h+='<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
-        h+='<div style="font-size:9px;color:var(--ca);letter-spacing:1px;margin-bottom:4px">'+s.scholar+'</div>';
-        h+='<div style="font-size:11px;color:var(--dim);line-height:1.6">'+s.opinion+'</div>';
-        h+='</div>';
-      });
-    }
+    var scholarShades=[
+      'rgba(255,204,0,.06)','rgba(80,200,255,.06)','rgba(180,130,255,.06)',
+      'rgba(80,250,123,.06)','rgba(255,130,180,.06)','rgba(255,160,80,.06)'
+    ];
+    var scholarBorders=[
+      'rgba(255,204,0,.15)','rgba(80,200,255,.15)','rgba(180,130,255,.15)',
+      'rgba(80,250,123,.15)','rgba(255,130,180,.15)','rgba(255,160,80,.15)'
+    ];
+    var scholarNameCols=[
+      '#ffcc00','#50c8ff','#b482ff',
+      '#50fa7b','#ff82b4','#ffa050'
+    ];
+    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">SCHOLARS</div>';
+    v.scholars_opinions.forEach(function(s,si){
+      var shade=scholarShades[si%scholarShades.length];
+      var border=scholarBorders[si%scholarBorders.length];
+      var nameCol=scholarNameCols[si%scholarNameCols.length];
+      h+='<div style="padding:10px 12px;margin-bottom:6px;border:1px solid '+border+';background:'+shade+';border-left:3px solid '+nameCol+'">';
+      h+='<div style="font-size:9px;color:'+nameCol+';letter-spacing:1px;margin-bottom:5px;font-family:monospace">'+s.scholar+'</div>';
+      h+='<div style="font-size:11px;color:rgba(255,255,255,.75);line-height:1.7">'+s.opinion+'</div>';
+      h+='</div>';
+    });
   }
   // Mark as read
   if(showMarkRead){
@@ -7091,9 +7103,6 @@ function qtRender(){
     b.onclick=function(){qtState._tab=this.getAttribute('data-qttab');qtSave();qtRender();};
   });
 
-  // Wire scholars
-  var scholarsBtn=el.querySelector('[data-qtscholars]');
-  if(scholarsBtn)scholarsBtn.onclick=function(){qtState._expanded=!qtState._expanded;qtSave();qtRender();};
 
   // Wire copy
   el.querySelectorAll('[data-qtcopy]').forEach(function(btn){
