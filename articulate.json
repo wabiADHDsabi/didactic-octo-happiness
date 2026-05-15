@@ -1,0 +1,942 @@
+{
+  "categories": [
+    {
+      "id": "swaps",
+      "name": "Instead Of...",
+      "color": "#ff79c6",
+      "entries": [
+        {
+          "id": "sw1",
+          "tip": "Instead of 'Sorry to interrupt' — enter the conversation with purpose",
+          "example": "Say: 'Building on what you said...' or 'I want to add something here.' or 'Can I jump in for a second?'",
+          "not": "Don't start with an apology — it frames your contribution as an intrusion before you've said anything.",
+          "why": "Apologies signal that you believe your voice is unwelcome. Transitional phrases signal that you're engaged and contributing, not barging in."
+        },
+        {
+          "id": "sw2",
+          "tip": "Instead of 'Does that make sense?' — invite real engagement",
+          "example": "Say: 'What are your thoughts on that?' or 'I'd love your reaction.' or 'Does that land the way I mean it?'",
+          "not": "Don't ask 'Does that make sense?' — it implies the problem might be their comprehension, not your explanation.",
+          "why": "'What are your thoughts?' assumes the other person is smart and engaged. It opens a conversation rather than asking for a pass mark."
+        },
+        {
+          "id": "sw3",
+          "tip": "Instead of 'I just wanted to...' — drop the 'just'",
+          "example": "Say: 'I wanted to follow up on...' or 'I'm reaching out because...' not 'I just wanted to check in real quick.'",
+          "not": "Don't use 'just' as a hedge — 'I just think,' 'I just wanted to say,' 'just a quick thought.' It miniaturizes everything you say.",
+          "why": "'Just' is a verbal apology for taking up space. Remove it from almost every sentence and you instantly sound more confident."
+        },
+        {
+          "id": "sw4",
+          "tip": "Instead of 'I'm not sure but...' — own your uncertainty differently",
+          "example": "Say: 'My read on this is...' or 'The way I see it...' or 'I'd want to verify this, but my instinct is...'",
+          "not": "Don't discount everything before you say it. 'I'm not sure but' trains people to stop listening before you've started.",
+          "why": "Owning your perspective — even an uncertain one — is more compelling than pre-emptively undermining it."
+        },
+        {
+          "id": "sw5",
+          "tip": "Instead of 'No problem' — respond to thanks with intention",
+          "example": "Say: 'Happy to help.' or 'Of course.' or 'Glad that worked out.' Situationally: 'That's what I'm here for.'",
+          "not": "Don't say 'No problem' — it implies there could have been a problem. It's a subtle negative.",
+          "why": "Positive framing — 'happy to,' 'glad to' — creates warmth without sycophancy. Small but compounds over time."
+        },
+        {
+          "id": "sw6",
+          "tip": "Instead of 'I feel like...' when making an argument — use evidence language",
+          "example": "Say: 'My sense is...' or 'The data suggests...' or 'From what I've seen...' or simply state the thing directly.",
+          "not": "Don't open every professional point with 'I feel like' — it invites pushback on your feelings rather than engagement with your point.",
+          "why": "'I feel like X' is easy to dismiss. 'The pattern I'm seeing is X' invites a factual conversation."
+        },
+        {
+          "id": "sw7",
+          "tip": "Instead of 'That's a great question' — just answer the question",
+          "example": "Pause briefly, then answer: 'The short answer is... and here's the nuance...' or 'Good timing on that — I was just thinking about...'",
+          "not": "Don't reflexively say 'great question' — it sounds like a stalling tactic and people know it.",
+          "why": "Answering directly signals confidence. The pause before answering signals thought. The combination is compelling."
+        },
+        {
+          "id": "sw8",
+          "tip": "Instead of 'I might be wrong, but...' — frame uncertainty as inquiry",
+          "example": "Say: 'Help me stress-test this...' or 'I want to think through this out loud — push back if something doesn't land.'",
+          "not": "Don't protect yourself from being wrong before you've said anything. It's intellectual cowardice disguised as humility.",
+          "why": "Inviting pushback from a position of confidence ('help me stress-test this') is stronger than pre-emptive self-criticism."
+        },
+        {
+          "id": "sw9",
+          "tip": "Instead of 'Basically' — be specific about what you mean",
+          "example": "Say the thing directly. If you need to simplify: 'In short...' or 'The key point is...' or 'Put simply...'",
+          "not": "Don't use 'basically' as a filler — it sounds like you're about to oversimplify, and it's often a sign you haven't organized your thought.",
+          "why": "'In short' or 'the key point' signals structure. 'Basically' signals improvisation."
+        },
+        {
+          "id": "sw10",
+          "tip": "Instead of 'To be honest' or 'Honestly' — just be honest",
+          "example": "Remove it entirely. If you must signal candor: 'I'll be direct...' or 'Here's my actual read...'",
+          "not": "Don't say 'to be honest' — it implies you're usually not.",
+          "why": "Every time you say 'to be honest,' you retroactively cast doubt on everything else you've said."
+        },
+        {
+          "id": "sw11",
+          "tip": "Instead of 'Whatever you think is fine' — state a preference",
+          "example": "Say: 'I lean toward X, but I'm open if you see it differently.' or 'My preference is X — what's yours?'",
+          "not": "Don't default to 'whatever' in professional settings — it reads as disengaged, not flexible.",
+          "why": "Stating a preference and then deferring is more impressive than having no preference. It shows you thought about it."
+        },
+        {
+          "id": "sw12",
+          "tip": "Instead of 'I was going to say...' when interrupted — reclaim your point cleanly",
+          "example": "Say: 'I'd like to finish the thought — ' then continue. Or wait for a pause and say: 'Coming back to my point...'",
+          "not": "Don't trail off and lose the thread. Don't say 'never mind' if your point was worth making.",
+          "why": "Reclaiming your point calmly, without aggression, signals self-respect and composure."
+        },
+        {
+          "id": "sw13",
+          "tip": "Instead of 'Sorry, this might be a dumb question' — ask the question",
+          "example": "Say: 'I want to make sure I understand this correctly — ' then ask. Or just ask directly.",
+          "not": "Don't apologize for curiosity. Never call your own question dumb.",
+          "why": "Pre-emptive self-deprecation about a question signals insecurity and makes others less likely to take your question seriously."
+        },
+        {
+          "id": "sw14",
+          "tip": "Instead of 'I don't have strong feelings either way' — engage",
+          "example": "Say: 'I haven't thought deeply about this, so I'd want to hear more before I weigh in.' — if genuinely neutral, say why.",
+          "not": "Don't say you have no opinion as a way to avoid conflict — people can usually tell.",
+          "why": "Naming why you're neutral ('I haven't thought deeply about this') is more credible than claiming neutrality you don't feel."
+        },
+        {
+          "id": "sw15",
+          "tip": "Instead of 'Can I ask you something?' — just ask it",
+          "example": "Say what you mean: 'What's your take on X?' or 'I'm curious — how did you approach Y?'",
+          "not": "Don't ask for permission to ask a question. It wastes time and signals tentativeness.",
+          "why": "Asking directly shows confidence and respect for the other person's time."
+        }
+      ]
+    },
+    {
+      "id": "starting",
+      "name": "Starting Strong",
+      "color": "#ffb86c",
+      "entries": [
+        {
+          "id": "st1",
+          "tip": "Lead with the conclusion, not the preamble",
+          "example": "'The answer is X — and here's why.' Not: 'Well, I was thinking about this and there are a few different angles and so I guess what I'm saying is...'",
+          "not": "Don't make people wait for your point. Burying the lead makes you sound unsure of your own argument.",
+          "why": "People listen differently when they know where you're going. Give them the destination first, then the route."
+        },
+        {
+          "id": "st2",
+          "tip": "Signal the structure before you deliver it",
+          "example": "'I have three thoughts on this.' or 'Two things: one quick, one more involved.' Then deliver both.",
+          "not": "Don't launch into an undifferentiated wall of speech. People lose track and stop following.",
+          "why": "Signaling structure creates suspense and gives listeners hooks to hang your points on. It also forces you to organize before speaking."
+        },
+        {
+          "id": "st3",
+          "tip": "Enter a room verbally — don't apologize for being there",
+          "example": "Walk in, make eye contact, and begin: 'Thanks for making time. I want to cover three things.' Not: 'Sorry, am I late? Sorry about that, I just...'",
+          "not": "Don't open with logistical apologies unless genuinely warranted. It frames you as disorganized before you've said anything of substance.",
+          "why": "Your verbal entrance sets the tone for how you'll be received. Confidence at the start earns latitude for the rest."
+        },
+        {
+          "id": "st4",
+          "tip": "Use a one-sentence framing statement before explaining",
+          "example": "'This is a resource question.' or 'I want to flag a risk.' or 'I'm going to make a case for changing direction.' Then explain.",
+          "not": "Don't dive into detail before framing why you're speaking. People organize what they hear around the frame.",
+          "why": "A framing sentence tells people how to listen. Without it, they're sorting your words as you speak, which means they retain less."
+        },
+        {
+          "id": "st5",
+          "tip": "Match your opening energy to the room — then elevate it slightly",
+          "example": "If the room is tired and low-energy, don't shout — but speak slightly cleaner, slightly more deliberately than the room's pace.",
+          "not": "Don't mirror a flat room so completely that you disappear into it. You can be calm and still be the most intentional voice.",
+          "why": "Slight elevation — not performance — signals presence. People orient toward the clearest signal in the room."
+        },
+        {
+          "id": "st6",
+          "tip": "Start with what you know, not what you don't",
+          "example": "'Here's what I'm confident about, and here's where I'd want your input.' Not: 'I don't really know much about this, but...'",
+          "not": "Don't establish ignorance as your opening position. Lead with your knowledge, then acknowledge limits.",
+          "why": "People assess competence quickly. Starting with what you know earns credibility that carries through your uncertainties."
+        },
+        {
+          "id": "st7",
+          "tip": "Name the stakes at the start of important conversations",
+          "example": "'This matters because if we get it wrong, we'll spend two months fixing it.' People listen differently when they understand why it matters.",
+          "not": "Don't assume everyone knows why a conversation matters. They often don't, and they disengage.",
+          "why": "Stakes create attention. Naming them isn't dramatic — it's efficient."
+        },
+        {
+          "id": "st8",
+          "tip": "Use 'I' statements to own your perspective from the start",
+          "example": "'My view is...' / 'What I'm seeing is...' / 'I'd argue...' — not 'One could say' or the passive 'It has been suggested.'",
+          "not": "Don't hide behind passive constructions or vague subjects to avoid ownership of your ideas.",
+          "why": "Owning your perspective is persuasive. Vague attribution makes you sound either cowardly or pompous."
+        }
+      ]
+    },
+    {
+      "id": "buytime",
+      "name": "Buying Time Gracefully",
+      "color": "#8be9fd",
+      "entries": [
+        {
+          "id": "bt1",
+          "tip": "Replace 'um' and 'uh' with deliberate silence",
+          "example": "Pause. Look down briefly if needed. Then speak. A 2-second silence feels like 10 seconds to the speaker and 1 second to the listener.",
+          "not": "Don't fill every gap with filler sounds. They signal that you're afraid of silence, not that you're thinking.",
+          "why": "Silence reads as confidence. Filler sounds read as uncertainty. The content is the same — the packaging changes how it lands."
+        },
+        {
+          "id": "bt2",
+          "tip": "Use a thinking phrase that sounds like thought, not stalling",
+          "example": "'That's worth thinking through carefully.' or 'Let me make sure I answer that well.' or 'There's more than one layer to this.'",
+          "not": "Don't say 'That's a great question' — it's recognizably a stall. Don't say 'Hmm, good point' reflexively.",
+          "why": "Phrases that signal your thinking process ('let me make sure I answer that well') sound deliberate. They buy time while raising expectations."
+        },
+        {
+          "id": "bt3",
+          "tip": "Repeat the question back to clarify and buy time simultaneously",
+          "example": "'So what you're asking is whether we should X before Y — let me think about that.' It confirms understanding and gives you 5 seconds.",
+          "not": "Don't repeat the question robotically — paraphrase it slightly, which shows you're processing.",
+          "why": "Paraphrasing serves two purposes: it confirms you understood, and it gives you thinking time without anyone noticing."
+        },
+        {
+          "id": "bt4",
+          "tip": "Start your answer, then deepen it — don't wait for the perfect answer",
+          "example": "'The short answer is X. The longer answer...' Begin with what you know, and the fuller answer often arrives while you're talking.",
+          "not": "Don't freeze waiting for the perfect answer to materialize fully formed. It rarely does.",
+          "why": "Beginning an answer often unlocks the rest of it. The act of speaking clarifies thinking."
+        },
+        {
+          "id": "bt5",
+          "tip": "Defer strategically, not evasively",
+          "example": "'I want to give you a real answer on that — can I come back to you by end of day?' or 'Let me pull the right number rather than guess.'",
+          "not": "Don't guess and get it wrong, and don't defer without a concrete timeframe. Vague deferral sounds evasive.",
+          "why": "Strategic deferral with a deadline signals competence. Guessing signals poor judgment. Pulling the right information demonstrates standards."
+        },
+        {
+          "id": "bt6",
+          "tip": "Use your hands when thinking — it buys micro-seconds and signals thought",
+          "example": "A slow, deliberate gesture (chin touch, slight head tilt) signals processing. It's nonverbal punctuation that says 'I'm considering this seriously.'",
+          "not": "Don't freeze physically while filling space verbally — the mismatch between movement and sound makes filler more obvious.",
+          "why": "Physical signals of thinking make verbal thinking time feel purposeful. The body reinforces the impression of deliberation."
+        },
+        {
+          "id": "bt7",
+          "tip": "Acknowledge complexity before answering",
+          "example": "'This is actually more nuanced than it looks — ' then give your best answer. You've set up a more sophisticated response.",
+          "not": "Don't pretend complexity isn't there just to seem quick. Rushing a complex answer often produces a worse one.",
+          "why": "Naming complexity earns you processing time and also primes your audience to appreciate a nuanced answer rather than expecting a simple one."
+        }
+      ]
+    },
+    {
+      "id": "disagree",
+      "name": "Disagreeing Without Conflict",
+      "color": "#ff5555",
+      "entries": [
+        {
+          "id": "dg1",
+          "tip": "Find the valid part before pushing back",
+          "example": "'There's a version of that I agree with — specifically X. Where I'd push back is on Y.'",
+          "not": "Don't lead with 'I disagree' or 'Actually' — both put people on the defensive before you've made a point.",
+          "why": "Steelmanning the other view before disagreeing signals fairness and makes your objection harder to dismiss as reactionary."
+        },
+        {
+          "id": "dg2",
+          "tip": "Use 'and' instead of 'but' when disagreeing",
+          "example": "'I hear what you're saying, and I think there's another factor we haven't considered.' 'But' signals opposition; 'and' signals addition.",
+          "not": "Don't reflexively use 'but' — it psychologically erases everything before it.",
+          "why": "'Yes, and' is a technique from improv for good reason. It keeps the conversation collaborative even when the content is oppositional."
+        },
+        {
+          "id": "dg3",
+          "tip": "Disagree with the idea, not the person",
+          "example": "'The logic of that argument breaks down at X' rather than 'You're not thinking about X.'",
+          "not": "Don't say 'you' when you mean 'the idea.' Disagreeing with a person triggers defensiveness; disagreeing with reasoning invites examination.",
+          "why": "Detaching the idea from the person gives them room to agree with you without feeling like they've lost."
+        },
+        {
+          "id": "dg4",
+          "tip": "Name your disagreement as a perspective, not a verdict",
+          "example": "'My read is different — I'd argue X.' rather than 'That's wrong.' or 'No, the issue is...'",
+          "not": "Don't deliver disagreement as correction. You can be firm without being dismissive.",
+          "why": "Framing disagreement as your perspective ('my read is') signals confidence without arrogance. It invites response rather than shutting down."
+        },
+        {
+          "id": "dg5",
+          "tip": "Ask a question instead of making a counter-argument first",
+          "example": "'Help me understand how you're thinking about X' before you share your view. Often the question surfaces the real disagreement.",
+          "not": "Don't fire your counterargument before you fully understand the argument you're countering. You might be disagreeing with a misunderstanding.",
+          "why": "Genuine questions create dialogue. Counterarguments create debate. Dialogue is more efficient."
+        },
+        {
+          "id": "dg6",
+          "tip": "Disagree in private more directly than in public",
+          "example": "In a one-on-one: 'I think that's the wrong call, and here's why.' In a group: 'I have some concerns I'd like to work through — can we schedule time?'",
+          "not": "Don't publicly contradict someone without warning — it damages the relationship even if you're right.",
+          "why": "Context determines the appropriate register of disagreement. Private disagreement can be more direct because there are no social dynamics to manage."
+        },
+        {
+          "id": "dg7",
+          "tip": "Signal that you've genuinely considered their view before disagreeing",
+          "example": "'I sat with this and I keep coming back to the same concern...' shows your disagreement is considered, not reactive.",
+          "not": "Don't disagree instantly in a way that looks like you didn't process what they said.",
+          "why": "A disagreement that arrives after visible thought carries more weight than an instant rebuttal."
+        },
+        {
+          "id": "dg8",
+          "tip": "Know when to disagree and commit anyway",
+          "example": "'I have reservations, and I want to name them — but I'm with you on this.' Noted dissent without sabotage.",
+          "not": "Don't pretend to agree when you don't — but also don't relitigate a decided issue forever.",
+          "why": "The ability to disagree and commit is a sign of professional maturity. It separates raising concerns from blocking progress."
+        }
+      ]
+    },
+    {
+      "id": "questions",
+      "name": "Asking Better Questions",
+      "color": "#50fa7b",
+      "entries": [
+        {
+          "id": "q1",
+          "tip": "Make your question specific to what you actually want to know",
+          "example": "'Help me understand what you mean by efficient in this context' rather than 'What do you mean?'",
+          "not": "Don't ask vague questions — 'what do you mean?' can mean anything. Specificity shows you were listening.",
+          "why": "Specific questions signal that you've processed what was said. Vague questions suggest you zoned out."
+        },
+        {
+          "id": "q2",
+          "tip": "Use 'what' and 'how' questions more than 'why' questions",
+          "example": "'How did you arrive at that?' rather than 'Why did you do it that way?' — same intent, different feel.",
+          "not": "Don't ask 'why' questions in professional settings without care — they often sound like interrogation or accusation.",
+          "why": "'Why' puts people on the defensive. 'How' and 'what' create space for explanation without judgment."
+        },
+        {
+          "id": "q3",
+          "tip": "Ask one question at a time",
+          "example": "Pick the most important question and ask only that. Wait for the answer before asking the next.",
+          "not": "Don't stack questions: 'How did this happen, and what are we doing about it, and who's responsible?' — they'll answer the easiest one.",
+          "why": "Multi-part questions diffuse attention. One focused question gets a full answer."
+        },
+        {
+          "id": "q4",
+          "tip": "Use questions to show what you know, not just what you don't",
+          "example": "'Given that we're working with X constraint, how does that change the approach?' shows context and asks the real question.",
+          "not": "Don't ask questions that reveal you haven't done the basic reading. Demonstrate preparation through the framing of the question.",
+          "why": "A well-framed question signals competence. It shows you understand the landscape even if you don't know the specific answer."
+        },
+        {
+          "id": "q5",
+          "tip": "Ask for concrete examples when things get abstract",
+          "example": "'Can you give me a concrete example of what that would look like?' or 'What would success actually look like in practice?'",
+          "not": "Don't let conversations float in abstraction when you need specifics. Asking for examples isn't a sign of not understanding — it's good thinking.",
+          "why": "Concrete examples expose whether the abstract thinking holds up. They're often more revealing than any other question."
+        },
+        {
+          "id": "q6",
+          "tip": "Ask the question behind the question",
+          "example": "When someone asks 'Is this done?' they often mean 'Can I count on this?' Answer both: 'Yes, and here's what to expect.'",
+          "not": "Don't answer only the literal question when the real concern is different. Read the subtext.",
+          "why": "Answering the real question — not just the asked one — signals high emotional intelligence and builds trust."
+        },
+        {
+          "id": "q7",
+          "tip": "Use silence after asking a question",
+          "example": "Ask the question, then stop. Wait. Resist the urge to fill the silence or rephrase the question immediately.",
+          "not": "Don't immediately rephrase or add to a question you just asked. It signals you don't trust your own question.",
+          "why": "Silence after a question creates pressure that helps people think. Filling it releases that pressure and often gets you a worse answer."
+        },
+        {
+          "id": "q8",
+          "tip": "Ask for the other person's preference before sharing yours",
+          "example": "'What's your instinct on this?' before 'Here's what I think.' You learn more and people feel heard.",
+          "not": "Don't always share your view first — it anchors the conversation and makes it harder for others to say something different.",
+          "why": "Asking first gives you information and builds goodwill. Sharing first closes off the conversation."
+        }
+      ]
+    },
+    {
+      "id": "listening",
+      "name": "Showing You're Listening",
+      "color": "#a9dc76",
+      "entries": [
+        {
+          "id": "li1",
+          "tip": "Reflect back what you heard before responding",
+          "example": "'So what I'm hearing is X — is that right?' before you respond. It confirms understanding and shows you listened.",
+          "not": "Don't assume you understood. Don't immediately launch into your response without acknowledging what was said.",
+          "why": "Reflection before response shows that you absorbed what was said. It also catches misunderstandings before they compound."
+        },
+        {
+          "id": "li2",
+          "tip": "Reference something specific they said earlier in the conversation",
+          "example": "'Going back to what you mentioned about X — that actually connects to this.' Using their own words signals full attention.",
+          "not": "Don't let something important someone said disappear without acknowledgment. It signals that you only heard what you wanted to hear.",
+          "why": "Referencing earlier content signals that you've been tracking the whole conversation, not just waiting for your turn."
+        },
+        {
+          "id": "li3",
+          "tip": "Replace 'I know' with 'I hear you' or 'I understand'",
+          "example": "When someone shares something difficult: 'I hear you.' rather than 'I know.' or worse, 'I know, same.'",
+          "not": "Don't say 'I know' in response to someone sharing their experience — it centers you and erases them.",
+          "why": "'I hear you' acknowledges without appropriating. It confirms you received what was said."
+        },
+        {
+          "id": "li4",
+          "tip": "Don't formulate your response while they're still talking",
+          "example": "Stay in their words until they stop. Then take a breath. Then respond. If you miss a point, ask.",
+          "not": "Don't half-listen while composing your next sentence. People can tell — your follow-up questions betray you.",
+          "why": "Full listening produces better responses. The pause to formulate after they stop is more effective than composing while they're speaking."
+        },
+        {
+          "id": "li5",
+          "tip": "Use minimal encouragers that aren't hollow",
+          "example": "'Right,' 'Mm,' 'Go on,' 'That's interesting,' (said when you mean it) — short signals that you're tracking without interrupting.",
+          "not": "Don't say 'Absolutely!' or 'Totally!' reflexively to everything — it's recognizable as autopilot and erodes credibility.",
+          "why": "Genuine minimal encouragers signal attention without hijacking the conversation. Hollow ones do the opposite."
+        },
+        {
+          "id": "li6",
+          "tip": "Ask a follow-up question that could only exist if you heard them",
+          "example": "If they mention a project under pressure: 'What's the main constraint — timeline or resources?' shows specific attention.",
+          "not": "Don't ask a generic follow-up that could apply to any situation. It reveals you weren't fully present.",
+          "why": "Specific follow-ups are the highest proof of listening. They're impossible to fake convincingly."
+        },
+        {
+          "id": "li7",
+          "tip": "Put your phone face down — or away entirely",
+          "example": "The physical signal of full attention changes the quality of the conversation. People speak differently when they know they have you.",
+          "not": "Don't check your phone mid-conversation even for a second — it immediately signals that whatever is on the screen is more important.",
+          "why": "Physical attention signals psychological attention. The absence of the phone is the loudest possible signal that you're present."
+        },
+        {
+          "id": "li8",
+          "tip": "Name the emotion, not just the content",
+          "example": "If someone shares a hard situation: 'That sounds genuinely frustrating' before moving to solutions.",
+          "not": "Don't rush to fix or advise without first acknowledging the feeling. Problem-solving without acknowledgment feels dismissive.",
+          "why": "People need to feel heard before they're ready to receive input. Naming the emotion unlocks the rest of the conversation."
+        }
+      ]
+    },
+    {
+      "id": "confidence",
+      "name": "Confidence Signals",
+      "color": "#ffcc00",
+      "entries": [
+        {
+          "id": "co1",
+          "tip": "Slow down when you're nervous — not up",
+          "example": "When anxiety spikes your pace, deliberately slow. Pause after key points. Let silence do work.",
+          "not": "Don't speed up to get through the discomfort. Fast speech sounds panicked; slow speech sounds authoritative.",
+          "why": "Pace is one of the most controllable confidence signals. Slowing down changes how both you and your audience experience what you're saying."
+        },
+        {
+          "id": "co2",
+          "tip": "Remove hedges from statements of fact or opinion",
+          "example": "'The deadline is Friday' not 'I think the deadline might be Friday.' 'My recommendation is X' not 'I sort of feel like maybe X could work.'",
+          "not": "Don't hedge when you don't need to. Hedging true things makes true things sound uncertain.",
+          "why": "Hedges are appropriate when you're genuinely uncertain. Applied to certainties, they undermine credibility with every sentence."
+        },
+        {
+          "id": "co3",
+          "tip": "End sentences — don't let them rise as questions",
+          "example": "Declarative sentences land downward. 'We launch Tuesday.' If you go up at the end: 'We launch Tuesday?' it sounds like you're asking.",
+          "not": "Don't use upward inflection (uptalk) on statements. It makes every assertion sound like a question needing validation.",
+          "why": "Downward intonation signals conviction. It tells listeners you believe what you just said."
+        },
+        {
+          "id": "co4",
+          "tip": "Hold eye contact slightly past comfortable",
+          "example": "Look at the person you're speaking to — not past them, not at your notes — especially while making your main point.",
+          "not": "Don't look away at the moment you deliver the key line. That's exactly when eye contact matters most.",
+          "why": "Eye contact during key moments signals belief in what you're saying. Looking away during the point suggests you're uncertain of it."
+        },
+        {
+          "id": "co5",
+          "tip": "Take up physical space deliberately",
+          "example": "Sit back, not forward. Shoulders down. Arms resting, not crossed. Feet on the floor. You don't have to be big — just present.",
+          "not": "Don't make yourself physically small when you want to be heard. Compressed posture compresses perceived authority.",
+          "why": "Physical presence and verbal presence reinforce each other. Open posture signals you belong in the room."
+        },
+        {
+          "id": "co6",
+          "tip": "Say 'I don't know' without apology",
+          "example": "'I don't know — let me find out.' or 'I don't have that number, but I'll get it.' Clean, direct, closed.",
+          "not": "Don't apologize for not knowing. Don't pad it: 'I'm so sorry, I should know this, I just can't remember...'",
+          "why": "Confident people don't know things — they just say so and close the loop. The apology is the problem, not the not-knowing."
+        },
+        {
+          "id": "co7",
+          "tip": "Be comfortable saying no — simply",
+          "example": "'I can't take that on right now.' or 'That doesn't work for me.' Clean and direct, no elaborate justification required.",
+          "not": "Don't over-explain or apologize for a legitimate no. Long explanations invite negotiation.",
+          "why": "A simple no, delivered calmly, signals that you know your limits and respect them. Over-explanation suggests guilt."
+        },
+        {
+          "id": "co8",
+          "tip": "Lower your voice slightly when making important points",
+          "example": "Reduce volume on the key statement. People lean in. It creates intimacy and gravity simultaneously.",
+          "not": "Don't raise your voice to signal importance — it reads as either excitement or aggression. Lower is more commanding.",
+          "why": "A lowered voice on a key point creates a dynamic that draws listeners in. It's one of the most powerful vocal techniques available."
+        },
+        {
+          "id": "co9",
+          "tip": "Don't over-explain after someone agrees with you",
+          "example": "If someone says 'yes, that makes sense' — stop. You don't need to keep convincing. Let the yes land.",
+          "not": "Don't continue making the argument after it's won. It signals insecurity and can actually reverse the agreement.",
+          "why": "Over-explaining after agreement suggests you didn't believe you'd be agreed with. Accepting agreement cleanly demonstrates confidence."
+        },
+        {
+          "id": "co10",
+          "tip": "Make declarative statements about your own work",
+          "example": "'This works because...' not 'I hope this is okay.' 'Here's what I built.' not 'This might not be exactly right but...'",
+          "not": "Don't pre-apologize for your own work. It cues the person to find problems before they've even looked.",
+          "why": "The way you present your work shapes how it's received. Confidence in presentation is part of the work."
+        }
+      ]
+    },
+    {
+      "id": "recovering",
+      "name": "Recovering Gracefully",
+      "color": "#bd93f9",
+      "entries": [
+        {
+          "id": "rc1",
+          "tip": "When you lose your train of thought — name it and pause",
+          "example": "'I had a thread — let me pick it back up.' Then pause 3 seconds. It often comes back. If not: 'The main point I was building toward is X.'",
+          "not": "Don't frantically fill the gap with sound while searching for the thread. The filler is more disruptive than the pause.",
+          "why": "Naming what happened and pausing is more composed than trying to hide that it happened. Audiences almost always prefer honesty to performance."
+        },
+        {
+          "id": "rc2",
+          "tip": "Correct yourself without excessive self-flagellation",
+          "example": "'Actually — let me revise that.' or 'I need to take that back — the right number is X.' Clean correction, move on.",
+          "not": "Don't say 'I'm so sorry, that was such a stupid mistake, I should know this.' The correction has been made — stop punishing yourself.",
+          "why": "Extended self-criticism draws more attention to the error than the error itself would have. Correct and continue."
+        },
+        {
+          "id": "rc3",
+          "tip": "If you say something wrong in a meeting — address it before the meeting ends",
+          "example": "'I want to correct something I said earlier — the actual figure is X.' Don't let a mistake become the record.",
+          "not": "Don't let an error stand in the interest of not drawing attention to it. The error usually draws more attention than the correction.",
+          "why": "Proactive correction signals integrity. Letting errors stand — especially when you notice them — signals the opposite."
+        },
+        {
+          "id": "rc4",
+          "tip": "When interrupted mid-point — hold your position",
+          "example": "Let them finish, then: 'I want to come back to what I was saying.' or 'Coming back to my point — ' and then make it.",
+          "not": "Don't just abandon your point when interrupted. Don't say 'Never mind, it's not important' if it was important.",
+          "why": "Returning to your point signals that you believe it's worth hearing. Abandoning it signals the opposite."
+        },
+        {
+          "id": "rc5",
+          "tip": "Accept compliments simply",
+          "example": "'Thank you — I'm pleased with how it turned out.' or 'Thanks, it took some work to get there.'",
+          "not": "Don't deflect or self-deprecate: 'Oh it was nothing really' or 'I mean it could have been better.' It makes the compliment-giver feel foolish.",
+          "why": "Deflecting compliments is a subtle form of self-doubt. Accepting them cleanly is confident and also gracious."
+        },
+        {
+          "id": "rc6",
+          "tip": "When you don't understand something — say so specifically",
+          "example": "'I'm following you up to the part about X — can you say more about that?'",
+          "not": "Don't nod through confusion and hope it resolves itself. It rarely does and you miss something important.",
+          "why": "Specific acknowledgment of where you lost the thread shows you were following everything before that point. It signals engagement, not ignorance."
+        },
+        {
+          "id": "rc7",
+          "tip": "Recover from a joke that landed badly — without doubling down",
+          "example": "Acknowledge it lightly: 'That landed differently than I intended.' and move on. Don't explain the joke.",
+          "not": "Don't explain why it was funny. Don't apologize excessively. Don't make the next five minutes about the joke.",
+          "why": "A brief acknowledgment and a pivot is more elegant than either doubling down or collapsing. It shows you can read a room and self-correct."
+        }
+      ]
+    },
+    {
+      "id": "ending",
+      "name": "Ending Conversations",
+      "color": "#ff9580",
+      "entries": [
+        {
+          "id": "en1",
+          "tip": "Signal that you're wrapping up — before you actually wrap up",
+          "example": "'So, to bring this to a close...' or 'Last thing from me...' or 'Final point on this — ' It primes listeners for the landing.",
+          "not": "Don't just stop suddenly — it leaves people uncertain whether you're done. Don't keep talking past your ending.",
+          "why": "A landing signal prepares the audience for your conclusion. Without it, they don't know whether to respond or wait."
+        },
+        {
+          "id": "en2",
+          "tip": "End with the action, not the summary",
+          "example": "Close with: 'So the next step is X by Thursday.' Not a recap of everything said. What happens next is what people remember.",
+          "not": "Don't end on a recap when a decision or action exists. Recaps diffuse the clarity that decisions create.",
+          "why": "Ending on action creates accountability and momentum. Ending on summary creates a pleasant feeling that dissipates."
+        },
+        {
+          "id": "en3",
+          "tip": "Exit a social conversation without abruptness or trailing off",
+          "example": "'It was genuinely good to see you — I'll let you get back to it.' or 'I've got to catch someone before they leave — great talking to you.'",
+          "not": "Don't just drift away hoping they'll notice the conversation is over. Don't keep the ending going for five minutes.",
+          "why": "A clean exit is a gift to both people. It closes the loop with warmth and leaves the other person with a positive final impression."
+        },
+        {
+          "id": "en4",
+          "tip": "Summarize who does what before leaving a meeting",
+          "example": "'Before we close — my understanding is: you're handling X, I'm on Y, and we'll reconnect Friday. Does that match?'",
+          "not": "Don't leave a meeting without confirming ownership of next steps — the same conversation often means different things to different people.",
+          "why": "Explicit closing summaries prevent misalignment. They also signal that you're the kind of person who follows through."
+        },
+        {
+          "id": "en5",
+          "tip": "Know when a point is made — stop making it",
+          "example": "When people have understood and agreed, stop adding supporting arguments. The point is made.",
+          "not": "Don't keep arguing for a position after it's been accepted. It sounds like you don't realize you've won.",
+          "why": "Stopping at agreement shows social awareness. Continuing past it signals either insecurity or inability to read the room."
+        },
+        {
+          "id": "en6",
+          "tip": "Thank people specifically, not generically",
+          "example": "'Thank you for pushing back on the timeline — that was the right call.' rather than just 'Thanks everyone.'",
+          "not": "Don't end with generic thanks that apply to no one specifically. It sounds like a habit, not a feeling.",
+          "why": "Specific thanks lands. It tells the person what they did that mattered. Generic thanks is better than nothing but barely."
+        },
+        {
+          "id": "en7",
+          "tip": "Leave silence at the end of your point",
+          "example": "Make your final statement and stop. Don't fill the silence. Let the point settle before someone responds.",
+          "not": "Don't trail off with 'so... yeah... that's kind of what I was thinking...' after making a good point.",
+          "why": "Your ending is the last thing heard. A clean stop is more memorable than a trail of qualifications."
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "name": "Real Life & Social",
+      "color": "#ff6e6e",
+      "entries": [
+        {
+          "id": "so1",
+          "tip": "Use people's names — once, at the right moment",
+          "example": "'Thanks, Marcus.' or 'That's a good point, Sarah.' Name, then continue. Don't overuse.",
+          "not": "Don't overuse names — it sounds like a sales call. Once or twice in a conversation is enough.",
+          "why": "Hearing your name activates attention. It signals that you're talking to this person specifically, not delivering a speech."
+        },
+        {
+          "id": "so2",
+          "tip": "Match energy without losing your own register",
+          "example": "If someone is excited, engage their excitement. If someone is serious, be present in that. Adapt without performing.",
+          "not": "Don't hold rigidly to one tone across all situations — it reads as either robotic or emotionally unavailable.",
+          "why": "Appropriate energy matching signals social intelligence. It tells people you're present to them, not just to yourself."
+        },
+        {
+          "id": "so3",
+          "tip": "Be the person who makes introductions",
+          "example": "When two people you know meet for the first time, connect them: 'Marcus, this is Sarah — she works on X which connects to what you were saying.'",
+          "not": "Don't stand silently between two people who don't know each other. It creates social discomfort that reflects on you.",
+          "why": "Making thoughtful introductions positions you as someone who thinks about connections. It's one of the most socially generous things you can do."
+        },
+        {
+          "id": "so4",
+          "tip": "When you forget someone's name — address it honestly",
+          "example": "'I'm so sorry — I've spaced on your name.' People almost always respond warmly to honesty over pretending.",
+          "not": "Don't spend an entire conversation avoiding using someone's name hoping it resolves itself. It usually doesn't.",
+          "why": "Admitting you forgot is infinitely better than being caught avoiding using the name. It's honest and oddly endearing."
+        },
+        {
+          "id": "so5",
+          "tip": "Ask about what someone does, not what they are",
+          "example": "'What are you working on these days?' rather than 'What do you do?' — invites story rather than category.",
+          "not": "Don't open with 'What do you do?' — it immediately sorts the person by professional status.",
+          "why": "'What are you working on?' opens space for multiple kinds of answers — professional, personal, creative. It signals genuine curiosity."
+        },
+        {
+          "id": "so6",
+          "tip": "Give compliments that are specific and non-transactional",
+          "example": "'That point about X in the meeting was sharp — I hadn't thought of it that way.' rather than generic praise.",
+          "not": "Don't give generic compliments: 'you're so smart.' Specific ones are more memorable and more believable.",
+          "why": "Specific compliments show you were paying attention. They land as observations, not flattery."
+        },
+        {
+          "id": "so7",
+          "tip": "Disagree in social settings with lightness, not heat",
+          "example": "'I actually see it differently — ' with a smile and curiosity, not defensiveness. 'What makes you think X?'",
+          "not": "Don't go silent to avoid social disagreement — or get heated over low-stakes things. Neither serves you.",
+          "why": "Gentle disagreement with genuine curiosity is charming. It marks you as someone with views and the confidence to hold them lightly."
+        },
+        {
+          "id": "so8",
+          "tip": "Speak well of people who aren't in the room",
+          "example": "When someone comes up: 'She's sharp — great instincts.' Resist the temptation to bond through criticism.",
+          "not": "Don't bond with people by criticizing absent parties. It's temporarily connecting and permanently damaging to how they see you.",
+          "why": "How you speak about people who can't hear you tells everyone present exactly how you'll speak about them."
+        },
+        {
+          "id": "so9",
+          "tip": "When you arrive somewhere — arrive",
+          "example": "Walk in, stand up straight, make eye contact, greet someone. Don't shrink in hoping to settle before being noticed.",
+          "not": "Don't creep in and find a corner. Your arrival sets a tone — choose it intentionally.",
+          "why": "A confident arrival signals that you belong there. It changes how people engage you from the first moment."
+        },
+        {
+          "id": "so10",
+          "tip": "Listen to understand, not to respond — especially in casual conversation",
+          "example": "Ask a follow-up question before sharing a parallel story. 'And then what happened?' before 'Oh that reminds me of when I...'",
+          "not": "Don't immediately pivot to your own experience — it signals that their story was just a trigger for yours, not interesting in itself.",
+          "why": "The rarest thing in conversation is someone who is genuinely curious about what you're saying. Being that person makes you magnetic."
+        }
+      ]
+    },
+    {
+      "id": "presence",
+      "name": "Presence & Delivery",
+      "color": "#00e5ff",
+      "entries": [
+        {
+          "id": "pr1",
+          "tip": "Vary your pace to create emphasis",
+          "example": "Speed up through the setup. Slow way down for the key point. The contrast creates emphasis without volume.",
+          "not": "Don't speak at a constant pace — it blends everything to the same importance. Monotone pace = monotone message.",
+          "why": "Pace variation is one of the most powerful vocal tools available. It directs attention without raising your voice."
+        },
+        {
+          "id": "pr2",
+          "tip": "Use pauses strategically — especially before key words",
+          "example": "'The most important thing here is — (pause) — trust.' The pause before the word makes the word land.",
+          "not": "Don't rush key words. Don't bury them in a continuous stream of speech.",
+          "why": "A pause before a key word frames it as significant. The audience knows something important is coming and leans in."
+        },
+        {
+          "id": "pr3",
+          "tip": "Match your face to what you're saying",
+          "example": "If you're making a serious point — look serious. If you're making a warm point — let warmth show. Don't smile through hard feedback.",
+          "not": "Don't hold a fixed expression regardless of content. Incongruence between face and words creates distrust.",
+          "why": "Congruence — face, body, and words aligned — is what we perceive as authentic. Incongruence triggers suspicion."
+        },
+        {
+          "id": "pr4",
+          "tip": "Breathe before you speak — especially in high-stakes moments",
+          "example": "One breath before starting an important sentence. It settles the voice, slows the pace, and signals that you're in control.",
+          "not": "Don't start speaking while still inhaling — it creates a strained voice that signals anxiety.",
+          "why": "The breath resets the nervous system slightly. It's a micro-reset that noticeably affects the quality of what follows."
+        },
+        {
+          "id": "pr5",
+          "tip": "Gesture with purpose — not as nervous energy discharge",
+          "example": "Use gestures to mark out structure ('on one hand... on the other') or emphasize scale. Let hands rest when not in use.",
+          "not": "Don't fidget, touch your face, or self-groom while speaking. These are comfort behaviors that undermine authority.",
+          "why": "Purposeful gestures reinforce meaning. Nervous gestures compete with meaning. Still hands on a neutral body signal control."
+        },
+        {
+          "id": "pr6",
+          "tip": "Project from your chest — not your throat",
+          "example": "Breathe into your belly, speak from your chest. The voice is fuller, carries further, and tires less.",
+          "not": "Don't speak from the throat — it creates a tight, strained quality that both sounds and feels anxious.",
+          "why": "A chest voice resonates. It takes up acoustic space in a way that throat-speaking doesn't. It also lasts longer without fatigue."
+        },
+        {
+          "id": "pr7",
+          "tip": "Make eye contact with individuals — not the group",
+          "example": "When speaking to a group: make a complete thought with one person, then move to another. 3-5 seconds per person.",
+          "not": "Don't sweep the room rapidly — it's visually nervous and no one feels seen. Don't stare at one person the whole time.",
+          "why": "Individual eye contact in group settings makes every person feel addressed. The group feels like several one-on-ones."
+        },
+        {
+          "id": "pr8",
+          "tip": "Record yourself once — then fix the most obvious thing",
+          "example": "Just the audio is enough. You'll immediately notice the filler words, the pace, the vocal tics. Pick one thing and work on it.",
+          "not": "Don't record yourself and then avoid watching it because it's uncomfortable. The discomfort is the data.",
+          "why": "You cannot hear yourself the way others hear you. Recording is the only way to get accurate data on how you actually sound."
+        }
+      ]
+    },
+    {
+      "id": "vocabulary",
+      "name": "Vocabulary & Word Choice",
+      "color": "#ffb86c",
+      "entries": [
+        {
+          "id": "vo1",
+          "tip": "Use the specific word, not the category word",
+          "example": "'She was furious' not 'She was upset.' 'He hesitated' not 'He seemed unsure.' Specific words create pictures; category words don't.",
+          "not": "Don't default to vague emotional language — 'upset,' 'nice,' 'bad,' 'good.' These words carry almost no information.",
+          "why": "Specific words do the work of description instantly. They require no elaboration because they already contain the picture."
+        },
+        {
+          "id": "vo2",
+          "tip": "Avoid jargon with people outside your field — translate it",
+          "example": "Instead of 'we need to optimize the pipeline' to a non-technical person: 'we need to make the process faster at this step.'",
+          "not": "Don't use jargon as a shorthand when it will obscure rather than clarify. It doesn't make you sound expert — it makes you sound inconsiderate.",
+          "why": "The goal of language is communication. Jargon serves communication within a group and blocks it outside one."
+        },
+        {
+          "id": "vo3",
+          "tip": "Replace 'very' and 'really' with a stronger word",
+          "example": "'Exhausted' not 'very tired.' 'Brilliant' not 'really smart.' 'Furious' not 'very angry.'",
+          "not": "Don't amplify weak words with adverbs — it makes the sentence longer and the image weaker.",
+          "why": "Intensifiers like 'very' and 'really' signal that the original word wasn't strong enough. Finding the right word eliminates the need for them."
+        },
+        {
+          "id": "vo4",
+          "tip": "Use concrete nouns and active verbs — minimize adjectives",
+          "example": "'He slammed the door' not 'He closed the door aggressively.' The verb does the work of the adverb.",
+          "not": "Don't decorate weak verbs with adverbs when a strong verb exists. Find the verb.",
+          "why": "Strong verbs create action. Adjective-heavy sentences create impressions without movement. Verbs are almost always more powerful."
+        },
+        {
+          "id": "vo5",
+          "tip": "Vary sentence length in speech — long sentences followed by short ones",
+          "example": "'We've been working on this for three months, tried four different approaches, and hit every obstacle you can think of. We're ready.'",
+          "not": "Don't speak in sentences that are all the same length — it creates monotony. Rhythm in speech is as real as rhythm in music.",
+          "why": "A short sentence after a long one lands with the weight of the long one behind it. It's one of the most powerful rhetorical structures available."
+        },
+        {
+          "id": "vo6",
+          "tip": "Use metaphors that are concrete, not dead",
+          "example": "'This is a Jenga tower — each piece we pull makes the next pull more dangerous.' Not: 'This is a slippery slope situation.'",
+          "not": "Don't use dead metaphors — 'low-hanging fruit,' 'move the needle,' 'circle back,' 'synergy.' They create the impression of thought without any.",
+          "why": "A fresh metaphor creates a picture that communicates faster than explanation. A dead metaphor is just noise."
+        },
+        {
+          "id": "vo7",
+          "tip": "Say the number, not the approximation — when you know it",
+          "example": "'We lost 340 users last month' not 'We lost a bunch of users.' Specificity signals that you know your subject.",
+          "not": "Don't hide behind vague quantifiers when precision is available and would serve the conversation.",
+          "why": "Specific numbers demonstrate command of the material. They also make your statements harder to dismiss."
+        },
+        {
+          "id": "vo8",
+          "tip": "When you must simplify — say you're simplifying",
+          "example": "'This is a simplification, but: X.' Naming the simplification earns trust. Pretending it's complete loses it.",
+          "not": "Don't oversimplify without signaling it — people who know more will catch it and it damages credibility.",
+          "why": "Naming your simplification shows intellectual honesty and signals that you know more than you're delivering."
+        }
+      ]
+    },
+    {
+      "id": "emotions",
+      "name": "Emotional Intelligence in Speech",
+      "color": "#ff5555",
+      "entries": [
+        {
+          "id": "ei1",
+          "tip": "Name the dynamic, not just the fact",
+          "example": "'I notice we keep coming back to this — I wonder if there's something underneath it we haven't addressed.'",
+          "not": "Don't push through unacknowledged tension hoping it resolves. Named tension can be resolved; unnamed tension festers.",
+          "why": "Naming a dynamic shifts the conversation from content to process — which is often where the real issue lives."
+        },
+        {
+          "id": "ei2",
+          "tip": "When someone is upset — don't go straight to logic",
+          "example": "First: 'I can see this is frustrating.' Then — only when they feel heard — 'Let me share what I know about why it happened.'",
+          "not": "Don't immediately explain yourself to someone who is upset. They're not ready to receive it until they feel acknowledged.",
+          "why": "Logic offered to an emotionally activated person almost always fails. Acknowledgment first shifts the emotional state so logic can land."
+        },
+        {
+          "id": "ei3",
+          "tip": "Don't raise stakes language in high-pressure moments",
+          "example": "When things are tense: calm, declarative sentences. 'Here's where we are. Here's what I think we should do.'",
+          "not": "Don't say 'this is a disaster' or 'this is a nightmare' or 'I can't believe this is happening.' It amplifies panic without helping.",
+          "why": "Language shapes emotional reality. Calm language in a crisis is one of the most effective leadership tools available."
+        },
+        {
+          "id": "ei4",
+          "tip": "Acknowledge before advising — always",
+          "example": "'That sounds really hard. Do you want to talk through it or do you want to think about solutions?'",
+          "not": "Don't go straight to advice when someone is sharing something difficult. It signals that their feelings are an inconvenience.",
+          "why": "Asking whether someone wants acknowledgment or advice is one of the most respectful things you can do in a hard conversation."
+        },
+        {
+          "id": "ei5",
+          "tip": "Read what's not being said",
+          "example": "When someone says 'it's fine' but their body or tone says otherwise: 'You don't sound totally convinced — what's your actual read?'",
+          "not": "Don't take 'fine' at face value when context suggests otherwise. Letting it go is easier and costs more later.",
+          "why": "The willingness to surface what isn't being said is one of the rarest and most valued conversational skills."
+        },
+        {
+          "id": "ei6",
+          "tip": "Regulate your own emotion before a hard conversation",
+          "example": "Take a walk, write down your main point, breathe. Enter the conversation with your nervous system settled.",
+          "not": "Don't have a high-stakes conversation when you're in peak emotion. Your argument will be worse and your delivery will confirm it.",
+          "why": "Emotional regulation is a prerequisite for effective communication, not a nice-to-have. A regulated person is simply more persuasive."
+        },
+        {
+          "id": "ei7",
+          "tip": "Don't match aggression — de-escalate through pace and volume",
+          "example": "When someone raises their voice, lower yours slightly and slow down. It creates contrast and often pulls them down.",
+          "not": "Don't match raised energy with raised energy — it escalates. Don't go silent either — it leaves a vacuum.",
+          "why": "Calm in the face of heat is the most commanding response available. It communicates that you will not be destabilized."
+        },
+        {
+          "id": "ei8",
+          "tip": "Separate intent from impact — acknowledge both",
+          "example": "'I know that wasn't your intention, and I want to share how it landed — because the impact matters too.'",
+          "not": "Don't accept 'I didn't mean it that way' as a conversation-ender. Intent and impact are separate and both matter.",
+          "why": "Separating intent from impact keeps a conversation from becoming a debate about motive, which is unresolvable, and focuses it on effect, which is real."
+        }
+      ]
+    },
+    {
+      "id": "storytelling",
+      "name": "Storytelling & Making Points Stick",
+      "color": "#a9dc76",
+      "entries": [
+        {
+          "id": "sl1",
+          "tip": "Every point needs an example — abstract arguments don't stick",
+          "example": "After your point: 'For example...' or 'To make that concrete...' then a specific instance. The example is as important as the argument.",
+          "not": "Don't present abstract principles without grounding them. People will nod and forget immediately.",
+          "why": "The brain retains examples, not principles. The principle rides out of the room on the example."
+        },
+        {
+          "id": "sl2",
+          "tip": "Start a story with what changed — not with the setup",
+          "example": "'Everything was fine until Tuesday' not 'So, it all started back in January when we first decided to...'",
+          "not": "Don't front-load with context. Start with the moment of rupture and work outward from there.",
+          "why": "Change creates story. Setup creates patience tests. Start at the change and earn the right to fill in context."
+        },
+        {
+          "id": "sl3",
+          "tip": "Use the structure: situation, complication, resolution",
+          "example": "'We had a deadline (situation). The main vendor dropped out Thursday (complication). Here's how we handled it (resolution).'",
+          "not": "Don't tell stories chronologically from the beginning — they lose momentum. Start with the complication if you can.",
+          "why": "Situation-complication-resolution is the smallest unit of compelling narrative. It creates tension and relieves it."
+        },
+        {
+          "id": "sl4",
+          "tip": "Make the point explicit after the story — don't assume they drew it",
+          "example": "'So what that means for us is...' or 'The reason I'm telling you this is...' Connect the story to the point.",
+          "not": "Don't end a story and assume everyone extracted the same lesson. They didn't.",
+          "why": "Stories are memorable. The explicit connection is retrievable. Without it, the story is entertainment without function."
+        },
+        {
+          "id": "sl5",
+          "tip": "Use specific names and places — not 'someone' and 'somewhere'",
+          "example": "'My colleague Priya at my last job' not 'someone I used to work with.' Specificity creates credibility.",
+          "not": "Don't vaguify stories to the point where they could be about anyone anywhere. Specificity is what makes stories feel true.",
+          "why": "Specific details signal that this actually happened. They also make the story more vivid and therefore more memorable."
+        },
+        {
+          "id": "sl6",
+          "tip": "Know your ending before you start the story",
+          "example": "Before beginning: know the final sentence. Stories that don't know where they're going wander to a stop.",
+          "not": "Don't start a story to see where it goes in a professional setting. Know the point before you open your mouth.",
+          "why": "The ending is what the story is for. Knowing it shapes every choice in the telling."
+        },
+        {
+          "id": "sl7",
+          "tip": "Trim ruthlessly — say it in half as many words",
+          "example": "After preparing what you want to say, cut it by 40%. The best parts will survive.",
+          "not": "Don't assume that more detail makes a story more convincing. It usually makes it less memorable.",
+          "why": "Editing is a form of respect for the listener's attention. Tight stories are more powerful than comprehensive ones."
+        },
+        {
+          "id": "sl8",
+          "tip": "Let the other person feel the weight of a key moment — don't rush through it",
+          "example": "When you reach the emotional or factual peak of a story — slow down. Let that sentence breathe.",
+          "not": "Don't rush the key moment. It's the reason you told the story.",
+          "why": "Pace drops at the moment of importance signal to the listener: this is it. The slowdown is a form of emphasis."
+        }
+      ]
+    }
+  ]
+}

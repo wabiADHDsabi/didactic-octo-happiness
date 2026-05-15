@@ -1,0 +1,4113 @@
+[
+  {
+    "id": "ordn_78",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER An-Naba?",
+    "a": "An-Nazi'at",
+    "wrong": [
+      "Al-Infitar",
+      "Al-Ikhlas",
+      "Al-Fajr"
+    ]
+  },
+  {
+    "id": "ord_79",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE An-Nazi'at?",
+    "a": "An-Naba",
+    "wrong": [
+      "Al-Asr",
+      "Al-Buruj",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "ordn_79",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER An-Nazi'at?",
+    "a": "Abasa",
+    "wrong": [
+      "Al-Layl",
+      "Al-Qadr",
+      "Al-Balad"
+    ]
+  },
+  {
+    "id": "ord_80",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Abasa?",
+    "a": "An-Nazi'at",
+    "wrong": [
+      "An-Nas",
+      "At-Tariq",
+      "At-Takathur"
+    ]
+  },
+  {
+    "id": "ordn_80",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Abasa?",
+    "a": "At-Takwir",
+    "wrong": [
+      "Al-Asr",
+      "Al-Ala",
+      "Al-Mutaffifin"
+    ]
+  },
+  {
+    "id": "ord_81",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE At-Takwir?",
+    "a": "Abasa",
+    "wrong": [
+      "Quraysh",
+      "Al-Humazah",
+      "Al-Kafirun"
+    ]
+  },
+  {
+    "id": "ordn_81",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER At-Takwir?",
+    "a": "Al-Infitar",
+    "wrong": [
+      "An-Nas",
+      "Al-Mutaffifin",
+      "Al-Qari'ah"
+    ]
+  },
+  {
+    "id": "ord_82",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Infitar?",
+    "a": "At-Takwir",
+    "wrong": [
+      "Al-Kafirun",
+      "Al-Qari'ah",
+      "An-Nazi'at"
+    ]
+  },
+  {
+    "id": "ordn_82",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Infitar?",
+    "a": "Al-Mutaffifin",
+    "wrong": [
+      "Al-Masad",
+      "Al-Layl",
+      "An-Naba"
+    ]
+  },
+  {
+    "id": "ord_83",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Mutaffifin?",
+    "a": "Al-Infitar",
+    "wrong": [
+      "Al-Humazah",
+      "Al-Fil",
+      "Al-Balad"
+    ]
+  },
+  {
+    "id": "ordn_83",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Mutaffifin?",
+    "a": "Al-Inshiqaq",
+    "wrong": [
+      "An-Nas",
+      "Al-Ala",
+      "Al-Bayyinah"
+    ]
+  },
+  {
+    "id": "ord_84",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Inshiqaq?",
+    "a": "Al-Mutaffifin",
+    "wrong": [
+      "An-Nas",
+      "Al-Humazah",
+      "Quraysh"
+    ]
+  },
+  {
+    "id": "ordn_84",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Inshiqaq?",
+    "a": "Al-Buruj",
+    "wrong": [
+      "An-Nazi'at",
+      "At-Takwir",
+      "An-Nas"
+    ]
+  },
+  {
+    "id": "ord_85",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Buruj?",
+    "a": "Al-Inshiqaq",
+    "wrong": [
+      "Al-Masad",
+      "Az-Zalzalah",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "ordn_85",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Buruj?",
+    "a": "At-Tariq",
+    "wrong": [
+      "Al-Inshiqaq",
+      "Al-Fajr",
+      "Al-Alaq"
+    ]
+  },
+  {
+    "id": "ord_86",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE At-Tariq?",
+    "a": "Al-Buruj",
+    "wrong": [
+      "Abasa",
+      "Al-Mutaffifin",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "ordn_86",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER At-Tariq?",
+    "a": "Al-Ala",
+    "wrong": [
+      "Al-Infitar",
+      "Al-Layl",
+      "Al-Humazah"
+    ]
+  },
+  {
+    "id": "ord_87",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Ala?",
+    "a": "At-Tariq",
+    "wrong": [
+      "Al-Adiyat",
+      "An-Nas",
+      "Quraysh"
+    ]
+  },
+  {
+    "id": "ordn_87",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Ala?",
+    "a": "Al-Ghashiyah",
+    "wrong": [
+      "An-Nas",
+      "At-Takathur",
+      "At-Tariq"
+    ]
+  },
+  {
+    "id": "ord_88",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Ghashiyah?",
+    "a": "Al-Ala",
+    "wrong": [
+      "Al-Fil",
+      "An-Nasr",
+      "Al-Adiyat"
+    ]
+  },
+  {
+    "id": "ordn_88",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Ghashiyah?",
+    "a": "Al-Fajr",
+    "wrong": [
+      "Al-Kafirun",
+      "Ash-Shams",
+      "Al-Kawthar"
+    ]
+  },
+  {
+    "id": "ord_89",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Fajr?",
+    "a": "Al-Ghashiyah",
+    "wrong": [
+      "An-Nas",
+      "Al-Adiyat",
+      "Abasa"
+    ]
+  },
+  {
+    "id": "ordn_89",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Fajr?",
+    "a": "Al-Balad",
+    "wrong": [
+      "Quraysh",
+      "Al-Alaq",
+      "Al-Mutaffifin"
+    ]
+  },
+  {
+    "id": "ord_90",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Balad?",
+    "a": "Al-Fajr",
+    "wrong": [
+      "An-Nasr",
+      "At-Takathur",
+      "Al-Qari'ah"
+    ]
+  },
+  {
+    "id": "ordn_90",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Balad?",
+    "a": "Ash-Shams",
+    "wrong": [
+      "Al-Asr",
+      "Ash-Sharh",
+      "An-Nas"
+    ]
+  },
+  {
+    "id": "ord_91",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Ash-Shams?",
+    "a": "Al-Balad",
+    "wrong": [
+      "Al-Ala",
+      "Al-Kafirun",
+      "Al-Asr"
+    ]
+  },
+  {
+    "id": "ordn_91",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Ash-Shams?",
+    "a": "Al-Layl",
+    "wrong": [
+      "Al-Fil",
+      "Al-Ala",
+      "Al-Asr"
+    ]
+  },
+  {
+    "id": "ord_92",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Layl?",
+    "a": "Ash-Shams",
+    "wrong": [
+      "Al-Mutaffifin",
+      "Al-Fajr",
+      "Ad-Duha"
+    ]
+  },
+  {
+    "id": "ordn_92",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Layl?",
+    "a": "Ad-Duha",
+    "wrong": [
+      "Al-Adiyat",
+      "Al-Falaq",
+      "Al-Balad"
+    ]
+  },
+  {
+    "id": "ord_93",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Ad-Duha?",
+    "a": "Al-Layl",
+    "wrong": [
+      "Az-Zalzalah",
+      "Al-Kawthar",
+      "Al-Mutaffifin"
+    ]
+  },
+  {
+    "id": "ordn_93",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Ad-Duha?",
+    "a": "Ash-Sharh",
+    "wrong": [
+      "Al-Masad",
+      "Al-Ghashiyah",
+      "Al-Qadr"
+    ]
+  },
+  {
+    "id": "ord_94",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Ash-Sharh?",
+    "a": "Ad-Duha",
+    "wrong": [
+      "An-Nazi'at",
+      "At-Tariq",
+      "Al-Falaq"
+    ]
+  },
+  {
+    "id": "ordn_94",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Ash-Sharh?",
+    "a": "At-Tin",
+    "wrong": [
+      "An-Nazi'at",
+      "Al-Humazah",
+      "Al-Alaq"
+    ]
+  },
+  {
+    "id": "ord_95",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE At-Tin?",
+    "a": "Ash-Sharh",
+    "wrong": [
+      "Al-Masad",
+      "Al-Infitar",
+      "Al-Adiyat"
+    ]
+  },
+  {
+    "id": "ordn_95",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER At-Tin?",
+    "a": "Al-Alaq",
+    "wrong": [
+      "Al-Inshiqaq",
+      "Al-Ma'un",
+      "Quraysh"
+    ]
+  },
+  {
+    "id": "ord_96",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Alaq?",
+    "a": "At-Tin",
+    "wrong": [
+      "Al-Qadr",
+      "Al-Fajr",
+      "Al-Mutaffifin"
+    ]
+  },
+  {
+    "id": "ordn_96",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Alaq?",
+    "a": "Al-Qadr",
+    "wrong": [
+      "Al-Fil",
+      "Al-Mutaffifin",
+      "Al-Ala"
+    ]
+  },
+  {
+    "id": "ord_97",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Qadr?",
+    "a": "Al-Alaq",
+    "wrong": [
+      "Al-Ala",
+      "Al-Bayyinah",
+      "Al-Adiyat"
+    ]
+  },
+  {
+    "id": "ordn_97",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Qadr?",
+    "a": "Al-Bayyinah",
+    "wrong": [
+      "Quraysh",
+      "Al-Adiyat",
+      "Al-Buruj"
+    ]
+  },
+  {
+    "id": "ord_98",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Bayyinah?",
+    "a": "Al-Qadr",
+    "wrong": [
+      "Al-Alaq",
+      "An-Nasr",
+      "Al-Adiyat"
+    ]
+  },
+  {
+    "id": "ordn_98",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Bayyinah?",
+    "a": "Az-Zalzalah",
+    "wrong": [
+      "At-Tin",
+      "Al-Adiyat",
+      "Al-Fil"
+    ]
+  },
+  {
+    "id": "ord_99",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Az-Zalzalah?",
+    "a": "Al-Bayyinah",
+    "wrong": [
+      "Ash-Shams",
+      "Al-Falaq",
+      "Al-Fajr"
+    ]
+  },
+  {
+    "id": "ordn_99",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Az-Zalzalah?",
+    "a": "Al-Adiyat",
+    "wrong": [
+      "Al-Qari'ah",
+      "Ad-Duha",
+      "An-Nas"
+    ]
+  },
+  {
+    "id": "ord_100",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Adiyat?",
+    "a": "Az-Zalzalah",
+    "wrong": [
+      "Al-Fil",
+      "Al-Masad",
+      "An-Nas"
+    ]
+  },
+  {
+    "id": "ordn_100",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Adiyat?",
+    "a": "Al-Qari'ah",
+    "wrong": [
+      "Al-Inshiqaq",
+      "At-Tariq",
+      "An-Nazi'at"
+    ]
+  },
+  {
+    "id": "ord_101",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Qari'ah?",
+    "a": "Al-Adiyat",
+    "wrong": [
+      "At-Tariq",
+      "Ash-Shams",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "ordn_101",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Qari'ah?",
+    "a": "At-Takathur",
+    "wrong": [
+      "An-Nas",
+      "At-Tin",
+      "At-Takwir"
+    ]
+  },
+  {
+    "id": "ord_102",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE At-Takathur?",
+    "a": "Al-Qari'ah",
+    "wrong": [
+      "Al-Ikhlas",
+      "Al-Qadr",
+      "Al-Alaq"
+    ]
+  },
+  {
+    "id": "ordn_102",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER At-Takathur?",
+    "a": "Al-Asr",
+    "wrong": [
+      "Al-Ghashiyah",
+      "Al-Kafirun",
+      "Ad-Duha"
+    ]
+  },
+  {
+    "id": "ord_103",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Asr?",
+    "a": "At-Takathur",
+    "wrong": [
+      "Al-Infitar",
+      "Al-Balad",
+      "Ash-Sharh"
+    ]
+  },
+  {
+    "id": "ordn_103",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Asr?",
+    "a": "Al-Humazah",
+    "wrong": [
+      "An-Nas",
+      "Al-Fajr",
+      "Ash-Shams"
+    ]
+  },
+  {
+    "id": "ord_104",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Humazah?",
+    "a": "Al-Asr",
+    "wrong": [
+      "Al-Ghashiyah",
+      "Al-Ma'un",
+      "An-Nasr"
+    ]
+  },
+  {
+    "id": "ordn_104",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Humazah?",
+    "a": "Al-Fil",
+    "wrong": [
+      "Al-Qadr",
+      "Al-Buruj",
+      "Al-Alaq"
+    ]
+  },
+  {
+    "id": "ord_105",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Fil?",
+    "a": "Al-Humazah",
+    "wrong": [
+      "An-Nazi'at",
+      "An-Naba",
+      "Al-Bayyinah"
+    ]
+  },
+  {
+    "id": "ordn_105",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Fil?",
+    "a": "Quraysh",
+    "wrong": [
+      "An-Naba",
+      "Al-Balad",
+      "Az-Zalzalah"
+    ]
+  },
+  {
+    "id": "ord_106",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Quraysh?",
+    "a": "Al-Fil",
+    "wrong": [
+      "Al-Fajr",
+      "Abasa",
+      "An-Nas"
+    ]
+  },
+  {
+    "id": "ordn_106",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Quraysh?",
+    "a": "Al-Ma'un",
+    "wrong": [
+      "Al-Qadr",
+      "An-Nas",
+      "Az-Zalzalah"
+    ]
+  },
+  {
+    "id": "ord_107",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Ma'un?",
+    "a": "Quraysh",
+    "wrong": [
+      "Al-Humazah",
+      "Al-Ala",
+      "Al-Infitar"
+    ]
+  },
+  {
+    "id": "ordn_107",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Ma'un?",
+    "a": "Al-Kawthar",
+    "wrong": [
+      "Al-Falaq",
+      "Al-Buruj",
+      "Al-Bayyinah"
+    ]
+  },
+  {
+    "id": "ord_108",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Kawthar?",
+    "a": "Al-Ma'un",
+    "wrong": [
+      "At-Tariq",
+      "Al-Buruj",
+      "Al-Infitar"
+    ]
+  },
+  {
+    "id": "ordn_108",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Kawthar?",
+    "a": "Al-Kafirun",
+    "wrong": [
+      "Az-Zalzalah",
+      "Al-Infitar",
+      "Al-Falaq"
+    ]
+  },
+  {
+    "id": "ord_109",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Kafirun?",
+    "a": "Al-Kawthar",
+    "wrong": [
+      "Al-Ikhlas",
+      "Al-Bayyinah",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "ordn_109",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Kafirun?",
+    "a": "An-Nasr",
+    "wrong": [
+      "Abasa",
+      "Al-Kawthar",
+      "Ad-Duha"
+    ]
+  },
+  {
+    "id": "ord_110",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE An-Nasr?",
+    "a": "Al-Kafirun",
+    "wrong": [
+      "Al-Bayyinah",
+      "Al-Ghashiyah",
+      "Ad-Duha"
+    ]
+  },
+  {
+    "id": "ordn_110",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER An-Nasr?",
+    "a": "Al-Masad",
+    "wrong": [
+      "Al-Inshiqaq",
+      "Az-Zalzalah",
+      "At-Takwir"
+    ]
+  },
+  {
+    "id": "ord_111",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Masad?",
+    "a": "An-Nasr",
+    "wrong": [
+      "Ad-Duha",
+      "At-Takathur",
+      "Al-Humazah"
+    ]
+  },
+  {
+    "id": "ordn_111",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Masad?",
+    "a": "Al-Ikhlas",
+    "wrong": [
+      "An-Nas",
+      "Al-Fajr",
+      "Al-Asr"
+    ]
+  },
+  {
+    "id": "ord_112",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Ikhlas?",
+    "a": "Al-Masad",
+    "wrong": [
+      "Al-Balad",
+      "Al-Kafirun",
+      "Al-Falaq"
+    ]
+  },
+  {
+    "id": "ordn_112",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Ikhlas?",
+    "a": "Al-Falaq",
+    "wrong": [
+      "Al-Qari'ah",
+      "At-Takwir",
+      "At-Tin"
+    ]
+  },
+  {
+    "id": "ord_113",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE Al-Falaq?",
+    "a": "Al-Ikhlas",
+    "wrong": [
+      "Al-Asr",
+      "Al-Inshiqaq",
+      "Al-Masad"
+    ]
+  },
+  {
+    "id": "ordn_113",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately AFTER Al-Falaq?",
+    "a": "An-Nas",
+    "wrong": [
+      "At-Tin",
+      "Al-Inshiqaq",
+      "Al-Ikhlas"
+    ]
+  },
+  {
+    "id": "ord_114",
+    "cat": "Surah Order",
+    "q": "In Juz Amma, which surah comes immediately BEFORE An-Nas?",
+    "a": "Al-Falaq",
+    "wrong": [
+      "Al-Balad",
+      "Al-Kafirun",
+      "Al-Ghashiyah"
+    ]
+  },
+  {
+    "id": "name_78",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah An-Naba?",
+    "a": "The Tidings",
+    "wrong": [
+      "Sincerity",
+      "The Palm Fibre",
+      "The Splitting Open"
+    ]
+  },
+  {
+    "id": "namer_78",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Tidings'?",
+    "a": "An-Naba",
+    "wrong": [
+      "Al-Masad",
+      "An-Nazi'at",
+      "Ash-Sharh"
+    ]
+  },
+  {
+    "id": "name_79",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah An-Nazi'at?",
+    "a": "Those Who Drag Forth",
+    "wrong": [
+      "The Elephant",
+      "The Slanderer",
+      "The Relief"
+    ]
+  },
+  {
+    "id": "namer_79",
+    "cat": "Surah Names",
+    "q": "Which surah means 'Those Who Drag Forth'?",
+    "a": "An-Nazi'at",
+    "wrong": [
+      "Abasa",
+      "At-Tariq",
+      "Al-Inshiqaq"
+    ]
+  },
+  {
+    "id": "name_80",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Abasa?",
+    "a": "He Frowned",
+    "wrong": [
+      "The Great Constellations",
+      "The Splitting Open",
+      "The Fig"
+    ]
+  },
+  {
+    "id": "namer_80",
+    "cat": "Surah Names",
+    "q": "Which surah means 'He Frowned'?",
+    "a": "Abasa",
+    "wrong": [
+      "Al-Bayyinah",
+      "Al-Balad",
+      "Ash-Sharh"
+    ]
+  },
+  {
+    "id": "name_81",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah At-Takwir?",
+    "a": "The Folding Up",
+    "wrong": [
+      "The Slanderer",
+      "The Clot",
+      "Sincerity"
+    ]
+  },
+  {
+    "id": "namer_81",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Folding Up'?",
+    "a": "At-Takwir",
+    "wrong": [
+      "Al-Qari'ah",
+      "At-Takathur",
+      "Ad-Duha"
+    ]
+  },
+  {
+    "id": "name_82",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Infitar?",
+    "a": "The Cleaving",
+    "wrong": [
+      "The Clot",
+      "The Slanderer",
+      "The Disbelievers"
+    ]
+  },
+  {
+    "id": "namer_82",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Cleaving'?",
+    "a": "Al-Infitar",
+    "wrong": [
+      "Al-Ma'un",
+      "Al-Ikhlas",
+      "Al-Kawthar"
+    ]
+  },
+  {
+    "id": "name_83",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Mutaffifin?",
+    "a": "The Defrauders",
+    "wrong": [
+      "The Great Constellations",
+      "Those Who Drag Forth",
+      "The Disbelievers"
+    ]
+  },
+  {
+    "id": "namer_83",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Defrauders'?",
+    "a": "Al-Mutaffifin",
+    "wrong": [
+      "Al-Falaq",
+      "Al-Kafirun",
+      "At-Takwir"
+    ]
+  },
+  {
+    "id": "name_84",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Inshiqaq?",
+    "a": "The Splitting Open",
+    "wrong": [
+      "The Coursers",
+      "The Abundance",
+      "The Cleaving"
+    ]
+  },
+  {
+    "id": "namer_84",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Splitting Open'?",
+    "a": "Al-Inshiqaq",
+    "wrong": [
+      "Al-Masad",
+      "Al-Kafirun",
+      "At-Tin"
+    ]
+  },
+  {
+    "id": "name_85",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Buruj?",
+    "a": "The Great Constellations",
+    "wrong": [
+      "The Abundance",
+      "The Time",
+      "The Folding Up"
+    ]
+  },
+  {
+    "id": "namer_85",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Great Constellations'?",
+    "a": "Al-Buruj",
+    "wrong": [
+      "An-Nazi'at",
+      "Al-Mutaffifin",
+      "Al-Alaq"
+    ]
+  },
+  {
+    "id": "name_86",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah At-Tariq?",
+    "a": "The Night Star",
+    "wrong": [
+      "He Frowned",
+      "The Clot",
+      "The Divine Support"
+    ]
+  },
+  {
+    "id": "namer_86",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Night Star'?",
+    "a": "At-Tariq",
+    "wrong": [
+      "Ad-Duha",
+      "An-Nas",
+      "Abasa"
+    ]
+  },
+  {
+    "id": "name_87",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Ala?",
+    "a": "The Most High",
+    "wrong": [
+      "The Abundance",
+      "The City",
+      "The Sun"
+    ]
+  },
+  {
+    "id": "namer_87",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Most High'?",
+    "a": "Al-Ala",
+    "wrong": [
+      "An-Naba",
+      "Al-Falaq",
+      "Abasa"
+    ]
+  },
+  {
+    "id": "name_88",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Ghashiyah?",
+    "a": "The Overwhelming",
+    "wrong": [
+      "The Splitting Open",
+      "The Power",
+      "The Folding Up"
+    ]
+  },
+  {
+    "id": "namer_88",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Overwhelming'?",
+    "a": "Al-Ghashiyah",
+    "wrong": [
+      "Al-Masad",
+      "Al-Kafirun",
+      "An-Nasr"
+    ]
+  },
+  {
+    "id": "name_89",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Fajr?",
+    "a": "The Dawn",
+    "wrong": [
+      "The Abundance",
+      "The City",
+      "The Night"
+    ]
+  },
+  {
+    "id": "namer_89",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Dawn'?",
+    "a": "Al-Fajr",
+    "wrong": [
+      "Al-Asr",
+      "Al-Layl",
+      "Al-Mutaffifin"
+    ]
+  },
+  {
+    "id": "name_90",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Balad?",
+    "a": "The City",
+    "wrong": [
+      "The Palm Fibre",
+      "He Frowned",
+      "The Fig"
+    ]
+  },
+  {
+    "id": "namer_90",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The City'?",
+    "a": "Al-Balad",
+    "wrong": [
+      "Abasa",
+      "Al-Ghashiyah",
+      "At-Tariq"
+    ]
+  },
+  {
+    "id": "name_91",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Ash-Shams?",
+    "a": "The Sun",
+    "wrong": [
+      "The Folding Up",
+      "The City",
+      "The Defrauders"
+    ]
+  },
+  {
+    "id": "namer_91",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Sun'?",
+    "a": "Ash-Shams",
+    "wrong": [
+      "At-Takathur",
+      "At-Takwir",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "name_92",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Layl?",
+    "a": "The Night",
+    "wrong": [
+      "The Coursers",
+      "The Overwhelming",
+      "The Most High"
+    ]
+  },
+  {
+    "id": "namer_92",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Night'?",
+    "a": "Al-Layl",
+    "wrong": [
+      "Al-Ghashiyah",
+      "At-Tin",
+      "Al-Kafirun"
+    ]
+  },
+  {
+    "id": "name_93",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Ad-Duha?",
+    "a": "The Morning Brightness",
+    "wrong": [
+      "The Divine Support",
+      "The Small Kindnesses",
+      "The Disbelievers"
+    ]
+  },
+  {
+    "id": "namer_93",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Morning Brightness'?",
+    "a": "Ad-Duha",
+    "wrong": [
+      "Al-Falaq",
+      "An-Nazi'at",
+      "Al-Bayyinah"
+    ]
+  },
+  {
+    "id": "name_94",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Ash-Sharh?",
+    "a": "The Relief",
+    "wrong": [
+      "He Frowned",
+      "The Defrauders",
+      "The Splitting Open"
+    ]
+  },
+  {
+    "id": "namer_94",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Relief'?",
+    "a": "Ash-Sharh",
+    "wrong": [
+      "An-Nasr",
+      "Al-Fil",
+      "An-Naba"
+    ]
+  },
+  {
+    "id": "name_95",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah At-Tin?",
+    "a": "The Fig",
+    "wrong": [
+      "He Frowned",
+      "Quraysh",
+      "The Abundance"
+    ]
+  },
+  {
+    "id": "namer_95",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Fig'?",
+    "a": "At-Tin",
+    "wrong": [
+      "Quraysh",
+      "Al-Falaq",
+      "Al-Kafirun"
+    ]
+  },
+  {
+    "id": "name_96",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Alaq?",
+    "a": "The Clot",
+    "wrong": [
+      "The Great Constellations",
+      "The Dawn",
+      "The Rivalry in World Increase"
+    ]
+  },
+  {
+    "id": "namer_96",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Clot'?",
+    "a": "Al-Alaq",
+    "wrong": [
+      "Al-Masad",
+      "Al-Ikhlas",
+      "Ad-Duha"
+    ]
+  },
+  {
+    "id": "name_97",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Qadr?",
+    "a": "The Power",
+    "wrong": [
+      "The Tidings",
+      "The Clot",
+      "The Time"
+    ]
+  },
+  {
+    "id": "namer_97",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Power'?",
+    "a": "Al-Qadr",
+    "wrong": [
+      "Al-Infitar",
+      "Az-Zalzalah",
+      "Al-Inshiqaq"
+    ]
+  },
+  {
+    "id": "name_98",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Bayyinah?",
+    "a": "The Clear Evidence",
+    "wrong": [
+      "The Splitting Open",
+      "The Night Star",
+      "The Small Kindnesses"
+    ]
+  },
+  {
+    "id": "namer_98",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Clear Evidence'?",
+    "a": "Al-Bayyinah",
+    "wrong": [
+      "Al-Buruj",
+      "Az-Zalzalah",
+      "Al-Kawthar"
+    ]
+  },
+  {
+    "id": "name_99",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Az-Zalzalah?",
+    "a": "The Earthquake",
+    "wrong": [
+      "The Clear Evidence",
+      "The Abundance",
+      "Sincerity"
+    ]
+  },
+  {
+    "id": "namer_99",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Earthquake'?",
+    "a": "Az-Zalzalah",
+    "wrong": [
+      "Al-Ma'un",
+      "Al-Infitar",
+      "Ad-Duha"
+    ]
+  },
+  {
+    "id": "name_100",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Adiyat?",
+    "a": "The Coursers",
+    "wrong": [
+      "Those Who Drag Forth",
+      "The Night",
+      "The Palm Fibre"
+    ]
+  },
+  {
+    "id": "namer_100",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Coursers'?",
+    "a": "Al-Adiyat",
+    "wrong": [
+      "At-Takathur",
+      "Al-Alaq",
+      "Al-Humazah"
+    ]
+  },
+  {
+    "id": "name_101",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Qari'ah?",
+    "a": "The Calamity",
+    "wrong": [
+      "The Sun",
+      "The City",
+      "The Coursers"
+    ]
+  },
+  {
+    "id": "namer_101",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Calamity'?",
+    "a": "Al-Qari'ah",
+    "wrong": [
+      "Quraysh",
+      "Ash-Shams",
+      "At-Takathur"
+    ]
+  },
+  {
+    "id": "name_102",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah At-Takathur?",
+    "a": "The Rivalry in World Increase",
+    "wrong": [
+      "The Abundance",
+      "He Frowned",
+      "The Relief"
+    ]
+  },
+  {
+    "id": "namer_102",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Rivalry in World Increase'?",
+    "a": "At-Takathur",
+    "wrong": [
+      "An-Nasr",
+      "Al-Inshiqaq",
+      "An-Naba"
+    ]
+  },
+  {
+    "id": "name_103",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Asr?",
+    "a": "The Time",
+    "wrong": [
+      "The Elephant",
+      "The Small Kindnesses",
+      "The Fig"
+    ]
+  },
+  {
+    "id": "namer_103",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Time'?",
+    "a": "Al-Asr",
+    "wrong": [
+      "Ash-Shams",
+      "At-Tin",
+      "Abasa"
+    ]
+  },
+  {
+    "id": "name_104",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Humazah?",
+    "a": "The Slanderer",
+    "wrong": [
+      "The Palm Fibre",
+      "The Disbelievers",
+      "The Divine Support"
+    ]
+  },
+  {
+    "id": "namer_104",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Slanderer'?",
+    "a": "Al-Humazah",
+    "wrong": [
+      "Al-Qadr",
+      "Al-Ma'un",
+      "Abasa"
+    ]
+  },
+  {
+    "id": "name_105",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Fil?",
+    "a": "The Elephant",
+    "wrong": [
+      "The City",
+      "The Daybreak",
+      "The Clot"
+    ]
+  },
+  {
+    "id": "namer_105",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Elephant'?",
+    "a": "Al-Fil",
+    "wrong": [
+      "An-Nasr",
+      "Ash-Sharh",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "name_106",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Quraysh?",
+    "a": "Quraysh",
+    "wrong": [
+      "The Folding Up",
+      "Mankind",
+      "The Fig"
+    ]
+  },
+  {
+    "id": "namer_106",
+    "cat": "Surah Names",
+    "q": "Which surah means 'Quraysh'?",
+    "a": "Quraysh",
+    "wrong": [
+      "An-Naba",
+      "Al-Ghashiyah",
+      "Al-Ma'un"
+    ]
+  },
+  {
+    "id": "name_107",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Ma'un?",
+    "a": "The Small Kindnesses",
+    "wrong": [
+      "The Time",
+      "The Fig",
+      "Mankind"
+    ]
+  },
+  {
+    "id": "namer_107",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Small Kindnesses'?",
+    "a": "Al-Ma'un",
+    "wrong": [
+      "At-Tariq",
+      "Al-Masad",
+      "Al-Adiyat"
+    ]
+  },
+  {
+    "id": "name_108",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Kawthar?",
+    "a": "The Abundance",
+    "wrong": [
+      "The Palm Fibre",
+      "The Cleaving",
+      "The Divine Support"
+    ]
+  },
+  {
+    "id": "namer_108",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Abundance'?",
+    "a": "Al-Kawthar",
+    "wrong": [
+      "Al-Buruj",
+      "Al-Ala",
+      "Al-Inshiqaq"
+    ]
+  },
+  {
+    "id": "name_109",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Kafirun?",
+    "a": "The Disbelievers",
+    "wrong": [
+      "The Defrauders",
+      "The Palm Fibre",
+      "The Night"
+    ]
+  },
+  {
+    "id": "namer_109",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Disbelievers'?",
+    "a": "Al-Kafirun",
+    "wrong": [
+      "Al-Bayyinah",
+      "Al-Mutaffifin",
+      "Al-Fil"
+    ]
+  },
+  {
+    "id": "name_110",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah An-Nasr?",
+    "a": "The Divine Support",
+    "wrong": [
+      "The Cleaving",
+      "The Palm Fibre",
+      "The Abundance"
+    ]
+  },
+  {
+    "id": "namer_110",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Divine Support'?",
+    "a": "An-Nasr",
+    "wrong": [
+      "Al-Alaq",
+      "Al-Masad",
+      "Al-Humazah"
+    ]
+  },
+  {
+    "id": "name_111",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Masad?",
+    "a": "The Palm Fibre",
+    "wrong": [
+      "The Folding Up",
+      "The Slanderer",
+      "The Fig"
+    ]
+  },
+  {
+    "id": "namer_111",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Palm Fibre'?",
+    "a": "Al-Masad",
+    "wrong": [
+      "Ad-Duha",
+      "An-Naba",
+      "Al-Ala"
+    ]
+  },
+  {
+    "id": "name_112",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Ikhlas?",
+    "a": "Sincerity",
+    "wrong": [
+      "The Night Star",
+      "The Clot",
+      "The Time"
+    ]
+  },
+  {
+    "id": "namer_112",
+    "cat": "Surah Names",
+    "q": "Which surah means 'Sincerity'?",
+    "a": "Al-Ikhlas",
+    "wrong": [
+      "Al-Ma'un",
+      "Al-Ala",
+      "An-Naba"
+    ]
+  },
+  {
+    "id": "name_113",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah Al-Falaq?",
+    "a": "The Daybreak",
+    "wrong": [
+      "The Palm Fibre",
+      "The Calamity",
+      "Those Who Drag Forth"
+    ]
+  },
+  {
+    "id": "namer_113",
+    "cat": "Surah Names",
+    "q": "Which surah means 'The Daybreak'?",
+    "a": "Al-Falaq",
+    "wrong": [
+      "At-Takwir",
+      "Al-Ghashiyah",
+      "Al-Kafirun"
+    ]
+  },
+  {
+    "id": "name_114",
+    "cat": "Surah Names",
+    "q": "What is the English meaning of Surah An-Nas?",
+    "a": "Mankind",
+    "wrong": [
+      "The Elephant",
+      "The Morning Brightness",
+      "The Fig"
+    ]
+  },
+  {
+    "id": "namer_114",
+    "cat": "Surah Names",
+    "q": "Which surah means 'Mankind'?",
+    "a": "An-Nas",
+    "wrong": [
+      "Al-Mutaffifin",
+      "At-Takathur",
+      "Al-Buruj"
+    ]
+  },
+  {
+    "id": "theme_78",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah An-Naba?",
+    "a": "The Day of Judgment and its certainty",
+    "wrong": [
+      "Victory of Islam; people entering in multitudes; glorify and seek forgiveness",
+      "The companions of the trench; Allah's sovereignty over all",
+      "The angels, resurrection, and Pharaoh's story"
+    ]
+  },
+  {
+    "id": "theme_79",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah An-Nazi'at?",
+    "a": "The angels, resurrection, and Pharaoh's story",
+    "wrong": [
+      "Oaths by charging warhorses; human ingratitude; the Day of Judgment",
+      "The Day of Judgment; weighing of deeds; Hawiyah for the light-scaled",
+      "Those who give and those who withhold; striving will lead to ease"
+    ]
+  },
+  {
+    "id": "theme_80",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Abasa?",
+    "a": "The Prophet's interaction with Ibn Umm Maktum; treating all equally",
+    "wrong": [
+      "Those who give and those who withhold; striving will lead to ease",
+      "Allah grants the Prophet abundance; sacrifice and pray; enemy is cut off",
+      "Comfort to the Prophet; counting Allah's blessings; giving to the needy"
+    ]
+  },
+  {
+    "id": "theme_81",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah At-Takwir?",
+    "a": "Signs of the Last Hour and the Quran as divine revelation",
+    "wrong": [
+      "The contrast between Paradise and Hellfire; pondering Allah's creation",
+      "The Day of Judgment and its certainty",
+      "Clear separation: you have your religion, I have mine"
+    ]
+  },
+  {
+    "id": "theme_82",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Infitar?",
+    "a": "The sky splitting; humans forgetting their accountability to Allah",
+    "wrong": [
+      "Woe to slanderers who hoard wealth thinking it makes them immortal",
+      "The sanctity of Makkah; human struggle; choosing the steep path of good",
+      "Warning to those who deny the deen; neglect prayer; withhold kindness"
+    ]
+  },
+  {
+    "id": "theme_83",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Mutaffifin?",
+    "a": "Warning to those who cheat in weights; contrast of righteous and wicked",
+    "wrong": [
+      "The companions of the trench; Allah's sovereignty over all",
+      "The angels, resurrection, and Pharaoh's story",
+      "Allah grants the Prophet abundance; sacrifice and pray; enemy is cut off"
+    ]
+  },
+  {
+    "id": "theme_84",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Inshiqaq?",
+    "a": "The earth and sky submitting to Allah; the human journey to meet Allah",
+    "wrong": [
+      "The absolute oneness and uniqueness of Allah; He neither begets nor is begotten",
+      "Abu Lahab and his wife condemned; their wealth won't save them",
+      "Stories of destroyed nations; the righteous soul entering Paradise"
+    ]
+  },
+  {
+    "id": "theme_85",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Buruj?",
+    "a": "The companions of the trench; Allah's sovereignty over all",
+    "wrong": [
+      "Relief after hardship; two mentions of ease; focusing on worship",
+      "The sanctity of Makkah; human struggle; choosing the steep path of good",
+      "The angels, resurrection, and Pharaoh's story"
+    ]
+  },
+  {
+    "id": "theme_86",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah At-Tariq?",
+    "a": "The piercing star; every soul has a guardian; the Quran as discernment",
+    "wrong": [
+      "Oaths by the fig and olive; humanity in the best form; the final judgment",
+      "The earth and sky submitting to Allah; the human journey to meet Allah",
+      "Those who give and those who withhold; striving will lead to ease"
+    ]
+  },
+  {
+    "id": "theme_87",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Ala?",
+    "a": "Glorifying Allah; Allah teaches and facilitates; the everlasting Hereafter",
+    "wrong": [
+      "Signs of the Last Hour and the Quran as divine revelation",
+      "The Night of Power; better than 1000 months; angels descend with peace",
+      "Oaths by the fig and olive; humanity in the best form; the final judgment"
+    ]
+  },
+  {
+    "id": "theme_88",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Ghashiyah?",
+    "a": "The contrast between Paradise and Hellfire; pondering Allah's creation",
+    "wrong": [
+      "The sky splitting; humans forgetting their accountability to Allah",
+      "The Day of Judgment and its certainty",
+      "Allah grants the Prophet abundance; sacrifice and pray; enemy is cut off"
+    ]
+  },
+  {
+    "id": "theme_89",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Fajr?",
+    "a": "Stories of destroyed nations; the righteous soul entering Paradise",
+    "wrong": [
+      "Seeking Allah's protection from external evil, envy, and black magic",
+      "The People of the Book and polytheists; clear evidence; the best of creation",
+      "The earth and sky submitting to Allah; the human journey to meet Allah"
+    ]
+  },
+  {
+    "id": "theme_90",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Balad?",
+    "a": "The sanctity of Makkah; human struggle; choosing the steep path of good",
+    "wrong": [
+      "The Prophet's interaction with Ibn Umm Maktum; treating all equally",
+      "Allah grants the Prophet abundance; sacrifice and pray; enemy is cut off",
+      "First revelation; read in the name of Allah; warning to those who hinder prayer"
+    ]
+  },
+  {
+    "id": "theme_91",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Ash-Shams?",
+    "a": "Eleven oaths; purifying the soul vs corrupting it; the story of Thamud",
+    "wrong": [
+      "The companions of the trench; Allah's sovereignty over all",
+      "Distraction by accumulation until the grave; a warning",
+      "Warning to those who deny the deen; neglect prayer; withhold kindness"
+    ]
+  },
+  {
+    "id": "theme_92",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Layl?",
+    "a": "Those who give and those who withhold; striving will lead to ease",
+    "wrong": [
+      "The earth and sky submitting to Allah; the human journey to meet Allah",
+      "The piercing star; every soul has a guardian; the Quran as discernment",
+      "The contrast between Paradise and Hellfire; pondering Allah's creation"
+    ]
+  },
+  {
+    "id": "theme_93",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Ad-Duha?",
+    "a": "Comfort to the Prophet; counting Allah's blessings; giving to the needy",
+    "wrong": [
+      "The Day of Judgment; weighing of deeds; Hawiyah for the light-scaled",
+      "Abu Lahab and his wife condemned; their wealth won't save them",
+      "Victory of Islam; people entering in multitudes; glorify and seek forgiveness"
+    ]
+  },
+  {
+    "id": "theme_94",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Ash-Sharh?",
+    "a": "Relief after hardship; two mentions of ease; focusing on worship",
+    "wrong": [
+      "Clear separation: you have your religion, I have mine",
+      "Allah's favour to Quraysh; safe trade journeys; worship the Lord of the Kaaba",
+      "Distraction by accumulation until the grave; a warning"
+    ]
+  },
+  {
+    "id": "theme_95",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah At-Tin?",
+    "a": "Oaths by the fig and olive; humanity in the best form; the final judgment",
+    "wrong": [
+      "The Day of Judgment; weighing of deeds; Hawiyah for the light-scaled",
+      "The Night of Power; better than 1000 months; angels descend with peace",
+      "Abu Lahab and his wife condemned; their wealth won't save them"
+    ]
+  },
+  {
+    "id": "theme_96",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Alaq?",
+    "a": "First revelation; read in the name of Allah; warning to those who hinder prayer",
+    "wrong": [
+      "The sanctity of Makkah; human struggle; choosing the steep path of good",
+      "The piercing star; every soul has a guardian; the Quran as discernment",
+      "The angels, resurrection, and Pharaoh's story"
+    ]
+  },
+  {
+    "id": "theme_97",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Qadr?",
+    "a": "The Night of Power; better than 1000 months; angels descend with peace",
+    "wrong": [
+      "Allah's favour to Quraysh; safe trade journeys; worship the Lord of the Kaaba",
+      "Oaths by the fig and olive; humanity in the best form; the final judgment",
+      "The sanctity of Makkah; human struggle; choosing the steep path of good"
+    ]
+  },
+  {
+    "id": "theme_98",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Bayyinah?",
+    "a": "The People of the Book and polytheists; clear evidence; the best of creation",
+    "wrong": [
+      "Seeking Allah's protection from the whisperings of Shaytan in the heart",
+      "Seeking Allah's protection from external evil, envy, and black magic",
+      "Those who give and those who withhold; striving will lead to ease"
+    ]
+  },
+  {
+    "id": "theme_99",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Az-Zalzalah?",
+    "a": "The earth shaken; every atom's worth of good or evil will be seen",
+    "wrong": [
+      "The angels, resurrection, and Pharaoh's story",
+      "The contrast between Paradise and Hellfire; pondering Allah's creation",
+      "The sanctity of Makkah; human struggle; choosing the steep path of good"
+    ]
+  },
+  {
+    "id": "theme_100",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Adiyat?",
+    "a": "Oaths by charging warhorses; human ingratitude; the Day of Judgment",
+    "wrong": [
+      "Allah's favour to Quraysh; safe trade journeys; worship the Lord of the Kaaba",
+      "Glorifying Allah; Allah teaches and facilitates; the everlasting Hereafter",
+      "Clear separation: you have your religion, I have mine"
+    ]
+  },
+  {
+    "id": "theme_101",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Qari'ah?",
+    "a": "The Day of Judgment; weighing of deeds; Hawiyah for the light-scaled",
+    "wrong": [
+      "Stories of destroyed nations; the righteous soul entering Paradise",
+      "Those who give and those who withhold; striving will lead to ease",
+      "Eleven oaths; purifying the soul vs corrupting it; the story of Thamud"
+    ]
+  },
+  {
+    "id": "theme_102",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah At-Takathur?",
+    "a": "Distraction by accumulation until the grave; a warning",
+    "wrong": [
+      "The companions of the trench; Allah's sovereignty over all",
+      "Mankind in loss except believers who do good, urge truth and patience",
+      "The People of the Book and polytheists; clear evidence; the best of creation"
+    ]
+  },
+  {
+    "id": "theme_103",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Asr?",
+    "a": "Mankind in loss except believers who do good, urge truth and patience",
+    "wrong": [
+      "The Day of Judgment and its certainty",
+      "Oaths by charging warhorses; human ingratitude; the Day of Judgment",
+      "Eleven oaths; purifying the soul vs corrupting it; the story of Thamud"
+    ]
+  },
+  {
+    "id": "theme_104",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Humazah?",
+    "a": "Woe to slanderers who hoard wealth thinking it makes them immortal",
+    "wrong": [
+      "The sky splitting; humans forgetting their accountability to Allah",
+      "Distraction by accumulation until the grave; a warning",
+      "The Night of Power; better than 1000 months; angels descend with peace"
+    ]
+  },
+  {
+    "id": "theme_105",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Fil?",
+    "a": "Allah's destruction of Abraha's army with birds carrying stones",
+    "wrong": [
+      "Stories of destroyed nations; the righteous soul entering Paradise",
+      "The companions of the trench; Allah's sovereignty over all",
+      "Oaths by charging warhorses; human ingratitude; the Day of Judgment"
+    ]
+  },
+  {
+    "id": "theme_106",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Quraysh?",
+    "a": "Allah's favour to Quraysh; safe trade journeys; worship the Lord of the Kaaba",
+    "wrong": [
+      "Seeking Allah's protection from external evil, envy, and black magic",
+      "Distraction by accumulation until the grave; a warning",
+      "Abu Lahab and his wife condemned; their wealth won't save them"
+    ]
+  },
+  {
+    "id": "theme_107",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Ma'un?",
+    "a": "Warning to those who deny the deen; neglect prayer; withhold kindness",
+    "wrong": [
+      "Allah's favour to Quraysh; safe trade journeys; worship the Lord of the Kaaba",
+      "The sanctity of Makkah; human struggle; choosing the steep path of good",
+      "Relief after hardship; two mentions of ease; focusing on worship"
+    ]
+  },
+  {
+    "id": "theme_108",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Kawthar?",
+    "a": "Allah grants the Prophet abundance; sacrifice and pray; enemy is cut off",
+    "wrong": [
+      "Eleven oaths; purifying the soul vs corrupting it; the story of Thamud",
+      "Stories of destroyed nations; the righteous soul entering Paradise",
+      "Oaths by charging warhorses; human ingratitude; the Day of Judgment"
+    ]
+  },
+  {
+    "id": "theme_109",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Kafirun?",
+    "a": "Clear separation: you have your religion, I have mine",
+    "wrong": [
+      "Comfort to the Prophet; counting Allah's blessings; giving to the needy",
+      "Woe to slanderers who hoard wealth thinking it makes them immortal",
+      "The earth shaken; every atom's worth of good or evil will be seen"
+    ]
+  },
+  {
+    "id": "theme_110",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah An-Nasr?",
+    "a": "Victory of Islam; people entering in multitudes; glorify and seek forgiveness",
+    "wrong": [
+      "The earth shaken; every atom's worth of good or evil will be seen",
+      "The companions of the trench; Allah's sovereignty over all",
+      "Those who give and those who withhold; striving will lead to ease"
+    ]
+  },
+  {
+    "id": "theme_111",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Masad?",
+    "a": "Abu Lahab and his wife condemned; their wealth won't save them",
+    "wrong": [
+      "Oaths by charging warhorses; human ingratitude; the Day of Judgment",
+      "Allah grants the Prophet abundance; sacrifice and pray; enemy is cut off",
+      "Seeking Allah's protection from the whisperings of Shaytan in the heart"
+    ]
+  },
+  {
+    "id": "theme_112",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Ikhlas?",
+    "a": "The absolute oneness and uniqueness of Allah; He neither begets nor is begotten",
+    "wrong": [
+      "Allah grants the Prophet abundance; sacrifice and pray; enemy is cut off",
+      "Allah's destruction of Abraha's army with birds carrying stones",
+      "The piercing star; every soul has a guardian; the Quran as discernment"
+    ]
+  },
+  {
+    "id": "theme_113",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah Al-Falaq?",
+    "a": "Seeking Allah's protection from external evil, envy, and black magic",
+    "wrong": [
+      "The Day of Judgment and its certainty",
+      "Warning to those who deny the deen; neglect prayer; withhold kindness",
+      "The contrast between Paradise and Hellfire; pondering Allah's creation"
+    ]
+  },
+  {
+    "id": "theme_114",
+    "cat": "Surah Themes",
+    "q": "What is the primary theme/message of Surah An-Nas?",
+    "a": "Seeking Allah's protection from the whisperings of Shaytan in the heart",
+    "wrong": [
+      "Abu Lahab and his wife condemned; their wealth won't save them",
+      "First revelation; read in the name of Allah; warning to those who hinder prayer",
+      "The sky splitting; humans forgetting their accountability to Allah"
+    ]
+  },
+  {
+    "id": "juz_1",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 1 begin and end?",
+    "a": "Al-Fatihah 1:1 → Al-Baqarah 2:141",
+    "wrong": [
+      "Ya-Sin 36:28 → Az-Zumar 39:31",
+      "Al-Baqarah 2:253 → Al-Imran 3:92",
+      "Az-Zariyat 51:31 → Al-Hadid 57:29"
+    ]
+  },
+  {
+    "id": "juzr_1",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Fatihah 1:1?",
+    "a": "Juz 1",
+    "wrong": [
+      "Juz 26",
+      "Juz 11",
+      "Juz 30"
+    ]
+  },
+  {
+    "id": "juz_2",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 2 begin and end?",
+    "a": "Al-Baqarah 2:142 → Al-Baqarah 2:252",
+    "wrong": [
+      "Al-Ahzab 33:31 → Ya-Sin 36:27",
+      "Al-Isra 17:1 → Al-Kahf 18:74",
+      "Al-Ahqaf 46:1 → Az-Zariyat 51:30"
+    ]
+  },
+  {
+    "id": "juzr_2",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Baqarah 2:142?",
+    "a": "Juz 2",
+    "wrong": [
+      "Juz 30",
+      "Juz 4",
+      "Juz 14"
+    ]
+  },
+  {
+    "id": "juz_3",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 3 begin and end?",
+    "a": "Al-Baqarah 2:253 → Al-Imran 3:92",
+    "wrong": [
+      "Al-Baqarah 2:142 → Al-Baqarah 2:252",
+      "Yusuf 12:53 → Ibrahim 14:52",
+      "An-Naml 27:56 → Al-Ankabut 29:45"
+    ]
+  },
+  {
+    "id": "juzr_3",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Baqarah 2:253?",
+    "a": "Juz 3",
+    "wrong": [
+      "Juz 23",
+      "Juz 2",
+      "Juz 5"
+    ]
+  },
+  {
+    "id": "juz_4",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 4 begin and end?",
+    "a": "Al-Imran 3:93 → An-Nisa 4:23",
+    "wrong": [
+      "Yusuf 12:53 → Ibrahim 14:52",
+      "Al-Kahf 18:75 → Ta-Ha 20:135",
+      "Al-Hijr 15:1 → An-Nahl 16:128"
+    ]
+  },
+  {
+    "id": "juzr_4",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Imran 3:93?",
+    "a": "Juz 4",
+    "wrong": [
+      "Juz 15",
+      "Juz 18",
+      "Juz 20"
+    ]
+  },
+  {
+    "id": "juz_5",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 5 begin and end?",
+    "a": "An-Nisa 4:24 → An-Nisa 4:147",
+    "wrong": [
+      "Al-Ahqaf 46:1 → Az-Zariyat 51:30",
+      "Al-Furqan 25:21 → An-Naml 27:55",
+      "Al-Mu'minun 23:1 → Al-Furqan 25:20"
+    ]
+  },
+  {
+    "id": "juzr_5",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at An-Nisa 4:24?",
+    "a": "Juz 5",
+    "wrong": [
+      "Juz 30",
+      "Juz 11",
+      "Juz 8"
+    ]
+  },
+  {
+    "id": "juz_6",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 6 begin and end?",
+    "a": "An-Nisa 4:148 → Al-Ma'idah 5:81",
+    "wrong": [
+      "Al-A'raf 7:88 → Al-Anfal 8:40",
+      "An-Naml 27:56 → Al-Ankabut 29:45",
+      "Al-Imran 3:93 → An-Nisa 4:23"
+    ]
+  },
+  {
+    "id": "juzr_6",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at An-Nisa 4:148?",
+    "a": "Juz 6",
+    "wrong": [
+      "Juz 8",
+      "Juz 14",
+      "Juz 16"
+    ]
+  },
+  {
+    "id": "juz_7",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 7 begin and end?",
+    "a": "Al-Ma'idah 5:82 → Al-An'am 6:110",
+    "wrong": [
+      "Al-Anbiya 21:1 → Al-Hajj 22:78",
+      "Yusuf 12:53 → Ibrahim 14:52",
+      "Hud 11:6 → Yusuf 12:52"
+    ]
+  },
+  {
+    "id": "juzr_7",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Ma'idah 5:82?",
+    "a": "Juz 7",
+    "wrong": [
+      "Juz 18",
+      "Juz 8",
+      "Juz 19"
+    ]
+  },
+  {
+    "id": "juz_8",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 8 begin and end?",
+    "a": "Al-An'am 6:111 → Al-A'raf 7:87",
+    "wrong": [
+      "Al-Ahqaf 46:1 → Az-Zariyat 51:30",
+      "Al-Hijr 15:1 → An-Nahl 16:128",
+      "Al-Ahzab 33:31 → Ya-Sin 36:27"
+    ]
+  },
+  {
+    "id": "juzr_8",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-An'am 6:111?",
+    "a": "Juz 8",
+    "wrong": [
+      "Juz 10",
+      "Juz 1",
+      "Juz 9"
+    ]
+  },
+  {
+    "id": "juz_9",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 9 begin and end?",
+    "a": "Al-A'raf 7:88 → Al-Anfal 8:40",
+    "wrong": [
+      "Az-Zariyat 51:31 → Al-Hadid 57:29",
+      "Al-Furqan 25:21 → An-Naml 27:55",
+      "Al-Hijr 15:1 → An-Nahl 16:128"
+    ]
+  },
+  {
+    "id": "juzr_9",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-A'raf 7:88?",
+    "a": "Juz 9",
+    "wrong": [
+      "Juz 18",
+      "Juz 23",
+      "Juz 21"
+    ]
+  },
+  {
+    "id": "juz_10",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 10 begin and end?",
+    "a": "Al-Anfal 8:41 → At-Tawbah 9:92",
+    "wrong": [
+      "Al-Baqarah 2:253 → Al-Imran 3:92",
+      "An-Nisa 4:148 → Al-Ma'idah 5:81",
+      "Al-Ahqaf 46:1 → Az-Zariyat 51:30"
+    ]
+  },
+  {
+    "id": "juzr_10",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Anfal 8:41?",
+    "a": "Juz 10",
+    "wrong": [
+      "Juz 24",
+      "Juz 6",
+      "Juz 11"
+    ]
+  },
+  {
+    "id": "juz_11",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 11 begin and end?",
+    "a": "At-Tawbah 9:93 → Hud 11:5",
+    "wrong": [
+      "Al-Furqan 25:21 → An-Naml 27:55",
+      "Ya-Sin 36:28 → Az-Zumar 39:31",
+      "Al-Fatihah 1:1 → Al-Baqarah 2:141"
+    ]
+  },
+  {
+    "id": "juzr_11",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at At-Tawbah 9:93?",
+    "a": "Juz 11",
+    "wrong": [
+      "Juz 19",
+      "Juz 14",
+      "Juz 15"
+    ]
+  },
+  {
+    "id": "juz_12",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 12 begin and end?",
+    "a": "Hud 11:6 → Yusuf 12:52",
+    "wrong": [
+      "Al-Ahqaf 46:1 → Az-Zariyat 51:30",
+      "Az-Zumar 39:32 → Fussilat 41:46",
+      "Ya-Sin 36:28 → Az-Zumar 39:31"
+    ]
+  },
+  {
+    "id": "juzr_12",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Hud 11:6?",
+    "a": "Juz 12",
+    "wrong": [
+      "Juz 13",
+      "Juz 3",
+      "Juz 7"
+    ]
+  },
+  {
+    "id": "juz_13",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 13 begin and end?",
+    "a": "Yusuf 12:53 → Ibrahim 14:52",
+    "wrong": [
+      "Al-Kahf 18:75 → Ta-Ha 20:135",
+      "At-Tawbah 9:93 → Hud 11:5",
+      "Al-Fatihah 1:1 → Al-Baqarah 2:141"
+    ]
+  },
+  {
+    "id": "juzr_13",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Yusuf 12:53?",
+    "a": "Juz 13",
+    "wrong": [
+      "Juz 12",
+      "Juz 20",
+      "Juz 25"
+    ]
+  },
+  {
+    "id": "juz_14",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 14 begin and end?",
+    "a": "Al-Hijr 15:1 → An-Nahl 16:128",
+    "wrong": [
+      "Al-Baqarah 2:253 → Al-Imran 3:92",
+      "Al-Furqan 25:21 → An-Naml 27:55",
+      "Ya-Sin 36:28 → Az-Zumar 39:31"
+    ]
+  },
+  {
+    "id": "juzr_14",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Hijr 15:1?",
+    "a": "Juz 14",
+    "wrong": [
+      "Juz 29",
+      "Juz 24",
+      "Juz 28"
+    ]
+  },
+  {
+    "id": "juz_15",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 15 begin and end?",
+    "a": "Al-Isra 17:1 → Al-Kahf 18:74",
+    "wrong": [
+      "An-Naml 27:56 → Al-Ankabut 29:45",
+      "Al-Anfal 8:41 → At-Tawbah 9:92",
+      "Yusuf 12:53 → Ibrahim 14:52"
+    ]
+  },
+  {
+    "id": "juzr_15",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Isra 17:1?",
+    "a": "Juz 15",
+    "wrong": [
+      "Juz 26",
+      "Juz 10",
+      "Juz 1"
+    ]
+  },
+  {
+    "id": "juz_16",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 16 begin and end?",
+    "a": "Al-Kahf 18:75 → Ta-Ha 20:135",
+    "wrong": [
+      "An-Nisa 4:24 → An-Nisa 4:147",
+      "Al-Ma'idah 5:82 → Al-An'am 6:110",
+      "Al-Hijr 15:1 → An-Nahl 16:128"
+    ]
+  },
+  {
+    "id": "juzr_16",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Kahf 18:75?",
+    "a": "Juz 16",
+    "wrong": [
+      "Juz 30",
+      "Juz 17",
+      "Juz 20"
+    ]
+  },
+  {
+    "id": "juz_17",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 17 begin and end?",
+    "a": "Al-Anbiya 21:1 → Al-Hajj 22:78",
+    "wrong": [
+      "Fussilat 41:47 → Al-Jathiyah 45:37",
+      "An-Naba 78:1 → An-Nas 114:6",
+      "Al-Imran 3:93 → An-Nisa 4:23"
+    ]
+  },
+  {
+    "id": "juzr_17",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Anbiya 21:1?",
+    "a": "Juz 17",
+    "wrong": [
+      "Juz 16",
+      "Juz 6",
+      "Juz 24"
+    ]
+  },
+  {
+    "id": "juz_18",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 18 begin and end?",
+    "a": "Al-Mu'minun 23:1 → Al-Furqan 25:20",
+    "wrong": [
+      "Al-Imran 3:93 → An-Nisa 4:23",
+      "Al-Ma'idah 5:82 → Al-An'am 6:110",
+      "An-Naml 27:56 → Al-Ankabut 29:45"
+    ]
+  },
+  {
+    "id": "juzr_18",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Mu'minun 23:1?",
+    "a": "Juz 18",
+    "wrong": [
+      "Juz 14",
+      "Juz 29",
+      "Juz 12"
+    ]
+  },
+  {
+    "id": "juz_19",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 19 begin and end?",
+    "a": "Al-Furqan 25:21 → An-Naml 27:55",
+    "wrong": [
+      "Al-Ankabut 29:46 → Al-Ahzab 33:30",
+      "An-Nisa 4:24 → An-Nisa 4:147",
+      "Fussilat 41:47 → Al-Jathiyah 45:37"
+    ]
+  },
+  {
+    "id": "juzr_19",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Furqan 25:21?",
+    "a": "Juz 19",
+    "wrong": [
+      "Juz 17",
+      "Juz 10",
+      "Juz 4"
+    ]
+  },
+  {
+    "id": "juz_20",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 20 begin and end?",
+    "a": "An-Naml 27:56 → Al-Ankabut 29:45",
+    "wrong": [
+      "An-Nisa 4:24 → An-Nisa 4:147",
+      "At-Tawbah 9:93 → Hud 11:5",
+      "Az-Zariyat 51:31 → Al-Hadid 57:29"
+    ]
+  },
+  {
+    "id": "juzr_20",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at An-Naml 27:56?",
+    "a": "Juz 20",
+    "wrong": [
+      "Juz 10",
+      "Juz 25",
+      "Juz 26"
+    ]
+  },
+  {
+    "id": "juz_21",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 21 begin and end?",
+    "a": "Al-Ankabut 29:46 → Al-Ahzab 33:30",
+    "wrong": [
+      "Al-Baqarah 2:142 → Al-Baqarah 2:252",
+      "An-Nisa 4:148 → Al-Ma'idah 5:81",
+      "Az-Zumar 39:32 → Fussilat 41:46"
+    ]
+  },
+  {
+    "id": "juzr_21",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Ankabut 29:46?",
+    "a": "Juz 21",
+    "wrong": [
+      "Juz 17",
+      "Juz 23",
+      "Juz 27"
+    ]
+  },
+  {
+    "id": "juz_22",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 22 begin and end?",
+    "a": "Al-Ahzab 33:31 → Ya-Sin 36:27",
+    "wrong": [
+      "At-Tawbah 9:93 → Hud 11:5",
+      "Hud 11:6 → Yusuf 12:52",
+      "Al-Imran 3:93 → An-Nisa 4:23"
+    ]
+  },
+  {
+    "id": "juzr_22",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Ahzab 33:31?",
+    "a": "Juz 22",
+    "wrong": [
+      "Juz 26",
+      "Juz 27",
+      "Juz 16"
+    ]
+  },
+  {
+    "id": "juz_23",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 23 begin and end?",
+    "a": "Ya-Sin 36:28 → Az-Zumar 39:31",
+    "wrong": [
+      "Al-Anbiya 21:1 → Al-Hajj 22:78",
+      "Al-Anfal 8:41 → At-Tawbah 9:92",
+      "Al-Imran 3:93 → An-Nisa 4:23"
+    ]
+  },
+  {
+    "id": "juzr_23",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Ya-Sin 36:28?",
+    "a": "Juz 23",
+    "wrong": [
+      "Juz 21",
+      "Juz 5",
+      "Juz 25"
+    ]
+  },
+  {
+    "id": "juz_24",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 24 begin and end?",
+    "a": "Az-Zumar 39:32 → Fussilat 41:46",
+    "wrong": [
+      "Fussilat 41:47 → Al-Jathiyah 45:37",
+      "Al-Isra 17:1 → Al-Kahf 18:74",
+      "Al-Hijr 15:1 → An-Nahl 16:128"
+    ]
+  },
+  {
+    "id": "juzr_24",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Az-Zumar 39:32?",
+    "a": "Juz 24",
+    "wrong": [
+      "Juz 1",
+      "Juz 25",
+      "Juz 3"
+    ]
+  },
+  {
+    "id": "juz_25",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 25 begin and end?",
+    "a": "Fussilat 41:47 → Al-Jathiyah 45:37",
+    "wrong": [
+      "Al-Baqarah 2:253 → Al-Imran 3:92",
+      "Al-Fatihah 1:1 → Al-Baqarah 2:141",
+      "Az-Zariyat 51:31 → Al-Hadid 57:29"
+    ]
+  },
+  {
+    "id": "juzr_25",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Fussilat 41:47?",
+    "a": "Juz 25",
+    "wrong": [
+      "Juz 10",
+      "Juz 24",
+      "Juz 22"
+    ]
+  },
+  {
+    "id": "juz_26",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 26 begin and end?",
+    "a": "Al-Ahqaf 46:1 → Az-Zariyat 51:30",
+    "wrong": [
+      "Al-Ankabut 29:46 → Al-Ahzab 33:30",
+      "An-Naml 27:56 → Al-Ankabut 29:45",
+      "Ya-Sin 36:28 → Az-Zumar 39:31"
+    ]
+  },
+  {
+    "id": "juzr_26",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Ahqaf 46:1?",
+    "a": "Juz 26",
+    "wrong": [
+      "Juz 29",
+      "Juz 28",
+      "Juz 4"
+    ]
+  },
+  {
+    "id": "juz_27",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 27 begin and end?",
+    "a": "Az-Zariyat 51:31 → Al-Hadid 57:29",
+    "wrong": [
+      "Al-Fatihah 1:1 → Al-Baqarah 2:141",
+      "Al-Ma'idah 5:82 → Al-An'am 6:110",
+      "An-Nisa 4:24 → An-Nisa 4:147"
+    ]
+  },
+  {
+    "id": "juzr_27",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Az-Zariyat 51:31?",
+    "a": "Juz 27",
+    "wrong": [
+      "Juz 11",
+      "Juz 20",
+      "Juz 17"
+    ]
+  },
+  {
+    "id": "juz_28",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 28 begin and end?",
+    "a": "Al-Mujadila 58:1 → At-Tahrim 66:12",
+    "wrong": [
+      "Al-Ma'idah 5:82 → Al-An'am 6:110",
+      "Al-Ankabut 29:46 → Al-Ahzab 33:30",
+      "An-Naml 27:56 → Al-Ankabut 29:45"
+    ]
+  },
+  {
+    "id": "juzr_28",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Mujadila 58:1?",
+    "a": "Juz 28",
+    "wrong": [
+      "Juz 16",
+      "Juz 11",
+      "Juz 14"
+    ]
+  },
+  {
+    "id": "juz_29",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 29 begin and end?",
+    "a": "Al-Mulk 67:1 → Al-Mursalat 77:50",
+    "wrong": [
+      "Al-Anbiya 21:1 → Al-Hajj 22:78",
+      "Al-Ankabut 29:46 → Al-Ahzab 33:30",
+      "Al-Ahzab 33:31 → Ya-Sin 36:27"
+    ]
+  },
+  {
+    "id": "juzr_29",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at Al-Mulk 67:1?",
+    "a": "Juz 29",
+    "wrong": [
+      "Juz 4",
+      "Juz 18",
+      "Juz 14"
+    ]
+  },
+  {
+    "id": "juz_30",
+    "cat": "Juz Locations",
+    "q": "Where does Juz 30 begin and end?",
+    "a": "An-Naba 78:1 → An-Nas 114:6",
+    "wrong": [
+      "Al-Baqarah 2:253 → Al-Imran 3:92",
+      "Al-Ma'idah 5:82 → Al-An'am 6:110",
+      "Al-Fatihah 1:1 → Al-Baqarah 2:141"
+    ]
+  },
+  {
+    "id": "juzr_30",
+    "cat": "Juz Locations",
+    "q": "Which Juz number begins at An-Naba 78:1?",
+    "a": "Juz 30",
+    "wrong": [
+      "Juz 11",
+      "Juz 24",
+      "Juz 15"
+    ]
+  },
+  {
+    "id": "anum_1",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١",
+    "a": "1",
+    "wrong": [
+      "19",
+      "4",
+      "13"
+    ]
+  },
+  {
+    "id": "anumb_1",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 1?",
+    "a": "١",
+    "wrong": [
+      "٢",
+      "١٧",
+      "٥"
+    ]
+  },
+  {
+    "id": "anumc_1",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Wahid' (واحد) represent?",
+    "a": "1",
+    "wrong": [
+      "25",
+      "21",
+      "4"
+    ]
+  },
+  {
+    "id": "anum_2",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٢",
+    "a": "2",
+    "wrong": [
+      "20",
+      "8",
+      "40"
+    ]
+  },
+  {
+    "id": "anumb_2",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 2?",
+    "a": "٢",
+    "wrong": [
+      "٢٠",
+      "٧",
+      "٤"
+    ]
+  },
+  {
+    "id": "anumc_2",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Ithnan' (اثنان) represent?",
+    "a": "2",
+    "wrong": [
+      "21",
+      "18",
+      "5"
+    ]
+  },
+  {
+    "id": "anum_3",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٣",
+    "a": "3",
+    "wrong": [
+      "6",
+      "40",
+      "8"
+    ]
+  },
+  {
+    "id": "anumb_3",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 3?",
+    "a": "٣",
+    "wrong": [
+      "١٧",
+      "٢٠",
+      "٤٠"
+    ]
+  },
+  {
+    "id": "anumc_3",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Thalatha' (ثلاثة) represent?",
+    "a": "3",
+    "wrong": [
+      "8",
+      "12",
+      "17"
+    ]
+  },
+  {
+    "id": "anum_4",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٤",
+    "a": "4",
+    "wrong": [
+      "40",
+      "21",
+      "19"
+    ]
+  },
+  {
+    "id": "anumb_4",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 4?",
+    "a": "٤",
+    "wrong": [
+      "١٠",
+      "١٩",
+      "١"
+    ]
+  },
+  {
+    "id": "anumc_4",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Arba'a' (أربعة) represent?",
+    "a": "4",
+    "wrong": [
+      "14",
+      "30",
+      "22"
+    ]
+  },
+  {
+    "id": "anum_5",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٥",
+    "a": "5",
+    "wrong": [
+      "50",
+      "15",
+      "18"
+    ]
+  },
+  {
+    "id": "anumb_5",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 5?",
+    "a": "٥",
+    "wrong": [
+      "٢٠",
+      "١٨",
+      "١٩"
+    ]
+  },
+  {
+    "id": "anumc_5",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Khamsa' (خمسة) represent?",
+    "a": "5",
+    "wrong": [
+      "4",
+      "6",
+      "11"
+    ]
+  },
+  {
+    "id": "anum_6",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٦",
+    "a": "6",
+    "wrong": [
+      "1",
+      "16",
+      "17"
+    ]
+  },
+  {
+    "id": "anumb_6",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 6?",
+    "a": "٦",
+    "wrong": [
+      "١٢",
+      "٢٥",
+      "١٥"
+    ]
+  },
+  {
+    "id": "anumc_6",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Sitta' (ستة) represent?",
+    "a": "6",
+    "wrong": [
+      "50",
+      "4",
+      "9"
+    ]
+  },
+  {
+    "id": "anum_7",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٧",
+    "a": "7",
+    "wrong": [
+      "3",
+      "2",
+      "17"
+    ]
+  },
+  {
+    "id": "anumb_7",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 7?",
+    "a": "٧",
+    "wrong": [
+      "١١",
+      "٩",
+      "٦"
+    ]
+  },
+  {
+    "id": "anumc_7",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Sab'a' (سبعة) represent?",
+    "a": "7",
+    "wrong": [
+      "2",
+      "19",
+      "3"
+    ]
+  },
+  {
+    "id": "anum_8",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٨",
+    "a": "8",
+    "wrong": [
+      "10",
+      "4",
+      "9"
+    ]
+  },
+  {
+    "id": "anumb_8",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 8?",
+    "a": "٨",
+    "wrong": [
+      "١٥",
+      "٤٠",
+      "١٧"
+    ]
+  },
+  {
+    "id": "anumc_8",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Thamanya' (ثمانية) represent?",
+    "a": "8",
+    "wrong": [
+      "3",
+      "10",
+      "13"
+    ]
+  },
+  {
+    "id": "anum_9",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٩",
+    "a": "9",
+    "wrong": [
+      "15",
+      "1",
+      "6"
+    ]
+  },
+  {
+    "id": "anumb_9",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 9?",
+    "a": "٩",
+    "wrong": [
+      "١٥",
+      "١٣",
+      "٢"
+    ]
+  },
+  {
+    "id": "anumc_9",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Tis'a' (تسعة) represent?",
+    "a": "9",
+    "wrong": [
+      "19",
+      "13",
+      "7"
+    ]
+  },
+  {
+    "id": "anum_10",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٠",
+    "a": "10",
+    "wrong": [
+      "19",
+      "12",
+      "17"
+    ]
+  },
+  {
+    "id": "anumb_10",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 10?",
+    "a": "١٠",
+    "wrong": [
+      "١٩",
+      "٣",
+      "٧"
+    ]
+  },
+  {
+    "id": "anumc_10",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Ashara' (عشرة) represent?",
+    "a": "10",
+    "wrong": [
+      "4",
+      "22",
+      "50"
+    ]
+  },
+  {
+    "id": "anum_11",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١١",
+    "a": "11",
+    "wrong": [
+      "6",
+      "2",
+      "30"
+    ]
+  },
+  {
+    "id": "anumb_11",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 11?",
+    "a": "١١",
+    "wrong": [
+      "٢٠",
+      "١٠",
+      "٥"
+    ]
+  },
+  {
+    "id": "anumc_11",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Ahad Ashar' (أحد عشر) represent?",
+    "a": "11",
+    "wrong": [
+      "25",
+      "4",
+      "10"
+    ]
+  },
+  {
+    "id": "anum_12",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٢",
+    "a": "12",
+    "wrong": [
+      "11",
+      "50",
+      "6"
+    ]
+  },
+  {
+    "id": "anumb_12",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 12?",
+    "a": "١٢",
+    "wrong": [
+      "٤",
+      "٣٠",
+      "٤٠"
+    ]
+  },
+  {
+    "id": "anumc_12",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Ithna Ashar' (اثنا عشر) represent?",
+    "a": "12",
+    "wrong": [
+      "10",
+      "1",
+      "17"
+    ]
+  },
+  {
+    "id": "anum_13",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٣",
+    "a": "13",
+    "wrong": [
+      "8",
+      "18",
+      "4"
+    ]
+  },
+  {
+    "id": "anumb_13",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 13?",
+    "a": "١٣",
+    "wrong": [
+      "٨",
+      "٢١",
+      "١١"
+    ]
+  },
+  {
+    "id": "anumc_13",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Thalatha Ashar' (ثلاثة عشر) represent?",
+    "a": "13",
+    "wrong": [
+      "25",
+      "30",
+      "17"
+    ]
+  },
+  {
+    "id": "anum_14",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٤",
+    "a": "14",
+    "wrong": [
+      "15",
+      "13",
+      "20"
+    ]
+  },
+  {
+    "id": "anumb_14",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 14?",
+    "a": "١٤",
+    "wrong": [
+      "١٢",
+      "٣",
+      "١٨"
+    ]
+  },
+  {
+    "id": "anumc_14",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Arba'ata Ashar' (أربعة عشر) represent?",
+    "a": "14",
+    "wrong": [
+      "12",
+      "18",
+      "9"
+    ]
+  },
+  {
+    "id": "anum_15",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٥",
+    "a": "15",
+    "wrong": [
+      "7",
+      "18",
+      "17"
+    ]
+  },
+  {
+    "id": "anumb_15",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 15?",
+    "a": "١٥",
+    "wrong": [
+      "٧",
+      "٨",
+      "٢"
+    ]
+  },
+  {
+    "id": "anumc_15",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Khamsat Ashar' (خمسة عشر) represent?",
+    "a": "15",
+    "wrong": [
+      "7",
+      "9",
+      "6"
+    ]
+  },
+  {
+    "id": "anum_16",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٦",
+    "a": "16",
+    "wrong": [
+      "9",
+      "6",
+      "19"
+    ]
+  },
+  {
+    "id": "anumb_16",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 16?",
+    "a": "١٦",
+    "wrong": [
+      "٤٠",
+      "١٥",
+      "١٣"
+    ]
+  },
+  {
+    "id": "anumc_16",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Sittat Ashar' (ستة عشر) represent?",
+    "a": "16",
+    "wrong": [
+      "3",
+      "15",
+      "18"
+    ]
+  },
+  {
+    "id": "anum_17",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٧",
+    "a": "17",
+    "wrong": [
+      "9",
+      "25",
+      "10"
+    ]
+  },
+  {
+    "id": "anumb_17",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 17?",
+    "a": "١٧",
+    "wrong": [
+      "١٤",
+      "١١",
+      "٢٥"
+    ]
+  },
+  {
+    "id": "anumc_17",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Sab'ata Ashar' (سبعة عشر) represent?",
+    "a": "17",
+    "wrong": [
+      "2",
+      "11",
+      "16"
+    ]
+  },
+  {
+    "id": "anum_18",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٨",
+    "a": "18",
+    "wrong": [
+      "3",
+      "8",
+      "13"
+    ]
+  },
+  {
+    "id": "anumb_18",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 18?",
+    "a": "١٨",
+    "wrong": [
+      "١٣",
+      "٩",
+      "١٩"
+    ]
+  },
+  {
+    "id": "anumc_18",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Thamaniyat Ashar' (ثمانية عشر) represent?",
+    "a": "18",
+    "wrong": [
+      "15",
+      "13",
+      "14"
+    ]
+  },
+  {
+    "id": "anum_19",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ١٩",
+    "a": "19",
+    "wrong": [
+      "17",
+      "22",
+      "25"
+    ]
+  },
+  {
+    "id": "anumb_19",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 19?",
+    "a": "١٩",
+    "wrong": [
+      "٤",
+      "١١",
+      "٢٢"
+    ]
+  },
+  {
+    "id": "anumc_19",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Tis'ata Ashar' (تسعة عشر) represent?",
+    "a": "19",
+    "wrong": [
+      "2",
+      "11",
+      "5"
+    ]
+  },
+  {
+    "id": "anum_20",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٢٠",
+    "a": "20",
+    "wrong": [
+      "17",
+      "10",
+      "3"
+    ]
+  },
+  {
+    "id": "anumb_20",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 20?",
+    "a": "٢٠",
+    "wrong": [
+      "٨",
+      "١٤",
+      "١٧"
+    ]
+  },
+  {
+    "id": "anumc_20",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Ishrun' (عشرون) represent?",
+    "a": "20",
+    "wrong": [
+      "19",
+      "50",
+      "2"
+    ]
+  },
+  {
+    "id": "anum_21",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٢١",
+    "a": "21",
+    "wrong": [
+      "22",
+      "19",
+      "10"
+    ]
+  },
+  {
+    "id": "anumb_21",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 21?",
+    "a": "٢١",
+    "wrong": [
+      "٢",
+      "١٩",
+      "٥"
+    ]
+  },
+  {
+    "id": "anumc_21",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Wahid wa Ishrun' (واحد وعشرون) represent?",
+    "a": "21",
+    "wrong": [
+      "8",
+      "15",
+      "12"
+    ]
+  },
+  {
+    "id": "anum_22",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٢٢",
+    "a": "22",
+    "wrong": [
+      "21",
+      "8",
+      "16"
+    ]
+  },
+  {
+    "id": "anumb_22",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 22?",
+    "a": "٢٢",
+    "wrong": [
+      "١٧",
+      "٨",
+      "٧"
+    ]
+  },
+  {
+    "id": "anumc_22",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Ithnan wa Ishrun' (اثنان وعشرون) represent?",
+    "a": "22",
+    "wrong": [
+      "20",
+      "5",
+      "8"
+    ]
+  },
+  {
+    "id": "anum_25",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٢٥",
+    "a": "25",
+    "wrong": [
+      "3",
+      "16",
+      "2"
+    ]
+  },
+  {
+    "id": "anumb_25",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 25?",
+    "a": "٢٥",
+    "wrong": [
+      "١٦",
+      "١",
+      "٦"
+    ]
+  },
+  {
+    "id": "anumc_25",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Khamsa wa Ishrun' (خمسة وعشرون) represent?",
+    "a": "25",
+    "wrong": [
+      "3",
+      "2",
+      "30"
+    ]
+  },
+  {
+    "id": "anum_30",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٣٠",
+    "a": "30",
+    "wrong": [
+      "8",
+      "15",
+      "2"
+    ]
+  },
+  {
+    "id": "anumb_30",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 30?",
+    "a": "٣٠",
+    "wrong": [
+      "١٧",
+      "٣",
+      "١٦"
+    ]
+  },
+  {
+    "id": "anumc_30",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Thalathun' (ثلاثون) represent?",
+    "a": "30",
+    "wrong": [
+      "16",
+      "7",
+      "21"
+    ]
+  },
+  {
+    "id": "anum_40",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٤٠",
+    "a": "40",
+    "wrong": [
+      "15",
+      "8",
+      "13"
+    ]
+  },
+  {
+    "id": "anumb_40",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 40?",
+    "a": "٤٠",
+    "wrong": [
+      "٢١",
+      "١٥",
+      "١٢"
+    ]
+  },
+  {
+    "id": "anumc_40",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Arba'un' (أربعون) represent?",
+    "a": "40",
+    "wrong": [
+      "25",
+      "22",
+      "4"
+    ]
+  },
+  {
+    "id": "anum_50",
+    "cat": "Arabic Numbers",
+    "q": "What English number is this Arabic numeral: ٥٠",
+    "a": "50",
+    "wrong": [
+      "18",
+      "14",
+      "5"
+    ]
+  },
+  {
+    "id": "anumb_50",
+    "cat": "Arabic Numbers",
+    "q": "Which is the Arabic numeral for 50?",
+    "a": "٥٠",
+    "wrong": [
+      "٢٠",
+      "٣",
+      "٢١"
+    ]
+  },
+  {
+    "id": "anumc_50",
+    "cat": "Arabic Numbers",
+    "q": "What English number does 'Khamsun' (خمسون) represent?",
+    "a": "50",
+    "wrong": [
+      "30",
+      "40",
+      "17"
+    ]
+  },
+  {
+    "id": "waqf_م",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'م' (Waqf Lazim) mean?",
+    "a": "Mandatory stop — must stop here; the meaning is incomplete if you continue",
+    "wrong": [
+      "Preferred stop — continuing is better",
+      "Forbidden stop — do not stop here",
+      "Stop and continue are equal"
+    ]
+  },
+  {
+    "id": "waqfr_م",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Mandatory stop — must stop here; the meaning is incomplete if you cont...'?",
+    "a": "م — Waqf Lazim",
+    "wrong": [
+      "... — Waqf Mu'anaqah",
+      "ج — Waqf Ja'iz",
+      "قف — Waqf Awla"
+    ]
+  },
+  {
+    "id": "waqf_لا",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'لا' (Waqf Mamnu') mean?",
+    "a": "Forbidden stop — do not stop here as it distorts the meaning",
+    "wrong": [
+      "Mandatory stop — must stop",
+      "Preferred stop — stopping is better",
+      "Good stopping point"
+    ]
+  },
+  {
+    "id": "waqfr_لا",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Forbidden stop — do not stop here as it distorts the meaning...'?",
+    "a": "لا — Waqf Mamnu'",
+    "wrong": [
+      "صل — Wasl Awla",
+      "وقفة — Waqfah",
+      "ج — Waqf Ja'iz"
+    ]
+  },
+  {
+    "id": "waqf_ط",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'ط' (Waqf Mutlaq) mean?",
+    "a": "Absolute stop — the sentence and meaning are fully complete",
+    "wrong": [
+      "Preferred stop — continuing is fine",
+      "Forbidden stop — do not stop",
+      "Mandatory stop due to meaning"
+    ]
+  },
+  {
+    "id": "waqfr_ط",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Absolute stop — the sentence and meaning are fully complete...'?",
+    "a": "ط — Waqf Mutlaq",
+    "wrong": [
+      "ج — Waqf Ja'iz",
+      "ز — Waqf Mujawwaz",
+      "لا — Waqf Mamnu'"
+    ]
+  },
+  {
+    "id": "waqf_ج",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'ج' (Waqf Ja'iz) mean?",
+    "a": "Permissible stop — stopping or continuing are both acceptable",
+    "wrong": [
+      "Mandatory stop — must stop",
+      "Forbidden stop — do not stop",
+      "Absolute stop — sentence complete"
+    ]
+  },
+  {
+    "id": "waqfr_ج",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Permissible stop — stopping or continuing are both acceptable...'?",
+    "a": "ج — Waqf Ja'iz",
+    "wrong": [
+      "م — Waqf Lazim",
+      "قف — Waqf Awla",
+      "صل — Wasl Awla"
+    ]
+  },
+  {
+    "id": "waqf_ز",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'ز' (Waqf Mujawwaz) mean?",
+    "a": "Permissible but continuing without stopping is preferred",
+    "wrong": [
+      "Mandatory stop — must stop",
+      "Stopping here is strongly preferred",
+      "Forbidden stop — do not stop"
+    ]
+  },
+  {
+    "id": "waqfr_ز",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Permissible but continuing without stopping is preferred...'?",
+    "a": "ز — Waqf Mujawwaz",
+    "wrong": [
+      "صل — Wasl Awla",
+      "ط — Waqf Mutlaq",
+      "ج — Waqf Ja'iz"
+    ]
+  },
+  {
+    "id": "waqf_ص",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'ص' (Waqf Murakhkhas) mean?",
+    "a": "Permissible due to length of verse, but continuing is better",
+    "wrong": [
+      "Forbidden stop — do not stop",
+      "Mandatory stop — must stop",
+      "Absolute stop — meaning complete"
+    ]
+  },
+  {
+    "id": "waqfr_ص",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Permissible due to length of verse, but continuing is better...'?",
+    "a": "ص — Waqf Murakhkhas",
+    "wrong": [
+      "ط — Waqf Mutlaq",
+      "... — Waqf Mu'anaqah",
+      "صل — Wasl Awla"
+    ]
+  },
+  {
+    "id": "waqf_قف",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'قف' (Waqf Awla) mean?",
+    "a": "Stopping is preferred — better to stop than to continue here",
+    "wrong": [
+      "Stopping is forbidden here",
+      "Stopping and continuing are exactly equal",
+      "Mandatory stop — must stop"
+    ]
+  },
+  {
+    "id": "waqfr_قف",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Stopping is preferred — better to stop than to continue here...'?",
+    "a": "قف — Waqf Awla",
+    "wrong": [
+      "... — Waqf Mu'anaqah",
+      "صل — Wasl Awla",
+      "وقفة — Waqfah"
+    ]
+  },
+  {
+    "id": "waqf_...",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark '...' (Waqf Mu'anaqah) mean?",
+    "a": "Stop at one set of dots or the other, not both — the meanings are linked between them",
+    "wrong": [
+      "Stop at all three-dot markers",
+      "Never stop at any of the markers",
+      "Mandatory stop at the first marker only"
+    ]
+  },
+  {
+    "id": "waqfr_...",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Stop at one set of dots or the other, not both — the meanings are link...'?",
+    "a": "... — Waqf Mu'anaqah",
+    "wrong": [
+      "م — Waqf Lazim",
+      "ص — Waqf Murakhkhas",
+      "صل — Wasl Awla"
+    ]
+  },
+  {
+    "id": "waqf_صل",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'صل' (Wasl Awla) mean?",
+    "a": "Continuing without stopping is preferred — do not stop if possible",
+    "wrong": [
+      "Stopping is strongly preferred here",
+      "Mandatory stop — must stop",
+      "Stopping and continuing are equally fine"
+    ]
+  },
+  {
+    "id": "waqfr_صل",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'Continuing without stopping is preferred — do not stop if possible...'?",
+    "a": "صل — Wasl Awla",
+    "wrong": [
+      "ط — Waqf Mutlaq",
+      "قف — Waqf Awla",
+      "... — Waqf Mu'anaqah"
+    ]
+  },
+  {
+    "id": "waqf_وقفة",
+    "cat": "Waqf Marks",
+    "q": "What does the waqf mark 'وقفة' (Waqfah) mean?",
+    "a": "A brief pause without a full stop — do not take a new breath",
+    "wrong": [
+      "Full stop is required here",
+      "It is forbidden to pause",
+      "Mandatory stop and restart recitation"
+    ]
+  },
+  {
+    "id": "waqfr_وقفة",
+    "cat": "Waqf Marks",
+    "q": "Which waqf mark means: 'A brief pause without a full stop — do not take a new breath...'?",
+    "a": "وقفة — Waqfah",
+    "wrong": [
+      "لا — Waqf Mamnu'",
+      "قف — Waqf Awla",
+      "... — Waqf Mu'anaqah"
+    ]
+  },
+  {
+    "id": "h1",
+    "cat": "40 Hadith",
+    "hadith": "Actions are judged by intentions, and every person will have only what they intended. Whoever migrates for Allah and His Messenger, his migration is for Allah and His Messenger. Whoever migrates for worldly gain or to marry a woman, his migration is for that.",
+    "q": "What does this hadith teach about deeds done outwardly the same way?",
+    "a": "Two people doing the same action may receive completely different rewards based on their intention",
+    "wrong": [
+      "The action itself determines the reward regardless of intent",
+      "Only deeds of worship require intention",
+      "Intention only matters for acts of charity"
+    ]
+  },
+  {
+    "id": "h2",
+    "cat": "40 Hadith",
+    "hadith": "One day while we were sitting with the Messenger of Allah, a man appeared — his clothes were very white, his hair very black, with no signs of travel, yet none of us knew him. He sat with the Prophet and asked about Islam, Iman, and Ihsan. The Prophet replied: Islam is the five pillars. Iman is to believe in Allah, His angels, His books, His messengers, the Last Day, and divine decree. Ihsan is to worship Allah as though you see Him; if you cannot, then know that He sees you.",
+    "q": "What is Ihsan according to this hadith?",
+    "a": "Worshipping Allah as though you see Him — and if you cannot, knowing He sees you",
+    "wrong": [
+      "Performing all five pillars perfectly",
+      "Believing in the six pillars of faith",
+      "Giving charity openly to inspire others"
+    ]
+  },
+  {
+    "id": "h3",
+    "cat": "40 Hadith",
+    "hadith": "Islam is built on five things: the testimony that there is no god but Allah and that Muhammad is His messenger, establishing prayer, giving zakat, fasting Ramadan, and making Hajj to the House for those who are able.",
+    "q": "What does this hadith clarify about Hajj?",
+    "a": "Hajj is only obligatory for those who are able — it is conditional, unlike the other pillars",
+    "wrong": [
+      "Hajj must be done every year",
+      "Hajj replaces zakat for those who perform it",
+      "Hajj is optional for all Muslims"
+    ]
+  },
+  {
+    "id": "h4",
+    "cat": "40 Hadith",
+    "hadith": "Each of you is brought together in your mother's womb for forty days as a drop, then is a clot for a like period, then a morsel for a like period. Then an angel is sent and breathes the soul into it, and is commanded to write four things: the person's provision, their lifespan, their deeds, and whether they will be wretched or happy.",
+    "q": "What theological lesson comes from the angel writing 'wretched or happy' before birth?",
+    "a": "Allah's knowledge of our fate is complete before we exist, yet we are still responsible for our choices",
+    "wrong": [
+      "Our fate is sealed and our actions have no meaning",
+      "Only good deeds can change what was written",
+      "The soul entering the body erases the written decree"
+    ]
+  },
+  {
+    "id": "h5",
+    "cat": "40 Hadith",
+    "hadith": "Whoever introduces into this affair of ours something that is not of it will have it rejected.",
+    "q": "What is this hadith the primary evidence for in Islamic jurisprudence?",
+    "a": "The prohibition of bid'ah — religious innovations not grounded in the Quran and Sunnah",
+    "wrong": [
+      "The obligation of following scholars",
+      "The permissibility of local customs in worship",
+      "The requirement to consult the community before new rulings"
+    ]
+  },
+  {
+    "id": "h6",
+    "cat": "40 Hadith",
+    "hadith": "The halal is clear and the haram is clear, and between them are doubtful matters that most people do not know about. Whoever avoids doubtful matters has protected his religion and honour. Whoever falls into doubtful matters falls into haram, like a shepherd who grazes near a sanctuary — he is likely to enter it. Every king has a sanctuary, and Allah's sanctuary is His prohibitions.",
+    "q": "What does the shepherd analogy teach in this hadith?",
+    "a": "Getting close to what is forbidden — even in grey areas — puts you at risk of crossing the boundary",
+    "wrong": [
+      "A shepherd must protect his flock from all water sources",
+      "Halal and haram are only clear to scholars",
+      "Doubtful matters are always permissible if unsure"
+    ]
+  },
+  {
+    "id": "h7",
+    "cat": "40 Hadith",
+    "hadith": "The religion is sincerity (nasihah). We said: To whom? He said: To Allah, to His book, to His messenger, to the leaders of the Muslims, and to the common people.",
+    "q": "Why is 'sincerity to the common people' included in this hadith?",
+    "a": "Nasihah to laypeople means genuinely guiding, advising, and caring for all Muslims — not just leadership",
+    "wrong": [
+      "Common people must follow leaders without question",
+      "Sincerity only applies to those in authority",
+      "The hadith only refers to sincerity in acts of worship"
+    ]
+  },
+  {
+    "id": "h8",
+    "cat": "40 Hadith",
+    "hadith": "Make things easy and do not make them difficult; give glad tidings and do not make people run away.",
+    "q": "What approach to teaching and leadership does this hadith encourage?",
+    "a": "Facilitating understanding and encouraging people rather than burdening or alienating them",
+    "wrong": [
+      "Strict enforcement of all rules at all times",
+      "Only scholars should speak to the public",
+      "Hiding difficult rulings from new Muslims"
+    ]
+  },
+  {
+    "id": "h9",
+    "cat": "40 Hadith",
+    "hadith": "Part of the excellence of a person's Islam is leaving what does not concern him.",
+    "q": "What is a sign of spiritual maturity according to this hadith?",
+    "a": "Focusing only on what benefits you and avoiding unnecessary involvement in others' affairs",
+    "wrong": [
+      "Advising everyone around you on all matters",
+      "Maximising your knowledge of every topic",
+      "Speaking frequently so your voice is heard"
+    ]
+  },
+  {
+    "id": "h10",
+    "cat": "40 Hadith",
+    "hadith": "Allah is pure and accepts only what is pure. He commanded the believers as He commanded the messengers. A man travels, his hair dishevelled and dusty, raising his hands to the sky: 'O Lord! O Lord!' — yet his food is haram, his drink is haram, his clothing is haram, his nourishment is haram. How can he be answered?",
+    "q": "What barrier to having du'a answered does this hadith highlight?",
+    "a": "Consuming haram wealth or food blocks the acceptance of supplication, regardless of sincerity",
+    "wrong": [
+      "Du'a is never answered without completing Hajj",
+      "Only scholars' supplications are accepted",
+      "Du'a must be made in Arabic to be answered"
+    ]
+  },
+  {
+    "id": "h11",
+    "cat": "40 Hadith",
+    "hadith": "Leave what makes you doubt for what does not make you doubt, for truthfulness is tranquility and lying is doubt.",
+    "q": "What inner tool does this hadith give for navigating unclear situations?",
+    "a": "Your sense of inner peace and discomfort — peace indicates righteousness, unease indicates sin",
+    "wrong": [
+      "Always ask a scholar before acting",
+      "Doubt always means something is haram",
+      "Ignore feelings and follow legal opinions only"
+    ]
+  },
+  {
+    "id": "h12",
+    "cat": "40 Hadith",
+    "hadith": "None of you truly believes until he loves for his brother what he loves for himself.",
+    "q": "What standard of brotherhood does this hadith establish?",
+    "a": "Genuine faith requires actively wishing for others the same good you desire for yourself",
+    "wrong": [
+      "Brotherhood only applies to people of the same family",
+      "It is enough to not harm others to fulfill this",
+      "This applies only to acts of charity and money"
+    ]
+  },
+  {
+    "id": "h13",
+    "cat": "40 Hadith",
+    "hadith": "The blood of a Muslim is not lawful to shed except in three cases: the previously married adulterer, a life for a life, and the one who abandons his religion and separates from the community.",
+    "q": "What does this hadith establish about human life in Islam?",
+    "a": "The sanctity of Muslim life is a foundational principle — taking it is only permitted in the most serious cases and only by proper authority",
+    "wrong": [
+      "Anyone can enforce these three cases",
+      "The list is not exhaustive and scholars can add cases",
+      "Apostasy alone is always punishable by death in all circumstances"
+    ]
+  },
+  {
+    "id": "h14",
+    "cat": "40 Hadith",
+    "hadith": "Whoever believes in Allah and the Last Day, let him speak good or remain silent. Whoever believes in Allah and the Last Day, let him honour his neighbour. Whoever believes in Allah and the Last Day, let him honour his guest.",
+    "q": "What does linking these behaviours to belief in Allah and the Last Day imply?",
+    "a": "These social duties are not merely cultural — they are expressions of faith and will be accounted for",
+    "wrong": [
+      "Good speech only applies in formal settings",
+      "Neighbours are only those directly next door",
+      "Guests must be hosted for exactly three days no more"
+    ]
+  },
+  {
+    "id": "h15",
+    "cat": "40 Hadith",
+    "hadith": "Do not be angry. The Prophet repeated this three times.",
+    "q": "Why is controlling anger so significant that the Prophet emphasised it three times?",
+    "a": "Anger is a root cause of many sins — controlling it protects relationships, judgment, and one's deen",
+    "wrong": [
+      "The Prophet repeated it because the companion was hard of hearing",
+      "Anger is only prohibited during prayer",
+      "The repetition is a literary style with no added emphasis"
+    ]
+  },
+  {
+    "id": "h16",
+    "cat": "40 Hadith",
+    "hadith": "Allah prescribed excellence (ihsan) in all things. So if you kill, kill well; if you slaughter, slaughter well; sharpen your blade and spare your animal the agony.",
+    "q": "What broad principle does this hadith establish beyond just slaughter?",
+    "a": "Excellence (ihsan) is an Islamic value in every act — even difficult or terminal ones must be done with care and competence",
+    "wrong": [
+      "Only acts of worship require perfection",
+      "This ruling only applies to professional butchers",
+      "The hadith permits any method as long as the animal dies"
+    ]
+  },
+  {
+    "id": "h17",
+    "cat": "40 Hadith",
+    "hadith": "Fear Allah wherever you are. Follow a bad deed with a good one to erase it. And treat people with good character.",
+    "q": "What practical tool for managing sin does this hadith provide?",
+    "a": "Following a sin immediately with a good deed — tawbah expressed through action — as a way to erase its effect",
+    "wrong": [
+      "Only formal repentance through prayer removes sin",
+      "Good deeds before a sin cancel its effect",
+      "You must confess sins to a scholar to erase them"
+    ]
+  },
+  {
+    "id": "h18",
+    "cat": "40 Hadith",
+    "hadith": "Be mindful of Allah and He will protect you. Be mindful of Allah and you will find Him before you. Know Him in times of ease and He will know you in times of hardship. When you ask, ask Allah. When you seek help, seek it from Allah.",
+    "q": "What relationship dynamic does 'know Allah in ease and He will know you in hardship' describe?",
+    "a": "Building a relationship with Allah during good times creates a foundation He responds to in difficulty",
+    "wrong": [
+      "Allah only responds to those in crisis regardless of past deeds",
+      "Du'a is more powerful when made in hardship than in ease",
+      "Knowing Allah means memorising His 99 names"
+    ]
+  },
+  {
+    "id": "h19",
+    "cat": "40 Hadith",
+    "hadith": "If you do what pleases people but angers Allah, He will give you over to the people. But if you do what pleases Allah though it angers people, Allah will protect you from the people.",
+    "q": "What does this hadith warn about people-pleasing at the expense of Allah's pleasure?",
+    "a": "Prioritising people's approval over Allah's leads to dependence on people — and losing both Allah's support and theirs",
+    "wrong": [
+      "It is always necessary to balance pleasing Allah and people equally",
+      "Social harmony is always more important than strict rulings",
+      "This only applies to scholars not laypeople"
+    ]
+  },
+  {
+    "id": "h20",
+    "cat": "40 Hadith",
+    "hadith": "If you feel no shame, then do as you wish.",
+    "q": "What role does hayaa (modesty/shame) play in Islamic morality according to this hadith?",
+    "a": "Hayaa is an internal moral compass — its absence removes the barrier between a person and any sin",
+    "wrong": [
+      "Shame is only relevant in public settings",
+      "The hadith gives permission to do anything you like",
+      "Modesty only applies to dress and physical appearance"
+    ]
+  },
+  {
+    "id": "h21",
+    "cat": "40 Hadith",
+    "hadith": "Say: I believe in Allah — then be steadfast.",
+    "q": "What does 'be steadfast' add to simply saying 'I believe'?",
+    "a": "Belief must be lived consistently over time — istiqamah (steadfastness) is what separates conviction from claim",
+    "wrong": [
+      "Steadfastness only applies to the five pillars",
+      "The statement of belief alone is sufficient for salvation",
+      "Istiqamah means never making mistakes in worship"
+    ]
+  },
+  {
+    "id": "h22",
+    "cat": "40 Hadith",
+    "hadith": "There should be no harming and no reciprocating harm.",
+    "q": "What legal principle in Islamic fiqh does this short hadith establish?",
+    "a": "The removal of harm (dar' al-mafsada) is a foundational legal maxim — harm cannot be repaid with harm",
+    "wrong": [
+      "Retaliation in equal measure is always permitted",
+      "This only applies to physical injury between Muslims",
+      "The hadith overrides the qisas principle completely"
+    ]
+  },
+  {
+    "id": "h23",
+    "cat": "40 Hadith",
+    "hadith": "Allah said: O My servants, I have forbidden injustice for Myself and made it forbidden among you, so do not oppress one another. Every one of you is astray except those I have guided, so seek guidance from Me. Every one of you is hungry except those I have fed, so seek food from Me.",
+    "q": "What does Allah forbidding injustice for Himself (in a Hadith Qudsi) mean theologically?",
+    "a": "It emphasises that Allah's prohibition of injustice is absolute and self-willed — not imposed — making it the highest moral standard",
+    "wrong": [
+      "Allah can commit injustice but chooses not to in most cases",
+      "This only applies to physical harm between people",
+      "The Hadith Qudsi carries less authority than regular hadith"
+    ]
+  },
+  {
+    "id": "h24",
+    "cat": "40 Hadith",
+    "hadith": "Part of the perfection of one's Islam is leaving what does not concern him.",
+    "q": "How does this relate to social media and information overload in a modern context?",
+    "a": "Consuming and reacting to everything that doesn't benefit you is a failure of spiritual discipline — restraint is a sign of mature faith",
+    "wrong": [
+      "Muslims must stay informed about all world events",
+      "This hadith only applies to private conversations",
+      "Leaving things that don't concern you applies only to gossip"
+    ]
+  },
+  {
+    "id": "h25",
+    "cat": "40 Hadith",
+    "hadith": "On every joint of a person there is a charitable act due every day the sun rises: mediating between two people is charity; helping someone load his mount is charity; a good word is charity; every step taken toward prayer is charity; removing harm from the path is charity.",
+    "q": "What does this hadith teach about the scope of Islamic charity?",
+    "a": "Sadaqa is not limited to money — every beneficial act for others or society counts as charity",
+    "wrong": [
+      "Only financial giving counts as sadaqa",
+      "Sadaqa is only for the poor and needy",
+      "This type of charity only applies during Ramadan"
+    ]
+  },
+  {
+    "id": "h26",
+    "cat": "40 Hadith",
+    "hadith": "Righteousness is good character, and sin is what disturbs the soul and you dislike people knowing about it.",
+    "q": "What internal test for sin does this hadith offer?",
+    "a": "If an action unsettles your conscience and you would be ashamed if others saw it — that discomfort is itself a sign of sin",
+    "wrong": [
+      "Public opinion determines what is sinful",
+      "Only scholars can define what sin is",
+      "The heart is not a reliable guide — only text defines sin"
+    ]
+  },
+  {
+    "id": "h27",
+    "cat": "40 Hadith",
+    "hadith": "Whoever relieves a believer of a worldly hardship, Allah will relieve him of a hardship on the Day of Judgment. Whoever makes things easy for one in difficulty, Allah will ease his situation in this world and the next. Whoever conceals a Muslim's faults, Allah will conceal his faults in this world and the next.",
+    "q": "What pattern does Allah's response follow in this hadith?",
+    "a": "Allah mirrors the nature of the deed — ease given creates ease received; concealment given creates concealment received",
+    "wrong": [
+      "Rewards are only given in the Hereafter not in this world",
+      "Only helping in financial matters earns this reward",
+      "The reward is based on the amount of effort not the type of deed"
+    ]
+  },
+  {
+    "id": "h28",
+    "cat": "40 Hadith",
+    "hadith": "I urge you to follow my Sunnah and the Sunnah of the rightly-guided caliphs after me. Hold fast to it and bite onto it with your molar teeth. Beware of newly invented matters, for every new matter is an innovation, and every innovation is going astray.",
+    "q": "Why does the Prophet say 'bite onto it with your molar teeth'?",
+    "a": "It conveys that holding onto the Sunnah requires fierce determination — it will not be easy and people will try to pull you away",
+    "wrong": [
+      "It is a literal instruction about how to eat during worship",
+      "The phrase refers to keeping the tongue from speaking falsehood",
+      "Molar teeth are symbolic of scholars who preserve the deen"
+    ]
+  },
+  {
+    "id": "h29",
+    "cat": "40 Hadith",
+    "hadith": "Verily Allah has obligated certain duties, so do not neglect them. He has set certain limits, so do not transgress them. He has prohibited certain things, so do not violate them. And He has been silent about certain things — out of mercy for you, not forgetfulness — so do not seek them out.",
+    "q": "What does 'He has been silent about certain things out of mercy' mean?",
+    "a": "Matters not addressed explicitly are a mercy — adding rulings where silence exists is a burden Allah did not intend",
+    "wrong": [
+      "Scholars must fill in all silences with rulings",
+      "Silent matters are always considered forbidden",
+      "The Sunnah provides rulings for every possible situation"
+    ]
+  },
+  {
+    "id": "h30",
+    "cat": "40 Hadith",
+    "hadith": "Take advantage of five before five: your youth before old age, your health before sickness, your wealth before poverty, your free time before being occupied, and your life before death.",
+    "q": "Why does this hadith list these five in this particular order?",
+    "a": "They move from the most taken-for-granted to the most obvious — we recognise the value of life only at death, but waste youth, health, and time first",
+    "wrong": [
+      "The order reflects the five pillars of Islam",
+      "The hadith ranks these by religious obligation",
+      "Youth comes first because it is the only one fully in our control"
+    ]
+  }
+]

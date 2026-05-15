@@ -1,0 +1,1236 @@
+{
+  "categories": [
+    {
+      "id": "clarity",
+      "name": "Clarity & Economy",
+      "color": "#00e5ff",
+      "entries": [
+        {
+          "id": "c1",
+          "author": "Ernest Hemingway",
+          "work": "A Farewell to Arms",
+          "excerpt": "The world breaks everyone and afterward many are strong at the broken places. But those that will not break it kills. It kills the very good and the very gentle and the very brave impartially.",
+          "notice": "Three sentences. No modifiers except the ones doing real work. The repetition of 'kills' is the only emphasis needed. Notice how 'impartially' lands harder because everything before it was simple."
+        },
+        {
+          "id": "c2",
+          "author": "Raymond Carver",
+          "work": "Cathedral",
+          "excerpt": "This blind man, an old friend of my wife's, he was on his way to spend the night. His wife had died. So he was visiting the dead wife's relatives in Connecticut. He called my wife from his in-laws'. Arrangements were made. He would come by train, a five-hour trip, and my wife would meet him at the station. She hadn't seen him since she worked for him one summer in Seattle ten years ago.",
+          "notice": "Every sentence is declarative. Short. No flourish. Watch how Carver uses the period as a tool — each full stop is a small emotional wall the narrator builds. The flatness IS the characterization."
+        },
+        {
+          "id": "c3",
+          "author": "George Orwell",
+          "work": "Shooting an Elephant",
+          "excerpt": "He was dying, very slowly and in great agony, but in some world remote from me where not even a bullet could damage him further. I felt that I had got to put an end to that dreadful noise. It seemed dreadful to see the great beast lying there, powerless to move and yet powerless to die.",
+          "notice": "Orwell never flinches from the concrete. 'That dreadful noise' — not 'his suffering.' The repetition of 'powerless' in the last sentence is deliberate music. Economy doesn't mean coldness."
+        },
+        {
+          "id": "c4",
+          "author": "Cormac McCarthy",
+          "work": "The Road",
+          "excerpt": "He walked out in the gray light and stood and he saw for a brief moment the absolute truth of the world. The cold relentless circling of the intestate earth. Darkness implacable. The blind dogs of the sun in their running. The nights dead still and deader black and the days more gray each one than what had gone before.",
+          "notice": "McCarthy drops articles and punctuation like excess weight. 'Darkness implacable' — adjective after noun, Biblical syntax. He achieves economy through compression rather than simplicity. No word earns its place by being ordinary."
+        },
+        {
+          "id": "c5",
+          "author": "Denis Johnson",
+          "work": "Jesus' Son",
+          "excerpt": "I'd been staying at the Holiday Inn with my girlfriend, honestly the most beautiful woman I'd ever abandoned myself to, until our money ran out. Our room was a mess. A woman's clothes were everywhere.",
+          "notice": "That parenthetical — 'honestly the most beautiful woman I'd ever abandoned myself to' — does three things at once: characterizes the narrator, foreshadows the relationship, and uses 'abandoned myself to' instead of 'loved.' Every word choice is a decision."
+        },
+        {
+          "id": "c6",
+          "author": "Elmore Leonard",
+          "work": "10 Rules of Writing",
+          "excerpt": "The car stopped. Two men got out. They walked into the diner and sat at the counter. The woman behind the counter came over and one of the men said they were waiting for a friend.",
+          "notice": "Pure action grammar. Subject-verb. Subject-verb. Leonard believed if it sounds like writing, rewrite it. Notice there is no interiority — and yet you feel tension building purely from the sequence of actions."
+        },
+        {
+          "id": "c7",
+          "author": "Joan Didion",
+          "work": "Play It As It Lays",
+          "excerpt": "She took his hand and held it. She did not know why she did this. She only knew that it seemed important to hold onto something.",
+          "notice": "Didion strips motive down to its honest minimum. 'She did not know why she did this' — most writers would explain. Didion refuses. The character's confusion becomes the reader's intimacy."
+        },
+        {
+          "id": "c8",
+          "author": "Tobias Wolff",
+          "work": "This Boy's Life",
+          "excerpt": "I had a new name and invented a new history for myself. I stood in front of a mirror for hours at a time, practicing expressions — stern, cold, amused — to go with the story I was building.",
+          "notice": "The list of expressions — 'stern, cold, amused' — is doing enormous work. It's both specific and damning. Wolff trusts the concrete detail to carry the psychological weight."
+        },
+        {
+          "id": "c9",
+          "author": "Anton Chekhov",
+          "work": "Letter to his brother",
+          "excerpt": "Don't tell me the moon is shining; show me the glint of light on broken glass.",
+          "notice": "The most famous writing instruction ever given — and Chekhov followed it himself. Every abstract description has a concrete equivalent. The 'glint on broken glass' contains the moon, the night, and a whole emotional atmosphere."
+        },
+        {
+          "id": "c10",
+          "author": "John Steinbeck",
+          "work": "East of Eden",
+          "excerpt": "And now that you don't have to be perfect, you can be good.",
+          "notice": "The economy is devastating. Thirteen words that contain an entire moral philosophy. Nothing padded, nothing wasted. The contrast — perfect/good — does everything."
+        },
+        {
+          "id": "c11",
+          "author": "Cormac McCarthy",
+          "work": "Suttree",
+          "excerpt": "He lay in the floor of the cave and watched the fire and the shadows that prowled the walls and he slept and woke and slept again.",
+          "notice": "The and-and-and construction (polysyndeton) removes punctuation and creates a dreamlike flow. McCarthy uses it to blur time and consciousness. The repetition of 'slept' is not lazy — it is doing the work of duration."
+        },
+        {
+          "id": "c12",
+          "author": "Flannery O'Connor",
+          "work": "A Good Man Is Hard to Find",
+          "excerpt": "She would have been a good woman if it had been somebody there to shoot her every minute of her life.",
+          "notice": "The Misfit's line is simultaneously joke, horror, and theological statement. O'Connor's economy is always moral. The simplest sentence in the story often contains her entire argument."
+        },
+        {
+          "id": "c13",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "It ain't dying I'm talking about. It's living. I doubt it matters where you die, but it matters where you live.",
+          "notice": "The pivot from dying to living in a single breath is structurally elegant. McMurtry finds folk wisdom in declarative sentences. No elaboration needed — the structure does it."
+        },
+        {
+          "id": "c14",
+          "author": "Elmore Leonard",
+          "work": "Get Shorty",
+          "excerpt": "He had never done anything wrong in his life that he could remember offhand.",
+          "notice": "'That he could remember offhand' — six words that contain an entire character's moral universe. Leonard's economy is always doing double duty. The qualifier demolishes the claim."
+        },
+        {
+          "id": "c15",
+          "author": "Penelope Fitzgerald",
+          "work": "The Blue Flower",
+          "excerpt": "He was not unhappy, but he was not happy, and he did not know what he wanted.",
+          "notice": "Triple negation and negation creating a precise emotional location. Not unhappy, not happy — that exact middle territory most writers would reach for adjectives to cover. Fitzgerald finds it through structure."
+        }
+      ]
+    },
+    {
+      "id": "rhythm",
+      "name": "Rhythm & Music",
+      "color": "#ff79c6",
+      "entries": [
+        {
+          "id": "r1",
+          "author": "James Baldwin",
+          "work": "Giovanni's Room",
+          "excerpt": "People can't, unhappily, invent their mooring posts, their lovers and their friends, anymore than they can invent their parents. Life gives these and also takes them away and the great difficulty is to say Yes to life.",
+          "notice": "Baldwin writes in long breath-clauses that build on each other. Read this aloud — the comma before 'anymore' slows you just enough. The final short clause 'to say Yes to life' lands like a punch after the long wind-up."
+        },
+        {
+          "id": "r2",
+          "author": "Vladimir Nabokov",
+          "work": "Lolita",
+          "excerpt": "Lolita, light of my life, fire of my loins. Lo-lee-ta: the tip of the tongue taking a trip of three steps down the palate to tap, at three, on the teeth.",
+          "notice": "This is prose that performs what it describes — the tongue actually does what Nabokov says. The alliteration is not decorative; it enacts obsession. Every writer should study this opening for how sound creates meaning."
+        },
+        {
+          "id": "r3",
+          "author": "Toni Morrison",
+          "work": "Beloved",
+          "excerpt": "124 was spiteful. Full of a baby's venom. The women in the neighborhood, houses away, knew it and so did their children.",
+          "notice": "Three sentences with three different rhythms — declarative, compressed, expanding. 'A baby's venom' — the oxymoron creates unease before you understand why. Morrison's rhythms are African-American oral tradition filtered through the novel form."
+        },
+        {
+          "id": "r4",
+          "author": "Joan Didion",
+          "work": "The White Album",
+          "excerpt": "We tell ourselves stories in order to live. The princess is caged in the consulate. The man with the candy will lead the children into the sea.",
+          "notice": "The first sentence is a statement. The next two are fairy tales gone wrong — rhythm drops into dream logic. Didion uses the sentence as a unit of thought, and the white space between them is where meaning lives."
+        },
+        {
+          "id": "r5",
+          "author": "Marilynne Robinson",
+          "work": "Gilead",
+          "excerpt": "I have thought about that very often — how the times change, and the same words that carry a good man to prison may bring another man his freedom. How strange that should be.",
+          "notice": "Robinson's rhythm is meditative — the long clause, the comma, the return. She writes the way a thoughtful person thinks. 'How strange that should be' — a simple sentence that would be banal from anyone else. Here it arrives like grace."
+        },
+        {
+          "id": "r6",
+          "author": "Ursula K. Le Guin",
+          "work": "The Left Hand of Darkness",
+          "excerpt": "I'll make my report as if I told a story, for I was taught as a child on my homeworld that Truth is a matter of the imagination.",
+          "notice": "Le Guin's rhythm is ceremonial — she writes like someone who has thought about language for a very long time. That first clause 'as if I told a story' earns the philosophical weight of what follows. The rhythm slows you into believing her."
+        },
+        {
+          "id": "r7",
+          "author": "Ocean Vuong",
+          "work": "On Earth We're Briefly Gorgeous",
+          "excerpt": "Let me begin again. I am writing to you because she will never read this. And my greatest fear is that I have come to love you the same way — the way one loves the dead: more each day, with no chance of answer.",
+          "notice": "Vuong breaks the rhythm deliberately with 'Let me begin again' — a reset that feels performative and desperate at once. Then the long final clause after the colon delivers the wound. Study the colon as a pivot into revelation."
+        },
+        {
+          "id": "r8",
+          "author": "N.K. Jemisin",
+          "work": "The Fifth Season",
+          "excerpt": "Let's start with the end of the world, why don't we, and work our way from there. The end of the world as we know it, the end of the season, the end of a civilization — take your pick.",
+          "notice": "Jemisin's rhythm is conversational and commanding at once. 'Why don't we' — an invitation, almost casual. Then the tricolon with dashes. She earns the epic scale by starting intimate. The rhythm says: I'm in control, follow me."
+        },
+        {
+          "id": "r9",
+          "author": "Cormac McCarthy",
+          "work": "Outer Dark",
+          "excerpt": "The sun was going down and the sky in the west was set afire and the creek ran bloodred in the light and the woman was watching all this in the purple shadows of the wood.",
+          "notice": "The long unbroken 'and' chain holds everything in a single moment — the sunset, the creek, the woman — suspended. McCarthy's polysyndeton is a rhythm that refuses to let time move forward."
+        },
+        {
+          "id": "r10",
+          "author": "Flannery O'Connor",
+          "work": "The Violent Bear It Away",
+          "excerpt": "The old man had only a short time left and he was in a hurry to get the boy baptized and to tell him the truth, and the boy's mother had not wanted him baptized.",
+          "notice": "The run-on sentence enacts the old man's urgency. The sentence doesn't stop because he can't stop. Rhythm as characterization — the form mirrors the psychology."
+        },
+        {
+          "id": "r11",
+          "author": "Annie Proulx",
+          "work": "Brokeback Mountain",
+          "excerpt": "They never talked about the original trip or their subsequent ones, but the time on the mountain had never left Ennis's mind.",
+          "notice": "The restraint of the first clause makes the second clause hit harder. 'Had never left' — the pluperfect tense contains the whole weight of years. Proulx earns the emotion through the rhythm of withholding."
+        },
+        {
+          "id": "r12",
+          "author": "Denis Johnson",
+          "work": "Jesus' Son",
+          "excerpt": "All these weirdos, and me getting a little better every day right in the midst of them. I had never known, never even imagined for a heartbeat, that there might be a place for people like us.",
+          "notice": "'Never known, never even imagined for a heartbeat' — the intensification across the list creates a crescendo. Johnson's rhythms are improvisational, jazz-like, with emotional logic rather than grammatical logic."
+        },
+        {
+          "id": "r13",
+          "author": "Hilary Mantel",
+          "work": "Bring Up the Bodies",
+          "excerpt": "Once, he had been Cromwell the blacksmith's son, Cromwell the ruffian, Cromwell who had to beg his way through the world; now he is the king's right hand.",
+          "notice": "The tricolon of what he was — followed by the pivot — is a rhetorical structure as old as Latin. Mantel uses classical rhythm to give the rise of a self-made man the feel of historical inevitability."
+        },
+        {
+          "id": "r14",
+          "author": "Colson Whitehead",
+          "work": "The Intuitionist",
+          "excerpt": "In the beginning there was the elevator, and the elevator was without flaw, and the men who rode it were without flaw, and the city itself was without flaw.",
+          "notice": "Biblical cadence applied to secular subject matter — the irony of 'without flaw' repeated about a machine, men, and a city we know is corrupt. Whitehead uses rhythm to set up a theological joke."
+        },
+        {
+          "id": "r15",
+          "author": "Zadie Smith",
+          "work": "White Teeth",
+          "excerpt": "And the saddest thing about it was that Archie had not really wanted to die. He just wanted something — anything — to take the decision out of his hands.",
+          "notice": "The dash-enclosed 'anything' creates a pause — then emphasis. Smith's rhythm is conversational and precise simultaneously. The qualifier 'anything' is not vague — it is the devastating specificity of hopelessness."
+        }
+      ]
+    },
+    {
+      "id": "voice",
+      "name": "Voice & Personality",
+      "color": "#ffb86c",
+      "entries": [
+        {
+          "id": "v1",
+          "author": "David Foster Wallace",
+          "work": "Infinite Jest",
+          "excerpt": "The older Mario gets, the more confused he gets about the fact that everyone at Enfield Tennis Academy finds stuff that's really fun and games to be deeply, seriously sad, and that apparently the only way to deal with stuff that's really sad is to be funny about it.",
+          "notice": "Wallace writes inside his character's confusion rather than above it. 'Stuff that's really fun and games' — that's Mario's diction, not the narrator's. Voice is often about choosing whose language runs the sentence."
+        },
+        {
+          "id": "v2",
+          "author": "Nora Ephron",
+          "work": "Heartburn",
+          "excerpt": "The first thing I did was to make a list of everyone who had ever wronged me. It was a very long list. It took several days.",
+          "notice": "The joke is structural — the third sentence lands because it confirms the second in the most specific way possible. Ephron's voice is built on timing. Comedy in fiction is almost always about sentence length and placement."
+        },
+        {
+          "id": "v3",
+          "author": "Kazuo Ishiguro",
+          "work": "The Remains of the Day",
+          "excerpt": "Indeed — why should I not admit it? — the evening's the crowning point of my day. For it is only then that one can sit quietly and really ponder the events of the day just past.",
+          "notice": "Ishiguro's narrator interrupts himself — 'why should I not admit it?' — which simultaneously reveals how much he represses. Stevens tells us everything by how carefully he avoids saying anything. Voice through evasion."
+        },
+        {
+          "id": "v4",
+          "author": "Carmen Maria Machado",
+          "work": "Her Body and Other Parties",
+          "excerpt": "In the beginning I did not love her. I thought I did, but I didn't. It took seeing her every day and coming to know her — the way she holds her fork, the way she laughs at her own jokes — to understand that I had only been prepared to love her before.",
+          "notice": "The correction in the second sentence — 'I thought I did, but I didn't' — is the voice. It's a narrator who trusts the reader to follow a revised thought. The specificity of 'holds her fork' is how we earn the abstract final clause."
+        },
+        {
+          "id": "v5",
+          "author": "Colson Whitehead",
+          "work": "The Intuitionist",
+          "excerpt": "It is a city of vertical hold. She will master it or it will master her. She has no choice in the matter, being who she is.",
+          "notice": "Whitehead's voice is laconic and fatalistic. Three sentences, each shorter than the last, narrowing to inevitability. 'Being who she is' — the phrase hangs without explanation. Voice is also what you refuse to explain."
+        },
+        {
+          "id": "v6",
+          "author": "Ottessa Moshfegh",
+          "work": "My Year of Rest and Relaxation",
+          "excerpt": "Sleep felt productive. Something was getting sorted out. I knew that when I'd slept enough, I'd be renewed, reborn. I would be a whole new person, every cell in my body replaced.",
+          "notice": "Moshfegh's narrator is delusional and completely self-aware of her delusion — or not. The ambiguity is the voice. 'Something was getting sorted out' — the vagueness is not careless; it's a character who has opted out of precision."
+        },
+        {
+          "id": "v7",
+          "author": "Jeff VanderMeer",
+          "work": "Annihilation",
+          "excerpt": "I don't know what to call the thing that happened to me next. To call it a vision seems too tame. To call it possession seems too theatrical. Perhaps the closest I can come is to say that the brightness poured into me.",
+          "notice": "VanderMeer builds voice through negation — what something isn't. This is a useful technique when describing the genuinely weird. By rejecting 'vision' and 'possession,' he raises the stakes before offering a third option that is weirder than either."
+        },
+        {
+          "id": "v8",
+          "author": "Mariana Enriquez",
+          "work": "Things We Lost in the Fire",
+          "excerpt": "The house wanted to tell us something. We knew that, my sister and I, and we weren't afraid, because we had grown up in houses that wanted things.",
+          "notice": "The logic of horror built into the sentence as if it's ordinary. 'Houses that wanted things' — said plainly, it becomes terrifying. Enriquez's voice treats the supernatural as just another fact of Latin American domestic life. The horror is in the calm."
+        },
+        {
+          "id": "v9",
+          "author": "Flannery O'Connor",
+          "work": "A Good Man Is Hard to Find",
+          "excerpt": "She would have been a good woman if it had been somebody there to shoot her every minute of her life.",
+          "notice": "The Misfit's voice is simultaneously homespun and theologically precise. O'Connor builds her most monstrous characters with the most vernacular speech. The voice enacts the horror — it sounds ordinary."
+        },
+        {
+          "id": "v10",
+          "author": "Penelope Fitzgerald",
+          "work": "The Gate of Angels",
+          "excerpt": "Fred had always believed that the soul, if it existed, was not a delicate thing, but tough as an old boot.",
+          "notice": "'Tough as an old boot' — a folk simile in a Cambridge novel about metaphysics. Fitzgerald's voice constantly undercuts its own intellectual pretension with homely language. The contrast is the style."
+        },
+        {
+          "id": "v11",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "Augustus had a way of saying things that made you realize they were true without quite knowing how.",
+          "notice": "The narrator steps back to describe his own character's verbal power — and performs it in the description. The sentence does what it says. McMurtry's voice trusts the reader to see the recursion."
+        },
+        {
+          "id": "v12",
+          "author": "Paul Auster",
+          "work": "The New York Trilogy",
+          "excerpt": "It was a wrong number that started it, the telephone ringing three times in the dead of night, and the voice on the other end asking for someone he was not.",
+          "notice": "The voice establishes itself through a philosophical premise dressed as plot. 'Someone he was not' — Auster's entire preoccupation with identity is in the opening sentence. Voice as worldview from the first line."
+        },
+        {
+          "id": "v13",
+          "author": "Zadie Smith",
+          "work": "NW",
+          "excerpt": "The fat sun stalls by the phone masts. Anti-climb paint turns sullen. Zing-zing-zing. The bossy twitch of a little girl's pigtail.",
+          "notice": "Smith's voice in NW is fragmented, staccato, stream-of-consciousness — deliberately broken to represent a fractured neighborhood. Voice can be built through what grammar you break as much as what grammar you keep."
+        },
+        {
+          "id": "v14",
+          "author": "Salman Rushdie",
+          "work": "Midnight's Children",
+          "excerpt": "I was born in the city of Bombay... once upon a time. No, that won't do, there's no getting away from the date: I was born in Doctor Narlikar's Nursing Home on August 15th, 1947.",
+          "notice": "The narrator corrects himself mid-sentence — 'No, that won't do' — and the correction reveals the entire register of the novel. A voice that is both mythologizing and self-aware simultaneously."
+        },
+        {
+          "id": "v15",
+          "author": "Denis Johnson",
+          "work": "Train Dreams",
+          "excerpt": "He'd had the good luck to stumble into a time and place where a mule driver could move through the wilderness with the assurance of a man walking from one room of his house to another.",
+          "notice": "The simile — a mule driver like a man in his own house — is earned by everything around it. Johnson's voice makes the epic feel domestic and the domestic feel epic. That is its defining quality."
+        }
+      ]
+    },
+    {
+      "id": "specificity",
+      "name": "Specificity",
+      "color": "#50fa7b",
+      "entries": [
+        {
+          "id": "sp1",
+          "author": "Annie Dillard",
+          "work": "Pilgrim at Tinker Creek",
+          "excerpt": "A weasel is wild. Who knows what he thinks? He sleeps in his underground den, his tail draped over his nose. Sometimes he lives in his den for two days without leaving. Outside, he stalks rabbits, mice, muskrats, and birds, killing more bodies than he can eat warm.",
+          "notice": "'Killing more bodies than he can eat warm' — that final word 'warm' is the stroke of genius. It's specific in a way that makes you feel the weasel's relationship to food, death, and time all at once. Specificity is not about detail — it's about the right detail."
+        },
+        {
+          "id": "sp2",
+          "author": "John Steinbeck",
+          "work": "Of Mice and Men",
+          "excerpt": "A few miles south of Soledad, the Salinas River drops in close to the hillside bank and runs deep and green. The water is warm too, for it has slipped twinkling over the yellow sands in the sunlight before reaching the narrow pool.",
+          "notice": "'Twinkling over the yellow sands' — Steinbeck earns his lyricism with the physical facts first. The river is warm because of what it has done before arriving. Causality is a form of specificity. We believe the warmth because he explains it."
+        },
+        {
+          "id": "sp3",
+          "author": "Donna Tartt",
+          "work": "The Secret History",
+          "excerpt": "The snow in the mountains was melting and Bunny had been dead for several weeks before we came to understand the gravity of our situation.",
+          "notice": "The juxtaposition of the melting snow and Bunny's death tells us exactly how long without saying a number. Tartt uses seasonal specificity as a clock. The image earns its place because it is doing structural work."
+        },
+        {
+          "id": "sp4",
+          "author": "Ted Chiang",
+          "work": "Story of Your Life",
+          "excerpt": "Your father is about to ask me the question. This is the most important moment in our lives, and I want to pay attention, note every detail. Your dad is standing in the kitchen, leaning against the counter, his arms crossed in front of him.",
+          "notice": "Chiang builds emotional weight through physical inventory — 'leaning against the counter, arms crossed.' The body says everything before any words are exchanged. Specificity of posture is specificity of interior state."
+        },
+        {
+          "id": "sp5",
+          "author": "Hilary Mantel",
+          "work": "Wolf Hall",
+          "excerpt": "The boy Thomas Cromwell is now in his second week in the household of the Italian banker Francesco Frescobaldi, and still the banker cannot remember his name. He calls him 'inglese.' He also calls him 'ragazzo,' and 'il ragazzo' and sometimes just 'ragazzo.'",
+          "notice": "The accumulation of variants — 'ragazzo,' 'il ragazzo,' 'just ragazzo' — is comic and precise and says everything about Cromwell's status without stating it. Specificity here is about the rhythm of indignity."
+        },
+        {
+          "id": "sp6",
+          "author": "Hanya Yanagihara",
+          "work": "A Little Life",
+          "excerpt": "He had always thought of himself as primarily a body, and only incidentally a mind. His body had needs and the mind had to accommodate those needs. Now he thought of himself as primarily a mind and only incidentally a body.",
+          "notice": "Yanagihara inverts the sentence structure itself to mirror the inversion in the character. The specific intellectual framework — body vs. mind — is concrete enough that we feel the shift as physical. Abstraction grounded in syntax."
+        },
+        {
+          "id": "sp7",
+          "author": "China Miéville",
+          "work": "Perdido Street Station",
+          "excerpt": "He had eaten a whole pig by himself, slowly, over the course of a long evening, the fat pooling in his beard, the bones split for marrow.",
+          "notice": "Three details — fat pooling, bones split, the implied alone-ness of a whole pig — and you have a complete character portrait. Miéville trusts the specific physical act to do the moral and psychological work."
+        },
+        {
+          "id": "sp8",
+          "author": "Paul Tremblay",
+          "work": "A Head Full of Ghosts",
+          "excerpt": "The crucifix above the doorway of the kitchen was new. We'd never been a religious family. I noticed it was slightly off-center, tilted to the right, and it bothered me in a way I couldn't explain.",
+          "notice": "The tilted crucifix is perfect horror specificity — off-center enough to feel wrong, specific enough to feel real. Tremblay knows that in horror, the detail must be both mundane and slightly incorrect."
+        },
+        {
+          "id": "sp9",
+          "author": "Flannery O'Connor",
+          "work": "A Good Man Is Hard to Find",
+          "excerpt": "The grandmother had on a navy blue straw sailor hat with a bunch of white violets on the brim and a navy blue dress with a small white dot in the print. Her collar and cuffs were white organdy trimmed with lace and at her neckline she had pinned a purple spray of cloth violets.",
+          "notice": "Every detail of the grandmother's outfit is a character indictment. She is overdressed for a road trip — trying to die 'like a lady.' O'Connor's specificity is always moral. The details condemn without a word of judgment."
+        },
+        {
+          "id": "sp10",
+          "author": "Denis Johnson",
+          "work": "Jesus' Son",
+          "excerpt": "It was going to be one of those days when you feel the past rearing up out of the landscape — a dog tied to a fence, an old woman eating cereal on a porch.",
+          "notice": "'A dog tied to a fence, an old woman eating cereal on a porch' — these two images contain an entire atmosphere of midwestern melancholy. Johnson picks images that carry more weight than they appear to. The specificity is emotional, not documentary."
+        },
+        {
+          "id": "sp11",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "Call had a scar on his chin from a Mexican's knife and another from a Comanche arrowhead along his left jawbone.",
+          "notice": "Two scars, two enemies, two conflicts — all in one sentence. McMurtry uses the body as biography. The specificity of 'left jawbone' is not pedantry — it makes the violence real."
+        },
+        {
+          "id": "sp12",
+          "author": "Zadie Smith",
+          "work": "White Teeth",
+          "excerpt": "Archie was struck by the three hairs on Clara's chin, the small crescent-shaped scar on her neck, the gap between her front teeth.",
+          "notice": "A character inventory that reads as attraction — noticing the imperfect specific things. Smith's specificity is observational, the way love is. The gap between front teeth is more intimate than any abstract beauty description."
+        },
+        {
+          "id": "sp13",
+          "author": "Penelope Fitzgerald",
+          "work": "The Blue Flower",
+          "excerpt": "The soup was the colour of dirty water, the meat like gloves left in the rain, the bread sour.",
+          "notice": "Three things, three images, all unflattering, all exact. Fitzgerald uses culinary specificity to characterize an entire household's spirit. The 'gloves left in the rain' is the stroke of genius — it makes you feel the texture."
+        },
+        {
+          "id": "sp14",
+          "author": "Annie Proulx",
+          "work": "The Shipping News",
+          "excerpt": "A great damp loaf of a body. At six he was fat. Monstrous at sixteen with coy, fat-smothered eyes, a spill of moles down his neck, shaped like a manatee.",
+          "notice": "'Shaped like a manatee' — the simile is surprising and exact and instantly visual. Proulx's specificity is grotesque, which is a tradition in American fiction. The specific grotesque is more alive than the vague beautiful."
+        },
+        {
+          "id": "sp15",
+          "author": "Cormac McCarthy",
+          "work": "All the Pretty Horses",
+          "excerpt": "In the evening he sat at the kitchen table and ate cold beans and cornbread and drank three glasses of buttermilk and washed the dishes and turned off the light over the sink.",
+          "notice": "The list of ordinary actions — cold beans, cornbread, buttermilk — is heartbreaking because of what's absent. The specificity of the mundane enacts grief that is never named."
+        }
+      ]
+    },
+    {
+      "id": "openings",
+      "name": "Openings",
+      "color": "#ffcc00",
+      "entries": [
+        {
+          "id": "o1",
+          "author": "Gabriel García Márquez",
+          "work": "One Hundred Years of Solitude",
+          "excerpt": "Many years later, as he faced the firing squad, Colonel Aureliano Buendía was to remember that distant afternoon when his father took him to discover ice.",
+          "notice": "The firing squad establishes death. Ice establishes wonder. The gap between them is the entire novel. Notice 'was to remember' — a future-past construction that tells you the character survives and that this is a book about memory. All of that in one sentence."
+        },
+        {
+          "id": "o2",
+          "author": "Donna Tartt",
+          "work": "The Goldfinch",
+          "excerpt": "While I was still in Amsterdam, I dreamed about my mother for the first time in years. I'd been shut up in my hotel for more than a week, afraid to telephone anybody or go out.",
+          "notice": "We begin in medias res — already past a crisis, hiding. The dream of the mother immediately suggests grief. Two sentences establish place, time, fear, loss, and the shape of the plot without explaining any of it."
+        },
+        {
+          "id": "o3",
+          "author": "Kazuo Ishiguro",
+          "work": "Never Let Me Go",
+          "excerpt": "My name is Kathy H. I'm thirty-one years old, and I've been a carer now for over eleven years. That sounds long enough, I know, but actually I'm only now in the early stages of preparing to become a donor.",
+          "notice": "'I'm only now in the early stages of preparing to become a donor' — we don't know what a donor is, but something is wrong. The cheerful tone against the strange word does the work. Ishiguro teaches that unease lives in what isn't explained."
+        },
+        {
+          "id": "o4",
+          "author": "Toni Morrison",
+          "work": "Song of Solomon",
+          "excerpt": "The North Carolina Mutual Life Insurance agent promised to fly from Mercy to the other side of Lake Superior at three o'clock. Two days before the event was to take place he tacked a note on the door of his little yellow house.",
+          "notice": "The opening is completely matter-of-fact about the impossible. This is Morrison's signal to the reader: in this world, a man might fly, and we will treat it as news. The register of normalcy does the work of a thousand explanatory sentences."
+        },
+        {
+          "id": "o5",
+          "author": "Andy Weir",
+          "work": "The Martian",
+          "excerpt": "I'm pretty much fucked. That's my considered opinion. Fucked.",
+          "notice": "Voice established in six words. The repetition of 'fucked' at the end — after 'that's my considered opinion,' which is a formal phrase — is the entire character. Weir knows that voice is more important than situation in an opening."
+        },
+        {
+          "id": "o6",
+          "author": "Colson Whitehead",
+          "work": "Zone One",
+          "excerpt": "He always wanted to be the last man on earth, and the flood had given him a trial run.",
+          "notice": "The fantasy and the apocalypse arrive together. 'Trial run' reframes catastrophe as wish fulfillment — immediately the psychology of survivalism is under examination. The irony is built into the structure of the sentence."
+        },
+        {
+          "id": "o7",
+          "author": "Sally Rooney",
+          "work": "Normal People",
+          "excerpt": "Marianne is standing at the sink, rinsing a plate, when Connell comes in from football training. His arms are hanging slightly away from his body because of his gym bag.",
+          "notice": "Everything is happening in the present tense, close and physical. 'His arms are hanging slightly away from his body because of his gym bag' — that is exact observation. Rooney establishes her mode immediately: hyper-present, bodily, no distance between reader and moment."
+        },
+        {
+          "id": "o8",
+          "author": "N.K. Jemisin",
+          "work": "The Broken Earth Trilogy",
+          "excerpt": "Let's start with the end of the world, why don't we, and work our way from there.",
+          "notice": "The second person and the casual 'why don't we' make the apocalypse feel intimate. Jemisin refuses epic grandiosity — she pulls you close instead. The tone signals that this is a story told to a specific person for a reason we'll discover."
+        },
+        {
+          "id": "o9",
+          "author": "Salman Rushdie",
+          "work": "Midnight's Children",
+          "excerpt": "I was born in the city of Bombay... once upon a time. No, that won't do, there's no getting away from the date: I was born in Doctor Narlikar's Nursing Home on August 15th, 1947.",
+          "notice": "Two opening sentences that contradict each other — the mythic and the historical — and in the gap between them is the whole novel. Rushdie teaches that an opening can argue with itself."
+        },
+        {
+          "id": "o10",
+          "author": "Cormac McCarthy",
+          "work": "Blood Meridian",
+          "excerpt": "See the child. He is pale and thin, he wears a thin and ragged linen shirt. He stokes the scullery fire. Outside lie dark turned fields with rags of snow and darker woods beyond that harbor yet a few last wolves.",
+          "notice": "'See the child' — an imperative that makes the reader a spectator. The Biblical register established immediately. McCarthy drops us into a world that feels ancient on the first page."
+        },
+        {
+          "id": "o11",
+          "author": "Flannery O'Connor",
+          "work": "Wise Blood",
+          "excerpt": "Hazel Motes sat at a forward angle on the green plush train seat, looking one minute out the window as if he might want to jump out of it, and the next down the aisle at the other end of the car.",
+          "notice": "The restless gaze — window then car — establishes a character who cannot settle and does not belong anywhere. The opening movement is the entire character."
+        },
+        {
+          "id": "o12",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "When Augustus came out on the porch the blue pigs were eating a rattlesnake — not a very big one. It had probably just come out of its winter den and had run into the pigs before it was properly awake.",
+          "notice": "'Not a very big one' — the deadpan qualifier in the second sentence establishes the entire tone. Men and animals coexist in a world governed by practical details, not drama. The opening enacts the novel's worldview."
+        },
+        {
+          "id": "o13",
+          "author": "Penelope Fitzgerald",
+          "work": "The Blue Flower",
+          "excerpt": "Half of the party lost their way in the forest, but the guide brought them through at last, and they arrived in time for the birth.",
+          "notice": "We arrive in the middle of a journey, in time for a birth we weren't expecting. In medias res with a structure that promises the novel will be about arrivals and comings — and it is."
+        },
+        {
+          "id": "o14",
+          "author": "Ursula K. Le Guin",
+          "work": "The Word for World is Forest",
+          "excerpt": "Two pieces of yesterday were in Captain Davidson's mind when he woke, and he lay quiet for a while looking up at the 'bam roof, while they fell into place around him like bits of a puzzle coming together.",
+          "notice": "Le Guin opens on consciousness waking — the puzzle metaphor immediately signals a novel about meaning-making. The 'bam' material tells us we're not on Earth without stopping to explain."
+        },
+        {
+          "id": "o15",
+          "author": "Zadie Smith",
+          "work": "NW",
+          "excerpt": "The fat sun stalls by the phone masts. Anti-climb paint turns sullen. A man in his garden burns his grass.",
+          "notice": "Three declarative sentences with an urban, slightly surreal quality. No character yet — just a neighborhood establishing itself as a presence. Smith's opening is atmospheric before it is narrative."
+        }
+      ]
+    },
+    {
+      "id": "restraint",
+      "name": "Tension & Restraint",
+      "color": "#bd93f9",
+      "entries": [
+        {
+          "id": "re1",
+          "author": "Cormac McCarthy",
+          "work": "No Country for Old Men",
+          "excerpt": "What you got aint nothin new. This country is hard on people. You can't stop what's coming. It aint all waiting on you. That's vanity.",
+          "notice": "Anton Chigurh's philosophy rendered in unlettered grammar. McCarthy strips punctuation as a form of fatalism — the world doesn't pause for apostrophes. The flatness of 'That's vanity' is more frightening than any elaborate menace."
+        },
+        {
+          "id": "re2",
+          "author": "Alice Munro",
+          "work": "Runaway",
+          "excerpt": "Carla heard the car. She had ears that could catch the faintest sound from a long way off. That was a peculiarity she had — hearing things before other people did.",
+          "notice": "Munro sets up a character detail that feels innocent and will later carry enormous weight. She plants her subtext in what looks like simple characterization. The restraint is in never signaling that this detail matters."
+        },
+        {
+          "id": "re3",
+          "author": "Ernest Hemingway",
+          "work": "Hills Like White Elephants",
+          "excerpt": "'It's really an awfully simple operation, Jig,' the man said. 'It's not really an operation at all.' The girl was looking at the hills across the dry side of the valley.",
+          "notice": "The word 'abortion' never appears. The hills are doing the emotional work — 'the dry side.' Hemingway understood that what characters look away from is more revealing than what they face. Restraint as a structural principle."
+        },
+        {
+          "id": "re4",
+          "author": "Denis Johnson",
+          "work": "Tree of Smoke",
+          "excerpt": "He didn't say anything because he didn't know anything. He'd come to know a great deal in his life, but it hadn't amounted to anything he could put into words.",
+          "notice": "The denial of knowledge as a form of honesty. Johnson doesn't pretend his characters understand their experience. The restraint is in the refusal to impose meaning — which paradoxically creates more meaning than explanation would."
+        },
+        {
+          "id": "re5",
+          "author": "Kazuo Ishiguro",
+          "work": "The Remains of the Day",
+          "excerpt": "'I'm so glad you could come,' Miss Kenton said again. There was something in her tone that gave me a pause. That is to say, there was something almost wistful in the way she said it.",
+          "notice": "Stevens corrects himself — 'that is to say' — and the correction reveals more than the original. He reaches for the exact word and finds 'wistful,' which is the precise feeling he cannot allow himself to name as love. Restraint enacts repression."
+        },
+        {
+          "id": "re6",
+          "author": "Marilynne Robinson",
+          "work": "Housekeeping",
+          "excerpt": "My name is Ruth. I grew up with my younger sister, Lucille, under the care of my grandmother, Mrs. Sylvia Foster, and when she died, of her sisters-in-law, Missoula and Nona, and when they fled, of her daughter, Sylvie.",
+          "notice": "The deaths and departures in this sentence are narrated as grammatical afterthoughts — 'and when she died,' 'and when they fled.' Robinson's narrator treats abandonment as just another conjunction. The restraint is devastating."
+        },
+        {
+          "id": "re7",
+          "author": "Ted Chiang",
+          "work": "Exhalation",
+          "excerpt": "I have long suspected that the universe is not for us. Last night I discovered a proof. I have not told anyone.",
+          "notice": "Three sentences. The weight of 'I have not told anyone' after 'I discovered a proof' about the universe — the restraint of that silence is the entire emotional core. Chiang knows that what is withheld creates more gravity than what is said."
+        },
+        {
+          "id": "re8",
+          "author": "Paul Tremblay",
+          "work": "Survivor Song",
+          "excerpt": "Natalie said, 'I think I've been bitten.' She showed Ramola her forearm. It was a small thing. There were two marks.",
+          "notice": "In horror, restraint is everything. 'It was a small thing' — the understatement preceding 'two marks' is more frightening than any description of the wound. Tremblay understands that the reader's imagination is always more terrifying than the text."
+        },
+        {
+          "id": "re9",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "'You know what I'd do if I was you?' Augustus said. 'I'd put the best of my past behind me and ride on to the future.' Call didn't answer. He just sat there watching the river.",
+          "notice": "Call's non-answer — 'just sat there watching the river' — contains everything. The restraint is Call's character. McMurtry understands that the absence of a response is often the most eloquent response."
+        },
+        {
+          "id": "re10",
+          "author": "Annie Proulx",
+          "work": "Brokeback Mountain",
+          "excerpt": "Ennis did not come to Jack's funeral. He heard about it through Lureen.",
+          "notice": "Two short sentences. The word 'did not' — not 'couldn't' or 'was unable to' — is a choice that says everything about what Ennis would not allow himself. The restraint of 'heard about it through Lureen' contains the entire tragedy."
+        },
+        {
+          "id": "re11",
+          "author": "Penelope Fitzgerald",
+          "work": "The Gate of Angels",
+          "excerpt": "'Are you happy?' 'I don't ask myself that.'",
+          "notice": "The question refused — and the refusal is the answer. Fitzgerald lets the silence after the dialogue do the work. The non-answer is the most honest thing the character could say."
+        },
+        {
+          "id": "re12",
+          "author": "Tobias Wolff",
+          "work": "In the Garden of the North American Martyrs",
+          "excerpt": "She had tried to be unobtrusive. The effort made her tired.",
+          "notice": "Two sentences. The second is the entire payoff of a long career of self-effacement compressed to five words. Wolff trusts the weight of simple declarative sentences."
+        },
+        {
+          "id": "re13",
+          "author": "Flannery O'Connor",
+          "work": "Good Country People",
+          "excerpt": "'Well,' he said and just stood looking, rocking back and forth on his heels a little. 'Well,' he said again.",
+          "notice": "The repeated 'Well' — said twice with nothing between — contains shock, guilt, calculation, and retreat. O'Connor lets the repeated word carry what a paragraph of interiority would explain."
+        },
+        {
+          "id": "re14",
+          "author": "Ursula K. Le Guin",
+          "work": "The Ones Who Walk Away from Omelas",
+          "excerpt": "They leave Omelas, they walk ahead into the darkness, and they do not come back. The place they go towards is a place even less imaginable to most of us than the city of happiness.",
+          "notice": "The ending refuses to give us the destination. The restraint is philosophical — we're not allowed to imagine a comfortable alternative to the city's bargain. The withholding is the point."
+        },
+        {
+          "id": "re15",
+          "author": "Kazuo Ishiguro",
+          "work": "The Remains of the Day",
+          "excerpt": "What is the point of worrying oneself too much about what one could or could not have done to control the course one's life took? One can see in retrospect, of course, that one was too narrow.",
+          "notice": "'One was too narrow' — Stevens uses the impersonal 'one' to discuss his own ruin. The restraint is grammatical — he cannot even say 'I.' The form and the feeling are identical."
+        }
+      ]
+    },
+    {
+      "id": "interiority",
+      "name": "Interiority",
+      "color": "#ff5555",
+      "entries": [
+        {
+          "id": "i1",
+          "author": "Virginia Woolf",
+          "work": "Mrs Dalloway",
+          "excerpt": "What a lark! What a plunge! For so it had always seemed to her, when, with a little squeak of the hinges, which she could hear now, she had burst open the French windows and plunged at Bourton into the open air.",
+          "notice": "Woolf doesn't describe Clarissa remembering — she becomes the memory. The present tense sensation ('which she could hear now') pulls the past into the present. Interiority that feels simultaneous rather than reported."
+        },
+        {
+          "id": "i2",
+          "author": "Karl Ove Knausgård",
+          "work": "My Struggle",
+          "excerpt": "What we think of as our identity is more or less the story we tell about ourselves, and it is always coherent, always logical, always somewhat false. The story has to be linear, and life is not.",
+          "notice": "Knausgård uses his narrator's self-awareness against himself — and the reader. The philosophical statement about narrative is embedded in a narrative that tries to exceed it. Interiority that is in dialogue with its own impossibility."
+        },
+        {
+          "id": "i3",
+          "author": "Elena Ferrante",
+          "work": "My Brilliant Friend",
+          "excerpt": "I felt that I had to be careful: Lila had a particular capacity, she could make you feel, at the same moment, like a precious friend and a piece of shit.",
+          "notice": "'A precious friend and a piece of shit' — the profanity is important. It's the only word that matches the feeling. Ferrante's interiority is relentless honest translation of emotional experience into the most exact language possible, including language that isn't polite."
+        },
+        {
+          "id": "i4",
+          "author": "Hanya Yanagihara",
+          "work": "A Little Life",
+          "excerpt": "He felt his old self returning to him, but a self so altered that it was almost unrecognizable — he was still the same person, but he had been arranged differently, his interests and longings placed in a new order of priority.",
+          "notice": "The passive voice — 'arranged,' 'placed' — is intentional. The character experiences his interior self as something done to him, not by him. Yanagihara uses grammar to convey the experience of trauma reshaping identity."
+        },
+        {
+          "id": "i5",
+          "author": "Sally Rooney",
+          "work": "Conversations with Friends",
+          "excerpt": "I had a strange sensation then, which I can only describe now as realizing that I had nothing to offer anyone, not because I lacked things, but because I lacked the capacity to offer them.",
+          "notice": "The distinction Rooney draws — not lacking things but lacking the capacity — is the kind of precise interior discrimination that makes her fiction feel psychologically true. Interiority as making fine-grained distinctions."
+        },
+        {
+          "id": "i6",
+          "author": "Jeff VanderMeer",
+          "work": "Annihilation",
+          "excerpt": "I am aware that all of this speculation is incomplete, built on guesswork, and that I have a kind of mania for lists and record-keeping, as if this will somehow help me understand.",
+          "notice": "The narrator analyzing her own cognitive style while using it. This recursive self-awareness is VanderMeer's technique for grounding a character who is becoming unreliable. Interiority that documents its own dissolution."
+        },
+        {
+          "id": "i7",
+          "author": "Ocean Vuong",
+          "work": "On Earth We're Briefly Gorgeous",
+          "excerpt": "To be close to you was to be close to a bomb that had already exploded — and what I remember is not the damage but the light.",
+          "notice": "The metaphor is violent and then immediately corrected — 'not the damage but the light.' Vuong's interiority moves through destruction toward what survives it. The simile is doing psychological autobiography."
+        },
+        {
+          "id": "i8",
+          "author": "Ottessa Moshfegh",
+          "work": "Eileen",
+          "excerpt": "I was not a nice person. I know that. I was a deeply unhappy young woman, stupid and selfish and ugly and wrong in almost every way. I tell you this so that you can understand why I did what I did.",
+          "notice": "The narrator's self-condemnation is so extreme it becomes unreliable. When a character indicts themselves this thoroughly, we stop believing them. Moshfegh uses interiority as a form of performance — the character narrating herself rather than experiencing herself."
+        },
+        {
+          "id": "i9",
+          "author": "Penelope Fitzgerald",
+          "work": "The Gate of Angels",
+          "excerpt": "He wanted to ask her what she meant, but he was afraid of the answer, not because it might be bad, but because it might be good.",
+          "notice": "The inversion — afraid of good news, not bad — is psychologically exact. Fitzgerald finds the precise fear: that hope might be justified, which is more terrifying than disappointment."
+        },
+        {
+          "id": "i10",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "Call had never been a man who asked himself many questions, and he didn't start then; he just decided and acted.",
+          "notice": "Interiority through its absence. We understand Call's inner life by being told he has no interest in examining it. McMurtry uses the refusal of interiority as characterization."
+        },
+        {
+          "id": "i11",
+          "author": "Marilynne Robinson",
+          "work": "Housekeeping",
+          "excerpt": "I have never distinguished readily between thinking and dreaming. I know my life would be much different if I could.",
+          "notice": "The second sentence does extraordinary work. 'I know my life would be much different if I could' — the narrator assesses her own limitation with complete clarity and complete resignation. Interiority as self-knowledge without self-pity."
+        },
+        {
+          "id": "i12",
+          "author": "Zadie Smith",
+          "work": "On Beauty",
+          "excerpt": "Howard was the kind of man who was more afraid of appearing stupid than of actually being stupid, which is the worst kind of afraid to be.",
+          "notice": "The narrator steps out to editorialize — 'which is the worst kind of afraid to be.' Smith's interiority often involves the narrator passing direct judgment on characters. The aside is the style."
+        },
+        {
+          "id": "i13",
+          "author": "Paul Auster",
+          "work": "The Locked Room",
+          "excerpt": "I realized that I had always thought of him as someone who needed to be protected. It had not occurred to me until that moment that I was the one who needed protection from him.",
+          "notice": "The reversal — the protected becoming the threat — arrives with complete simplicity. Auster builds interiority through reversals. The revelation is always structural, a flip of the initial premise."
+        },
+        {
+          "id": "i14",
+          "author": "Flannery O'Connor",
+          "work": "The Displaced Person",
+          "excerpt": "Mrs. Shortley's large body rolled back still further and almost fell over the freezer before she caught herself. She was having a revelation.",
+          "notice": "'She was having a revelation' — said flatly, in the past tense, as the most ordinary thing in the world. O'Connor locates divine experience in the most prosaic sentence construction. The interiority is both real and grotesque."
+        },
+        {
+          "id": "i15",
+          "author": "Tobias Wolff",
+          "work": "Old School",
+          "excerpt": "I wanted to be a writer. I wanted this so badly that I had given little thought to what it meant.",
+          "notice": "The distinction — wanting vs. knowing what it meant — is exact. Wolff's interiority is often about the gap between desire and understanding. The second sentence makes the first sentence into a confession."
+        }
+      ]
+    },
+    {
+      "id": "scene",
+      "name": "Scene & Place",
+      "color": "#8be9fd",
+      "entries": [
+        {
+          "id": "sc1",
+          "author": "Cormac McCarthy",
+          "work": "Blood Meridian",
+          "excerpt": "They rode on and the sun in the east flushed pale streaks of light and then a deeper run of color like blood seeping up in sudden reaches flaring and radiant and very quickly the whole of the eastern world was on fire.",
+          "notice": "McCarthy's landscapes are never neutral — 'blood seeping up' makes the sunrise ominous before any human action. The scene mirrors the violence of the book. Great scene writing doesn't just describe — it interprets."
+        },
+        {
+          "id": "sc2",
+          "author": "Donna Tartt",
+          "work": "The Secret History",
+          "excerpt": "The snow had covered everything. The trees were white and the grass was white and the sky was white and everything was so still that the scene had the quality of a paper cutout, flat and opaque and with no depth at all.",
+          "notice": "'Flat and opaque and with no depth at all' — Tartt's description of the landscape is also a description of the narrator's dissociated state after the murder. The best scene writing in fiction is always simultaneously psychological."
+        },
+        {
+          "id": "sc3",
+          "author": "Hilary Mantel",
+          "work": "Wolf Hall",
+          "excerpt": "The kitchen smells of almonds. Something is always baking, stewing, reducing. Fires burn at either end and in the middle of the room; the air is a delicious fug of spice and wet wool and smoke.",
+          "notice": "'A delicious fug' — Mantel's scene writing is tactile and olfactory before it is visual. We smell the kitchen before we see it. This is the right order — it's how we experience entering a room. Write scenes in the order of perception, not the order of inventory."
+        },
+        {
+          "id": "sc4",
+          "author": "China Miéville",
+          "work": "The City & The City",
+          "excerpt": "The old town of Besźel has no ghettoes. That word implies a confinement of the disliked. What Besźel has instead are neighborhoods old and decayed and unloved, into which the poor are not so much herded as permitted to seep.",
+          "notice": "'Not so much herded as permitted to seep' — the distinction is political and visual simultaneously. Miéville builds his fictional cities through exactly this kind of sociological precision. Scene writing that builds world through observation rather than exposition."
+        },
+        {
+          "id": "sc5",
+          "author": "Ursula K. Le Guin",
+          "work": "The Tombs of Atuan",
+          "excerpt": "The Place of the Tombs was large. There was plenty of room for it to be large; the desert extended for hundreds of miles around. This was the sacred place of the Powers of the Earth, the dark things that had been worshipped before the world was made.",
+          "notice": "Le Guin establishes scale through logic — 'plenty of room for it to be large.' Then she moves from the geographic to the metaphysical in the same tone. The flatness of 'before the world was made' said matter-of-factly is her great trick."
+        },
+        {
+          "id": "sc6",
+          "author": "Colson Whitehead",
+          "work": "The Underground Railroad",
+          "excerpt": "The sun had slanted to the treetops before Ridgeway spoke. They rode through the drowsy heat of the afternoon. When they finally arrived, the plantation appeared between the trees in stages, pieces of it assembling into a whole as they drew closer.",
+          "notice": "'In stages, pieces of it assembling into a whole' — this is how a frightened person sees something: not all at once, but incrementally, dreading the complete picture. The scene is built from the character's dread, not from geography."
+        },
+        {
+          "id": "sc7",
+          "author": "Jeff VanderMeer",
+          "work": "Annihilation",
+          "excerpt": "I stood in the wilderness of a primeval estuary, watching lights that might have been marsh gas or fireflies or something entirely different. The darkness lived and breathed and had a texture.",
+          "notice": "'The darkness lived and breathed and had a texture' — VanderMeer personifies environment in a way that makes the world feel sentient. In weird fiction, the scene itself is a character. Establishing this early licenses everything that follows."
+        },
+        {
+          "id": "sc8",
+          "author": "Mariana Enriquez",
+          "work": "Our Share of Night",
+          "excerpt": "The house had belonged to her family for generations. Each wall held a different smell: wood polish in the living room, damp in the hallway, something sweet and slightly rotten near the kitchen, as if something dead were hiding behind the refrigerator.",
+          "notice": "The scene is mapped through smell, and the smells escalate — polish to damp to something 'sweet and slightly rotten.' Enriquez builds dread through olfactory progression. The final image 'as if something dead' is the horror made architectural."
+        },
+        {
+          "id": "sc9",
+          "author": "Annie Proulx",
+          "work": "The Shipping News",
+          "excerpt": "Quoyle experienced moments in all colors, uttered brilliancies, had a black streak from saying nothing when he should have spoken.",
+          "notice": "The scene is entirely interior — the room of Quoyle's mind. But 'uttered brilliancies' (he didn't) and 'black streak' make it visual and tactile. Proulx uses synesthesia to render psychology as landscape."
+        },
+        {
+          "id": "sc10",
+          "author": "Flannery O'Connor",
+          "work": "A Good Man Is Hard to Find",
+          "excerpt": "The road was about ten feet above and they could see only the tops of the trees on the other side of it. Behind the ditch they were sitting in there were more woods, tall and dark and deep.",
+          "notice": "'Tall and dark and deep' — the Frost echo is not accidental. The woods in O'Connor are always theologically loaded. The scene becomes ominous not through what is in it but through its enclosure."
+        },
+        {
+          "id": "sc11",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "The sun was behind the hills to the west and the long shadows of the horses reached almost to the river.",
+          "notice": "The long shadows reaching toward the river — this is cinematic composition as prose. McMurtry stages his landscapes the way a director stages a wide shot. The length of the shadow measures the time of day without saying it."
+        },
+        {
+          "id": "sc12",
+          "author": "Penelope Fitzgerald",
+          "work": "The Blue Flower",
+          "excerpt": "The Rockenthiens' house was large, but never felt large, because it was always full.",
+          "notice": "A scene built on paradox — large but not large. Fitzgerald creates a sense of place through the feeling of a house, not its architecture. The fullness is social, emotional, historical all at once."
+        },
+        {
+          "id": "sc13",
+          "author": "Annie Dillard",
+          "work": "The Writing Life",
+          "excerpt": "The interior of the house felt like the interior of a pencil, pointy, narrow, stained with use.",
+          "notice": "'Stained with use' — the personification of the house through the pencil simile creates a writer's space that is both cramped and purposeful. Dillard's scene writing finds the metaphor that contains the meaning."
+        },
+        {
+          "id": "sc14",
+          "author": "Cormac McCarthy",
+          "work": "Suttree",
+          "excerpt": "The city of Knoxville Tennessee with the river running darkly by.",
+          "notice": "Eight words — a complete scene. The present participle 'running darkly' makes it ongoing, not static. McCarthy can set a scene in a clause. The restraint is the style."
+        },
+        {
+          "id": "sc15",
+          "author": "Toni Morrison",
+          "work": "Sula",
+          "excerpt": "In that place, where they tore the nightshade and blackberry patches from their roots to make room for the Medallion City Golf Course, there was once a neighborhood.",
+          "notice": "The scene is established through what replaced it — the erasure is the setting. Morrison locates her world in the negative space of what capitalism removed. The past tense 'there was once' carries the whole novel's elegiac tone."
+        }
+      ]
+    },
+    {
+      "id": "emotion",
+      "name": "Emotion Without Naming It",
+      "color": "#ff6e6e",
+      "entries": [
+        {
+          "id": "em1",
+          "author": "Alice Munro",
+          "work": "The Bear Came Over the Mountain",
+          "excerpt": "Grant had to go to the hospital the first time alone, because Fiona was not well enough to travel. He had given up his car, to save money. He took the bus.",
+          "notice": "'He had given up his car, to save money. He took the bus.' These two sentences contain an entire economic and emotional reality without naming shame, sacrifice, or love. The facts carry everything. Munro never says what the character feels — she shows what they do."
+        },
+        {
+          "id": "em2",
+          "author": "Denis Johnson",
+          "work": "Jesus' Son",
+          "excerpt": "I stood there while the man died. He didn't make a sound. He was just sitting there against the wall. He was still alive. He was breathing. He was looking at me.",
+          "notice": "The repetition of 'He was' creates a horrifying presence — Johnson refuses to look away or emotionalize. The narrator's emotion is entirely in his inability to describe anything other than the physical facts of a dying man looking at him."
+        },
+        {
+          "id": "em3",
+          "author": "Raymond Carver",
+          "work": "A Small Good Thing",
+          "excerpt": "Later, the boy's father, Howard, telephoned the school where his wife, Ann, was a teacher. There was a three-hour time difference, and he was able to reach her on the first try. She was at her desk when she answered the phone.",
+          "notice": "The administrative precision — 'three-hour time difference,' 'on the first try,' 'at her desk' — is Carver's grief technique. When a character is in shock, they report facts. The emotion is entirely in what is not said: 'Our son has been hit by a car.'"
+        },
+        {
+          "id": "em4",
+          "author": "Marilynne Robinson",
+          "work": "Gilead",
+          "excerpt": "I have wondered about that a good many times since. What have I to leave you but the ruins of old hopes?",
+          "notice": "'The ruins of old hopes' — not 'my regrets' or 'my failures' but a spatial metaphor, as if hopes were buildings that stand even after they collapse. Robinson's grief is architectural. The abstract emotion becomes concrete through image."
+        },
+        {
+          "id": "em5",
+          "author": "Ocean Vuong",
+          "work": "On Earth We're Briefly Gorgeous",
+          "excerpt": "Sometimes I don't know what or who we are. Days I feel like a human being. Other days I feel more like a sound. I feel like the wind in a field — is that something? Is that a life?",
+          "notice": "The escalation from 'human being' to 'a sound' to 'the wind in a field' is dissociation rendered as poetry. Vuong doesn't name depression or disconnection — he finds the correct image for the feeling, which is always more accurate than the clinical word."
+        },
+        {
+          "id": "em6",
+          "author": "Hanya Yanagihara",
+          "work": "A Little Life",
+          "excerpt": "He cried in the bathroom, running the water so no one would hear, and it wasn't even about anything in particular, just about everything, just about his whole life.",
+          "notice": "'Just about everything, just about his whole life' — the two 'just's make the enormity smaller, which makes it more devastating. Yanagihara's technique for extreme emotion is to undercut it grammatically, and the undercut is what breaks you."
+        },
+        {
+          "id": "em7",
+          "author": "Ted Chiang",
+          "work": "Story of Your Life",
+          "excerpt": "Your laughter was a physical thing. It started in your belly, worked its way up through your body, took over your whole face. That's what I'll miss most, I think. That specific laugh.",
+          "notice": "Chiang tracks the body to avoid naming grief. 'That specific laugh' — the specificity rather than the category. Not 'the sound of you laughing' but the exact, unrepeatable instance. This is how grief actually works: particular, not general."
+        },
+        {
+          "id": "em8",
+          "author": "Colson Whitehead",
+          "work": "The Nickel Boys",
+          "excerpt": "He had been trained well. He did not fight back. He waited for it to be over, and when it was over, he told himself it was over, and moved forward. But of course it wasn't over.",
+          "notice": "'But of course it wasn't over' — the shift to 'of course' makes the reader complicit in a truth the character can't yet access. Whitehead delivers the emotion the character is suppressing through the narrator's quiet correction. Restraint that contains a howl."
+        },
+        {
+          "id": "em9",
+          "author": "Penelope Fitzgerald",
+          "work": "The Gate of Angels",
+          "excerpt": "He had lost something, though he could not say what it was. He had the feeling, common enough, that something good had passed him by.",
+          "notice": "'Common enough' — the dismissal of the feeling within the description of it is the genius. Fitzgerald's grief is always ordinary, and the ordinariness is what makes it heartbreaking."
+        },
+        {
+          "id": "em10",
+          "author": "Larry McMurtry",
+          "work": "Lonesome Dove",
+          "excerpt": "Call had not cried since he was a young boy and he didn't know if he could. But he felt something — enough to make him turn away.",
+          "notice": "'Something — enough to make him turn away.' The unnamed feeling proven by its effect on the body. McMurtry earns the emotion entirely through physical behavior. We feel it because Call acts on it."
+        },
+        {
+          "id": "em11",
+          "author": "Tobias Wolff",
+          "work": "This Boy's Life",
+          "excerpt": "Everything was uncertain. I tried not to think about it. When I did think about it I tried to think about something else.",
+          "notice": "The three-sentence spiral — uncertainty, avoidance, secondary avoidance — enacts anxiety through structure. The third sentence is not redundant; it deepens the first two. Grief through the grammar of evasion."
+        },
+        {
+          "id": "em12",
+          "author": "Annie Proulx",
+          "work": "Brokeback Mountain",
+          "excerpt": "There was some open space between what he knew and what he tried to believe, but nothing could be done about it, and if you can't fix it you've got to stand it.",
+          "notice": "'If you can't fix it you've got to stand it' — this is the novel's central statement, and it contains more grief than a page of description. The folk wisdom register makes the impossibility feel as inevitable as weather."
+        },
+        {
+          "id": "em13",
+          "author": "Zadie Smith",
+          "work": "On Beauty",
+          "excerpt": "He looked at her and thought: there is everything in her face. Everything I have been chasing.",
+          "notice": "'Everything I have been chasing' — not named, not specified. The refusal to list what he's been chasing is exactly right. Smith trusts that the reader's 'everything' is more personal and therefore more affecting than any list would be."
+        },
+        {
+          "id": "em14",
+          "author": "Marilynne Robinson",
+          "work": "Gilead",
+          "excerpt": "I feel sometimes as if I were a child who opens its eyes on the world once and sees amazing things it will never know any names for and then has to close its eyes again.",
+          "notice": "The simile extends until it breaks — the child opens eyes, sees, then has to close them. The emotion of mortality is rendered as the inability to name what you've seen. The structure of the sentence enacts the experience."
+        },
+        {
+          "id": "em15",
+          "author": "Cormac McCarthy",
+          "work": "The Road",
+          "excerpt": "He held the boy close to him. He was shaking with cold but he thought it was something else. He did not want to look at the boy's face.",
+          "notice": "'He thought it was something else' — McCarthy refuses to name grief or fear directly. The not-looking at the boy's face is where the feeling lives. Three sentences, no named emotion, total devastation."
+        }
+      ]
+    },
+    {
+      "id": "scifi",
+      "name": "Sci-Fi World-Building Voice",
+      "color": "#a9dc76",
+      "entries": [
+        {
+          "id": "sf1",
+          "author": "Ursula K. Le Guin",
+          "work": "The Left Hand of Darkness",
+          "excerpt": "I'll make my report as if I told a story, for I was taught as a child on my homeworld that Truth is a matter of the imagination. The soundest fact may fail or prevail in the imagination of those who wield it.",
+          "notice": "Le Guin establishes her epistemology in the opening. She's not telling you about a world — she's telling you how knowledge works in it. The best sci-fi world-building is philosophical before it is technical."
+        },
+        {
+          "id": "sf2",
+          "author": "Ted Chiang",
+          "work": "Exhalation",
+          "excerpt": "It has long been said that air (which we breathe to live) is the very substance of our thought, and science has now confirmed what was once mere philosophical conjecture: we are indeed made of air, in that our memories, our selves, consist of patterned differences in air pressure.",
+          "notice": "Chiang makes the unfamiliar sound like scientific consensus. 'Which we breathe to live' — the parenthetical tells us this world breathes air but something is different about what air means. World-building through apparently casual clarification."
+        },
+        {
+          "id": "sf3",
+          "author": "N.K. Jemisin",
+          "work": "The Fifth Season",
+          "excerpt": "You learn, in the Stillness, what things are worth fighting for. Water is worth fighting for. Food is worth fighting for. Children are worth fighting for. Land, sometimes — the right kind, with the right memories buried in it.",
+          "notice": "'The right memories buried in it' — Jemisin seeds her world-building with details that will pay off later. The list form makes the world feel practical and lived-in. We understand the economy of this world through what people deem worth dying for."
+        },
+        {
+          "id": "sf4",
+          "author": "Jeff VanderMeer",
+          "work": "Annihilation",
+          "excerpt": "We had been briefed beforehand on what to expect from Area X. 'Pristine' was a word that came up frequently. 'Pristine' as if Area X were something that needed to be sold to us.",
+          "notice": "The suspicion of official language — 'as if Area X were something that needed to be sold to us' — establishes the narrator's intelligence and distrust simultaneously. VanderMeer builds his strange world partly through what institutional language gets wrong about it."
+        },
+        {
+          "id": "sf5",
+          "author": "China Miéville",
+          "work": "Embassytown",
+          "excerpt": "Language is the first way we make the world make sense. Before there is anything else, there is language. The Ariekei do not lie. They cannot. They have no word for lie.",
+          "notice": "Miéville builds alien cognition through what it lacks rather than what it has. 'They have no word for lie' — the absence is the world-building. Negation as alien construction. This is more efficient than describing what they do have."
+        },
+        {
+          "id": "sf6",
+          "author": "Kazuo Ishiguro",
+          "work": "Never Let Me Go",
+          "excerpt": "We all knew it. We all knew, and none of us ever said it. It was one of those things that remained unspoken — not because it was forbidden, exactly, but because to say it out loud would have changed something between us.",
+          "notice": "Ishiguro builds his sci-fi tragedy through social behavior rather than technology. The dystopia is in how people manage to not know what they know. The world-building is entirely about psychology."
+        },
+        {
+          "id": "sf7",
+          "author": "Andy Weir",
+          "work": "Project Hail Mary",
+          "excerpt": "I am humanity's last hope. No pressure or anything. I thought I'd come to terms with it during the long journey, but it's one thing to know you're humanity's only hope in the abstract. It's another to actually be there.",
+          "notice": "Weir's world-building voice is always grounded in practical sarcasm. 'No pressure or anything' — the colloquial undercut of the epic. He builds his science rigorously but his voice is the mechanic, not the visionary. The approachability IS the technique."
+        },
+        {
+          "id": "sf8",
+          "author": "Nnedi Ofofor",
+          "work": "Who Fears Death",
+          "excerpt": "There's something about the desert that calls to those who have nowhere else to go. It doesn't care if you're man or woman, Okeke or Nuru, light-skinned or dark. To the desert, you're just meat and bone and need.",
+          "notice": "'Just meat and bone and need' — the desert as equalizer is a world-building statement that is also a moral statement. Ofofor builds her world from the ground up, through the perspective of those the world has already failed."
+        },
+        {
+          "id": "sf9",
+          "author": "Ursula K. Le Guin",
+          "work": "The Dispossessed",
+          "excerpt": "There was a wall. It did not look important. It was built of uncut rocks roughly mortared. An adult could look right over it, and even a child could climb it. Where it crossed the roadway, instead of a gate it degenerated into mere geometry, a line, an idea of boundary.",
+          "notice": "'An idea of boundary' — Le Guin elevates physical description to philosophy in a single phrase. Her world-building makes the political spatial and the spatial philosophical. The wall is a concept before it is a structure."
+        },
+        {
+          "id": "sf10",
+          "author": "Ursula K. Le Guin",
+          "work": "The Ones Who Walk Away from Omelas",
+          "excerpt": "Perhaps it would be best if you imagined it as your own fancy bids, assuming it will rise to the occasion, for certainly I cannot suit you all.",
+          "notice": "The narrator addressing the reader directly — 'I cannot suit you all' — makes the city a collaborative fiction. Le Guin's sci-fi voice often makes its own construction explicit, inviting the reader into the world-making."
+        },
+        {
+          "id": "sf11",
+          "author": "Ted Chiang",
+          "work": "Hell Is the Absence of God",
+          "excerpt": "It was the nature of the visitations that made Neil's loss so hard for others to understand. He hadn't been erased from existence in the collision of two angelic forms. He had simply died.",
+          "notice": "'He had simply died' — in a world where angelic visitations kill people routinely, simple death becomes remarkable. Chiang's world-building inverts what is ordinary. The extraordinary is ordinary; the ordinary becomes striking."
+        },
+        {
+          "id": "sf12",
+          "author": "Nnedi Okofor",
+          "work": "Binti",
+          "excerpt": "I powered up the edan and my whole body tingled as it sucked from my life force. This was normal. I didn't let myself think about the cost.",
+          "notice": "'This was normal' — the most efficient world-building phrase available. Telling the reader not to be alarmed by something alarming defines an entire civilization's relationship to technology in three words."
+        },
+        {
+          "id": "sf13",
+          "author": "China Miéville",
+          "work": "The City & The City",
+          "excerpt": "We are all good at pretending not to see things we should not see. In Besźel, in Ul Qoma, it is infrastructure.",
+          "notice": "'It is infrastructure' — making a social performance into a civic category. Miéville's world-building works by taking a real human capacity (pretending not to see) and systematizing it into law. The extrapolation is minimal but the implications are vast."
+        },
+        {
+          "id": "sf14",
+          "author": "Ann Leckie",
+          "work": "Ancillary Justice",
+          "excerpt": "The body I was wearing was named Seivarden Vendaai. A lieutenant of mine, once, from before I was what I am now.",
+          "notice": "'The body I was wearing' and 'A lieutenant of mine, once' — two phrases that contain an entire history of what the narrator has been and lost. Leckie world-builds through the grammar of how the narrator talks about bodies and time."
+        },
+        {
+          "id": "sf15",
+          "author": "Octavia Butler",
+          "work": "Kindred",
+          "excerpt": "I lost an arm on my last trip home. My left arm.",
+          "notice": "The correction — 'My left arm' — is the technique. The second sentence is not repetitive; it makes the loss specific and real. Butler's opening is the most efficient setup in modern sci-fi: future, past, violence, stakes, in two sentences."
+        }
+      ]
+    },
+    {
+      "id": "modern",
+      "name": "Modern Fiction (Last 10 Years)",
+      "color": "#ff9580",
+      "entries": [
+        {
+          "id": "m1",
+          "author": "Sally Rooney",
+          "work": "Normal People (2018)",
+          "excerpt": "He wanted to explain that he wasn't himself lately. He wanted to say: this is not what I'm really like. But he couldn't, because he had no other self to point to.",
+          "notice": "The logic of 'no other self to point to' is both philosophically precise and emotionally exact. Rooney's characters argue with themselves using the vocabulary of identity. The sentence earns its abstraction because the physical and social grounding came before it."
+        },
+        {
+          "id": "m2",
+          "author": "Ocean Vuong",
+          "work": "On Earth We're Briefly Gorgeous (2019)",
+          "excerpt": "Let me begin again. Dear Ma, I am writing to you from the past, before everything changed, so you can see what we had been and decide whether it was enough.",
+          "notice": "'From the past, before everything changed' — Vuong collapses time into paradox as a structural choice. The whole novel works this way: grief looking backward at life with full knowledge. The 'before everything changed' does the work of a hundred pages of setup."
+        },
+        {
+          "id": "m3",
+          "author": "Carmen Maria Machado",
+          "work": "In the Dream House (2019)",
+          "excerpt": "The Dream House was a place of many rooms. The Dream House was a place of hiding. The Dream House was a place of unspoken rules. The Dream House was a place where you learned, very quickly, not to make noise.",
+          "notice": "Anaphora — the repetition of 'The Dream House was' — builds dread through accumulation. Each definition adds weight. Machado uses the fairy tale syntax deliberately to argue that abuse has an archetypal grammar. The form is the argument."
+        },
+        {
+          "id": "m4",
+          "author": "Colson Whitehead",
+          "work": "The Nickel Boys (2019)",
+          "excerpt": "Once you held it against someone they never got free of it. That was the thing about people — once you put them in a certain box, they lived there forever. Elwood had learned that early on.",
+          "notice": "The simplicity of 'they lived there forever' — a child's syntax making a permanent philosophical observation. Whitehead's great technique is to put adult truths in simple structures so they feel both new and inevitable."
+        },
+        {
+          "id": "m5",
+          "author": "Paul Tremblay",
+          "work": "A Head Full of Ghosts (2015)",
+          "excerpt": "I was fifteen years old when everything went wrong in my house, but I can only tell you what I saw, what I heard, what I felt. I cannot tell you what any of it meant.",
+          "notice": "'I cannot tell you what any of it meant' — Tremblay builds his horror on epistemological honesty. The narrator's acknowledged limitation is more frightening than certainty would be. Modern horror understands that ambiguity is more disturbing than revelation."
+        },
+        {
+          "id": "m6",
+          "author": "Hanya Yanagihara",
+          "work": "A Little Life (2015)",
+          "excerpt": "Wasn't friendship its own miracle, the finding of another person who made the entire enterprise of existence feel a little less impossible?",
+          "notice": "'The entire enterprise of existence' — the hyperbole that is not hyperbole. Yanagihara argues that friendship is meaningful at the scale of existence, not just comfort. The question form makes it philosophical without being pretentious."
+        },
+        {
+          "id": "m7",
+          "author": "N.K. Jemisin",
+          "work": "The Stone Sky (2017)",
+          "excerpt": "Some things you do because you need to. Some things you do because doing them is better than not doing them. And some things you do because they are the only way to live with yourself afterward.",
+          "notice": "The three-part structure builds to the most honest reason last. The tricolon is a rhetorical form as old as language, but Jemisin uses it for moral taxonomy. The third sentence doesn't name sacrifice — it describes the psychology of it."
+        },
+        {
+          "id": "m8",
+          "author": "Mariana Enriquez",
+          "work": "The Dangers of Smoking in Bed (2020)",
+          "excerpt": "The dead don't stay where you put them. That's the first thing you learn. The second thing you learn is that they don't come back because they miss you.",
+          "notice": "'They don't come back because they miss you' — the horror of that sentence is in the implication: they come back for other reasons, none of them tender. Enriquez's modern horror voice is that of someone who has stopped being surprised by the terrible, which makes it more terrible."
+        },
+        {
+          "id": "m9",
+          "author": "Colson Whitehead",
+          "work": "Harlem Shuffle (2021)",
+          "excerpt": "Ray Carney was only slightly bent when it came to being crooked. The furniture store was legitimate, mostly.",
+          "notice": "'Mostly' — one word that carries the entire moral universe of the novel. Whitehead's modern crime voice is built on qualifications. The humor is in the precision of the moral self-assessment. 'Slightly bent' and 'mostly' do the work of a character study."
+        },
+        {
+          "id": "m10",
+          "author": "Paul Tremblay",
+          "work": "The Pallbearers Club (2022)",
+          "excerpt": "Look, I'll be upfront: I don't know if any of this happened the way I'm telling it. Memory is a story you tell yourself, and the story changes every time you tell it.",
+          "notice": "Tremblay makes unreliable narration explicit rather than hidden — which paradoxically makes us trust the narrator more. 'Memory is a story you tell yourself' is both the theme and the structural disclaimer. Modern horror fiction increasingly foregrounds its own epistemology."
+        },
+        {
+          "id": "m11",
+          "author": "Andrew Sean Greer",
+          "work": "Less (2018)",
+          "excerpt": "But then he had been a young man who loved an old man who loved him, and that had seemed simple, and now it seems anything but.",
+          "notice": "The tense shift across the sentence — 'had been,' 'loved,' 'seemed,' 'seems' — enacts the experience of looking back. Greer's voice finds the exact grammar for how the past looks different from the present."
+        },
+        {
+          "id": "m12",
+          "author": "Hernan Diaz",
+          "work": "Trust (2022)",
+          "excerpt": "It is not that I have concealed anything. I have simply chosen to show only certain things, in a certain light.",
+          "notice": "The distinction — not concealment but selection — is the novel's entire argument about biography, memory, and power. Diaz makes an epistemological statement sound like a modest disclaimer."
+        },
+        {
+          "id": "m13",
+          "author": "Ling Ma",
+          "work": "Severance (2018)",
+          "excerpt": "In those last months, I continued to go into work. I wore nice outfits. I answered emails. I met deadlines. I did not know what else to do.",
+          "notice": "The list of professional normalcy followed by 'I did not know what else to do' — Ling Ma captures late-capitalist apocalypse through the persistence of work habits. The form is the critique."
+        },
+        {
+          "id": "m14",
+          "author": "George Saunders",
+          "work": "Lincoln in the Bardo (2017)",
+          "excerpt": "He has, to this point, not suffered greatly, I noted, with a kind of wonder, and a kind of hope, a kind of dread.",
+          "notice": "Three emotional states offered simultaneously — wonder, hope, dread — all correct at once. Saunders trusts that emotional experience is multiple and contradictory. The commas are doing the work of the human heart."
+        },
+        {
+          "id": "m15",
+          "author": "Jenny Zhang",
+          "work": "Sour Heart (2017)",
+          "excerpt": "My mother said she would love me through all my past and future mistakes before she had even made them and before I had even made mine.",
+          "notice": "The grammar of preemptive forgiveness — 'before she had even made them and before I had even made mine.' The tense creates a circle of love that encompasses both their entire lives. Precision about time is precision about love."
+        }
+      ]
+    }
+  ]
+}
