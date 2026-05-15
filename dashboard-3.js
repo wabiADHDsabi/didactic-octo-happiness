@@ -1088,10 +1088,23 @@ function qnavRender(){
           if((_now2-_last2)<_QNAV_COOLDOWN){obs.disconnect();return;}
           localStorage.setItem('qnav_last_anim',String(_now2));
           obs.disconnect();
-          el.querySelectorAll('.qnav-btn').forEach(function(btn,i){
-            btn.style.opacity='0';btn.style.transform='translateY(6px) scale(0.92)';
-            btn.style.transition='opacity 0.35s ease, transform 0.35s ease';
-            setTimeout(function(){btn.style.opacity='';btn.style.transform='';},i*47);
+          var btns=Array.from(el.querySelectorAll('.qnav-btn'));
+          // Shuffle order so buttons pop randomly
+          var indices=btns.map(function(_,i){return i;}).sort(function(){return Math.random()-0.5;});
+          btns.forEach(function(btn){
+            btn.style.opacity='0';
+            btn.style.transform='scale(0.88)';
+            btn.style.transition='none';
+          });
+          indices.forEach(function(idx,order){
+            var btn=btns[idx];
+            // Random delay within a 280ms window (33% faster than 420ms)
+            var delay=Math.random()*280;
+            setTimeout(function(){
+              btn.style.transition='opacity 0.22s ease, transform 0.22s cubic-bezier(0.34,1.56,0.64,1)';
+              btn.style.opacity='';
+              btn.style.transform='';
+            },delay);
           });
         }
       });
