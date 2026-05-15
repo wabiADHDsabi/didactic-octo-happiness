@@ -6743,12 +6743,12 @@ function juaRender(){
   else if(tab==='progress')h+=juaRenderProgress();
   else h+=juaRenderStats();
   el.innerHTML=h;
-  el.querySelectorAll('[data-juatab]').forEach(function(b){b.onclick=function(){juaState._tab=this.dataset.juatab;juaSave();juaRender();};});
+  el.querySelectorAll('[data-juatab]').forEach(function(b){b.onclick=function(){juaState._tab=this.dataset.juatab;juaSave();if(typeof hap==='function')hap(HAP.soft);juaRender();};});
   el.querySelectorAll('[data-juasec]').forEach(function(b){
     b.onclick=function(){
       var s=this.getAttribute('data-juasec');
       if(!juaSectionUnlocked(s))return;
-      juaState.section=s;juaState._revealed=0;juaSave();juaRender();
+      juaState.section=s;juaState._revealed=0;juaSave();if(typeof hap==='function')hap(HAP.soft);juaRender();
     };
   });
   el.querySelectorAll('[data-juaans]').forEach(function(b){
@@ -6761,7 +6761,7 @@ function juaRender(){
     };
   });
   var revBtn=el.querySelector('[data-juareveal]');
-  if(revBtn)revBtn.onclick=function(){juaState._revealed=(juaState._revealed||0)+1;juaSave();juaRender();};
+  if(revBtn)revBtn.onclick=function(){juaState._revealed=(juaState._revealed||0)+1;if(typeof hap==='function')hap(HAP.soft);juaSave();juaRender();};
   el.querySelectorAll('[data-juachoice]').forEach(function(b){
     b.onclick=function(){
       var correct=this.getAttribute('data-juacorrect')==='1';
@@ -6771,6 +6771,7 @@ function juaRender(){
       if(!correct)el.querySelectorAll('[data-juachoice][data-juacorrect="1"]').forEach(function(c){c.style.borderColor='var(--cg)';c.style.color='var(--cg)';});
       if(typeof hap==='function')hap(correct?HAP.check:HAP.error);
       juaAnswerCard(juaState.section,idx,correct?'good':'again');
+      if(typeof hap==='function')hap(correct?HAP.check:HAP.error);
       if(correct)setTimeout(function(){juaRender();},600);
       else{var nb=document.createElement('button');nb.textContent='NEXT →';nb.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';nb.onclick=function(){juaRender();};el.appendChild(nb);}
     };
@@ -7148,6 +7149,39 @@ if(!questState.completedSteps)questState.completedSteps=[];
 if(!questState._tab)questState._tab='current';
 function questSave(){ localStorage.setItem('dash_quest', JSON.stringify(questState)); }
 
+function questConfetti(sourceEl){
+  var rect=sourceEl?sourceEl.getBoundingClientRect():{top:window.innerHeight/2,left:window.innerWidth/2,width:0,height:0};
+  var x=rect.left+rect.width/2;
+  var y=rect.top+rect.height/2;
+  var colors=['#ffa500','#ffcc00','#ff6b6b','#50fa7b','#8be9fd','#ff79c6','#bd93f9'];
+  for(var i=0;i<40;i++){
+    var el=document.createElement('div');
+    el.style.cssText='position:fixed;pointer-events:none;z-index:9999;width:'+(6+Math.random()*6)+'px;height:'+(6+Math.random()*6)+'px;background:'+colors[Math.floor(Math.random()*colors.length)]+';border-radius:'+(Math.random()>0.5?'50%':'2px')+';left:'+x+'px;top:'+y+'px;transform:translate(-50%,-50%)';
+    document.body.appendChild(el);
+    var angle=Math.random()*Math.PI*2;
+    var speed=80+Math.random()*200;
+    var vx=Math.cos(angle)*speed;
+    var vy=Math.sin(angle)*speed-150;
+    var gravity=300;
+    var start=null;
+    (function(el,vx,vy){
+      function frame(ts){
+        if(!start)start=ts;
+        var t=(ts-start)/1000;
+        var px=x+vx*t;
+        var py=y+vy*t+0.5*gravity*t*t;
+        var alpha=Math.max(0,1-t*1.5);
+        el.style.left=px+'px';
+        el.style.top=py+'px';
+        el.style.opacity=alpha;
+        if(alpha>0)requestAnimationFrame(frame);
+        else el.remove();
+      }
+      requestAnimationFrame(frame);
+    })(el,vx,vy);
+  }
+}
+
 function questRender(){
   var el = document.getElementById('quest-body');
   var badge = document.getElementById('quest-badge');
@@ -7190,7 +7224,8 @@ function questRender(){
         h += '</div>';
 
         // Phase label
-        h += '<div style="font-size:9px;color:rgba(255,165,0,.5);letter-spacing:2px;margin-bottom:8px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
+        h += '<div style="font-size:8px;color:rgba(255,165,0,.3);letter-spacing:1px;margin-bottom:4px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
+        h+='<div style="font-size:9px;color:rgba(255,165,0,.5);letter-spacing:2px;margin-bottom:8px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
 
         // Step card
         h += '<div style="padding:20px 16px;border:1px solid rgba(255,165,0,.2);background:rgba(255,165,0,.04);margin-bottom:16px">';
@@ -7236,6 +7271,8 @@ function questRender(){
   var doneBtn = el.querySelector('#quest-done-btn');
   if(doneBtn){
     var questDoneFn = function(){
+      // Confetti burst
+      questConfetti(doneBtn);
       var now = new Date().toISOString();
       questState.completedSteps.push({ step: questState.currentStep, completedAt: now });
       questState.currentStep++;
