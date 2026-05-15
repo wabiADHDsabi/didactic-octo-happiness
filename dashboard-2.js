@@ -1795,7 +1795,8 @@ function clearAllData(){
     return;
   }
   ['dash_todos','dash_notes_v2','dash_meals','dash_schedule','dash_books','dash_bmarks',
-   's_log','pt_data','prayerHist','stockHist','dash_tile_order','clockMode','prayerHist'].forEach(function(k){
+   's_log','pt_data','prayerHist','stockHist','dash_tile_order','clockMode','prayerHist',
+   'dash_jua','dash_qt','dash_med','dash_cert','dash_goals','jm_data'].forEach(function(k){
     localStorage.removeItem(k);
   });
   localStorage.removeItem('dash_season_traditions');
