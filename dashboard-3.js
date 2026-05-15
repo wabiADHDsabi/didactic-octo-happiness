@@ -5298,8 +5298,13 @@ function qwRenderStudy(){
       qwAnswered=false;
       var isReview=(qwState.todayReviewQueue||[]).indexOf(card.id)>=0;
       var streak=qwState.streaks&&qwState.streaks[card.id]||0;
-      h+='<div style="margin-bottom:10px">';
-      if(card.cat)h+='<div style="font-size:9px;color:rgba(0,255,136,.5);letter-spacing:1px;margin-bottom:6px">'+card.cat+(isReview?' · review':'')+(streak>=3?' · \u2605'.repeat(Math.min(streak,6)):'')+'</div>';
+      h+='<div class="qw-card-area" style="margin-bottom:10px">';
+      h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">';
+      if(card.cat)h+='<span style="font-size:9px;color:rgba(0,255,136,.5);letter-spacing:1px">'+card.cat+'</span>';
+      if(isReview){h+='<span style="font-size:9px;padding:2px 8px;border:1px solid rgba(0,229,255,.4);color:var(--cc);letter-spacing:1px;font-family:monospace">REVIEW</span>';}
+      else{h+='<span style="font-size:9px;padding:2px 8px;border:1px solid rgba(255,184,108,.4);color:rgba(255,184,108,.9);letter-spacing:1px;font-family:monospace">NEW</span>';}
+      if(streak>=3)h+='<span style="font-size:9px;color:rgba(255,204,0,.6)">'+'\u2605'.repeat(Math.min(streak,6))+'</span>';
+      h+='</div>';
       // Detect if question contains Arabic chars — apply selected Arabic font
       var _qwHasAr=/[\u0600-\u06ff]/.test(card.q);
       var _qwFontCss=DUA_ARABIC_FONTS.find(function(f){{return f.key===_qwFont;}})||(DUA_ARABIC_FONTS[0]);
@@ -5394,8 +5399,16 @@ function qwRenderStudy(){
         h+='<div style="font-size:28px;font-family:\'Scheherazade New\',serif;color:#ffcc00;direction:rtl">'+w.arabic+'</div>';
         h+='<div style="font-size:8px;color:rgba(255,255,255,.2);margin-top:2px">'+w.cat+'</div></td>';
         h+='<td style="padding:10px 6px;vertical-align:middle">';
-        if(rev)h+='<span style="font-size:13px;color:var(--text)">'+w.answer+'</span>';
-        else h+='<button data-qwreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">SHOW</button>';
+        if(rev){
+          h+='<div style="display:flex;align-items:center;gap:6px">';
+          h+='<span style="font-size:13px;color:var(--text)">'+w.answer+'</span>';
+          var isLearned=!!(qwState.learnSeen&&qwState.learnSeen[w.id]);
+          if(!isLearned)h+='<button data-qwlearned="'+w.id+'" style="padding:2px 8px;background:rgba(80,250,123,.06);border:1px solid rgba(80,250,123,.3);color:rgba(80,250,123,.8);font-family:monospace;font-size:8px;cursor:pointer;letter-spacing:1px">✓ LEARNED</button>';
+          else h+='<span style="font-size:8px;color:rgba(80,250,123,.5)">✓</span>';
+          h+='</div>';
+        } else {
+          h+='<button data-qwreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">SHOW</button>';
+        }
         h+='</td></tr>';
       });
       h+='</tbody></table>';
@@ -5475,6 +5488,18 @@ function qwRenderStudy(){
   el.innerHTML=h;
 
   // Wire LEARN tab interactions
+  // Wire per-word LEARNED buttons
+  el.querySelectorAll('[data-qwlearned]').forEach(function(btn){
+    btn.onclick=function(){
+      var wid=this.dataset.qwlearned;
+      if(!qwState.learnSeen)qwState.learnSeen={};
+      if(!qwState.learnRevealed)qwState.learnRevealed={};
+      qwState.learnSeen[wid]=qwTodayKey();
+      qwState.learnRevealed[wid]=true;
+      if(typeof hap==='function')hap(HAP.check);
+      qwSave();qwRenderStudy();
+    };
+  });
   el.querySelectorAll('[data-qwreveal]').forEach(function(btn){
     btn.onclick=function(){
       var wid=this.dataset.qwreveal;
@@ -5592,7 +5617,21 @@ function qwRenderStudy(){
         }
         qwState._showNext=true;
         qwSave();
-        qwRenderStudy();
+        // Show the answer text and a NEXT button instead of auto-advancing
+        var _ansDiv=document.createElement('div');
+        _ansDiv.style.cssText='margin-top:10px;padding:10px;border:1px solid rgba(0,255,136,.2);background:rgba(0,255,136,.06)';
+        _ansDiv.innerHTML='<div style="font-size:9px;color:rgba(0,255,136,.5);letter-spacing:1px;margin-bottom:4px">CORRECT ANSWER</div>'
+          +'<div style="font-size:16px;color:#00ff88">'+card.a+'</div>'
+          +(card.a2?'<div style="font-size:12px;color:rgba(0,255,136,.6);margin-top:2px">'+card.a2+'</div>':'');
+        var _nxt=document.createElement('button');
+        _nxt.textContent='NEXT →';
+        _nxt.style.cssText='width:100%;margin-top:8px;padding:10px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.3);color:#00ff88;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';
+        var _nxtFn=function(){qwRenderStudy();};
+        _nxt.onclick=_nxtFn;
+        _nxt.ontouchend=function(e){e.preventDefault();e.stopPropagation();_nxtFn();};
+        var _studyArea=el.querySelector('.qw-card-area')||el;
+        _studyArea.appendChild(_ansDiv);
+        _studyArea.appendChild(_nxt);
       };
       dkBtn.onclick=dkFn;
       dkBtn.ontouchend=function(e){e.preventDefault();dkFn();};

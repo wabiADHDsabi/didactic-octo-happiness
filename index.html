@@ -903,6 +903,7 @@ body.theme-vangogh [data-id="season-traditions"]{--vg-accent:#f1b69a;--vg-card-a
 
 /* ── LARGE TEXT MODE: minimum 13px everywhere, scaled up proportionally ── */
 body.large-text{font-size:15px}
+body.extra-large-text{font-size:21px}
 
 /* Things that were 7-10px → 13px */
 body.large-text .mood-bar-label,
@@ -2422,6 +2423,7 @@ body.slim-screen-mode #cat-nav{top:42px}
 .dhikr-counter{font-family:VT323,monospace;font-size:72px;color:var(--ca);text-align:center;line-height:1;margin:8px 0}
 .dhikr-name{font-size:11px;color:var(--dim);text-align:center;letter-spacing:2px;margin-bottom:6px}
 .dhikr-tap{width:100%;padding:18px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:VT323,monospace;font-size:22px;cursor:pointer;letter-spacing:2px;transition:all .1s;-webkit-tap-highlight-color:transparent}
+body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 .dhikr-tap:active{background:rgba(255,204,0,.18);transform:scale(.98)}
 .dhikr-progress{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;margin:8px 0}
 .dhikr-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,204,0,.15);flex-shrink:0}
@@ -3045,6 +3047,10 @@ body.slim-screen-mode #cat-nav{top:42px}
             <button class="sset-toggle" id="tog-largeText" onclick="event.stopPropagation();toggleSetting('largeText')"><div class="sset-knob"></div></button>
           </div>
           <div class="sset-row">
+            <div class="sset-info"><div class="sset-lbl">Extra Large Text</div><div class="sset-desc">Increase base font size by 50%</div></div>
+            <button class="sset-toggle" id="tog-extraLargeText" onclick="event.stopPropagation();toggleSetting('extraLargeText')"><div class="sset-knob"></div></button>
+          </div>
+          <div class="sset-row">
             <div class="sset-info"><div class="sset-lbl">No Google Fonts</div><div class="sset-desc">Use system fonts (faster, offline-friendly)</div></div>
             <button class="sset-toggle" id="tog-noGoogleFonts" onclick="event.stopPropagation();toggleSetting('noGoogleFonts')"><div class="sset-knob"></div></button>
           </div>
@@ -3372,7 +3378,7 @@ body.slim-screen-mode #cat-nav{top:42px}
     <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)">
       <span class="th-icon" style="color:var(--ca)">📚</span>
-      <span class="th-label" style="color:var(--ca)">Juz Amma</span>
+      <span class="th-label" style="color:var(--ca)">Juz Amma Facts</span>
       <span id="jua-badge" class="th-badge" style="color:var(--ca);border-color:rgba(255,204,0,.3);margin-left:auto;display:none"></span>
     </div>
     <div id="jua-body"></div>
@@ -3619,6 +3625,14 @@ window.dbgJua = function(){
       <button id="sb-pull-btn" onclick="sbAnimBtn('pull');sbModalConfirm('pull')" style="flex:1;padding:10px 6px;background:transparent;border:1px solid var(--cc);color:var(--cc);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;cursor:pointer;position:relative;overflow:hidden">&#8595; PULL</button>
     </div>
     <div id="sb-modal-status" style="font-size:11px;min-height:14px;text-align:center"></div>
+    <!-- Auto sync -->
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(0,255,136,.12);display:flex;align-items:center;gap:10px">
+      <input type="checkbox" id="sb-autosync-cb" style="width:16px;height:16px;cursor:pointer;accent-color:var(--cg)">
+      <div style="flex:1">
+        <div style="font-size:11px;color:var(--cg)">Auto-sync for 1 hour</div>
+        <div style="font-size:9px;color:var(--dim)" id="sb-autosync-status">Pushes every 10 min for 60 min, then stops</div>
+      </div>
+    </div>
   </div>
 </div>
 

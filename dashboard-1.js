@@ -4906,7 +4906,7 @@ var sSections={view:false,display:false,data:false,supabase:false,layout:false,z
 
 // Defaults
 window._dbgCheckpoints['settings_defaults']=true;
-var SETTING_DEFAULTS={compact:false,slimScreen:false,singleCol:false,bigCat:false,iconMode:false,minimalMode:false,vibrateOff:false,categoryNav:false,sectionHeaders:false,pinnedCards:false,snapToCard:false,crt:false,vignette:true,magnetMode:false,bigBorders:false,scrollGlow:false,sbAutoSync:false,noGoogleFonts:false,largeText:false,bgVisuals:false,bgVisualSinSin:false,letterNav:false,textGlow:false,starfield:false,scrollTrail:false,cardEntrance:false};
+var SETTING_DEFAULTS={compact:false,slimScreen:false,singleCol:false,bigCat:false,iconMode:false,minimalMode:false,vibrateOff:false,categoryNav:false,sectionHeaders:false,pinnedCards:false,snapToCard:false,crt:false,vignette:true,magnetMode:false,bigBorders:false,scrollGlow:false,sbAutoSync:false,noGoogleFonts:false,largeText:false,extraLargeText:false,bgVisuals:false,bgVisualSinSin:false,letterNav:false,textGlow:false,starfield:false,scrollTrail:false,cardEntrance:false};
 var hiddenTiles=(function(){
   try{
     var v=JSON.parse(localStorage.getItem('dash_hidden_tiles')||'[]');
@@ -5009,7 +5009,7 @@ function renderViewPills(){
 
 function updateSettingsUI(){
   // Appearance toggles
-  ['crt','vignette','magnetMode','bigBorders','scrollGlow','sbAutoSync','noGoogleFonts','largeText','bgVisuals','bgVisualSinSin','letterNav','textGlow','categoryNav','sectionHeaders','pinnedCards','snapToCard','starfield','scrollTrail','cardEntrance'].forEach(function(k){
+  ['crt','vignette','magnetMode','bigBorders','scrollGlow','sbAutoSync','noGoogleFonts','largeText','extraLargeText','bgVisuals','bgVisualSinSin','letterNav','textGlow','categoryNav','sectionHeaders','pinnedCards','snapToCard','starfield','scrollTrail','cardEntrance'].forEach(function(k){
     var t=document.getElementById('tog-'+k);
     if(t)t.classList.toggle('on',getSetting(k));
   });
@@ -5275,7 +5275,8 @@ function applySettings(){
   if(window.setScrollGlow)window.setScrollGlow(getSetting('scrollGlow'));
   applyHiddenTiles();
   // Large text
-  document.body.classList.toggle('large-text',getSetting('largeText'));
+  document.body.classList.toggle('large-text',getSetting('largeText')&&!getSetting('extraLargeText'));
+  document.body.classList.toggle('extra-large-text',getSetting('extraLargeText'));
   // Background visuals
   if(window.applyBgVisuals)window.applyBgVisuals(getSetting('bgVisuals'));
   if(window.applyBgSinSin)window.applyBgSinSin(getSetting('bgVisualSinSin'));
@@ -6231,6 +6232,16 @@ function sbShowModal(){
   sbMaybeFetchCloudStatus();
   sbFetchCloudSyncLog();
   renderSyncLog();
+  // Wire auto-sync checkbox
+  var _cb=document.getElementById('sb-autosync-cb');
+  if(_cb){
+    _cb.checked=!!_autoSyncInterval;
+    _cb.onchange=function(){
+      if(this.checked)sbStartAutoSync();
+      else sbStopAutoSync();
+    };
+  }
+  _sbUpdateAutoSyncStatus();
 }
 
 function sbHideModal(){
@@ -6424,7 +6435,7 @@ function sbPullTopbar(){sbShowModal();}
 
 
 function sbStripLocalSettings(settingsStr){
-  var LOCAL_ONLY=['compact','slimScreen','iconMode','minimalMode','singleCol','crt','vignette','bgVisuals','bgVisualSinSin','starfield','cardEntrance','scrollGlow','bigBorders','textGlow','scrollTrail','largeText','magnetMode','noGoogleFonts','letterNav'];
+  var LOCAL_ONLY=['compact','slimScreen','iconMode','minimalMode','singleCol','crt','vignette','bgVisuals','bgVisualSinSin','starfield','cardEntrance','scrollGlow','bigBorders','textGlow','scrollTrail','largeText','extraLargeText','magnetMode','noGoogleFonts','letterNav'];
   try{
     var s=JSON.parse(settingsStr||'{}');
     LOCAL_ONLY.forEach(function(k){delete s[k];});
@@ -7318,5 +7329,73 @@ window.addEventListener('load', function(){
   if(typeof questRender==='function') questRender();
 });
 // ── END QUEST ──
+
+// ── AUTO SYNC FOR 1 HOUR ──
+var _autoSyncTimer=null;
+var _autoSyncInterval=null;
+var _autoSyncEnd=0;
+
+function sbStartAutoSync(){
+  if(_autoSyncInterval)return; // already running
+  _autoSyncEnd=Date.now()+60*60*1000; // 1 hour from now
+  localStorage.setItem('dash_autosync_end',String(_autoSyncEnd));
+  _sbDoAutoSync();
+  _autoSyncInterval=setInterval(function(){
+    if(Date.now()>=_autoSyncEnd){
+      sbStopAutoSync();
+      if(typeof showToast==='function')showToast('Auto-sync ended after 1 hour');
+      var cb=document.getElementById('sb-autosync-cb');
+      if(cb)cb.checked=false;
+      return;
+    }
+    _sbDoAutoSync();
+  },10*60*1000); // every 10 minutes
+  _sbUpdateAutoSyncStatus();
+}
+
+function sbStopAutoSync(){
+  if(_autoSyncInterval){clearInterval(_autoSyncInterval);_autoSyncInterval=null;}
+  _autoSyncEnd=0;
+  localStorage.removeItem('dash_autosync_end');
+  _sbUpdateAutoSyncStatus();
+}
+
+function _sbDoAutoSync(){
+  var cfg=sbGetConfig();
+  if(!cfg.url||!cfg.key||!cfg.account)return;
+  sbPush&&sbPush(true); // silent push
+}
+
+function _sbUpdateAutoSyncStatus(){
+  var el=document.getElementById('sb-autosync-status');
+  if(!el)return;
+  if(_autoSyncInterval&&_autoSyncEnd>Date.now()){
+    var minsLeft=Math.ceil((_autoSyncEnd-Date.now())/60000);
+    el.textContent='Active · '+minsLeft+' min remaining · next push in ~10 min';
+    el.style.color='var(--cg)';
+  } else {
+    el.textContent='Pushes every 10 min for 60 min, then stops';
+    el.style.color='var(--dim)';
+  }
+}
+
+// Restore auto sync if page reloaded within the hour
+window.addEventListener('load',function(){
+  var savedEnd=parseInt(localStorage.getItem('dash_autosync_end')||'0');
+  if(savedEnd>Date.now()){
+    _autoSyncEnd=savedEnd;
+    _autoSyncInterval=setInterval(function(){
+      if(Date.now()>=_autoSyncEnd){
+        sbStopAutoSync();
+        if(typeof showToast==='function')showToast('Auto-sync ended after 1 hour');
+        var cb=document.getElementById('sb-autosync-cb');
+        if(cb)cb.checked=false;
+        return;
+      }
+      _sbDoAutoSync();
+    },10*60*1000);
+  }
+});
+// ── END AUTO SYNC ──
 
 // ── END OF dashboard-1.js (Part 1 of 3) — continues in dashboard-2.js ──
