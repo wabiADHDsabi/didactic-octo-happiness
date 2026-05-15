@@ -967,6 +967,7 @@ function wdRender(){
       setTimeout(function(){if(_b.dataset.confirm==='1'){_b.textContent='SKIP ENTRY →';_b.style.color='rgba(255,255,255,.65)';_b.style.borderColor='rgba(255,255,255,.3)';_b.dataset.confirm='';}},2500);
       return;
     }
+    if(typeof hap==='function')hap(HAP.tap);
     wdPickNext();wdRender();
   };
 }

@@ -942,7 +942,8 @@ var QNAV_CARDS=[
   ['articulate',     '🗣️',    'Articulate',    '#ffb86c'],
   ['quran-tafsir',   '📖',    'Quran Tafsir',  'var(--ca)'],
   ['certifications', '🏅',    'Certifications','#50fac8'],
-  ['medicine',       '💊',    'Medicine',      '#c896ff']
+  ['medicine',       '💊',    'Medicine',      '#c896ff'],
+  ['quest',          '⚔',     'Quest',         '#ffa500']
 ];
 
 
@@ -4239,7 +4240,7 @@ function legacyRender(){
   }
   el.innerHTML=h;
 
-  el.querySelectorAll('[data-legacytab]').forEach(function(btn){btn.onclick=function(){legacyData._tab=this.dataset.legacytab;legacySave();legacyRender();};});
+  el.querySelectorAll('[data-legacytab]').forEach(function(btn){btn.onclick=function(){legacyData._tab=this.dataset.legacytab;legacySave();if(typeof hap==='function')hap(HAP.write);legacyRender();};});
   var draftBtn=document.getElementById('legacy-save-draft');
   if(draftBtn)draftBtn.onclick=function(){var inp=document.getElementById('legacy-inp');if(inp){legacyData.draft=inp.value;legacySave();showToast('Draft saved');}};
   var addBtn=document.getElementById('legacy-add-entry');
@@ -4251,7 +4252,7 @@ function legacyRender(){
     legacyData.draft='';
     legacySave();
     showToast('Added to your letter ✉️');
-    legacyRender();
+    if(typeof hap==='function')hap(HAP.write);legacyRender();
   };
 }
 
@@ -4300,7 +4301,7 @@ function shadowRender(){
     if(shadowData.length>100)shadowData=shadowData.slice(0,100);
     shadowSave();
     showToast('Shadow logged 🌑');
-    shadowRender();
+    if(typeof hap==='function')hap(HAP.write);shadowRender();
   };
 }
 
@@ -4393,25 +4394,25 @@ function fearRender(){
 
   el.innerHTML=h;
 
-  el.querySelectorAll('[data-feartab]').forEach(function(btn){btn.onclick=function(){fearData._tab=this.dataset.feartab;fearSave();fearRender();};});
+  el.querySelectorAll('[data-feartab]').forEach(function(btn){btn.onclick=function(){fearData._tab=this.dataset.feartab;fearSave();if(typeof hap==='function')hap(HAP.save);fearRender();};});
   var fearAddBtn=document.getElementById('fear-add');
   var fearInp=document.getElementById('fear-inp');
   if(fearAddBtn)fearAddBtn.onclick=function(){
     if(!fearInp||!fearInp.value.trim())return;
     if(!fearData.fears)fearData.fears=[];
     fearData.fears.unshift({text:fearInp.value.trim(),date:new Date().toISOString().slice(0,10),faced:false,ts:Date.now()});
-    fearSave();fearRender();
+    fearSave();if(typeof hap==='function')hap(HAP.save);fearRender();
   };
   if(fearInp)fearInp.onkeydown=function(e){if(e.keyCode===13)fearAddBtn&&fearAddBtn.click();};
   el.querySelectorAll('[data-fearface]').forEach(function(btn){btn.onclick=function(){
     var i=parseInt(this.dataset.fearface);
     fearData.fears[i].faced=!fearData.fears[i].faced;
-    fearSave();fearRender();
+    fearSave();if(typeof hap==='function')hap(HAP.save);fearRender();
   };});
   el.querySelectorAll('[data-feardel]').forEach(function(btn){btn.onclick=function(){
     var i=parseInt(this.dataset.feardel);
     fearData.fears.splice(i,1);
-    fearSave();fearRender();
+    fearSave();if(typeof hap==='function')hap(HAP.save);fearRender();
   };});
   var moriSave=document.getElementById('mori-save');
   if(moriSave)moriSave.onclick=function(){
@@ -4420,7 +4421,7 @@ function fearRender(){
     if(!fearData.mori)fearData.mori=[];
     fearData.mori.push({date:new Date().toISOString().slice(0,10),answer:inp.value.trim(),prompt:prompt,ts:Date.now()});
     if(fearData.mori.length>200)fearData.mori=fearData.mori.slice(-200);
-    fearSave();fearRender();
+    fearSave();if(typeof hap==='function')hap(HAP.save);fearRender();
   };
 }
 
@@ -4877,20 +4878,20 @@ function peopleRender(){
   });
   el.innerHTML=h;
   var addBtn=document.getElementById('people-add-btn');
-  if(addBtn)addBtn.onclick=function(){window._peopleAdding=true;peopleRender();setTimeout(function(){var n=document.getElementById('people-name');if(n)n.focus();},50);};
+  if(addBtn)addBtn.onclick=function(){window._peopleAdding=true;if(typeof hap==='function')hap(HAP.save);peopleRender();setTimeout(function(){var n=document.getElementById('people-name');if(n)n.focus();},50);};
   var cancelBtn=document.getElementById('people-cancel');
-  if(cancelBtn)cancelBtn.onclick=function(){window._peopleAdding=false;peopleRender();};
+  if(cancelBtn)cancelBtn.onclick=function(){window._peopleAdding=false;if(typeof hap==='function')hap(HAP.save);peopleRender();};
   var saveBtn=document.getElementById('people-save');
   if(saveBtn)saveBtn.onclick=function(){
     var name=document.getElementById('people-name');var admire=document.getElementById('people-admire');var behavior=document.getElementById('people-behavior');
     if(!name||!name.value.trim())return;
     peopleData.push({name:name.value.trim(),admire:admire?admire.value.trim():'',behavior:behavior?behavior.value.trim():'',ts:Date.now()});
-    peopleSave();window._peopleAdding=false;peopleRender();
+    peopleSave();window._peopleAdding=false;if(typeof hap==='function')hap(HAP.save);peopleRender();
     if(typeof showToast==='function')showToast('Added');
   };
-  el.querySelectorAll('[data-peopleexpand]').forEach(function(btn){btn.onclick=function(){var i=parseInt(this.dataset.peopleexpand);window['_peopleOpen_'+i]=!window['_peopleOpen_'+i];peopleRender();};});
-  el.querySelectorAll('[data-peopledel]').forEach(function(btn){btn.onclick=function(){var i=parseInt(this.dataset.peopledel);if(!confirm('Remove?'))return;peopleData.splice(i,1);peopleSave();peopleRender();};});
-  el.querySelectorAll('[data-peopleedit]').forEach(function(btn){btn.onclick=function(){var i=parseInt(this.dataset.peopleedit);var p=peopleData[i];var n=prompt('Name:',p.name);if(n===null)return;var a=prompt('What do you admire?',p.admire);if(a===null)return;var b=prompt('How do you apply it?',p.behavior);if(b===null)return;p.name=n.trim()||p.name;p.admire=a.trim();p.behavior=b.trim();peopleSave();peopleRender();};});
+  el.querySelectorAll('[data-peopleexpand]').forEach(function(btn){btn.onclick=function(){var i=parseInt(this.dataset.peopleexpand);window['_peopleOpen_'+i]=!window['_peopleOpen_'+i];if(typeof hap==='function')hap(HAP.save);peopleRender();};});
+  el.querySelectorAll('[data-peopledel]').forEach(function(btn){btn.onclick=function(){var i=parseInt(this.dataset.peopledel);if(!confirm('Remove?'))return;peopleData.splice(i,1);peopleSave();if(typeof hap==='function')hap(HAP.save);peopleRender();};});
+  el.querySelectorAll('[data-peopleedit]').forEach(function(btn){btn.onclick=function(){var i=parseInt(this.dataset.peopleedit);var p=peopleData[i];var n=prompt('Name:',p.name);if(n===null)return;var a=prompt('What do you admire?',p.admire);if(a===null)return;var b=prompt('How do you apply it?',p.behavior);if(b===null)return;p.name=n.trim()||p.name;p.admire=a.trim();p.behavior=b.trim();peopleSave();if(typeof hap==='function')hap(HAP.save);peopleRender();};});
 }
 setTimeout(function(){peopleRender();},800);
 
@@ -5707,6 +5708,9 @@ function arEnsureState(){
     });
     // Shuffle
     for(var i=newCards.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=newCards[i];newCards[i]=newCards[j];newCards[j]=t;}
+    // Shuffle both queues so verses aren't chronological
+    reviewCards.sort(function(){return Math.random()-0.5;});
+    newCards.sort(function(){return Math.random()-0.5;});
     arState.todayQueue=[].concat(reviewCards, newCards.slice(0,5));
     arState.todayIdx=0;
   }
