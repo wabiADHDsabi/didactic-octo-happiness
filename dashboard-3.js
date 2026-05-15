@@ -1577,6 +1577,16 @@ function qcAnswer(isCorrect,cardId,clickedBtn){
       res.innerHTML='<div class="qc-result" style="color:'+qcResCol+'">'+qcResMsg+' <button onclick="qcNext()" style="margin-left:10px;padding:4px 14px;background:transparent;border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:11px;cursor:pointer">NEXT</button></div>';
     }
     if(isCorrect)confetti(window.innerWidth/2,200,'#00ff88');
+    // Show surah order infographic for order cards
+    if(typeof qcOrderInfographic==='function'){
+      var _infoHtml=qcOrderInfographic(cardId);
+      if(_infoHtml){
+        var _infoDiv=document.createElement('div');
+        _infoDiv.innerHTML=_infoHtml;
+        var _resEl=document.getElementById('qc-result');
+        if(_resEl)_resEl.appendChild(_infoDiv);
+      }
+    }
   }
 }
 
