@@ -1077,28 +1077,27 @@ function qnavRender(){
     };
   });
 
-  // Staggered entrance animation
+  // Entrance animation — always on page load, cooldown only if no refresh
   var _QNAV_COOLDOWN=11*60*1000;
   var _qnavLastAnim=parseInt(localStorage.getItem('qnav_last_anim')||'0',10);
-  if((Date.now()-_qnavLastAnim)>=_QNAV_COOLDOWN){
+  var _qnavIsRefresh=!!(window.performance&&window.performance.navigation&&window.performance.navigation.type===1)||
+    !!(window.performance&&window.performance.getEntriesByType&&window.performance.getEntriesByType('navigation')[0]&&window.performance.getEntriesByType('navigation')[0].type==='reload');
+  var _shouldAnim=_qnavIsRefresh||(Date.now()-_qnavLastAnim)>=_QNAV_COOLDOWN;
+  if(_shouldAnim){
     var _qnavObserver=new IntersectionObserver(function(entries,obs){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          var _now2=Date.now(),_last2=parseInt(localStorage.getItem('qnav_last_anim')||'0',10);
-          if((_now2-_last2)<_QNAV_COOLDOWN){obs.disconnect();return;}
-          localStorage.setItem('qnav_last_anim',String(_now2));
+          localStorage.setItem('qnav_last_anim',String(Date.now()));
           obs.disconnect();
           var btns=Array.from(el.querySelectorAll('.qnav-btn'));
-          // Shuffle order so buttons pop randomly
           var indices=btns.map(function(_,i){return i;}).sort(function(){return Math.random()-0.5;});
           btns.forEach(function(btn){
             btn.style.opacity='0';
             btn.style.transform='scale(0.88)';
             btn.style.transition='none';
           });
-          indices.forEach(function(idx,order){
+          indices.forEach(function(idx){
             var btn=btns[idx];
-            // Random delay within a 280ms window (33% faster than 420ms)
             var delay=Math.random()*280;
             setTimeout(function(){
               btn.style.transition='opacity 0.22s ease, transform 0.22s cubic-bezier(0.34,1.56,0.64,1)';
