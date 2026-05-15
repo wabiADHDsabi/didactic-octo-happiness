@@ -6607,8 +6607,8 @@ var pomoState={
   sessionLog:[],
   interval:null
 };
-// Load day data after definition
-setTimeout(pomoLoadDay,100);
+// Load day data after all scripts load
+window.addEventListener('load',function(){if(typeof pomoLoadDay==='function')pomoLoadDay();});
 
 // Save pomo state when page hides or closes — ensures trail persists
 document.addEventListener('visibilitychange',function(){

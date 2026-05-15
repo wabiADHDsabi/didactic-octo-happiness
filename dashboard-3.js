@@ -1,4 +1,4 @@
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-14 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-15 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -7243,7 +7243,8 @@ function artRender(){
     nextBtn.onclick=artNextFn;
     nextBtn.ontouchend=function(e){e.preventDefault();e.stopPropagation();artNextFn();};
   }
-}tTimeout(function(){artRender();},1200);
+}
+setTimeout(function(){artRender();},1200);
 
 // ── FOCUS MODES ──
 var FOCUS_MODES = [
