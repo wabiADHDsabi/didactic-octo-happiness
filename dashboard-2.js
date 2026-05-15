@@ -1,4 +1,4 @@
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-14 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-15 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -4480,32 +4480,42 @@ function mlRenderLog(){
   });
   h+='</div>';
   h+='</div>';
-  // Tags
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">WHAT&apos;S PRESENT? <span style="opacity:.5">(tap a category to expand)</span></div>';
-  h+='<div style="margin-bottom:12px">';
+  // Tags — section grid then flat adjective pool
+  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">WHAT\'S PRESENT?</div>';
+  // Section buttons grid
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px">';
   ML_TAG_CATS.forEach(function(cat){
     var expanded=!!mlCatExpanded[cat.id];
     var selInCat=cat.tags.filter(function(t){return mlSelectedTags.indexOf(t)>=0;}).length;
-    // Category header row
-    h+='<div data-mlcat="'+cat.id+'" style="display:flex;align-items:center;gap:8px;padding:6px 10px;margin-bottom:2px;border:1px solid rgba(255,255,255,'+(expanded?'.12':'.07')+');background:rgba(255,255,255,'+(expanded?'.04':'0')+');cursor:pointer">';
-    h+='<span style="font-size:14px">'+cat.emoji+'</span>';
-    h+='<span style="font-size:11px;color:'+(expanded?'var(--text)':'var(--dim)')+';flex:1">'+cat.label+'</span>';
-    if(selInCat>0)h+='<span style="font-size:9px;padding:1px 6px;background:'+cat.color.replace('0.7','0.25')+';color:var(--text)">'+selInCat+'</span>';
-    h+='<span style="font-size:10px;color:var(--dim)">'+( expanded?'▴':'▾')+'</span>';
+    var borderCol=expanded?cat.color.replace('0.7','0.8'):'rgba(255,255,255,.1)';
+    var bgCol=expanded?cat.color.replace('0.7','0.12'):'transparent';
+    var textCol=expanded?'var(--text)':'var(--dim)';
+    h+='<div data-mlcat="'+cat.id+'" style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid '+borderCol+';background:'+bgCol+';cursor:pointer;user-select:none">';
+    h+='<span style="font-size:16px">'+cat.emoji+'</span>';
+    h+='<div style="flex:1;min-width:0">';
+    h+='<div style="font-size:10px;color:'+textCol+';line-height:1.3">'+cat.label+'</div>';
+    if(selInCat>0)h+='<div style="font-size:9px;color:'+cat.color.replace('0.7','0.9')+'">'+selInCat+' selected</div>';
     h+='</div>';
-    if(expanded){
-      h+='<div style="display:flex;flex-wrap:wrap;gap:3px;padding:8px 10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-top:none;margin-bottom:4px">';
-      cat.tags.forEach(function(tag){
-        var sel=mlSelectedTags.indexOf(tag)>=0;
-        var borderCol=sel?cat.color:'rgba(255,255,255,.1)';
-        var bgCol=sel?cat.color.replace('0.7','0.2'):'transparent';
-        var textCol=sel?'var(--text)':'rgba(255,255,255,.45)';
-        h+='<span data-tag="'+tag+'" onclick="mlToggleTag(this.dataset.tag)" style="font-size:10px;padding:3px 9px;border:1px solid '+borderCol+';background:'+bgCol+';color:'+textCol+';cursor:pointer;transition:all .15s">'+tag+'</span>';
-      });
-      h+='</div>';
-    }
+    h+='</div>';
   });
   h+='</div>';
+  // Flat adjective pool from active sections
+  var activeCats=ML_TAG_CATS.filter(function(c){return !!mlCatExpanded[c.id];});
+  if(activeCats.length){
+    h+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;padding:10px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02)">';
+    activeCats.forEach(function(cat){
+      cat.tags.forEach(function(tag){
+        var sel=mlSelectedTags.indexOf(tag)>=0;
+        var borderCol=sel?cat.color.replace('0.7','0.8'):'rgba(255,255,255,.1)';
+        var bgCol=sel?cat.color.replace('0.7','0.2'):'transparent';
+        var textCol=sel?'var(--text)':'rgba(255,255,255,.45)';
+        h+='<span data-tag="'+tag+'" style="font-size:10px;padding:4px 10px;border:1px solid '+borderCol+';background:'+bgCol+';color:'+textCol+';cursor:pointer">'+tag+'</span>';
+      });
+    });
+    h+='</div>';
+  } else {
+    h+='<div style="margin-bottom:12px"></div>';
+  }
   // Note
   h+='<textarea class="wr-inp" id="ml-note" placeholder="Write anything... or nothing. You don&apos;t have to explain yourself." style="min-height:72px;font-size:12px"></textarea>';
   // Affirmation if low mood selected
