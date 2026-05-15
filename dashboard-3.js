@@ -1334,6 +1334,60 @@ function qcRenderLearn(){
   };
 }
 
+var QC_SURAH_MAP={
+  78:'An-Naba',79:"An-Nazi'at",80:'Abasa',81:'At-Takwir',82:'Al-Infitar',
+  83:'Al-Mutaffifin',84:'Al-Inshiqaq',85:'Al-Buruj',86:'At-Tariq',87:'Al-Ala',
+  88:'Al-Ghashiyah',89:'Al-Fajr',90:'Al-Balad',91:'Ash-Shams',92:'Al-Layl',
+  93:'Ad-Duha',94:'Ash-Sharh',95:'At-Tin',96:'Al-Alaq',97:'Al-Qadr',
+  98:'Al-Bayyinah',99:'Az-Zalzalah',100:"Al-Adiyat",101:"Al-Qari'ah",
+  102:'At-Takathur',103:'Al-Asr',104:'Al-Humazah',105:'Al-Fil',
+  106:'Quraysh',107:"Al-Ma'un",108:'Al-Kawthar',109:'Al-Kafirun',
+  110:'An-Nasr',111:'Al-Masad',112:'Al-Ikhlas',113:'Al-Falaq',114:'An-Nas'
+};
+
+function qcOrderInfographic(cardId){
+  // Parse surah number and direction from card id
+  // ordn_78 = after surah 78, ord_79 = before surah 79
+  var isAfter = cardId.indexOf('ordn_')===0;
+  var isBefore = cardId.indexOf('ord_')===0 && cardId.indexOf('ordn_')!==0;
+  if(!isAfter && !isBefore) return '';
+  var num = parseInt(cardId.replace('ordn_','').replace('ord_',''));
+  if(isNaN(num)) return '';
+
+  // Build sequence: show current surah + 2 before + 2 after (when possible)
+  var center = num;
+  var sequence = [];
+  for(var n=Math.max(78,center-2);n<=Math.min(114,center+2);n++){
+    sequence.push(n);
+  }
+
+  var h='<div style="margin-top:12px;overflow-x:auto">';
+  h+='<div style="display:flex;align-items:center;gap:0;min-width:max-content;padding:4px 0">';
+
+  sequence.forEach(function(n,i){
+    var name = QC_SURAH_MAP[n]||('S'+n);
+    var isCurrent = n===center;
+    var borderCol = isCurrent?'rgba(0,229,255,.6)':'rgba(255,255,255,.12)';
+    var bgCol = isCurrent?'rgba(0,229,255,.1)':'rgba(255,255,255,.03)';
+    var textCol = isCurrent?'var(--cc)':'var(--dim)';
+    var numCol = isCurrent?'var(--cc)':'rgba(255,255,255,.3)';
+
+    // Surah box
+    h+='<div style="display:flex;flex-direction:column;align-items:center;padding:8px 10px;border:1px solid '+borderCol+';background:'+bgCol+';min-width:72px;text-align:center">';
+    h+='<div style="font-size:9px;color:'+numCol+';font-family:monospace;margin-bottom:3px">'+n+'</div>';
+    h+='<div style="font-size:10px;color:'+textCol+';line-height:1.3;max-width:70px">'+name+'</div>';
+    h+='</div>';
+
+    // Arrow between boxes (not after last)
+    if(i < sequence.length-1){
+      h+='<div style="font-size:14px;color:rgba(255,255,255,.2);padding:0 2px">›</div>';
+    }
+  });
+
+  h+='</div></div>';
+  return h;
+}
+
 function qcRenderStudy(){
   var el=document.getElementById('qc-panel-study');
   if(!el)return;
@@ -1440,6 +1494,12 @@ function qcRenderStudy(){
       _skipNext.onclick=_doNext;
       _skipNext.ontouchend=function(e){e.preventDefault();_doNext();};
       skipBtn.parentNode.insertBefore(_skipNext,skipBtn.nextSibling);
+      // Show order infographic for Surah Order cards
+      if(card.cat==='Surah Order'&&typeof qcOrderInfographic==='function'){
+        var _info=document.createElement('div');
+        _info.innerHTML=qcOrderInfographic(card.id);
+        _skipNext.parentNode.insertBefore(_info,_skipNext.nextSibling);
+      }
       qcSave();
     };
     skipBtn.ontouchend=function(e){
