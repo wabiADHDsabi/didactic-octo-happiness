@@ -571,6 +571,7 @@ function _gbSound(notes,wave){
   }catch(e){}
 }
 function pomoBeep(){
+  if(typeof hap==='function')hap(HAP.pomoWork);
   // Fireworks sound: 2 seconds of staggered pops, whistles, and crackle bursts
   try{
     var ctx=_getAudioCtx();
@@ -656,6 +657,7 @@ function pomoSoundStart(){_gbSound([[392,0,0.06],[523,0.07,0.12]],'square');}
 function pomoSoundReset(){_gbSound([[523,0,0.05],[392,0.06,0.05],[294,0.12,0.1]],'square');}
 
 function pomoBreakBeep(){
+  if(typeof hap==='function')hap(HAP.pomoBreak);
   // Calm, gentle chime for break completion — 3 soft bell tones descending
   try{
     var ctx=_getAudioCtx();
@@ -735,6 +737,7 @@ function pomoStartStop(){
 }
 
 function pomoReset(){
+  if(typeof hap==='function')hap(HAP.soft);
   clearInterval(pomoState.interval);
   pomoState.running=false;
   if(window.pomoNoiseStop)window.pomoNoiseStop();

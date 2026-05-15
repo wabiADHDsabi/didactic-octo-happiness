@@ -4199,6 +4199,7 @@ function ptSave(){localStorage.setItem('pt_data',JSON.stringify(ptData));}
 function ptTodayKey(){return localDateStr();}
 
 function ptSetStatus(dateKey,prayer,status,evt){
+  if(typeof hap==='function')hap(status==='prayed'?HAP.check:status==='missed'?HAP.error:HAP.soft);
   if(!ptData[dateKey])ptData[dateKey]={};
   if(ptData[dateKey][prayer]===status){
     delete ptData[dateKey][prayer];
@@ -4240,6 +4241,7 @@ function ptDayBalance(dateKey){
 }
 
 function ptAddExtra(dateKey,delta){
+  if(typeof hap==='function')hap(delta>0?HAP.goal:HAP.soft);
   if(!ptData[dateKey])ptData[dateKey]={};
   var cur=ptData[dateKey]._extra||0;
   var next=Math.max(0,cur+delta);
@@ -4268,6 +4270,7 @@ var _ptOrder=['today','log','balance','focus'];
 var _ptPanels={today:'pt-today',log:'pt-log',balance:'pt-balance-panel',focus:'pt-focus-panel'};
 var _ptTabEls={today:'pt-tab-today',log:'pt-tab-log',balance:'pt-tab-balance',focus:'pt-tab-focus'};
 function ptSwitchTab(tab){
+  if(typeof hap==='function')hap(HAP.tap);
   var prev=_ptTabPrev;
   ptTab=tab;_ptTabPrev=tab;
   _ptOrder.forEach(function(t){
@@ -4289,6 +4292,7 @@ function ptStatusClass(s){
 }
 
 function ptNavDay(offset){
+  if(typeof hap==='function')hap(HAP.tap);
   var d=new Date(ptViewDate+'T12:00:00');
   d.setDate(d.getDate()+offset);
   ptViewDate=localDateStr(d);
@@ -6225,6 +6229,8 @@ function sbShowModal(){
   modal.onclick=function(e){if(e.target===modal)sbHideModal();};
   // Soft pull cloud metadata if last sync was >1hr ago
   sbMaybeFetchCloudStatus();
+  sbFetchCloudSyncLog();
+  renderSyncLog();
 }
 
 function sbHideModal(){
@@ -6283,6 +6289,29 @@ function saveSyncLog(action,device,ts){
   localStorage.setItem('dash_sync_log_all',JSON.stringify(allLog));
   renderSyncLog();
 }
+async function sbFetchCloudSyncLog(){
+  var cfg=sbGetConfig();
+  if(!cfg.url||!cfg.key||!cfg.account)return;
+  try{
+    var base=cfg.url.replace(/\/+$/,'');
+    var endpoint=base+'/rest/v1/dashboard_data?account=eq.'+encodeURIComponent(cfg.account)+'&select=payload->>syncLogAll&limit=1';
+    var res=await fetch(endpoint,{headers:{'apikey':cfg.key,'Authorization':'Bearer '+cfg.key}});
+    if(!res.ok)return;
+    var rows=await res.json();
+    if(!rows||!rows[0])return;
+    var cloudLog=rows[0].syncLogAll;
+    if(typeof cloudLog==='string')cloudLog=JSON.parse(cloudLog);
+    if(!Array.isArray(cloudLog))return;
+    // Merge with local
+    var localLog=JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]');
+    var map={};
+    localLog.concat(cloudLog).forEach(function(e){if(e&&e.ts&&e.device)map[e.device+'_'+e.ts]=e;});
+    var merged=Object.values(map).sort(function(a,b){return b.ts>a.ts?1:-1;}).slice(0,20);
+    localStorage.setItem('dash_sync_log_all',JSON.stringify(merged));
+    renderSyncLog();
+  }catch(e){console.warn('sbFetchCloudSyncLog failed',e);}
+}
+
 function renderSyncLog(){
   var el=document.getElementById('sb-sync-history');
   if(!el)return;

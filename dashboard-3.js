@@ -7014,8 +7014,11 @@ function vsRender(){
   var markBtn=el.querySelector('[data-vsmark]');
   if(markBtn){
     markBtn.onclick=function(){
-      vsMarkStudied(this.dataset.vsmark);
+      var t=this.dataset.vsmark;
+      vsMarkStudied(t);
       vsState._revealed=null;
+      if(t==='new')vsState.todayNewDone=(vsState.todayNewDone||0)+1;
+      else if(t==='review')vsState.todayReviewDone=(vsState.todayReviewDone||0)+1;
       if(typeof hap==='function')hap(HAP.check);
       vsSave();vsRender();
     };
@@ -7241,8 +7244,11 @@ function artRender(){
 
   var markBtn=el.querySelector('[data-artmark]');
   if(markBtn)markBtn.onclick=function(){
-    artMarkStudied(this.dataset.artmark);
+    var t=this.dataset.artmark;
+    artMarkStudied(t);
     artState._revealed=null;
+    if(t==='new')artState.todayNewDone=(artState.todayNewDone||0)+1;
+    else if(t==='review')artState.todayReviewDone=(artState.todayReviewDone||0)+1;
     if(typeof hap==='function')hap(HAP.check);
     artSave();artRender();
   };
