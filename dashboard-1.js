@@ -4443,10 +4443,10 @@ function ptRenderTodayLegacy(){
     h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">'
       +'<span style="font-size:var(--t-base);letter-spacing:2px;width:58px;flex-shrink:0;color:'+(isActive?'var(--ca)':'var(--dim)')+(isActive?';text-shadow:var(--ga)':'')+'">'
       +p.toUpperCase()+'</span>'
-      +'<div style="display:flex;gap:5px;flex:1">'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'ontime\',event)" style="flex:1;padding:9px 0;border:1px solid '+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.2)')+';background:'+(s==='ontime'?'var(--c-ok-dim)':'transparent')+';color:'+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.4)')+';font-size:var(--t-body);cursor:pointer;border-radius:3px">&#10003;</button>'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'late\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='late'?'var(--ca)':'var(--c-gold-dim)')+';background:'+(s==='late'?'rgba(255,204,0,.15)':'transparent')+';color:'+(s==='late'?'var(--ca)':'rgba(255,204,0,.4)')+';font-size:var(--t-sm);letter-spacing:1px;cursor:pointer;border-radius:3px">LATE</button>'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'missed\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='missed'?'var(--cr)':'rgba(255,68,68,.2)')+';background:'+(s==='missed'?'rgba(255,68,68,.15)':'transparent')+';color:'+(s==='missed'?'var(--cr)':'rgba(255,68,68,.4)')+';font-size:var(--t-body);cursor:pointer;border-radius:3px">&#10005;</button>'
+      +'<div style="display:flex;gap:4px;flex:1">'
+      +'<button data-pt-status="ontime" data-pt-date="'+ptViewDate+'" data-pt-prayer="'+p+'" class="pt-sp-btn" style="flex:1;padding:'+(s==="ontime"?'12px':'8px')+' 0;border:1px solid '+(s==="ontime"?'var(--cg)':'rgba(0,255,136,.12)')+';background:'+(s==="ontime"?'rgba(0,255,136,.2)':'transparent')+';color:'+(s==="ontime"?'var(--cg)':'rgba(0,255,136,.18)')+';font-size:'+(s==="ontime"?'var(--t-title)':'var(--t-md)')+';font-weight:bold;cursor:pointer;border-radius:3px;transition:all .12s">✓</button>'
+      +'<button data-pt-status="late" data-pt-date="'+ptViewDate+'" data-pt-prayer="'+p+'" class="pt-sp-btn" style="flex:1;padding:'+(s==="late"?'12px':'8px')+' 0;border:1px solid '+(s==="late"?'var(--ca)':'rgba(255,204,0,.1)')+';background:'+(s==="late"?'rgba(255,204,0,.2)':'transparent')+';color:'+(s==="late"?'var(--ca)':'rgba(255,204,0,.15)')+';font-size:'+(s==="late"?'var(--t-base)':'var(--t-xs)')+';font-weight:bold;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:all .12s">LATE</button>'
+      +'<button data-pt-status="missed" data-pt-date="'+ptViewDate+'" data-pt-prayer="'+p+'" class="pt-sp-btn" style="flex:1;padding:'+(s==="missed"?'12px':'8px')+' 0;border:1px solid '+(s==="missed"?'var(--cr)':'rgba(255,68,68,.1)')+';background:'+(s==="missed"?'rgba(255,68,68,.2)':'transparent')+';color:'+(s==="missed"?'var(--cr)':'rgba(255,68,68,.15)')+';font-size:'+(s==="missed"?'var(--t-title)':'var(--t-md)')+';font-weight:bold;cursor:pointer;border-radius:3px;transition:all .12s">✗</button>'
       +'</div>'
       +'</div>';
   });
@@ -4723,6 +4723,15 @@ function ptRenderToday(){
   h+='</div>';
   // ── Forbidden prayer times rendered in prayer tile ──
   if(isToday&&prayers)renderForbiddenTimes();  el.innerHTML=h;
+  // Wire prayer status buttons
+  el.querySelectorAll('[data-pt-status]').forEach(function(btn){
+    btn.onclick=function(){
+      var status=this.dataset.ptStatus;
+      var dateKey=this.dataset.ptDate;
+      var prayer=this.dataset.ptPrayer;
+      ptSetStatus(dateKey,prayer,status,{target:this});
+    };
+  });
 }
 
 var ptCollapsed={};
