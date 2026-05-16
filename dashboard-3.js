@@ -1384,6 +1384,52 @@ function qcOrderInfographic(cardId){
   return h;
 }
 
+var QC_JUZ_MAP={1:{ss:"Al-Fatihah",sr:"1:1",es:"Al-Baqarah",er:"2:141"},2:{ss:"Al-Baqarah",sr:"2:142",es:"Al-Baqarah",er:"2:252"},3:{ss:"Al-Baqarah",sr:"2:253",es:"Al-Imran",er:"3:92"},4:{ss:"Al-Imran",sr:"3:93",es:"An-Nisa",er:"4:23"},5:{ss:"An-Nisa",sr:"4:24",es:"An-Nisa",er:"4:147"},6:{ss:"An-Nisa",sr:"4:148",es:"Al-Ma'idah",er:"5:81"},7:{ss:"Al-Ma'idah",sr:"5:82",es:"Al-An'am",er:"6:110"},8:{ss:"Al-An'am",sr:"6:111",es:"Al-A'raf",er:"7:87"},9:{ss:"Al-A'raf",sr:"7:88",es:"Al-Anfal",er:"8:40"},10:{ss:"Al-Anfal",sr:"8:41",es:"At-Tawbah",er:"9:92"},11:{ss:"At-Tawbah",sr:"9:93",es:"Hud",er:"11:5"},12:{ss:"Hud",sr:"11:6",es:"Yusuf",er:"12:52"},13:{ss:"Yusuf",sr:"12:53",es:"Ibrahim",er:"14:52"},14:{ss:"Al-Hijr",sr:"15:1",es:"An-Nahl",er:"16:128"},15:{ss:"Al-Isra",sr:"17:1",es:"Al-Kahf",er:"18:74"},16:{ss:"Al-Kahf",sr:"18:75",es:"Ta-Ha",er:"20:135"},17:{ss:"Al-Anbiya",sr:"21:1",es:"Al-Hajj",er:"22:78"},18:{ss:"Al-Mu'minun",sr:"23:1",es:"Al-Furqan",er:"25:20"},19:{ss:"Al-Furqan",sr:"25:21",es:"An-Naml",er:"27:55"},20:{ss:"An-Naml",sr:"27:56",es:"Al-Ankabut",er:"29:45"},21:{ss:"Al-Ankabut",sr:"29:46",es:"Al-Ahzab",er:"33:30"},22:{ss:"Al-Ahzab",sr:"33:31",es:"Ya-Sin",er:"36:27"},23:{ss:"Ya-Sin",sr:"36:28",es:"Az-Zumar",er:"39:31"},24:{ss:"Az-Zumar",sr:"39:32",es:"Fussilat",er:"41:46"},25:{ss:"Fussilat",sr:"41:47",es:"Al-Jathiyah",er:"45:37"},26:{ss:"Al-Ahqaf",sr:"46:1",es:"Az-Zariyat",er:"51:30"},27:{ss:"Az-Zariyat",sr:"51:31",es:"Al-Hadid",er:"57:29"},28:{ss:"Al-Mujadila",sr:"58:1",es:"At-Tahrim",er:"66:12"},29:{ss:"Al-Mulk",sr:"67:1",es:"Al-Mursalat",er:"77:50"},30:{ss:"An-Naba",sr:"78:1",es:"An-Nas",er:"114:6"},};
+
+function qcJuzInfographic(cardId){
+  var m=cardId.match(/^juz(?:r)?_(\d+)$/);
+  if(!m)return '';
+  var num=parseInt(m[1]);
+  if(isNaN(num)||num<1||num>30)return '';
+  var start=Math.max(1,num-2);
+  var end=Math.min(30,num+2);
+
+  var h='<div style="margin-top:12px">';
+  h+='<div class="dim-9-ls" style="margin-bottom:6px">JUZ SEQUENCE</div>';
+  h+='<div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:4px">';
+
+  for(var n=start;n<=end;n++){
+    var isCurrent=n===num;
+    var d=QC_JUZ_MAP[n]||{ss:'',sr:'',es:'',er:''};
+    var borderCol=isCurrent?'rgba(0,229,255,.6)':'rgba(255,255,255,.1)';
+    var bgCol=isCurrent?'rgba(0,229,255,.08)':'rgba(255,255,255,.02)';
+    var numCol=isCurrent?'var(--cc)':'var(--dim)';
+    var metaCol=isCurrent?'rgba(0,229,255,.5)':'rgba(255,255,255,.2)';
+
+    h+='<div style="display:flex;flex-direction:column;align-items:center;border:1px solid '+borderCol+';background:'+bgCol+';min-width:80px;max-width:100px">';
+    // Start ref above
+    h+='<div style="font-size:7px;color:'+metaCol+';padding:4px 6px 2px;text-align:center;line-height:1.3;border-bottom:1px solid '+borderCol+'">';
+    h+=d.ss+'<br>'+d.sr;
+    h+='</div>';
+    // Juz number center
+    h+='<div style="padding:6px 10px;text-align:center">';
+    h+='<div style="font-size:9px;color:'+metaCol+';letter-spacing:1px">JUZ</div>';
+    h+='<div style="font-size:22px;font-family:monospace;color:'+numCol+';line-height:1;font-weight:'+(isCurrent?'bold':'normal')+'">'+n+'</div>';
+    h+='</div>';
+    // End ref below
+    h+='<div style="font-size:7px;color:'+metaCol+';padding:2px 6px 4px;text-align:center;line-height:1.3;border-top:1px solid '+borderCol+'">';
+    h+=d.es+'<br>'+d.er;
+    h+='</div>';
+    h+='</div>';
+
+    if(n<end){
+      h+='<div style="font-size:16px;color:rgba(255,255,255,.2);padding:0 2px;flex-shrink:0">→</div>';
+    }
+  }
+  h+='</div></div>';
+  return h;
+}
+
 function qcRenderStudy(){
   var el=document.getElementById('qc-panel-study');
   if(!el)return;
@@ -1573,15 +1619,15 @@ function qcAnswer(isCorrect,cardId,clickedBtn){
       res.innerHTML='<div class="qc-result" style="color:'+qcResCol+'">'+qcResMsg+' <button onclick="qcNext()" style="margin-left:10px;padding:4px 14px;background:transparent;border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:11px;cursor:pointer">NEXT</button></div>';
     }
     if(isCorrect)confetti(window.innerWidth/2,200,'#00ff88');
-    // Show surah order infographic for order cards
-    if(typeof qcOrderInfographic==='function'){
-      var _infoHtml=qcOrderInfographic(cardId);
-      if(_infoHtml){
-        var _infoDiv=document.createElement('div');
-        _infoDiv.innerHTML=_infoHtml;
-        var _resEl=document.getElementById('qc-result');
-        if(_resEl)_resEl.appendChild(_infoDiv);
-      }
+    // Show infographic for order and juz location cards
+    var _infoHtml='';
+    if(typeof qcOrderInfographic==='function')_infoHtml=qcOrderInfographic(cardId);
+    if(!_infoHtml&&typeof qcJuzInfographic==='function')_infoHtml=qcJuzInfographic(cardId);
+    if(_infoHtml){
+      var _infoDiv=document.createElement('div');
+      _infoDiv.innerHTML=_infoHtml;
+      var _resEl=document.getElementById('qc-result');
+      if(_resEl)_resEl.appendChild(_infoDiv);
     }
   }
 }
@@ -3828,14 +3874,22 @@ function wallRender(){
     } else {
       // Show oldest first so grid fills bottom→top visually (grid scaleY(-1))
       var display=bricks.slice(-50);
-      // Chunk bricks into rows of 5, wrap in flex column-reverse outer
+      // Chunk bricks into rows by column width (max 10 cols per row)
       h+='<div class="wall-outer" id="wall-outer">';
-      var totalRows=Math.ceil(display.length/5);
-      for(var ri=0;ri<display.length;ri+=5){
-        var rowIdx=Math.floor(ri/5);
+      var wallRows=[];
+      var curRow=[];var curCols=0;
+      display.forEach(function(b){
+        var llen=(b.label||'').length;
+        var bCols=b.type==='eval'?2:(llen<=20?2:llen<=36?3:4);
+        if(curCols+bCols>10&&curRow.length>0){wallRows.push(curRow);curRow=[];curCols=0;}
+        curRow.push(b);curCols+=bCols;
+      });
+      if(curRow.length)wallRows.push(curRow);
+      for(var ri=0;ri<wallRows.length;ri++){
+        var rowIdx=ri;
         var isOdd=rowIdx%2===1;
-        var row=display.slice(ri,ri+5);
-        h+='<div class="wall-grid'+(isOdd?' row-odd':'')+'">';
+        var row=wallRows[ri];
+        h+='<div class="wall-grid'+(isOdd?' row-odd':'')+"'>";
         row.forEach(function(b){
           if(b.type==='eval'){
             var evalCol=b.answer==='real'?'var(--cg)':'var(--cc)';
@@ -5362,11 +5416,25 @@ function qwRenderStudy(){
       var _qwFontCss=DUA_ARABIC_FONTS.find(function(f){{return f.key===_qwFont;}})||(DUA_ARABIC_FONTS[0]);
       var _qwQStyle="font-size:19px;color:var(--text);line-height:1.5;margin-bottom:14px;padding:12px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.12);text-align:center;";
       if(_qwHasAr)_qwQStyle+="font-family:"+_qwFontCss.css+";direction:rtl;font-size:26px;";
-      h+='<div id="qw-question" style="'+_qwQStyle+'">'+card.q+'</div>';
+      h+='<div id="qw-question" style="'+_qwQStyle+'">'+card.q.replace(/^['‘’“”"\u0022]+|['‘’“”"\u0022?\u061f]+$/g,'').trim()+'</div>';
       h+='<div id="qw-choices" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
-      // Shuffle options
+      // For verb cards, add 2 extra wrong answers from other verb cards
       var opts=[card.a].concat(card.wrong||[]);
+      var isVerbCard=card.cat&&card.cat.indexOf('Verb')===0;
+      if(isVerbCard&&typeof QW_CARDS!=='undefined'&&QW_CARDS.length>0){
+        var extraPool=QW_CARDS.filter(function(c){
+          return c.cat&&c.cat.indexOf('Verb')===0&&opts.indexOf(c.a)<0&&c.id!==card.id;
+        });
+        extraPool.sort(function(){return Math.random()-0.5;});
+        for(var ei=0;ei<extraPool.length&&opts.length<6;ei++){
+          if(opts.indexOf(extraPool[ei].a)<0)opts.push(extraPool[ei].a);
+        }
+      }
+      // Shuffle
       for(var oi=opts.length-1;oi>0;oi--){var oj=Math.floor(Math.random()*(oi+1));var ot=opts[oi];opts[oi]=opts[oj];opts[oj]=ot;}
+      // Use 3-col grid for 6 options, 2-col for 4
+      var _qwGridCols=opts.length>=6?'1fr 1fr 1fr':'1fr 1fr';
+      h=h.replace('grid-template-columns:1fr 1fr','grid-template-columns:'+_qwGridCols);
       var _qwHasArOpt=/[\u0600-\u06ff]/.test(opts.join(''));
       var _qwOptFontCss2=DUA_ARABIC_FONTS.find(function(f){return f.key===_qwFont;})||(DUA_ARABIC_FONTS[0]);
       opts.forEach(function(opt){

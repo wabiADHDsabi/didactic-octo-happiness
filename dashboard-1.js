@@ -502,11 +502,67 @@ function renderWeather(){
 loadWeather();
 setInterval(loadWeather, 5*60*1000);
 
-var stocks=[
-  {t:'SPY', lb:'S&P 500 ETF',   p:542.18, ch:1.24,  pt:0.23},
-  {t:'DIA', lb:'Dow Jones ETF', p:440.95, ch:-0.82, pt:-0.19},
-  {t:'HLAL',lb:'Wahed Shariah', p:60.47,  ch:0.22,  pt:0.36}
+var STOCK_TICKERS=[
+  {t:'HLAL',  lb:'Wahed Shariah ETF'},
+  {t:'SPUS',  lb:'Halal S&P 500'},
+  {t:'SPRE',  lb:'Halal REIT'},
+  {t:'GLD',   lb:'Gold ETF'},
+  {t:'SUKUK', lb:'Sukuk Bond ETF'}
 ];
+var stocks=STOCK_TICKERS.map(function(s){return {t:s.t,lb:s.lb,p:0,ch:0,pt:0};});
+var _stockLastFetch=parseInt(localStorage.getItem('dash_stock_fetch_ts')||'0');
+var _stockFetchInterval=6*60*60*1000; // 6 hours = 4x daily
+
+async function fetchStockPrice(ticker){
+  try{
+    var url='https://query1.finance.yahoo.com/v8/finance/chart/'+ticker+'?interval=1d&range=2d';
+    var res=await fetch(url);
+    if(!res.ok)return null;
+    var data=await res.json();
+    var result=data.chart&&data.chart.result&&data.chart.result[0];
+    if(!result)return null;
+    var meta=result.meta;
+    var price=meta.regularMarketPrice||0;
+    var prev=meta.chartPreviousClose||meta.previousClose||price;
+    var change=price-prev;
+    var pct=prev?((change/prev)*100):0;
+    return {p:parseFloat(price.toFixed(2)),ch:parseFloat(change.toFixed(2)),pt:parseFloat(pct.toFixed(2))};
+  }catch(e){return null;}
+}
+
+async function fetchAllStocks(force){
+  var now=Date.now();
+  if(!force&&now-_stockLastFetch<_stockFetchInterval)return; // not due yet
+  var cached=lsGet('dash_stock_prices',null);
+  if(!force&&cached&&cached.ts&&(now-cached.ts)<_stockFetchInterval){
+    // Use cached
+    STOCK_TICKERS.forEach(function(s,i){
+      if(cached[s.t])Object.assign(stocks[i],cached[s.t]);
+    });
+    renderStocks();
+    return;
+  }
+  // Fetch all tickers
+  var results={ts:now};
+  for(var i=0;i<STOCK_TICKERS.length;i++){
+    var s=STOCK_TICKERS[i];
+    var data=await fetchStockPrice(s.t);
+    if(data){
+      Object.assign(stocks[i],data);
+      results[s.t]=data;
+    }
+  }
+  lsSet('dash_stock_prices',results);
+  localStorage.setItem('dash_stock_fetch_ts',String(now));
+  _stockLastFetch=now;
+  renderStocks();
+}
+
+// Fetch on load, then every 30 min check if 6h has passed
+window.addEventListener('load',function(){
+  fetchAllStocks(false);
+  setInterval(function(){fetchAllStocks(false);},30*60*1000);
+});
 // Store daily close prices for rolling avg (keyed by YYYY-MM-DD)
 var stockHist=lsGet('stockHist',{});
 function seedStockHistory(){
@@ -571,10 +627,15 @@ function renderStocks(){
       +'</div>'
       +'</div>';
   }
-  document.getElementById('slist').innerHTML='<div style="font-size:9px;color:var(--ca);border:1px solid rgba(255,204,0,.25);padding:5px 8px;margin-bottom:8px;letter-spacing:1px">&#9888; DEMO DATA ONLY</div>'+h;
+  // Last updated time
+  var _lu=parseInt(localStorage.getItem('dash_stock_fetch_ts')||'0');
+  var _luStr=_lu?'Updated '+new Date(_lu).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'Fetching...';
+  var _nextFetch=_lu?Math.max(0,Math.round((_lu+6*60*60*1000-Date.now())/60000)):0;
+  var _nextStr=_nextFetch>0?(' · next in '+_nextFetch+'m'):''
+  h='<div class="dim-9" style="margin-bottom:8px">'+_luStr+_nextStr+'</div>'+h;
+  document.getElementById('slist').innerHTML=h;
 }
 renderStocks();
-setInterval(renderStocks, 60*60*1000);
 
 var SYNC_DEVICE_KEY='dash_sync_device_id';
 function syncNowIso(){return new Date().toISOString();}
@@ -1218,7 +1279,9 @@ function renderTodos(){
         +'<div class="tbox" id="tbox-'+t.id+'">'+(t.done?'&#10003;':'')+'</div>'
         +(function(){
   var ageDays=Math.floor((now-(t.created||t.id))/86400000);
-  var ageStr=ageDays>=1?' <span style="font-size:9px;color:var(--dim);opacity:.7">('+ageDays+' day'+(ageDays===1?'':'s')+' old)</span>':'';
+  var ageCol=ageDays<=0?'':ageDays<=3?'rgba(255,180,80,.65)':ageDays<=7?'rgba(210,110,40,.75)':'rgba(180,70,20,.85)';
+  var ageStr=ageDays>=1?' <span style="font-size:9px;color:'+ageCol+'">('
+  +ageDays+' day'+(ageDays===1?'':'s')+' old)</span>':'';
   return '<span class="ttx" id="ttx-'+t.id+'">'+t.text+ageStr+'</span>';
 }())
         +'<button class="ti-mv" id="tedit-btn-'+t.id+'" title="Edit">&#9998;</button>'

@@ -1258,72 +1258,109 @@ function wwRender(){
   var adj=wwGetAdjacentHolidays(sat,sun);
   var fri=new Date(sat);fri.setDate(sat.getDate()-1);
   var mon=new Date(sun);mon.setDate(sun.getDate()+1);
-
-  // Badge
   var isThisWeekend=wwOffset===0;
   if(badge)badge.textContent=isThisWeekend?'THIS WEEKEND':localDateStr(sat).slice(0,7);
   if(nextBtn)nextBtn.style.opacity=wwOffset>=5?'.25':'1';
   if(nextBtn)nextBtn.style.pointerEvents=wwOffset>=5?'none':'auto';
 
-  // Build columns
-  var cols=[];
-  if(adj.fri)cols.push({date:fri,label:'FRIDAY',holiday:adj.fri});
-  cols.push({date:sat,label:'SATURDAY',holiday:null});
-  cols.push({date:sun,label:'SUNDAY',holiday:null});
-  if(adj.mon)cols.push({date:mon,label:'MONDAY',holiday:adj.mon});
+  // Build days list
+  var days=[];
+  if(adj.fri)days.push({date:fri,label:'FRIDAY',holiday:adj.fri,isMain:false});
+  days.push({date:sat,label:'SATURDAY',holiday:null,isMain:true});
+  days.push({date:sun,label:'SUNDAY',holiday:null,isMain:true});
+  if(adj.mon)days.push({date:mon,label:'MONDAY',holiday:adj.mon,isMain:false});
   var wwColors=wwWeekendColorsForSat(sat);
 
-  var colCount=cols.length;
-  var h='<div class="ww-cols">';
-  cols.forEach(function(col){
-    var k=wwKey(col.date);
+  var mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var h='';
+
+  days.forEach(function(day){
+    var k=wwKey(day.date);
     var entry=wwData[k]||{goal:'',notes:[]};
-    var dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    var mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var canExpand=(col.label==='SATURDAY'||col.label==='SUNDAY');
+    var status=entry.goalStatus||'';
     var edge='rgba(0,229,255,.15)';
-    if(col.label==='SATURDAY')edge=wwColors.sat;
-    if(col.label==='SUNDAY')edge=wwColors.sun;
-    h+='<div class="ww-col" data-ww-key="'+k+'" data-ww-expandable="'+(canExpand?'1':'0')+'" style="border-color:'+edge+';box-shadow:inset 0 0 0 1px '+edge+'22">';
-    h+='<div class="ww-col-header'+(canExpand?' expandable':'')+'"'+(canExpand?' onclick="wwToggleExpand(\''+k+'\',\''+col.label+'\')"':'')+'>';
-    h+='<div><div class="ww-col-day" style="'+(canExpand?'color:'+edge+';text-shadow:0 0 8px '+edge+'66;':'')+'">'+col.label+' <span style="font-size:14px;color:var(--dim)">('+col.date.getDate()+')</span></div></div>';
-    if(canExpand)h+='<span class="ww-expand-pill" style="border-color:'+edge+'66;color:'+edge+'">EXPAND</span>';
+    if(day.label==='SATURDAY')edge=wwColors.sat;
+    if(day.label==='SUNDAY')edge=wwColors.sun;
+
+    var dateStr=mn[day.date.getMonth()]+' '+day.date.getDate();
+
+    h+='<div style="border:1px solid '+edge+';box-shadow:inset 0 0 0 1px '+edge+'22;padding:12px;margin-bottom:10px">';
+
+    // Header row: day name + date + status pills
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
+    h+='<div style="flex:1">';
+    h+='<div style="font-size:13px;font-family:monospace;color:'+edge+';text-shadow:0 0 8px '+edge+'44;letter-spacing:1px">'+day.label+'</div>';
+    h+='<div class="dim-9">'+dateStr+(day.holiday?' · 🎉 '+day.holiday:'')+'</div>';
     h+='</div>';
-    if(col.holiday)h+='<div class="ww-holiday">&#127881; '+col.holiday+'</div>';
-    h+='<div class="ww-label">GOAL</div>';
-    var _gv=(entry.goal||'').replace(/"/g,'&quot;');
-    h+='<input class="ww-goal-inp" id="wwg-'+k+'" value="'+_gv+'" placeholder="Mission for the day..." oninput="wwSaveField(\''+k+'\',\'goal\',this.value)">';
-    var gStatus=entry.goalStatus||'';
-    h+='<div style="display:flex;gap:4px;margin-top:5px">';
-    if(gStatus==='done')h+='<button onclick="wwSetStatus(\''+k+'\',\'done\')" style="flex:1;padding:5px 2px;font-size:10px;border:1px solid var(--cg);color:var(--cg);background:rgba(0,255,136,.12);cursor:pointer;font-family:monospace">✓ Done</button>';
-    else h+='<button onclick="wwSetStatus(\''+k+'\',\'done\')" style="flex:1;padding:5px 2px;font-size:10px;border:1px solid rgba(255,255,255,.12);color:var(--dim);background:transparent;cursor:pointer;font-family:monospace">✓ Done</button>';
-    if(gStatus==='half')h+='<button onclick="wwSetStatus(\''+k+'\',\'half\')" style="flex:1;padding:5px 2px;font-size:10px;border:1px solid var(--ca);color:var(--ca);background:rgba(255,204,0,.1);cursor:pointer;font-family:monospace">~ Half</button>';
-    else h+='<button onclick="wwSetStatus(\''+k+'\',\'half\')" style="flex:1;padding:5px 2px;font-size:10px;border:1px solid rgba(255,255,255,.12);color:var(--dim);background:transparent;cursor:pointer;font-family:monospace">~ Half</button>';
-    if(gStatus==='cancelled')h+='<button onclick="wwSetStatus(\''+k+'\',\'cancelled\')" style="flex:1;padding:5px 2px;font-size:10px;border:1px solid var(--cr);color:var(--cr);background:rgba(255,68,68,.1);cursor:pointer;font-family:monospace">✗ Skip</button>';
-    else h+='<button onclick="wwSetStatus(\''+k+'\',\'cancelled\')" style="flex:1;padding:5px 2px;font-size:10px;border:1px solid rgba(255,255,255,.12);color:var(--dim);background:transparent;cursor:pointer;font-family:monospace">✗ Skip</button>';
-    h+='</div>';
-    h+='<div class="ww-label" style="margin-top:6px">NOTES CHAT</div>';
-    var wnotes=wwNormalizeNotes(entry);
-    h+='<div id="wwnotes-'+k+'" class="ww-chat">';
-    wnotes.forEach(function(n,ni){
-      h+='<div class="ww-chat-row me">';
-      h+='<div class="ww-chat-bubble">';
-      h+='<div>'+n.text+'</div>';
-      h+='<div class="ww-chat-meta"><span>'+(n.ts?new Date(n.ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}):'now')+'</span><span class="ww-chat-del" onclick="wwDeleteNote(\''+k+'\','+ni+')">&#x2715;</span></div>';
-      h+='</div>';
-      h+='</div>';
+    // Status toggle buttons
+    h+='<div style="display:flex;gap:4px">';
+    var statuses=[
+      {v:'missed', label:'✗', col:'rgba(255,68,68,.7)',  bg:'rgba(255,68,68,.12)'},
+      {v:'half',   label:'½', col:'rgba(255,184,108,.8)',bg:'rgba(255,184,108,.1)'},
+      {v:'done',   label:'✓', col:'rgba(0,255,136,.8)', bg:'rgba(0,255,136,.1)'}
+    ];
+    statuses.forEach(function(s){
+      var active=status===s.v;
+      h+='<button data-wwstatus="'+k+'" data-wwval="'+s.v+'" style="width:32px;height:32px;border:1px solid '+(active?s.col:'rgba(255,255,255,.12)')+';background:'+(active?s.bg:'transparent')+';color:'+(active?s.col:'var(--dim)')+';font-size:14px;cursor:pointer;font-family:monospace">'+s.label+'</button>';
     });
     h+='</div>';
-    h+='<div style="display:flex;gap:4px">';
-    h+='<input class="ww-goal-inp" id="wwni-'+k+'" placeholder="Send a note..." onkeydown="if(event.key===\'Enter\')wwAddNote(\''+k+'\')" style="flex:1">';
-    h+='<button onclick="wwAddNote(\''+k+'\')" style="background:transparent;border:1px solid rgba(0,229,255,.3);color:var(--cc);font-size:11px;padding:4px 8px;cursor:pointer">SEND</button>';
     h+='</div>';
+
+    // Goal input
+    h+='<div class="dim-9-ls" style="margin-bottom:4px">GOAL</div>';
+    var gv=(entry.goal||'').replace(/"/g,'&quot;');
+    h+='<input class="ww-goal-inp" id="wwg-'+k+'" value="'+gv+'" placeholder="Mission for the day..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:11px;padding:7px 9px;outline:none;margin-bottom:8px" oninput="wwSaveField(\''+k+'\',\'goal\',this.value)">';
+
+    // Notes
+    h+='<div class="dim-9-ls" style="margin-bottom:4px">NOTES</div>';
+    var notes=entry.notes||[];
+    notes.forEach(function(n,ni){
+      var nv=(n||'').replace(/"/g,'&quot;');
+      h+='<div style="display:flex;gap:6px;margin-bottom:4px">';
+      h+='<input value="'+nv+'" placeholder="Note..." style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--dim);font-family:monospace;font-size:10px;padding:5px 8px;outline:none" oninput="wwSaveNote(\''+k+'\','+ni+',this.value)">';
+      h+='<button data-wwnote-del="'+k+'" data-wwnote-idx="'+ni+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:12px;cursor:pointer">✕</button>';
+      h+='</div>';
+    });
+    h+='<button data-wwnote-add="'+k+'" style="width:100%;padding:5px;background:transparent;border:1px dashed rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">+ ADD NOTE</button>';
+
     h+='</div>';
   });
-  h+='</div>';
+
   el.innerHTML=h;
-  el.setAttribute('data-ww-count',String(colCount));
-  wwApplyExpandLayout();
+
+  // Wire status buttons
+  el.querySelectorAll('[data-wwstatus]').forEach(function(btn){
+    btn.onclick=function(){
+      var k=this.dataset.wwstatus;
+      var v=this.dataset.wwval;
+      var cur=(wwData[k]&&wwData[k].goalStatus)||'';
+      if(!wwData[k])wwData[k]={goal:'',notes:[]};
+      wwData[k].goalStatus=(cur===v)?'':v; // toggle
+      safeHap(HAP.check);
+      wwSave();wwRender();
+    };
+  });
+
+  // Wire add note
+  el.querySelectorAll('[data-wwnote-add]').forEach(function(btn){
+    btn.onclick=function(){
+      var k=this.dataset.wwnoteAdd;
+      if(!wwData[k])wwData[k]={goal:'',notes:[]};
+      if(!wwData[k].notes)wwData[k].notes=[];
+      wwData[k].notes.push('');
+      wwSave();wwRender();
+    };
+  });
+
+  // Wire delete note
+  el.querySelectorAll('[data-wwnote-del]').forEach(function(btn){
+    btn.onclick=function(){
+      var k=this.dataset.wwnoteDel;
+      var ni=parseInt(this.dataset.wwnoteIdx);
+      if(wwData[k]&&wwData[k].notes)wwData[k].notes.splice(ni,1);
+      wwSave();wwRender();
+    };
+  });
 }
 
 
