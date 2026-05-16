@@ -2,7 +2,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-15 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-16 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -10,9 +10,9 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 // Continues in dashboard-2.js and dashboard-3.js
 
 //  ZIP CODE CONFIG (must be first — used by weather, prayer, pickleball) 
-var zipConfig=JSON.parse(localStorage.getItem('dash_zip')||'{}');
+var zipConfig=lsGet('dash_zip',{});
 function getZipCfg(key,def){return zipConfig[key]!==undefined&&zipConfig[key]!==''?zipConfig[key]:def;}
-function saveZipCfg(key,val){zipConfig[key]=val;localStorage.setItem('dash_zip',JSON.stringify(zipConfig));}
+function saveZipCfg(key,val){zipConfig[key]=val;lsSet('dash_zip',zipConfig);}
 var ZIP_COORDS={
   '21044':{lat:39.2195,lng:-76.8607,city:'Columbia'},
   '21043':{lat:39.2657,lng:-76.7983,city:'Ellicott City'},
@@ -295,6 +295,28 @@ function updatePrayerCountdown(){
   badge.textContent=nxt.name.toUpperCase();
   countdown.textContent=fmtCountdown(minsUntil(nxt.time));
 }
+function renderForbiddenTimes(){
+  var el=document.getElementById('forbidden-times-panel');
+  if(!el||!prayers||!prayers.Sunrise||!prayers.Maghrib)return;
+  var _sr=pMins(prayers.Sunrise);
+  var _mg=pMins(prayers.Maghrib);
+  var _dh=prayers.Dhuhr?pMins(prayers.Dhuhr):0;
+  var _now=new Date();var _nm=_now.getHours()*60+_now.getMinutes();
+  var _forbiddenNow=false;var _forbiddenLabel='';
+  if(_nm>=_sr-2&&_nm<=_sr+12){_forbiddenNow=true;_forbiddenLabel='⚠ Sunrise — do not pray now';}
+  else if(_dh&&_nm>=_dh-12&&_nm<_dh){_forbiddenNow=true;_forbiddenLabel='⚠ Sun at zenith — do not pray now';}
+  else if(_nm>=_mg-12&&_nm<_mg){_forbiddenNow=true;_forbiddenLabel='⚠ Sunset — do not pray now';}
+  var h='<div style="margin-top:10px;padding:8px 10px;background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.15)">';
+  h+='<div style="font-size:9px;color:rgba(255,68,68,.6);letter-spacing:1px;margin-bottom:5px">🚫 FORBIDDEN TIMES</div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:2px"><span>Sunrise</span><span>'+fmt12(prayers.Sunrise)+' + 12 min</span></div>';
+  if(prayers.Dhuhr)h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:2px"><span>Zenith (before Dhuhr)</span><span>12 min before '+fmt12(prayers.Dhuhr)+'</span></div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35)'
+    +((_nm>=_mg-12&&_nm<_mg)?';color:rgba(255,68,68,.8)':'')+'"><span>Sunset (before Maghrib)</span><span>12 min before '+fmt12(prayers.Maghrib)+'</span></div>';
+  if(_forbiddenNow)h+='<div style="margin-top:5px;font-size:10px;color:rgba(255,68,68,.9);font-weight:bold">'+_forbiddenLabel+'</div>';
+  h+='</div>';
+  el.innerHTML=h;
+}
+
 function renderPrayer(){
   if(!prayers)return;
   var cur=currentPrayer(),nxt=nextPrayer();
@@ -319,6 +341,7 @@ function renderPrayer(){
     h+='<div class="prayer-row'+(a?' now':'')+'"><span class="pname">'+p.toUpperCase()+'</span><span class="ptime">'+fmt12(prayers[p])+'</span><span class="ptrend" style="'+tStyle+'">'+tl+'</span></div>';
   }
   document.getElementById('plist').innerHTML=h;
+  renderForbiddenTimes();
 }
 loadPrayer();
 setInterval(renderPrayer,60000);
@@ -453,7 +476,7 @@ var stocks=[
   {t:'HLAL',lb:'Wahed Shariah', p:60.47,  ch:0.22,  pt:0.36}
 ];
 // Store daily close prices for rolling avg (keyed by YYYY-MM-DD)
-var stockHist=JSON.parse(localStorage.getItem('stockHist')||'{}');
+var stockHist=lsGet('stockHist',{});
 function seedStockHistory(){
   // Seed 15 days of simulated prior prices so avg shows immediately
   var today=new Date();
@@ -469,7 +492,7 @@ function seedStockHistory(){
       }
     }
   }
-  localStorage.setItem('stockHist',JSON.stringify(stockHist));
+  lsSet('stockHist',stockHist);
 }
 if(Object.keys(stockHist).length<3)seedStockHistory();
 function recordStockPrices(){
@@ -478,7 +501,7 @@ function recordStockPrices(){
   for(var i=0;i<stocks.length;i++)stockHist[key][stocks[i].t]=stocks[i].p;
   var keys=Object.keys(stockHist).sort();
   while(keys.length>20){delete stockHist[keys.shift()];}
-  localStorage.setItem('stockHist',JSON.stringify(stockHist));
+  lsSet('stockHist',stockHist);
 }
 function get15DayAvg(ticker){
   var keys=Object.keys(stockHist).sort();
@@ -507,10 +530,10 @@ function renderStocks(){
       avgDiff=(diff>=0?'+':'')+diff.toFixed(2);
     }
     h+='<div class="sr">'
-      +'<div><div class="st">'+s.t+'</div><div style="font-size:10px;color:var(--dim)">'+s.lb+'</div></div>'
+      +'<div><div class="st">'+s.t+'</div><div class="dim-10">'+s.lb+'</div></div>'
       +'<div style="text-align:right"><div class="sp">$'+s.p.toFixed(2)+'</div>'
       +'<div class="sc '+(s.ch>=0?'sup':'sdn')+'">'+( s.ch>=0?'+':'')+s.ch.toFixed(2)+'</div></div>'
-      +'<div style="text-align:right;margin-left:10px;min-width:52px"><div style="font-size:9px;color:var(--dim);letter-spacing:1px">15D AVG</div>'
+      +'<div style="text-align:right;margin-left:10px;min-width:52px"><div class="dim-9-ls">15D AVG</div>'
       +'<div style="font-family:monospace;font-size:14px;color:var(--dim)">'+avgStr+'</div>'
       +(avg!==null?'<div style="font-size:10px" class="sc '+avgCls+'">'+avgDiff+'</div>':'')
       +'</div>'
@@ -810,8 +833,8 @@ function mergeWmData(a,b){
   return {weekKey:weekKey,items:items,deleted:deleted,log:log};
 }
 
-var todos=mergeItemArrays(JSON.parse(localStorage.getItem('dash_todos')||'[]'),[],normalizeTodoItem);
-function saveTodos(){localStorage.setItem('dash_todos',JSON.stringify(todos));}
+var todos=mergeItemArrays(lsGet('dash_todos',[]),[],normalizeTodoItem);
+function saveTodos(){lsSet('dash_todos',todos);}
 saveTodos();
 
 // ── Tab slide utility ──
@@ -973,7 +996,7 @@ function addTodo(){
     _deviceId:getSyncDeviceId()
   });
   inp.value='';
-  if(typeof hap==='function')hap(HAP.soft);
+  safeHap(HAP.soft);
   saveTodos();
   renderTodos();
 }
@@ -987,7 +1010,7 @@ function toggleTodo(id){
   t._deviceId=getSyncDeviceId();
   saveTodos();renderTodos();
   if(t.done){
-    if(typeof hap==='function')hap(HAP.check);
+    safeHap(HAP.check);
     var el=document.getElementById('tdel-'+id);
     if(el){var r=el.getBoundingClientRect();confetti(r.left,r.top,'#ff5fa0');}
     else confetti(window.innerWidth/2,300,'#ff5fa0');
@@ -1291,7 +1314,7 @@ renderTodos();
 
 var DEF_MEALS=[{d:'MON',m:'Grilled Chicken + Rice'},{d:'TUE',m:'Pasta Bolognese'},{d:'WED',m:'Salmon + Veggies'},{d:'THU',m:'Chicken Shawarma'},{d:'FRI',m:'Pizza Night'},{d:'SAT',m:'Lamb Chops'},{d:'SUN',m:'Meal Prep Day'}];
 var meals=JSON.parse(localStorage.getItem('dash_meals')||JSON.stringify(DEF_MEALS));
-function saveMeals(){localStorage.setItem('dash_meals',JSON.stringify(meals));}
+function saveMeals(){lsSet('dash_meals',meals);}
 function todayIdx(){var d=new Date().getDay();return d===0?6:d-1;}
 function renderMeals(){
   var ti=todayIdx(),h='';
@@ -1463,7 +1486,7 @@ function renderCal(){
     noteKeys.forEach(function(d){
       var nm=noteMap[d];
       var col=nm.type==='both'?'var(--cp)':nm.type==='us'?'var(--ca)':nm.type==='is'?'var(--cg)':'var(--dim)';
-      if(nm.names)nh+='<div class="cal-note-row"><span class="cal-note-dot" style="background:'+col+'"></span><span style="color:'+col+';min-width:20px;font-size:11px">'+d+'</span><span style="font-size:11px;color:var(--dim)">'+nm.names+'</span></div>';
+      if(nm.names)nh+='<div class="cal-note-row"><span class="cal-note-dot" style="background:'+col+'"></span><span style="color:'+col+';min-width:20px;font-size:11px">'+d+'</span><span class="dim-11">'+nm.names+'</span></div>';
       // Extra events (birthdays=pink, countdowns=purple, user=their color)
       if(nm.extra)nm.extra.forEach(function(ev){
         nh+='<div class="cal-note-row"><span class="cal-note-dot" style="background:'+ev.col+'"></span><span style="color:'+ev.col+';min-width:20px;font-size:11px">'+d+'</span><span style="font-size:11px;color:'+ev.col+'">'+ev.text+'</span></div>';
@@ -1488,17 +1511,17 @@ function renderCal(){
 renderCal();
 
 // ── USER CALENDAR EVENTS (yearly recurring) ──
-var USER_CAL_EVENTS=JSON.parse(localStorage.getItem('dash_user_cal')||'[]');
+var USER_CAL_EVENTS=lsGet('dash_user_cal',[]);
 // Seed defaults if empty
 if(!USER_CAL_EVENTS.length){
   USER_CAL_EVENTS=[{id:'walima',month:5,day:6,label:'🎬 Record Walima Video',color:'#bd93f9',yearly:true}];
-  localStorage.setItem('dash_user_cal',JSON.stringify(USER_CAL_EVENTS));
+  lsSet('dash_user_cal',USER_CAL_EVENTS);
 }
-function saveUserCalEvents(){localStorage.setItem('dash_user_cal',JSON.stringify(USER_CAL_EVENTS));}
+function saveUserCalEvents(){lsSet('dash_user_cal',USER_CAL_EVENTS);}
 window.USER_CAL_EVENTS=USER_CAL_EVENTS;
 
-var notes=mergeItemArrays(JSON.parse(localStorage.getItem('dash_notes_v2')||'[]'),[],normalizeNoteItem);
-function saveNotes(){localStorage.setItem('dash_notes_v2',JSON.stringify(notes));}
+var notes=mergeItemArrays(lsGet('dash_notes_v2',[]),[],normalizeNoteItem);
+function saveNotes(){lsSet('dash_notes_v2',notes);}
 saveNotes();
 var notesTab=localStorage.getItem('dash_notes_tab')||'main';
 function notesSwitchTab(tab,skipSave){
@@ -1574,7 +1597,7 @@ function addNote(){
     _deviceId:getSyncDeviceId()
   });
   inp.value='';
-  if(typeof hap==='function')hap(HAP.soft);
+  safeHap(HAP.soft);
   saveNotes();
   renderNotes(true);
 }
@@ -1697,8 +1720,8 @@ function schedPrune(){
   if(changed)saveSched();
 }
 
-var schedule=JSON.parse(localStorage.getItem('dash_schedule')||'{}');
-function saveSched(){localStorage.setItem('dash_schedule',JSON.stringify(schedule));}
+var schedule=lsGet('dash_schedule',{});
+function saveSched(){lsSet('dash_schedule',schedule);}
 
 function schedNav(dir){
   schedWeekOffset+=dir;
@@ -1750,7 +1773,7 @@ var bmarks=JSON.parse(localStorage.getItem('dash_bmarks')||JSON.stringify(DEF_BM
 (function(){var mx=0;bmarks.forEach(function(b){if(b.id&&b.id>mx)mx=b.id;});bmarks.forEach(function(b){if(!b.id){mx++;b.id=mx;}});})();
 var bmManageMode=false;
 var bmDelPending={};
-function saveBmarks(){localStorage.setItem('dash_bmarks',JSON.stringify(bmarks));}
+function saveBmarks(){lsSet('dash_bmarks',bmarks);}
 function bmToggleManage(){
   bmManageMode=!bmManageMode;
   var btn=document.getElementById('bm-manage-btn');
@@ -1764,7 +1787,7 @@ function renderBmarks(){
     bmarks.forEach(function(b,idx){
       h+='<div class="bm-manage-item">'
         +'<span class="bm-manage-icon">'+b.i+'</span>'
-        +'<div style="flex:1;min-width:0"><div class="bm-manage-name">'+b.n+'</div>'
+        +'<div class="flex-1"><div class="bm-manage-name">'+b.n+'</div>'
         +'<div class="bm-manage-url">'+b.u.replace(/https?:\/\//,'')+'</div></div>'
         +'<button class="bm-arr" onclick="bmMove('+idx+',-1)"'+(idx===0?' disabled':'')+'>&#8593;</button>'
         +'<button class="bm-arr" onclick="bmMove('+idx+',1)"'+(idx===bmarks.length-1?' disabled':'')+'>&#8595;</button>'
@@ -1846,7 +1869,7 @@ function openModal(type){
   } else if(type==='stocks'){
     box.style.borderColor='var(--cl)';title.className='cl';title.textContent='// MARKET DATA';
     var open=mktOpen(),h='<div class="sl">STATUS: <span style="color:'+(open?'var(--cl)':'var(--cr)')+'">'+( open?'OPEN':'CLOSED')+'</span> - DEMO DATA</div>';
-    for(var i=0;i<stocks.length;i++){var s=stocks[i];h+='<div class="drow"><div><div class="vt cl" style="font-size:32px;text-shadow:var(--gl)">'+s.t+'</div><div style="font-size:11px;color:var(--dim)">'+s.lb+'</div></div><div style="text-align:right"><div class="vt" style="font-size:28px">$'+s.p+'</div><div class="sc '+(s.up?'sup':'sdn')+'" style="font-size:14px;margin-top:2px">'+s.ch+' ('+s.pt+')</div></div></div>';}
+    for(var i=0;i<stocks.length;i++){var s=stocks[i];h+='<div class="drow"><div><div class="vt cl" style="font-size:32px;text-shadow:var(--gl)">'+s.t+'</div><div class="dim-11">'+s.lb+'</div></div><div style="text-align:right"><div class="vt" style="font-size:28px">$'+s.p+'</div><div class="sc '+(s.up?'sup':'sdn')+'" style="font-size:14px;margin-top:2px">'+s.ch+' ('+s.pt+')</div></div></div>';}
     h+='<div style="margin-top:18px;border:1px dashed var(--dim);padding:12px;font-size:11px;color:var(--dim)">DEMO MODE - integrate Finnhub API for live prices.</div>';
     mc.innerHTML=h;
   }
@@ -1870,7 +1893,7 @@ function applyOrder(){
     if(tileOrder.indexOf(el.dataset.id)<0)g.appendChild(el);
   });
 }
-function saveOrder(){var els=document.getElementById('grid').querySelectorAll('[data-id]');tileOrder=Array.from(els).map(function(e){return e.dataset.id;});localStorage.setItem('dash_tile_order',JSON.stringify(tileOrder));}
+function saveOrder(){var els=document.getElementById('grid').querySelectorAll('[data-id]');tileOrder=Array.from(els).map(function(e){return e.dataset.id;});lsSet('dash_tile_order',tileOrder);}
 applyOrder();
 var MAGNET_PAIRS=[
   ['clock','pomodoro'],
@@ -1982,11 +2005,11 @@ function lighten(hex){
 }
 
 //  BOOKS 
-var books=JSON.parse(localStorage.getItem('dash_books')||'[]');
+var books=lsGet('dash_books',[]);
 // Prune covers on load
 setTimeout(function(){if(typeof booksPruneCoversByDate==='function')booksPruneCoversByDate();},200);
 var booksTab='reading';
-function saveBooks(){localStorage.setItem('dash_books',JSON.stringify(books));}
+function saveBooks(){lsSet('dash_books',books);}
 
 
 var _booksTabOrder=['reading','done','stats','add','reviews'];
@@ -2074,7 +2097,7 @@ var _newBook={id:Date.now(),title:title,author:author,total:total,current:Math.m
   if(window._bfCoverData){_newBook.cover=window._bfCoverData;window._bfCoverData=null;}
   books.push(_newBook);
   booksPruneCoversByDate();
-  if(typeof hap==='function')hap(HAP.save);
+  safeHap(HAP.save);
   saveBooks();
   document.getElementById('bf-title').value='';
   document.getElementById('bf-author').value='';
@@ -2779,7 +2802,7 @@ function renderBooks(){
         var collapsed=window._bookDoneCollapsed[yr];
         h+='<div data-bookyr="'+yr+'" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(155,111,255,.15);cursor:pointer;user-select:none">';
         h+='<span style="font-size:11px;color:#9b6fff;font-weight:bold;letter-spacing:1px">'+yr+'</span>';
-        h+='<span style="font-size:10px;color:var(--dim)">'+bks.length+' book'+(bks.length!==1?'s':'')+'&nbsp;&nbsp;'+(collapsed?'▶':'▼')+'</span>';
+        h+='<span class="dim-10">'+bks.length+' book'+(bks.length!==1?'s':'')+'&nbsp;&nbsp;'+(collapsed?'▶':'▼')+'</span>';
         h+='</div>';
 
         if(!collapsed){
@@ -2802,7 +2825,7 @@ function renderBooks(){
               h+='<canvas id="bcover-done-'+b.id+'" style="width:55px;image-rendering:pixelated;flex-shrink:0;border-radius:1px;align-self:flex-start"></canvas>';
             }
             // Right column
-            h+='<div style="flex:1;min-width:0">';
+            h+='<div class="flex-1">';
             // Title + dropped badge
             h+='<div class="book-done-title" style="margin-bottom:3px">'+b.title+(b.dropped?' <span style="font-size:9px;color:var(--cr);border:1px solid rgba(255,68,68,.35);padding:1px 5px">DROPPED</span>':'')+'</div>';
             // Stats row: pages · finished · days
@@ -2896,16 +2919,16 @@ function renderBookReviews(){
     h+='<div style="border:1px solid rgba(255,255,255,.07);border-radius:2px;margin-bottom:10px;overflow:hidden">';
     h+='<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,.02);cursor:pointer" data-brexpand="'+b.id+'">';
     h+='<div style="font-size:12px;font-weight:600;flex:1">'+b.title+'</div>';
-    h+='<div style="font-size:10px;color:var(--dim)">'+starStr+'</div>';
+    h+='<div class="dim-10">'+starStr+'</div>';
     h+='<div style="font-size:10px;color:var(--dim);margin-left:4px">'+(hasReview?'&#10003;':'&#9998;')+'</div>';
     h+='</div>';
     if(window['_brOpen_'+b.id]){
       h+='<div style="padding:12px">';
-      h+='<div style="margin-bottom:10px"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:4px">RATING</div>';
+      h+='<div class="mb-10"><div class="label-dim-xs">RATING</div>';
       h+='<div id="brstars-'+b.id+'">'+starStr+'</div></div>';
       BOOK_REVIEW_QS.slice(1).forEach(function(q){
-        h+='<div style="margin-bottom:10px">';
-        h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:4px">'+q.label.toUpperCase()+'</div>';
+        h+='<div class="mb-10">';
+        h+='<div class="label-dim-xs">'+q.label.toUpperCase()+'</div>';
         h+='<textarea id="brq-'+b.id+'-'+q.id+'" style="width:100%;min-height:56px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.5">'+( rev[q.id]||'')+'</textarea>';
         h+='</div>';
       });
@@ -3035,12 +3058,12 @@ function renderBooksStats(){
   var h='';
 
   //  PERIOD COUNTS 
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:8px">BOOKS COMPLETED</div>';
+  h+='<div class="label-dim-wide">BOOKS COMPLETED</div>';
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px">';
   function pstat(val,lbl,sub){
     return '<div style="text-align:center;padding:8px 4px;border:1px solid rgba(122,79,255,.12);background:rgba(122,79,255,.04)">'
       +'<div style="font-family:VT323,monospace;font-size:30px;color:#9b6fff;line-height:1">'+val+'</div>'
-      +'<div style="font-size:9px;color:var(--dim);letter-spacing:1px">'+lbl+'</div>'
+      +'<div class="dim-9-ls">'+lbl+'</div>'
       +(sub?'<div style="font-size:8px;color:var(--dim);opacity:.5;margin-top:2px">'+sub+'</div>':'')
       +'</div>';
   }
@@ -3051,7 +3074,7 @@ function renderBooksStats(){
   h+='</div>';
 
   //  READING ACTIVITY 
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:8px">READING ACTIVITY</div>';
+  h+='<div class="label-dim-wide">READING ACTIVITY</div>';
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px">';
   h+=pstat(totalPagesDone.toLocaleString(),'PAGES READ','finished books');
   h+=pstat(reading.length,'IN PROGRESS','currently');
@@ -3062,15 +3085,15 @@ function renderBooksStats(){
   //  FASTEST / SLOWEST 
   if(fastest&&slowest&&fastest.b.id!==slowest.b.id){
     h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">EXTREMES</div>';
-    h+='<div style="margin-bottom:14px">';
+    h+='<div class="mb-14">';
     h+='<div style="display:flex;align-items:baseline;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
     h+='<span style="font-size:9px;color:var(--cg);width:56px;flex-shrink:0">FASTEST</span>';
-    h+='<span style="font-size:11px;color:var(--text);flex:1">'+fastest.b.title+'</span>';
+    h+='<span class="text-11-flex">'+fastest.b.title+'</span>';
     h+='<span style="font-size:10px;color:var(--cg)">'+fastest.days+'d</span>';
     h+='</div>';
     h+='<div style="display:flex;align-items:baseline;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
     h+='<span style="font-size:9px;color:var(--ca);width:56px;flex-shrink:0">SLOWEST</span>';
-    h+='<span style="font-size:11px;color:var(--text);flex:1">'+slowest.b.title+'</span>';
+    h+='<span class="text-11-flex">'+slowest.b.title+'</span>';
     h+='<span style="font-size:10px;color:var(--ca)">'+slowest.days+'d</span>';
     h+='</div>';
     h+='</div>';
@@ -3079,13 +3102,13 @@ function renderBooksStats(){
   //  BOOKS & PAGES PER YEAR 
   var years=Object.keys(booksByYear).sort().reverse().slice(0,5);
   if(years.length){
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:8px">BY YEAR</div>';
+    h+='<div class="label-dim-wide">BY YEAR</div>';
     var maxYrBooks=Math.max.apply(null,years.map(function(y){return booksByYear[y]||0;}));
     years.forEach(function(yr){
       var bc=booksByYear[yr]||0;var pg=pagesByYear[yr]||0;
       var pct=Math.round(bc/maxYrBooks*100);
       var isCur=+yr===thisYear;
-      h+='<div style="margin-bottom:6px">';
+      h+='<div class="mb-6">';
       h+='<div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px">';
       h+='<span style="color:'+(isCur?'#9b6fff':'var(--dim)')+'">'+yr+(isCur?' ←':'')+' </span>';
       h+='<span style="color:var(--dim)">'+bc+' books · '+pg.toLocaleString()+' pages</span>';
@@ -3098,7 +3121,7 @@ function renderBooksStats(){
   }
 
   //  GENRE BREAKDOWN 
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:8px">GENRE SPLIT</div>';
+  h+='<div class="label-dim-wide">GENRE SPLIT</div>';
   h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
   h+='<span style="font-size:11px;color:var(--dim);width:80px;flex-shrink:0">Fiction</span>';
   h+='<div style="flex:1;height:10px;background:rgba(122,79,255,.1);border-radius:2px"><div style="width:'+Math.round((fDone/maxBar)*100)+'%;height:100%;background:#9b6fff;border-radius:2px"></div></div>';
@@ -3114,13 +3137,13 @@ function renderBooksStats(){
   var longBooks=finished.slice().sort(function(a,b){return b.total-a.total;}).slice(0,3);
   if(longBooks.length){
     h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">LONGEST FINISHED</div>';
-    h+='<div style="margin-bottom:8px">';
+    h+='<div class="mb-8">';
     longBooks.forEach(function(b,i){
       var medals=['🥇','🥈','🥉'];
       h+='<div style="display:flex;align-items:baseline;gap:6px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
       h+='<span style="font-size:12px">'+medals[i]+'</span>';
-      h+='<span style="font-size:11px;color:var(--text);flex:1">'+b.title+'</span>';
-      h+='<span style="font-size:10px;color:var(--dim)">'+b.total.toLocaleString()+' pp</span>';
+      h+='<span class="text-11-flex">'+b.title+'</span>';
+      h+='<span class="dim-10">'+b.total.toLocaleString()+' pp</span>';
       h+='</div>';
     });
     h+='</div>';
@@ -3753,11 +3776,11 @@ setTimeout(initSettings,200);
 })();
 
 //  S TRACKER //  S TRACKER 
-var sLog=JSON.parse(localStorage.getItem('s_log')||'[]');
+var sLog=lsGet('s_log',[]);
 var sDeletePending={};
 var sPanel='main';
 
-function saveSLog(){localStorage.setItem('s_log',JSON.stringify(sLog));}
+function saveSLog(){lsSet('s_log',sLog);}
 
 function switchSTab(tab){
   sPanel=tab;
@@ -3921,7 +3944,7 @@ var _sLogCollapsed={};
 function renderSLog(){
   var el=document.getElementById('s-log-list');
   if(!el)return;
-  if(!sLog.length){el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:10px 0">No entries yet.</div>';return;}
+  if(!sLog.length){el.innerHTML='<div class="empty-msg-sm">No entries yet.</div>';return;}
 
   // Group by year, most recent year first
   var byYear={};
@@ -3943,8 +3966,8 @@ function renderSLog(){
 
     h+='<div data-syr="'+yr+'" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,95,160,.15);cursor:pointer;user-select:none">';
     h+='<span style="font-size:11px;color:#ff5fa0;font-weight:bold;letter-spacing:1px">'+yr+'</span>';
-    h+='<span style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:var(--dim)">'+count+' entries</span>';
-    h+='<span style="font-size:10px;color:var(--dim)">'+(collapsed?'▶':'▼')+'</span></span>';
+    h+='<span class="flex-center"><span class="dim-10">'+count+' entries</span>';
+    h+='<span class="dim-10">'+(collapsed?'▶':'▼')+'</span></span>';
     h+='</div>';
 
     if(!collapsed){
@@ -3953,7 +3976,7 @@ function renderSLog(){
         var dstr=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
         var tstr=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
         h+='<div class="s-log-item" id="srow-'+e.id+'">'
-          +'<div><div class="s-log-date">'+dstr+'</div><div style="font-size:10px;color:var(--dim)">'+tstr+(e.note?' &mdash; <em style="color:#ff5fa0aa">'+e.note+'</em>':'')+'</div></div>'
+          +'<div><div class="s-log-date">'+dstr+'</div><div class="dim-10">'+tstr+(e.note?' &mdash; <em style="color:#ff5fa0aa">'+e.note+'</em>':'')+'</div></div>'
           +'<div class="s-log-actions">'
           +'<button class="s-log-btn-sm" onclick="editSEntry('+e.id+')">&#9998;</button>'
           +'<button class="s-log-btn-sm" id="sdel-'+e.id+'" onclick="deleteSEntry('+e.id+')" style="color:var(--cr);border-color:rgba(255,68,68,.3)">&#x2715;</button>'
@@ -4071,7 +4094,7 @@ function exportS(){
 
 //  PRAYER TRACKER 
 var PT_PRAYERS=['Fajr','Dhuhr','Asr','Maghrib','Isha']; // Sunrise not tracked
-var ptData=JSON.parse(localStorage.getItem('pt_data')||'{}');
+var ptData=lsGet('pt_data',{});
 var ptTab='today';
 var ptViewDate=localDateStr();
 var ptExtraOpen=(localStorage.getItem('pt_extra_open')||'0')==='1';
@@ -4136,7 +4159,7 @@ function ptRenderFocus(){
   var h='';
   // Stats row
   h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">';
-  function fstat(v,l,col){return '<div style="text-align:center"><div style="font-family:VT323,monospace;font-size:32px;color:'+(col||'var(--cc)')+'">'+v+'</div><div style="font-size:9px;color:var(--dim)">'+l+'</div></div>';}
+  function fstat(v,l,col){return '<div class="text-center"><div style="font-family:VT323,monospace;font-size:32px;color:'+(col||'var(--cc)')+'">'+v+'</div><div class="dim-9">'+l+'</div></div>';}
   h+=fstat(avg,'AVG FOCUS');
   h+=fstat(best+'/10','BEST DAY','var(--cg)');
   h+=fstat(trendIcon,'7-DAY TREND',trendCol);
@@ -4167,13 +4190,13 @@ function ptRenderFocus(){
     dowFocus[dow]+=(ptData[d]._focus||0);
     dowCount[dow]++;
   });
-  h+='<div style="display:flex;gap:4px;margin-bottom:10px">';
+  h+='<div class="flex-row-4">';
   ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d,i){
     var avg2=dowCount[i]?Math.round(dowFocus[i]/dowCount[i]*10)/10:0;
     var col=!avg2?'rgba(255,255,255,.1)':avg2<=3?'var(--cr)':avg2<=6?'var(--ca)':'var(--cg)';
     h+='<div style="flex:1;text-align:center">';
     h+='<div style="font-size:11px;color:'+col+';font-family:VT323,monospace">'+(avg2||'—')+'</div>';
-    h+='<div style="font-size:9px;color:var(--dim)">'+d+'</div>';
+    h+='<div class="dim-9">'+d+'</div>';
     h+='</div>';
   });
   h+='</div>';
@@ -4194,12 +4217,12 @@ function ptRenderFocus(){
   el.innerHTML=h;
 }
 
-function ptSave(){localStorage.setItem('pt_data',JSON.stringify(ptData));}
+function ptSave(){lsSet('pt_data',ptData);}
 
 function ptTodayKey(){return localDateStr();}
 
 function ptSetStatus(dateKey,prayer,status,evt){
-  if(typeof hap==='function')hap(status==='prayed'?HAP.check:status==='missed'?HAP.error:HAP.soft);
+  safeHap(status==='prayed'?HAP.check:status==='missed'?HAP.error:HAP.soft);
   if(!ptData[dateKey])ptData[dateKey]={};
   if(ptData[dateKey][prayer]===status){
     delete ptData[dateKey][prayer];
@@ -4241,7 +4264,7 @@ function ptDayBalance(dateKey){
 }
 
 function ptAddExtra(dateKey,delta){
-  if(typeof hap==='function')hap(delta>0?HAP.goal:HAP.soft);
+  safeHap(delta>0?HAP.goal:HAP.soft);
   if(!ptData[dateKey])ptData[dateKey]={};
   var cur=ptData[dateKey]._extra||0;
   var next=Math.max(0,cur+delta);
@@ -4270,7 +4293,7 @@ var _ptOrder=['today','log','balance','focus'];
 var _ptPanels={today:'pt-today',log:'pt-log',balance:'pt-balance-panel',focus:'pt-focus-panel'};
 var _ptTabEls={today:'pt-tab-today',log:'pt-tab-log',balance:'pt-tab-balance',focus:'pt-tab-focus'};
 function ptSwitchTab(tab){
-  if(typeof hap==='function')hap(HAP.tap);
+  safeHap(HAP.tap);
   var prev=_ptTabPrev;
   ptTab=tab;_ptTabPrev=tab;
   _ptOrder.forEach(function(t){
@@ -4292,7 +4315,7 @@ function ptStatusClass(s){
 }
 
 function ptNavDay(offset){
-  if(typeof hap==='function')hap(HAP.tap);
+  safeHap(HAP.tap);
   var d=new Date(ptViewDate+'T12:00:00');
   d.setDate(d.getDate()+offset);
   ptViewDate=localDateStr(d);
@@ -4313,7 +4336,7 @@ function ptRenderTodayLegacy(){
     +'<span style="font-size:11px;letter-spacing:2px;color:var(--ca)">'+dayLabel+'</span>'
     +'<button onclick="ptNavDay(1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:13px;'+(isToday?'opacity:.25;pointer-events:none':'')+'">&#8594;</button>'
     +'</div>';
-  h+='<div class="pt-score-bar" style="margin-bottom:10px">';
+  h+='<div class="pt-score-bar" class="mb-10">';
   PT_PRAYERS.forEach(function(p){
     var s=day[p];
     h+='<div class="pt-score-seg'+(s==='ontime'?' s-on':s==='late'?' s-late':s==='missed'?' s-miss':'')+'"></div>';
@@ -4338,8 +4361,8 @@ function ptRenderTodayLegacy(){
   var balCls=bal.bal>0?'pt-balance-pos':bal.bal<0?'pt-balance-neg':'pt-balance-zero';
   h+='<div class="pt-extra-row">'
     +'<div><div style="font-size:11px;letter-spacing:1px;color:var(--ca)">EXTRA RAKAAT</div>'
-    +'<div style="font-size:9px;color:var(--dim);margin-top:2px">voluntary prayers</div></div>'
-    +'<div style="display:flex;align-items:center;gap:8px">'
+    +'<div class="dim-9-mt">voluntary prayers</div></div>'
+    +'<div class="flex-center">'
     +'<button class="pt-extra-btn" onclick="ptAddExtra(\'' +ptViewDate+ '\',-1)">&#8722;</button>'
     +'<span class="pt-extra-count">'+extra+'</span>'
     +'<button class="pt-extra-btn" onclick="ptAddExtra(\'' +ptViewDate+ '\',1)" style="border-color:var(--ca)">&#43;</button>'
@@ -4347,7 +4370,7 @@ function ptRenderTodayLegacy(){
   // Day balance
   h+='<div class="pt-balance-bar">'
     +'<div><div class="pt-balance-lbl">TODAYS BALANCE</div>'
-    +'<div style="font-size:9px;color:var(--dim);margin-top:2px">'+(bal.missed?bal.missed+' missed':bal.prayed+'/17 prayed')+'</div></div>'
+    +'<div class="dim-9-mt">'+(bal.missed?bal.missed+' missed':bal.prayed+'/17 prayed')+'</div></div>'
     +'<div class="pt-balance-num '+balCls+'">'+(bal.bal>=0?'+':'')+bal.bal+'</div>'
     +'</div>';
 
@@ -4356,7 +4379,7 @@ function ptRenderTodayLegacy(){
   var easyNo=easyState===0;
   h+='<div style="margin-top:8px;padding:8px;border:1px solid rgba(255,95,160,.18);background:rgba(255,95,160,.06)">';
   h+='<div style="font-size:10px;letter-spacing:1px;color:var(--cp);margin-bottom:6px">EASY SURAHS ONLY</div>';
-  h+='<div style="display:flex;gap:6px">';
+  h+='<div class="flex-row">';
   h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',1)" style="flex:1;padding:7px 0;border:1px solid '+(easyYes?'var(--cp)':'rgba(255,255,255,.15)')+';background:'+(easyYes?'rgba(255,95,160,.16)':'transparent')+';color:'+(easyYes?'var(--cp)':'var(--dim)')+';font-size:11px;cursor:pointer">YES</button>';
   h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',0)" style="flex:1;padding:7px 0;border:1px solid '+(easyNo?'rgba(0,255,136,.35)':'rgba(255,255,255,.15)')+';background:'+(easyNo?'rgba(0,255,136,.1)':'transparent')+';color:'+(easyNo?'var(--cg)':'var(--dim)')+';font-size:11px;cursor:pointer">NO</button>';
   h+='</div>';
@@ -4376,7 +4399,7 @@ function ptRenderTodayLegacy(){
       +'style="flex:1;min-width:24px;padding:8px 2px;border:1px solid '+(fSel?fCol:'rgba(255,255,255,.12)')+';background:'+(fSel?fBg:'transparent')+';color:'+(fSel?fCol:'var(--dim)')+';font-size:13px;cursor:pointer;font-family:monospace;font-weight:'+(fSel?'bold':'normal')+'">'+fi+'</button>';
   }
   h+='</div>';
-  h+='<div style="font-size:9px;color:var(--dim)">'+(focusVal?'Focus: '+focusVal+'/10 — '+(focusVal<=3?'low concentration':focusVal<=6?'moderate':'high concentration'):'Tap a number to rate your focus')+'</div>';
+  h+='<div class="dim-9">'+(focusVal?'Focus: '+focusVal+'/10 — '+(focusVal<=3?'low concentration':focusVal<=6?'moderate':'high concentration'):'Tap a number to rate your focus')+'</div>';
   el.innerHTML=h;
 }
 var PT_PRAYERS_5=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
@@ -4453,7 +4476,7 @@ function ptCheckNotices(){
 
   //  4. Mood below 4 for more than 3 days 
   try{
-    var mlData=JSON.parse(localStorage.getItem('dash_ml')||'[]');
+    var mlData=lsGet('dash_ml',[]);
     if(mlData.length){
       var lowMoodStreak=0;
       var moodDays=ptGetLastNDays(14);
@@ -4534,7 +4557,7 @@ function ptRenderToday(){
     +'<span style="font-size:11px;letter-spacing:2px;color:var(--ca)">'+dayLabel+'</span>'
     +'<button onclick="ptNavDay(1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:13px;'+(isToday?'opacity:.25;pointer-events:none':'')+'">&#8594;</button>'
     +'</div>';
-  h+='<div class="pt-score-bar" style="margin-bottom:10px">';
+  h+='<div class="pt-score-bar" class="mb-10">';
   PT_PRAYERS.forEach(function(p){
     var s=day[p];
     h+='<div class="pt-score-seg'+(s==='ontime'?' s-on':s==='late'?' s-late':s==='missed'?' s-miss':'')+'"></div>';
@@ -4565,15 +4588,15 @@ function ptRenderToday(){
   var balCls=bal.bal>0?'pt-balance-pos':bal.bal<0?'pt-balance-neg':'pt-balance-zero';
   h+='<div class="pt-extra-row" style="margin-top:8px">'
     +'<div><div style="font-size:11px;letter-spacing:1px;color:var(--ca)">EXTRA RAKAAT</div>'
-    +'<div style="font-size:9px;color:var(--dim);margin-top:2px">voluntary prayers</div></div>'
-    +'<div style="display:flex;align-items:center;gap:8px">'
+    +'<div class="dim-9-mt">voluntary prayers</div></div>'
+    +'<div class="flex-center">'
     +'<button class="pt-extra-btn" onclick="ptAddExtra(\'' +ptViewDate+ '\',-1)">&#8722;</button>'
     +'<span class="pt-extra-count">'+extra+'</span>'
     +'<button class="pt-extra-btn" onclick="ptAddExtra(\'' +ptViewDate+ '\',1)" style="border-color:var(--ca)">&#43;</button>'
     +'</div></div>';
   h+='<div class="pt-balance-bar">'
     +'<div><div class="pt-balance-lbl">TODAYS BALANCE</div>'
-    +'<div style="font-size:9px;color:var(--dim);margin-top:2px">'+(bal.missed?bal.missed+' missed':bal.prayed+'/17 prayed')+'</div></div>'
+    +'<div class="dim-9-mt">'+(bal.missed?bal.missed+' missed':bal.prayed+'/17 prayed')+'</div></div>'
     +'<div class="pt-balance-num '+balCls+'">'+(bal.bal>=0?'+':'')+bal.bal+'</div>'
     +'</div>';
 
@@ -4582,7 +4605,7 @@ function ptRenderToday(){
   var easyNo=easyState===0;
   h+='<div style="margin-top:8px;padding:8px;border:1px solid rgba(255,95,160,.18);background:rgba(255,95,160,.06)">';
   h+='<div style="font-size:10px;letter-spacing:1px;color:var(--cp);margin-bottom:6px">EASY SURAHS ONLY</div>';
-  h+='<div style="display:flex;gap:6px">';
+  h+='<div class="flex-row">';
   h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',1)" style="flex:1;padding:7px 0;border:1px solid '+(easyYes?'var(--cp)':'rgba(255,255,255,.15)')+';background:'+(easyYes?'rgba(255,95,160,.16)':'transparent')+';color:'+(easyYes?'var(--cp)':'var(--dim)')+';font-size:11px;cursor:pointer">YES</button>';
   h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',0)" style="flex:1;padding:7px 0;border:1px solid '+(easyNo?'rgba(0,255,136,.35)':'rgba(255,255,255,.15)')+';background:'+(easyNo?'rgba(0,255,136,.1)':'transparent')+';color:'+(easyNo?'var(--cg)':'var(--dim)')+';font-size:11px;cursor:pointer">NO</button>';
   h+='</div>';
@@ -4601,28 +4624,10 @@ function ptRenderToday(){
       +'style="flex:1;min-width:24px;padding:8px 2px;border:1px solid '+(fSel?fCol:'rgba(255,255,255,.12)')+';background:'+(fSel?fBg:'transparent')+';color:'+(fSel?fCol:'var(--dim)')+';font-size:13px;cursor:pointer;font-family:monospace;font-weight:'+(fSel?'bold':'normal')+'">'+fi+'</button>';
   }
   h+='</div>';
-  h+='<div style="font-size:9px;color:var(--dim)">'+(focusVal?'Focus: '+focusVal+'/10 - '+(focusVal<=3?'low concentration':focusVal<=6?'moderate':'high concentration'):'Tap a number to rate your focus')+'</div>';
+  h+='<div class="dim-9">'+(focusVal?'Focus: '+focusVal+'/10 - '+(focusVal<=3?'low concentration':focusVal<=6?'moderate':'high concentration'):'Tap a number to rate your focus')+'</div>';
   h+='</div>';
-  // ── Forbidden prayer times ──
-  if(isToday&&prayers&&prayers.Sunrise&&prayers.Maghrib){
-    var _sr=pMins(prayers.Sunrise);
-    var _mg=pMins(prayers.Maghrib);
-    var _dh=prayers.Dhuhr?pMins(prayers.Dhuhr):0;
-    var _now=new Date();var _nm=_now.getHours()*60+_now.getMinutes();
-    var _forbiddenNow=false;var _forbiddenLabel='';
-    if(_nm>=_sr-2&&_nm<=_sr+12){_forbiddenNow=true;_forbiddenLabel='⚠ Sunrise — do not pray now';}
-    else if(_dh&&_nm>=_dh-12&&_nm<_dh){_forbiddenNow=true;_forbiddenLabel='⚠ Sun at zenith — do not pray now';}
-    else if(_nm>=_mg-12&&_nm<_mg){_forbiddenNow=true;_forbiddenLabel='⚠ Sunset — do not pray now';}
-    h+='<div style="margin-top:10px;padding:8px 10px;background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.15)">';
-    h+='<div style="font-size:9px;color:rgba(255,68,68,.6);letter-spacing:1px;margin-bottom:5px">🚫 FORBIDDEN TIMES</div>';
-    h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:2px"><span>Sunrise</span><span>'+fmt12(prayers.Sunrise)+' + 12 min</span></div>';
-    if(prayers.Dhuhr)h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:2px"><span>Zenith (before Dhuhr)</span><span>12 min before '+fmt12(prayers.Dhuhr)+'</span></div>';
-    h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35)'
-      +((_nm>=_mg-12&&_nm<_mg)?';color:rgba(255,68,68,.8)':'')+'"><span>Sunset (before Maghrib)</span><span>12 min before '+fmt12(prayers.Maghrib)+'</span></div>';
-    if(_forbiddenNow)h+='<div style="margin-top:5px;font-size:10px;color:rgba(255,68,68,.9);font-weight:bold">'+_forbiddenLabel+'</div>';
-    h+='</div>';
-  }
-  el.innerHTML=h;
+  // ── Forbidden prayer times rendered in prayer tile ──
+  if(isToday&&prayers)renderForbiddenTimes();  el.innerHTML=h;
 }
 
 var ptCollapsed={};
@@ -4637,7 +4642,7 @@ function ptRenderLog(){
   var el=document.getElementById('pt-log');
   if(!el)return;
   var keys=Object.keys(ptData).sort().reverse();
-  if(!keys.length){el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:10px 0">No entries yet. Log some prayers first.</div>';return;}
+  if(!keys.length){el.innerHTML='<div class="empty-msg-sm">No entries yet. Log some prayers first.</div>';return;}
   // Group by YYYY-MM
   var months={},monthOrder=[];
   keys.forEach(function(dk){
@@ -4662,7 +4667,7 @@ function ptRenderLog(){
     });
     var collapsed=(ptCollapsed[mo]===undefined?mi>0:ptCollapsed[mo]);
     if(ptCollapsed[mo]===undefined)ptCollapsed[mo]=mi>0;
-    h+='<div style="margin-bottom:8px">'
+    h+='<div class="mb-8">'
       +'<div class="pt-month-hdr" onclick="ptToggleMonth(\'' +mo+ '\')">' 
       +'<span class="pt-month-label">'+moLabel+'</span>'
       +'<div class="pt-month-stats">'
@@ -4794,7 +4799,7 @@ function ptRenderBalance(){
   if(!el)return;
   var keys=Object.keys(ptData).sort();
   if(!keys.length){
-    el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:10px 0">No data yet. Start logging prayers.</div>';
+    el.innerHTML='<div class="empty-msg-sm">No data yet. Start logging prayers.</div>';
     return;
   }
   // Compute per-day balances
@@ -4831,12 +4836,12 @@ function ptRenderBalance(){
 
   // Big total
   h+='<div style="text-align:center;padding:14px 0;border-bottom:1px solid rgba(255,204,0,.1);margin-bottom:10px">'
-    +'<div class="pt-balance-lbl" style="margin-bottom:4px">NET BALANCE ('+(ptBalPeriod==='all'?'ALL TIME':ptBalPeriod==='year'?thisYear:thisMonth)+')</div>'
+    +'<div class="pt-balance-lbl" class="mb-4">NET BALANCE ('+(ptBalPeriod==='all'?'ALL TIME':ptBalPeriod==='year'?thisYear:thisMonth)+')</div>'
     +'<div class="pt-balance-num '+totalCls+'" style="font-size:52px">'+(total>=0?'+':'')+total+'</div>'
     +'<div style="display:flex;justify-content:center;gap:16px;margin-top:6px">'
     +'<span style="font-size:10px;color:var(--cr)">&#8722;'+totalMissed+' missed</span>'
     +(totalExtra?'<span style="font-size:10px;color:var(--ca)">+'+totalExtra+' extra</span>':'')
-    +'<span style="font-size:10px;color:var(--dim)">'+filtered.length+' days</span>'
+    +'<span class="dim-10">'+filtered.length+' days</span>'
     +'</div></div>';
 
   // Per-prayer stats for this period
@@ -4901,7 +4906,7 @@ ptRenderToday();
 
 
 //  SETTINGS SYSTEM 
-var sSettings=(function(){try{var s=JSON.parse(localStorage.getItem('dash_settings')||'{}');return(s&&typeof s==='object')?s:{};}catch(e){return{};}})();
+var sSettings=(function(){try{var s=lsGet('dash_settings',{});return(s&&typeof s==='object')?s:{};}catch(e){return{};}})();
 var sSections={view:false,display:false,data:false,supabase:false,layout:false,zipcodes:false,theme:false,hides:false,danger:false};
 
 // Defaults
@@ -4909,7 +4914,7 @@ window._dbgCheckpoints['settings_defaults']=true;
 var SETTING_DEFAULTS={compact:false,slimScreen:false,singleCol:false,bigCat:false,iconMode:false,minimalMode:false,vibrateOff:false,categoryNav:false,sectionHeaders:false,pinnedCards:false,snapToCard:false,crt:false,vignette:true,magnetMode:false,bigBorders:false,scrollGlow:false,sbAutoSync:false,noGoogleFonts:false,largeText:false,extraLargeText:false,bgVisuals:false,bgVisualSinSin:false,letterNav:false,textGlow:false,starfield:false,scrollTrail:false,cardEntrance:false};
 var hiddenTiles=(function(){
   try{
-    var v=JSON.parse(localStorage.getItem('dash_hidden_tiles')||'[]');
+    var v=lsGet('dash_hidden_tiles',[]);
     if(!Array.isArray(v))return[];
     // NEVER allow these to be hidden via localStorage — always force visible
     var alwaysVisible=['quick-nav','quran-cards','gratitude-log','dua-card','for-akhira',
@@ -4923,10 +4928,10 @@ var hiddenTiles=(function(){
   }catch(e){return[];}
 })();
 var currentTheme=localStorage.getItem('dash_theme')||'default';
-function saveHiddenTiles(showMsg){localStorage.setItem('dash_hidden_tiles',JSON.stringify(hiddenTiles));if(showMsg)showToast('\u2715 Card hidden');}
+function saveHiddenTiles(showMsg){lsSet('dash_hidden_tiles',hiddenTiles);if(showMsg)showToast('\u2715 Card hidden');}
 
 function getSetting(k){return sSettings[k]!==undefined?sSettings[k]:SETTING_DEFAULTS[k];}
-function setSetting(k,v){sSettings[k]=v;localStorage.setItem('dash_settings',JSON.stringify(sSettings));}
+function setSetting(k,v){sSettings[k]=v;lsSet('dash_settings',sSettings);}
 
 var VIEW_MODES=['compact','slimScreen','iconMode','minimalMode','singleCol','bigCat'];
 
@@ -5320,9 +5325,9 @@ function initSettings(){
 
 
 //  QURAN TRACKER 
-var qtData=JSON.parse(localStorage.getItem('qt_data')||'{}');
+var qtData=lsGet('qt_data',{});
 var qtTab='today'; var qtLogPeriod='week'; var qtGraphPeriod='week';
-function qtSave(){localStorage.setItem('qt_data',JSON.stringify(qtData));}
+function qtSave(){lsSet('qt_data',qtData);}
 function qtGetToday(){return qtData[localDateStr()]||0;}
 function qtSetToday(n){qtData[localDateStr()]=Math.max(0,Math.min(604,Math.round(n)));qtSave();qtRenderToday();}
 function qtAdjust(d){qtSetToday(qtGetToday()+d);}
@@ -5355,7 +5360,7 @@ function qtSetRange(){
   var today=localDateStr();
   if(!qtData[today])qtData[today]=0;
   qtData[today]+=pages;
-  localStorage.setItem('qt_data',JSON.stringify(qtData));
+  lsSet('qt_data',qtData);
   // Clear inputs
   document.getElementById('qt-pg-start').value='';
   document.getElementById('qt-pg-end').value='';
@@ -5509,7 +5514,7 @@ var goalEditId=null;
 var goalDelPending={};
 
 function goalsSave(){
-  localStorage.setItem('dash_goals',JSON.stringify(goalsData));
+  lsSet('dash_goals',goalsData);
 }
 
 function goalSwitch(period){
@@ -5550,7 +5555,7 @@ function goalsCheckNotice(){
   if(!mostRecent){el.innerHTML='';return;}
   var daysSince=Math.round((new Date()-new Date(mostRecent+'T00:00:00'))/(864e5));
   if(daysSince>=3){
-    el.innerHTML='<div class="inactivity-notice'+(daysSince>=5?' jiggle':'')+'" style="margin-bottom:6px"><span>&#9650; No goal check-in in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last: '+mostRecent+'</span><button data-dismiss="goals-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
+    el.innerHTML='<div class="inactivity-notice'+(daysSince>=5?' jiggle':'')+'" class="mb-6"><span>&#9650; No goal check-in in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last: '+mostRecent+'</span><button data-dismiss="goals-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
   } else {
     el.innerHTML='';
   }
@@ -5665,12 +5670,12 @@ function renderGoals(period){
 
     if(goalEditId===g.id){
       h+='<input class="goal-inp" id="gedit-'+g.id+'" value="'+g.text.replace(/"/g,'&quot;')+'" style="margin-bottom:8px;font-size:14px">';
-      h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px"><span style="font-size:9px;color:var(--dim)">Target check-ins (optional):</span><input class="goal-inp" id="gedit-total-'+g.id+'" type="number" min="1" value="'+(g.total||'')+'" placeholder="optional" style="width:60px"></div>';
-      h+='<div style="display:flex;gap:6px"><button class="goal-action-btn checkin" data-gedit-save="'+g.id+'" data-gperiod="'+period+'">SAVE</button><button class="goal-action-btn" data-gedit-cancel="1">CANCEL</button></div>';
+      h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px"><span class="dim-9">Target check-ins (optional):</span><input class="goal-inp" id="gedit-total-'+g.id+'" type="number" min="1" value="'+(g.total||'')+'" placeholder="optional" style="width:60px"></div>';
+      h+='<div class="flex-row"><button class="goal-action-btn checkin" data-gedit-save="'+g.id+'" data-gperiod="'+period+'">SAVE</button><button class="goal-action-btn" data-gedit-cancel="1">CANCEL</button></div>';
     } else {
       h+='<div style="display:flex;gap:10px;align-items:flex-start">';
       h+=arcSvg;
-      h+='<div style="flex:1;min-width:0">';
+      h+='<div class="flex-1">';
       h+='<div style="font-size:9px;color:'+accent.c+';letter-spacing:1.5px;opacity:.7;margin-bottom:2px">'+period.toUpperCase()+(timeInfo?' · '+timeInfo:'')+'</div>';
       h+='<div style="font-size:14px;color:var(--text);font-weight:600;line-height:1.3">'+g.text+'</div>';
       h+='</div>';
@@ -5696,7 +5701,7 @@ function renderGoals(period){
       h+='<div data-goalexpand="'+g.id+'" style="font-size:10px;color:var(--dim);cursor:pointer;margin-top:8px;opacity:.5;user-select:none">'+(isExpanded?'▲ collapse':'▼ details'+(detailCount?' ('+detailCount+')':''))+'</div>';
       if(isExpanded){
         h+='<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">';
-        h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:6px">SUBGOALS</div>';
+        h+='<div class="label-dim-sm">SUBGOALS</div>';
         subgoals.forEach(function(sg,sgi){
           h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
           h+='<span data-goalsg="'+g.id+'" data-sgidx="'+sgi+'" style="cursor:pointer;font-size:16px;color:'+(sg.done?accent.c:'rgba(255,255,255,.2)')+'">'+( sg.done?'◉':'○')+'</span>';
@@ -5705,7 +5710,7 @@ function renderGoals(period){
           h+='</div>';
         });
         h+='<div style="display:flex;gap:6px;margin-top:8px"><input id="gsg-inp-'+g.id+'" placeholder="Add subgoal..." autocomplete="off" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text);font-family:monospace;font-size:12px;padding:4px 2px;outline:none"><button data-goalsgadd="'+g.id+'" data-gperiod="'+period+'" style="font-size:10px;padding:3px 10px;border:1px solid '+accent.ring+';color:'+accent.c+';background:transparent;cursor:pointer">+</button></div>';
-        h+='<div style="margin-top:12px"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:6px">NOTES</div>';
+        h+='<div style="margin-top:12px"><div class="label-dim-sm">NOTES</div>';
         if(notes.length){
           notes.slice().reverse().slice(0,5).forEach(function(n){
             h+='<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:9px;color:var(--dim);margin-bottom:2px">'+(n.ts?n.ts.slice(0,10):'')+'</div><div style="font-size:12px;color:var(--text);line-height:1.5">'+n.text+'</div></div>';
@@ -5729,8 +5734,8 @@ function renderGoals(period){
   h+='<span data-gperiod="monthly" id="gperiod-monthly" style="font-size:9px;padding:3px 10px;border:1px solid rgba(255,204,0,.4);color:var(--ca);cursor:pointer;letter-spacing:1px">MONTHLY</span>';
   h+='<span data-gperiod="yearly" id="gperiod-yearly" style="font-size:9px;padding:3px 10px;border:1px solid rgba(255,255,255,.1);color:var(--dim);cursor:pointer;letter-spacing:1px">YEARLY</span>';
   h+='</div>';
-  h+='<input class="goal-inp" id="gi-new" placeholder="What do you want to pursue?" autocomplete="off" style="margin-bottom:6px">';
-  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:9px;color:var(--dim)">target check-ins</span><input class="goal-inp" id="gt-new" type="number" min="1" placeholder="optional" style="width:80px;flex-shrink:0"></div>';
+  h+='<input class="goal-inp" id="gi-new" placeholder="What do you want to pursue?" autocomplete="off" class="mb-6">';
+  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="dim-9">target check-ins</span><input class="goal-inp" id="gt-new" type="number" min="1" placeholder="optional" style="width:80px;flex-shrink:0"></div>';
   h+='<button class="goal-add-btn" id="gadd-new">+ ADD GOAL</button>';
   h+='</div>';
 
@@ -5882,7 +5887,7 @@ function renderDoneGoals(){
   var el=document.getElementById('goal-done-panel');if(!el)return;
   var done=goalsData.done||[];
   if(!done.length){
-    el.innerHTML='<div style="font-size:11px;color:var(--dim);padding:10px 0">No completed goals yet.</div>';
+    el.innerHTML='<div class="card-empty-v">No completed goals yet.</div>';
     return;
   }
   var h='<div style="font-size:9px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">'+done.length+' COMPLETED</div>';
@@ -5903,7 +5908,7 @@ function renderDoneGoals(){
     h+='</div>';
     // Chain dots
     if(checkins.length){
-      h+='<div class="goal-chain" style="margin-bottom:8px">';
+      h+='<div class="goal-chain" class="mb-8">';
       var slots=Math.max(g.total||checkins.length,checkins.length);
       for(var ci=0;ci<Math.min(slots,16);ci++){
         h+='<div class="goal-chain-dot'+(ci<checkins.length?' done':'')+'"></div>';
@@ -5990,7 +5995,7 @@ function goalCheckin(period,id){
   var todayStr=localDateStr();
   if(g.checkins[g.checkins.length-1]===todayStr)return; // already checked in today
   g.checkins.push(todayStr);
-  if(typeof hap==='function')hap(HAP.goal);
+  safeHap(HAP.goal);
   goalsSave();renderGoals('active');
   confetti(window.innerWidth/2,window.innerHeight*0.3,'#ffcc00');
 }
@@ -6138,7 +6143,7 @@ function sbRenderLog(){
     var icon=entry.ok?'✓':'✗';
     var color=entry.ok?'var(--cg)':'var(--cr)';
     h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:1px solid rgba(0,255,136,.06)">';
-    h+='<div style="flex:1;min-width:0">';
+    h+='<div class="flex-1">';
     h+='<span style="color:'+color+';font-size:10px;letter-spacing:.5px">'+icon+' '+entry.action+'</span>';
     if(entry.detail){
       h+='<div style="font-size:9px;color:var(--dim);margin-top:2px;word-break:break-all">'+entry.detail+'</div>';
@@ -6195,7 +6200,7 @@ async function sbMaybeFetchCloudStatus(){
       lastPushDeviceId:row.lastPushDeviceId||null,
       lastPushTs:row.updated_at||null
     };
-    localStorage.setItem('dash_cloud_meta',JSON.stringify(meta));
+    lsSet('dash_cloud_meta',meta);
     sbRenderCloudStatus(meta);
   }catch(e){
     statusEl.innerHTML='<span style="color:var(--cr);font-size:10px">Error: '+(e.message||'network error')+'</span>';
@@ -6294,10 +6299,10 @@ function saveSyncLog(action,device,ts){
   if(log.length>20)log=log.slice(0,20);
   localStorage.setItem(SYNC_LOG_KEY,JSON.stringify(log));
   // Cross-device log (all devices, stored in cloud key)
-  var allLog=JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]');
+  var allLog=lsGet('dash_sync_log_all',[]);
   allLog.unshift({action:action,device:device,ts:tsStr});
   if(allLog.length>20)allLog=allLog.slice(0,20);
-  localStorage.setItem('dash_sync_log_all',JSON.stringify(allLog));
+  lsSet('dash_sync_log_all',allLog);
   renderSyncLog();
 }
 async function sbFetchCloudSyncLog(){
@@ -6314,11 +6319,11 @@ async function sbFetchCloudSyncLog(){
     if(typeof cloudLog==='string')cloudLog=JSON.parse(cloudLog);
     if(!Array.isArray(cloudLog))return;
     // Merge with local
-    var localLog=JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]');
+    var localLog=lsGet('dash_sync_log_all',[]);
     var map={};
     localLog.concat(cloudLog).forEach(function(e){if(e&&e.ts&&e.device)map[e.device+'_'+e.ts]=e;});
     var merged=Object.values(map).sort(function(a,b){return b.ts>a.ts?1:-1;}).slice(0,20);
-    localStorage.setItem('dash_sync_log_all',JSON.stringify(merged));
+    lsSet('dash_sync_log_all',merged);
     renderSyncLog();
   }catch(e){console.warn('sbFetchCloudSyncLog failed',e);}
 }
@@ -6327,12 +6332,12 @@ function renderSyncLog(){
   var el=document.getElementById('sb-sync-history');
   if(!el)return;
   var thisDevice=getDeviceName();
-  var allLog=JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]');
+  var allLog=lsGet('dash_sync_log_all',[]);
   var localLog=JSON.parse(localStorage.getItem(SYNC_LOG_KEY)||'[]');
   var h='';
 
   // Last 5 syncs across all devices
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:6px">LAST 5 SYNCS · ALL DEVICES</div>';
+  h+='<div class="label-dim-sm">LAST 5 SYNCS · ALL DEVICES</div>';
   if(!allLog.length){
     h+='<div style="font-size:10px;color:var(--dim);padding:4px 0;opacity:.5">No syncs yet.</div>';
   } else {
@@ -6363,7 +6368,7 @@ function renderSyncLog(){
     var col=isPush?'var(--cg)':'var(--cc)';
     h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0">';
     h+='<span style="font-size:13px;color:'+col+'">'+(isPush?'↑':'↓')+'</span>';
-    h+='<div style="flex:1"><div style="font-size:11px;color:var(--text)">'+(isPush?'PUSH':'PULL')+' · '+sbTimeAgo(last.ts)+'</div></div>';
+    h+='<div style="flex:1"><div class="text-11">'+(isPush?'PUSH':'PULL')+' · '+sbTimeAgo(last.ts)+'</div></div>';
     h+='</div>';
   }
   el.innerHTML=h;
@@ -6404,7 +6409,7 @@ async function sbAnalyzeCloud(){
     var thisDevice=getDeviceName()||'this device';
     el.innerHTML=
       '<span style="color:var(--cg)">&#10003; Cloud has data</span><br>'+
-      'Last pushed by: <strong style="color:var(--text)">'+lastDevice+'</strong>'+(payload.lastPushDeviceId?' <span style="font-size:9px;color:var(--dim)">['+payload.lastPushDeviceId+']</span>':'')+'<br>'+
+      'Last pushed by: <strong style="color:var(--text)">'+lastDevice+'</strong>'+(payload.lastPushDeviceId?' <span class="dim-9">['+payload.lastPushDeviceId+']</span>':'')+'<br>'+
       'When: <strong style="color:var(--text)">'+ago+'</strong>'+(lastTs?' ('+lastTs.slice(0,16).replace('T',' ')+'Z)':'')+'<br>'+
       'You are on: <strong style="color:var(--text)">'+thisDevice+'</strong>';
     el.style.color='var(--dim)';
@@ -6473,7 +6478,7 @@ async function sbPush(){
           payload=mergeSnapshots(payload,rows[0].payload);
           // Also union syncLogAll from cloud so all devices stay in sync
           var _cloudLog=(rows[0].payload&&rows[0].payload.syncLogAll)||[];
-          var _localLog=JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]');
+          var _localLog=lsGet('dash_sync_log_all',[]);
           var _logMap={};
           _cloudLog.concat(_localLog).forEach(function(e){
             var k=(e.ts||'')+'|'+(e.device||'');
@@ -6593,7 +6598,7 @@ async function sbPull(){
         // Merge syncLogAll from cloud with local
         if(cloudPayload.syncLogAll&&Array.isArray(cloudPayload.syncLogAll)){
           var _cLog=cloudPayload.syncLogAll;
-          var _lLog=JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]');
+          var _lLog=lsGet('dash_sync_log_all',[]);
           var _lMap={};
           _cLog.concat(_lLog).forEach(function(e){var k=(e.ts||'')+'|'+(e.device||'');if(!_lMap[k])_lMap[k]=e;});
           safePayload.syncLogAll=Object.values(_lMap).sort(function(a,b){return b.ts>a.ts?1:-1;}).slice(0,20);
@@ -6696,12 +6701,12 @@ window._dbgCheckpoints['jua_data_start']=true;
 // ── JUZ AMMA UNDERSTAND ──
 window._dbgCheckpoints['jua_data_assign']=true;
 var JUA_DATA=[{"order":78,"surah":"An-Naba","meaning":"The Tidings","key_points":["Confirms the reality of the Day of Judgment.","Highlights the signs of Allah’s power in nature (mountains, Earth, sky).","Describes the rewards for the righteous in Paradise.","Warns of the consequences for those who deny the afterlife."]},{"order":79,"surah":"An-Nazi'at","meaning":"Those Who Drag Forth","key_points":["Describes the soul being taken at the time of death.","Recounts the story of Prophet Musa and Pharaoh as a warning.","Emphasizes that only Allah knows the exact timing of the Last Hour.","Contrasts the fate of the arrogant with those who fear Allah."]},{"order":80,"surah":"Abasa","meaning":"He Frowned","key_points":["Gentle correction to the Prophet regarding priority given to seekers of truth.","Reminds humanity of their humble origins from a drop of fluid.","Lists Allah’s blessings in providing food and vegetation.","Describes the chaos of the Day of Judgment where families flee from each other."]},{"order":81,"surah":"At-Takwir","meaning":"The Overthrowing","key_points":["Vividly describes the cosmic end of the world (stars falling, sun darkening).","Mentions the accountability for the 'buried alive' female infant.","Defends the integrity of the Quran as a message delivered by Angel Jibril.","Affirms that the Quran is a reminder for all of humanity."]},{"order":82,"surah":"Al-Infitar","meaning":"The Cleaving Asunder","key_points":["Describes the sky splitting and the graves being overturned.","Asks man what has deceived him regarding his Generous Lord.","Mentions the recording angels (Kiraman Katibin) who note every deed.","States that on the Last Day, no soul will have power over another."]},{"order":83,"surah":"Al-Mutaffifin","meaning":"The Defrauders","key_points":["Condemns those who give less in weight and measure (dishonesty in trade).","Defines 'Sijjin' as the register of the wicked.","Defines 'Illiyyun' as the register of the righteous.","Describes the mockery the believers faced and how the tables will turn."]},{"order":84,"surah":"Al-Inshiqaq","meaning":"The Sundering","key_points":["Describes the Earth being flattened and 'throwing out' its contents.","Explains that everyone is laboring toward a meeting with their Lord.","Contrasts those given their record in the right hand vs. behind their back.","Encourages prostration and submission to Allah’s word."]},{"order":85,"surah":"Al-Buruj","meaning":"The Mansions of the Stars","key_points":["Recounts the story of the People of the Ditch (martyrs of faith).","Assures that Allah witnesses all things, even when justice seems delayed.","Warns of the punishment for those who persecute believers.","Affirms the preservation of the Quran in the 'Guarded Tablet'."]},{"order":86,"surah":"At-Tariq","meaning":"The Night-Comer","key_points":["Points to the piercing star as a sign of divine oversight.","Reflects on the creation of man to prove that resurrection is easy for Allah.","States that on Judgment Day, all secrets will be laid bare.","Describes the Quran as a decisive word, not a matter for jest."]},{"order":87,"surah":"Al-A'la","meaning":"The Most High","key_points":["Commands the glorification of Allah, the Creator and Proportioner.","Promises the Prophet that he will not forget the revelation (except as Allah wills).","Emphasizes that success comes to those who purify their souls.","Notes that these teachings were also in the scriptures of Ibrahim and Musa."]},{"order":88,"surah":"Al-Ghashiyah","meaning":"The Overwhelming Event","key_points":["Describes the faces of the burdened vs. the joyful on Judgment Day.","Details the comforts of Paradise (running springs, raised couches).","Invites reflection on camels, the sky, mountains, and the Earth.","Reminds the Prophet that his role is to remind, not to manage people's hearts."]},{"order":89,"surah":"Al-Fajr","meaning":"The Dawn","key_points":["Swears by the dawn and the ten nights (of Dhul-Hijjah).","Mentions the destruction of powerful past nations like 'Ad and Thamud.","Critiques the human tendency to be greedy and neglect orphans.","Addresses the 'soul at peace' (An-Nafs al-Mutma'innah) with a call to enter Paradise."]},{"order":90,"surah":"Al-Balad","meaning":"The City","key_points":["Highlights that man was created for a life of struggle and test.","Lists the 'steep path' of virtue: freeing slaves and feeding the hungry.","Critiques those who brag about their wealth while ignoring the needy.","Identifies the believers as the 'Companions of the Right'."]},{"order":91,"surah":"Ash-Shams","meaning":"The Sun","key_points":["Swears by various celestial objects to emphasize the soul’s potential.","Teaches that success is achieved by purifying the soul (Tazkiyah).","Teaches that failure comes from corrupting the soul.","Uses the story of the She-Camel and Thamud as a warning against rebellion."]},{"order":92,"surah":"Al-Layl","meaning":"The Night","key_points":["Contrasts the paths of the generous believer and the stingy denier.","Explains that Allah makes the path to ease easy for the righteous.","Warns that wealth will not benefit a person once they perish.","Assures that those who give for the sake of Allah will be satisfied."]},{"order":93,"surah":"Ad-Duha","meaning":"The Morning Hours","key_points":["Consoles the Prophet during a period when revelation had paused.","Assures that the hereafter is better than the present life.","Reminds the Prophet of Allah’s care for him when he was an orphan.","Commands kindness to the needy and proclaiming Allah's favors."]},{"order":94,"surah":"Ash-Sharh","meaning":"The Expansion","key_points":["Speaks of Allah 'opening the chest' of the Prophet for guidance.","Mentions the removal of the heavy burden of anxiety/sin.","Repeats the famous promise: 'With every hardship, there is ease.'","Encourages turning to Allah in worship once worldly tasks are finished."]},{"order":95,"surah":"At-Tin","meaning":"The Fig","key_points":["Swears by the fig, the olive, Mount Sinai, and the city of Makkah.","States that man was created in the 'best of molds'.","Warns that man can fall to the 'lowest of the low' without faith.","Affirms Allah as the Most Just of all judges."]},{"order":96,"surah":"Al-Alaq","meaning":"The Clot","key_points":["Contains the first five verses revealed to the Prophet (Read!).","Emphasizes the importance of seeking knowledge and the pen.","Warns against the arrogance of man who thinks he is self-sufficient.","Condemns those who try to stop others from praying."]},{"order":97,"surah":"Al-Qadr","meaning":"The Power/Decree","key_points":["Commemorates the night the Quran was first sent down.","States that Laylat al-Qadr is better than a thousand months.","Mentions the descent of angels and the Spirit (Jibril).","Describes the night as one of peace until the break of dawn."]},{"order":98,"surah":"Al-Bayyinah","meaning":"The Clear Evidence","key_points":["Explains that people of the book needed clear evidence to change.","Defines the 'straight religion' as sincere worship, prayer, and charity.","Labels those who reject truth as the 'worst of creatures'.","Labels the righteous believers as the 'best of creatures'."]},{"order":99,"surah":"Al-Zalzalah","meaning":"The Earthquake","key_points":["Describes the final, violent shaking of the Earth.","States that the Earth will 'speak' and testify about human actions.","Teaches that people will see their deeds in the smallest detail.","Emphasizes the weight of an atom’s worth of good or evil."]},{"order":100,"surah":"Al-Adiyat","meaning":"The Chargers","key_points":["Uses the imagery of war horses to describe human intensity.","Critiques man for being ungrateful to his Lord.","Points out man's intense love for material wealth.","Reminds that what is hidden in the hearts will be made known."]},{"order":101,"surah":"Al-Qari'ah","meaning":"The Striking Hour","key_points":["Describes the Day of Judgment making people like scattered moths.","Mentions the mountains becoming like fluffed wool.","Introduces the concept of the 'Heavy Scales' for good deeds.","Warns of the 'Hawiyah' (a bottomless pit of fire) for the light scales."]},{"order":102,"surah":"At-Takathur","meaning":"Competition in Increase","key_points":["Warns that the distraction of gaining wealth lasts until death.","Tells humans that they will eventually see the 'certainty' of the fire.","Reminds that everyone will be questioned about the blessings they enjoyed.","Teaches that materialism blinds people to the purpose of life."]},{"order":103,"surah":"Al-Asr","meaning":"The Declining Day/Time","key_points":["Swears by time to show that humanity is in a state of loss.","Identifies the four traits of success: Faith, Good Deeds, Truth, and Patience.","Teaches the necessity of communal encouragement toward righteousness.","Summarizes the entire philosophy of life in three short verses."]},{"order":104,"surah":"Al-Humazah","meaning":"The Scorner","key_points":["Condemns backbiting, slandering, and mocking others.","Critiques the hoarding of wealth as a false sense of immortality.","Describes 'Hutamah', the fire that reaches the hearts.","Warns that arrogance and gossip lead to spiritual and literal ruin."]},{"order":105,"surah":"Al-Fil","meaning":"The Elephant","key_points":["Recounts the historical event of Abrahah’s failed attack on the Kaaba.","Shows how Allah protects His sanctuary with the smallest of means (birds).","Reminds the Quraish of Allah’s favor and power over their enemies.","Demonstrates that no human plot can overcome Allah’s plan."]},{"order":106,"surah":"Quraish","meaning":"The Quraish","key_points":["Mentions the winter and summer trade caravans of the tribe.","Urges the Quraish to worship the Lord of the House (Kaaba).","Attributes their security and food to Allah's grace.","Teaches that economic stability should lead to gratitude and worship."]},{"order":107,"surah":"Al-Ma'un","meaning":"Small Kindnesses","key_points":["Defines the 'denier of faith' as one who repels the orphan.","Critiques those who pray only to be seen (hypocrisy).","Condemns those who are heedless of their prayers.","Warns against those who withhold basic necessities/kindness from others."]},{"order":108,"surah":"Al-Kawthar","meaning":"The Abundance","key_points":["Consoles the Prophet by promising him the River of Abundance.","Commands the Prophet to pray and sacrifice for his Lord.","Declares that the enemies of the Prophet are the ones truly 'cut off'.","The shortest Surah, emphasizing quality of message over length."]},{"order":109,"surah":"Al-Kafirun","meaning":"The Disbelievers","key_points":["Establishes a clear distinction between Islamic monotheism and polytheism.","Refuses compromise in matters of core theology/worship.","Concludes with the famous principle: 'To you your religion, to me mine.'","Protects the integrity of the believer’s faith from external influence."]},{"order":110,"surah":"An-Nasr","meaning":"The Divine Support","key_points":["Foresees the final victory of Islam and the conquest of Makkah.","Describes people entering the religion in large crowds.","Instructs the Prophet to glorify Allah and seek forgiveness.","Signals the completion of the Prophet’s mission on Earth."]},{"order":111,"surah":"Al-Masad","meaning":"The Palm Fiber","key_points":["Condemns Abu Lahab for his active opposition to the Prophet.","Mentions that his wealth and children did not save him.","Condemns his wife for her role in spreading slander.","Serves as a historical miracle (it was revealed while they were still alive)."]},{"order":112,"surah":"Al-Ikhlas","meaning":"The Sincerity/Purity","key_points":["Defines the absolute Oneness of Allah (Tawhid).","States that Allah is Self-Sufficient and Eternal (As-Samad).","Negates the concept of Allah having parents or children.","Declares that nothing is comparable or equal to Him."]},{"order":113,"surah":"Al-Falaq","meaning":"The Daybreak","key_points":["A prayer for protection from the evil of created things.","Seeks refuge from the darkness of the night when it spreads.","Seeks protection from the evil of those who practice 'magic/knots'.","Seeks protection from the evil of the envious person."]},{"order":114,"surah":"An-Nas","meaning":"Mankind","key_points":["A prayer for protection from internal whispers (Waswas).","Recognizes Allah as the Lord, King, and God of mankind.","Identifies the whisperer as one who retreats (Al-Khannas).","Notes that whispers can come from both Jinns and Men."]}];
-var juaState=JSON.parse(localStorage.getItem('dash_jua')||'{}');
+var juaState=lsGet('dash_jua',{});
 if(!juaState.cards)juaState.cards={};
 if(!juaState.section)juaState.section='facts';
 if(!juaState._tab)juaState._tab='study';
 if(!juaState._revealed)juaState._revealed=0;
-function juaSave(){localStorage.setItem('dash_jua',JSON.stringify(juaState));}
+function juaSave(){lsSet('dash_jua',juaState);}
 
 var SECTIONS=[
   {id:'facts',label:'Facts',desc:'4 key points per surah'},
@@ -6711,7 +6716,7 @@ var SECTIONS=[
 ];
 var JUA_INTERVALS={again:1,hard:2,good:5,easy:14};
 
-function juaTodayKey(){var n=new Date();if(n.getHours()<4)n=new Date(n.getTime()-864e5);return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
+// todayKey() → now uses global todayKey()
 function juaCardKey(s,i){return s+'_'+i;}
 function juaSectionUnlocked(s){
   if(s==='facts')return true;
@@ -6726,7 +6731,7 @@ function juaAllSeen(s){
   return true;
 }
 function juaGetCard(s){
-  var today=juaTodayKey();
+  var today=todayKey();
   var count=s==='forward'||s==='backward'?JUA_DATA.length-1:JUA_DATA.length;
   for(var i=0;i<count;i++){var k=juaCardKey(s,i);var c=juaState.cards[k];if(c&&c.seen&&c.nextReview&&c.nextReview<=today)return i;}
   var newCount=0;
@@ -6748,7 +6753,7 @@ function juaAnswerCard(s,idx,result){
 }
 function juaSectionProgress(s){
   var count=s==='forward'||s==='backward'?JUA_DATA.length-1:JUA_DATA.length;
-  var seen=0,due=0,mastered=0,today=juaTodayKey();
+  var seen=0,due=0,mastered=0,today=todayKey();
   for(var i=0;i<count;i++){var k=juaCardKey(s,i);var c=juaState.cards[k];if(c&&c.seen){seen++;if(c.interval>=14)mastered++;if(!c.nextReview||c.nextReview<=today)due++;}}
   return{seen:seen,total:count,due:due,mastered:mastered};
 }
@@ -6783,12 +6788,12 @@ function juaRender(){
   else if(tab==='progress')h+=juaRenderProgress();
   else h+=juaRenderStats();
   el.innerHTML=h;
-  el.querySelectorAll('[data-juatab]').forEach(function(b){b.onclick=function(){juaState._tab=this.dataset.juatab;juaSave();if(typeof hap==='function')hap(HAP.soft);juaRender();};});
+  el.querySelectorAll('[data-juatab]').forEach(function(b){b.onclick=function(){juaState._tab=this.dataset.juatab;juaSave();safeHap(HAP.soft);juaRender();};});
   el.querySelectorAll('[data-juasec]').forEach(function(b){
     b.onclick=function(){
       var s=this.getAttribute('data-juasec');
       if(!juaSectionUnlocked(s))return;
-      juaState.section=s;juaState._revealed=0;juaSave();if(typeof hap==='function')hap(HAP.soft);juaRender();
+      juaState.section=s;juaState._revealed=0;juaSave();safeHap(HAP.soft);juaRender();
     };
   });
   el.querySelectorAll('[data-juaans]').forEach(function(b){
@@ -6796,12 +6801,12 @@ function juaRender(){
       var result=this.getAttribute('data-juaans');
       var idx=parseInt(this.getAttribute('data-juaidx'));
       juaAnswerCard(juaState.section,idx,result);
-      if(typeof hap==='function')hap(result==='again'?HAP.error:HAP.check);
+      safeHap(result==='again'?HAP.error:HAP.check);
       juaRender();
     };
   });
   var revBtn=el.querySelector('[data-juareveal]');
-  if(revBtn)revBtn.onclick=function(){juaState._revealed=(juaState._revealed||0)+1;if(typeof hap==='function')hap(HAP.soft);juaSave();juaRender();};
+  if(revBtn)revBtn.onclick=function(){juaState._revealed=(juaState._revealed||0)+1;safeHap(HAP.soft);juaSave();juaRender();};
   el.querySelectorAll('[data-juachoice]').forEach(function(b){
     b.onclick=function(){
       var correct=this.getAttribute('data-juacorrect')==='1';
@@ -6809,9 +6814,9 @@ function juaRender(){
       this.style.borderColor=correct?'var(--cg)':'var(--cr)';
       this.style.color=correct?'var(--cg)':'var(--cr)';
       if(!correct)el.querySelectorAll('[data-juachoice][data-juacorrect="1"]').forEach(function(c){c.style.borderColor='var(--cg)';c.style.color='var(--cg)';});
-      if(typeof hap==='function')hap(correct?HAP.check:HAP.error);
+      safeHap(correct?HAP.check:HAP.error);
       juaAnswerCard(juaState.section,idx,correct?'good':'again');
-      if(typeof hap==='function')hap(correct?HAP.check:HAP.error);
+      safeHap(correct?HAP.check:HAP.error);
       if(correct)setTimeout(function(){juaRender();},600);
       else{var nb=document.createElement('button');nb.textContent='NEXT →';nb.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';nb.onclick=function(){juaRender();};el.appendChild(nb);}
     };
@@ -6829,10 +6834,10 @@ function juaRenderStudy(){
   h+='</div>';
   if(!juaSectionUnlocked(sec)){
     var prev=SECTIONS[SECTIONS.findIndex(function(s){return s.id===sec;})-1];
-    return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,255,255,.1)"><div style="font-size:20px;margin-bottom:8px">??</div><div style="font-size:12px;color:var(--text)">Locked</div><div style="font-size:10px;color:var(--dim)">Complete '+prev.label+' first</div></div>';
+    return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,255,255,.1)"><div style="font-size:20px;margin-bottom:8px">??</div><div class="text-12">Locked</div><div class="dim-10">Complete '+prev.label+' first</div></div>';
   }
   var idx=juaGetCard(sec);
-  if(idx===null)return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,204,0,.15)"><div style="font-size:24px;margin-bottom:8px">✓</div><div style="font-size:13px;color:var(--ca)">All done for today!</div><div style="font-size:10px;color:var(--dim)">Come back tomorrow</div></div>';
+  if(idx===null)return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,204,0,.15)"><div class="icon-lg">✓</div><div style="font-size:13px;color:var(--ca)">All done for today!</div><div class="dim-10">Come back tomorrow</div></div>';
   var surah=JUA_DATA[idx];
   var k=juaCardKey(sec,idx);
   var card=juaState.cards[k]||{};
@@ -6874,7 +6879,7 @@ function juaRenderFacts(surah,idx){
     h+='<div style="font-size:12px;color:var(--text);line-height:1.9;margin-bottom:12px;padding:10px;border:1px solid rgba(255,204,0,.1);background:rgba(255,204,0,.03)">'+juaCloze(surah.key_points[0],seed)+'</div>';
     h+='<button data-juareveal="1" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">REVEAL FULL POINT 1</button>';
   } else {
-    h+='<div style="margin-bottom:10px">';
+    h+='<div class="mb-10">';
     for(var i=0;i<Math.min(revealed,surah.key_points.length);i++){
       var isLast=i===revealed-1;
       // Previous points shown complete; current point shown complete after reveal
@@ -6922,15 +6927,15 @@ function juaRenderOrder(surah,idx,dir){
   h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:12px">'+(dir==='forward'?'ORDER FORWARD ►':'◄ ORDER BACKWARD')+'</div>';
   h+='<div style="display:flex;align-items:center;gap:4px;margin-bottom:16px">';
   if(dir==='forward'){
-    h+='<div style="text-align:center;flex:1"><div style="font-size:12px;color:var(--text);font-family:monospace">'+leftSurah.surah+'</div><div style="font-size:9px;color:var(--dim)">('+leftSurah.order+')</div></div>';
+    h+='<div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+leftSurah.surah+'</div><div class="dim-9">('+leftSurah.order+')</div></div>';
     h+='<div style="color:var(--ca);font-size:16px">►</div>';
     h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:15px;color:rgba(255,204,0,.4)">???</div></div>';
-    if(rightSurah){h+='<div style="color:var(--ca);font-size:16px">►</div><div style="text-align:center;flex:1"><div style="font-size:12px;color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div style="font-size:9px;color:var(--dim)">('+rightSurah.order+')</div></div>';}
+    if(rightSurah){h+='<div style="color:var(--ca);font-size:16px">►</div><div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
   } else {
     h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:15px;color:rgba(255,204,0,.4)">???</div></div>';
     h+='<div style="color:var(--ca);font-size:16px">◄</div>';
-    h+='<div style="text-align:center;flex:1"><div style="font-size:12px;color:var(--text);font-family:monospace">'+correctSurah.surah+'</div><div style="font-size:9px;color:var(--dim)">('+correctSurah.order+')</div></div>';
-    if(rightSurah){h+='<div style="color:var(--ca);font-size:16px">◄</div><div style="text-align:center;flex:1"><div style="font-size:12px;color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div style="font-size:9px;color:var(--dim)">('+rightSurah.order+')</div></div>';}
+    h+='<div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+correctSurah.surah+'</div><div class="dim-9">('+correctSurah.order+')</div></div>';
+    if(rightSurah){h+='<div style="color:var(--ca);font-size:16px">◄</div><div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
   }
   h+='</div>';
   var choices=[{text:answerSurah.surah+' ('+answerSurah.order+')',correct:true}];
@@ -6949,13 +6954,13 @@ function juaRenderProgress(){
     var p=juaSectionProgress(sec.id),locked=!juaSectionUnlocked(sec.id);
     var pct=p.total?Math.round(p.seen/p.total*100):0;
     var col=locked?'rgba(255,255,255,.2)':'var(--ca)';
-    h+='<div style="margin-bottom:14px">';
+    h+='<div class="mb-14">';
     h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="font-size:11px;color:'+col+'">'+(si+1)+'. '+sec.label+'</span>';
     if(locked)h+='<span style="font-size:9px;color:rgba(255,255,255,.25)">??</span>';
     else if(p.seen===p.total&&p.total>0)h+='<span style="font-size:9px;color:rgba(80,250,123,.6)">ALL SEEN</span>';
     h+='<span style="margin-left:auto;font-size:9px;color:var(--dim)">'+p.seen+'/'+p.total+'</span></div>';
     h+='<div style="height:6px;background:rgba(255,255,255,.06);margin-bottom:4px"><div style="height:100%;width:'+pct+'%;background:'+(locked?'rgba(255,255,255,.1)':'var(--ca)')+';transition:width .3s"></div></div>';
-    h+='<div style="font-size:9px;color:var(--dim)">'+p.due+' due today · '+p.mastered+' mastered</div>';
+    h+='<div class="dim-9">'+p.due+' due today · '+p.mastered+' mastered</div>';
     h+='</div>';
   });
   return h;
@@ -6963,9 +6968,9 @@ function juaRenderProgress(){
 function juaRenderStats(){
   var totalSeen=0,totalMastered=0,totalDue=0;
   SECTIONS.forEach(function(s){var p=juaSectionProgress(s.id);totalSeen+=p.seen;totalMastered+=p.mastered;totalDue+=p.due;});
-  var h='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">';
+  var h='<div class="grid-2col">';
   [{l:'Cards Seen',v:totalSeen},{l:'Mastered',v:totalMastered},{l:'Due Today',v:totalDue},{l:'Total Cards',v:JUA_DATA.length*2}].forEach(function(stat){
-    h+='<div style="padding:10px;border:1px solid rgba(255,255,255,.08);text-align:center"><div style="font-size:22px;color:var(--ca);font-family:monospace">'+stat.v+'</div><div style="font-size:9px;color:var(--dim)">'+stat.l+'</div></div>';
+    h+='<div style="padding:10px;border:1px solid rgba(255,255,255,.08);text-align:center"><div style="font-size:22px;color:var(--ca);font-family:monospace">'+stat.v+'</div><div class="dim-9">'+stat.l+'</div></div>';
   });
   return h+'</div>';
 }
@@ -6977,25 +6982,22 @@ window._dbgCheckpoints['qt_before_data']=true;
 // ── QURAN TAFSIR ──
 var QT_DATA=[{"id_number":1,"verse":"1:1","surah_name":"Al-Fatiha","quran_text":"بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ","english_meaning":"In the name of Allah, the Entirely Merciful, the Especially Merciful.","verse_explanation":"The 'Basmalah' serves as the gateway to the Quran and every action for a believer. It establishes that all existence begins with the mercy of the Creator.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"He emphasizes that starting with the name of Allah is a means of seeking blessing (barakah) and recognition that He is the only One truly worthy of worship."},{"scholar":"Al-Qurtubi","opinion":"He delves into the linguistic roots, noting that Ar-Rahman refers to a general mercy for all creation, while Ar-Rahim is a specific, intimate mercy reserved for the believers."},{"scholar":"Muhammad Asad","opinion":"He views it as a psychological framework, suggesting that by reciting this, the human mind aligns itself with the primary attribute of the Divine: Infinite Grace."}]},{"id_number":2,"verse":"1:2","surah_name":"Al-Fatiha","quran_text":"الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ","english_meaning":"[All] praise is [due] to Allah, Lord of the worlds.","verse_explanation":"This verse establishes the foundational relationship between the Creator and the created: one of gratitude and absolute sovereignty.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Argues that 'Hamd' is more than just praise; it is a specific type of gratitude directed at the benefactor for favors granted by His own will."},{"scholar":"Fakhr al-Din al-Razi","opinion":"Explains 'Al-Alamin' (the worlds) as a proof of the infinite nature of God's creation, suggesting there are thousands of realms beyond human perception."},{"scholar":"Ibn al-Qayyim","opinion":"Focuses on the heart's involvement, stating that Hamd is the 'breath of the soul,' and without it, the spiritual life of a human ceases to function."}]},{"id_number":3,"verse":"1:5","surah_name":"Al-Fatiha","quran_text":"إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ","english_meaning":"It is You we worship and You we ask for help.","verse_explanation":"This is the central pivot of the Quran, dividing the relationship into the duty of the slave (worship) and the promise of the Master (assistance).","scholars_opinions":[{"scholar":"Ibn Taymiyyah","opinion":"States that this verse cures two major spiritual diseases: showing off (Riya) through 'It is You we worship,' and arrogance (Kibr) through 'You we ask for help.'"},{"scholar":"Sayyid Qutb","opinion":"Views this as the ultimate declaration of independence; if a person truly relies only on God, they become free from the slavery of all worldly powers."},{"scholar":"Al-Ghazali","opinion":"Suggests that 'worship' is the external action, but 'seeking help' is the internal realization that no action is possible without Divine permission."}]},{"id_number":4,"verse":"1:6","surah_name":"Al-Fatiha","quran_text":"اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ","english_meaning":"Guide us to the straight path.","verse_explanation":"A perpetual prayer for clarity and consistency in a world of moral ambiguity.","scholars_opinions":[{"scholar":"Raghib al-Isfahani","opinion":"Notes that 'Hidayah' (guidance) here is not just knowing the path, but being granted the strength to actually walk upon it until the end."},{"scholar":"Al-Shawkani","opinion":"Defines the 'Straight Path' as the Quran itself, which acts as a rope between the heavens and the earth, unchanging and secure."},{"scholar":"Malik Bennabi","opinion":"Interprets this path as the 'social trajectory' of a civilization that remains balanced between spiritual values and material progress."}]},{"id_number":5,"verse":"2:153","surah_name":"Al-Baqarah","quran_text":"يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ","english_meaning":"O you who have believed, seek help through patience and prayer. Indeed, Allah is with the patient.","verse_explanation":"Provides the two primary tools for navigating the trials of life: internal fortitude (patience) and external connection (prayer).","scholars_opinions":[{"scholar":"Al-Baghawi","opinion":"Explains that patience (Sabr) refers specifically to fasting or the restraint of the soul from desires, which prepares it for the discipline of prayer."},{"scholar":"Ibn Ajiba","opinion":"From a Sufi perspective, he argues that 'Allah is with the patient' implies a special 'Ma'iyyah' (presence) that brings tranquility amidst chaos."},{"scholar":"Nouman Ali Khan","opinion":"Highlights the linguistic placement of Sabr before Salah, suggesting that one needs mental resilience (patience) just to be able to focus in prayer."}]},{"id_number":6,"verse":"2:155","surah_name":"Al-Baqarah","quran_text":"وَلَنَبْلُوَنَّكُمْ بِشَيْءٍ مِنَ الْخَوْفِ وَالْجُوعِ وَنَقْصٍ مِنَ الْأَمْوَالِ وَالْأَنْفُسِ وَالثَّمَرَاتِ ۗ وَبَشِّرِ الصَّابِرِينَ","english_meaning":"And We will surely test you with something of fear and hunger and a loss of wealth and lives and fruits, but give good tidings to the patient.","verse_explanation":"An honest declaration that life is a series of tests designed to refine the human spirit.","scholars_opinions":[{"scholar":"Ibn Ashur","opinion":"Notes that the use of 'something' (bi-shay'in) implies that God never tests a soul beyond its capacity; it is only a small portion of what could be."},{"scholar":"Al-Jalalayn","opinion":"Emphasizes that these trials are a way to distinguish the sincere believer from the one who worships God only when things are easy."},{"scholar":"Tariq Ramadan","opinion":"Argues that these tests are not punishments, but 'opportunities for growth' that force humans to look inward and find their true source of strength."}]},{"id_number":7,"verse":"2:156","surah_name":"Al-Baqarah","quran_text":"الَّذِينَ إِذَا أَصَابَتْهُمْ مُصِيبَةٌ قَالُوا إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ","english_meaning":"Who, when disaster strikes them, say, 'Indeed we belong to Allah, and indeed to Him we will return.'","verse_explanation":"The ultimate mantra of detachment, shifting the focus from the loss to the Eternal Owner.","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"States that this phrase is a 'safety valve' for the heart, acknowledging that since we didn't own ourselves to begin with, the loss is merely a return of a trust."},{"scholar":"Saeed bin Jubayr","opinion":"Points out that this specific phrase was given to the Ummah of Muhammad as a mercy; previous nations did not have this specific verbal refuge during calamity."},{"scholar":"Hamza Yusuf","opinion":"Describes this as a 'metaphysical orientation,' where the soul recognizes its origin and its destination, rendering the middle (the disaster) manageable."}]},{"id_number":8,"verse":"2:186","surah_name":"Al-Baqarah","quran_text":"وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ","english_meaning":"And when My servants ask you concerning Me - indeed I am near. I respond to the invocation of the supplicant when he calls upon Me.","verse_explanation":"A deeply personal verse where God removes the intermediary to speak directly to the seeker.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Notes the unique structure: usually, God says 'They ask you... Say (Qul).' Here, He omits 'Say' and answers directly, showing the lack of barriers in prayer."},{"scholar":"Al-Razi","opinion":"Explains 'Nearness' (Qurb) as an intellectual and spiritual closeness that transcends physical distance or space."},{"scholar":"Wahbah al-Zuhayli","opinion":"Emphasizes that the response of God is guaranteed, but it may take forms the human didn't expect, such as averting a future evil instead."}]},{"id_number":9,"verse":"2:216","surah_name":"Al-Baqarah","quran_text":"وَعَسَىٰ أَنْ تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَكُمْ ۖ وَعَسَىٰ أَنْ تُحِبُّوا شَيْئًا وَهُوَ شَرٌّ لَكُمْ","english_meaning":"But perhaps you hate a thing and it is good for you; and perhaps you love a thing and it is bad for you.","verse_explanation":"A lesson in Divine wisdom versus human limited perception.","scholars_opinions":[{"scholar":"Ibn al-Qayyim","opinion":"Suggests that if a believer truly understood how God manages their affairs, their heart would melt out of love for His hidden kindness."},{"scholar":"Al-Tabari","opinion":"Relates this to the context of struggle (Jihad), but generalizes it to all of life's occurrences where humans lack foresight."},{"scholar":"Muhammad Metwalli al-Sha'rawi","opinion":"Uses the analogy of a parent and a child: the parent denies the child candy (which they love) for their own health, representing God's 'positive denial.'"}]},{"id_number":10,"verse":"2:255","surah_name":"Al-Baqarah","quran_text":"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ","english_meaning":"Allah - there is no deity except Him, the Ever-Living, the Sustainer of [all] existence. Neither drowsiness overtakes Him nor sleep.","verse_explanation":"Known as Ayat al-Kursi, this is the most powerful description of God's majesty and attributes in the Quran.","scholars_opinions":[{"scholar":"Al-Ghazali","opinion":"Focuses on 'Al-Qayyum' (The Self-Sustaining), explaining that every atom in the universe requires His constant attention to exist for even a millisecond."},{"scholar":"Ibn Taymiyyah","opinion":"Argues that this verse contains the 'Greatest Name' of Allah, which combines His life and His power over all creation."},{"scholar":"Abul A'la Maududi","opinion":"Views this as a complete refutation of all forms of shirk (polytheism), establishing a worldview where everything is dependent on one Will."}]},{"id_number":11,"verse":"2:256","surah_name":"Al-Baqarah","quran_text":"لَا إِكْرَاهَ فِي الدِّينِ ۖ قَدْ تَبَيَّنَ الرُّشْدُ مِنَ الْغَيِّ","english_meaning":"There shall be no compulsion in [acceptance of] the religion. The right course has become clear from the wrong.","verse_explanation":"Establishes the principle of religious freedom and the necessity of sincere, voluntary faith.","scholars_opinions":[{"scholar":"Ibn Abbas","opinion":"Reports that this was revealed when people tried to force their children into Islam, and God forbade it, as faith must come from the heart."},{"scholar":"Al-Zamakhshari","opinion":"Argues that since the proofs of truth are so clear, using force would be redundant and illogical; truth stands on its own merit."},{"scholar":"Yusuf al-Qaradawi","opinion":"Generalizes this as a human rights foundation, stating that Islam protects the sanctity of the human conscience above all."}]},{"id_number":12,"verse":"2:263","surah_name":"Al-Baqarah","quran_text":"قَوْلٌ مَعْرُوفٌ وَمَغْفِرَةٌ خَيْرٌ مِنْ صَدَقَةٍ يَتْبَعُهَا أَذًى","english_meaning":"Kind words and forgiveness are better than charity followed by injury.","verse_explanation":"Prioritizes the dignity of the recipient over the material value of the gift.","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Notes that a kind word heals the soul, while a hurtful charity breaks it; God is 'Ghani' (Rich), so He doesn't need our money if it comes with arrogance."},{"scholar":"Ibn Zayd","opinion":"Suggests that 'forgiveness' here means forgiving the beggar if they are persistent or rude, rather than reacting with anger."},{"scholar":"Malik bin Dinar","opinion":"Emphasized that the 'injury' (adha) mentioned can be as subtle as making the recipient feel inferior, which nullifies the spiritual reward."}]},{"id_number":13,"verse":"2:269","surah_name":"Al-Baqarah","quran_text":"يُؤْتِي الْحِكْمَةَ مَنْ يَشَاءُ ۚ وَمَنْ يُؤْتَ الْحِكْمَةَ فَقَدْ أُوتِيَ خَيْرًا كَثِيرًا","english_meaning":"He gives wisdom to whom He wills, and whoever has been given wisdom has certainly been given much good.","verse_explanation":"Differentiates between mere knowledge (information) and wisdom (the ability to apply knowledge correctly).","scholars_opinions":[{"scholar":"Mujahid ibn Jabr","opinion":"Defines wisdom (Hikmah) specifically as the understanding of the Quran and the ability to correctly interpret Divine laws."},{"scholar":"Al-Suyuti","opinion":"Describes it as 'acting upon knowledge,' stating that information without action is a burden, not wisdom."},{"scholar":"Muhammad Iqbal","opinion":"Sees Hikmah as the synthesis of 'Intellect' and 'Love,' allowing the human to master the material world while remaining spiritually grounded."}]},{"id_number":14,"verse":"2:284","surah_name":"Al-Baqarah","quran_text":"لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ وَإِنْ تُبْدُوا مَا فِي أَنْفُسِكُمْ أَوْ تُخْفُوهُ يُحَاسِبْكُمْ بِهِ اللَّهُ","english_meaning":"To Allah belongs whatever is in the heavens and whatever is in the earth. Whether you show what is within yourselves or conceal it, Allah will bring you to account for it.","verse_explanation":"A reminder of God's omniscience, covering both the cosmos and the deepest secrets of the heart.","scholars_opinions":[{"scholar":"Aisha (RA)","opinion":"Clarified that this 'accountability' for thoughts refers to the distress or 'humm' (anxiety) a person feels for a bad thought, which acts as an expiation."},{"scholar":"Al-Tabari","opinion":"Explains that while God knows our thoughts, He only punishes for the 'intent' (Azm) to act, not the fleeting whispers (Waswasa)."},{"scholar":"Ja'far al-Sadiq","opinion":"Spiritualized this as a call to purify the 'Sirr' (inner secret), as the heart is the true throne where God's presence is felt."}]},{"id_number":15,"verse":"2:286","surah_name":"Al-Baqarah","quran_text":"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ","english_meaning":"Allah does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned.","verse_explanation":"The ultimate promise of Divine justice and psychological relief, ensuring that no one is overwhelmed by duty.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Notes that this verse was revealed to ease the companions' fear of being judged for their thoughts (from verse 284), confirming God's leniency."},{"scholar":"Al-Qurtubi","opinion":"Explains the linguistic nuance between 'Kasabat' (gained easily) for good deeds and 'Iktasabat' (earned with effort) for sins, showing evil requires more exertion."},{"scholar":"Fazlur Rahman","opinion":"Interprets this as the foundation of 'Moral Responsibility'—man is only responsible for what he has the power to change."}]},{"id_number":16,"verse":"3:8","surah_name":"Ali 'Imran","quran_text":"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً","english_meaning":"[Who say], 'Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy.'","verse_explanation":"A prayer of those grounded in knowledge, recognizing the fragility of the human heart.","scholars_opinions":[{"scholar":"Al-Baghawi","opinion":"Points out that 'deviation' refers to following ambiguous verses to cause fitnah (confusion), seeking mercy to stay firm on the clear truths."},{"scholar":"Umm Salama","opinion":"Narrated that the Prophet (PBUH) frequently made a similar prayer, stating that 'the heart is between two fingers of the Merciful; He turns it as He wills.'"},{"scholar":"Ibn Ashur","opinion":"Describes this as the 'Petition of the Intellectuals'—those who realize that intelligence alone cannot preserve faith; only God's grace can."}]},{"id_number":17,"verse":"3:31","surah_name":"Ali 'Imran","quran_text":"قُلْ إِنْ كُنْتُمْ تُحبُّونَ اللَّهَ فَاتَّبِعُونِي يُحْبِبْكُمُ اللَّهُ وَيَغْفِرْ لَكُمْ ذُنُوبَكُمْ","english_meaning":"Say, [O Muhammad], 'If you should love Allah, then follow me, [so] Allah will love you and forgive you your sins.'","verse_explanation":"Defines true love for God as action and imitation of the Prophetic model, rather than just emotional sentiment.","scholars_opinions":[{"scholar":"Hasan al-Basri","opinion":"Famously said: 'People claimed to love Allah, so He tested them with this verse.' It serves as the 'Verse of the Test.'"},{"scholar":"Al-Zamakhshari","opinion":"Highlights that the reward (God's love for us) is far greater than our initial claim (our love for God)."},{"scholar":"Ibn Qayyim","opinion":"Explains that following the Prophet is the 'fuel' for the fire of Divine Love; without it, the flame eventually dies out."}]},{"id_number":18,"verse":"3:139","surah_name":"Ali 'Imran","quran_text":"وَلَا تَهِنُوا وَلَا تَحْزَنُوا وَأَنْتُمُ الْأَعْلَوْنَ إِنْ كُنْتُمْ مُؤْمِنِينَ","english_meaning":"So do not weaken and do not grieve, and you will be superior if you are [true] believers.","verse_explanation":"Revealed after the setback of the Battle of Uhud to restore morale and provide a spiritual definition of 'superiority.'","scholars_opinions":[{"scholar":"Sayyid Qutb","opinion":"Argues that 'superiority' refers to a moral and spiritual high ground—even when physically defeated, the believer's values remain supreme."},{"scholar":"Al-Tabari","opinion":"Focuses on the prohibition of 'Wahn' (mental weakness) and 'Huzn' (excessive grief for the past), as both paralyze a person's future actions."},{"scholar":"Ibn Abbas","opinion":"Interpreted this as a promise of eventual victory, provided the internal condition of faith is purified."}]},{"id_number":19,"verse":"3:159","surah_name":"Ali 'Imran","quran_text":"فَبِمَا رَحْمَةٍ مِنَ اللَّهِ لِنْتَ لَهُمْ ۖ وَلَوْ كُنْتَ فَظًّا غَلِيظَ الْقَلْبِ لَانْفَضُّوا مِنْ حَوْلِكَ","english_meaning":"So by mercy from Allah, [O Muhammad], you were lenient with them. And if you had been rude [in speech] and harsh in heart, they would have disbanded from about you.","verse_explanation":"Highlights the importance of soft-heartedness and emotional intelligence in leadership and communication.","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Stresses that if the Prophet himself needed to be gentle to keep people close, then ordinary leaders have an even greater obligation to avoid harshness."},{"scholar":"Fakhr al-Din al-Razi","opinion":"Connects 'Mercy' to the internal state and 'Lenience' to the external behavior, showing that one must flow from the other."},{"scholar":"Ali Gomaa","opinion":"Uses this verse to argue that the 'aesthetic of character' is a central pillar of Islamic دعوت (calling to the path), where beauty of soul is the main attractor."}]},{"id_number":20,"verse":"3:160","surah_name":"Ali 'Imran","quran_text":"إِنْ يَنْصُرْكُمُ اللَّهُ فَلَا غَالِبَ لَكُمْ ۖ وَإِنْ يَخْذُلْكُمْ فَمَنْ ذَا الَّذِي يَنْصُرُكُمْ مِنْ بَعْدِهِ","english_meaning":"If Allah should aid you, no one can overcome you; but if He should forsake you, who is there that can aid you after Him?","verse_explanation":"The ultimate statement of Tawakkul (reliance), shifting the source of victory from material causes to Divine will.","scholars_opinions":[{"scholar":"Ibn Ashur","opinion":"Points out the rhetorical question 'Who is there...?' serves to highlight the absolute powerlessness of creation when God withdraws His support."},{"scholar":"Al-Baghawi","opinion":"Defines 'forsaking' (khidhlan) as God leaving a person to their own self/ego, which is the greatest form of failure."},{"scholar":"Abul A'la Maududi","opinion":"Emphasizes that this verse is meant to purge the heart of fear of enemies and replace it with a singular fear of losing God's favor."}]},{"id_number":21,"verse":"3:190","surah_name":"Ali 'Imran","quran_text":"إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافِ اللَّيْلِ وَالنَّهَارِ لَآيَاتٍ لِأُولِي الْأَلْبَابِ","english_meaning":"Indeed, in the creation of the heavens and the earth and the alternation of the night and the day are signs for those of understanding.","verse_explanation":"Directs the human intellect to find the Creator through the observation of the natural laws and the cosmic order.","scholars_opinions":[{"scholar":"Ibn al-Jawzi","opinion":"Notes that 'Al-Albab' (the core/intellect) refers to those who strip away the husk of the world to see the essence of the Creator's wisdom within it."},{"scholar":"Al-Alusi","opinion":"Suggests the alternation of night and day represents the perpetual shift between expansion (joy) and contraction (sorrow) in the human soul."},{"scholar":"Muhammad Asad","opinion":"Interprets this as a call to scientific inquiry, where the 'signs' are the mathematical and physical laws that govern the universe."}]},{"id_number":22,"verse":"3:191","surah_name":"Ali 'Imran","quran_text":"الَّذِينَ يَذْكُرُونَ اللَّهَ قِيَامًا وَقُعُودًا وَعَلَىٰ جُنُوبِهِمْ وَيَتَفَكَّرُونَ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ رَبَّنَا مَا خَلَقْتَ هَٰذَا بَاطِلًا","english_meaning":"Who remember Allah while standing or sitting or [lying] on their sides and give thought to the creation of the heavens and the earth, [saying], 'Our Lord, You did not create this aimlessly.'","verse_explanation":"Shows the synthesis of the heart (remembrance) and the mind (reflection), leading to the realization of purpose.","scholars_opinions":[{"scholar":"Allamah Tabataba'i","opinion":"Explains that true 'Dhikr' is not just a tongue movement, but a permanent state of consciousness where one is never heedless of the Divine presence."},{"scholar":"Jalaluddin Rumi (referenced)","opinion":"Describes this as the 'dance of the soul'—whether moving or still, the lover's focus never leaves the Beloved, seeing Him in every atom."},{"scholar":"Ibn al-Qayyim","opinion":"Argues that 'reflection' (Tafakkur) is the lamp of the heart; without it, the heart is in darkness even if it performs rituals."}]},{"id_number":23,"verse":"4:1","surah_name":"An-Nisa","quran_text":"يَا أَيُّهَا النَّاسُ اتَّقُوا رَبَّكُمُ الَّذِي خَلَقَكُمْ مِنْ نَفْسٍ وَاحِدَةٍ","english_meaning":"O mankind, fear your Lord, who created you from one soul...","verse_explanation":"Establishes the ontological unity of all human beings, regardless of race, gender, or status.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Emphasizes the biological and spiritual kinship of humanity, making any form of tribalism or racism a violation of the 'One Soul' principle."},{"scholar":"Ibn Arabi","opinion":"Takes a metaphysical view, suggesting the 'One Soul' is the universal human reality (Al-Haqiqah al-Muhammadiyyah) from which all individuals manifest."},{"scholar":"Amina Wadud","opinion":"Highlights that the creation from a single soul implies primordial equality between genders, as neither is superior in origin."}]},{"id_number":24,"verse":"4:36","surah_name":"An-Nisa","quran_text":"وَاعْبُدُوا اللَّهَ وَلَا تُشْرِكُوا بِهِ شَيْئًا ۖ وَبِالْوَالِدَيْنِ إِحْسَانًا","english_meaning":"Worship Allah and associate nothing with Him, and to parents do good...","verse_explanation":"A comprehensive social charter linking the vertical relationship (God) with the horizontal relationships (family, neighbors, society).","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Notes that 'Ihsan' (excellence/kindness) is a higher standard than 'Adl' (justice); it requires doing more than what is legally required."},{"scholar":"Ibn Kathir","opinion":"Details the rights of the 'neighbor who is a stranger,' arguing that Islam mandates social safety nets for all members of a community, regardless of faith."},{"scholar":"Fethullah Gülen","opinion":"Sees this as the 'Circle of Compassion,' starting from the Creator and expanding to the closest kin, then the neighborhood, and finally the whole world."}]},{"id_number":25,"verse":"4:114","surah_name":"An-Nisa","quran_text":"لَا خَيْرَ فِي كَثِيرٍ مِنْ نَجْوَاهُمْ إِلَّا مَنْ أَمَرَ بِصَدَقَةٍ أَوْ مَعْرُوفٍ أَوْ إِصْلَاحٍ بَيْنَ النَّاسِ","english_meaning":"No good is there in much of their private conversation, except for those who enjoin charity or that which is right or conciliation between people.","verse_explanation":"Criticizes idle or harmful talk and defines the only three productive uses of 'secret' or private meetings.","scholars_opinions":[{"scholar":"Al-Baghawi","opinion":"States that 'Najwa' (whispering/private talk) usually leads to sin (backbiting), unless it is purposefully steered toward helping the poor."},{"scholar":"Ibn Ashur","opinion":"Points out that 'reconciliation' (Islah) is often more beloved to God than voluntary prayer, as it heals the fabric of the community."},{"scholar":"Malik Bennabi","opinion":"Views this as a 'social hygiene' rule, where the energy of communication must be directed toward construction rather than social decay."}]},{"id_number":26,"verse":"4:135","surah_name":"An-Nisa","quran_text":"يَا أَيُّهَا الَّذِينَ آمَنُوا كُونُوا قَوَّامِينَ بِالْقِسْطِ شُهَدَاءَ لِلَّهِ وَلَوْ عَلَىٰ أَنْفُسِكُمْ","english_meaning":"O you who have believed, be persistently standing firm in justice, witnesses for Allah, even if it be against yourselves...","verse_explanation":"The ultimate standard of impartial justice, where truth takes precedence over self-interest, family, or wealth.","scholars_opinions":[{"scholar":"Sayyid Qutb","opinion":"Describes this as the 'pinnacle of human integrity,' where a person's conscience is so pure that they can testify against their own ego."},{"scholar":"Al-Jalalayn","opinion":"Focuses on the word 'Qawwamin' (persistently standing), implying that justice is not a one-time act but a permanent character trait."},{"scholar":"Hamza Yusuf","opinion":"Relates this to the 'fitra' (innate nature), stating that true justice is only possible when a person fears God more than they love their own benefit."}]},{"id_number":27,"verse":"4:147","surah_name":"An-Nisa","quran_text":"مَا يَفْعَلُ اللَّهُ بِعَذَابِكُمْ إِنْ شَكَرْتُمْ وَآمَنْتُمْ","english_meaning":"What would Allah do with your punishment if you are grateful and believe?","verse_explanation":"A powerful rhetorical question establishing that God does not desire to punish; punishment is merely a result of human choices.","scholars_opinions":[{"scholar":"Al-Razi","opinion":"Argues that God is 'Ghani' (Self-Sufficient), so He gains nothing from punishing. Punishment only exists as a corrective for those who reject the truth."},{"scholar":"Ibn al-Qayyim","opinion":"Connects gratitude (Shukr) to the preservation of blessings; if a human is grateful, they have secured themselves from the need for 'wake-up' trials."},{"scholar":"Muhammad al-Ghazali","opinion":"States that the universe is built on 'Grace,' and the human only encounters 'Wrath' when they actively turn away from the light of belief."}]},{"id_number":28,"verse":"5:8","surah_name":"Al-Ma'idah","quran_text":"وَلَا يَجْرِمَنَّكُمْ شَنَآنُ قَوْمٍ عَلَىٰ أَلَّا تَعْدِلُوا ۚ اعْدِلُوا هُوَ أَقْرَبُ لِلتَّقْوَىٰ","english_meaning":"And do not let the hatred of a people prevent you from being just. Be just; that is nearer to righteousness.","verse_explanation":"Mandates ethical behavior even toward enemies, forbidding that personal animosity should cloud moral judgment.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Notes that justice is an absolute obligation that does not change based on the identity of the person—friend or foe."},{"scholar":"Javed Ahmad Ghamidi","opinion":"Highlights that justice is the 'closest neighbor' to Taqwa (God-consciousness). Without justice, one's claim of piety is hollow."},{"scholar":"Tariq Ramadan","opinion":"Argues this is the foundation of 'Universal Ethics,' where the believer must defend the rights of those they dislike as much as those they love."}]},{"id_number":29,"verse":"5:32","surah_name":"Al-Ma'idah","quran_text":"مَنْ قَتَلَ نَفْسًا بِغَيْرِ نَفْسٍ أَوْ فَسَادٍ فِي الْأَرْضِ فَكَأَنَّمَا قَتَلَ النَّاسَ جَمِيعًا","english_meaning":"Whoever kills a soul... it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely.","verse_explanation":"The Quranic declaration on the absolute sanctity of human life, using a powerful mathematical analogy.","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Explains that because the right to life is universal, an attack on one is an attack on the 'concept' of life itself, which affects all of humanity."},{"scholar":"Sa'id bin al-Musayyib","opinion":"Interpreted 'saving a soul' not just as physical rescue, but also as guiding someone out of spiritual darkness into light."},{"scholar":"Yusuf al-Qaradawi","opinion":"Uses this to emphasize that Islam is inherently pro-life and anti-terror, as no political goal justifies the 'killing of mankind' through one soul."}]},{"id_number":30,"verse":"6:103","surah_name":"Al-An'am","quran_text":"لَا تُدْرِكُهُ الْأَبْصَارُ وَهُوَ يُدْرِكُ الْأَبْصَارَ ۖ وَهُوَ اللَّطِيفُ الْخَبِيرُ","english_meaning":"Vision perceives Him not, but He perceives [all] vision; and He is the Subtle, the Acquainted.","verse_explanation":"Defines the transcendence of God, who is beyond physical perception but intimately aware of every observer.","scholars_opinions":[{"scholar":"Ja'far al-Sadiq","opinion":"Explained that 'vision' here means the limits of the mind; God cannot be 'encompassed' by thought, though He is known by the heart."},{"scholar":"Al-Razi","opinion":"Focuses on 'Al-Latif' (The Subtle), stating that God is closer to us than our own senses, yet too vast to be trapped by them."},{"scholar":"Ibn Arabi","opinion":"Suggests that we don't see God because He is 'too apparent' (like the sun blinding the eye), and He sees us because He is our very essence."}]},{"id_number":31,"verse":"6:162","surah_name":"Al-An'am","quran_text":"قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ","english_meaning":"Say, 'Indeed, my prayer, my rites of sacrifice, my living and my dying are for Allah, Lord of the worlds.'","verse_explanation":"The ultimate declaration of purpose, surrendering the entirety of existence—from rituals to the moment of death—to the Creator.","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Notes that 'living and dying' implies that even mundane activities (eating, sleeping) become worship if the intention is for God."},{"scholar":"Ibn al-Qayyim","opinion":"Describes this as the 'Station of Sincerity' (Ikhlas), where a person becomes a 'pure servant,' seeking no approval from the creation."},{"scholar":"Sayyid Qutb","opinion":"Views this as a revolutionary stance: it removes the 'secular' divide, making every aspect of life a spiritual mission."}]},{"id_number":32,"verse":"7:156","surah_name":"Al-A'raf","quran_text":"وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ","english_meaning":"...but My mercy encompasses all things.","verse_explanation":"A foundational promise that the primary attribute of God’s dealing with the universe is Mercy, which overpowers His wrath.","scholars_opinions":[{"scholar":"Ibn Arabi","opinion":"Argues that even in the Hereafter, Mercy is the ultimate end, as 'all things' include every creature and every state of being."},{"scholar":"Al-Suyuti","opinion":"Relates a Hadith that God divided mercy into 100 parts, keeping 99 for Himself and sending 1 to Earth—this 1 part is what causes a mother to love her child."},{"scholar":"Fakhr al-Din al-Razi","opinion":"Explains that Mercy 'encompassing' means it precedes our existence and continues after it; it is the environment in which we live."}]},{"id_number":33,"verse":"7:199","surah_name":"Al-A'raf","quran_text":"خُذِ الْعَفْوَ وَأْمُرْ بِالْعُرْفِ وَأَعْرِضْ عَنِ الْجَاهِلِينَ","english_meaning":"Take what is given, enjoin what is right, and turn away from the ignorant.","verse_explanation":"A three-part guide to interpersonal conduct: being easygoing, promoting virtue, and avoiding unproductive conflict.","scholars_opinions":[{"scholar":"Jafar al-Sadiq","opinion":"Said that this verse contains the entire sum of good character (Makarim al-Akhlaq)."},{"scholar":"Al-Tabari","opinion":"Interprets 'Afw' (what is given) as accepting the natural temperament of people without demanding perfection from them."},{"scholar":"Nouman Ali Khan","opinion":"Points out that 'turning away' from the ignorant is a form of emotional intelligence—not every insult deserves a response."}]},{"id_number":34,"verse":"7:204","surah_name":"Al-A'raf","quran_text":"وَإِذَا قُرِئَ الْقُرْآنُ فَاسْتَمِعُوا لَهُ وَأَنْصِتُوا لَعَلَّكُمْ تُرْحَمُونَ","english_meaning":"So when the Quran is recited, then listen to it and pay attention that you may receive mercy.","verse_explanation":"Establishes the etiquette of engagement with the Divine Word—silence and active listening as a prerequisite for spiritual reception.","scholars_opinions":[{"scholar":"Al-Baghawi","opinion":"Differentiates between 'hearing' (sama') and 'listening' (istima'), where the latter requires the presence of the heart."},{"scholar":"Ibn Ashur","opinion":"Suggests that the 'Mercy' mentioned is the immediate tranquility (Sakina) that descends upon those who respect the Word."},{"scholar":"Sahl al-Tustari","opinion":"Believes that in the silence of the listener, God 'speaks' to the inner secret of the soul, providing personal guidance."}]},{"id_number":35,"verse":"8:2","surah_name":"Al-Anfal","quran_text":"إِنَّمَا الْمُؤْمِنُونَ الَّذِينَ إِذَا ذُكِرَ اللَّهُ وَجِلَتْ قُلُوبُهُمْ","english_meaning":"The believers are only those who, when Allah is mentioned, their hearts tremble...","verse_explanation":"Describes the emotional sensitivity of a heart that is truly connected to its Creator.","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Explains 'Wajal' (trembling) as a mix of awe and love—like a child who is both in awe of their father but loves him deeply."},{"scholar":"Ibn al-Qayyim","opinion":"States that the trembling is because of the heart's awareness of its own shortcomings in the presence of Majesty."},{"scholar":"Amin Ahsan Islahi","opinion":"Emphasizes the word 'Innama' (only), suggesting that if a person feels nothing when hearing God's name, their faith needs 'reviving.'"}]},{"id_number":36,"verse":"8:33","surah_name":"Al-Anfal","quran_text":"وَمَا كَانَ اللَّهُ لِيُعَذِّبَهُمْ وَأَنْتَ فِيهِمْ ۚ وَمَا كَانَ اللَّهُ مُعَذِّبَهُمْ وَهُمْ يَسْتَغْفِرُونَ","english_meaning":"But Allah would not punish them while you, [O Muhammad], are among them, and Allah would not punish them while they seek forgiveness.","verse_explanation":"Reveals the two 'shields' against Divine punishment: the presence of the Prophetic legacy and the act of Istighfar (seeking forgiveness).","scholars_opinions":[{"scholar":"Ibn Abbas","opinion":"Famously said: 'There were two safeties on earth. One is gone (the Prophet), but the other remains (seeking forgiveness). If you lose that, you are lost.'"},{"scholar":"Al-Shawkani","opinion":"Notes that 'seeking forgiveness' must be sincere (from the heart) to act as a shield, not just empty words."},{"scholar":"Habib Umar bin Hafiz","opinion":"Interprets 'you are among them' as the Prophet's character (Sunnah) being alive in the community; as long as the Sunnah is practiced, the community is protected."}]},{"id_number":37,"verse":"8:46","surah_name":"Al-Anfal","quran_text":"وَلَا تَنَازَعُوا فَتَفْشَلُوا وَتَذْهَبَ رِيحُكُمْ","english_meaning":"...and do not dispute and [thus] lose courage and [then] your strength would depart...","verse_explanation":"A sociological warning that internal conflict leads to the loss of 'Rih' (wind/momentum/power).","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Uses the metaphor of a ship: if the crew fights, they lose the 'wind' in their sails and the ship becomes a sitting duck."},{"scholar":"Abul A'la Maududi","opinion":"Argues that unity is not just a moral goal but a strategic necessity for any civilization that wishes to survive."},{"scholar":"Muhammad Iqbal","opinion":"Interprets 'Rih' as the collective 'ego' or 'spirit' of a nation; once they split into sects, that spirit evaporates."}]},{"id_number":38,"verse":"9:40","surah_name":"At-Tawbah","quran_text":"لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا","english_meaning":"...'Do not grieve; indeed Allah is with us.'","verse_explanation":"Spoken by the Prophet to Abu Bakr in the Cave of Thawr, representing absolute trust in God during the most vulnerable moment.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Emphasizes that 'Ma'iyyah' (God being with us) is the ultimate source of Sakina (tranquility) that allows one to remain calm in the face of death."},{"scholar":"Al-Qurtubi","opinion":"Notes that the Prophet didn't say 'Don't fear,' but 'Don't grieve,' because grief for the future can paralyze action, whereas trust in God empowers it."},{"scholar":"Hamza Yusuf","opinion":"Describes this as the 'Philosophy of the Cave'—when the world is against you, the realization of God's presence makes the small cave feel like the whole universe."}]},{"id_number":39,"verse":"9:128","surah_name":"At-Tawbah","quran_text":"لَقَدْ جَاءَكُمْ رَسُولٌ مِنْ أَنْفُسِكُمْ عَزِيزٌ عَلَيْهِ مَا عَنِتُّمْ حَرِيصٌ عَلَيْكُمْ بِالْمُؤْمِنِينَ رَءُوفٌ رَحِيمٌ","english_meaning":"There has certainly come to you a Messenger from among yourselves. Grievous to him is what you suffer; [he is] concerned over you and to the believers is kind and merciful.","verse_explanation":"A touching description of the Prophet’s empathy and his deep emotional investment in the well-being of his people.","scholars_opinions":[{"scholar":"Ibn Ashur","opinion":"Points out that 'from yourselves' means he understands human weakness because he shares the human nature."},{"scholar":"Al-Jalalayn","opinion":"Highlights 'Haris' (concerned), which implies a mother-like anxiety for the safety and guidance of the believers."},{"scholar":"Fethullah Gülen","opinion":"Describes the Prophet as a 'Doctor of Hearts' whose own heart hurts whenever his 'patients' are in pain."}]},{"id_number":40,"verse":"9:129","surah_name":"At-Tawbah","quran_text":"فَإِنْ تَوَلَّوْا فَقُلْ حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ","english_meaning":"But if they turn away, say, 'Sufficient for me is Allah; there is no deity except Him. On Him I have relied, and He is the Lord of the Great Throne.'","verse_explanation":"The ultimate declaration of spiritual independence—even if the whole world turns away, the presence of God is enough.","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"States that 'Hasbiya Allah' (God is sufficient) is the fortress for anyone who is lonely or rejected in their mission."},{"scholar":"Abul A'la Maududi","opinion":"Explains that referencing the 'Great Throne' is to remind the soul that the one supporting it is the Sovereign of the entire cosmos."},{"scholar":"Ibn al-Qayyim","opinion":"Argues that 'Tawakkul' (reliance) is not passive, but the highest form of active courage, as it grounds the human in the Infinite."}]},{"id_number":41,"verse":"10:44","surah_name":"Yunus","quran_text":"إِنَّ اللَّهَ لَا يَظْلِمُ النَّاسَ شَيْئًا وَلَٰكِنَّ النَّاسَ أَنْفُسَهُمْ يَظْلِمُونَ","english_meaning":"Indeed, Allah does not wrong the people at all, but it is the people who are wronging themselves.","verse_explanation":"A foundational statement on Divine Justice and human accountability, emphasizing that suffering is often the result of human choices rather than Divine whim.","scholars_opinions":[{"scholar":"Fakhr al-Din al-Razi","opinion":"Argues that 'wronging themselves' refers to the corruption of the soul's innate potential; God provides the light, but humans choose to close their eyes."},{"scholar":"Allamah Tabataba'i","opinion":"Explains this through the law of cause and effect; every action carries a natural consequence, and 'wronging oneself' is simply triggering a negative outcome."},{"scholar":"Muhammad Asad","opinion":"Views this as a sociological law: societies perish not because of Divine anger, but because they violate the moral and physical laws that sustain them."}]},{"id_number":42,"verse":"10:62","surah_name":"Yunus","quran_text":"أَلَا إِنَّ أَوْلِيَاءَ اللَّهِ لَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ","english_meaning":"Unquestionably, [for] the allies of Allah there will be no fear concerning them, nor will they grieve.","verse_explanation":"Defines the state of 'Wilayah' (closeness to God) as a psychological fortress where the anxieties of the future and the regrets of the past are neutralized.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Identifies the 'Allies' as those who combine faith (Iman) with constant mindfulness (Taqwa), resulting in a state of eternal tranquility."},{"scholar":"Al-Ghazali","opinion":"Suggests that 'no fear' means they have reached a level of certainty where they trust the outcome of every event, seeing the hand of the Beloved in everything."},{"scholar":"Yasir Qadhi","opinion":"Notes that while they may feel human emotions, they are not 'overwhelmed' by them; their spiritual anchor prevents them from sinking into despair."}]},{"id_number":43,"verse":"11:115","surah_name":"Hud","quran_text":"وَاصْبِرْ فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ","english_meaning":"And be patient, for indeed, Allah does not allow to be lost the reward of those who do good.","verse_explanation":"An assurance of the conservation of moral energy; no good deed, however small, is ever deleted from the cosmic record.","scholars_opinions":[{"scholar":"Ibn al-Jawzi","opinion":"Highlights that the 'reward' isn't just in the afterlife, but in the immediate peace and strength God grants the doer of good."},{"scholar":"Al-Sadi","opinion":"Emphasizes that patience is the 'container' for excellence (Ihsan); without patience, a person cannot sustain high-quality work or character."},{"scholar":"Nouman Ali Khan","opinion":"Points out the word 'Ajar' (wage/reward) implies a contractual certainty; God views Himself as 'indebted' to pay back the one who does good."}]},{"id_number":44,"verse":"12:18","surah_name":"Yusuf","quran_text":"فَصَبْرٌ جَمِيلٌ ۖ وَاللَّهُ الْمُسْتَعَانُ عَلَىٰ مَا تَصِفُونَ","english_meaning":"...So patience is most fitting. And Allah is the one sought for help against that which you describe.","verse_explanation":"Introduces the concept of 'Sabrun Jamil' (Beautiful Patience)—patience without complaining to creation, only to the Creator.","scholars_opinions":[{"scholar":"Ibn al-Qayyim","opinion":"Defines beautiful patience as that which is free from restlessness, anxiety, and the desire to make others feel guilty for one's suffering."},{"scholar":"Al-Qurtubi","opinion":"Notes that Jacob (AS) knew his sons were lying, but chose silence and reliance on God as the most dignified response to betrayal."},{"scholar":"Muhammad al-Ghazali","opinion":"Describes this as 'Positive Patience'—not a passive surrender, but a calm, strategic endurance while waiting for the truth to manifest."}]},{"id_number":45,"verse":"12:67","surah_name":"Yusuf","quran_text":"لَا تَدْخُلُوا مِنْ بَابٍ وَاحِدٍ وَادْخُلُوا مِنْ أَبْوَابٍ مُتَفَرِّقَةٍ","english_meaning":"And he said, 'O my sons, do not enter from one gate but enter from different gates...'","verse_explanation":"A lesson in balancing practical caution and strategic planning with the ultimate reliance on Divine decree.","scholars_opinions":[{"scholar":"Ibn Ashur","opinion":"Interprets this as a command to avoid 'Evil Eye' and unnecessary attention, showing that Islam encourages taking logical precautions (Asbab)."},{"scholar":"Al-Zamakhshari","opinion":"Suggests that using multiple gates represents 'diversification of risk'—if one path is blocked or dangerous, others remain open."},{"scholar":"Hamza Yusuf","opinion":"Uses this to discuss the 'shadow' of the ego; by entering from different gates, they remained humble and less likely to provoke envy or hostility."}]},{"id_number":46,"verse":"12:86","surah_name":"Yusuf","quran_text":"إِنَّمَا أَشْكُو بَثِّي وَحُزْنِي إِلَى اللَّهِ وَأَعْلَمُ مِنَ اللَّهِ مَا لَا تَعْلَمُونَ","english_meaning":"He said, 'I only complain of my suffering and my grief to Allah, and I know from Allah that which you do not know.'","verse_explanation":"The ultimate expression of emotional intimacy with God, where the believer vents their deepest pain only to the One who can actually heal it.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Explains that 'what you do not know' refers to Jacob’s absolute certainty that God’s promise is true, even when the data of the world suggests otherwise."},{"scholar":"Ibn Ajiba","opinion":"From a mystical perspective, this is the station of 'Kashf' (unveiling)—where the heart sees the hidden mercy behind the apparent tragedy."},{"scholar":"Abdel Haleem","opinion":"Focuses on the linguistic precision: 'Bath' (suffering) refers to grief so intense it 'scatters' one's focus, yet it is gathered back through prayer."}]},{"id_number":47,"verse":"13:11","surah_name":"Ar-Ra'd","quran_text":"إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنْفُسِهِمْ","english_meaning":"Indeed, Allah will not change the condition of a people until they change what is in themselves.","verse_explanation":"The primary law of social and personal transformation: external reality is a reflection of internal state.","scholars_opinions":[{"scholar":"Malek Bennabi","opinion":"This is a core pillar of his 'Conditions of Civilization,' arguing that no political revolution succeeds unless the 'inner man' is reformed first."},{"scholar":"Sayyid Qutb","opinion":"Emphasizes that Divine support is contingent upon human initiative; God provides the power, but the 'trigger' is the human will."},{"scholar":"Ibn al-Qayyim","opinion":"Relates this to individual psychology: if you want God to change your anxiety to peace, you must change your habits of thought and heart."}]},{"id_number":48,"verse":"13:28","surah_name":"Ar-Ra'd","quran_text":"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ","english_meaning":"Unquestionably, by the remembrance of Allah hearts are assured.","verse_explanation":"Defines the only 'natural frequency' at which the human heart finds resonance and stability: the mention of its Source.","scholars_opinions":[{"scholar":"Al-Razi","opinion":"Argues that since the heart is infinite in its desires, it can never be satisfied by finite worldly objects; only the Infinite (God) can fill it."},{"scholar":"Ibn Taymiyyah","opinion":"States that 'Dhikr' (remembrance) is to the heart what water is to a fish; without it, the heart gasps and dies in a state of agitation."},{"scholar":"Saeed bin Jubayr","opinion":"Interprets 'assurance' as the removal of doubt; the heart becomes firm because it finally understands the 'Why' behind existence."}]},{"id_number":49,"verse":"14:7","surah_name":"Ibrahim","quran_text":"لَئِنْ شَكَرْتُمْ لَأَزِيدَنَّكُمْ","english_meaning":"If you are grateful, I will surely increase you [in favor].","verse_explanation":"Establishes a mathematical-spiritual ratio: gratitude is the multiplier of blessings.","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Explains that gratitude isn't just saying 'Alhamdulillah,' but using the blessing in a way that pleases the Provider, which then triggers more."},{"scholar":"Ibn al-Jawzi","opinion":"Notes that the 'increase' can be in the blessing itself, or in the 'Barakah' (utility) of the blessing, making a little go a long way."},{"scholar":"Muhammad Metwalli al-Sha'rawi","opinion":"Suggests that gratitude 'tethers' the current blessing and 'hunts' the future one; it is both a shield and a magnet."}]},{"id_number":50,"verse":"14:34","surah_name":"Ibrahim","quran_text":"وَإِنْ تَعُدُّوا نِعْمَتَ اللَّهِ لَا تُحْصُوهَا","english_meaning":"And if you should count the favor of Allah, you could not enumerate them.","verse_explanation":"A reminder of the infinite complexity and volume of the biological and spiritual systems supporting human life at every second.","scholars_opinions":[{"scholar":"Al-Razi","opinion":"Invites the reader to look at a single cell or a single breath; the variables required to sustain life for one minute are beyond human calculation."},{"scholar":"Muhammad Asad","opinion":"Refers to the 'ecological favors'—the precise balance of gases, gravity, and distance that make Earth habitable against all odds."},{"scholar":"Fethullah Gülen","opinion":"Notes the word 'Ni'mah' is singular, implying that even 'one' favor (like the eye) has so many sub-layers that you couldn't count the components of that single gift."}]},{"id_number":51,"verse":"15:49","surah_name":"Al-Hijr","quran_text":"نَبِّئْ عِبَادِي أَنِّي أَنَا الْغَفُورُ الرَّحِيمُ","english_meaning":"[O Muhammad], inform My servants that it is I who am the Forgiving, the Merciful.","verse_explanation":"A direct message of hope, where God identifies Himself primarily through the lens of redemption and grace.","scholars_opinions":[{"scholar":"Al-Baghawi","opinion":"Points out the honor in the word 'My servants'; even those who sin are still 'His,' and He invites them back with tenderness."},{"scholar":"Ibn Kathir","opinion":"States that this verse was revealed to balance the fear of punishment, ensuring the believer's heart remains in a state of optimistic love."},{"scholar":"Al-Qurtubi","opinion":"Highlights that God uses the 'First Person' (I am the Forgiving), making the promise of mercy an absolute and personal guarantee."}]},{"id_number":52,"verse":"15:85","surah_name":"Al-Hijr","quran_text":"فَاصْفَحِ الصَّفْحَ الْجَمِيلَ","english_meaning":"...So overlook [any human faults] with gracious forgiveness.","verse_explanation":"Defines 'Al-Safh al-Jamil' (Gracious Overlooking)—forgiving without reminding the person of their fault or holding a secret grudge.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Interprets 'overlooking' as a higher state than mere forgiveness; it's as if the fault was never committed, wiping the slate completely clean."},{"scholar":"Ibn Ajiba","opinion":"Argues that one cannot have a gracious heart if it is filled with the 'trash' of others' mistakes; overlooking is for one's own mental health."},{"scholar":"Tariq Ramadan","opinion":"Sees this as a social ethic: to build a community, we must 'overlook' the petty differences and focus on the shared common good."}]},{"id_number":53,"verse":"16:18","surah_name":"An-Nahl","quran_text":"وَإِنْ تَعُدُّوا نِعْمَةَ اللَّهِ لَا تُحْصُوهَا ۗ إِنَّ اللَّهَ لَفَغُورٌ رَحِيمٌ","english_meaning":"And if you should count the favors of Allah, you could not enumerate them. Indeed, Allah is Forgiving and Merciful.","verse_explanation":"A repetition of 14:34, but with a different ending; here, God acknowledges our failure to be sufficiently grateful and offers forgiveness for it.","scholars_opinions":[{"scholar":"Ibn al-Qayyim","opinion":"Notes that the end of the verse ('Indeed Allah is Forgiving') is a consolation; since we can never count the favors, we can never give full thanks, so God forgives our shortcoming."},{"scholar":"Al-Shawkani","opinion":"Suggests that the greatest 'favor' we can't count is the very fact that God forgives us for being ungrateful for all the other favors."},{"scholar":"Hamza Yusuf","opinion":"Relates this to 'Entropy' in the physical world; God's Mercy is the constant energy input that keeps the system from collapsing into chaos."}]},{"id_number":54,"verse":"16:90","surah_name":"An-Nahl","quran_text":"إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ وَإِيتَاءِ ذِي الْقُرْبَىٰ","english_meaning":"Indeed, Allah orders justice and good conduct and giving to relatives and forbids immorality and bad conduct and oppression.","verse_explanation":"The 'Comprehensive Verse' that summarizes the entire Islamic ethical and social system in a single sentence.","scholars_opinions":[{"scholar":"Abdullah ibn Mas'ud","opinion":"Famously said: 'This is the most comprehensive verse in the Quran regarding good and evil.'"},{"scholar":"Abul A'la Maududi","opinion":"Views this as the 'Constitution of a Moral Society,' balancing the legal (justice) with the social/emotional (Ihsan)."},{"scholar":"Al-Jalalayn","opinion":"Defines 'Adl' as giving everyone their due right, and 'Ihsan' as giving more than their due right and taking less than your own."}]},{"id_number":55,"verse":"16:125","surah_name":"An-Nahl","quran_text":"ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ ۖ وَجَادِلْهُمْ بِالَّتِي هِيَ أَحْسَنُ","english_meaning":"Invite to the way of your Lord with wisdom and good instruction, and argue with them in a way that is best.","verse_explanation":"The methodology of communication: using intellect (wisdom), emotion (good instruction), and dialectic (best argument).","scholars_opinions":[{"scholar":"Ibn Ashur","opinion":"Explains that 'Wisdom' means addressing each person according to their mental capacity and specific situation."},{"scholar":"Sayyid Qutb","opinion":"Argues that 'arguing in a way that is best' means maintaining dignity and kindness even when the other person is being rude or illogical."},{"scholar":"Malik Bennabi","opinion":"Describes this as the 'Pedagogy of the Soul'—the goal isn't to 'win' the debate but to 'open' the heart of the listener."}]},{"id_number":56,"verse":"16:128","surah_name":"An-Nahl","quran_text":"إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوْا وَالَّذِينَ هُمْ مُحْسِنُونَ","english_meaning":"Indeed, Allah is with those who fear Him and those who are doers of good.","verse_explanation":"Reveals the two keys to gaining 'Ma'iyyat Allah' (Divine Support): internal restraint (Taqwa) and external excellence (Ihsan).","scholars_opinions":[{"scholar":"Al-Baghawi","opinion":"Defines 'those who fear Him' as those who avoid the forbidden, and 'doers of good' as those who go above and beyond in their duties."},{"scholar":"Saeed bin Jubayr","opinion":"States that God's 'with-ness' here is the 'Special Support' (Al-Ma'iyyah al-Khassah), providing protection and success in all affairs."},{"scholar":"Ibn Ajiba","opinion":"Suggests that 'Ihsan' is to worship God as if you see Him; if you do that, you realize He was 'with' you all along."}]},{"id_number":57,"verse":"17:23","surah_name":"Al-Isra","quran_text":"وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ وَبِالْوَالِدَيْنِ إِحْسَانًا","english_meaning":"And your Lord has decreed that you not worship except Him, and to parents, good treatment.","verse_explanation":"Links the highest spiritual obligation (Tawhid) directly with the highest social obligation (honoring parents).","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Notes that 'Qada' (decreed) here is a moral and legal command, making the service of parents a form of worship in itself."},{"scholar":"Fakhr al-Din al-Razi","opinion":"Explains that parents are the 'apparent' cause of existence, while God is the 'real' cause; thus, both must be acknowledged in hierarchy."},{"scholar":"Ibn Kathir","opinion":"Details the meaning of 'Uff' (the smallest sound of irritation), stating that even a sigh of annoyance toward parents is a violation of this verse."}]},{"id_number":58,"verse":"17:32","surah_name":"Al-Isra","quran_text":"وَلَا تَقْرَبُوا الزِّنَا ۖ إِنَّهُ كَانَ فَاحِشَةً وَسَاءَ سَبِيلًا","english_meaning":"And do not approach unlawful sexual intercourse. Indeed, it is ever an immorality and is evil as a way.","verse_explanation":"A preventative command: it doesn't just forbid the act, but the 'approaching' of it (the pathways that lead to it).","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Notes that 'don't approach' is more powerful than 'don't do,' as it targets the environment, the gaze, and the preliminary steps."},{"scholar":"Muhammad Asad","opinion":"Focuses on 'evil as a way,' arguing that it destroys the sanctity of the family unit, which is the basic building block of a healthy society."},{"scholar":"Abul A'la Maududi","opinion":"Describes this as the 'social hygiene' of the Quran, protecting the psychological and physical health of the community."}]},{"id_number":59,"verse":"17:37","surah_name":"Al-Isra","quran_text":"وَلَا تَمْشِ فِي الْأَرْضِ مَرَحًا ۖ إِنَّكَ لَنْ تَخْرِقَ الْأَرْضَ وَلَنْ تَبْلُغَ الْجِبَالَ طُولًا","english_meaning":"And do not walk upon the earth exultantly. Indeed, you will never tear the earth [apart], and you will never reach the mountains in height.","verse_explanation":"A poetic check on human arrogance, reminding the person of their physical limitations against the vastness of the Earth.","scholars_opinions":[{"scholar":"Al-Zamakhshari","opinion":"Interprets this as a call to 'physical humility'—the way one walks and carries themselves is a reflection of their internal ego."},{"scholar":"Fethullah Gülen","opinion":"Describes this as the 'realization of nothingness'—only when the human realizes their smallness can they reflect the greatness of the Creator."},{"scholar":"Amin Ahsan Islahi","opinion":"Notes that arrogance is a form of 'delusion' that detaches a person from reality; the mountain and the earth are there to ground us."}]},{"id_number":60,"verse":"17:70","surah_name":"Al-Isra","quran_text":"وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ","english_meaning":"And We have certainly honored the children of Adam...","verse_explanation":"The Quranic declaration of 'Inherent Human Dignity,' granted to every human being by virtue of their creation, regardless of faith or status.","scholars_opinions":[{"scholar":"Al-Jassas","opinion":"Legal expert who argues that 'honor' includes the right to life, property, and freedom, forming the basis of Islamic human rights."},{"scholar":"Ibn Arabi","opinion":"Metaphysical view: man is honored because he is the 'microcosm' that contains the secrets of the entire 'macrocosm' (the universe)."},{"scholar":"Hamza Yusuf","opinion":"States that dignity (karamah) is a 'Divine Trust'; to mistreat any human is to disrespect the One who honored them."}]},{"id_number":61,"verse":"17:80","surah_name":"Al-Isra","quran_text":"وَقُلْ رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنْكَ سُلْطَانًا نَصِيرًا","english_meaning":"And say, 'My Lord, cause me to enter a sound entrance and to exit a sound exit and grant me from Yourself a supporting authority.'","verse_explanation":"A prayer for absolute integrity and sincerity (Sidq) in every transition of life, ensuring one's beginning and end are rooted in truth.","scholars_opinions":[{"scholar":"Al-Hasan al-Basri","opinion":"Interprets 'sound entrance' as entering the grave with faith and 'sound exit' as being resurrected with honor, focusing on the ultimate transition."},{"scholar":"Ibn al-Qayyim","opinion":"Argues that 'Sidq' (truthfulness) here means the harmony between the heart's intention, the tongue's word, and the limb's action."},{"scholar":"Nouman Ali Khan","opinion":"Points out that 'supporting authority' refers to God providing the external means (people, resources, power) to protect one's internal sincerity."}]},{"id_number":62,"verse":"17:82","surah_name":"Al-Isra","quran_text":"وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِلْمُؤْمِنِينَ","english_meaning":"And We send down of the Quran that which is healing and mercy for the believers...","verse_explanation":"Identifies the Quran not just as a book of laws, but as a therapeutic tool for the psychological and spiritual ailments of humanity.","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"States that the 'healing' is dual: physical (through Ruqyah) and spiritual (curing doubt, hypocrisy, and malice)."},{"scholar":"Fakhr al-Din al-Razi","opinion":"Suggests that the Quran 'heals' the intellect by providing proofs that remove the 'sickness' of ignorance and confusion."},{"scholar":"Muhammad al-Ghazali","opinion":"Argues that it is a 'social healing,' providing the correct values to mend broken societies and dysfunctional relationships."}]},{"id_number":63,"verse":"18:10","surah_name":"Al-Kahf","quran_text":"رَبَّنَا آتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا","english_meaning":"Our Lord, grant us from Yourself mercy and prepare for us from our affair right guidance.","verse_explanation":"The prayer of the Youth of the Cave when they were trapped, seeking 'Rashad'—the ability to make the right decision under extreme pressure.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Notes that they asked for 'Mercy' to protect them from their enemies and 'Guidance' to ensure their own actions were correct."},{"scholar":"Al-Baghawi","opinion":"Defines 'Rashad' as a path that leads directly to the desired goal without any deviation or wasted effort."},{"scholar":"Hamza Yusuf","opinion":"Highlights that when logic fails and the world closes in, the believer asks for 'min ladunka' (from Your very Presence), bypassing all worldly means."}]},{"id_number":64,"verse":"18:109","surah_name":"Al-Kahf","quran_text":"قُلْ لَوْ كَانَ الْبَحْرُ مِدَادًا لِكَلِمَاتِ رَبِّي لَنَفِدَ الْبَحْرُ قَبْلَ أَنْ تَنْفَدَ كَلِمَاتُ رَبِّي","english_meaning":"Say, 'If the sea were ink for [writing] the words of my Lord, the sea would be exhausted before the words of my Lord were exhausted...'","verse_explanation":"A stunning metaphor for the infinite nature of Divine Knowledge and the vastness of the meanings contained in God's creation and revelation.","scholars_opinions":[{"scholar":"Al-Zamakhshari","opinion":"Points out that 'Words' (Kalimat) refers to both the written scriptures and the 'creative words' by which every atom in the universe is managed."},{"scholar":"Allamah Tabataba'i","opinion":"Explains that the finite (the sea) can never encompass the infinite (God's knowledge), highlighting the humility required of the human intellect."},{"scholar":"Muhammad Asad","opinion":"Suggests this is a call to perpetual discovery; no matter how much science or theology we learn, we have only scratched the surface."}]},{"id_number":65,"verse":"19:4","surah_name":"Maryam","quran_text":"قَالَ رَبِّ إِنِّي وَهَنَ الْعَظْمُ مِنِّي وَاشْتَعَلَ الرَّأْسُ شَيْبًا وَلَمْ أَكُنْ بِدُعَائِكَ رَبِّ شَقِيًّا","english_meaning":"He said, 'My Lord, indeed my bones have weakened, and my head has filled with white, and never have I been in my supplication to You, my Lord, unhappy.'","verse_explanation":"Zachariah’s (AS) intimate conversation with God, combining a vulnerable admission of physical frailty with an unshakeable trust in God's response.","scholars_opinions":[{"scholar":"Ibn Ashur","opinion":"Highlights the beauty of 'Shaqiyya' (unhappy/disappointed); Zachariah is saying that the mere act of praying to God has always brought him joy, regardless of the answer."},{"scholar":"Al-Qurtubi","opinion":"Notes that mentioning one's weakness (the bones) is an etiquette of prayer, as it demonstrates total 'Iftiqar' (utter neediness) before the Almighty."},{"scholar":"Saeed bin Jubayr","opinion":"Describes this as the 'Hope of the Elderly,' showing that biological impossibility is irrelevant when one has a history of Divine favor."}]},{"id_number":66,"verse":"19:21","surah_name":"Maryam","quran_text":"قَالَ كَذَٰلِكِ قَالَ رَبُّكِ هُوَ عَلَيَّ هَيِّنٌ ۖ وَلِنَجْعَلَهُ آيَةً لِلنَّاسِ وَرَحْمَةً مِنَّا","english_meaning":"He said, 'Thus [it will be]; your Lord says, \"It is easy for Me\"...'","verse_explanation":"The Archangel Gabriel's response to Mary (AS), establishing that the 'laws of nature' are merely 'habits of God' which He can suspend at will.","scholars_opinions":[{"scholar":"Al-Razi","opinion":"Argues that 'Easy for Me' reminds the human that God does not work through 'effort' but through 'Will' (Kun/Be)."},{"scholar":"Sayyid Qutb","opinion":"Views this as a message of 'Cosmic Possibility'—no situation is too difficult for God to resolve, no matter how 'impossible' it looks to us."},{"scholar":"Ibn Arabi","opinion":"Interprets this as the 'Breath of the Merciful' (Nafas al-Rahman), where existence is constantly being renewed with ease."}]},{"id_number":67,"verse":"19:96","surah_name":"Maryam","quran_text":"إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ سَيَجْعَلُ لَهُمُ الرَّحْمَنُ وُدًّا","english_meaning":"Indeed, those who have believed and done righteous deeds - the Most Merciful will appoint for them affection.","verse_explanation":"A promise that authentic faith and service to humanity will result in 'Wudd'—a deep, Divinely-inspired love from both the Creator and the creation.","scholars_opinions":[{"scholar":"Ibn Abbas","opinion":"Explains that this 'Wudd' starts in the heavens; God loves them, tells the angels to love them, and then places that love in the hearts of people on Earth."},{"scholar":"Al-Tabari","opinion":"Emphasizes that this love is not sought through PR or fame-seeking, but is a 'natural byproduct' of sincere righteousness."},{"scholar":"Ja'far al-Sadiq","opinion":"States that 'Wudd' is the highest form of love (stronger than Hubb), implying an intimate friendship and protection from the Divine."}]},{"id_number":68,"verse":"20:25","surah_name":"Taha","quran_text":"قَالَ رَبِّ اشْرَحْ لِي صَدْرِي","english_meaning":"[Moses] said, 'My Lord, expand for me my breast [with assurance].'","verse_explanation":"The opening of the prayer for leadership and communication, asking for the internal capacity to hold the weight of a monumental mission.","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Notes that 'expansion of the breast' is the first requirement for any task, as it removes anxiety and allows for clear, calm thinking."},{"scholar":"Al-Alusi","opinion":"Connects this to the 'Light of Wisdom'; when the chest is expanded, it becomes a vessel that can receive Divine inspiration without being overwhelmed."},{"scholar":"Muhammad Iqbal","opinion":"Sees this as the 'expansion of the Ego,' where the individual self grows to encompass the concerns and pains of the entire community."}]},{"id_number":69,"verse":"20:46","surah_name":"Taha","quran_text":"قَالَ لَا تَخَافَا ۖ إِنَّنِي مَعَكُمَا أَسْمَعُ وَأَرَىٰ","english_meaning":"[Allah] said, 'Fear not. Indeed, I am with you both; I hear and I see.'","verse_explanation":"A foundational verse for courage, grounding the absence of fear in the active, observant presence of God.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Emphasizes that 'I hear and I see' is a promise of protection; God isn't just watching, He is actively monitoring every word and move of the oppressor."},{"scholar":"Al-Ghazali","opinion":"States that if a person truly internalized 'I am with you,' they would never feel lonely or vulnerable again, as the Source of Power is their companion."},{"scholar":"Amin Ahsan Islahi","opinion":"Notes that this was spoken to Moses and Aaron when they had to face Pharaoh—the most powerful tyrant—proving that God's presence outweights any earthly power."}]},{"id_number":70,"verse":"20:114","surah_name":"Taha","quran_text":"وَقُلْ رَبِّ زِدْنِي عِلْمًا","english_meaning":"...and say, 'My Lord, increase me in knowledge.'","verse_explanation":"The only thing God commanded the Prophet (PBUH) to ask for 'more' of was knowledge, establishing it as the ultimate pursuit of a believer.","scholars_opinions":[{"scholar":"Al-Suyuti","opinion":"Points out that the lack of any other request for 'increase' (like wealth or power) proves that knowledge is the only thing that is purely beneficial."},{"scholar":"Ibn al-Jawzi","opinion":"Explains that this includes 'beneficial knowledge'—that which leads to action, better character, and a deeper connection to the Creator."},{"scholar":"Muhammad Asad","opinion":"Interprets this as a mandate for 'Continuous Education,' suggesting that a believer should never be satisfied with what they already know."}]},{"id_number":71,"verse":"21:30","surah_name":"Al-Anbiya","quran_text":"أَوَلَمْ يَرَ الَّذِينَ كَفَرُوا أَنَّ السَّمَاوَاتِ وَالْأَرْضِ كَانَتَا رَتْقًا فَفَتَقْنَاهُمَا ۖ وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ","english_meaning":"Have those who disbelieved not considered that the heavens and the earth were a joined entity, and We separated them and made from water every living thing?","verse_explanation":"A profound verse addressing the origins of the universe and the biological necessity of water for life.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Classical view: The heavens and earth were 'joined' (no rain from one, no plants from the other) until God 'separated' them to allow for life."},{"scholar":"Ibn Ashur","opinion":"Linguistic view: 'Ratq' (sewn together) and 'Fatq' (ripped apart) suggests a primordial unity of matter before the cosmic expansion."},{"scholar":"Maurice Bucaille","opinion":"Scientific view: Sees this as a direct reference to the Big Bang theory and the modern biological discovery that protoplasm is mostly water."}]},{"id_number":72,"verse":"21:35","surah_name":"Al-Anbiya","quran_text":"كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ ۗ وَنَبْلُوكُمْ بِالشَّرِّ وَالْخَيْرِ فِتْنَةً","english_meaning":"Every soul will taste death. And We test you with evil and with good as a trial...","verse_explanation":"Reframes 'good' (ease, wealth, health) as just as much of a 'test' as 'evil' (hardship, poverty, sickness).","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Argues that the test of 'Good' (gratitude) is often harder than the test of 'Evil' (patience), as ease makes one forgetful."},{"scholar":"Ibn al-Qayyim","opinion":"Describes life as a 'testing ground' where the soul is refined; death is not the end, but the transition to the 'final result' of the test."},{"scholar":"Nouman Ali Khan","opinion":"Points out the word 'Fitnah' (refining gold with fire), implying that the purpose of life's ups and downs is to burn away the impurities of the heart."}]},{"id_number":73,"verse":"21:87","surah_name":"Al-Anbiya","quran_text":"لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ","english_meaning":"...'There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.'","verse_explanation":"The 'Prayer of Yunus' (AS) in the belly of the whale, which Prophet Muhammad (PBUH) said would be answered for any believer in distress.","scholars_opinions":[{"scholar":"Ibn Taymiyyah","opinion":"Argues that this prayer is perfect because it combines the recognition of God's Perfection (Tawhid/Tasbih) with the recognition of human imperfection (Istighfar)."},{"scholar":"Al-Razi","opinion":"Notes that Yunus didn't even ask for help; he simply stated the truth. God's response to truth is more immediate than His response to a request."},{"scholar":"Hamza Yusuf","opinion":"Describes this as the 'Key to Darkness'—whenever you feel 'swallowed' by life, this realization is the only way out."}]},{"id_number":74,"verse":"21:107","surah_name":"Al-Anbiya","quran_text":"وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِلْعَالَمِينَ","english_meaning":"And We have not sent you, [O Muhammad], except as a mercy to the worlds.","verse_explanation":"Defines the very essence of the Prophetic mission: it is not about judgment or condemnation, but about bringing universal compassion.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Explains that even those who reject him receive mercy through the delay of their punishment and the moral standards he introduced to the world."},{"scholar":"Fethullah Gülen","opinion":"Views the Prophet as a 'Spring of Life' whose message brings mercy to animals, plants, and the environment, not just humans."},{"scholar":"Tariq Ramadan","opinion":"Argues that a believer's job is to 'embody' this mercy; if a religious person is harsh or cruel, they are violating the core of the Prophetic mission."}]},{"id_number":75,"verse":"22:46","surah_name":"Al-Hajj","quran_text":"فَإِنَّهَا لَا تَعْمَى الْأَبْصَارُ وَلَٰكِنْ تَعْمَى الْقُلُوبُ الَّتِي فِي الصُّدُورِ","english_meaning":"For indeed, it is not eyes that are blinded, but blinded are the hearts which are within the breasts.","verse_explanation":"Distinguishes between physical sight and spiritual insight (Basirah), identifying 'heart-blindness' as the true tragedy.","scholars_opinions":[{"scholar":"Al-Ghazali","opinion":"Explains that the heart has its own 'eye' which sees the spiritual realities (Malakut). When it is covered in the 'rust' of sins, it loses its vision."},{"scholar":"Ibn Ajiba","opinion":"Suggests that physical blindness can be a mercy if it leads to inner vision, while the 'seeing' person who is heart-blind is in total darkness."},{"scholar":"Muhammad Iqbal","opinion":"Views this as 'Intellectual Blindness'—the inability to see the deeper purpose and meaning behind the material world."}]},{"id_number":76,"verse":"23:118","surah_name":"Al-Mu'minun","quran_text":"وَقُلْ رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ","english_meaning":"And, [O Muhammad], say, 'My Lord, forgive and have mercy, and You are the best of the merciful.'","verse_explanation":"The closing verse of the Surah, summarizing the believer’s dual need for 'Maghfirah' (covering of sins) and 'Rahmah' (bestowal of blessings).","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Notes that 'Forgiveness' deals with the past (removing the bad) and 'Mercy' deals with the future (granting the good)."},{"scholar":"Ibn Ashur","opinion":"Highlights 'Best of the Merciful,' stating that God's mercy is unconditional and infinite, unlike the limited mercy of humans."},{"scholar":"Habib Umar bin Hafiz","opinion":"Describes this as the 'Ultimate Refuge'—when all human mercy is exhausted, the believer returns to the 'Best' of them."}]},{"id_number":77,"verse":"24:35","surah_name":"An-Nur","quran_text":"اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ ۚ مَثَلُ نُورِهِ كَمِشْكَاةٍ فِيهَا مِصْبَاحٌ","english_meaning":"Allah is the Light of the heavens and the earth. The example of His light is like a niche within which is a lamp...","verse_explanation":"Known as 'Ayat an-Nur' (The Verse of Light), this is a complex, multi-layered parable describing Divine Guidance and the human heart.","scholars_opinions":[{"scholar":"Al-Ghazali","opinion":"In his book 'Mishkat al-Anwar,' he argues that 'Light' is the only thing that is visible in itself and makes other things visible. Therefore, God is the only 'True Reality' through which everything else is understood."},{"scholar":"Ibn al-Qayyim","opinion":"Interprets the parable as the light of 'Iman' (Faith) inside the 'Niche' (the chest) and 'Lamp' (the heart), protected by the 'Glass' (the pure nature/fitra)."},{"scholar":"Allamah Tabataba'i","opinion":"Explains that God is 'Light' because He is the Source of 'Existence.' Just as light brings things out of darkness into being, God brings things out of non-existence into life."}]},{"id_number":78,"verse":"25:43","surah_name":"Al-Furqan","quran_text":"أَرَأَيْتَ مَنِ اتَّخَذَ إِلَٰهَهُ هَوَاهُ أَفَأَنْتَ تَكُونُ عَلَيْهِ وَكِيلًا","english_meaning":"Have you seen the one who takes as his god his own desire? Then would you be responsible for him?","verse_explanation":"A psychological warning against 'Hawa' (whim/desire), identifying it as a form of subtle polytheism where the ego becomes the object of worship.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Defines this person as one who follows their desires regardless of logic or Divine law; their 'god' is whatever they feel like doing at that moment."},{"scholar":"Ibn Taymiyyah","opinion":"Argues that 'Hawa' is the root of all innovation and misguidance, as it prioritizes the subjective 'self' over objective 'truth.'"},{"scholar":"Muhammad al-Ghazali","opinion":"Describes this as 'Internalized Idolatry,' where the modern human replaces stone idols with the idol of 'Self-Gratification.'"}]},{"id_number":79,"verse":"25:63","surah_name":"Al-Furqan","quran_text":"وَعِبَادُ الرَّحْمَنِ الَّذِينَ يَمْشُونَ عَلَى الْأَرْضِ هَوْنًا وَإِذَا خَاطَبَهُمُ الْجَاهِلُونَ قَالُوا سَلَامًا","english_meaning":"And the servants of the Most Merciful are those who walk upon the earth easily, and when the ignorant address them, they say, 'Peace.'","verse_explanation":"Defines the 'Aesthetic of Character'—humility in movement and emotional intelligence in communication.","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Notes that 'walk easily' doesn't mean being slow, but being free from arrogance and pride; they carry no 'weight' of ego."},{"scholar":"Ibn Kathir","opinion":"Explains that saying 'Peace' (Salam) isn't just a greeting, but a way to end a hostile conversation without sinking to the other's level."},{"scholar":"Saeed bin Jubayr","opinion":"Interprets this as 'forbearance' (Hilm); they respond to the 'ignorance' of others with the 'knowledge' of their own peace."}]},{"id_number":80,"verse":"25:74","surah_name":"Al-Furqan","quran_text":"رَبَّنَا هَبْ لَنَا مِنْ أَزْواجِنا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا","english_meaning":"...'Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous.'","verse_explanation":"A comprehensive prayer for the family and for 'Moral Leadership,' asking for success that brings joy to the eyes and benefits the community.","scholars_opinions":[{"scholar":"Al-Hasan al-Basri","opinion":"States that 'comfort to the eyes' means seeing your family being obedient to God; there is no greater joy for a believer than seeing those they love find faith."},{"scholar":"Ibn Ashur","opinion":"Highlights 'Make us an Imam (example)'; this is not asking for power, but for such a high level of character that others are inspired to follow."},{"scholar":"Abul A'la Maududi","opinion":"Describes this as the 'Believer's Ambition'—to build a home that is a sanctuary and a life that is a light for others."}]},{"id_number":81,"verse":"26:80","surah_name":"Ash-Shu'ara","quran_text":"وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ","english_meaning":"And when I am ill, it is He who cures me.","verse_explanation":"A statement by Abraham (AS) demonstrating high etiquette (Adab) with God: he attributes the illness to himself and the cure to the Creator.","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Notes the linguistic shift; Abraham does not say 'He makes me ill,' out of respect for God's Absolute Goodness, even though all causes come from Him."},{"scholar":"Ibn al-Qayyim","opinion":"Argues that 'cure' includes the heart’s recovery from the sickness of doubt and passion, which is more critical than physical healing."},{"scholar":"Muhammad Metwalli al-Sha'rawi","opinion":"Suggests this verse is the foundation of 'Faith-Based Medicine'—the doctor provides the means, but the patient's heart must be tethered to the Source of Healing."}]},{"id_number":82,"verse":"27:62","surah_name":"An-Naml","quran_text":"أَمَّنْ يُجِيبُ الْمُضْطَرَّ إِذَا دَعَاهُ وَيَكْشِفُ السُّوءَ","english_meaning":"Is He [not best] who responds to the desperate one when he calls upon Him and removes evil...","verse_explanation":"Identifies the state of 'Idtirar' (desperation/dire need) as the most potent condition for an answered prayer.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Defines the 'desperate one' as someone who has lost all worldly hope and realizes that none can help him except Allah."},{"scholar":"Al-Ghazali","opinion":"Views desperation as a 'spiritual necessity' that breaks the ego, allowing the soul to finally call upon God with 100% sincerity."},{"scholar":"Hamza Yusuf","opinion":"Describes this as the 'Ontological Response'—God answers even the non-believer when they are truly desperate, because the truth of their neediness is undeniable."}]},{"id_number":83,"verse":"28:24","surah_name":"Al-Qasas","quran_text":"رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ","english_meaning":"...'My Lord, indeed I am, for whatever good You would send down to me, in need.'","verse_explanation":"Moses (AS) makes this prayer while alone, hungry, and an outlaw, demonstrating the 'Dignity of the Needy'—asking God without complaining to people.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Points out that immediately after this humble admission of need, God provided Moses with a home, a wife, and a job."},{"scholar":"Ibn Ajiba","opinion":"States that 'Faqr' (poverty/need) before God is the highest spiritual rank, as it acknowledges the reality of the human condition."},{"scholar":"Nouman Ali Khan","opinion":"Notes the wording 'any good' (min khayrin)—Moses is so desperate he will take anything God deems good, showing total surrender of preference."}]},{"id_number":84,"verse":"28:56","surah_name":"Al-Qasas","quran_text":"إِنَّك لَا تَهْدِي مَنْ أَحْبَبْتَ وَلَٰكِنَّ اللَّهَ يَهْدِي مَنْ يَشَاءُ","english_meaning":"Indeed, [O Muhammad], you do not guide whom you like, but Allah guides whom He wills.","verse_explanation":"A reminder that guidance is a Divine gift, not a result of human persuasion or emotional attachment.","scholars_opinions":[{"scholar":"Ibn Abbas","opinion":"Explains this was revealed concerning the Prophet's uncle, Abu Talib, whom he loved deeply but who died without embracing Islam."},{"scholar":"Al-Razi","opinion":"Argues that if the Prophet himself couldn't 'give' guidance, it proves that faith is an internal resonance between God and the individual soul."},{"scholar":"Muhammad Asad","opinion":"Interprets 'whom He wills' as 'those who seek it'; God guides those whose internal state is ready to receive the truth."}]},{"id_number":85,"verse":"28:77","surah_name":"Al-Qasas","quran_text":"وَابْتَغِ فِيمَا آتَاكَ اللَّهُ الدَّارَ الْآخِرَةَ ۖ وَلَا تَنْسَ نَصِيبَكَ مِنَ الدُّنْيَا","english_meaning":"But seek, through that which Allah has given you, the home of the Hereafter; and [yet], do not forget your share of the world...","verse_explanation":"Provides the blueprint for a balanced life: using material wealth for spiritual ends while maintaining a healthy enjoyment of the physical world.","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Explains 'do not forget your share' as taking what is necessary for health, comfort, and family, ensuring the body is not neglected."},{"scholar":"Abul A'la Maududi","opinion":"Views this as a refutation of extreme asceticism; Islam wants humans to be productive and prosperous 'in' the world for the 'sake' of the next."},{"scholar":"Malik Bennabi","opinion":"Describes this as the 'Synthesis of Values'—a civilization must maintain its spiritual goal without losing its material competence."}]},{"id_number":86,"verse":"29:2","surah_name":"Al-'Ankabut","quran_text":"أَحَسِبَ النَّاسُ أَنْ يُتْرَكُوا أَنْ يَقُولُوا آمَنَّا وَهُمْ لَا يُفْتَنُونَ","english_meaning":"Do the people think that they will be left to say, 'We believe' and they will not be tried?","verse_explanation":"Establishes that faith is not a mere verbal claim but a conviction that must be verified through the trials of life.","scholars_opinions":[{"scholar":"Sayyid Qutb","opinion":"Argues that trials are like fire to gold—they don't exist to destroy the believer, but to melt away the impurities of doubt and cowardice."},{"scholar":"Al-Baghawi","opinion":"Notes that the 'test' is meant to make the internal state of a person apparent to themselves and the world, fulfilling the requirement of justice."},{"scholar":"Fazlur Rahman","opinion":"Sees this as a call to 'Ethical Action'—belief without the willingness to sacrifice or endure for one's principles is meaningless."}]},{"id_number":87,"verse":"29:69","surah_name":"Al-'Ankabut","quran_text":"وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا","english_meaning":"And those who strive for Us - We will surely guide them to Our ways.","verse_explanation":"A promise that sincere effort (Jihad of the soul and action) is the prerequisite for deeper spiritual insight.","scholars_opinions":[{"scholar":"Jafar al-Sadiq","opinion":"Interpreted 'Our ways' (plural) to mean that there are many paths to God, and He will guide each person to the path that best suits their unique nature."},{"scholar":"Ibn al-Qayyim","opinion":"States that guidance is a reward for struggle; the more you push against your ego (Nafs), the more the horizons of Truth open for you."},{"scholar":"Allamah Tabataba'i","opinion":"Emphasizes that the striving must be 'in Us' (fina)—meaning with the correct intention—for the guidance to be activated."}]},{"id_number":88,"verse":"30:21","surah_name":"Ar-Rum","quran_text":"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً","english_meaning":"And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.","verse_explanation":"Defines the spiritual and psychological purpose of marriage: 'Sakina' (Tranquility) and 'Mawaddah' (Active Love).","scholars_opinions":[{"scholar":"Al-Qurtubi","opinion":"Distinguishes between 'Mawaddah' (love when things are good) and 'Rahmah' (mercy/compassion when things are difficult or health fails)."},{"scholar":"Muhammad Asad","opinion":"Focuses on 'from yourselves,' highlighting the biological and spiritual kinship between men and women as a foundational 'Sign' of God."},{"scholar":"Hamza Yusuf","opinion":"Describes the home as a 'sanctuary' where the noise of the world is silenced by the tranquility of a companionate relationship."}]},{"id_number":89,"verse":"30:22","surah_name":"Ar-Rum","quran_text":"وَمِنْ آيَاتِهِ خَلْقُ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافُ أَلْسِنَتِكُمْ وَأَلْوَانِكُمْ","english_meaning":"And of His signs is the creation of the heavens and the earth and the diversity of your languages and your colors...","verse_explanation":"Celebrates diversity (linguistic, racial, ethnic) as a Divine miracle rather than a cause for conflict.","scholars_opinions":[{"scholar":"Ibn Ashur","opinion":"Argues that linguistic diversity is a proof of the infinite creativity of God; it forces humans to learn from one another."},{"scholar":"Sayyid Qutb","opinion":"Views this as the 'Quranic Charter of Equality'—if diversity is a sign of God, then no color or language can be superior to another."},{"scholar":"Tariq Ramadan","opinion":"Suggests that pluralism is a 'test of intelligence'; only the wise see the beauty in the 'Other.'"}]},{"id_number":90,"verse":"31:17","surah_name":"Luqman","quran_text":"يَا بُنَيَّ أَقِمِ الصَّلَاةَ وَأْمُرْ بِالْمَعْرُوفِ وَانْهَ عَنِ الْمُنْكَرِ وَاصْبِرْ عَلَىٰ مَا أَصَابَكَ","english_meaning":"O my son, establish prayer, enjoin what is right, forbid what is wrong, and be patient over what befalls you...","verse_explanation":"Luqman’s advice to his son, linking the internal spiritual duty (prayer) with social activism and resilience.","scholars_opinions":[{"scholar":"Al-Zamakhshari","opinion":"Notes the sequence: once you try to 'enjoin right,' you will inevitably face pushback, which is why 'patience' is mentioned immediately after."},{"scholar":"Abul A'la Maududi","opinion":"Describes this as the 'Complete Personality'—one who connects with God, serves society, and remains firm under pressure."},{"scholar":"Saeed bin Jubayr","opinion":"Interprets 'establish prayer' as the fuel for the soul; without it, one lacks the strength to face the 'wrongs' of the world."}]},{"id_number":91,"verse":"31:18","surah_name":"Luqman","quran_text":"وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِي الْأَرْضِ مَرَحًا","english_meaning":"And do not turn your cheek [in contempt] toward people and do not walk through the earth exultantly.","verse_explanation":"Forbids the micro-expressions and body language of arrogance, mandating a humble social presence.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Explains 'turning the cheek' (Tu-sa'ir) as a facial expression of disdain; God is regulating even the muscles of the face to promote kindness."},{"scholar":"Ibn al-Jawzi","opinion":"Warns that 'walking exultantly' detaches the human from their humble origin, making them a 'stranger' to their own humanity."},{"scholar":"Muhammad al-Ghazali","opinion":"Describes this as the 'Aesthetics of Interaction'—a believer’s face and gait should radiate accessibility and warmth, not distance and pride."}]},{"id_number":92,"verse":"33:35","surah_name":"Al-Ahzab","quran_text":"إِنَّ الْمُسْلِمِينَ وَالْمُسْلِمَاتِ وَالْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ...","english_meaning":"Indeed, the Muslim men and Muslim women, the believing men and believing women...","verse_explanation":"A rhythmic, comprehensive verse emphasizing the absolute spiritual equality and shared moral responsibility of both genders.","scholars_opinions":[{"scholar":"Umm Salama","opinion":"Reportedly asked the Prophet why the Quran addressed men mostly; this verse was revealed to show that every reward applies equally to women."},{"scholar":"Ibn Ashur","opinion":"Points out the ten qualities mentioned (faith, patience, charity, etc.) as the 'Universal Decalogue' for the human soul regardless of biological sex."},{"scholar":"Amina Wadud","opinion":"Highlights that the 'equal and parallel' structure of the language here is the definitive Quranic stance on gender ontological equality."}]},{"id_number":93,"verse":"33:56","surah_name":"Al-Ahzab","quran_text":"إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا","english_meaning":"Indeed, Allah confers blessing upon the Prophet, and His angels [ask Him to do so]. O you who have believed, ask [Allah to confer] blessing upon him and ask [Allah to grant him] peace.","verse_explanation":"Commands a constant connection of love and gratitude toward the Messenger, identifying it as an activity shared by God and the angels.","scholars_opinions":[{"scholar":"Al-Sadi","opinion":"Explains that God's 'Salat' on the Prophet is His praise for him in the highest assembly, while the angels' 'Salat' is seeking his elevation."},{"scholar":"Ibn al-Qayyim","opinion":"In his book 'Jala' al-Afham,' he argues that sending blessings on the Prophet is a means for the believer to receive blessings back from God tenfold."},{"scholar":"Habib Ali al-Jifri","opinion":"Describes this as the 'Umbilical Cord of Love'—it keeps the heart of the believer nourished by the Prophetic light even in his physical absence."}]},{"id_number":94,"verse":"39:53","surah_name":"Az-Zumar","quran_text":"قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنْفُسِهِمْ لَا تَقْنَطُوا مِنْ رَحْمَةِ اللَّهِ","english_meaning":"Say, 'O My servants who have transgressed against themselves [by sinning], do not despair of the mercy of Allah...'","verse_explanation":"Often called the 'Most Hopeful Verse' in the Quran, it offers a blank slate to anyone, no matter the gravity of their past mistakes.","scholars_opinions":[{"scholar":"Abdullah ibn Mas'ud","opinion":"Said: 'This is the verse in the Book of Allah that provides the greatest relief for the heart.'"},{"scholar":"Ibn Kathir","opinion":"Emphasizes that 'transgressed against themselves' implies that the sin only hurts the sinner, not God, and He is waiting to heal the self-inflicted wound."},{"scholar":"Fethullah Gülen","opinion":"Notes that the address 'O My servants' is kept even for the sinners, showing that the bond of 'belonging' to God is never severed by a mistake."}]},{"id_number":95,"verse":"40:60","surah_name":"Ghafir","quran_text":"وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ","english_meaning":"And your Lord says, 'Call upon Me; I will respond to you.'","verse_explanation":"A direct, unconditional promise from the Creator to the creature, making the act of 'asking' the highest form of worship.","scholars_opinions":[{"scholar":"Al-Baghawi","opinion":"Quotes the Prophet: 'Dua (supplication) is worship itself,' because it demonstrates the ultimate humility and recognition of Sovereignty."},{"scholar":"Ibn Taymiyyah","opinion":"Argues that if God didn't want to give, He wouldn't have inspired the person to ask; the impulse to pray is itself a sign of an impending gift."},{"scholar":"Yasir Qadhi","opinion":"Notes that 'I will respond' is a guarantee, but the timing and nature of the response are according to God’s wisdom, not our whims."}]},{"id_number":96,"verse":"41:34","surah_name":"Fussilat","quran_text":"وَلَا تَسْتَوِي الْحَسَنَةُ وَلَا السَّيِّئَةُ ۚ ادْفَعْ بِالَّتِي هِيَ أَحْسَنُ","english_meaning":"And not equal are the good deed and the bad. Repel [evil] by that [deed] which is better...","verse_explanation":"A masterclass in conflict resolution: turning an enemy into a friend through the unexpected use of kindness.","scholars_opinions":[{"scholar":"Ibn Abbas","opinion":"States that 'that which is better' refers to showing patience when someone is angry and forgiveness when someone is oppressive."},{"scholar":"Al-Razi","opinion":"Points out that 'repelling' implies an active force—kindness is not passive; it is a spiritual 'move' that disarms the aggressor."},{"scholar":"Hamza Yusuf","opinion":"Describes this as 'Moral Judo'—using the momentum of the other person’s hate to flip the situation into one of reconciliation."}]},{"id_number":97,"verse":"48:4","surah_name":"Al-Fath","quran_text":"هُوَ الَّذِي أَنْزَلَ السَّكِينَةَ فِي قُلُوبِ الْمُؤْمِنِينَ","english_meaning":"It is He who sent down tranquility into the hearts of the believers...","verse_explanation":"Defines 'Sakina' (Tranquility) as a Divinely-sent state of calm that overrides environmental chaos and internal anxiety.","scholars_opinions":[{"scholar":"Ibn al-Qayyim","opinion":"Describes Sakina as a 'light' that descends on the heart, giving it the strength to remain still when everyone else is trembling."},{"scholar":"Al-Qurtubi","opinion":"Notes that this was revealed in the context of the Treaty of Hudaybiyyah, where the believers were under immense stress, proving Sakina is for times of crisis."},{"scholar":"Nouman Ali Khan","opinion":"Focuses on 'sent down' (Anzala), implying that peace of mind is not something you can manufacture; it is a gift you must ask for."}]},{"id_number":98,"verse":"50:16","surah_name":"Qaf","quran_text":"وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ الْوَرِيدِ","english_meaning":"...and We are closer to him than [his] jugular vein.","verse_explanation":"A powerful anatomical metaphor for Divine Immanence—God is more essential to the human's existence than their own blood supply.","scholars_opinions":[{"scholar":"Al-Tabari","opinion":"Explains this closeness in terms of knowledge: God knows what you will think even before the thought fully forms in your mind."},{"scholar":"Ibn Arabi","opinion":"Takes a metaphysical view, arguing that the 'closeness' is not spatial, but existential; God is the 'Reality' (Al-Haqq) that sustains the soul."},{"scholar":"Sahl al-Tustari","opinion":"Suggests that if God is closer to you than your own vein, then seeking Him 'outside' yourself is the ultimate spiritual misunderstanding."}]},{"id_number":99,"verse":"55:60","surah_name":"Ar-Rahman","quran_text":"هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ","english_meaning":"Is the reward for excellence [anything] but excellence?","verse_explanation":"A rhetorical question establishing the 'Law of Reciprocity' in the universe: beauty attracts beauty, and goodness results in goodness.","scholars_opinions":[{"scholar":"Ibn Kathir","opinion":"Interprets this as: 'Is the reward for the one who did good in the world anything other than God doing good to them in the Hereafter?'"},{"scholar":"Al-Alusi","opinion":"Suggests that 'Ihsan' from the human side is 'sincerity,' and 'Ihsan' from God's side is 'Vision' (the opportunity to see His light)."},{"scholar":"Muhammad Iqbal","opinion":"Sees this as the 'Cosmic Echo'—the universe is designed to respond to the quality of human action with a corresponding quality of result."}]},{"id_number":100,"verse":"94:6","surah_name":"Ash-Sharh","quran_text":"إِنَّ مَعَ الْعُسْرِ يُسْرًا","english_meaning":"Indeed, with hardship [will be] ease.","verse_explanation":"The ultimate comfort for the suffering: hardship and ease are not sequential, but coexist simultaneously.","scholars_opinions":[{"scholar":"Ibn Abbas","opinion":"Famously noted the grammar: 'Al-Usr' (the hardship) is definite (singular), while 'Yusran' (ease) is indefinite (plural). Therefore, one hardship will never overcome two eases."},{"scholar":"Al-Razi","opinion":"Argues that 'with' (ma'a) means the ease is 'hidden' inside the hardship, like a seed inside a tough shell; they arrive together."},{"scholar":"Hamza Yusuf","opinion":"Describes this as the 'Relativity of Suffering'—no matter how dark the moment, the mechanisms for relief and growth are already present in the heart."}]}];
 window._dbgCheckpoints['qt_after_data']=true;
-var qtState = JSON.parse(localStorage.getItem('dash_qt') || '{}');
+var qtState = lsGet('dash_qt',{});
 if(!qtState.history)qtState.history=[];
 if(!qtState.currentId)qtState.currentId=null;
 if(!qtState.currentDate)qtState.currentDate=null;
 if(!qtState.readToday)qtState.readToday=false;
 if(!qtState._tab)qtState._tab='today';
 if(!qtState._expanded)qtState._expanded=false;
-function qtSave(){ localStorage.setItem('dash_qt', JSON.stringify(qtState)); }
+function qtSave(){ lsSet('dash_qt',qtState); }
 
-function qtTodayKey(){
-  var n=new Date(); if(n.getHours()<4)n=new Date(n.getTime()-864e5);
-  return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
-}
+// todayKey() → now uses global todayKey()
 
 function qtPickRandom(){
   if(!QT_DATA||!QT_DATA.length) return null;
   var pick = QT_DATA[Math.floor(Math.random()*QT_DATA.length)];
   qtState.currentId = pick.id_number;
-  qtState.currentDate = qtTodayKey();
+  qtState.currentDate = todayKey();
   qtState.readToday = false;
   qtState._expanded = false;
   qtSave();
@@ -7004,7 +7006,7 @@ function qtPickRandom(){
 
 function qtCurrent(){
   if(!QT_DATA) return null;
-  var today = qtTodayKey();
+  var today = todayKey();
   if(qtState.currentId && qtState.currentDate === today){
     var v = QT_DATA.find(function(x){ return x.id_number===qtState.currentId; });
     if(v) return v;
@@ -7013,7 +7015,7 @@ function qtCurrent(){
 }
 
 function qtMarkRead(v){
-  var today = qtTodayKey();
+  var today = todayKey();
   // Add to history if not already there for today
   var alreadyLogged = qtState.history.some(function(h){ return h.date===today && h.id===v.id_number; });
   if(!alreadyLogged){
@@ -7037,7 +7039,7 @@ function qtRenderVerse(v, expanded, showMarkRead){
   // Reference row
   h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
   h+='<div style="flex:1"><div style="font-size:11px;color:var(--ca);letter-spacing:1px;font-family:monospace">'+v.surah_name+'</div>';
-  h+='<div style="font-size:9px;color:var(--dim)">'+v.verse+'</div></div>';
+  h+='<div class="dim-9">'+v.verse+'</div></div>';
   h+='<button data-qtcopy="1" style="background:transparent;border:1px solid rgba(255,204,0,.2);color:rgba(255,204,0,.5);font-family:monospace;font-size:9px;padding:4px 10px;cursor:pointer">📋</button>';
   h+='</div>';
   // Arabic
@@ -7060,7 +7062,7 @@ function qtRenderVerse(v, expanded, showMarkRead){
       '#ffcc00','#50c8ff','#b482ff',
       '#50fa7b','#ff82b4','#ffa050'
     ];
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">SCHOLARS</div>';
+    h+='<div class="label-dim">SCHOLARS</div>';
     v.scholars_opinions.forEach(function(s,si){
       var shade=scholarShades[si%scholarShades.length];
       var border=scholarBorders[si%scholarBorders.length];
@@ -7104,7 +7106,7 @@ function qtRender(){
 
   if(tab==='today'){
     var v = qtCurrent();
-    if(!v){h+='<div style="font-size:11px;color:var(--dim)">No verse found.</div>';}
+    if(!v){h+='<div class="dim-11">No verse found.</div>';}
     else if(qtState.readToday){
       h+='<div style="padding:12px;text-align:center;border:1px solid rgba(255,204,0,.15);margin-bottom:12px">';
       h+='<div style="font-size:20px;margin-bottom:6px">✓</div>';
@@ -7126,7 +7128,7 @@ function qtRender(){
         h+='<div style="border-bottom:1px solid rgba(255,255,255,.06);padding:8px 0">';
         h+='<div data-qthistopen="'+i+'" style="display:flex;align-items:center;gap:8px;cursor:pointer">';
         h+='<div style="flex:1"><div style="font-size:11px;color:var(--ca)">'+entry.surah+'</div>';
-        h+='<div style="font-size:9px;color:var(--dim)">'+entry.verse+' · '+entry.date+'</div></div>';
+        h+='<div class="dim-9">'+entry.verse+' · '+entry.date+'</div></div>';
         h+='<span style="color:var(--dim);font-size:12px">'+(open?'▲':'▼')+'</span>';
         h+='</div>';
         if(open&&v2){
@@ -7152,7 +7154,7 @@ function qtRender(){
       qtCopyToClipboard(v);
       this.textContent='✓';
       var _b=this;setTimeout(function(){_b.textContent='📋';},1800);
-      if(typeof hap==='function')hap(HAP.soft);
+      safeHap(HAP.soft);
     };
   });
 
@@ -7183,11 +7185,11 @@ setTimeout(function(){qtRender();},600);
 
 // ── QUEST ──
 var QUEST_DATA={"title":"Memorize Juz Amma","steps":[{"step":1,"phase":"Preparation","task":"Find a reliable recitation of Juz Amma. Sheikh Mishary Rashid Al-Afasy or Al-Husary (Muallim) are great for memorization. Download or bookmark it now."},{"step":2,"phase":"Preparation","task":"Set a daily memorization time. Even 15 minutes after Fajr is enough. Consistency beats duration. Decide the time now."},{"step":3,"phase":"Preparation","task":"Get a Quran or open a Quran app. Use the same mushaf every session — your brain maps the page layout. Recommended: Quran.com."},{"step":4,"phase":"Listen","surah":"Al-Asr","surah_num":103,"task":"Listen to Al-Asr (Surah 103, 3 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":5,"phase":"Repeat","surah":"Al-Asr","surah_num":103,"task":"Repeat Al-Asr (Surah 103) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":6,"phase":"Memorize","surah":"Al-Asr","surah_num":103,"task":"Memorize Al-Asr (Surah 103). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":7,"phase":"Listen","surah":"Al-Kawthar","surah_num":108,"task":"Listen to Al-Kawthar (Surah 108, 3 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":8,"phase":"Repeat","surah":"Al-Kawthar","surah_num":108,"task":"Repeat Al-Kawthar (Surah 108) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":9,"phase":"Memorize","surah":"Al-Kawthar","surah_num":108,"task":"Memorize Al-Kawthar (Surah 108). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":10,"phase":"Listen","surah":"An-Nasr","surah_num":110,"task":"Listen to An-Nasr (Surah 110, 3 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":11,"phase":"Repeat","surah":"An-Nasr","surah_num":110,"task":"Repeat An-Nasr (Surah 110) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":12,"phase":"Memorize","surah":"An-Nasr","surah_num":110,"task":"Memorize An-Nasr (Surah 110). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":13,"phase":"Listen","surah":"Quraysh","surah_num":106,"task":"Listen to Quraysh (Surah 106, 4 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":14,"phase":"Repeat","surah":"Quraysh","surah_num":106,"task":"Repeat Quraysh (Surah 106) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":15,"phase":"Memorize","surah":"Quraysh","surah_num":106,"task":"Memorize Quraysh (Surah 106). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":16,"phase":"Listen","surah":"Al-Ikhlas","surah_num":112,"task":"Listen to Al-Ikhlas (Surah 112, 4 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":17,"phase":"Repeat","surah":"Al-Ikhlas","surah_num":112,"task":"Repeat Al-Ikhlas (Surah 112) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":18,"phase":"Memorize","surah":"Al-Ikhlas","surah_num":112,"task":"Memorize Al-Ikhlas (Surah 112). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":19,"phase":"Listen","surah":"Al-Qadr","surah_num":97,"task":"Listen to Al-Qadr (Surah 97, 5 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":20,"phase":"Repeat","surah":"Al-Qadr","surah_num":97,"task":"Repeat Al-Qadr (Surah 97) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":21,"phase":"Memorize","surah":"Al-Qadr","surah_num":97,"task":"Memorize Al-Qadr (Surah 97). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":22,"phase":"Listen","surah":"Al-Fil","surah_num":105,"task":"Listen to Al-Fil (Surah 105, 5 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":23,"phase":"Repeat","surah":"Al-Fil","surah_num":105,"task":"Repeat Al-Fil (Surah 105) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":24,"phase":"Memorize","surah":"Al-Fil","surah_num":105,"task":"Memorize Al-Fil (Surah 105). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":25,"phase":"Listen","surah":"Al-Masad","surah_num":111,"task":"Listen to Al-Masad (Surah 111, 5 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":26,"phase":"Repeat","surah":"Al-Masad","surah_num":111,"task":"Repeat Al-Masad (Surah 111) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":27,"phase":"Memorize","surah":"Al-Masad","surah_num":111,"task":"Memorize Al-Masad (Surah 111). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":28,"phase":"Listen","surah":"Al-Falaq","surah_num":113,"task":"Listen to Al-Falaq (Surah 113, 5 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":29,"phase":"Repeat","surah":"Al-Falaq","surah_num":113,"task":"Repeat Al-Falaq (Surah 113) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":30,"phase":"Memorize","surah":"Al-Falaq","surah_num":113,"task":"Memorize Al-Falaq (Surah 113). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":31,"phase":"Listen","surah":"Al-Kafirun","surah_num":109,"task":"Listen to Al-Kafirun (Surah 109, 6 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":32,"phase":"Repeat","surah":"Al-Kafirun","surah_num":109,"task":"Repeat Al-Kafirun (Surah 109) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":33,"phase":"Memorize","surah":"Al-Kafirun","surah_num":109,"task":"Memorize Al-Kafirun (Surah 109). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":34,"phase":"Listen","surah":"An-Nas","surah_num":114,"task":"Listen to An-Nas (Surah 114, 6 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":35,"phase":"Repeat","surah":"An-Nas","surah_num":114,"task":"Repeat An-Nas (Surah 114) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":36,"phase":"Memorize","surah":"An-Nas","surah_num":114,"task":"Memorize An-Nas (Surah 114). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":37,"phase":"Listen","surah":"Al-Ma'un","surah_num":107,"task":"Listen to Al-Ma'un (Surah 107, 7 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":38,"phase":"Repeat","surah":"Al-Ma'un","surah_num":107,"task":"Repeat Al-Ma'un (Surah 107) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":39,"phase":"Memorize","surah":"Al-Ma'un","surah_num":107,"task":"Memorize Al-Ma'un (Surah 107). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":40,"phase":"Listen","surah":"Ash-Sharh","surah_num":94,"task":"Listen to Ash-Sharh (Surah 94, 8 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":41,"phase":"Repeat","surah":"Ash-Sharh","surah_num":94,"task":"Repeat Ash-Sharh (Surah 94) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":42,"phase":"Memorize","surah":"Ash-Sharh","surah_num":94,"task":"Memorize Ash-Sharh (Surah 94). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":43,"phase":"Listen","surah":"At-Tin","surah_num":95,"task":"Listen to At-Tin (Surah 95, 8 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":44,"phase":"Repeat","surah":"At-Tin","surah_num":95,"task":"Repeat At-Tin (Surah 95) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":45,"phase":"Memorize","surah":"At-Tin","surah_num":95,"task":"Memorize At-Tin (Surah 95). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":46,"phase":"Listen","surah":"Al-Bayyinah","surah_num":98,"task":"Listen to Al-Bayyinah (Surah 98, 8 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":47,"phase":"Repeat","surah":"Al-Bayyinah","surah_num":98,"task":"Repeat Al-Bayyinah (Surah 98) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":48,"phase":"Memorize","surah":"Al-Bayyinah","surah_num":98,"task":"Memorize Al-Bayyinah (Surah 98). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":49,"phase":"Listen","surah":"Az-Zalzalah","surah_num":99,"task":"Listen to Az-Zalzalah (Surah 99, 8 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":50,"phase":"Repeat","surah":"Az-Zalzalah","surah_num":99,"task":"Repeat Az-Zalzalah (Surah 99) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":51,"phase":"Memorize","surah":"Az-Zalzalah","surah_num":99,"task":"Memorize Az-Zalzalah (Surah 99). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":52,"phase":"Listen","surah":"At-Takathur","surah_num":102,"task":"Listen to At-Takathur (Surah 102, 8 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":53,"phase":"Repeat","surah":"At-Takathur","surah_num":102,"task":"Repeat At-Takathur (Surah 102) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":54,"phase":"Memorize","surah":"At-Takathur","surah_num":102,"task":"Memorize At-Takathur (Surah 102). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":55,"phase":"Listen","surah":"Al-Humazah","surah_num":104,"task":"Listen to Al-Humazah (Surah 104, 9 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":56,"phase":"Repeat","surah":"Al-Humazah","surah_num":104,"task":"Repeat Al-Humazah (Surah 104) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":57,"phase":"Memorize","surah":"Al-Humazah","surah_num":104,"task":"Memorize Al-Humazah (Surah 104). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":58,"phase":"Listen","surah":"Ad-Duha","surah_num":93,"task":"Listen to Ad-Duha (Surah 93, 11 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":59,"phase":"Repeat","surah":"Ad-Duha","surah_num":93,"task":"Repeat Ad-Duha (Surah 93) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":60,"phase":"Memorize","surah":"Ad-Duha","surah_num":93,"task":"Memorize Ad-Duha (Surah 93). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":61,"phase":"Listen","surah":"Al-Adiyat","surah_num":100,"task":"Listen to Al-Adiyat (Surah 100, 11 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":62,"phase":"Repeat","surah":"Al-Adiyat","surah_num":100,"task":"Repeat Al-Adiyat (Surah 100) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":63,"phase":"Memorize","surah":"Al-Adiyat","surah_num":100,"task":"Memorize Al-Adiyat (Surah 100). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":64,"phase":"Listen","surah":"Al-Qari'ah","surah_num":101,"task":"Listen to Al-Qari'ah (Surah 101, 11 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":65,"phase":"Repeat","surah":"Al-Qari'ah","surah_num":101,"task":"Repeat Al-Qari'ah (Surah 101) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":66,"phase":"Memorize","surah":"Al-Qari'ah","surah_num":101,"task":"Memorize Al-Qari'ah (Surah 101). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":67,"phase":"Listen","surah":"Ash-Shams","surah_num":91,"task":"Listen to Ash-Shams (Surah 91, 15 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":68,"phase":"Repeat","surah":"Ash-Shams","surah_num":91,"task":"Repeat Ash-Shams (Surah 91) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":69,"phase":"Memorize","surah":"Ash-Shams","surah_num":91,"task":"Memorize Ash-Shams (Surah 91). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":70,"phase":"Listen","surah":"At-Tariq","surah_num":86,"task":"Listen to At-Tariq (Surah 86, 17 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":71,"phase":"Repeat","surah":"At-Tariq","surah_num":86,"task":"Repeat At-Tariq (Surah 86) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":72,"phase":"Memorize","surah":"At-Tariq","surah_num":86,"task":"Memorize At-Tariq (Surah 86). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":73,"phase":"Listen","surah":"Al-Infitar","surah_num":82,"task":"Listen to Al-Infitar (Surah 82, 19 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":74,"phase":"Repeat","surah":"Al-Infitar","surah_num":82,"task":"Repeat Al-Infitar (Surah 82) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":75,"phase":"Memorize","surah":"Al-Infitar","surah_num":82,"task":"Memorize Al-Infitar (Surah 82). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":76,"phase":"Listen","surah":"Al-Ala","surah_num":87,"task":"Listen to Al-Ala (Surah 87, 19 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":77,"phase":"Repeat","surah":"Al-Ala","surah_num":87,"task":"Repeat Al-Ala (Surah 87) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":78,"phase":"Memorize","surah":"Al-Ala","surah_num":87,"task":"Memorize Al-Ala (Surah 87). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":79,"phase":"Listen","surah":"Al-Alaq","surah_num":96,"task":"Listen to Al-Alaq (Surah 96, 19 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":80,"phase":"Repeat","surah":"Al-Alaq","surah_num":96,"task":"Repeat Al-Alaq (Surah 96) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":81,"phase":"Memorize","surah":"Al-Alaq","surah_num":96,"task":"Memorize Al-Alaq (Surah 96). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":82,"phase":"Listen","surah":"Al-Balad","surah_num":90,"task":"Listen to Al-Balad (Surah 90, 20 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":83,"phase":"Repeat","surah":"Al-Balad","surah_num":90,"task":"Repeat Al-Balad (Surah 90) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":84,"phase":"Memorize","surah":"Al-Balad","surah_num":90,"task":"Memorize Al-Balad (Surah 90). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":85,"phase":"Listen","surah":"Al-Layl","surah_num":92,"task":"Listen to Al-Layl (Surah 92, 21 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":86,"phase":"Repeat","surah":"Al-Layl","surah_num":92,"task":"Repeat Al-Layl (Surah 92) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":87,"phase":"Memorize","surah":"Al-Layl","surah_num":92,"task":"Memorize Al-Layl (Surah 92). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":88,"phase":"Listen","surah":"Al-Buruj","surah_num":85,"task":"Listen to Al-Buruj (Surah 85, 22 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":89,"phase":"Repeat","surah":"Al-Buruj","surah_num":85,"task":"Repeat Al-Buruj (Surah 85) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":90,"phase":"Memorize","surah":"Al-Buruj","surah_num":85,"task":"Memorize Al-Buruj (Surah 85). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":91,"phase":"Listen","surah":"Al-Inshiqaq","surah_num":84,"task":"Listen to Al-Inshiqaq (Surah 84, 25 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":92,"phase":"Repeat","surah":"Al-Inshiqaq","surah_num":84,"task":"Repeat Al-Inshiqaq (Surah 84) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":93,"phase":"Memorize","surah":"Al-Inshiqaq","surah_num":84,"task":"Memorize Al-Inshiqaq (Surah 84). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":94,"phase":"Listen","surah":"Al-Ghashiyah","surah_num":88,"task":"Listen to Al-Ghashiyah (Surah 88, 26 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":95,"phase":"Repeat","surah":"Al-Ghashiyah","surah_num":88,"task":"Repeat Al-Ghashiyah (Surah 88) out loud with the audio, ayah by ayah. Pause after each and echo it back. Do this 3 times through."},{"step":96,"phase":"Memorize","surah":"Al-Ghashiyah","surah_num":88,"task":"Memorize Al-Ghashiyah (Surah 88). Cover the text, recite from memory, check yourself. Repeat until you can do the full surah once without looking."},{"step":97,"phase":"Listen","surah":"At-Takwir","surah_num":81,"task":"Listen to At-Takwir (Surah 81, 29 ayahs) 5 times in a row. Don't try to memorize yet. Just absorb the melody and rhythm."},{"step":98,"phase":"Full Review","task":"Recite the last 10 surahs (Al-Kawthar to An-Nas) from memory in one sitting. These are your foundation — recite with confidence."},{"step":99,"phase":"Full Review","task":"Recite the middle surahs (Ad-Duha to Al-Adiyat) from memory. Take your time. It is okay to pause and recall."},{"step":100,"phase":"Complete","task":"Recite all of Juz Amma from An-Naba to An-Nas from memory. Start with Bismillah. You have been building to this moment. This is it."}]};
-var questState = JSON.parse(localStorage.getItem('dash_quest') || '{}');
+var questState = lsGet('dash_quest',{});
 if(!questState.currentStep)questState.currentStep=1;
 if(!questState.completedSteps)questState.completedSteps=[];
 if(!questState._tab)questState._tab='current';
-function questSave(){ localStorage.setItem('dash_quest', JSON.stringify(questState)); }
+function questSave(){ lsSet('dash_quest',questState); }
 
 function questConfetti(sourceEl){
   var rect=sourceEl?sourceEl.getBoundingClientRect():{top:window.innerHeight/2,left:window.innerWidth/2,width:0,height:0};
@@ -7343,7 +7345,7 @@ function sbStartAutoSync(){
   _autoSyncInterval=setInterval(function(){
     if(Date.now()>=_autoSyncEnd){
       sbStopAutoSync();
-      if(typeof showToast==='function')showToast('Auto-sync ended after 1 hour');
+      safeToast('Auto-sync ended after 1 hour');
       var cb=document.getElementById('sb-autosync-cb');
       if(cb)cb.checked=false;
       return;
@@ -7364,6 +7366,9 @@ function _sbDoAutoSync(){
   var cfg=sbGetConfig();
   if(!cfg.url||!cfg.key||!cfg.account)return;
   sbPush&&sbPush(true); // silent push
+  var _now=new Date();
+  var _t=_now.getHours()+':'+String(_now.getMinutes()).padStart(2,'0');
+  safeToast('☁ Auto-synced at '+_t);
 }
 
 function _sbUpdateAutoSyncStatus(){
@@ -7387,7 +7392,7 @@ window.addEventListener('load',function(){
     _autoSyncInterval=setInterval(function(){
       if(Date.now()>=_autoSyncEnd){
         sbStopAutoSync();
-        if(typeof showToast==='function')showToast('Auto-sync ended after 1 hour');
+        safeToast('Auto-sync ended after 1 hour');
         var cb=document.getElementById('sb-autosync-cb');
         if(cb)cb.checked=false;
         return;

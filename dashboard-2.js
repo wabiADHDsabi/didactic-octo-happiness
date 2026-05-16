@@ -1,4 +1,4 @@
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-15 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-16 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -102,7 +102,7 @@ function pomoSaveDay(includeTimer){
       startedAt:null
     };
   }
-  localStorage.setItem('pomo_day_data',JSON.stringify(data));
+  lsSet('pomo_day_data',data);
 }
 
 
@@ -153,7 +153,7 @@ function pomoRenderLog(){
   if(!el)return;
   var allLog=pomoGetAllLog();
   var dates=Object.keys(allLog).sort().reverse();
-  if(!dates.length){el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:12px 0">No sessions logged yet.</div>';return;}
+  if(!dates.length){el.innerHTML='<div class="empty-msg">No sessions logged yet.</div>';return;}
   var h='';
   // Group by month
   var months={};
@@ -228,7 +228,7 @@ function pomoRenderStats(){
 
   var dates=getFilteredDates();
   if(!dates.length){
-    el.innerHTML=h+'<div style="color:var(--dim);font-size:12px;padding:12px 0">No sessions for this period.</div>';
+    el.innerHTML=h+'<div class="empty-msg">No sessions for this period.</div>';
     return;
   }
   var totalWorkMins=0,totalBreakMins=0,totalWorkSess=0,totalBreakSess=0;
@@ -251,7 +251,7 @@ function pomoRenderStats(){
     workMinsByDow[dow]+=dwm;
   });
   function fmins(m){return m>=60?(Math.floor(m/60)+'h '+(m%60?m%60+'m':'')):(m+'m');}
-  function stat(v,l,col){return '<div style="text-align:center"><div class="pomo-stat-num" style="color:'+(col||'var(--cp)')+'">'+v+'</div><div class="pomo-stat-lbl">'+l+'</div></div>';}
+  function stat(v,l,col){return '<div class="text-center"><div class="pomo-stat-num" style="color:'+(col||'var(--cp)')+'">'+v+'</div><div class="pomo-stat-lbl">'+l+'</div></div>';}
 
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
   h+=stat(fmins(totalWorkMins),'WORK','var(--cr)');
@@ -316,7 +316,7 @@ function pomoRenderStats(){
         var moLabel=new Date(mo+'-01').toLocaleDateString('en-US',{month:'short',year:'2-digit'});
         var wm=workMinsByMonth[mo]||0;
         var wpct=Math.round(wm/maxWm*100);
-        h+='<div style="margin-bottom:6px"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-bottom:2px"><span>'+moLabel+'</span><span style="color:var(--cr)">'+fmins(wm)+'</span></div>';
+        h+='<div class="mb-6"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-bottom:2px"><span>'+moLabel+'</span><span style="color:var(--cr)">'+fmins(wm)+'</span></div>';
         h+='<div style="height:6px;background:rgba(255,255,255,.07);border-radius:2px"><div style="width:'+wpct+'%;height:100%;background:var(--cr);border-radius:2px"></div></div></div>';
       });
     }
@@ -571,7 +571,7 @@ function _gbSound(notes,wave){
   }catch(e){}
 }
 function pomoBeep(){
-  if(typeof hap==='function')hap(HAP.pomoWork);
+  safeHap(HAP.pomoWork);
   // Fireworks sound: 2 seconds of staggered pops, whistles, and crackle bursts
   try{
     var ctx=_getAudioCtx();
@@ -657,7 +657,7 @@ function pomoSoundStart(){_gbSound([[392,0,0.06],[523,0.07,0.12]],'square');}
 function pomoSoundReset(){_gbSound([[523,0,0.05],[392,0.06,0.05],[294,0.12,0.1]],'square');}
 
 function pomoBreakBeep(){
-  if(typeof hap==='function')hap(HAP.pomoBreak);
+  safeHap(HAP.pomoBreak);
   // Calm, gentle chime for break completion — 3 soft bell tones descending
   try{
     var ctx=_getAudioCtx();
@@ -720,10 +720,10 @@ function pomoStartStop(){
       if(window.pomoNoiseStop)window.pomoNoiseStop();
       if(pomoState.mode==='work'){
         pomoBeep();
-        if(typeof hap==='function')hap(HAP.pomoWork);
+        safeHap(HAP.pomoWork);
       }else{
         pomoBreakBeep();
-        if(typeof hap==='function')hap(HAP.pomoBreak);
+        safeHap(HAP.pomoBreak);
       }
       pomoRender();
       pomoConfettiRain();
@@ -737,7 +737,7 @@ function pomoStartStop(){
 }
 
 function pomoReset(){
-  if(typeof hap==='function')hap(HAP.soft);
+  safeHap(HAP.soft);
   clearInterval(pomoState.interval);
   pomoState.running=false;
   if(window.pomoNoiseStop)window.pomoNoiseStop();
@@ -745,7 +745,7 @@ function pomoReset(){
   pomoState.remainSecs=pomoState.totalSecs;
   // Clear persisted timer so reload doesn't restore it
   var saved=JSON.parse(localStorage.getItem('pomo_day_data')||'null');
-  if(saved){saved.activeTimer=null;localStorage.setItem('pomo_day_data',JSON.stringify(saved));}
+  if(saved){saved.activeTimer=null;lsSet('pomo_day_data',saved);}
   pomoRender();
 }
 
@@ -826,7 +826,7 @@ var itData=null; // loaded from islam.json
 var itState=JSON.parse(localStorage.getItem('dash_islamic')||'{"current":1,"meditated":{},"log":[]}');
 itState.browseIdx=itState.current; // always start at today's entry
 
-function itSave(){localStorage.setItem('dash_islamic',JSON.stringify(itState));}
+function itSave(){lsSet('dash_islamic',itState);}
 
 
 // ── WRITER'S DEN ──
@@ -834,7 +834,7 @@ var wdData=null; // loaded from write.json (object keyed by string id)
 var wdState=JSON.parse(localStorage.getItem('dash_wd')||'{"currentId":null,"seen":[],"history":[],"meditated":{},"log":[]}');
 wdState.browseId=null; // always start at today's entry
 
-function wdSave(){localStorage.setItem('dash_wd',JSON.stringify(wdState));}
+function wdSave(){lsSet('dash_wd',wdState);}
 
 function wdLoad(){
   var el=document.getElementById('wd-body');
@@ -925,7 +925,7 @@ function wdRender(){
   // Progress
   h+='<div class="wd-progress">';
   h+='<div class="wd-pbar-wrap"><div class="wd-pbar" style="width:'+pct+'%"></div></div>';
-  h+='<span style="font-size:9px;color:var(--dim)">'+pct+'% seen</span>';
+  h+='<span class="dim-9">'+pct+'% seen</span>';
   h+='</div>';
   // ID + category
   h+='<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">';
@@ -970,7 +970,7 @@ function wdRender(){
       setTimeout(function(){if(_b.dataset.confirm==='1'){_b.textContent='SKIP ENTRY →';_b.style.color='rgba(255,255,255,.65)';_b.style.borderColor='rgba(255,255,255,.3)';_b.dataset.confirm='';}},2500);
       return;
     }
-    if(typeof hap==='function')hap(HAP.tap);
+    safeHap(HAP.tap);
     wdPickNext();wdRender();
   };
 }
@@ -983,7 +983,7 @@ function wdMeditate(){
   wdState.log=wdState.log||[];
   wdState.log.unshift({id:id,date:localDateStr(),title:(wdData&&wdData[id]?wdData[id].title:'')});
   if(wdState.log.length>500)wdState.log=wdState.log.slice(0,500);
-  if(typeof hap==='function')hap(HAP.goal);
+  safeHap(HAP.goal);
   wdSave();
   wdRender();
   confetti(window.innerWidth/2,window.innerHeight*0.4,'#00e5ff');
@@ -1067,7 +1067,7 @@ function itRender(){
   // Progress bar
   h+='<div class="it-progress">';
   h+='<div class="it-pbar-wrap"><div class="it-pbar" style="width:'+pct+'%"></div></div>';
-  h+='<span style="font-size:9px;color:var(--dim)">'+pct+'%</span>';
+  h+='<span class="dim-9">'+pct+'%</span>';
   h+='</div>';
   // Number + topic
   h+='<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">';
@@ -1116,7 +1116,7 @@ function itMeditate(){
   itState.log=itState.log||[];
   itState.log.unshift({id:itState.current,date:localDateStr()});
   if(itState.log.length>200)itState.log=itState.log.slice(0,200);
-  if(typeof hap==='function')hap(HAP.goal);
+  safeHap(HAP.goal);
   itSave();
   itRender();
   confetti(window.innerWidth/2,window.innerHeight*0.4,'#ffcc00');
@@ -1138,7 +1138,7 @@ setTimeout(itLoad,400);
 
 
 // ── WEEKEND WARRIOR ──
-var wwData=JSON.parse(localStorage.getItem('dash_ww')||'{}');
+var wwData=lsGet('dash_ww',{});
 var wwOffset=0; // weeks from current
 var wwExpandedKey='';
 
@@ -1151,7 +1151,7 @@ var US_HOLIDAYS=[
   {m:12,d:31,n:'New Years Eve'},
 ];
 
-function wwSave(){localStorage.setItem('dash_ww',JSON.stringify(wwData));}
+function wwSave(){lsSet('dash_ww',wwData);}
 function wwNormalizeNotes(entry){
   var raw=entry&&entry.notes;
   if(!raw)return [];
@@ -1375,71 +1375,71 @@ function snapshotData(){
   return {
     version:3,
     ts:new Date().toISOString(),
-    todos:JSON.parse(localStorage.getItem('dash_todos')||'[]'),
-    notes:JSON.parse(localStorage.getItem('dash_notes_v2')||'[]'),
-    meals:JSON.parse(localStorage.getItem('dash_meals')||'[]'),
-    schedule:JSON.parse(localStorage.getItem('dash_schedule')||'{}'),
-    books:JSON.parse(localStorage.getItem('dash_books')||'[]'),
-    bmarks:JSON.parse(localStorage.getItem('dash_bmarks')||'[]'),
-    sLog:JSON.parse(localStorage.getItem('s_log')||'[]'),
-    ptData:JSON.parse(localStorage.getItem('pt_data')||'{}'), // includes _focus per day
-    birthdays:JSON.parse(localStorage.getItem('dash_birthdays')||'[]'),
+    todos:lsGet('dash_todos',[]),
+    notes:lsGet('dash_notes_v2',[]),
+    meals:lsGet('dash_meals',[]),
+    schedule:lsGet('dash_schedule',{}),
+    books:lsGet('dash_books',[]),
+    bmarks:lsGet('dash_bmarks',[]),
+    sLog:lsGet('s_log',[]),
+    ptData:lsGet('pt_data',{}), // includes _focus per day
+    birthdays:lsGet('dash_birthdays',[]),
     tileOrder:JSON.parse(localStorage.getItem('dash_tile_order')||'null'),
     clockMode:localStorage.getItem('clockMode')||'24',
     sSettings:sbStripLocalSettings(localStorage.getItem('dash_settings')),
-    qtData:JSON.parse(localStorage.getItem('qt_data')||'{}'),
-    jmData:JSON.parse(localStorage.getItem('jm_data')||'{}'),
+    qtData:lsGet('qt_data',{}),
+    jmData:lsGet('jm_data',{}),
     goalsData:JSON.parse(localStorage.getItem('dash_goals')||'{"monthly":[],"yearly":[]}'),
-    islamicState:JSON.parse(localStorage.getItem('dash_islamic')||'{}'),
-    wdState:JSON.parse(localStorage.getItem('dash_wd')||'{}'),
-    wwData:JSON.parse(localStorage.getItem('dash_ww')||'{}'),
-    wmData:JSON.parse(localStorage.getItem('dash_wm')||'{}'),
-    wrData:JSON.parse(localStorage.getItem('dash_wr')||'[]'),
-    dlData:JSON.parse(localStorage.getItem('dash_dl')||'[]'),
-    seasonTraditions:JSON.parse(localStorage.getItem('dash_season_traditions')||'{}'),
-    zipConfig:JSON.parse(localStorage.getItem('dash_zip')||'{}'),
-    hiddenTiles:JSON.parse(localStorage.getItem('dash_hidden_tiles')||'[]'),
+    islamicState:lsGet('dash_islamic',{}),
+    wdState:lsGet('dash_wd',{}),
+    wwData:lsGet('dash_ww',{}),
+    wmData:lsGet('dash_wm',{}),
+    wrData:lsGet('dash_wr',[]),
+    dlData:lsGet('dash_dl',[]),
+    seasonTraditions:lsGet('dash_season_traditions',{}),
+    zipConfig:lsGet('dash_zip',{}),
+    hiddenTiles:lsGet('dash_hidden_tiles',[]),
     pomoDayData:JSON.parse(localStorage.getItem('pomo_day_data')||'null'),
     pomoHistLog:(function(){var h={};for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.startsWith('pomo_log_')){try{h[k.slice(9)]=JSON.parse(localStorage.getItem(k)||'[]');}catch(e){}}}return h;}()),
     zipCfg:localStorage.getItem('dash_zip')||'{}',
     sbCfg:localStorage.getItem('dash_sb_config')||'{}',
-    qcState:JSON.parse(localStorage.getItem('dash_qc')||'{}'),
-    pinsData:JSON.parse(localStorage.getItem('dash_pins')||'[]'),
-    mlData:JSON.parse(localStorage.getItem('dash_ml')||'[]'),
-    prayerHist:JSON.parse(localStorage.getItem('prayerHist')||'{}'),
-    stockHist:JSON.parse(localStorage.getItem('stockHist')||'{}'),
+    qcState:lsGet('dash_qc',{}),
+    pinsData:lsGet('dash_pins',[]),
+    mlData:lsGet('dash_ml',[]),
+    prayerHist:lsGet('prayerHist',{}),
+    stockHist:lsGet('stockHist',{}),
     sSettingsRaw:sbStripLocalSettings(localStorage.getItem('dash_settings')),
-    milData:JSON.parse(localStorage.getItem('dash_mil')||'{}'),
-    dbData:JSON.parse(localStorage.getItem('dash_db')||'{}'),
-    wlData:JSON.parse(localStorage.getItem('dash_wl')||'[]'),
-    qcState:JSON.parse(localStorage.getItem('dash_qc')||'{}'),
-    gratData:JSON.parse(localStorage.getItem('dash_grat')||'[]'),
-    duaState:JSON.parse(localStorage.getItem('dash_dua')||'{}'),
-    akhiraData:JSON.parse(localStorage.getItem('dash_akhira')||'{}'),
+    milData:lsGet('dash_mil',{}),
+    dbData:lsGet('dash_db',{}),
+    wlData:lsGet('dash_wl',[]),
+    qcState:lsGet('dash_qc',{}),
+    gratData:lsGet('dash_grat',[]),
+    duaState:lsGet('dash_dua',{}),
+    akhiraData:lsGet('dash_akhira',{}),
     cdData:JSON.parse(localStorage.getItem('dash_cd')||'{"items":[],"log":[]}'),
-    wallData:JSON.parse(localStorage.getItem('dash_wall')||'{}'),
-    calorieLog:JSON.parse(localStorage.getItem('dash_calories')||'[]'),
-    writeLog:JSON.parse(localStorage.getItem('dash_write_log')||'[]'),
-    rfData:JSON.parse(localStorage.getItem('dash_reframe')||'[]'),
-    legacyData:JSON.parse(localStorage.getItem('dash_legacy')||'{}'),
-    shadowData:JSON.parse(localStorage.getItem('dash_shadow')||'[]'),
-    fearData:JSON.parse(localStorage.getItem('dash_fear')||'{}'),
-    rfData:JSON.parse(localStorage.getItem('dash_reframe')||'[]'),
-    legacyData:JSON.parse(localStorage.getItem('dash_legacy')||'{}'),
-    shadowData:JSON.parse(localStorage.getItem('dash_shadow')||'[]'),
-    fearData:JSON.parse(localStorage.getItem('dash_fear')||'{}'),
-    rentData:JSON.parse(localStorage.getItem('dash_rent')||'[]'),
-    syncLogAll:JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]'),
-    qwState:JSON.parse(localStorage.getItem('dash_qw')||'{}'),
-    arState:JSON.parse(localStorage.getItem('dash_ar')||'{}'),
-    acState:JSON.parse(localStorage.getItem('dash_ac')||'{}'),
-    smState:JSON.parse(localStorage.getItem('dash_sm')||'{}'),
-    vsState:JSON.parse(localStorage.getItem('dash_vs')||'{}'),
-    artState:JSON.parse(localStorage.getItem('dash_art')||'{}'),
-    juaState:JSON.parse(localStorage.getItem('dash_jua')||'{}'),
-    certData:JSON.parse(localStorage.getItem('dash_cert')||'[]'),
+    wallData:lsGet('dash_wall',{}),
+    calorieLog:lsGet('dash_calories',[]),
+    writeLog:lsGet('dash_write_log',[]),
+    rfData:lsGet('dash_reframe',[]),
+    legacyData:lsGet('dash_legacy',{}),
+    shadowData:lsGet('dash_shadow',[]),
+    fearData:lsGet('dash_fear',{}),
+    rfData:lsGet('dash_reframe',[]),
+    legacyData:lsGet('dash_legacy',{}),
+    shadowData:lsGet('dash_shadow',[]),
+    fearData:lsGet('dash_fear',{}),
+    rentData:lsGet('dash_rent',[]),
+    syncLogAll:lsGet('dash_sync_log_all',[]),
+    qwState:lsGet('dash_qw',{}),
+    arState:lsGet('dash_ar',{}),
+    acState:lsGet('dash_ac',{}),
+    smState:lsGet('dash_sm',{}),
+    vsState:lsGet('dash_vs',{}),
+    artState:lsGet('dash_art',{}),
+    juaState:lsGet('dash_jua',{}),
+    certData:lsGet('dash_cert',[]),
     medData:JSON.parse(localStorage.getItem('dash_med')||'{"meds":[],"log":[]}'),
-    peopleData:JSON.parse(localStorage.getItem('dash_people')||'[]'),
+    peopleData:lsGet('dash_people',[]),
     stressDemess:JSON.parse(localStorage.getItem('dash_stress_demess')||'{"log":[]}')
   };
 }
@@ -1485,11 +1485,11 @@ function restoreSnapshot(snap){
       'scrollGlow','bigBorders','textGlow','scrollTrail','largeText','magnetMode','noGoogleFonts','letterNav'];
     try{
       var _remote=JSON.parse(snap.sSettingsRaw||'{}');
-      var _local=JSON.parse(localStorage.getItem('dash_settings')||'{}');
+      var _local=lsGet('dash_settings',{});
       // Start with remote, then overlay local appearance keys
       var _merged=Object.assign({},_remote);
       _LOCAL_APP.forEach(function(k){if(_local.hasOwnProperty(k))_merged[k]=_local[k];});
-      localStorage.setItem('dash_settings',JSON.stringify(_merged));
+      lsSet('dash_settings',_merged);
     }catch(e){localStorage.setItem('dash_settings',snap.sSettingsRaw);}
   }
   if(snap.milData)localStorage.setItem('dash_mil',JSON.stringify(snap.milData));
@@ -1522,14 +1522,14 @@ function restoreSnapshot(snap){
   if(snap.peopleData)localStorage.setItem('dash_people',JSON.stringify(snap.peopleData));
   if(snap.stressDemess)localStorage.setItem('dash_stress_demess',JSON.stringify(snap.stressDemess));
   if(snap.syncLogAll&&Array.isArray(snap.syncLogAll)){
-    var _curAll=JSON.parse(localStorage.getItem('dash_sync_log_all')||'[]');
+    var _curAll=lsGet('dash_sync_log_all',[]);
     var _allMap={};
     snap.syncLogAll.concat(_curAll).forEach(function(e){
       var k=(e.ts||'')+'|'+(e.device||'');
       if(!_allMap[k])_allMap[k]=e;
     });
     var _merged=Object.values(_allMap).sort(function(a,b){return b.ts>a.ts?1:-1;}).slice(0,20);
-    localStorage.setItem('dash_sync_log_all',JSON.stringify(_merged));
+    lsSet('dash_sync_log_all',_merged);
   }
 }
 
@@ -1538,20 +1538,20 @@ function doBackup(manual){
   var now=new Date();
 
   // ── Recent backups: keep last 3 ──
-  var recent=JSON.parse(localStorage.getItem('bk_recent')||'[]');
+  var recent=lsGet('bk_recent',[]);
   recent.unshift(snap);
   if(recent.length>3)recent=recent.slice(0,3);
-  localStorage.setItem('bk_recent',JSON.stringify(recent));
+  lsSet('bk_recent',recent);
 
   // ── Daily backups: 1 per day for 7 days ──
-  var daily=JSON.parse(localStorage.getItem('bk_daily')||'{}');
+  var daily=lsGet('bk_daily',{});
   var dayKey=localDateStr(now);
   daily[dayKey]=snap;
   // Prune to last 7 days
   var dayKeys=Object.keys(daily).sort().reverse().slice(0,7);
   var pruned={};
   dayKeys.forEach(function(k){pruned[k]=daily[k];});
-  localStorage.setItem('bk_daily',JSON.stringify(pruned));
+  lsSet('bk_daily',pruned);
 
   localStorage.setItem('bk_last',now.toISOString());
   renderBackupList();
@@ -1597,10 +1597,10 @@ function confirmRestore(key,idx){
   // Do restore
   var snap=null;
   if(key==='recent'){
-    var recent=JSON.parse(localStorage.getItem('bk_recent')||'[]');
+    var recent=lsGet('bk_recent',[]);
     snap=recent[idx];
   } else {
-    var daily=JSON.parse(localStorage.getItem('bk_daily')||'{}');
+    var daily=lsGet('bk_daily',{});
     snap=daily[idx];
   }
   if(!snap){alert('Backup not found.');return;}
@@ -1612,8 +1612,8 @@ function confirmRestore(key,idx){
 function renderBackupList(){
   var el=document.getElementById('backup-list');
   if(!el)return;
-  var recent=JSON.parse(localStorage.getItem('bk_recent')||'[]');
-  var daily=JSON.parse(localStorage.getItem('bk_daily')||'{}');
+  var recent=lsGet('bk_recent',[]);
+  var daily=lsGet('bk_daily',{});
   var h='';
 
   if(!recent.length&&!Object.keys(daily).length){
@@ -1674,45 +1674,45 @@ function exportAllData(){
     version:2,
     exported:new Date().toISOString(),
     // Core data
-    todos:JSON.parse(localStorage.getItem('dash_todos')||'[]'),
-    notes:JSON.parse(localStorage.getItem('dash_notes_v2')||'[]'),
-    meals:JSON.parse(localStorage.getItem('dash_meals')||'[]'),
-    schedule:JSON.parse(localStorage.getItem('dash_schedule')||'{}'),
-    books:JSON.parse(localStorage.getItem('dash_books')||'[]'),
-    bmarks:JSON.parse(localStorage.getItem('dash_bmarks')||'[]'),
-    sLog:JSON.parse(localStorage.getItem('s_log')||'[]'),
-    ptData:JSON.parse(localStorage.getItem('pt_data')||'{}'), // includes _focus per day
-    prayerHist:JSON.parse(localStorage.getItem('prayerHist')||'{}'),
-    stockHist:JSON.parse(localStorage.getItem('stockHist')||'{}'),
-    stockHist:JSON.parse(localStorage.getItem('stockHist')||'{}'),
-    birthdays:JSON.parse(localStorage.getItem('dash_birthdays')||'[]'),
+    todos:lsGet('dash_todos',[]),
+    notes:lsGet('dash_notes_v2',[]),
+    meals:lsGet('dash_meals',[]),
+    schedule:lsGet('dash_schedule',{}),
+    books:lsGet('dash_books',[]),
+    bmarks:lsGet('dash_bmarks',[]),
+    sLog:lsGet('s_log',[]),
+    ptData:lsGet('pt_data',{}), // includes _focus per day
+    prayerHist:lsGet('prayerHist',{}),
+    stockHist:lsGet('stockHist',{}),
+    stockHist:lsGet('stockHist',{}),
+    birthdays:lsGet('dash_birthdays',[]),
     // New cards
-    qtData:JSON.parse(localStorage.getItem('qt_data')||'{}'),
-    jmData:JSON.parse(localStorage.getItem('jm_data')||'{}'),
-    goalsData:JSON.parse(localStorage.getItem('dash_goals')||'{}'),
-    islamicState:JSON.parse(localStorage.getItem('dash_islamic')||'{}'),
-    wdState:JSON.parse(localStorage.getItem('dash_wd')||'{}'),
-    wwData:JSON.parse(localStorage.getItem('dash_ww')||'{}'),
-    wmData:JSON.parse(localStorage.getItem('dash_wm')||'{}'),
-    wrData:JSON.parse(localStorage.getItem('dash_wr')||'[]'),
-    dlData:JSON.parse(localStorage.getItem('dash_dl')||'[]'),
-    mlData:JSON.parse(localStorage.getItem('dash_ml')||'[]'),
-    qcState:JSON.parse(localStorage.getItem('dash_qc')||'{}'),
-    pinsData:JSON.parse(localStorage.getItem('dash_pins')||'[]'),
-    wmData:JSON.parse(localStorage.getItem('dash_wm')||'{}'),
-    wrData:JSON.parse(localStorage.getItem('dash_wr')||'[]'),
-    dlData:JSON.parse(localStorage.getItem('dash_dl')||'[]'),
-    seasonTraditions:JSON.parse(localStorage.getItem('dash_season_traditions')||'{}'),
+    qtData:lsGet('qt_data',{}),
+    jmData:lsGet('jm_data',{}),
+    goalsData:lsGet('dash_goals',{}),
+    islamicState:lsGet('dash_islamic',{}),
+    wdState:lsGet('dash_wd',{}),
+    wwData:lsGet('dash_ww',{}),
+    wmData:lsGet('dash_wm',{}),
+    wrData:lsGet('dash_wr',[]),
+    dlData:lsGet('dash_dl',[]),
+    mlData:lsGet('dash_ml',[]),
+    qcState:lsGet('dash_qc',{}),
+    pinsData:lsGet('dash_pins',[]),
+    wmData:lsGet('dash_wm',{}),
+    wrData:lsGet('dash_wr',[]),
+    dlData:lsGet('dash_dl',[]),
+    seasonTraditions:lsGet('dash_season_traditions',{}),
     pomoDayData:JSON.parse(localStorage.getItem('pomo_day_data')||'null'),
     pomoHistLog:(function(){var h={};for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.startsWith('pomo_log_')){try{h[k.slice(9)]=JSON.parse(localStorage.getItem(k)||'[]');}catch(e){}}}return h;}()),
     // Settings & config
     tileOrder:JSON.parse(localStorage.getItem('dash_tile_order')||'null'),
     clockMode:localStorage.getItem('clockMode')||'24',
     sSettings:localStorage.getItem('dash_settings')||'{}',
-    hiddenTiles:JSON.parse(localStorage.getItem('dash_hidden_tiles')||'[]'),
-    zipConfig:JSON.parse(localStorage.getItem('dash_zip')||'{}'),
-    milData:JSON.parse(localStorage.getItem('dash_mil')||'{}'),
-    wlData:JSON.parse(localStorage.getItem('dash_wl')||'[]'),
+    hiddenTiles:lsGet('dash_hidden_tiles',[]),
+    zipConfig:lsGet('dash_zip',{}),
+    milData:lsGet('dash_mil',{}),
+    wlData:lsGet('dash_wl',[]),
     // Supabase credentials
     sbCfg:localStorage.getItem('dash_sb_config')||'{}'
   };
@@ -1931,7 +1931,7 @@ function renderReorderModal(){
   var modal=document.createElement('div');
   modal.id='reorder-modal';
   modal.className='reorder-modal';
-  var h='<div class="reorder-header">'    +'<span class="reorder-title">&#8942; DRAG TO REORDER</span>'    +'<div style="display:flex;gap:6px">'    +'<button class="settings-btn" onclick="applyReorder()" style="padding:4px 14px;font-size:10px">&#10003; APPLY</button>'    +'<button class="reorder-close" onclick="closeReorder()">&#10005;</button>'    +'</div></div>'    +'<div style="font-size:9px;color:var(--dim);padding:4px 12px 8px;letter-spacing:1px">Drag to reorder &bull; tap APPLY to save</div>'    +'<div class="ro-grid" id="ro-grid">';
+  var h='<div class="reorder-header">'    +'<span class="reorder-title">&#8942; DRAG TO REORDER</span>'    +'<div class="flex-row">'    +'<button class="settings-btn" onclick="applyReorder()" style="padding:4px 14px;font-size:10px">&#10003; APPLY</button>'    +'<button class="reorder-close" onclick="closeReorder()">&#10005;</button>'    +'</div></div>'    +'<div style="font-size:9px;color:var(--dim);padding:4px 12px 8px;letter-spacing:1px">Drag to reorder &bull; tap APPLY to save</div>'    +'<div class="ro-grid" id="ro-grid">';
   reorderList.forEach(function(id,i){
     var name=TILE_NAMES[id]||id;
     var emoji=TILE_EMOJI[id]||'▪';
@@ -2036,7 +2036,7 @@ function wireReorderDrag(){
 
 function applyReorder(){
   tileOrder=reorderList.slice();
-  localStorage.setItem('dash_tile_order',JSON.stringify(tileOrder));
+  lsSet('dash_tile_order',tileOrder);
   applyOrder();
   if(getSetting('magnetMode'))enforceMagnetAll();
   closeReorder();
@@ -2049,7 +2049,7 @@ function closeReorder(){
 
 
 // ── SEASON TRADITIONS ──
-var stData=JSON.parse(localStorage.getItem('dash_season_traditions')||'{}');
+var stData=lsGet('dash_season_traditions',{});
 var ST_SEASONS=['spring','summer','fall','winter'];
 var ST_LABELS={spring:'SPRING',summer:'SUMMER',fall:'FALL',winter:'WINTER'};
 function stCurrentSeason(){
@@ -2063,7 +2063,7 @@ var stSeason=(function(){
   var saved=localStorage.getItem('dash_st_tab');
   return ST_SEASONS.indexOf(saved)>=0?saved:stCurrentSeason();
 })();
-function stSave(){localStorage.setItem('dash_season_traditions',JSON.stringify(stData));}
+function stSave(){lsSet('dash_season_traditions',stData);}
 function stYear(){return (new Date()).getFullYear();}
 var stViewYear=(function(){
   var y=parseInt(localStorage.getItem('dash_st_year')||'',10);
@@ -2167,12 +2167,12 @@ function exportSeasonTraditions(){
 setTimeout(stRender,200);
 
 // ── BIRTHDAYS ──
-var birthdays=window.birthdays=JSON.parse(localStorage.getItem('dash_birthdays')||'[]');
+var birthdays=window.birthdays=lsGet('dash_birthdays',[]);
 var bdayDeletePending={};
 var bdayEditId=null;
 var bdayTab='view';
 
-function saveBirthdays(){localStorage.setItem('dash_birthdays',JSON.stringify(birthdays));window.birthdays=birthdays;if(typeof renderCal==='function')renderCal();}
+function saveBirthdays(){lsSet('dash_birthdays',birthdays);window.birthdays=birthdays;if(typeof renderCal==='function')renderCal();}
 
 function bdayDaysUntil(month,day){
   var now=new Date();
@@ -2222,7 +2222,7 @@ function renderBdayView(){
   var el=document.getElementById('bday-view-panel');
   if(!el)return;
   if(!birthdays.length){
-    el.innerHTML='<div style="font-size:11px;color:var(--dim);padding:10px 0">No birthdays yet. Go to PEOPLE to add some.</div>';
+    el.innerHTML='<div class="card-empty-v">No birthdays yet. Go to PEOPLE to add some.</div>';
     return;
   }
   var sorted=birthdays.slice().sort(function(a,b){
@@ -2240,7 +2240,7 @@ function renderBdayView(){
     +'<div class="bday-next-sub">'
     +(nextDays===0?'🎉 TODAY!':nextDays===1?'Tomorrow!':nextDays+' days away')
     +(bdayTurningAge(next)?' · turns '+bdayTurningAge(next):'')
-    +'</div>'+(next.notes?'<div style="font-size:9px;color:var(--dim);margin-top:2px">'+next.notes+'</div>':'')
+    +'</div>'+(next.notes?'<div class="dim-9-mt">'+next.notes+'</div>':'')
     +'</div></div>';
 
   // ── Upcoming list grouped by month ──
@@ -2274,9 +2274,9 @@ function renderBdayView(){
   var withYear=birthdays.filter(function(b){return b.year;});
   var soonCount=birthdays.filter(function(b){return bdayDaysUntil(b.month,b.day)<=30;}).length;
   h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,105,180,.1)">'
-    +'<span style="font-size:10px;color:var(--dim)">'+birthdays.length+' people</span>'
+    +'<span class="dim-10">'+birthdays.length+' people</span>'
     +(soonCount?'<span style="font-size:10px;color:#ff69b4">·  '+soonCount+' in next 30 days</span>':'')
-    +(withYear.length?'<span style="font-size:10px;color:var(--dim)">·  '+withYear.length+' with age</span>':'')
+    +(withYear.length?'<span class="dim-10">·  '+withYear.length+' with age</span>':'')
     +'</div>';
 
   el.innerHTML=h;
@@ -2696,7 +2696,7 @@ function renderPickleball(){
       +'<span style="font-size:14px;color:'+verdictColor+'">'+icon+'</span>'
       +'<span style="font-size:8px;color:'+verdictColor+';letter-spacing:.5px;font-weight:bold">'+verdictLabel+'</span>'
       +'</div>'
-      +'<div style="flex:1;min-width:0">'
+      +'<div class="flex-1">'
       +tempLine
       +windLine
       +otherLine
@@ -3284,7 +3284,7 @@ function applyTheme(t){
       showToast('\u2191 Moved to top');
       if(getSetting('magnetMode'))magnetPlace(tileId);
       tileOrder=Array.from(g.querySelectorAll('[data-id]')).map(function(e){return e.dataset.id;});
-      localStorage.setItem('dash_tile_order',JSON.stringify(tileOrder));
+      lsSet('dash_tile_order',tileOrder);
       confetti(window.innerWidth/2,80,'#00ff88');
     } else if(zone==='up5'){
       // Move 5 positions up
@@ -3295,7 +3295,7 @@ function applyTheme(t){
       if(ref5&&ref5!==tile)g.insertBefore(tile,ref5);
       showToast('\u21e1 Moved 5 up');
       tileOrder=Array.from(g.querySelectorAll('[data-id]')).map(function(e){return e.dataset.id;});
-      localStorage.setItem('dash_tile_order',JSON.stringify(tileOrder));
+      lsSet('dash_tile_order',tileOrder);
       confetti(window.innerWidth/2,window.innerHeight*0.18,'#00ff88');
     } else if(zone==='down5'){
       // Move 5 positions down
@@ -3306,7 +3306,7 @@ function applyTheme(t){
       if(ref5d&&ref5d!==tile){g.insertBefore(tile,ref5d);g.insertBefore(ref5d,tile);}
       showToast('\u21e3 Moved 5 down');
       tileOrder=Array.from(g.querySelectorAll('[data-id]')).map(function(e){return e.dataset.id;});
-      localStorage.setItem('dash_tile_order',JSON.stringify(tileOrder));
+      lsSet('dash_tile_order',tileOrder);
       confetti(window.innerWidth/2,window.innerHeight*0.82,'#00e5ff');
     } else if(zone==='bottom'){
       var sTile=g.querySelector('[data-id="settings"]');
@@ -3315,7 +3315,7 @@ function applyTheme(t){
       if(getSetting('magnetMode'))magnetPlace(tileId);
       showToast('\u2193 Moved to bottom');
       tileOrder=Array.from(g.querySelectorAll('[data-id]')).map(function(e){return e.dataset.id;});
-      localStorage.setItem('dash_tile_order',JSON.stringify(tileOrder));
+      lsSet('dash_tile_order',tileOrder);
       confetti(window.innerWidth/2,window.innerHeight-80,'#00e5ff');
     }
     hideZones();
@@ -3511,7 +3511,7 @@ if('serviceWorker' in navigator&&location.protocol==='https:'&&!location.hostnam
 }
 
 var wmData=JSON.parse(localStorage.getItem('dash_wm')||'{"weekKey":null,"items":[]}');
-function wmSave(){localStorage.setItem('dash_wm',JSON.stringify(wmData));}
+function wmSave(){lsSet('dash_wm',wmData);}
 function wmGetWeekKey(){
   // Week resets Monday at midnight — no grace period
   var n=new Date();
@@ -3562,7 +3562,7 @@ function wmRender(){
   var h='';
 
   // Tab bar — no inline onclick, use data-wmtab
-  h+='<div style="display:flex;gap:4px;margin-bottom:10px">';
+  h+='<div class="flex-row-4">';
   [{t:'routines',l:'ROUTINES'},{t:'log',l:'LOG'},{t:'chain',l:'CHAIN'}].forEach(function(x){
     var active=tab===x.t;
     h+='<span data-wmtab="'+x.t+'" style="font-size:10px;padding:3px 10px;border:1px solid '+(active?'var(--ca)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--ca)':'var(--dim)')+';cursor:pointer">'+x.l+'</span>';
@@ -3572,7 +3572,7 @@ function wmRender(){
   if(tab==='routines'){
     // Show current week number
     var curWkNum=wrGetISOWeek?wrGetISOWeek(new Date().toISOString().slice(0,10)):0;
-    if(curWkNum)h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">WEEK #'+curWkNum+'</div>';
+    if(curWkNum)h+='<div class="label-dim">WEEK #'+curWkNum+'</div>';
     if(!wmData.items.length){
       h+='<div style="color:var(--dim);font-size:12px;padding:8px 0">No routines yet. Add one below.</div>';
     } else {
@@ -3587,7 +3587,7 @@ function wmRender(){
         h+='<div '+(locked?'':'data-wmtoggle="'+i+'"')+' style="flex-shrink:0;width:28px;height:28px;border-radius:4px;border:2px solid '+(it.done?'var(--ca)':locked?'rgba(255,255,255,.08)':'rgba(255,255,255,.2)')+';background:'+(it.done?'var(--ca)':'transparent')+';cursor:'+(locked?'default':'pointer')+';display:flex;align-items:center;justify-content:center;transition:all .15s;opacity:'+(locked&&!it.done?'.4':'1')+'">';
         h+=it.done?'<span style="color:#000;font-size:16px;font-weight:bold;line-height:1">&#10003;</span>':'';
         h+='</div>';
-        h+='<div style="flex:1;min-width:0">';
+        h+='<div class="flex-1">';
         h+='<span style="font-size:13px;color:'+(it.done?'var(--dim)':'var(--text)')+';'+(it.done?'text-decoration:line-through':'')+'">' +it.text+'</span>';
         if(doneLastWeek)h+='<span style="margin-left:6px;font-size:9px;color:rgba(255,204,0,.45);letter-spacing:.5px">✓ last wk</span>';
         h+='</div>';
@@ -3610,7 +3610,7 @@ function wmRender(){
     } else {
       log.slice(0,12).forEach(function(entry){
         h+='<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)">';
-        h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:4px">WEEK #'+wrGetISOWeek(entry.week)+' &mdash; '+entry.week+'</div>';
+        h+='<div class="label-dim-xs">WEEK #'+wrGetISOWeek(entry.week)+' &mdash; '+entry.week+'</div>';
         entry.done.forEach(function(text){
           h+='<div style="font-size:12px;color:var(--text);padding:2px 0">&#10003; '+text+'</div>';
         });
@@ -3622,7 +3622,7 @@ function wmRender(){
     if(!wmData.items.length){
       h+='<div style="color:var(--dim);font-size:12px;padding:8px 0">Add routines first.</div>';
     } else {
-      h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:10px">Consecutive weeks completed</div>';
+      h+='<div class="label-dim-md">Consecutive weeks completed</div>';
       wmData.items.forEach(function(it){
         var streak=0;
         if(it.done)streak++;
@@ -3634,9 +3634,9 @@ function wmRender(){
         for(var d=0;d<12;d++){
           dots+='<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:'+(d<streak?'var(--ca)':'rgba(255,255,255,.08)')+';margin-right:3px"></span>';
         }
-        h+='<div style="margin-bottom:10px">';
+        h+='<div class="mb-10">';
         h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
-        h+='<span style="font-size:12px;color:var(--text)">'+it.text+'</span>';
+        h+='<span class="text-12">'+it.text+'</span>';
         h+='<span style="font-size:11px;color:var(--ca);font-weight:bold">'+streak+'w</span>';
         h+='</div>';
         h+='<div style="display:flex;flex-wrap:wrap;gap:3px">'+dots+(streak>12?'<span style="font-size:10px;color:var(--ca)">+'+(streak-12)+'</span>':'')+'</div>';
@@ -3784,8 +3784,8 @@ function pomoSetCustomWork(){var inp=document.getElementById('pomo-custom-inp');
 function pomoSetCustomBreak(){var inp=document.getElementById('pomo-custom-inp');var v=parseInt(inp&&inp.value);if(v>0&&v<=120){pomoSetMode('break',v);if(inp)inp.value='';}}
 setTimeout(wmRender,200);
 
-var wrData=JSON.parse(localStorage.getItem('dash_wr')||'[]');
-function wrSave(){localStorage.setItem('dash_wr',JSON.stringify(wrData));}
+var wrData=lsGet('dash_wr',[]);
+function wrSave(){lsSet('dash_wr',wrData);}
 function wrGetISOWeek(dateStr){
   // Returns ISO week number for a YYYY-MM-DD string
   var d=new Date(dateStr+'T12:00:00');
@@ -3833,10 +3833,10 @@ function wrRenderWrite(){
   var h='';
   if(existing){
     h+='<div style="font-size:10px;color:var(--cg);padding:6px 0;margin-bottom:8px;letter-spacing:1px">&#10003; Week #'+wrGetISOWeek(wk)+' — review saved</div>';
-    PROMPTS.forEach(function(p){if(existing[p.id]){h+='<div style="margin-bottom:8px"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:2px">'+p.label.toUpperCase()+'</div><div style="font-size:12px;color:var(--text);line-height:1.5">'+existing[p.id]+'</div></div>';}});
+    PROMPTS.forEach(function(p){if(existing[p.id]){h+='<div class="mb-8"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:2px">'+p.label.toUpperCase()+'</div><div style="font-size:12px;color:var(--text);line-height:1.5">'+existing[p.id]+'</div></div>';}});
     h+='<button onclick="wrStartNew()" style="width:100%;padding:7px;background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:10px;cursor:pointer;margin-top:4px">EDIT / UPDATE</button>';
   } else {
-    PROMPTS.forEach(function(p){h+='<div style="margin-bottom:10px"><div class="wr-prompt">'+p.label+'</div><textarea class="wr-inp" id="wr-'+p.id+'" placeholder="'+p.ph+'"></textarea></div>';});
+    PROMPTS.forEach(function(p){h+='<div class="mb-10"><div class="wr-prompt">'+p.label+'</div><textarea class="wr-inp" id="wr-'+p.id+'" placeholder="'+p.ph+'"></textarea></div>';});
     h+='<button onclick="wrSaveEntry()" style="width:100%;padding:9px;background:transparent;border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">SAVE REVIEW</button>';
   }
 
@@ -3889,21 +3889,21 @@ function wrSaveEntry(){
 function wrRenderHistory(){
   var el=document.getElementById('wr-panel-history');
   if(!el)return;
-  if(!wrData.length){el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:10px 0">No reviews yet.</div>';return;}
+  if(!wrData.length){el.innerHTML='<div class="empty-msg-sm">No reviews yet.</div>';return;}
   var h='';
   wrData.forEach(function(entry){
     h+='<div class="wr-entry"><div class="wr-entry-date">Week #'+wrGetISOWeek(entry.week)+' &mdash; '+entry.week+'</div>';
-    if(entry.win)h+='<div style="margin-bottom:4px"><span style="font-size:9px;color:var(--cg)">WIN: </span><span class="wr-entry-text">'+entry.win+'</span></div>';
-    if(entry.next)h+='<div style="margin-bottom:4px"><span style="font-size:9px;color:var(--ca)">NEXT: </span><span class="wr-entry-text">'+entry.next+'</span></div>';
-    if(entry.miss)h+='<div style="margin-bottom:4px"><span style="font-size:9px;color:var(--cr)">MISSED: </span><span class="wr-entry-text">'+entry.miss+'</span></div>';
+    if(entry.win)h+='<div class="mb-4"><span style="font-size:9px;color:var(--cg)">WIN: </span><span class="wr-entry-text">'+entry.win+'</span></div>';
+    if(entry.next)h+='<div class="mb-4"><span style="font-size:9px;color:var(--ca)">NEXT: </span><span class="wr-entry-text">'+entry.next+'</span></div>';
+    if(entry.miss)h+='<div class="mb-4"><span style="font-size:9px;color:var(--cr)">MISSED: </span><span class="wr-entry-text">'+entry.miss+'</span></div>';
     h+='</div>';
   });
   el.innerHTML=h;
 }
 setTimeout(function(){wrTab('write');},400);
 
-var dlData=JSON.parse(localStorage.getItem('dash_dl')||'[]');
-function dlSave(){localStorage.setItem('dash_dl',JSON.stringify(dlData));}
+var dlData=lsGet('dash_dl',[]);
+function dlSave(){lsSet('dash_dl',dlData);}
 var dlCurrentTab='add';
 var dlAddMode='quick';
 function dlTab(t){
@@ -3924,7 +3924,7 @@ function dlRenderAdd(){
   if(!el)return;
   if(badge)badge.textContent=dlData.length;
   var qActive=dlAddMode==='quick';
-  var h='<div style="display:flex;gap:4px;margin-bottom:10px">';
+  var h='<div class="flex-row-4">';
   h+='<span data-m="quick" onclick="dlSetMode(this.dataset.m)" style="font-size:10px;padding:3px 10px;border:1px solid '+(qActive?'var(--cpr)':'rgba(255,255,255,.15)')+';color:'+(qActive?'var(--cpr)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">QUICK</span>';
   h+='<span data-m="structured" onclick="dlSetMode(this.dataset.m)" style="font-size:10px;padding:3px 10px;border:1px solid '+(!qActive?'var(--cpr)':'rgba(255,255,255,.15)')+';color:'+(!qActive?'var(--cpr)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">STRUCTURED</span>';
   h+='</div>';
@@ -3932,10 +3932,10 @@ function dlRenderAdd(){
     h+='<textarea class="wr-inp" id="dl-inp-quick" placeholder="Quick decision note..." style="min-height:80px"></textarea>';
     h+='<button onclick="dlSaveQuick()" style="width:100%;padding:9px;background:transparent;border:1px solid var(--cpr);color:var(--cpr);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px;margin-top:4px">LOG</button>';
   } else {
-    h+='<div style="margin-bottom:8px"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">THE DECISION</div><textarea class="wr-inp" id="dl-inp-decision" placeholder="What am I deciding?" style="min-height:44px"></textarea></div>';
-    h+='<div style="margin-bottom:8px"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">WHY</div><textarea class="wr-inp" id="dl-inp-why" placeholder="Reasoning, context..." style="min-height:44px"></textarea></div>';
-    h+='<div style="margin-bottom:10px"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">ALTERNATIVES CONSIDERED</div><textarea class="wr-inp" id="dl-inp-alts" placeholder="What else did I consider?" style="min-height:36px"></textarea></div>';
-    h+='<div style="display:flex;gap:6px">';
+    h+='<div class="mb-8"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">THE DECISION</div><textarea class="wr-inp" id="dl-inp-decision" placeholder="What am I deciding?" style="min-height:44px"></textarea></div>';
+    h+='<div class="mb-8"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">WHY</div><textarea class="wr-inp" id="dl-inp-why" placeholder="Reasoning, context..." style="min-height:44px"></textarea></div>';
+    h+='<div class="mb-10"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">ALTERNATIVES CONSIDERED</div><textarea class="wr-inp" id="dl-inp-alts" placeholder="What else did I consider?" style="min-height:36px"></textarea></div>';
+    h+='<div class="flex-row">';
     h+='<button onclick="dlSaveEntry()" style="flex:1;padding:9px;background:transparent;border:1px solid var(--cpr);color:var(--cpr);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">LOG DECISION</button>';
     h+='<button id="dl-copy-prompt-btn" style="padding:9px 12px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px;white-space:nowrap">📋 AI</button>';
     h+='</div>';
@@ -3965,7 +3965,7 @@ function dlRenderAdd(){
       doCopy(prompt);
       dlCopyBtn.textContent='✓ COPIED';
       dlCopyBtn.style.color='var(--cg)';
-      if(typeof hap==='function')hap(HAP.soft);
+      safeHap(HAP.soft);
       setTimeout(function(){dlCopyBtn.textContent='📋 AI';dlCopyBtn.style.color='var(--dim)';},2000);
     };
   }
@@ -3986,7 +3986,7 @@ function dlRenderLog(){
   if(!el)return;
   var badge=document.getElementById('dl-badge');
   if(badge)badge.textContent=dlData.length;
-  if(!dlData.length){el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:10px 0">No decisions logged yet.</div>';return;}
+  if(!dlData.length){el.innerHTML='<div class="empty-msg-sm">No decisions logged yet.</div>';return;}
   var h='';
   // 30-day review prompt — find decisions that need revisiting
   var now30=new Date();
@@ -4080,14 +4080,14 @@ function emRender(){
     var today=new Date().toISOString().slice(0,10);
     pomoState.sessionLog.forEach(function(m){var mode=typeof m==='object'?m.mode:m;if(mode==='work'){var mts=typeof m==='object'&&m.ts?m.ts:new Date().toISOString();allSessions.push({date:today,mins:typeof m==='object'?m.mins:0,ts:mts});}});
   }
-  if(!allSessions.length){el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:12px 0">No session data yet. Complete some pomodoros first.</div>';return;}
+  if(!allSessions.length){el.innerHTML='<div class="empty-msg">No session data yet. Complete some pomodoros first.</div>';return;}
   if(badge)badge.textContent=allSessions.length+' sessions';
   if(emCurrentTab==='hours'){
     var hourMins=new Array(24).fill(0);
     var hasTime=false;
     allSessions.forEach(function(s){if(s.ts&&s.ts.length>10){hasTime=true;var h=new Date(s.ts).getHours();hourMins[h]+=s.mins;}});
     var maxM=Math.max.apply(null,hourMins);
-    var h='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">FOCUS INTENSITY BY HOUR</div>';
+    var h='<div class="label-dim">FOCUS INTENSITY BY HOUR</div>';
     if(!hasTime){h+='<div style="color:var(--dim);font-size:11px">Hour data appears after future sessions.</div>';}
     else{
       h+='<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-bottom:8px">';
@@ -4104,7 +4104,7 @@ function emRender(){
       h+='</div>';
       var peakHr=hourMins.indexOf(maxM);
       var peakLabel=peakHr<12?(peakHr||12)+'am':(peakHr===12?'12pm':(peakHr-12)+'pm');
-      h+='<div style="font-size:11px;color:var(--dim)">Peak: <span style="color:var(--cc)">'+peakLabel+'</span> ('+maxM+' min)</div>';
+      h+='<div class="dim-11">Peak: <span style="color:var(--cc)">'+peakLabel+'</span> ('+maxM+' min)</div>';
     }
     el.innerHTML=h;
   } else {
@@ -4112,7 +4112,7 @@ function emRender(){
     var dowMins=new Array(7).fill(0);
     allSessions.forEach(function(s){var dw=new Date(s.date+'T12:00:00').getDay();dowMins[dw]+=s.mins;});
     var maxDow=Math.max.apply(null,dowMins);
-    var h='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:10px">FOCUS MINUTES BY DAY OF WEEK</div>';
+    var h='<div class="label-dim-md">FOCUS MINUTES BY DAY OF WEEK</div>';
     h+='<div style="display:flex;align-items:flex-end;gap:6px;height:80px;margin-bottom:8px">';
     for(var dw=0;dw<7;dw++){
       var pct=maxDow>0?Math.round(dowMins[dw]/maxDow*100):0;
@@ -4120,12 +4120,12 @@ function emRender(){
       h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">';
       h+='<div style="font-size:9px;color:'+(isTop?'var(--cc)':'var(--dim)')+'">'+( dowMins[dw]?dowMins[dw]+'m':'')+'</div>';
       h+='<div style="width:100%;background:'+(isTop?'var(--cc)':'rgba(0,229,255,.35)')+';height:'+Math.max(2,pct)+'%;border-radius:1px 1px 0 0;min-height:'+( dowMins[dw]?'4px':'2px')+'"></div>';
-      h+='<div style="font-size:9px;color:var(--dim)">'+DOW[dw].slice(0,2)+'</div>';
+      h+='<div class="dim-9">'+DOW[dw].slice(0,2)+'</div>';
       h+='</div>';
     }
     h+='</div>';
     var bestDow=dowMins.indexOf(maxDow);
-    h+='<div style="font-size:11px;color:var(--dim)">Best: <span style="color:var(--cc)">'+DOW[bestDow]+'</span> — '+maxDow+' min</div>';
+    h+='<div class="dim-11">Best: <span style="color:var(--cc)">'+DOW[bestDow]+'</span> — '+maxDow+' min</div>';
     el.innerHTML=h;
   }
 }
@@ -4152,16 +4152,16 @@ function lsRender(){
      days:lsGet14(function(k){try{var log=JSON.parse(localStorage.getItem('pomo_log_'+k)||'[]');return log.filter(function(e){return (e.type||e)==='work';}).reduce(function(a,e){return a+(e.mins||0);},0)>=25;}catch(ex){return false;}})},
     // Akhira — Dhikr complete (all 4 phases done)
     {label:'Dhikr complete',col:'#ffcc00',
-     streak:lsCalcStreak(function(k){try{var d=JSON.parse(localStorage.getItem('dash_akhira')||'{}');return d.dhikr&&d.dhikr.date===k&&d.dhikr.phase>=4;}catch(ex){return false;}}),
-     days:lsGet14(function(k){try{var d=JSON.parse(localStorage.getItem('dash_akhira')||'{}');return d.dhikr&&d.dhikr.date===k&&d.dhikr.phase>=4;}catch(ex){return false;}})},
+     streak:lsCalcStreak(function(k){try{var d=lsGet('dash_akhira',{});return d.dhikr&&d.dhikr.date===k&&d.dhikr.phase>=4;}catch(ex){return false;}}),
+     days:lsGet14(function(k){try{var d=lsGet('dash_akhira',{});return d.dhikr&&d.dhikr.date===k&&d.dhikr.phase>=4;}catch(ex){return false;}})},
     // Akhira — Audit answered today
     {label:'Akhira audit',col:'#bf5fff',
-     streak:lsCalcStreak(function(k){try{var d=JSON.parse(localStorage.getItem('dash_akhira')||'{}');var log=d.audit||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}}),
-     days:lsGet14(function(k){try{var d=JSON.parse(localStorage.getItem('dash_akhira')||'{}');var log=d.audit||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}})},
+     streak:lsCalcStreak(function(k){try{var d=lsGet('dash_akhira',{});var log=d.audit||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}}),
+     days:lsGet14(function(k){try{var d=lsGet('dash_akhira',{});var log=d.audit||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}})},
     // Akhira — Intentions written today
     {label:'Intentions set',col:'#00e5ff',
-     streak:lsCalcStreak(function(k){try{var d=JSON.parse(localStorage.getItem('dash_akhira')||'{}');var log=d.intentions||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}}),
-     days:lsGet14(function(k){try{var d=JSON.parse(localStorage.getItem('dash_akhira')||'{}');var log=d.intentions||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}})}
+     streak:lsCalcStreak(function(k){try{var d=lsGet('dash_akhira',{});var log=d.intentions||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}}),
+     days:lsGet14(function(k){try{var d=lsGet('dash_akhira',{});var log=d.intentions||[];return log.some(function(e){return e.date===k;});}catch(ex){return false;}})}
   ];
   var h='';
   STREAMS.forEach(function(s){
@@ -4295,8 +4295,8 @@ function showHelp(card){
 }
 
 // ── MOOD LOG ──
-var mlData=JSON.parse(localStorage.getItem('dash_ml')||'[]');
-function mlSave(){localStorage.setItem('dash_ml',JSON.stringify(mlData));}
+var mlData=lsGet('dash_ml',[]);
+function mlSave(){lsSet('dash_ml',mlData);}
 
 var ML_TAG_COLORS={
   // Sad / low — blue
@@ -4438,14 +4438,14 @@ function mlCheckNotice(){
   var el=document.getElementById('ml-notice');
   if(!el)return;
   if(sessionStorage.getItem('ml-notice-dismissed')==='1'){el.innerHTML='';return;}
-  var mlData=JSON.parse(localStorage.getItem('dash_ml')||'[]');
+  var mlData=lsGet('dash_ml',[]);
   if(!mlData.length){el.innerHTML='';return;}
   // Find most recent entry date
   var sorted=mlData.slice().sort(function(a,b){return b.date>a.date?1:-1;});
   var lastDate=sorted[0].date;
   var daysSince=Math.round((new Date()-new Date(lastDate+'T00:00:00'))/(864e5));
   if(daysSince>=3){
-    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" style="margin-bottom:6px"><span>&#9650; No mood logged in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last entry: '+lastDate+'</span><button data-dismiss="ml-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
+    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" class="mb-6"><span>&#9650; No mood logged in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last entry: '+lastDate+'</span><button data-dismiss="ml-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
   } else {
     el.innerHTML='';
   }
@@ -4486,7 +4486,7 @@ function mlRenderLog(){
   h+='</div>';
   h+='</div>';
   // Tags — section grid then flat adjective pool
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">WHAT\'S PRESENT?</div>';
+  h+='<div class="label-dim">WHAT\'S PRESENT?</div>';
   // Section buttons grid
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px">';
   ML_TAG_CATS.forEach(function(cat){
@@ -4497,7 +4497,7 @@ function mlRenderLog(){
     var textCol=expanded?'var(--text)':'var(--dim)';
     h+='<div data-mlcat="'+cat.id+'" onclick="mlCatExpanded[this.dataset.mlcat]=!mlCatExpanded[this.dataset.mlcat];mlRenderLog()" style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid '+borderCol+';background:'+bgCol+';cursor:pointer;user-select:none">';
     h+='<span style="font-size:16px">'+cat.emoji+'</span>';
-    h+='<div style="flex:1;min-width:0">';
+    h+='<div class="flex-1">';
     h+='<div style="font-size:10px;color:'+textCol+';line-height:1.3">'+cat.label+'</div>';
     if(selInCat>0)h+='<div style="font-size:9px;color:'+cat.color.replace('0.7','0.9')+'">'+selInCat+' selected</div>';
     h+='</div>';
@@ -4519,7 +4519,7 @@ function mlRenderLog(){
     });
     h+='</div>';
   } else {
-    h+='<div style="margin-bottom:12px"></div>';
+    h+='<div class="mb-12"></div>';
   }
   // Note
   h+='<textarea class="wr-inp" id="ml-note" placeholder="Write anything... or nothing. You don&apos;t have to explain yourself." style="min-height:72px;font-size:12px"></textarea>';
@@ -4544,7 +4544,7 @@ function mlRenderLog(){
     h+='<div style="font-size:9px;color:rgba(170,100,110,.8);letter-spacing:1px;margin-bottom:6px">IF YOU NEED SUPPORT</div>';
     h+='Crisis Text Line: Text HOME to 741741<br>';
     h+='988 Suicide &amp; Crisis Lifeline: Call or text 988<br>';
-    h+='<span style="font-size:10px;color:var(--dim)">You are not alone in this.</span>';
+    h+='<span class="dim-10">You are not alone in this.</span>';
     h+='</div>';
   }
   h+='<button onclick="mlSaveEntry()" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(134,155,171,.3);color:#869BAB;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">SAVE</button>';
@@ -4614,7 +4614,7 @@ function mlSaveEntry(){
 function mlRenderHistory(){
   var el=document.getElementById('ml-panel-history');
   if(!el)return;
-  if(!mlData.length){el.innerHTML='<div style="color:var(--dim);font-size:12px;padding:12px 0">No entries yet.</div>';return;}
+  if(!mlData.length){el.innerHTML='<div class="empty-msg">No entries yet.</div>';return;}
 
   // ── SVG line chart — last 30 days avg mood ──
   var chartDays=30;
@@ -4676,8 +4676,8 @@ function mlRenderHistory(){
       xTicks+='<line x1="'+xPos+'" y1="'+(H-padB)+'" x2="'+xPos+'" y2="'+(H-padB+3)+'" stroke="rgba(134,155,171,.4)" stroke-width="1"/>';
       xTicks+='<text x="'+xPos+'" y="'+(H-padB+10)+'" fill="rgba(134,155,171,.6)" font-size="7" text-anchor="middle">'+lbl+'</text>';
     });
-    chartH='<div style="margin-bottom:12px">';
-    chartH+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:4px">MOOD — LAST 30 DAYS</div>';
+    chartH='<div class="mb-12">';
+    chartH+='<div class="label-dim-xs">MOOD — LAST 30 DAYS</div>';
     chartH+='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:'+H+'px;display:block">';
     chartH+=yTicks;
     // Y axis line
@@ -4709,8 +4709,8 @@ function mlRenderHistory(){
     var avgEmoji=ML_MOODS[Math.round(avgMood)-1]?ML_MOODS[Math.round(avgMood)-1].e:'';
     h+='<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
-    h+='<span style="font-size:11px;color:var(--text)">'+d+'</span>';
-    h+='<span style="font-size:11px;color:var(--dim)">'+avgEmoji+' avg '+avgMood+'</span>';
+    h+='<span class="text-11">'+d+'</span>';
+    h+='<span class="dim-11">'+avgEmoji+' avg '+avgMood+'</span>';
     h+='</div>';
     entries.forEach(function(e){
       var timeLabel='';
@@ -4722,9 +4722,9 @@ function mlRenderHistory(){
         timeExact=t.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
       }
       h+='<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-left:2px solid rgba(134,155,171,.2);padding-left:8px;margin-bottom:4px">';
-      if(timeLabel)h+='<div style="white-space:nowrap;min-width:60px;padding-top:2px"><div style="font-size:9px;color:var(--dim)">'+timeLabel+'</div><div style="font-size:9px;color:rgba(134,155,171,.5)">'+timeExact+'</div></div>';
+      if(timeLabel)h+='<div style="white-space:nowrap;min-width:60px;padding-top:2px"><div class="dim-9">'+timeLabel+'</div><div style="font-size:9px;color:rgba(134,155,171,.5)">'+timeExact+'</div></div>';
       h+='<div style="flex:1">';
-      h+='<span style="font-size:14px">'+ML_MOODS[e.mood-1].e+'</span> <span style="font-size:12px;color:var(--text)">'+e.mood+'/10</span>';
+      h+='<span style="font-size:14px">'+ML_MOODS[e.mood-1].e+'</span> <span class="text-12">'+e.mood+'/10</span>';
       if(e.tags&&e.tags.length)h+='<div style="font-size:10px;color:var(--dim);margin-top:3px">'+e.tags.join(', ')+'</div>';
       if(e.note)h+='<div style="font-size:11px;color:var(--text);margin-top:4px;font-style:italic;line-height:1.5">'+e.note+'</div>';
       h+='</div></div>';
@@ -4863,7 +4863,7 @@ var DEFAULT_PINS=['clock','prayer','prayer-tracker','todo','pomodoro','quran-tra
 function getPinnedIds(){
   return JSON.parse(localStorage.getItem('dash_pins')||JSON.stringify(DEFAULT_PINS));
 }
-function savePinnedIds(pins){localStorage.setItem('dash_pins',JSON.stringify(pins));}
+function savePinnedIds(pins){lsSet('dash_pins',pins);}
 
 function applyPinnedCards(){
   // Remove existing overflow wrapper
@@ -5161,7 +5161,7 @@ function sortModeApply(){
     });
     // Save
     tileOrder=newOrder;
-    localStorage.setItem('dash_tile_order',JSON.stringify(tileOrder));
+    lsSet('dash_tile_order',tileOrder);
     // Re-apply features that depend on order
     if(getSetting('sectionHeaders'))applySectionHeaders();
     if(getSetting('pinnedCards'))applyPinnedCards();
@@ -5251,7 +5251,7 @@ function showToast(msg){
 
 // ── MILESTONE / DAYS UNTIL ──
 var milData=JSON.parse(localStorage.getItem('dash_mil')||'{"birthday":null,"target":40,"goals":[]}');
-function milSave(){localStorage.setItem('dash_mil',JSON.stringify(milData));}
+function milSave(){lsSet('dash_mil',milData);}
 
 function milDaysUntil(){
   if(!milData.birthday)return null;
@@ -5282,7 +5282,7 @@ function milCheckNotice(){
   var el=document.getElementById('mil-notice');
   if(!el)return;
   if(sessionStorage.getItem('mil-notice-dismissed')==='1'){el.innerHTML='';return;}
-  var milData=JSON.parse(localStorage.getItem('dash_mil')||'{}');
+  var milData=lsGet('dash_mil',{});
   var goals=milData.goals||[];
   if(!goals.length){el.innerHTML='';return;}
   // Find most recent note timestamp across all goals
@@ -5298,7 +5298,7 @@ function milCheckNotice(){
   var lastDate=mostRecent.slice(0,10);
   var daysSince=Math.round((new Date()-new Date(lastDate+'T00:00:00'))/(864e5));
   if(daysSince>=7){
-    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" style="margin-bottom:6px"><span>&#9650; No milestone update in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last note: '+lastDate+'</span><button data-dismiss="mil-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
+    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" class="mb-6"><span>&#9650; No milestone update in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last note: '+lastDate+'</span><button data-dismiss="mil-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
   } else {
     el.innerHTML='';
   }
@@ -5316,19 +5316,19 @@ function milRender(){
   if(badge)badge.textContent=days!==null?(days>0?days+' days':days===0?'TODAY!':'DONE'):'—';
 
   // Tab header
-  var h='<div style="display:flex;gap:4px;margin-bottom:10px">';
+  var h='<div class="flex-row-4">';
   h+='<span data-tab="main" onclick="milSwitchTab(this.dataset.tab)" style="font-size:10px;padding:3px 10px;border:1px solid '+(milTab==='main'?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(milTab==='main'?'var(--cg)':'var(--dim)')+';cursor:pointer">MAIN</span>';
   h+='<span data-tab="settings" onclick="milSwitchTab(this.dataset.tab)" style="font-size:10px;padding:3px 10px;border:1px solid '+(milTab==='settings'?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(milTab==='settings'?'var(--cg)':'var(--dim)')+';cursor:pointer">&#9881; SETTINGS</span>';
   h+='</div>';
 
   if(milTab==='settings'){
     // ── SETTINGS TAB ──
-    h+='<div style="margin-bottom:14px">';
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:4px">BIRTHDAY</div>';
+    h+='<div class="mb-14">';
+    h+='<div class="label-dim-xs">BIRTHDAY</div>';
     h+='<input type="date" id="mil-bday-inp" value="'+(milData.birthday||'')+'" onchange="milSetBirthday(this.value)" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:13px;padding:7px 10px;outline:none;box-sizing:border-box">';
     h+='</div>';
-    h+='<div style="margin-bottom:14px">';
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:6px">TARGET AGE</div>';
+    h+='<div class="mb-14">';
+    h+='<div class="label-dim-sm">TARGET AGE</div>';
     h+='<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">';
     [35,40,45,50,55,60].forEach(function(t){
       h+='<button class="mil-target-btn'+(target===t?' active':'')+'" data-t="'+t+'" onclick="milSetTarget(+this.dataset.t)">'+t+'</button>';
@@ -5336,12 +5336,12 @@ function milRender(){
     h+='</div>';
     h+='<input type="number" id="mil-custom-target" placeholder="Custom age" min="1" max="120" value="'+(([35,40,45,50,55,60].indexOf(target)<0)?target:'')+'" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:6px 10px;outline:none;box-sizing:border-box" onchange="milSetTarget(+this.value||target)">';
     h+='</div>';
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:6px">GOALS</div>';
+    h+='<div class="label-dim-sm">GOALS</div>';
     var goals=milData.goals||[];
     goals.forEach(function(g,i){
       h+='<div style="display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
       h+='<span style="flex:1;font-size:12px;color:var(--text)">'+g.name+'</span>';
-      h+='<span style="font-size:9px;color:var(--dim)">'+( g.pct||0)+'%</span>';
+      h+='<span class="dim-9">'+( g.pct||0)+'%</span>';
       h+='<button onclick="milDeleteGoal('+i+')" style="font-size:10px;padding:2px 8px;border:1px solid rgba(255,68,68,.3);color:var(--cr);background:transparent;cursor:pointer">✕</button>';
       h+='</div>';
     });
@@ -5368,13 +5368,13 @@ function milRender(){
     if(goals.length){
       h+='<div style="font-size:9px;letter-spacing:2px;color:var(--dim);margin:14px 0 8px">GOALS FOR '+target+'</div>';
       goals.forEach(function(g,i){
-        h+='<div class="mil-goal-row" style="margin-bottom:12px">';
+        h+='<div class="mil-goal-row" class="mb-12">';
         // Goal name + % input
         h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
         h+='<span class="mil-goal-name" style="flex:1">'+g.name+'</span>';
         h+='<div style="display:flex;align-items:center;gap:4px">';
         h+='<input type="number" min="0" max="100" value="'+(g.pct||0)+'" data-gi="'+i+'" onchange="milSetPct(+this.dataset.gi,+this.value)" style="width:48px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--cg);font-family:monospace;font-size:12px;padding:3px 6px;outline:none;text-align:center">';
-        h+='<span style="font-size:10px;color:var(--dim)">%</span>';
+        h+='<span class="dim-10">%</span>';
         h+='</div>';
         h+='</div>';
         // Progress bar (visual only)
@@ -5489,25 +5489,25 @@ function wSummaryRender(){
   tile.style.display='';
   var days=[];for(var i=6;i>=0;i--){var dd=new Date();dd.setDate(dd.getDate()-i);days.push(dd.toISOString().slice(0,10));}
   // Mood
-  var mlRef=JSON.parse(localStorage.getItem('dash_ml')||'[]');
+  var mlRef=lsGet('dash_ml',[]);
   var moodEntries=mlRef.filter(function(e){return days.indexOf(e.date)>=0;});
   var moodAvg=moodEntries.length?Math.round(moodEntries.reduce(function(a,e){return a+e.mood;},0)/moodEntries.length*10)/10:null;
   // Prayers
-  var ptRef=JSON.parse(localStorage.getItem('pt_data')||'{}');
+  var ptRef=lsGet('pt_data',{});
   var prayersLogged=0;
   days.forEach(function(dk){var day=ptRef[dk]||{};['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(function(p){if(day[p]==='ontime'||day[p]==='late')prayersLogged++;});});
   // Goals
-  var goalsRef=JSON.parse(localStorage.getItem('dash_goals')||'{}');
+  var goalsRef=lsGet('dash_goals',{});
   var goalCheckins=0;
   ['monthly','yearly'].forEach(function(period){var gs=goalsRef[period]||[];gs.forEach(function(g){(g.checkins||[]).forEach(function(c){if(days.indexOf(c)>=0)goalCheckins++;});});});
   // Gratitude
-  var gratRef=JSON.parse(localStorage.getItem('dash_grat')||'[]');
+  var gratRef=lsGet('dash_grat',[]);
   var gratDays=gratRef.filter(function(e){return days.indexOf(e.date)>=0;}).length;
   // Books
-  var booksRef=JSON.parse(localStorage.getItem('dash_books')||'[]');
+  var booksRef=lsGet('dash_books',[]);
   var activeBooks=booksRef.filter(function(b){return !b.done&&b.current>0;}).length;
   // Writing
-  var writeRef=JSON.parse(localStorage.getItem('dash_write_log')||'[]');
+  var writeRef=lsGet('dash_write_log',[]);
   var writeDays=writeRef.filter(function(e){return days.indexOf(e.date)>=0;}).length;
 
   var things=[];
@@ -5528,10 +5528,10 @@ function wSummaryRender(){
   var h='';
   h+='<div style="font-size:11px;color:rgba(126,184,255,.7);line-height:1.7;margin-bottom:12px;font-style:italic">'+tone+'</div>';
   if(things.length){
-    h+='<div style="margin-bottom:14px">';
+    h+='<div class="mb-14">';
     things.forEach(function(t){
       h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
-      h+='<span style="color:#7eb8ff;font-size:14px">&#8226;</span><span style="font-size:12px;color:var(--text)">'+t+'</span></div>';
+      h+='<span style="color:#7eb8ff;font-size:14px">&#8226;</span><span class="text-12">'+t+'</span></div>';
     });
     h+='</div>';
   } else {
@@ -5552,14 +5552,14 @@ h+='<div style="font-size:10px;color:var(--dim);margin-bottom:10px;padding:5px 8
 h+='<button id="wsum-dismiss" style="width:100%;padding:8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">CLOSE FOR THIS WEEK</button>';
   el.innerHTML=h;
   var btn=document.getElementById('wsum-dismiss');
-  if(btn)btn.onclick=function(){localStorage.setItem(dismissKey,'1');tile.style.display='none';if(typeof showToast==='function')showToast('See you next week');};
+  if(btn)btn.onclick=function(){localStorage.setItem(dismissKey,'1');tile.style.display='none';safeToast('See you next week');};
 }
 setTimeout(function(){wSummaryRender();},1100);
 
 // ── CERTIFICATIONS TRACKER ──
-var certData = JSON.parse(localStorage.getItem('dash_cert') || '[]');
+var certData = lsGet('dash_cert',[]);
 var certNotesOpen = {}; // {id: bool} — tracks which note editors are open
-function certSave(){localStorage.setItem('dash_cert',JSON.stringify(certData));}
+function certSave(){lsSet('dash_cert',certData);}
 
 function certRender(){
   var el=document.getElementById('cert-body');
@@ -5604,10 +5604,10 @@ function certRender(){
         var expStr=exp.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
         var notesOpen=!!(certNotesOpen&&certNotesOpen[c.id]);
         h+='<div style="border-bottom:1px solid rgba(255,255,255,.06);padding:8px 0">';
-        h+='<div style="display:flex;align-items:center;gap:8px">';
-        h+='<div style="flex:1;min-width:0">';
-        h+='<div style="font-size:12px;color:var(--text)">'+c.name+'</div>';
-        if(c.issuer)h+='<div style="font-size:9px;color:var(--dim)">'+c.issuer+'</div>';
+        h+='<div class="flex-center">';
+        h+='<div class="flex-1">';
+        h+='<div class="text-12">'+c.name+'</div>';
+        if(c.issuer)h+='<div class="dim-9">'+c.issuer+'</div>';
         h+='</div>';
         h+='<div style="text-align:right;flex-shrink:0">';
         h+='<div style="font-size:10px;color:'+col+'">'+expStr+'</div>';
@@ -5647,7 +5647,7 @@ function certRender(){
     h+='<div style="font-size:9px;color:rgba(80,250,200,.5);letter-spacing:1px;margin-bottom:6px">GMAIL SEARCH KEYWORD</div>';
     h+='<div style="font-size:14px;color:#50fac8;font-family:monospace;letter-spacing:2px;margin-bottom:4px">'+_kw+'</div>';
     h+='<div style="font-size:9px;color:var(--dim);line-height:1.5;margin-bottom:8px">Include this keyword in any email you send yourself about a cert. Search Gmail for it to find all your cert emails.</div>';
-    h+='<div style="display:flex;gap:6px">';
+    h+='<div class="flex-row">';
     h+='<button data-certkwcopy="1" style="padding:4px 12px;background:transparent;border:1px solid rgba(80,250,200,.2);color:rgba(80,250,200,.6);font-family:monospace;font-size:9px;cursor:pointer">📋 COPY</button>';
     h+='<button data-certkwregen="1" style="padding:4px 12px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer">↻ REGENERATE</button>';
     h+='</div></div>';
@@ -5673,7 +5673,7 @@ function certRender(){
     certSave();
     certNotesOpen._tab='list';
     certRender();
-    if(typeof hap==='function')hap(HAP.save);
+    safeHap(HAP.save);
   };
 
   // Wire notes toggle
@@ -5695,7 +5695,7 @@ function certRender(){
       if(c&&ta){c.notes=ta.value.trim();certSave();}
       certNotesOpen[id]=false;
       certRender();
-      if(typeof hap==='function')hap(HAP.soft);
+      safeHap(HAP.soft);
     };
   });
 
@@ -5706,7 +5706,7 @@ function certRender(){
     if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(function(){var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);});
     else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
     kwCopy.textContent='✓ COPIED';setTimeout(function(){kwCopy.textContent='📋 COPY';},1800);
-    if(typeof hap==='function')hap(HAP.soft);
+    safeHap(HAP.soft);
   };
 
   // Wire keyword regen
@@ -5730,7 +5730,7 @@ function certRender(){
       else{var ta=document.createElement('textarea');ta.value=c.certKey;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
       this.textContent='✓';
       var _b=this;setTimeout(function(){_b.textContent='📋';},1500);
-      if(typeof hap==='function')hap(HAP.soft);
+      safeHap(HAP.soft);
     };
   });
 
@@ -5756,7 +5756,7 @@ setTimeout(function(){certRender();},300);
 var medData = JSON.parse(localStorage.getItem('dash_med') || '{"meds":[],"log":[]}');
 if(!medData.meds)medData.meds=[];
 if(!medData.log)medData.log=[];
-function medSave(){localStorage.setItem('dash_med',JSON.stringify(medData));}
+function medSave(){lsSet('dash_med',medData);}
 var medTab='today';
 var medPending=null; // id of med awaiting confirm
 
@@ -5815,7 +5815,7 @@ function medRender(){
 
   } else if(medTab==='log'){
     if(!medData.log.length){
-      h+='<div style="font-size:11px;color:var(--dim);padding:10px 0">No doses logged yet.</div>';
+      h+='<div class="card-empty-v">No doses logged yet.</div>';
     } else {
       // Group by date
       var byDate={};
@@ -5835,9 +5835,9 @@ function medRender(){
           var col=m.color||'#c896ff';
           h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
           h+='<div style="width:8px;height:8px;border-radius:50%;background:'+col+';flex-shrink:0"></div>';
-          h+='<div style="font-size:11px;color:var(--text);flex:1">'+m.name+'</div>';
-          if(m.dose)h+='<div style="font-size:9px;color:var(--dim)">'+m.dose+'</div>';
-          h+='<div style="font-size:10px;color:var(--dim)">'+timeStr+'</div>';
+          h+='<div class="text-11-flex">'+m.name+'</div>';
+          if(m.dose)h+='<div class="dim-9">'+m.dose+'</div>';
+          h+='<div class="dim-10">'+timeStr+'</div>';
           h+='<button data-meddel="'+e.ts+'|'+e.mid+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:11px;cursor:pointer">✕</button>';
           h+='</div>';
         });
@@ -5850,7 +5850,7 @@ function medRender(){
 
   } else if(medTab==='stats'){
     if(!medData.log.length||!medData.meds.length){
-      h+='<div style="font-size:11px;color:var(--dim);padding:10px 0">Log some doses to see stats.</div>';
+      h+='<div class="card-empty-v">Log some doses to see stats.</div>';
     } else {
       // Last 14 days bar chart — doses per day
       var days14=[];
@@ -5864,7 +5864,7 @@ function medRender(){
         if(c>maxPerDay)maxPerDay=c;
         return c;
       });
-      h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">DOSES — LAST 14 DAYS</div>';
+      h+='<div class="label-dim">DOSES — LAST 14 DAYS</div>';
       h+='<div style="display:flex;align-items:flex-end;gap:3px;height:60px;margin-bottom:4px">';
       days14.forEach(function(d,i){
         var c=dayCounts[i];
@@ -5885,7 +5885,7 @@ function medRender(){
       });
       h+='</div>';
       // Per-med stats
-      h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">PER MEDICINE</div>';
+      h+='<div class="label-dim">PER MEDICINE</div>';
       medData.meds.forEach(function(m){
         var logs=medData.log.filter(function(e){return e.mid===m.id;});
         var total=logs.length;
@@ -5903,15 +5903,15 @@ function medRender(){
         h+='<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
         h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">';
         h+='<div style="width:10px;height:10px;border-radius:50%;background:'+col+'"></div>';
-        h+='<span style="font-size:11px;color:var(--text)">'+m.name+'</span>';
+        h+='<span class="text-11">'+m.name+'</span>';
         h+='</div>';
-        h+='<div style="font-size:10px;color:var(--dim)">'+total+' doses total · '+streak+' day streak · last: '+lastStr+'</div>';
+        h+='<div class="dim-10">'+total+' doses total · '+streak+' day streak · last: '+lastStr+'</div>';
         h+='</div>';
       });
     }
 
   } else if(medTab==='manage'){
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:10px">YOUR MEDICINES</div>';
+    h+='<div class="label-dim-md">YOUR MEDICINES</div>';
     if(!medData.meds.length){
       h+='<div style="font-size:11px;color:var(--dim);margin-bottom:12px">None yet. Add below.</div>';
     } else {
@@ -5919,8 +5919,8 @@ function medRender(){
         var col=m.color||'#c896ff';
         h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
         h+='<div style="width:12px;height:12px;border-radius:50%;background:'+col+';flex-shrink:0"></div>';
-        h+='<div style="flex:1"><div style="font-size:12px;color:var(--text)">'+m.name+'</div>';
-        if(m.dose)h+='<div style="font-size:9px;color:var(--dim)">'+m.dose+'</div></div>';
+        h+='<div style="flex:1"><div class="text-12">'+m.name+'</div>';
+        if(m.dose)h+='<div class="dim-9">'+m.dose+'</div></div>';
         else h+='</div>';
         h+='<button data-meddelmeds="'+m.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.25);font-size:13px;cursor:pointer;padding:0 4px">✕</button>';
         h+='</div>';
@@ -5928,7 +5928,7 @@ function medRender(){
     }
     // Add form
     h+='<div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px">';
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">ADD MEDICINE</div>';
+    h+='<div class="label-dim">ADD MEDICINE</div>';
     h+='<input id="med-inp-name" placeholder="Name (e.g. Loratadine)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.2);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:6px;outline:none">';
     h+='<input id="med-inp-dose" placeholder="Dose label (e.g. 10mg) — optional" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:6px;outline:none">';
     h+='<div style="display:flex;gap:6px;margin-bottom:8px">';
@@ -5936,7 +5936,7 @@ function medRender(){
     h+='<div style="flex:1"><div style="font-size:9px;color:var(--dim);margin-bottom:3px">HALF-LIFE (hrs)</div><input id="med-inp-hl" type="number" min="1" max="72" step="0.5" value="8" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:11px;padding:5px 8px;outline:none"></div>';
     h+='</div>';
     h+='<div style="font-size:9px;color:var(--dim);margin-bottom:6px;letter-spacing:1px">BUTTON COLOR</div>';
-    h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
+    h+='<div class="flex-row-mb">';
     MED_COLORS.forEach(function(col,ci){
       h+='<div data-medcol="'+col+'" style="width:22px;height:22px;border-radius:50%;background:'+col+';cursor:pointer;border:2px solid rgba(255,255,255,.15)"></div>';
     });
@@ -5971,7 +5971,7 @@ function medRender(){
         var m=medData.meds.find(function(x){return x.id===mid;});
         medData.log.push({ts:new Date().toISOString(),mid:mid,mname:m?m.name:'?'});
         medSave();medPending=null;medRender();
-        if(typeof hap==='function')hap(HAP.check);
+        safeHap(HAP.check);
       } else {
         medPending=mid;
         medRender();
@@ -6005,9 +6005,9 @@ function medRender(){
       rows.push(t.toLocaleDateString()+','+t.toLocaleTimeString()+','+m.name+','+(m.dose||''));
     });
     var txt=rows.join('\n');
-    if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){if(typeof showToast==='function')showToast('Log copied!');});
-    else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);if(typeof showToast==='function')showToast('Log copied!');}
-    if(typeof hap==='function')hap(HAP.soft);
+    if(navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){safeToast('Log copied!');});
+    else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);safeToast('Log copied!');}
+    safeHap(HAP.soft);
   };
 
   // Wire manage delete med
@@ -6045,7 +6045,7 @@ function medRender(){
     if(!name)return;
     medData.meds.push({id:'med_'+Date.now(),name:name,dose:dose,color:col,tmax:tmax,halfLife:halfLife});
     medSave();medRender();
-    if(typeof hap==='function')hap(HAP.save);
+    safeHap(HAP.save);
   };
 }
 
@@ -6058,9 +6058,9 @@ function medRenderPK(){
   var now=new Date();
   var isolated=window._medPKIsolate||null;
 
-  // Build time axis: last 15 days in hours from 15d ago
-  var startMs=now.getTime()-15*24*3600*1000;
-  var totalHours=15*24;
+  // Build time axis: last 7 days in hours from 7d ago
+  var startMs=now.getTime()-7*24*3600*1000;
+  var totalHours=7*24;
 
   // For each med, compute concentration at each hour
   var meds=medData.meds.filter(function(m){return !isolated||m.id===isolated;});
@@ -6078,7 +6078,7 @@ function medRenderPK(){
     var tmax_exact=(Math.log(ka)-Math.log(ke))/(ka-ke);
     var scale=1/((Math.exp(-ke*tmax_exact)-Math.exp(-ka*tmax_exact)));
 
-    // Get doses for this med in last 15 days
+    // Get doses for this med in last 7 days
     var doses=medData.log.filter(function(e){
       return e.mid===m.id&&new Date(e.ts).getTime()>=startMs;
     });
@@ -6167,7 +6167,7 @@ function medRenderPK(){
   svg+='</svg>';
 
   // Legend + isolate buttons
-  var h='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">PLASMA CONCENTRATION CURVE — LAST 15 DAYS</div>';
+  var h='<div class="label-dim">PLASMA CONCENTRATION CURVE — LAST 15 DAYS</div>';
   h+=svg;
 
   h+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px">';
