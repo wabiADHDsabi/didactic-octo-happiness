@@ -339,12 +339,12 @@ function renderForbiddenTimes(){
   else if(_dh&&_nm>=_dh-12&&_nm<_dh){_forbiddenNow=true;_forbiddenLabel='⚠ Sun at zenith — do not pray now';}
   else if(_nm>=_mg-12&&_nm<_mg){_forbiddenNow=true;_forbiddenLabel='⚠ Sunset — do not pray now';}
   var h='<div style="margin-top:10px;padding:8px 10px;background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.15)">';
-  h+='<div style="font-size:9px;color:rgba(255,68,68,.6);letter-spacing:1px;margin-bottom:5px">🚫 FORBIDDEN TIMES</div>';
-  h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:2px"><span>Sunrise</span><span>'+fmt12(prayers.Sunrise)+' + 12 min</span></div>';
-  if(prayers.Dhuhr)h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:2px"><span>Zenith (before Dhuhr)</span><span>12 min before '+fmt12(prayers.Dhuhr)+'</span></div>';
-  h+='<div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35)'
+  h+='<div style="font-size:var(--t-xs);color:rgba(255,68,68,.6);letter-spacing:1px;margin-bottom:5px">🚫 FORBIDDEN TIMES</div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-sm);color:var(--c-dim);margin-bottom:2px"><span>Sunrise</span><span>'+fmt12(prayers.Sunrise)+' + 12 min</span></div>';
+  if(prayers.Dhuhr)h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-sm);color:var(--c-dim);margin-bottom:2px"><span>Zenith (before Dhuhr)</span><span>12 min before '+fmt12(prayers.Dhuhr)+'</span></div>';
+  h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-sm);color:var(--c-dim)'
     +((_nm>=_mg-12&&_nm<_mg)?';color:rgba(255,68,68,.8)':'')+'"><span>Sunset (before Maghrib)</span><span>12 min before '+fmt12(prayers.Maghrib)+'</span></div>';
-  if(_forbiddenNow)h+='<div style="margin-top:5px;font-size:10px;color:rgba(255,68,68,.9);font-weight:bold">'+_forbiddenLabel+'</div>';
+  if(_forbiddenNow)h+='<div style="margin-top:5px;font-size:var(--t-sm);color:rgba(255,68,68,.9);font-weight:bold">'+_forbiddenLabel+'</div>';
   h+='</div>';
   el.innerHTML=h;
 }
@@ -420,18 +420,18 @@ function renderHourlyRain(hrData){
   }
 
   if(!rainHours.length){
-    el.innerHTML='<div style="font-size:10px;color:var(--cg);margin-top:4px;letter-spacing:.5px">&#9729; No rain in next 48h</div>';
+    el.innerHTML='<div style="font-size:var(--t-sm);color:var(--cg);margin-top:4px;letter-spacing:.5px">&#9729; No rain in next 48h</div>';
     return;
   }
 
-  var h='<div style="font-size:9px;letter-spacing:1.5px;color:var(--dim);margin-top:8px;margin-bottom:5px">RAIN SCHEDULE</div>';
+  var h='<div style="font-size:var(--t-xs);letter-spacing:1.5px;color:var(--dim);margin-top:8px;margin-bottom:5px">RAIN SCHEDULE</div>';
   h+='<div style="display:flex;flex-direction:column;gap:3px">';
   rainHours.forEach(function(r){
     var icon=r.isSnow?'&#10052;':'&#127783;';
     var col=r.precip>0.1||r.snow>0.1?'var(--cr)':'var(--ca)';
     var detail=r.isSnow?(r.snow.toFixed(2)+'"snow'):(r.precip.toFixed(2)+'" rain');
     if(r.prob)detail+=', '+r.prob+'% chance';
-    h+='<div style="display:flex;align-items:center;gap:8px;font-size:10px">';
+    h+='<div style="display:flex;align-items:center;gap:8px;font-size:var(--t-sm)">';
     h+='<span style="color:'+col+';min-width:16px">'+icon+'</span>';
     h+='<span style="color:var(--text);min-width:88px">'+r.label+'</span>';
     h+='<span style="color:'+col+'">'+detail+'</span>';
@@ -622,8 +622,8 @@ function renderStocks(){
       +'<div style="text-align:right"><div class="sp">$'+s.p.toFixed(2)+'</div>'
       +'<div class="sc '+(s.ch>=0?'sup':'sdn')+'">'+( s.ch>=0?'+':'')+s.ch.toFixed(2)+'</div></div>'
       +'<div style="text-align:right;margin-left:10px;min-width:52px"><div class="dim-9-ls">15D AVG</div>'
-      +'<div style="font-family:monospace;font-size:14px;color:var(--dim)">'+avgStr+'</div>'
-      +(avg!==null?'<div style="font-size:10px" class="sc '+avgCls+'">'+avgDiff+'</div>':'')
+      +'<div style="font-family:monospace;font-size:var(--t-body);color:var(--dim)">'+avgStr+'</div>'
+      +(avg!==null?'<div style="font-size:var(--t-sm)" class="sc '+avgCls+'">'+avgDiff+'</div>':'')
       +'</div>'
       +'</div>';
   }
@@ -1249,7 +1249,7 @@ function renderTodos(){
   var left=todos.filter(function(t){return !t.deletedAt&&!t.done;}).length;
   document.getElementById('tdbadge').textContent=left+' left';
   var visible=todos.filter(todoInMainView);
-  if(!visible.length){el.innerHTML='<div class="cdm" style="font-size:13px;padding:8px 0">NO TASKS.</div>';renderTodoDoneList();todoSwitchTab(todoTab,true);return;}
+  if(!visible.length){el.innerHTML='<div class="cdm" style="font-size:var(--t-lg);padding:8px 0">NO TASKS.</div>';renderTodoDoneList();todoSwitchTab(todoTab,true);return;}
   var now=Date.now();
   var h='';
   for(var i=0;i<visible.length;i++){
@@ -1266,7 +1266,7 @@ function renderTodos(){
       // Section divider
       h+='<div class="ti" id="ti-'+t.id+'" data-todo-id="'+t.id+'" style="padding:4px 0;gap:4px;border:none;background:transparent;cursor:default">'
         +'<div style="flex:1;height:1px;background:rgba(255,255,255,.12);margin:4px 0"></div>'
-        +'<span class="tdel" id="tdel-'+t.id+'" style="opacity:.4;font-size:9px">[x]</span>'
+        +'<span class="tdel" id="tdel-'+t.id+'" style="opacity:.4;font-size:var(--t-xs)">[x]</span>'
         +'</div>';
     } else if(todoEditId===t.id){
       h+='<div class="ti" style="gap:4px">'
@@ -1280,7 +1280,7 @@ function renderTodos(){
         +(function(){
   var ageDays=Math.floor((now-(t.created||t.id))/86400000);
   var ageCol=ageDays<=0?'':ageDays<=3?'rgba(255,180,80,.65)':ageDays<=7?'rgba(210,110,40,.75)':'rgba(180,70,20,.85)';
-  var ageStr=ageDays>=1?' <span style="font-size:9px;color:'+ageCol+'">('
+  var ageStr=ageDays>=1?' <span style="font-size:var(--t-xs);color:'+ageCol+'">('
   +ageDays+' day'+(ageDays===1?'':'s')+' old)</span>':'';
   return '<span class="ttx" id="ttx-'+t.id+'">'+t.text+ageStr+'</span>';
 }())
@@ -1371,19 +1371,19 @@ function openTodoReorder(){
   modal.id='todo-reorder-modal';
   modal.style.cssText='position:fixed;inset:0;z-index:9600;background:rgba(0,0,0,.88);display:flex;flex-direction:column;padding:0';
   var h='<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,95,160,.2)">';
-  h+='<span style="font-size:11px;letter-spacing:3px;color:var(--cp)">&#8597; SORT TASKS</span>';
-  h+='<button onclick="closeTodoReorder()" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--dim);font-size:13px;padding:4px 12px;cursor:pointer">&#10005;</button>';
+  h+='<span style="font-size:var(--t-base);letter-spacing:3px;color:var(--cp)">&#8597; SORT TASKS</span>';
+  h+='<button onclick="closeTodoReorder()" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--dim);font-size:var(--t-lg);padding:4px 12px;cursor:pointer">&#10005;</button>';
   h+='</div><div style="flex:1;overflow-y:auto;padding:8px 14px">';
   todos.forEach(function(t,i){
     h+='<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
-    h+='<span style="flex:1;font-size:13px;color:'+(t.done?'var(--dim)':'var(--text)')+';word-break:break-word">'+(t.done?'<s>':'')+t.text+(t.done?'</s>':'')+'</span>';
+    h+='<span style="flex:1;font-size:var(--t-lg);color:'+(t.done?'var(--dim)':'var(--text)')+';word-break:break-word">'+(t.done?'<s>':'')+t.text+(t.done?'</s>':'')+'</span>';
     h+='<button class="ti-mv" id="tsor-up-'+i+'"'+(i===0?' disabled':'')+'>&#8593;</button>';
     h+='<button class="ti-mv" id="tsor-dn-'+i+'"'+(i===todos.length-1?' disabled':'')+'>&#8595;</button>';
     h+='</div>';
   });
   h+='</div>';
-  h+='<div style="padding:12px 18px;border-top:1px solid rgba(255,255,255,.06)">';
-  h+='<button onclick="closeTodoReorder()" style="background:transparent;border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:11px;padding:8px;cursor:pointer;width:100%;letter-spacing:2px">DONE</button>';
+  h+='<div style="padding:12px 18px;border-top:1px solid var(--c-ghost)">';
+  h+='<button onclick="closeTodoReorder()" style="background:transparent;border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:var(--t-base);padding:8px;cursor:pointer;width:100%;letter-spacing:2px">DONE</button>';
   h+='</div>';
   modal.innerHTML=h;
   document.body.appendChild(modal);
@@ -1581,10 +1581,10 @@ function renderCal(){
     noteKeys.forEach(function(d){
       var nm=noteMap[d];
       var col=nm.type==='both'?'var(--cp)':nm.type==='us'?'var(--ca)':nm.type==='is'?'var(--cg)':'var(--dim)';
-      if(nm.names)nh+='<div class="cal-note-row"><span class="cal-note-dot" style="background:'+col+'"></span><span style="color:'+col+';min-width:20px;font-size:11px">'+d+'</span><span class="dim-11">'+nm.names+'</span></div>';
+      if(nm.names)nh+='<div class="cal-note-row"><span class="cal-note-dot" style="background:'+col+'"></span><span style="color:'+col+';min-width:20px;font-size:var(--t-base)">'+d+'</span><span class="dim-11">'+nm.names+'</span></div>';
       // Extra events (birthdays=pink, countdowns=purple, user=their color)
       if(nm.extra)nm.extra.forEach(function(ev){
-        nh+='<div class="cal-note-row"><span class="cal-note-dot" style="background:'+ev.col+'"></span><span style="color:'+ev.col+';min-width:20px;font-size:11px">'+d+'</span><span style="font-size:11px;color:'+ev.col+'">'+ev.text+'</span></div>';
+        nh+='<div class="cal-note-row"><span class="cal-note-dot" style="background:'+ev.col+'"></span><span style="color:'+ev.col+';min-width:20px;font-size:var(--t-base)">'+d+'</span><span style="font-size:var(--t-base);color:'+ev.col+'">'+ev.text+'</span></div>';
       });
     });
     if(twoCol)nh+='</div>';
@@ -1595,11 +1595,11 @@ function renderCal(){
     // Check if we're in the last baked year for Islamic holidays (2027)
     var ISLAMIC_LAST_YEAR=2027;
     if(y>=ISLAMIC_LAST_YEAR){
-      alertHtml='<div style="background:rgba(255,204,0,.08);border:1px solid rgba(255,204,0,.3);padding:6px 10px;margin-bottom:8px;font-size:10px;color:var(--ca);letter-spacing:.5px">'
+      alertHtml='<div style="background:rgba(255,204,0,.08);border:1px solid rgba(255,204,0,.3);padding:6px 10px;margin-bottom:8px;font-size:var(--t-sm);color:var(--ca);letter-spacing:.5px">'
         +'&#9888; Islamic holiday dates are only pre-loaded through '+ISLAMIC_LAST_YEAR+'. Dates may be missing after this year.'
         +'</div>';
     }
-    if(nh)notesEl.innerHTML=alertHtml+'<div class="cal-note-label" style="margin-bottom:5px;flex-wrap:wrap;display:flex;gap:8px"><span style="color:var(--ca)">&#9679;</span><span style="color:var(--ca);font-size:9px">US</span>&nbsp;<span style="color:var(--cg)">&#9679;</span><span style="color:var(--cg);font-size:9px">Islamic</span>&nbsp;<span style="color:var(--cp)">&#9679;</span><span style="color:var(--cp);font-size:9px">Both</span>&nbsp;<span style="color:#ff85c2">&#9679;</span><span style="color:#ff85c2;font-size:9px">Birthday</span>&nbsp;<span style="color:#a78bfa">&#9679;</span><span style="color:#a78bfa;font-size:9px">In X Days</span></div>'+nh;
+    if(nh)notesEl.innerHTML=alertHtml+'<div class="cal-note-label" style="margin-bottom:5px;flex-wrap:wrap;display:flex;gap:8px"><span style="color:var(--ca)">&#9679;</span><span style="color:var(--ca);font-size:var(--t-xs)">US</span>&nbsp;<span style="color:var(--cg)">&#9679;</span><span style="color:var(--cg);font-size:var(--t-xs)">Islamic</span>&nbsp;<span style="color:var(--cp)">&#9679;</span><span style="color:var(--cp);font-size:var(--t-xs)">Both</span>&nbsp;<span style="color:#ff85c2">&#9679;</span><span style="color:#ff85c2;font-size:var(--t-xs)">Birthday</span>&nbsp;<span style="color:#a78bfa">&#9679;</span><span style="color:#a78bfa;font-size:var(--t-xs)">In X Days</span></div>'+nh;
     else notesEl.innerHTML=alertHtml;
   }
 }
@@ -1761,11 +1761,11 @@ function renderNotes(scrollDown){
   var feed=document.getElementById('notes-feed');
   var visible=notes.filter(noteInMainView);
   document.getElementById('notes-count').textContent=visible.length;
-  if(!visible.length){feed.innerHTML='<div class="cdm" style="font-size:11px;padding:6px 0">No notes yet.</div>';renderNotesDoneList();notesSwitchTab(notesTab,true);return;}
+  if(!visible.length){feed.innerHTML='<div class="cdm" style="font-size:var(--t-base);padding:6px 0">No notes yet.</div>';renderNotesDoneList();notesSwitchTab(notesTab,true);return;}
   var h='';
   for(var i=0;i<visible.length;i++){
     var n=visible[i];
-    h+='<div class="note-bubble'+(n.done?' done':'')+'"><span class="nb-del" id="ndel-'+n.id+'" onclick="delNote('+n.id+')">[x]</span><span class="nb-copy" onclick="copyNote('+n.id+')" title="Copy">&#128203;</span><span class="nb-done" onclick="markNoteDone('+n.id+')" title="Mark done">&#10003;</span>'+n.text+'<div class="nb-time" style="font-size:9px;color:rgba(255,255,255,.25);margin-top:5px;letter-spacing:.5px">'+n.ts+(n.done?' <span style="color:rgba(80,250,123,.5)">· done</span>':'')+'</div></div>';
+    h+='<div class="note-bubble'+(n.done?' done':'')+'"><span class="nb-del" id="ndel-'+n.id+'" onclick="delNote('+n.id+')">[x]</span><span class="nb-copy" onclick="copyNote('+n.id+')" title="Copy">&#128203;</span><span class="nb-done" onclick="markNoteDone('+n.id+')" title="Mark done">&#10003;</span>'+n.text+'<div class="nb-time" style="font-size:var(--t-xs);color:rgba(255,255,255,.25);margin-top:5px;letter-spacing:.5px">'+n.ts+(n.done?' <span style="color:rgba(80,250,123,.5)">· done</span>':'')+'</div></div>';
   }
   feed.innerHTML=h;
   renderNotesDoneList();
@@ -1942,9 +1942,9 @@ function openModal(type){
       var p=PNAMES[i],a=(p===cur);
       var tr=getPrayerTrend(p),tc='same',tl='--';
       if(tr!==null){if(tr<0){tc='earlier';tl=tr+'m';}else if(tr>0){tc='later';tl='+'+tr+'m';}else tl='+/-0';}
-      h+='<div class="drow" style="'+(a?'color:var(--ca)':'')+'"><span style="font-size:14px;letter-spacing:3px">'+p.toUpperCase()+'</span><span class="vt" style="font-size:30px">'+fmt12(prayers[p])+'</span><span class="ptrend '+tc+'" style="font-size:13px">'+tl+'</span></div>';
+      h+='<div class="drow" style="'+(a?'color:var(--ca)':'')+'"><span style="font-size:var(--t-body);letter-spacing:3px">'+p.toUpperCase()+'</span><span class="vt" style="font-size:30px">'+fmt12(prayers[p])+'</span><span class="ptrend '+tc+'" style="font-size:var(--t-lg)">'+tl+'</span></div>';
     }
-    h+='<div style="margin-top:14px;font-size:10px;color:var(--dim)">Trend = today vs 7-day future avg. Green = earlier than upcoming week, pink = later.</div>';
+    h+='<div style="margin-top:14px;font-size:var(--t-sm);color:var(--dim)">Trend = today vs 7-day future avg. Green = earlier than upcoming week, pink = later.</div>';
     mc.innerHTML=h;
   } else if(type==='weather'){
     box.style.borderColor='var(--cc)';title.className='cc';title.textContent='// WEATHER ZIP 21044';
@@ -1960,12 +1960,12 @@ function openModal(type){
       var rn=daily.precipitation_sum[d]||0,sn=daily.snowfall_sum[d]||0;
       fr+='<div class="drow"><span>'+DAY3[nd.getDay()].toUpperCase()+' '+(WICO[String(daily.weathercode[d])]||'?')+' '+(WMO[daily.weathercode[d]]||'')+'</span><span><span class="cc">'+Math.round(daily.temperature_2m_max[d])+'\u00B0</span><span class="cdm"> / '+Math.round(daily.temperature_2m_min[d])+'\u00B0</span>'+(rn>0.05?'<span class="cc"> \uD83C\uDF27 '+rn.toFixed(2)+'"</span>':'')+(sn>0.05?'<span class="cc"> \u2744 '+sn.toFixed(1)+'"</span>':'')+(jk.needs?' <span style="color:var(--ca)">\u26A0 jacket</span>':'')+'</span></div>';
     }
-    mc.innerHTML='<div class="sl">OPEN-METEO - ZIP '+(getZipCfg('home','21044')||'21044')+' - '+(getHomeCoords().city||'COLUMBIA')+' MD</div><div style="display:flex;align-items:center;gap:20px;margin-bottom:16px"><div class="vt cc" style="font-size:100px;line-height:1;text-shadow:var(--gc)">'+Math.round(cw.temperature)+'\u00B0F</div><div><div style="font-size:38px">'+(WICO[String(code)]||'?')+'</div><div style="font-size:14px;color:var(--dim);margin-top:4px">'+(WMO[code]||'Unknown')+'</div></div></div><div class="mdg" style="margin-bottom:16px"><div class="mdc"><div class="mdl">FEELS LIKE</div><div class="mdv cc">'+Math.round(hr.apparent_temperature[idx])+'\u00B0F</div></div><div class="mdc"><div class="mdl">HUMIDITY</div><div class="mdv cc">'+hr.relativehumidity_2m[idx]+'%</div></div><div class="mdc"><div class="mdl">WIND</div><div class="mdv cc">'+Math.round(cw.windspeed)+' mph</div></div><div class="mdc"><div class="mdl">3-DAY PRECIP</div><div class="mdv '+(rw?'ca':'cl')+'">R:'+rain3.toFixed(2)+'" S:'+snow3.toFixed(1)+'"</div></div></div><div class="sl">3-DAY FORECAST (7AM-4PM JACKET CHECK)</div>'+fr;
+    mc.innerHTML='<div class="sl">OPEN-METEO - ZIP '+(getZipCfg('home','21044')||'21044')+' - '+(getHomeCoords().city||'COLUMBIA')+' MD</div><div style="display:flex;align-items:center;gap:20px;margin-bottom:16px"><div class="vt cc" style="font-size:100px;line-height:1;text-shadow:var(--gc)">'+Math.round(cw.temperature)+'\u00B0F</div><div><div style="font-size:38px">'+(WICO[String(code)]||'?')+'</div><div style="font-size:var(--t-body);color:var(--dim);margin-top:4px">'+(WMO[code]||'Unknown')+'</div></div></div><div class="mdg" style="margin-bottom:16px"><div class="mdc"><div class="mdl">FEELS LIKE</div><div class="mdv cc">'+Math.round(hr.apparent_temperature[idx])+'\u00B0F</div></div><div class="mdc"><div class="mdl">HUMIDITY</div><div class="mdv cc">'+hr.relativehumidity_2m[idx]+'%</div></div><div class="mdc"><div class="mdl">WIND</div><div class="mdv cc">'+Math.round(cw.windspeed)+' mph</div></div><div class="mdc"><div class="mdl">3-DAY PRECIP</div><div class="mdv '+(rw?'ca':'cl')+'">R:'+rain3.toFixed(2)+'" S:'+snow3.toFixed(1)+'"</div></div></div><div class="sl">3-DAY FORECAST (7AM-4PM JACKET CHECK)</div>'+fr;
   } else if(type==='stocks'){
     box.style.borderColor='var(--cl)';title.className='cl';title.textContent='// MARKET DATA';
     var open=mktOpen(),h='<div class="sl">STATUS: <span style="color:'+(open?'var(--cl)':'var(--cr)')+'">'+( open?'OPEN':'CLOSED')+'</span> - DEMO DATA</div>';
-    for(var i=0;i<stocks.length;i++){var s=stocks[i];h+='<div class="drow"><div><div class="vt cl" style="font-size:32px;text-shadow:var(--gl)">'+s.t+'</div><div class="dim-11">'+s.lb+'</div></div><div style="text-align:right"><div class="vt" style="font-size:28px">$'+s.p+'</div><div class="sc '+(s.up?'sup':'sdn')+'" style="font-size:14px;margin-top:2px">'+s.ch+' ('+s.pt+')</div></div></div>';}
-    h+='<div style="margin-top:18px;border:1px dashed var(--dim);padding:12px;font-size:11px;color:var(--dim)">DEMO MODE - integrate Finnhub API for live prices.</div>';
+    for(var i=0;i<stocks.length;i++){var s=stocks[i];h+='<div class="drow"><div><div class="vt cl" style="font-size:32px;text-shadow:var(--gl)">'+s.t+'</div><div class="dim-11">'+s.lb+'</div></div><div style="text-align:right"><div class="vt" style="font-size:var(--t-h1)">$'+s.p+'</div><div class="sc '+(s.up?'sup':'sdn')+'" style="font-size:var(--t-body);margin-top:2px">'+s.ch+' ('+s.pt+')</div></div></div>';}
+    h+='<div style="margin-top:18px;border:1px dashed var(--dim);padding:12px;font-size:var(--t-base);color:var(--dim)">DEMO MODE - integrate Finnhub API for live prices.</div>';
     mc.innerHTML=h;
   }
 }
@@ -2209,7 +2209,7 @@ function startEditPage(id){
   if(!el)return;
   var b=books.find(function(x){return x.id===id;});
   if(!b)return;
-  el.innerHTML='<input id="bpg-inp-'+id+'" type="number" min="0" max="'+b.total+'" value="'+b.current+'" style="width:52px;background:transparent;border:1px solid #9b6fff;color:var(--text);font-family:monospace;font-size:11px;padding:2px 4px;outline:none" onkeydown="if(event.key===\'Enter\')savePageEdit('+id+');if(event.key===\'Escape\')renderBooks()"><span class="book-btn" onmousedown="event.preventDefault();savePageEdit('+id+')" ontouchstart="event.preventDefault();savePageEdit('+id+')" style="margin-left:4px;color:#9b6fff;border-color:rgba(122,79,255,.4);padding:4px 8px">OK</span>';
+  el.innerHTML='<input id="bpg-inp-'+id+'" type="number" min="0" max="'+b.total+'" value="'+b.current+'" style="width:52px;background:transparent;border:1px solid #9b6fff;color:var(--text);font-family:monospace;font-size:var(--t-base);padding:2px 4px;outline:none" onkeydown="if(event.key===\'Enter\')savePageEdit('+id+');if(event.key===\'Escape\')renderBooks()"><span class="book-btn" onmousedown="event.preventDefault();savePageEdit('+id+')" ontouchstart="event.preventDefault();savePageEdit('+id+')" style="margin-left:4px;color:#9b6fff;border-color:rgba(122,79,255,.4);padding:4px 8px">OK</span>';
   setTimeout(function(){var i=document.getElementById('bpg-inp-'+id);if(i){i.focus();i.select();}},20);
 }
 
@@ -2782,11 +2782,11 @@ function renderBooks(){
           var _diff=Math.round((_due-_today)/(864e5));
           var _uc=_diff<=0?'#ff4444':_diff<=3?'#ff4444':_diff<=7?'#ffcc00':'#9b6fff';
           var _msg=_diff<=0?'&#128218; OVERDUE by '+Math.abs(_diff)+'d':_diff===1?'&#128218; Due tomorrow':'&#128218; Due in '+_diff+' days';
-          bookDueLine='<div style="font-size:12px;font-weight:bold;color:'+_uc+';margin:2px 0 5px">'+_msg+'</div>';
+          bookDueLine='<div style="font-size:var(--t-md);font-weight:bold;color:'+_uc+';margin:2px 0 5px">'+_msg+'</div>';
           window._bookDueColor=_uc;window._bookDueMsg=_msg.replace(/&#128218; /,'');
         }
           // outer flex: [cover] [right-column]
-          h+='<div style="display:flex;gap:6px;margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px">'
+          h+='<div style="display:flex;gap:6px;margin-bottom:10px;border-bottom:1px solid var(--c-ghost);padding-bottom:8px">'
           // Cover to the left of the vertical bar
           +(b.cover?'<canvas id="bcover-'+b.id+'" style="image-rendering:pixelated;flex-shrink:0;align-self:flex-start;border-radius:1px;width:70px"></canvas>':'')
           // Right column — contains colored bar + all content
@@ -2794,16 +2794,16 @@ function renderBooks(){
             // Title
             +'<div class="book-title" style="margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.title+'</div>'
             // Author
-            +(b.author?'<div style="font-size:11px;color:var(--dim);margin-bottom:5px">'+b.author+'</div>':'')
+            +(b.author?'<div style="font-size:var(--t-base);color:var(--dim);margin-bottom:5px">'+b.author+'</div>':'')
             // Started + due row
-            +'<div style="display:flex;gap:12px;font-size:9px;color:var(--dim);margin-bottom:6px">'
+            +'<div style="display:flex;gap:12px;font-size:var(--t-xs);color:var(--dim);margin-bottom:6px">'
             +(b.startDate?'<span>Started '+b.startDate+'</span>':'')
             +(bookDueLine?'<span style="color:'+(window._bookDueColor||'var(--dim)')+'">'+( window._bookDueMsg||'')+'</span>':'')
             +'</div>'
             // Progress bar + stats
             +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">'
               +'<div class="book-bar-wrap" style="flex:1;background:'+bcol+'18"><div class="book-bar-fill" data-barpct="'+Math.min(pct,100)+'" style="background:'+bcol+'"></div></div>'
-              +'<div style="font-size:10px;color:'+bcol+';white-space:nowrap;flex-shrink:0">'
+              +'<div style="font-size:var(--t-sm);color:'+bcol+';white-space:nowrap;flex-shrink:0">'
                 +'<span class="book-pct">'+pct+'%</span>'
                 +' <span style="opacity:.4">|</span> '
                 +'<span id="bpg-'+b.id+'" onclick="startEditPage('+b.id+')" style="cursor:pointer;opacity:.8;border-bottom:1px dashed '+bcol+'55">p.'+(isLoc?'loc '+b.current+(b.total?' of '+b.total:'')+(b.realPages?' ('+b.realPages+'p)':''):b.current+'/'+b.total)+'</span>'
@@ -2836,7 +2836,7 @@ function renderBooks(){
     // + ADD BOOK button always visible at bottom
     var rAddBtn=document.createElement('button');
     rAddBtn.textContent='+ ADD BOOK';
-    rAddBtn.style.cssText='width:100%;margin-top:10px;padding:10px;background:rgba(122,79,255,.06);border:1px solid rgba(122,79,255,.3);color:#9b6fff;font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px';
+    rAddBtn.style.cssText='width:100%;margin-top:10px;padding:10px;background:rgba(122,79,255,.06);border:1px solid rgba(122,79,255,.3);color:#9b6fff;font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px';
     var _switchAdd=function(){switchBooksTab('add');};
     rAddBtn.onclick=_switchAdd;
     // Scroll-aware touch — only fire if finger didn't move (not a swipe)
@@ -2862,8 +2862,8 @@ function renderBooks(){
       if(!window._bookDoneHideDropped)window._bookDoneHideDropped=false;
       if(!window._bookDoneOrder)window._bookDoneOrder='newest';
       var ctrlH='<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center">';
-      ctrlH+='<button id="bdone-toggle-dropped" style="font-size:9px;padding:3px 9px;background:'+(window._bookDoneHideDropped?'rgba(255,68,68,.12)':'transparent')+';border:1px solid '+(window._bookDoneHideDropped?'rgba(255,68,68,.4)':'rgba(255,255,255,.12)')+';color:'+(window._bookDoneHideDropped?'var(--cr)':'var(--dim)')+';font-family:monospace;cursor:pointer">'+(window._bookDoneHideDropped?'SHOW DROPPED':'HIDE DROPPED')+'</button>';
-      ctrlH+='<button id="bdone-toggle-order" style="font-size:9px;padding:3px 9px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">'+(window._bookDoneOrder==='newest'?'NEWEST FIRST':'OLDEST FIRST')+'</button>';
+      ctrlH+='<button id="bdone-toggle-dropped" style="font-size:var(--t-xs);padding:3px 9px;background:'+(window._bookDoneHideDropped?'rgba(255,68,68,.12)':'transparent')+';border:1px solid '+(window._bookDoneHideDropped?'rgba(255,68,68,.4)':'rgba(255,255,255,.12)')+';color:'+(window._bookDoneHideDropped?'var(--cr)':'var(--dim)')+';font-family:monospace;cursor:pointer">'+(window._bookDoneHideDropped?'SHOW DROPPED':'HIDE DROPPED')+'</button>';
+      ctrlH+='<button id="bdone-toggle-order" style="font-size:var(--t-xs);padding:3px 9px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">'+(window._bookDoneOrder==='newest'?'NEWEST FIRST':'OLDEST FIRST')+'</button>';
       ctrlH+='</div>';
 
       // Filter + sort
@@ -2896,7 +2896,7 @@ function renderBooks(){
         if(window._bookDoneCollapsed[yr]===undefined)window._bookDoneCollapsed[yr]=(yr!==curYear);
         var collapsed=window._bookDoneCollapsed[yr];
         h+='<div data-bookyr="'+yr+'" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(155,111,255,.15);cursor:pointer;user-select:none">';
-        h+='<span style="font-size:11px;color:#9b6fff;font-weight:bold;letter-spacing:1px">'+yr+'</span>';
+        h+='<span style="font-size:var(--t-base);color:#9b6fff;font-weight:bold;letter-spacing:1px">'+yr+'</span>';
         h+='<span class="dim-10">'+bks.length+' book'+(bks.length!==1?'s':'')+'&nbsp;&nbsp;'+(collapsed?'▶':'▼')+'</span>';
         h+='</div>';
 
@@ -2922,9 +2922,9 @@ function renderBooks(){
             // Right column
             h+='<div class="flex-1">';
             // Title + dropped badge
-            h+='<div class="book-done-title" style="margin-bottom:3px">'+b.title+(b.dropped?' <span style="font-size:9px;color:var(--cr);border:1px solid rgba(255,68,68,.35);padding:1px 5px">DROPPED</span>':'')+'</div>';
+            h+='<div class="book-done-title" style="margin-bottom:3px">'+b.title+(b.dropped?' <span style="font-size:var(--t-xs);color:var(--cr);border:1px solid rgba(255,68,68,.35);padding:1px 5px">DROPPED</span>':'')+'</div>';
             // Stats row: pages · finished · days
-            h+='<div style="font-size:9px;color:var(--dim);margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap">';
+            h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap">';
             if(b.total)h+='<span>'+b.total+' pages</span>';
             if(b.doneDate){
               var _dd=b.doneDate;
@@ -2946,9 +2946,9 @@ function renderBooks(){
             h+='</div>';
             // Review
             if(isEditingReview){
-              h+='<div style="margin-top:4px"><textarea id="br-inp-'+b.id+'" placeholder="Write your review..." style="width:100%;min-height:80px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.25);color:var(--text);font-family:monospace;font-size:12px;padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.6">'+( b.review||'')+'</textarea><div style="display:flex;gap:6px;margin-top:4px"><button onclick="saveBookReview('+b.id+')" style="flex:1;padding:5px;background:transparent;border:1px solid var(--ca);color:var(--ca);font-family:monospace;font-size:11px;cursor:pointer">SAVE</button><button onclick="window._bookReviewEdit=null;renderBooks()" style="padding:5px 10px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:11px;cursor:pointer">CANCEL</button></div></div>';
+              h+='<div style="margin-top:4px"><textarea id="br-inp-'+b.id+'" placeholder="Write your review..." style="width:100%;min-height:80px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.25);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.6">'+( b.review||'')+'</textarea><div style="display:flex;gap:6px;margin-top:4px"><button onclick="saveBookReview('+b.id+')" style="flex:1;padding:5px;background:transparent;border:1px solid var(--ca);color:var(--ca);font-family:monospace;font-size:var(--t-base);cursor:pointer">SAVE</button><button onclick="window._bookReviewEdit=null;renderBooks()" style="padding:5px 10px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-base);cursor:pointer">CANCEL</button></div></div>';
             } else if(b.review){
-              h+='<div style="margin-top:4px;padding:7px;background:rgba(255,204,0,.04);border-left:2px solid rgba(255,204,0,.3);font-size:11px;color:var(--text);line-height:1.6;white-space:pre-wrap">'+b.review+'</div>';
+              h+='<div style="margin-top:4px;padding:7px;background:rgba(255,204,0,.04);border-left:2px solid rgba(255,204,0,.3);font-size:var(--t-base);color:var(--text);line-height:1.6;white-space:pre-wrap">'+b.review+'</div>';
             }
             h+='</div></div></div>';
           });
@@ -3013,9 +3013,9 @@ function renderBookReviews(){
     for(var s=1;s<=5;s++)starStr+='<span data-brstar="'+b.id+'" data-val="'+s+'" style="font-size:20px;cursor:pointer;color:'+(s<=stars?'#ffcc00':'rgba(255,255,255,.2)')+'">&#9733;</span>';
     h+='<div style="border:1px solid rgba(255,255,255,.07);border-radius:2px;margin-bottom:10px;overflow:hidden">';
     h+='<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,.02);cursor:pointer" data-brexpand="'+b.id+'">';
-    h+='<div style="font-size:12px;font-weight:600;flex:1">'+b.title+'</div>';
+    h+='<div style="font-size:var(--t-md);font-weight:600;flex:1">'+b.title+'</div>';
     h+='<div class="dim-10">'+starStr+'</div>';
-    h+='<div style="font-size:10px;color:var(--dim);margin-left:4px">'+(hasReview?'&#10003;':'&#9998;')+'</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-left:4px">'+(hasReview?'&#10003;':'&#9998;')+'</div>';
     h+='</div>';
     if(window['_brOpen_'+b.id]){
       h+='<div style="padding:12px">';
@@ -3024,10 +3024,10 @@ function renderBookReviews(){
       BOOK_REVIEW_QS.slice(1).forEach(function(q){
         h+='<div class="mb-10">';
         h+='<div class="label-dim-xs">'+q.label.toUpperCase()+'</div>';
-        h+='<textarea id="brq-'+b.id+'-'+q.id+'" style="width:100%;min-height:56px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.5">'+( rev[q.id]||'')+'</textarea>';
+        h+='<textarea id="brq-'+b.id+'-'+q.id+'" style="width:100%;min-height:56px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.5">'+( rev[q.id]||'')+'</textarea>';
         h+='</div>';
       });
-      h+='<button data-brsave="'+b.id+'" style="width:100%;padding:8px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">SAVE REVIEW</button>';
+      h+='<button data-brsave="'+b.id+'" style="width:100%;padding:8px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">SAVE REVIEW</button>';
       h+='</div>';
     }
     h+='</div>';
@@ -3179,17 +3179,17 @@ function renderBooksStats(){
 
   //  FASTEST / SLOWEST 
   if(fastest&&slowest&&fastest.b.id!==slowest.b.id){
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">EXTREMES</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:2px;margin-bottom:6px">EXTREMES</div>';
     h+='<div class="mb-14">';
-    h+='<div style="display:flex;align-items:baseline;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
-    h+='<span style="font-size:9px;color:var(--cg);width:56px;flex-shrink:0">FASTEST</span>';
+    h+='<div style="display:flex;align-items:baseline;gap:6px;padding:5px 0;border-bottom:1px solid var(--c-ghost)">';
+    h+='<span style="font-size:var(--t-xs);color:var(--cg);width:56px;flex-shrink:0">FASTEST</span>';
     h+='<span class="text-11-flex">'+fastest.b.title+'</span>';
-    h+='<span style="font-size:10px;color:var(--cg)">'+fastest.days+'d</span>';
+    h+='<span style="font-size:var(--t-sm);color:var(--cg)">'+fastest.days+'d</span>';
     h+='</div>';
-    h+='<div style="display:flex;align-items:baseline;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
-    h+='<span style="font-size:9px;color:var(--ca);width:56px;flex-shrink:0">SLOWEST</span>';
+    h+='<div style="display:flex;align-items:baseline;gap:6px;padding:5px 0;border-bottom:1px solid var(--c-ghost)">';
+    h+='<span style="font-size:var(--t-xs);color:var(--ca);width:56px;flex-shrink:0">SLOWEST</span>';
     h+='<span class="text-11-flex">'+slowest.b.title+'</span>';
-    h+='<span style="font-size:10px;color:var(--ca)">'+slowest.days+'d</span>';
+    h+='<span style="font-size:var(--t-sm);color:var(--ca)">'+slowest.days+'d</span>';
     h+='</div>';
     h+='</div>';
   }
@@ -3204,7 +3204,7 @@ function renderBooksStats(){
       var pct=Math.round(bc/maxYrBooks*100);
       var isCur=+yr===thisYear;
       h+='<div class="mb-6">';
-      h+='<div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px">';
+      h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-sm);margin-bottom:2px">';
       h+='<span style="color:'+(isCur?'#9b6fff':'var(--dim)')+'">'+yr+(isCur?' ←':'')+' </span>';
       h+='<span style="color:var(--dim)">'+bc+' books · '+pg.toLocaleString()+' pages</span>';
       h+='</div>';
@@ -3218,25 +3218,25 @@ function renderBooksStats(){
   //  GENRE BREAKDOWN 
   h+='<div class="label-dim-wide">GENRE SPLIT</div>';
   h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
-  h+='<span style="font-size:11px;color:var(--dim);width:80px;flex-shrink:0">Fiction</span>';
+  h+='<span style="font-size:var(--t-base);color:var(--dim);width:80px;flex-shrink:0">Fiction</span>';
   h+='<div style="flex:1;height:10px;background:rgba(122,79,255,.1);border-radius:2px"><div style="width:'+Math.round((fDone/maxBar)*100)+'%;height:100%;background:#9b6fff;border-radius:2px"></div></div>';
-  h+='<span style="font-family:VT323,monospace;font-size:18px;color:#9b6fff;min-width:24px;text-align:right">'+fDone+'</span>';
+  h+='<span style="font-family:VT323,monospace;font-size:var(--t-title);color:#9b6fff;min-width:24px;text-align:right">'+fDone+'</span>';
   h+='</div>';
   h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">';
-  h+='<span style="font-size:11px;color:var(--dim);width:80px;flex-shrink:0">Non-Fiction</span>';
+  h+='<span style="font-size:var(--t-base);color:var(--dim);width:80px;flex-shrink:0">Non-Fiction</span>';
   h+='<div style="flex:1;height:10px;background:rgba(0,229,255,.1);border-radius:2px"><div style="width:'+Math.round((nDone/maxBar)*100)+'%;height:100%;background:var(--cc);border-radius:2px"></div></div>';
-  h+='<span style="font-family:VT323,monospace;font-size:18px;color:var(--cc);min-width:24px;text-align:right">'+nDone+'</span>';
+  h+='<span style="font-family:VT323,monospace;font-size:var(--t-title);color:var(--cc);min-width:24px;text-align:right">'+nDone+'</span>';
   h+='</div>';
 
   //  LONGEST BOOKS FINISHED 
   var longBooks=finished.slice().sort(function(a,b){return b.total-a.total;}).slice(0,3);
   if(longBooks.length){
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:6px">LONGEST FINISHED</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:2px;margin-bottom:6px">LONGEST FINISHED</div>';
     h+='<div class="mb-8">';
     longBooks.forEach(function(b,i){
       var medals=['🥇','🥈','🥉'];
       h+='<div style="display:flex;align-items:baseline;gap:6px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
-      h+='<span style="font-size:12px">'+medals[i]+'</span>';
+      h+='<span style="font-size:var(--t-md)">'+medals[i]+'</span>';
       h+='<span class="text-11-flex">'+b.title+'</span>';
       h+='<span class="dim-10">'+b.total.toLocaleString()+' pp</span>';
       h+='</div>';
@@ -3997,10 +3997,10 @@ function editSEntry(id){
   var d=new Date(e.ts);
   var dstr=d.toISOString().slice(0,16);
   row.innerHTML='<div style="display:flex;flex-direction:column;gap:5px;padding:4px 0">'
-    +'<div style="font-size:9px;color:var(--dim);letter-spacing:2px">DATE/TIME</div>'
-    +'<input id="sedit-dt-'+id+'" type="datetime-local" value="'+dstr+'" style="background:transparent;border:1px solid #ff5fa0;color:var(--text);font-size:11px;padding:4px 7px;outline:none;width:100%;box-sizing:border-box">'
-    +'<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin-top:2px">NOTE</div>'
-    +'<input id="sedit-note-'+id+'" type="text" value="'+(e.note||'')+'" placeholder="note..." style="background:transparent;border:1px solid #ff5fa0;color:var(--text);font-size:11px;padding:4px 7px;outline:none;width:100%;box-sizing:border-box">'
+    +'<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:2px">DATE/TIME</div>'
+    +'<input id="sedit-dt-'+id+'" type="datetime-local" value="'+dstr+'" style="background:transparent;border:1px solid #ff5fa0;color:var(--text);font-size:var(--t-base);padding:4px 7px;outline:none;width:100%;box-sizing:border-box">'
+    +'<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:2px;margin-top:2px">NOTE</div>'
+    +'<input id="sedit-note-'+id+'" type="text" value="'+(e.note||'')+'" placeholder="note..." style="background:transparent;border:1px solid #ff5fa0;color:var(--text);font-size:var(--t-base);padding:4px 7px;outline:none;width:100%;box-sizing:border-box">'
     +'<div style="display:flex;gap:6px;margin-top:2px">'
     +'<button class="s-log-btn-sm" onclick="saveEditS('+id+')" style="color:#ff5fa0;border-color:#ff5fa0;padding:4px 10px">SAVE</button>'
     +'<button class="s-log-btn-sm" onclick="renderSLog()" style="padding:4px 10px">CANCEL</button>'
@@ -4060,7 +4060,7 @@ function renderSLog(){
     var collapsed=_sLogCollapsed[yr];
 
     h+='<div data-syr="'+yr+'" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,95,160,.15);cursor:pointer;user-select:none">';
-    h+='<span style="font-size:11px;color:#ff5fa0;font-weight:bold;letter-spacing:1px">'+yr+'</span>';
+    h+='<span style="font-size:var(--t-base);color:#ff5fa0;font-weight:bold;letter-spacing:1px">'+yr+'</span>';
     h+='<span class="flex-center"><span class="dim-10">'+count+' entries</span>';
     h+='<span class="dim-10">'+(collapsed?'▶':'▼')+'</span></span>';
     h+='</div>';
@@ -4240,7 +4240,7 @@ function ptRenderFocus(){
   var allDates=Object.keys(ptData).sort().reverse();
   var focusDates=allDates.filter(function(d){return ptData[d]&&ptData[d]._focus;});
   if(!focusDates.length){
-    el.innerHTML='<div style="font-size:12px;color:var(--dim);padding:12px 0">No focus ratings yet. Rate your concentration after each prayer session.</div>';
+    el.innerHTML='<div style="font-size:var(--t-md);color:var(--dim);padding:12px 0">No focus ratings yet. Rate your concentration after each prayer session.</div>';
     return;
   }
   // Stats
@@ -4260,7 +4260,7 @@ function ptRenderFocus(){
   h+=fstat(trendIcon,'7-DAY TREND',trendCol);
   h+='</div>';
   // Bar chart — last 14 days
-  h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin-bottom:6px">LAST 14 DAYS</div>';
+  h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin-bottom:6px">LAST 14 DAYS</div>';
   h+='<div style="display:flex;align-items:flex-end;gap:3px;height:60px;margin-bottom:10px">';
   var last14=focusDates.slice(0,14).reverse();
   last14.forEach(function(d){
@@ -4274,7 +4274,7 @@ function ptRenderFocus(){
   });
   h+='</div>';
   // Per-prayer average (which prayer gets best focus)
-  h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin-bottom:6px">BY PRAYER (avg focus)</div>';
+  h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin-bottom:6px">BY PRAYER (avg focus)</div>';
   var prayerFocus={};
   var prayerCount={};
   PT_PRAYERS.forEach(function(p){prayerFocus[p]=0;prayerCount[p]=0;});
@@ -4288,23 +4288,23 @@ function ptRenderFocus(){
   h+='<div class="flex-row-4">';
   ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d,i){
     var avg2=dowCount[i]?Math.round(dowFocus[i]/dowCount[i]*10)/10:0;
-    var col=!avg2?'rgba(255,255,255,.1)':avg2<=3?'var(--cr)':avg2<=6?'var(--ca)':'var(--cg)';
+    var col=!avg2?'var(--c-border)':avg2<=3?'var(--cr)':avg2<=6?'var(--ca)':'var(--cg)';
     h+='<div style="flex:1;text-align:center">';
-    h+='<div style="font-size:11px;color:'+col+';font-family:VT323,monospace">'+(avg2||'—')+'</div>';
+    h+='<div style="font-size:var(--t-base);color:'+col+';font-family:VT323,monospace">'+(avg2||'—')+'</div>';
     h+='<div class="dim-9">'+d+'</div>';
     h+='</div>';
   });
   h+='</div>';
   // Recent log
-  h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin-bottom:6px">RECENT LOG</div>';
+  h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin-bottom:6px">RECENT LOG</div>';
   h+='<div style="max-height:140px;overflow-y:auto">';
   focusDates.slice(0,20).forEach(function(d){
     var v=ptData[d]._focus||0;
     var col=v<=3?'var(--cr)':v<=6?'var(--ca)':'var(--cg)';
     var bar='█'.repeat(v)+'░'.repeat(10-v);
-    h+='<div style="display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px">';
+    h+='<div style="display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:var(--t-base)">';
     h+='<span style="color:var(--dim);min-width:80px">'+d+'</span>';
-    h+='<span style="color:'+col+';letter-spacing:1px;font-size:9px">'+bar+'</span>';
+    h+='<span style="color:'+col+';letter-spacing:1px;font-size:var(--t-xs)">'+bar+'</span>';
     h+='<span style="color:'+col+';font-weight:bold;min-width:20px">'+v+'</span>';
     h+='</div>';
   });
@@ -4427,9 +4427,9 @@ function ptRenderTodayLegacy(){
   var vd=new Date(ptViewDate+'T12:00:00');
   var dayLabel=DAYS[vd.getDay()].slice(0,3).toUpperCase()+', '+MO3[vd.getMonth()]+' '+vd.getDate()+' '+vd.getFullYear()+(isToday?' • TODAY':'');
   var h='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
-    +'<button onclick="ptNavDay(-1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:13px">&#8592;</button>'
-    +'<span style="font-size:11px;letter-spacing:2px;color:var(--ca)">'+dayLabel+'</span>'
-    +'<button onclick="ptNavDay(1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:13px;'+(isToday?'opacity:.25;pointer-events:none':'')+'">&#8594;</button>'
+    +'<button onclick="ptNavDay(-1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:var(--t-lg)">&#8592;</button>'
+    +'<span style="font-size:var(--t-base);letter-spacing:2px;color:var(--ca)">'+dayLabel+'</span>'
+    +'<button onclick="ptNavDay(1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:var(--t-lg);'+(isToday?'opacity:.25;pointer-events:none':'')+'">&#8594;</button>'
     +'</div>';
   h+='<div class="pt-score-bar" class="mb-10">';
   PT_PRAYERS.forEach(function(p){
@@ -4441,12 +4441,12 @@ function ptRenderTodayLegacy(){
     var s=day[p]||null;
     var isActive=isToday&&(p.toLowerCase()===cur.toLowerCase());
     h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">'
-      +'<span style="font-size:11px;letter-spacing:2px;width:58px;flex-shrink:0;color:'+(isActive?'var(--ca)':'var(--dim)')+(isActive?';text-shadow:var(--ga)':'')+'">'
+      +'<span style="font-size:var(--t-base);letter-spacing:2px;width:58px;flex-shrink:0;color:'+(isActive?'var(--ca)':'var(--dim)')+(isActive?';text-shadow:var(--ga)':'')+'">'
       +p.toUpperCase()+'</span>'
       +'<div style="display:flex;gap:5px;flex:1">'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'ontime\',event)" style="flex:1;padding:9px 0;border:1px solid '+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.2)')+';background:'+(s==='ontime'?'rgba(0,255,136,.15)':'transparent')+';color:'+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.4)')+';font-size:14px;cursor:pointer;border-radius:3px">&#10003;</button>'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'late\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='late'?'var(--ca)':'rgba(255,204,0,.2)')+';background:'+(s==='late'?'rgba(255,204,0,.15)':'transparent')+';color:'+(s==='late'?'var(--ca)':'rgba(255,204,0,.4)')+';font-size:10px;letter-spacing:1px;cursor:pointer;border-radius:3px">LATE</button>'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'missed\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='missed'?'var(--cr)':'rgba(255,68,68,.2)')+';background:'+(s==='missed'?'rgba(255,68,68,.15)':'transparent')+';color:'+(s==='missed'?'var(--cr)':'rgba(255,68,68,.4)')+';font-size:14px;cursor:pointer;border-radius:3px">&#10005;</button>'
+      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'ontime\',event)" style="flex:1;padding:9px 0;border:1px solid '+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.2)')+';background:'+(s==='ontime'?'var(--c-ok-dim)':'transparent')+';color:'+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.4)')+';font-size:var(--t-body);cursor:pointer;border-radius:3px">&#10003;</button>'
+      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'late\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='late'?'var(--ca)':'var(--c-gold-dim)')+';background:'+(s==='late'?'rgba(255,204,0,.15)':'transparent')+';color:'+(s==='late'?'var(--ca)':'rgba(255,204,0,.4)')+';font-size:var(--t-sm);letter-spacing:1px;cursor:pointer;border-radius:3px">LATE</button>'
+      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'missed\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='missed'?'var(--cr)':'rgba(255,68,68,.2)')+';background:'+(s==='missed'?'rgba(255,68,68,.15)':'transparent')+';color:'+(s==='missed'?'var(--cr)':'rgba(255,68,68,.4)')+';font-size:var(--t-body);cursor:pointer;border-radius:3px">&#10005;</button>'
       +'</div>'
       +'</div>';
   });
@@ -4455,7 +4455,7 @@ function ptRenderTodayLegacy(){
   var bal=ptDayBalance(ptViewDate);
   var balCls=bal.bal>0?'pt-balance-pos':bal.bal<0?'pt-balance-neg':'pt-balance-zero';
   h+='<div class="pt-extra-row">'
-    +'<div><div style="font-size:11px;letter-spacing:1px;color:var(--ca)">EXTRA RAKAAT</div>'
+    +'<div><div style="font-size:var(--t-base);letter-spacing:1px;color:var(--ca)">EXTRA RAKAAT</div>'
     +'<div class="dim-9-mt">voluntary prayers</div></div>'
     +'<div class="flex-center">'
     +'<button class="pt-extra-btn" onclick="ptAddExtra(\'' +ptViewDate+ '\',-1)">&#8722;</button>'
@@ -4473,17 +4473,17 @@ function ptRenderTodayLegacy(){
   var easyYes=easyState===1;
   var easyNo=easyState===0;
   h+='<div style="margin-top:8px;padding:8px;border:1px solid rgba(255,95,160,.18);background:rgba(255,95,160,.06)">';
-  h+='<div style="font-size:10px;letter-spacing:1px;color:var(--cp);margin-bottom:6px">EASY SURAHS ONLY</div>';
+  h+='<div style="font-size:var(--t-sm);letter-spacing:1px;color:var(--cp);margin-bottom:6px">EASY SURAHS ONLY</div>';
   h+='<div class="flex-row">';
-  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',1)" style="flex:1;padding:7px 0;border:1px solid '+(easyYes?'var(--cp)':'rgba(255,255,255,.15)')+';background:'+(easyYes?'rgba(255,95,160,.16)':'transparent')+';color:'+(easyYes?'var(--cp)':'var(--dim)')+';font-size:11px;cursor:pointer">YES</button>';
-  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',0)" style="flex:1;padding:7px 0;border:1px solid '+(easyNo?'rgba(0,255,136,.35)':'rgba(255,255,255,.15)')+';background:'+(easyNo?'rgba(0,255,136,.1)':'transparent')+';color:'+(easyNo?'var(--cg)':'var(--dim)')+';font-size:11px;cursor:pointer">NO</button>';
+  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',1)" style="flex:1;padding:7px 0;border:1px solid '+(easyYes?'var(--cp)':'var(--c-faint)')+';background:'+(easyYes?'rgba(255,95,160,.16)':'transparent')+';color:'+(easyYes?'var(--cp)':'var(--dim)')+';font-size:var(--t-base);cursor:pointer">YES</button>';
+  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',0)" style="flex:1;padding:7px 0;border:1px solid '+(easyNo?'rgba(0,255,136,.35)':'var(--c-faint)')+';background:'+(easyNo?'rgba(0,255,136,.1)':'transparent')+';color:'+(easyNo?'var(--cg)':'var(--dim)')+';font-size:var(--t-base);cursor:pointer">NO</button>';
   h+='</div>';
-  h+='<div style="font-size:9px;color:var(--dim);margin-top:5px">'+(easyState===1?'Logged as easy-surah-only day.':easyState===0?'Logged as normal-surah day.':'Not set yet.')+'</div>';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:5px">'+(easyState===1?'Logged as easy-surah-only day.':easyState===0?'Logged as normal-surah day.':'Not set yet.')+'</div>';
   h+='</div>';
 
   //  Focus section 
   h+='<hr style="border:none;border-top:1px solid rgba(255,255,255,.08);margin:12px 0">';
-  h+='<div style="font-size:9px;letter-spacing:2px;color:var(--dim);margin-bottom:8px">FOCUS LEVEL</div>';
+  h+='<div style="font-size:var(--t-xs);letter-spacing:2px;color:var(--dim);margin-bottom:8px">FOCUS LEVEL</div>';
   var focusVal=(day._focus||0);
   h+='<div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px">';
   for(var fi=1;fi<=10;fi++){
@@ -4491,7 +4491,7 @@ function ptRenderTodayLegacy(){
     var fCol=fi<=3?'var(--cr)':fi<=6?'var(--ca)':'var(--cg)';
     var fBg=fSel?fCol.replace('var(--cr)','rgba(255,68,68,.18)').replace('var(--ca)','rgba(255,204,0,.18)').replace('var(--cg)','rgba(0,255,136,.18)'):'transparent';
     h+='<button id="ptf-'+fi+'-'+ptViewDate+'" onclick="ptSetFocus(\''+ptViewDate+'\','+fi+')" '
-      +'style="flex:1;min-width:24px;padding:8px 2px;border:1px solid '+(fSel?fCol:'rgba(255,255,255,.12)')+';background:'+(fSel?fBg:'transparent')+';color:'+(fSel?fCol:'var(--dim)')+';font-size:13px;cursor:pointer;font-family:monospace;font-weight:'+(fSel?'bold':'normal')+'">'+fi+'</button>';
+      +'style="flex:1;min-width:24px;padding:8px 2px;border:1px solid '+(fSel?fCol:'rgba(255,255,255,.12)')+';background:'+(fSel?fBg:'transparent')+';color:'+(fSel?fCol:'var(--dim)')+';font-size:var(--t-lg);cursor:pointer;font-family:monospace;font-weight:'+(fSel?'bold':'normal')+'">'+fi+'</button>';
   }
   h+='</div>';
   h+='<div class="dim-9">'+(focusVal?'Focus: '+focusVal+'/10 — '+(focusVal<=3?'low concentration':focusVal<=6?'moderate':'high concentration'):'Tap a number to rate your focus')+'</div>';
@@ -4602,7 +4602,7 @@ function ptCheckNotices(){
     var col=n.type==='mood'?'var(--cc)':'var(--ca)';
     h+='<div class="inactivity-notice'+(n.days>5?' jiggle':'')+'" style="margin-bottom:4px;border-color:'+col+'40">';
     h+='<span style="color:'+col+'">'+icon+' '+n.msg+'</span>';
-    h+='<button data-ptnotice="'+n.type+'" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button>';
+    h+='<button data-ptnotice="'+n.type+'" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:var(--t-lg);padding:0 2px">&#10005;</button>';
     h+='</div>';
   });
   el.innerHTML=h;
@@ -4648,9 +4648,9 @@ function ptRenderToday(){
   var vd=new Date(ptViewDate+'T12:00:00');
   var dayLabel=DAYS[vd.getDay()].slice(0,3).toUpperCase()+', '+MO3[vd.getMonth()]+' '+vd.getDate()+' '+vd.getFullYear()+(isToday?' • TODAY':'');
   var h='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
-    +'<button onclick="ptNavDay(-1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:13px">&#8592;</button>'
-    +'<span style="font-size:11px;letter-spacing:2px;color:var(--ca)">'+dayLabel+'</span>'
-    +'<button onclick="ptNavDay(1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:13px;'+(isToday?'opacity:.25;pointer-events:none':'')+'">&#8594;</button>'
+    +'<button onclick="ptNavDay(-1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:var(--t-lg)">&#8592;</button>'
+    +'<span style="font-size:var(--t-base);letter-spacing:2px;color:var(--ca)">'+dayLabel+'</span>'
+    +'<button onclick="ptNavDay(1)" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);padding:4px 11px;cursor:pointer;font-size:var(--t-lg);'+(isToday?'opacity:.25;pointer-events:none':'')+'">&#8594;</button>'
     +'</div>';
   h+='<div class="pt-score-bar" class="mb-10">';
   PT_PRAYERS.forEach(function(p){
@@ -4662,19 +4662,19 @@ function ptRenderToday(){
     var s=day[p]||null;
     var isActive=isToday&&(p.toLowerCase()===cur.toLowerCase());
     h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">'
-      +'<span style="font-size:11px;letter-spacing:2px;width:58px;flex-shrink:0;color:'+(isActive?'var(--ca)':'var(--dim)')+(isActive?';text-shadow:var(--ga)':'')+'">'
+      +'<span style="font-size:var(--t-base);letter-spacing:2px;width:58px;flex-shrink:0;color:'+(isActive?'var(--ca)':'var(--dim)')+(isActive?';text-shadow:var(--ga)':'')+'">'
       +p.toUpperCase()+'</span>'
       +'<div style="display:flex;gap:5px;flex:1">'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'ontime\',event)" style="flex:1;padding:9px 0;border:1px solid '+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.2)')+';background:'+(s==='ontime'?'rgba(0,255,136,.15)':'transparent')+';color:'+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.4)')+';font-size:14px;cursor:pointer;border-radius:3px">&#10003;</button>'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'late\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='late'?'var(--ca)':'rgba(255,204,0,.2)')+';background:'+(s==='late'?'rgba(255,204,0,.15)':'transparent')+';color:'+(s==='late'?'var(--ca)':'rgba(255,204,0,.4)')+';font-size:10px;letter-spacing:1px;cursor:pointer;border-radius:3px">LATE</button>'
-      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'missed\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='missed'?'var(--cr)':'rgba(255,68,68,.2)')+';background:'+(s==='missed'?'rgba(255,68,68,.15)':'transparent')+';color:'+(s==='missed'?'var(--cr)':'rgba(255,68,68,.4)')+';font-size:14px;cursor:pointer;border-radius:3px">&#10005;</button>'
+      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'ontime\',event)" style="flex:1;padding:9px 0;border:1px solid '+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.2)')+';background:'+(s==='ontime'?'var(--c-ok-dim)':'transparent')+';color:'+(s==='ontime'?'var(--cg)':'rgba(0,255,136,.4)')+';font-size:var(--t-body);cursor:pointer;border-radius:3px">&#10003;</button>'
+      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'late\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='late'?'var(--ca)':'var(--c-gold-dim)')+';background:'+(s==='late'?'rgba(255,204,0,.15)':'transparent')+';color:'+(s==='late'?'var(--ca)':'rgba(255,204,0,.4)')+';font-size:var(--t-sm);letter-spacing:1px;cursor:pointer;border-radius:3px">LATE</button>'
+      +'<button onclick="ptSetStatus(\'' +ptViewDate+ '\',\'' +p+ '\',\'missed\')" style="flex:1;padding:9px 0;border:1px solid '+(s==='missed'?'var(--cr)':'rgba(255,68,68,.2)')+';background:'+(s==='missed'?'rgba(255,68,68,.15)':'transparent')+';color:'+(s==='missed'?'var(--cr)':'rgba(255,68,68,.4)')+';font-size:var(--t-body);cursor:pointer;border-radius:3px">&#10005;</button>'
       +'</div>'
       +'</div>';
   });
 
   h+='<div onclick="ptToggleExtraInfo()" style="margin-top:10px;display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid rgba(255,255,255,.12);cursor:pointer;background:rgba(255,255,255,.02)">';
-  h+='<span style="font-size:10px;letter-spacing:2px;color:var(--dim)">EXTRA INFO</span>';
-  h+='<span id="pt-extra-arrow" style="font-size:12px;color:var(--ca);transform:'+(ptExtraOpen?'rotate(0deg)':'rotate(-90deg)')+';transition:transform .2s">&#9660;</span>';
+  h+='<span style="font-size:var(--t-sm);letter-spacing:2px;color:var(--dim)">EXTRA INFO</span>';
+  h+='<span id="pt-extra-arrow" style="font-size:var(--t-md);color:var(--ca);transform:'+(ptExtraOpen?'rotate(0deg)':'rotate(-90deg)')+';transition:transform .2s">&#9660;</span>';
   h+='</div>';
   h+='<div id="pt-extra-wrap" style="max-height:'+(ptExtraOpen?'900px':'0')+';overflow:hidden;transition:max-height .28s ease,opacity .2s;opacity:'+(ptExtraOpen?'1':'0')+'">';
 
@@ -4682,7 +4682,7 @@ function ptRenderToday(){
   var bal=ptDayBalance(ptViewDate);
   var balCls=bal.bal>0?'pt-balance-pos':bal.bal<0?'pt-balance-neg':'pt-balance-zero';
   h+='<div class="pt-extra-row" style="margin-top:8px">'
-    +'<div><div style="font-size:11px;letter-spacing:1px;color:var(--ca)">EXTRA RAKAAT</div>'
+    +'<div><div style="font-size:var(--t-base);letter-spacing:1px;color:var(--ca)">EXTRA RAKAAT</div>'
     +'<div class="dim-9-mt">voluntary prayers</div></div>'
     +'<div class="flex-center">'
     +'<button class="pt-extra-btn" onclick="ptAddExtra(\'' +ptViewDate+ '\',-1)">&#8722;</button>'
@@ -4699,16 +4699,16 @@ function ptRenderToday(){
   var easyYes=easyState===1;
   var easyNo=easyState===0;
   h+='<div style="margin-top:8px;padding:8px;border:1px solid rgba(255,95,160,.18);background:rgba(255,95,160,.06)">';
-  h+='<div style="font-size:10px;letter-spacing:1px;color:var(--cp);margin-bottom:6px">EASY SURAHS ONLY</div>';
+  h+='<div style="font-size:var(--t-sm);letter-spacing:1px;color:var(--cp);margin-bottom:6px">EASY SURAHS ONLY</div>';
   h+='<div class="flex-row">';
-  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',1)" style="flex:1;padding:7px 0;border:1px solid '+(easyYes?'var(--cp)':'rgba(255,255,255,.15)')+';background:'+(easyYes?'rgba(255,95,160,.16)':'transparent')+';color:'+(easyYes?'var(--cp)':'var(--dim)')+';font-size:11px;cursor:pointer">YES</button>';
-  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',0)" style="flex:1;padding:7px 0;border:1px solid '+(easyNo?'rgba(0,255,136,.35)':'rgba(255,255,255,.15)')+';background:'+(easyNo?'rgba(0,255,136,.1)':'transparent')+';color:'+(easyNo?'var(--cg)':'var(--dim)')+';font-size:11px;cursor:pointer">NO</button>';
+  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',1)" style="flex:1;padding:7px 0;border:1px solid '+(easyYes?'var(--cp)':'var(--c-faint)')+';background:'+(easyYes?'rgba(255,95,160,.16)':'transparent')+';color:'+(easyYes?'var(--cp)':'var(--dim)')+';font-size:var(--t-base);cursor:pointer">YES</button>';
+  h+='<button onclick="ptSetEasyOnly(\''+ptViewDate+'\',0)" style="flex:1;padding:7px 0;border:1px solid '+(easyNo?'rgba(0,255,136,.35)':'var(--c-faint)')+';background:'+(easyNo?'rgba(0,255,136,.1)':'transparent')+';color:'+(easyNo?'var(--cg)':'var(--dim)')+';font-size:var(--t-base);cursor:pointer">NO</button>';
   h+='</div>';
-  h+='<div style="font-size:9px;color:var(--dim);margin-top:5px">'+(easyState===1?'Logged as easy-surah-only day.':easyState===0?'Logged as normal-surah day.':'Not set yet.')+'</div>';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:5px">'+(easyState===1?'Logged as easy-surah-only day.':easyState===0?'Logged as normal-surah day.':'Not set yet.')+'</div>';
   h+='</div>';
 
   h+='<hr style="border:none;border-top:1px solid rgba(255,255,255,.08);margin:12px 0">';
-  h+='<div style="font-size:9px;letter-spacing:2px;color:var(--dim);margin-bottom:8px">FOCUS LEVEL</div>';
+  h+='<div style="font-size:var(--t-xs);letter-spacing:2px;color:var(--dim);margin-bottom:8px">FOCUS LEVEL</div>';
   var focusVal=(day._focus||0);
   h+='<div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px">';
   for(var fi=1;fi<=10;fi++){
@@ -4716,7 +4716,7 @@ function ptRenderToday(){
     var fCol=fi<=3?'var(--cr)':fi<=6?'var(--ca)':'var(--cg)';
     var fBg=fSel?fCol.replace('var(--cr)','rgba(255,68,68,.18)').replace('var(--ca)','rgba(255,204,0,.18)').replace('var(--cg)','rgba(0,255,136,.18)'):'transparent';
     h+='<button id="ptf-'+fi+'-'+ptViewDate+'" onclick="ptSetFocus(\''+ptViewDate+'\','+fi+')" '
-      +'style="flex:1;min-width:24px;padding:8px 2px;border:1px solid '+(fSel?fCol:'rgba(255,255,255,.12)')+';background:'+(fSel?fBg:'transparent')+';color:'+(fSel?fCol:'var(--dim)')+';font-size:13px;cursor:pointer;font-family:monospace;font-weight:'+(fSel?'bold':'normal')+'">'+fi+'</button>';
+      +'style="flex:1;min-width:24px;padding:8px 2px;border:1px solid '+(fSel?fCol:'rgba(255,255,255,.12)')+';background:'+(fSel?fBg:'transparent')+';color:'+(fSel?fCol:'var(--dim)')+';font-size:var(--t-lg);cursor:pointer;font-family:monospace;font-weight:'+(fSel?'bold':'normal')+'">'+fi+'</button>';
   }
   h+='</div>';
   h+='<div class="dim-9">'+(focusVal?'Focus: '+focusVal+'/10 - '+(focusVal<=3?'low concentration':focusVal<=6?'moderate':'high concentration'):'Tap a number to rate your focus')+'</div>';
@@ -4788,11 +4788,11 @@ function ptRenderLog(){
       h+='<div class="pt-log-day" style="padding-left:10px">'
         +'<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px">'
         +'<span class="pt-log-date">'+dstr+'</span>'
-        +'<span style="font-size:10px;color:'+(missed?'var(--cr)':'var(--dim)')+'">'+ontime+'/'+PT_PRAYERS.length+(missed?' · '+missed+'✗':'')+'</span>'
+        +'<span style="font-size:var(--t-sm);color:'+(missed?'var(--cr)':'var(--dim)')+'">'+ontime+'/'+PT_PRAYERS.length+(missed?' · '+missed+'✗':'')+'</span>'
         +'</div>'
         +'<div class="pt-log-pills">'+rowH+'</div>'
-        +(day._easyOnly?'<div style="font-size:10px;color:var(--cp);margin-top:3px;letter-spacing:.5px">Easy Surahs Only: YES</div>':'')
-        +(day._focus?'<div style="font-size:10px;color:'+(day._focus<=3?'var(--cr)':day._focus<=6?'var(--ca)':'var(--cg)')+';margin-top:3px;letter-spacing:.5px">Focus: '+day._focus+'/10 '+'█'.repeat(day._focus)+'░'.repeat(10-day._focus)+'</div>':'')
+        +(day._easyOnly?'<div style="font-size:var(--t-sm);color:var(--cp);margin-top:3px;letter-spacing:.5px">Easy Surahs Only: YES</div>':'')
+        +(day._focus?'<div style="font-size:var(--t-sm);color:'+(day._focus<=3?'var(--cr)':day._focus<=6?'var(--ca)':'var(--cg)')+';margin-top:3px;letter-spacing:.5px">Focus: '+day._focus+'/10 '+'█'.repeat(day._focus)+'░'.repeat(10-day._focus)+'</div>':'')
         +'</div>';
     });
     h+='</div></div>';
@@ -4885,7 +4885,7 @@ function ptBuildStatsBar(pStats){
     var missRate=total>0?Math.round((st.missed/total)*100):0;
     h+='<div class="pt-stat-col">'      +'<div class="pt-stat-bar-wrap">'      +(st.late?'<div class="pt-stat-bar-late" style="height:'+lateH+'px"></div>':'')      +(st.missed?'<div class="pt-stat-bar-miss" style="height:'+missH+'px"></div>':'')      +'</div>'      +'<div class="pt-stat-num">'+(st.missed||'&#183;')+'</div>'      +'<div class="pt-stat-name">'+p.slice(0,3).toUpperCase()+'</div>'      +'</div>';
   });
-  h+='</div>'    +'<div style="display:flex;gap:10px;font-size:9px;margin-bottom:12px;margin-top:2px">'    +'<span style="color:var(--cr)">&#9632; missed</span>'    +'<span style="color:var(--ca)">&#9632; late</span>'    +'<span style="color:var(--dim)">bars = relative frequency</span>'    +'</div>';
+  h+='</div>'    +'<div style="display:flex;gap:10px;font-size:var(--t-xs);margin-bottom:12px;margin-top:2px">'    +'<span style="color:var(--cr)">&#9632; missed</span>'    +'<span style="color:var(--ca)">&#9632; late</span>'    +'<span style="color:var(--dim)">bars = relative frequency</span>'    +'</div>';
   return h;
 }
 
@@ -4910,7 +4910,7 @@ function ptRenderBalance(){
     +'<span class="pt-bal-pill'+(ptBalPeriod==='year'?' active':'')+'" onclick="ptSetBalPeriod(\'year\')">THIS YEAR</span>'
     +'<span class="pt-bal-pill'+(ptBalPeriod==='month'?' active':'')+'" onclick="ptSetBalPeriod(\'month\')">THIS MONTH</span>'
     +'</div>'
-    +'<button onclick="exportBalanceReport()" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-size:10px;padding:4px 9px;cursor:pointer;white-space:nowrap">&#128203; EXPORT</button>'
+    +'<button onclick="exportBalanceReport()" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-size:var(--t-sm);padding:4px 9px;cursor:pointer;white-space:nowrap">&#128203; EXPORT</button>'
     +'</div>';
 
   // Filter by period
@@ -4934,15 +4934,15 @@ function ptRenderBalance(){
     +'<div class="pt-balance-lbl" class="mb-4">NET BALANCE ('+(ptBalPeriod==='all'?'ALL TIME':ptBalPeriod==='year'?thisYear:thisMonth)+')</div>'
     +'<div class="pt-balance-num '+totalCls+'" style="font-size:52px">'+(total>=0?'+':'')+total+'</div>'
     +'<div style="display:flex;justify-content:center;gap:16px;margin-top:6px">'
-    +'<span style="font-size:10px;color:var(--cr)">&#8722;'+totalMissed+' missed</span>'
-    +(totalExtra?'<span style="font-size:10px;color:var(--ca)">+'+totalExtra+' extra</span>':'')
+    +'<span style="font-size:var(--t-sm);color:var(--cr)">&#8722;'+totalMissed+' missed</span>'
+    +(totalExtra?'<span style="font-size:var(--t-sm);color:var(--ca)">+'+totalExtra+' extra</span>':'')
     +'<span class="dim-10">'+filtered.length+' days</span>'
     +'</div></div>';
 
   // Per-prayer stats for this period
   var filteredKeys=filtered.map(function(d){return d.dk;});
   var pStats=ptComputePrayerStats(filteredKeys);
-  h+='<div style="margin-bottom:4px;font-size:9px;letter-spacing:2px;color:var(--dim)">MISSED BY PRAYER</div>';
+  h+='<div style="margin-bottom:4px;font-size:var(--t-xs);letter-spacing:2px;color:var(--dim)">MISSED BY PRAYER</div>';
   h+=ptBuildStatsBar(pStats);
 
   // Day-by-day list reversed
@@ -4955,14 +4955,14 @@ function ptRenderBalance(){
     h+='<div class="pt-bal-row">'
       +'<span class="pt-bal-date">'+dlabel+'</span>'
       +'<div style="display:flex;gap:10px;align-items:center">'
-      +(d.missed?'<span style="font-size:10px;color:var(--cr)">&#8722;'+d.missed+'</span>':'')
-      +(d.extra?'<span style="font-size:10px;color:var(--ca)">+'+d.extra+'e</span>':'')
+      +(d.missed?'<span style="font-size:var(--t-sm);color:var(--cr)">&#8722;'+d.missed+'</span>':'')
+      +(d.extra?'<span style="font-size:var(--t-sm);color:var(--ca)">+'+d.extra+'e</span>':'')
       +'<span class="pt-bal-val '+cls+'">'+(d.bal>=0?'+':'')+d.bal+'</span>'
       +'</div></div>';
   });
 
   if(!rev.filter(function(d){return d.bal!==0||d.missed||d.extra;}).length){
-    h+='<div style="color:var(--dim);font-size:11px;padding:8px 0">No logged prayers in this period yet.</div>';
+    h+='<div style="color:var(--dim);font-size:var(--t-base);padding:8px 0">No logged prayers in this period yet.</div>';
   }
 
   el.innerHTML=h;
@@ -5099,8 +5099,8 @@ function renderViewPills(){
   var h='';
   VIEW_MODE_DEFS.forEach(function(vm){
     var isOn=(vm.key===active);
-    h+='<div onclick="event.stopPropagation();setViewMode(\'' +vm.key+ '\')" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border:1px solid '+(isOn?'var(--cg)':'rgba(255,255,255,.1)')+';background:'+(isOn?'rgba(0,255,136,.07)':'transparent')+';cursor:pointer;transition:all .12s;border-radius:3px">'
-      +'<div><div style="font-size:12px;color:'+(isOn?'var(--cg)':'var(--text)')+'">'+vm.label+'</div><div style="font-size:10px;color:var(--dim);margin-top:2px">'+vm.desc+'</div></div>'
+    h+='<div onclick="event.stopPropagation();setViewMode(\'' +vm.key+ '\')" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border:1px solid '+(isOn?'var(--cg)':'var(--c-border)')+';background:'+(isOn?'rgba(0,255,136,.07)':'transparent')+';cursor:pointer;transition:all .12s;border-radius:3px">'
+      +'<div><div style="font-size:var(--t-md);color:'+(isOn?'var(--cg)':'var(--text)')+'">'+vm.label+'</div><div style="font-size:var(--t-sm);color:var(--dim);margin-top:2px">'+vm.desc+'</div></div>'
       +'<div style="width:16px;height:16px;border-radius:50%;border:2px solid '+(isOn?'var(--cg)':'rgba(255,255,255,.2)')+';background:'+(isOn?'var(--cg)':'transparent')+';flex-shrink:0"></div>'
       +'</div>';
   });
@@ -5182,9 +5182,9 @@ function applyMinimalMode(){
     // Card header — plain label
     'body.minimal-mode .th{border:none!important;background:none!important;padding:0 0 6px!important;',
     'margin-bottom:8px!important}',
-    'body.minimal-mode .th-label{font-size:11px!important;letter-spacing:2px!important;color:rgba(255,255,255,.35)!important;',
+    'body.minimal-mode .th-label{font-size:var(--t-base)!important;letter-spacing:2px!important;color:var(--c-dim)!important;',
     'text-transform:uppercase!important;font-weight:normal!important}',
-    'body.minimal-mode .th-badge{font-size:9px!important;border:none!important;',
+    'body.minimal-mode .th-badge{font-size:var(--t-xs)!important;border:none!important;',
     'color:rgba(255,255,255,.25)!important;padding-left:8px!important}',
     // Body text
     'body.minimal-mode .tile *{font-family:monospace!important}',
@@ -5192,8 +5192,8 @@ function applyMinimalMode(){
     'body.minimal-mode .book-bar-wrap,body.minimal-mode .book-bar-fill{display:none!important}',
     'body.minimal-mode .soul-card::before{display:none!important}',
     // Inputs and buttons stay functional but minimal
-    'body.minimal-mode button{background:transparent!important;border:1px solid rgba(255,255,255,.15)!important;',
-    'color:rgba(255,255,255,.5)!important;padding:3px 8px!important;font-size:10px!important}',
+    'body.minimal-mode button{background:transparent!important;border:1px solid var(--c-faint)!important;',
+    'color:rgba(255,255,255,.5)!important;padding:3px 8px!important;font-size:var(--t-sm)!important}',
     // Hide the topbar and quick nav tile borders
     'body.minimal-mode #topbar{opacity:.4}',
     // Faint 1px border on each card, 2em gap between cards
@@ -5283,7 +5283,7 @@ function bigCatRender(){
   }
 
   var h='';
-  h+='<button id="bigcat-exit-btn" style="display:block;width:100%;padding:10px;margin-bottom:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">\u2715 EXIT CATEGORIES MODE</button>';
+  h+='<button id="bigcat-exit-btn" style="display:block;width:100%;padding:10px;margin-bottom:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px">\u2715 EXIT CATEGORIES MODE</button>';
 
   BIGCAT_DEFS.forEach(function(cat){
     var open=BIGCAT_OPEN.indexOf(cat.id)>=0;
@@ -5537,7 +5537,7 @@ function qtRenderLog(){
   var el=document.getElementById('qt-log-list'),su=document.getElementById('qt-log-sum');
   if(!el)return;
   var keys=qtFilterKeys(qtLogPeriod);
-  if(!keys.length){el.innerHTML='<div style="color:var(--dim);font-size:11px;padding:6px 0">No entries yet.</div>';if(su)su.textContent='';return;}
+  if(!keys.length){el.innerHTML='<div style="color:var(--dim);font-size:var(--t-base);padding:6px 0">No entries yet.</div>';if(su)su.textContent='';return;}
   var total=0,h='';
   keys.forEach(function(k){
     var pg=qtData[k];total+=pg;
@@ -5584,7 +5584,7 @@ function qtRenderGraph(){
     });
     if(tot)tot.textContent=sy.length+' years · '+sy.reduce(function(a,y){return a+years[y];},0)+' pages';
   }
-  el.innerHTML=h||'<div style="color:var(--dim);font-size:11px">No data.</div>';
+  el.innerHTML=h||'<div style="color:var(--dim);font-size:var(--t-base)">No data.</div>';
 }
 function qtExport(){
   var keys=Object.keys(qtData).filter(function(k){return qtData[k]>0;}).sort().reverse();
@@ -5650,7 +5650,7 @@ function goalsCheckNotice(){
   if(!mostRecent){el.innerHTML='';return;}
   var daysSince=Math.round((new Date()-new Date(mostRecent+'T00:00:00'))/(864e5));
   if(daysSince>=3){
-    el.innerHTML='<div class="inactivity-notice'+(daysSince>=5?' jiggle':'')+'" class="mb-6"><span>&#9650; No goal check-in in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last: '+mostRecent+'</span><button data-dismiss="goals-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
+    el.innerHTML='<div class="inactivity-notice'+(daysSince>=5?' jiggle':'')+'" class="mb-6"><span>&#9650; No goal check-in in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last: '+mostRecent+'</span><button data-dismiss="goals-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:var(--t-lg);padding:0 2px">&#10005;</button></div>';
   } else {
     el.innerHTML='';
   }
@@ -5693,8 +5693,8 @@ function renderGoals(period){
   var _goalQuote=_goalQuotes[Math.floor((new Date().getDate()+allActive.length*7))%_goalQuotes.length];
 
   if(!allActive.length){
-    h='<div style="font-size:10px;color:var(--dim);font-style:italic;opacity:.6;padding:4px 0 12px;line-height:1.5">'+_goalQuote+'</div>';
-    h+='<div style="font-size:11px;color:var(--dim);padding:10px 0;text-align:center;line-height:2">Nothing to pursue yet.<br>Add your first goal below.</div>';
+    h='<div style="font-size:var(--t-sm);color:var(--dim);font-style:italic;opacity:.6;padding:4px 0 12px;line-height:1.5">'+_goalQuote+'</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);padding:10px 0;text-align:center;line-height:2">Nothing to pursue yet.<br>Add your first goal below.</div>';
   }
 
   var _goalAccents=[
@@ -5711,7 +5711,7 @@ function renderGoals(period){
   ];
 
   if(allActive.length){
-    h='<div style="font-size:10px;color:var(--dim);font-style:italic;opacity:.55;padding:4px 0 12px;line-height:1.5;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:2px">'+_goalQuote+'</div>'+h;
+    h='<div style="font-size:var(--t-sm);color:var(--dim);font-style:italic;opacity:.55;padding:4px 0 12px;line-height:1.5;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:2px">'+_goalQuote+'</div>'+h;
   }
 
   allActive.forEach(function(g,gi){
@@ -5748,7 +5748,7 @@ function renderGoals(period){
       var R=22,CX=28,CY=28,circ=2*Math.PI*R;
       var fillPct=Math.min(checkins.length/g.total,1);
       var dash=fillPct*circ,gap=circ-dash;
-      arcSvg='<svg width="56" height="56" style="flex-shrink:0"><circle cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="4"/><circle cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" stroke="'+accent.c+'" stroke-width="4" stroke-dasharray="'+dash+' '+gap+'" stroke-dashoffset="'+circ/4+'" stroke-linecap="round" opacity="0.85"/><text x="'+CX+'" y="'+(CY+4)+'" text-anchor="middle" fill="'+accent.c+'" font-size="10" font-family="VT323,monospace">'+(pct!==null?pct+'%':checkins.length)+'</text></svg>';
+      arcSvg='<svg width="56" height="56" style="flex-shrink:0"><circle cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" stroke="var(--c-ghost)" stroke-width="4"/><circle cx="'+CX+'" cy="'+CY+'" r="'+R+'" fill="none" stroke="'+accent.c+'" stroke-width="4" stroke-dasharray="'+dash+' '+gap+'" stroke-dashoffset="'+circ/4+'" stroke-linecap="round" opacity="0.85"/><text x="'+CX+'" y="'+(CY+4)+'" text-anchor="middle" fill="'+accent.c+'" font-size="10" font-family="VT323,monospace">'+(pct!==null?pct+'%':checkins.length)+'</text></svg>';
     }
 
     // Dot streak
@@ -5764,58 +5764,58 @@ function renderGoals(period){
     h+='<div style="background:'+accent.bg+';border:1px solid '+accent.ring+';border-radius:3px;padding:12px 14px;margin-bottom:8px">';
 
     if(goalEditId===g.id){
-      h+='<input class="goal-inp" id="gedit-'+g.id+'" value="'+g.text.replace(/"/g,'&quot;')+'" style="margin-bottom:8px;font-size:14px">';
+      h+='<input class="goal-inp" id="gedit-'+g.id+'" value="'+g.text.replace(/"/g,'&quot;')+'" style="margin-bottom:8px;font-size:var(--t-body)">';
       h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px"><span class="dim-9">Target check-ins (optional):</span><input class="goal-inp" id="gedit-total-'+g.id+'" type="number" min="1" value="'+(g.total||'')+'" placeholder="optional" style="width:60px"></div>';
       h+='<div class="flex-row"><button class="goal-action-btn checkin" data-gedit-save="'+g.id+'" data-gperiod="'+period+'">SAVE</button><button class="goal-action-btn" data-gedit-cancel="1">CANCEL</button></div>';
     } else {
       h+='<div style="display:flex;gap:10px;align-items:flex-start">';
       h+=arcSvg;
       h+='<div class="flex-1">';
-      h+='<div style="font-size:9px;color:'+accent.c+';letter-spacing:1.5px;opacity:.7;margin-bottom:2px">'+period.toUpperCase()+(timeInfo?' · '+timeInfo:'')+'</div>';
-      h+='<div style="font-size:14px;color:var(--text);font-weight:600;line-height:1.3">'+g.text+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:'+accent.c+';letter-spacing:1.5px;opacity:.7;margin-bottom:2px">'+period.toUpperCase()+(timeInfo?' · '+timeInfo:'')+'</div>';
+      h+='<div style="font-size:var(--t-body);color:var(--text);font-weight:600;line-height:1.3">'+g.text+'</div>';
       h+='</div>';
       h+='<div style="display:flex;gap:3px;flex-shrink:0">';
-      h+='<button class="goal-action-btn" data-geditbtn="'+g.id+'" style="font-size:10px;padding:2px 6px;opacity:.4">&#9998;</button>';
-      h+='<button class="goal-action-btn danger" data-gdel="'+g.id+'" data-gperiod="'+period+'" style="font-size:10px;padding:2px 6px;opacity:.4">&#x2715;</button>';
+      h+='<button class="goal-action-btn" data-geditbtn="'+g.id+'" style="font-size:var(--t-sm);padding:2px 6px;opacity:.4">&#9998;</button>';
+      h+='<button class="goal-action-btn danger" data-gdel="'+g.id+'" data-gperiod="'+period+'" style="font-size:var(--t-sm);padding:2px 6px;opacity:.4">&#x2715;</button>';
       h+='</div></div>';
       h+=dotsH;
       if(checkedToday){
-        h+='<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid rgba(255,255,255,.06)">';
-        h+='<span style="color:'+accent.c+';font-size:16px">&#10003;</span><span style="font-size:11px;color:'+accent.c+';opacity:.8">Done for today</span>';
-        h+='<span style="font-size:10px;color:var(--dim);margin-left:auto">'+checkins.length+(g.total?'/'+g.total:'')+' total</span>';
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--c-ghost)">';
+        h+='<span style="color:'+accent.c+';font-size:var(--t-sub)">&#10003;</span><span style="font-size:var(--t-base);color:'+accent.c+';opacity:.8">Done for today</span>';
+        h+='<span style="font-size:var(--t-sm);color:var(--dim);margin-left:auto">'+checkins.length+(g.total?'/'+g.total:'')+' total</span>';
         h+='</div>';
       } else {
-        h+='<button data-gcheckin="'+g.id+'" data-gperiod="'+period+'" style="width:100%;padding:10px;background:'+accent.bg+';border:1px solid '+accent.ring+';color:'+accent.c+';font-family:VT323,monospace;font-size:18px;cursor:pointer;letter-spacing:2px;border-radius:2px">CHECK IN ✓</button>';
+        h+='<button data-gcheckin="'+g.id+'" data-gperiod="'+period+'" style="width:100%;padding:10px;background:'+accent.bg+';border:1px solid '+accent.ring+';color:'+accent.c+';font-family:VT323,monospace;font-size:var(--t-title);cursor:pointer;letter-spacing:2px;border-radius:2px">CHECK IN ✓</button>';
       }
       if(!onTrack&&remaining>0){
-        h+='<div style="font-size:10px;color:rgba(255,180,50,.8);margin-top:6px">&#9650; Behind · '+remaining+' more needed in '+daysLeft+'d</div>';
+        h+='<div style="font-size:var(--t-sm);color:rgba(255,180,50,.8);margin-top:6px">&#9650; Behind · '+remaining+' more needed in '+daysLeft+'d</div>';
       } else if(remaining===0){
-        h+='<div style="font-size:10px;color:'+accent.c+';margin-top:6px">&#10003; Target reached!</div>';
+        h+='<div style="font-size:var(--t-sm);color:'+accent.c+';margin-top:6px">&#10003; Target reached!</div>';
       }
       var detailCount=notes.length+subgoals.length;
-      h+='<div data-goalexpand="'+g.id+'" style="font-size:10px;color:var(--dim);cursor:pointer;margin-top:8px;opacity:.5;user-select:none">'+(isExpanded?'▲ collapse':'▼ details'+(detailCount?' ('+detailCount+')':''))+'</div>';
+      h+='<div data-goalexpand="'+g.id+'" style="font-size:var(--t-sm);color:var(--dim);cursor:pointer;margin-top:8px;opacity:.5;user-select:none">'+(isExpanded?'▲ collapse':'▼ details'+(detailCount?' ('+detailCount+')':''))+'</div>';
       if(isExpanded){
-        h+='<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">';
+        h+='<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--c-ghost)">';
         h+='<div class="label-dim-sm">SUBGOALS</div>';
         subgoals.forEach(function(sg,sgi){
           h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
-          h+='<span data-goalsg="'+g.id+'" data-sgidx="'+sgi+'" style="cursor:pointer;font-size:16px;color:'+(sg.done?accent.c:'rgba(255,255,255,.2)')+'">'+( sg.done?'◉':'○')+'</span>';
-          h+='<span style="flex:1;font-size:12px;color:'+(sg.done?'var(--dim)':'var(--text)')+(sg.done?';text-decoration:line-through':'')+'">'+sg.text+'</span>';
-          h+='<span data-goalsqdel="'+g.id+'" data-sgidx="'+sgi+'" style="font-size:10px;color:var(--dim);cursor:pointer;opacity:.3">✕</span>';
+          h+='<span data-goalsg="'+g.id+'" data-sgidx="'+sgi+'" style="cursor:pointer;font-size:var(--t-sub);color:'+(sg.done?accent.c:'rgba(255,255,255,.2)')+'">'+( sg.done?'◉':'○')+'</span>';
+          h+='<span style="flex:1;font-size:var(--t-md);color:'+(sg.done?'var(--dim)':'var(--text)')+(sg.done?';text-decoration:line-through':'')+'">'+sg.text+'</span>';
+          h+='<span data-goalsqdel="'+g.id+'" data-sgidx="'+sgi+'" style="font-size:var(--t-sm);color:var(--dim);cursor:pointer;opacity:.3">✕</span>';
           h+='</div>';
         });
-        h+='<div style="display:flex;gap:6px;margin-top:8px"><input id="gsg-inp-'+g.id+'" placeholder="Add subgoal..." autocomplete="off" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text);font-family:monospace;font-size:12px;padding:4px 2px;outline:none"><button data-goalsgadd="'+g.id+'" data-gperiod="'+period+'" style="font-size:10px;padding:3px 10px;border:1px solid '+accent.ring+';color:'+accent.c+';background:transparent;cursor:pointer">+</button></div>';
+        h+='<div style="display:flex;gap:6px;margin-top:8px"><input id="gsg-inp-'+g.id+'" placeholder="Add subgoal..." autocomplete="off" style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--c-border);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 2px;outline:none"><button data-goalsgadd="'+g.id+'" data-gperiod="'+period+'" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+accent.ring+';color:'+accent.c+';background:transparent;cursor:pointer">+</button></div>';
         h+='<div style="margin-top:12px"><div class="label-dim-sm">NOTES</div>';
         if(notes.length){
           notes.slice().reverse().slice(0,5).forEach(function(n){
-            h+='<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:9px;color:var(--dim);margin-bottom:2px">'+(n.ts?n.ts.slice(0,10):'')+'</div><div style="font-size:12px;color:var(--text);line-height:1.5">'+n.text+'</div></div>';
+            h+='<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:2px">'+(n.ts?n.ts.slice(0,10):'')+'</div><div style="font-size:var(--t-md);color:var(--text);line-height:1.5">'+n.text+'</div></div>';
           });
-          if(notes.length>5)h+='<div style="font-size:9px;color:var(--dim);opacity:.4;margin-top:4px">+ '+(notes.length-5)+' more</div>';
+          if(notes.length>5)h+='<div style="font-size:var(--t-xs);color:var(--dim);opacity:.4;margin-top:4px">+ '+(notes.length-5)+' more</div>';
         } else {
-          h+='<div style="font-size:10px;color:var(--dim);opacity:.5">No notes yet.</div>';
+          h+='<div style="font-size:var(--t-sm);color:var(--dim);opacity:.5">No notes yet.</div>';
         }
-        h+='<textarea id="gnote-inp-'+g.id+'" placeholder="Add a note..." style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:12px;padding:8px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.5;margin-top:8px"></textarea>';
-        h+='<button data-goalnotesave="'+g.id+'" data-gperiod="'+period+'" style="width:100%;padding:6px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px;margin-top:4px">SAVE NOTE</button></div>';
+        h+='<textarea id="gnote-inp-'+g.id+'" placeholder="Add a note..." style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:8px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.5;margin-top:8px"></textarea>';
+        h+='<button data-goalnotesave="'+g.id+'" data-gperiod="'+period+'" style="width:100%;padding:6px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px;margin-top:4px">SAVE NOTE</button></div>';
         h+='<button class="goal-action-btn complete" data-gcomplete="'+g.id+'" data-gperiod="'+period+'" style="width:100%;margin-top:12px">MARK COMPLETE</button>';
         h+='</div>';
       }
@@ -5824,10 +5824,10 @@ function renderGoals(period){
   });
 
   // Add goal form
-  h+='<div style="margin-top:4px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">';
+  h+='<div style="margin-top:4px;padding-top:10px;border-top:1px solid var(--c-ghost)">';
   h+='<div style="display:flex;gap:6px;margin-bottom:8px">';
-  h+='<span data-gperiod="monthly" id="gperiod-monthly" style="font-size:9px;padding:3px 10px;border:1px solid rgba(255,204,0,.4);color:var(--ca);cursor:pointer;letter-spacing:1px">MONTHLY</span>';
-  h+='<span data-gperiod="yearly" id="gperiod-yearly" style="font-size:9px;padding:3px 10px;border:1px solid rgba(255,255,255,.1);color:var(--dim);cursor:pointer;letter-spacing:1px">YEARLY</span>';
+  h+='<span data-gperiod="monthly" id="gperiod-monthly" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid rgba(255,204,0,.4);color:var(--ca);cursor:pointer;letter-spacing:1px">MONTHLY</span>';
+  h+='<span data-gperiod="yearly" id="gperiod-yearly" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid var(--c-border);color:var(--dim);cursor:pointer;letter-spacing:1px">YEARLY</span>';
   h+='</div>';
   h+='<input class="goal-inp" id="gi-new" placeholder="What do you want to pursue?" autocomplete="off" class="mb-6">';
   h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="dim-9">target check-ins</span><input class="goal-inp" id="gt-new" type="number" min="1" placeholder="optional" style="width:80px;flex-shrink:0"></div>';
@@ -5985,7 +5985,7 @@ function renderDoneGoals(){
     el.innerHTML='<div class="card-empty-v">No completed goals yet.</div>';
     return;
   }
-  var h='<div style="font-size:9px;letter-spacing:2px;color:var(--dim);margin-bottom:10px">'+done.length+' COMPLETED</div>';
+  var h='<div style="font-size:var(--t-xs);letter-spacing:2px;color:var(--dim);margin-bottom:10px">'+done.length+' COMPLETED</div>';
   done.slice().reverse().forEach(function(g){
     var notes=g.notes||[];
     var subgoals=g.subgoals||[];
@@ -5996,10 +5996,10 @@ function renderDoneGoals(){
     // Header
     h+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px">';
     h+='<div style="flex:1">';
-    h+='<div style="font-size:9px;letter-spacing:2px;color:var(--cg);opacity:.7;margin-bottom:4px">'+(g.period||'').toUpperCase()+' · COMPLETED</div>';
+    h+='<div style="font-size:var(--t-xs);letter-spacing:2px;color:var(--cg);opacity:.7;margin-bottom:4px">'+(g.period||'').toUpperCase()+' · COMPLETED</div>';
     h+='<div class="goal-card-title">'+g.text+'</div>';
     h+='</div>';
-    h+='<span style="font-size:9px;color:var(--dim);white-space:nowrap">'+( g.completedDate||'')+'</span>';
+    h+='<span style="font-size:var(--t-xs);color:var(--dim);white-space:nowrap">'+( g.completedDate||'')+'</span>';
     h+='</div>';
     // Chain dots
     if(checkins.length){
@@ -6009,18 +6009,18 @@ function renderDoneGoals(){
         h+='<div class="goal-chain-dot'+(ci<checkins.length?' done':'')+'"></div>';
       }
       h+='</div>';
-      h+='<div style="font-size:10px;color:var(--dim);margin-bottom:8px">'+checkins.length+(g.total?'/'+g.total:'')+' check-ins</div>';
+      h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:8px">'+checkins.length+(g.total?'/'+g.total:'')+' check-ins</div>';
     }
     // Expand toggle
-    h+='<div data-goaldoneexpand="'+g.id+'" style="font-size:10px;color:var(--dim);cursor:pointer;user-select:none">'+(isOpen?'▲ hide':'▼ notes & subgoals ('+notes.length+' notes, '+subgoals.length+' subgoals)')+'</div>';
+    h+='<div data-goaldoneexpand="'+g.id+'" style="font-size:var(--t-sm);color:var(--dim);cursor:pointer;user-select:none">'+(isOpen?'▲ hide':'▼ notes & subgoals ('+notes.length+' notes, '+subgoals.length+' subgoals)')+'</div>';
     if(isOpen){
       // Subgoals
       if(subgoals.length){
         h+='<div style="margin-top:10px">';
-        h+='<div style="font-size:9px;color:var(--cg);letter-spacing:2px;margin-bottom:6px">SUBGOALS</div>';
+        h+='<div style="font-size:var(--t-xs);color:var(--cg);letter-spacing:2px;margin-bottom:6px">SUBGOALS</div>';
         subgoals.forEach(function(sg){
           h+='<div class="goal-subgoal'+(sg.done?' done-sg':'')+'">';
-          h+='<span style="font-size:14px;color:'+(sg.done?'var(--cg)':'rgba(255,255,255,.2)')+'">'+( sg.done?'◉':'○')+'</span>';
+          h+='<span style="font-size:var(--t-body);color:'+(sg.done?'var(--cg)':'rgba(255,255,255,.2)')+'">'+( sg.done?'◉':'○')+'</span>';
           h+='<span>'+sg.text+'</span>';
           h+='</div>';
         });
@@ -6029,7 +6029,7 @@ function renderDoneGoals(){
       // Notes
       if(notes.length){
         h+='<div style="margin-top:10px">';
-        h+='<div style="font-size:9px;color:var(--cg);letter-spacing:2px;margin-bottom:6px">NOTES ('+notes.length+')</div>';
+        h+='<div style="font-size:var(--t-xs);color:var(--cg);letter-spacing:2px;margin-bottom:6px">NOTES ('+notes.length+')</div>';
         notes.slice().reverse().forEach(function(n){
           h+='<div class="goal-note-entry">';
           h+='<div class="goal-note-date">'+(n.ts?n.ts.slice(0,10):'')+'</div>';
@@ -6039,7 +6039,7 @@ function renderDoneGoals(){
         h+='</div>';
       }
       if(!notes.length&&!subgoals.length){
-        h+='<div style="font-size:10px;color:var(--dim);margin-top:8px;opacity:.6">No notes or subgoals recorded.</div>';
+        h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-top:8px;opacity:.6">No notes or subgoals recorded.</div>';
       }
     }
     h+='</div>';
@@ -6230,7 +6230,7 @@ function sbRenderLog(){
   if(!el)return;
   var log=JSON.parse(localStorage.getItem(SB_LOG_KEY)||'[]');
   if(!log.length){
-    el.innerHTML='<div style="font-size:10px;color:var(--dim);padding:4px 0">No sync activity yet.</div>';
+    el.innerHTML='<div style="font-size:var(--t-sm);color:var(--dim);padding:4px 0">No sync activity yet.</div>';
     return;
   }
   var h='';
@@ -6239,12 +6239,12 @@ function sbRenderLog(){
     var color=entry.ok?'var(--cg)':'var(--cr)';
     h+='<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:1px solid rgba(0,255,136,.06)">';
     h+='<div class="flex-1">';
-    h+='<span style="color:'+color+';font-size:10px;letter-spacing:.5px">'+icon+' '+entry.action+'</span>';
+    h+='<span style="color:'+color+';font-size:var(--t-sm);letter-spacing:.5px">'+icon+' '+entry.action+'</span>';
     if(entry.detail){
-      h+='<div style="font-size:9px;color:var(--dim);margin-top:2px;word-break:break-all">'+entry.detail+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:2px;word-break:break-all">'+entry.detail+'</div>';
     }
     h+='</div>';
-    h+='<span style="font-size:9px;color:var(--dim);flex-shrink:0;margin-left:8px;white-space:nowrap">'+entry.ts+'</span>';
+    h+='<span style="font-size:var(--t-xs);color:var(--dim);flex-shrink:0;margin-left:8px;white-space:nowrap">'+entry.ts+'</span>';
     h+='</div>';
   });
   el.innerHTML=h;
@@ -6270,7 +6270,7 @@ async function sbMaybeFetchCloudStatus(){
     statusEl.innerHTML='<span style="color:var(--dim)">Configure Supabase in Settings.</span>';
     return;
   }
-  statusEl.innerHTML='<span style="color:var(--dim);font-size:10px">Checking cloud...</span>';
+  statusEl.innerHTML='<span style="color:var(--dim);font-size:var(--t-sm)">Checking cloud...</span>';
   try{
     var base=cfg.url.replace(/\/+$/,'');
     // Single lightweight request — updated_at column + two payload fields
@@ -6280,12 +6280,12 @@ async function sbMaybeFetchCloudStatus(){
     if(!res.ok){
       var errBody='';
       try{var ej=await res.json();errBody=ej.message||ej.hint||JSON.stringify(ej);}catch(e2){try{errBody=await res.text();}catch(e3){errBody='(no body)';}};
-      statusEl.innerHTML='<span style="color:var(--cr);font-size:10px">HTTP '+res.status+': '+errBody.slice(0,80)+'</span>';
+      statusEl.innerHTML='<span style="color:var(--cr);font-size:var(--t-sm)">HTTP '+res.status+': '+errBody.slice(0,80)+'</span>';
       return;
     }
     var data=await res.json();
     if(!data||!data.length){
-      statusEl.innerHTML='<span style="color:var(--dim);font-size:10px">No cloud data yet. Push first.</span>';
+      statusEl.innerHTML='<span style="color:var(--dim);font-size:var(--t-sm)">No cloud data yet. Push first.</span>';
       return;
     }
     var row=data[0];
@@ -6298,7 +6298,7 @@ async function sbMaybeFetchCloudStatus(){
     lsSet('dash_cloud_meta',meta);
     sbRenderCloudStatus(meta);
   }catch(e){
-    statusEl.innerHTML='<span style="color:var(--cr);font-size:10px">Error: '+(e.message||'network error')+'</span>';
+    statusEl.innerHTML='<span style="color:var(--cr);font-size:var(--t-sm)">Error: '+(e.message||'network error')+'</span>';
   }
 }
 
@@ -6313,7 +6313,7 @@ function sbRenderCloudStatus(meta){
     lines.push('Cloud updated: <span style="color:var(--text)">'+sbTimeAgo(meta.lastPushTs)+'</span>');
   }
   var fetchAge=meta.fetchedAt?sbTimeAgo(new Date(meta.fetchedAt).toISOString()):'just now';
-  lines.push('<span style="opacity:.5;font-size:9px">Status checked '+fetchAge+'</span>');
+  lines.push('<span style="opacity:.5;font-size:var(--t-xs)">Status checked '+fetchAge+'</span>');
   el.innerHTML=lines.join('<br>');
 }
 function sbShowModal(){
@@ -6434,7 +6434,7 @@ function renderSyncLog(){
   // Last 5 syncs across all devices
   h+='<div class="label-dim-sm">LAST 5 SYNCS · ALL DEVICES</div>';
   if(!allLog.length){
-    h+='<div style="font-size:10px;color:var(--dim);padding:4px 0;opacity:.5">No syncs yet.</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);padding:4px 0;opacity:.5">No syncs yet.</div>';
   } else {
     allLog.slice(0,5).forEach(function(entry){
       var ago=sbTimeAgo(entry.ts);
@@ -6442,27 +6442,27 @@ function renderSyncLog(){
       var col=isPush?'var(--cg)':'var(--cc)';
       var isMe=entry.device===thisDevice;
       h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
-      h+='<span style="font-size:13px;color:'+col+'">'+(isPush?'↑':'↓')+'</span>';
+      h+='<span style="font-size:var(--t-lg);color:'+col+'">'+(isPush?'↑':'↓')+'</span>';
       h+='<div style="flex:1">';
-      h+='<div style="font-size:11px;color:'+(isMe?'var(--text)':'var(--dim)')+'">'+(entry.device||'unknown')+(isMe?' • this device':'')+'</div>';
-      h+='<div style="font-size:9px;color:var(--dim);opacity:.6">'+ago+'</div>';
+      h+='<div style="font-size:var(--t-base);color:'+(isMe?'var(--text)':'var(--dim)')+'">'+(entry.device||'unknown')+(isMe?' • this device':'')+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);opacity:.6">'+ago+'</div>';
       h+='</div>';
-      h+='<span style="font-size:9px;color:'+col+';opacity:.7">'+(isPush?'PUSH':'PULL')+'</span>';
+      h+='<span style="font-size:var(--t-xs);color:'+col+';opacity:.7">'+(isPush?'PUSH':'PULL')+'</span>';
       h+='</div>';
     });
   }
 
   // This device last sync
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:10px;margin-bottom:6px">THIS DEVICE</div>';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-top:10px;margin-bottom:6px">THIS DEVICE</div>';
   var thisDevLog=localLog.filter(function(e){return !e.device||e.device===thisDevice;});
   if(!thisDevLog.length){
-    h+='<div style="font-size:10px;color:var(--dim);opacity:.5">No syncs from this device yet.</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);opacity:.5">No syncs from this device yet.</div>';
   } else {
     var last=thisDevLog[0];
     var isPush=last.action==='PUSH'||last.action==='PUSH ↑';
     var col=isPush?'var(--cg)':'var(--cc)';
     h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0">';
-    h+='<span style="font-size:13px;color:'+col+'">'+(isPush?'↑':'↓')+'</span>';
+    h+='<span style="font-size:var(--t-lg);color:'+col+'">'+(isPush?'↑':'↓')+'</span>';
     h+='<div style="flex:1"><div class="text-11">'+(isPush?'PUSH':'PULL')+' · '+sbTimeAgo(last.ts)+'</div></div>';
     h+='</div>';
   }
@@ -6864,7 +6864,7 @@ function juaRender(){
   if(!el)return;
   // Safety guards
   if(typeof JUA_DATA==='undefined'||!JUA_DATA){
-    el.innerHTML='<div style="padding:20px;text-align:center;font-size:11px;color:var(--dim)">JUA_DATA not loaded yet. Retrying...</div>';
+    el.innerHTML='<div style="padding:20px;text-align:center;font-size:var(--t-base);color:var(--dim)">JUA_DATA not loaded yet. Retrying...</div>';
     setTimeout(juaRender,500);return;
   }
   if(!juaState)juaState={};
@@ -6876,7 +6876,7 @@ function juaRender(){
   var h='<div style="display:flex;gap:5px;margin-bottom:12px">';
   [{t:'study',l:'STUDY'},{t:'progress',l:'PROGRESS'},{t:'stats',l:'STATS'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-juatab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(255,204,0,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'var(--ca)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-juatab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(255,204,0,.5)':'var(--c-border)')+';color:'+(a?'var(--ca)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
   if(tab==='study')h+=juaRenderStudy();
@@ -6913,7 +6913,7 @@ function juaRender(){
       juaAnswerCard(juaState.section,idx,correct?'good':'again');
       safeHap(correct?HAP.check:HAP.error);
       if(correct)setTimeout(function(){juaRender();},600);
-      else{var nb=document.createElement('button');nb.textContent='NEXT →';nb.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';nb.onclick=function(){juaRender();};el.appendChild(nb);}
+      else{var nb=document.createElement('button');nb.textContent='NEXT →';nb.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px';nb.onclick=function(){juaRender();};el.appendChild(nb);}
     };
   });
 }
@@ -6923,21 +6923,21 @@ function juaRenderStudy(){
   SECTIONS.forEach(function(s){
     var active=sec===s.id,locked=!juaSectionUnlocked(s.id);
     var col=active?'var(--ca)':locked?'rgba(255,255,255,.2)':'var(--dim)';
-    var border=active?'rgba(255,204,0,.5)':locked?'rgba(255,255,255,.08)':'rgba(255,255,255,.15)';
-    h+='<span data-juasec="'+s.id+'" style="font-size:9px;padding:3px 10px;border:1px solid '+border+';color:'+col+';cursor:'+(locked?'default':'pointer')+';letter-spacing:1px">'+(locked?'?? ':'')+s.label+'</span>';
+    var border=active?'rgba(255,204,0,.5)':locked?'rgba(255,255,255,.08)':'var(--c-faint)';
+    h+='<span data-juasec="'+s.id+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+border+';color:'+col+';cursor:'+(locked?'default':'pointer')+';letter-spacing:1px">'+(locked?'?? ':'')+s.label+'</span>';
   });
   h+='</div>';
   if(!juaSectionUnlocked(sec)){
     var prev=SECTIONS[SECTIONS.findIndex(function(s){return s.id===sec;})-1];
-    return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,255,255,.1)"><div style="font-size:20px;margin-bottom:8px">??</div><div class="text-12">Locked</div><div class="dim-10">Complete '+prev.label+' first</div></div>';
+    return h+'<div style="padding:20px;text-align:center;border:1px solid var(--c-border)"><div style="font-size:20px;margin-bottom:8px">??</div><div class="text-12">Locked</div><div class="dim-10">Complete '+prev.label+' first</div></div>';
   }
   var idx=juaGetCard(sec);
-  if(idx===null)return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,204,0,.15)"><div class="icon-lg">✓</div><div style="font-size:13px;color:var(--ca)">All done for today!</div><div class="dim-10">Come back tomorrow</div></div>';
+  if(idx===null)return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,204,0,.15)"><div class="icon-lg">✓</div><div style="font-size:var(--t-lg);color:var(--ca)">All done for today!</div><div class="dim-10">Come back tomorrow</div></div>';
   var surah=JUA_DATA[idx];
   var k=juaCardKey(sec,idx);
   var card=juaState.cards[k]||{};
   var isReview=!!(card.seen&&card.nextReview);
-  h+='<div style="font-size:9px;color:var(--dim);margin-bottom:10px;display:flex;gap:8px">';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:10px;display:flex;gap:8px">';
   h+='<span style="color:var(--ca)">'+SECTIONS.find(function(s){return s.id===sec;}).label+'</span>';
   h+=(isReview?'<span style="color:rgba(80,250,123,.6)">REVIEW</span>':'<span style="color:rgba(255,184,108,.6)">NEW</span>');
   h+='</div>';
@@ -6965,37 +6965,37 @@ function juaRenderFacts(surah,idx){
   var revealed=juaState._revealed||0;
   // Use idx as seed so blanks are consistent per card per session
   var seed=idx*7+surah.order;
-  var h='<div style="border:1px solid rgba(255,204,0,.2);padding:14px;margin-bottom:10px">';
-  h+='<div style="font-size:18px;color:var(--ca);font-family:monospace;margin-bottom:4px">'+surah.surah+'</div>';
-  h+='<div style="font-size:10px;color:var(--dim);margin-bottom:12px">Surah '+surah.order+'</div>';
+  var h='<div style="border:1px solid var(--c-gold-dim);padding:14px;margin-bottom:10px">';
+  h+='<div style="font-size:var(--t-title);color:var(--ca);font-family:monospace;margin-bottom:4px">'+surah.surah+'</div>';
+  h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:12px">Surah '+surah.order+'</div>';
   if(revealed===0){
     // Show cloze version of point 1
-    h+='<div style="font-size:9px;color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:6px">KEY POINT 1 — fill in the blanks:</div>';
-    h+='<div style="font-size:12px;color:var(--text);line-height:1.9;margin-bottom:12px;padding:10px;border:1px solid rgba(255,204,0,.1);background:rgba(255,204,0,.03)">'+juaCloze(surah.key_points[0],seed)+'</div>';
-    h+='<button data-juareveal="1" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">REVEAL FULL POINT 1</button>';
+    h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:6px">KEY POINT 1 — fill in the blanks:</div>';
+    h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.9;margin-bottom:12px;padding:10px;border:1px solid rgba(255,204,0,.1);background:rgba(255,204,0,.03)">'+juaCloze(surah.key_points[0],seed)+'</div>';
+    h+='<button data-juareveal="1" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">REVEAL FULL POINT 1</button>';
   } else {
     h+='<div class="mb-10">';
     for(var i=0;i<Math.min(revealed,surah.key_points.length);i++){
       var isLast=i===revealed-1;
       // Previous points shown complete; current point shown complete after reveal
       // Next point shown as cloze if not yet revealed
-      h+='<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
+      h+='<div style="padding:8px 0;border-bottom:1px solid var(--c-ghost)">';
       h+='<div style="display:flex;gap:8px;align-items:flex-start">';
-      h+='<span style="color:var(--ca);flex-shrink:0;font-size:11px">'+(i+1)+'.</span>';
-      h+='<div style="font-size:12px;color:var(--text);line-height:1.6">'+surah.key_points[i]+'</div>';
+      h+='<span style="color:var(--ca);flex-shrink:0;font-size:var(--t-base)">'+(i+1)+'.</span>';
+      h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.6">'+surah.key_points[i]+'</div>';
       h+='</div>';
       h+='</div>';
     }
     h+='</div>';
     if(revealed<surah.key_points.length){
       // Show cloze of next point
-      h+='<div style="font-size:9px;color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:6px">KEY POINT '+(revealed+1)+' — fill in the blanks:</div>';
-      h+='<div style="font-size:12px;color:var(--text);line-height:1.9;margin-bottom:12px;padding:10px;border:1px solid rgba(255,204,0,.1);background:rgba(255,204,0,.03)">'+juaCloze(surah.key_points[revealed],seed+revealed)+'</div>';
-      h+='<button data-juareveal="1" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">REVEAL POINT '+(revealed+1)+'</button>';
+      h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:6px">KEY POINT '+(revealed+1)+' — fill in the blanks:</div>';
+      h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.9;margin-bottom:12px;padding:10px;border:1px solid rgba(255,204,0,.1);background:rgba(255,204,0,.03)">'+juaCloze(surah.key_points[revealed],seed+revealed)+'</div>';
+      h+='<button data-juareveal="1" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">REVEAL POINT '+(revealed+1)+'</button>';
     } else {
       h+='<div style="display:flex;gap:8px;margin-top:12px">';
-      h+='<button data-juaans="again" data-juaidx="'+idx+'" style="flex:1;padding:10px;background:transparent;border:1px solid rgba(255,68,68,.4);color:rgba(255,68,68,.8);font-family:monospace;font-size:10px;cursor:pointer">✗ MISSED</button>';
-      h+='<button data-juaans="good" data-juaidx="'+idx+'" style="flex:1;padding:10px;background:transparent;border:1px solid rgba(80,250,123,.4);color:rgba(80,250,123,.8);font-family:monospace;font-size:10px;cursor:pointer">✓ GOT IT</button>';
+      h+='<button data-juaans="again" data-juaidx="'+idx+'" style="flex:1;padding:10px;background:transparent;border:1px solid rgba(255,68,68,.4);color:rgba(255,68,68,.8);font-family:monospace;font-size:var(--t-sm);cursor:pointer">✗ MISSED</button>';
+      h+='<button data-juaans="good" data-juaidx="'+idx+'" style="flex:1;padding:10px;background:transparent;border:1px solid rgba(80,250,123,.4);color:rgba(80,250,123,.8);font-family:monospace;font-size:var(--t-sm);cursor:pointer">✓ GOT IT</button>';
       h+='</div>';
     }
   }
@@ -7006,31 +7006,31 @@ function juaRenderMeanings(surah,idx){
   var others=JUA_DATA.filter(function(s){return s.order!==surah.order;}).slice().sort(function(){return Math.random()-.5;}).slice(0,3);
   others.forEach(function(s){choices.push({text:s.meaning,correct:false});});
   choices.sort(function(){return Math.random()-.5;});
-  var h='<div style="border:1px solid rgba(255,204,0,.2);padding:14px">';
-  h+='<div style="font-size:11px;color:var(--dim);margin-bottom:6px">What does this surah name mean?</div>';
+  var h='<div style="border:1px solid var(--c-gold-dim);padding:14px">';
+  h+='<div style="font-size:var(--t-base);color:var(--dim);margin-bottom:6px">What does this surah name mean?</div>';
   h+='<div style="font-size:20px;color:var(--ca);font-family:monospace;margin-bottom:4px">'+surah.surah+'</div>';
-  h+='<div style="font-size:10px;color:var(--dim);margin-bottom:12px">Surah '+surah.order+'</div>';
+  h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:12px">Surah '+surah.order+'</div>';
   choices.forEach(function(c){
-    h+='<button data-juachoice="1" data-juacorrect="'+(c.correct?'1':'0')+'" data-juaidx="'+idx+'" style="width:100%;padding:10px;text-align:left;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;margin-bottom:6px">'+c.text+'</button>';
+    h+='<button data-juachoice="1" data-juacorrect="'+(c.correct?'1':'0')+'" data-juaidx="'+idx+'" style="width:100%;padding:10px;text-align:left;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;margin-bottom:6px">'+c.text+'</button>';
   });
   return h+'</div>';
 }
 function juaRenderOrder(surah,idx,dir){
   var leftSurah=surah,correctSurah=JUA_DATA[idx+1],rightSurah=JUA_DATA[idx+2]||null;
   var answerSurah=dir==='forward'?correctSurah:leftSurah;
-  var h='<div style="border:1px solid rgba(255,204,0,.2);padding:16px">';
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:12px">'+(dir==='forward'?'ORDER FORWARD ►':'◄ ORDER BACKWARD')+'</div>';
+  var h='<div style="border:1px solid var(--c-gold-dim);padding:16px">';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:12px">'+(dir==='forward'?'ORDER FORWARD ►':'◄ ORDER BACKWARD')+'</div>';
   h+='<div style="display:flex;align-items:center;gap:4px;margin-bottom:16px">';
   if(dir==='forward'){
-    h+='<div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+leftSurah.surah+'</div><div class="dim-9">('+leftSurah.order+')</div></div>';
-    h+='<div style="color:var(--ca);font-size:16px">►</div>';
+    h+='<div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+leftSurah.surah+'</div><div class="dim-9">('+leftSurah.order+')</div></div>';
+    h+='<div style="color:var(--ca);font-size:var(--t-sub)">►</div>';
     h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:15px;color:rgba(255,204,0,.4)">???</div></div>';
-    if(rightSurah){h+='<div style="color:var(--ca);font-size:16px">►</div><div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
+    if(rightSurah){h+='<div style="color:var(--ca);font-size:var(--t-sub)">►</div><div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
   } else {
     h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:15px;color:rgba(255,204,0,.4)">???</div></div>';
-    h+='<div style="color:var(--ca);font-size:16px">◄</div>';
-    h+='<div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+correctSurah.surah+'</div><div class="dim-9">('+correctSurah.order+')</div></div>';
-    if(rightSurah){h+='<div style="color:var(--ca);font-size:16px">◄</div><div class="text-center-flex"><div style="font-size:12px;color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
+    h+='<div style="color:var(--ca);font-size:var(--t-sub)">◄</div>';
+    h+='<div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+correctSurah.surah+'</div><div class="dim-9">('+correctSurah.order+')</div></div>';
+    if(rightSurah){h+='<div style="color:var(--ca);font-size:var(--t-sub)">◄</div><div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
   }
   h+='</div>';
   var choices=[{text:answerSurah.surah+' ('+answerSurah.order+')',correct:true}];
@@ -7039,22 +7039,22 @@ function juaRenderOrder(surah,idx,dir){
   nearby.forEach(function(s){choices.push({text:s.surah+' ('+s.order+')',correct:false});});
   choices.sort(function(){return Math.random()-.5;});
   choices.forEach(function(c){
-    h+='<button data-juachoice="1" data-juacorrect="'+(c.correct?'1':'0')+'" data-juaidx="'+idx+'" style="width:100%;padding:10px;text-align:left;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;margin-bottom:6px">'+c.text+'</button>';
+    h+='<button data-juachoice="1" data-juacorrect="'+(c.correct?'1':'0')+'" data-juaidx="'+idx+'" style="width:100%;padding:10px;text-align:left;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;margin-bottom:6px">'+c.text+'</button>';
   });
   return h+'</div>';
 }
 function juaRenderProgress(){
-  var h='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:12px">SECTION PROGRESS</div>';
+  var h='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:12px">SECTION PROGRESS</div>';
   SECTIONS.forEach(function(sec,si){
     var p=juaSectionProgress(sec.id),locked=!juaSectionUnlocked(sec.id);
     var pct=p.total?Math.round(p.seen/p.total*100):0;
     var col=locked?'rgba(255,255,255,.2)':'var(--ca)';
     h+='<div class="mb-14">';
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="font-size:11px;color:'+col+'">'+(si+1)+'. '+sec.label+'</span>';
-    if(locked)h+='<span style="font-size:9px;color:rgba(255,255,255,.25)">??</span>';
-    else if(p.seen===p.total&&p.total>0)h+='<span style="font-size:9px;color:rgba(80,250,123,.6)">ALL SEEN</span>';
-    h+='<span style="margin-left:auto;font-size:9px;color:var(--dim)">'+p.seen+'/'+p.total+'</span></div>';
-    h+='<div style="height:6px;background:rgba(255,255,255,.06);margin-bottom:4px"><div style="height:100%;width:'+pct+'%;background:'+(locked?'rgba(255,255,255,.1)':'var(--ca)')+';transition:width .3s"></div></div>';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="font-size:var(--t-base);color:'+col+'">'+(si+1)+'. '+sec.label+'</span>';
+    if(locked)h+='<span style="font-size:var(--t-xs);color:rgba(255,255,255,.25)">??</span>';
+    else if(p.seen===p.total&&p.total>0)h+='<span style="font-size:var(--t-xs);color:rgba(80,250,123,.6)">ALL SEEN</span>';
+    h+='<span style="margin-left:auto;font-size:var(--t-xs);color:var(--dim)">'+p.seen+'/'+p.total+'</span></div>';
+    h+='<div style="height:6px;background:var(--c-ghost);margin-bottom:4px"><div style="height:100%;width:'+pct+'%;background:'+(locked?'var(--c-border)':'var(--ca)')+';transition:width .3s"></div></div>';
     h+='<div class="dim-9">'+p.due+' due today · '+p.mastered+' mastered</div>';
     h+='</div>';
   });
@@ -7065,7 +7065,7 @@ function juaRenderStats(){
   SECTIONS.forEach(function(s){var p=juaSectionProgress(s.id);totalSeen+=p.seen;totalMastered+=p.mastered;totalDue+=p.due;});
   var h='<div class="grid-2col">';
   [{l:'Cards Seen',v:totalSeen},{l:'Mastered',v:totalMastered},{l:'Due Today',v:totalDue},{l:'Total Cards',v:JUA_DATA.length*2}].forEach(function(stat){
-    h+='<div style="padding:10px;border:1px solid rgba(255,255,255,.08);text-align:center"><div style="font-size:22px;color:var(--ca);font-family:monospace">'+stat.v+'</div><div class="dim-9">'+stat.l+'</div></div>';
+    h+='<div style="padding:10px;border:1px solid rgba(255,255,255,.08);text-align:center"><div style="font-size:var(--t-h2);color:var(--ca);font-family:monospace">'+stat.v+'</div><div class="dim-9">'+stat.l+'</div></div>';
   });
   return h+'</div>';
 }
@@ -7133,16 +7133,16 @@ function qtRenderVerse(v, expanded, showMarkRead){
   var h='';
   // Reference row
   h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
-  h+='<div style="flex:1"><div style="font-size:11px;color:var(--ca);letter-spacing:1px;font-family:monospace">'+v.surah_name+'</div>';
+  h+='<div style="flex:1"><div style="font-size:var(--t-base);color:var(--ca);letter-spacing:1px;font-family:monospace">'+v.surah_name+'</div>';
   h+='<div class="dim-9">'+v.verse+'</div></div>';
-  h+='<button data-qtcopy="1" style="background:transparent;border:1px solid rgba(255,204,0,.2);color:rgba(255,204,0,.5);font-family:monospace;font-size:9px;padding:4px 10px;cursor:pointer">📋</button>';
+  h+='<button data-qtcopy="1" style="background:transparent;border:1px solid var(--c-gold-dim);color:rgba(255,204,0,.5);font-family:monospace;font-size:var(--t-xs);padding:4px 10px;cursor:pointer">📋</button>';
   h+='</div>';
   // Arabic
   h+='<div style="font-size:20px;color:var(--ca);text-align:right;line-height:1.8;margin-bottom:10px;font-family:serif;direction:rtl">'+v.quran_text+'</div>';
   // Meaning
-  h+='<div style="font-size:12px;color:var(--text);font-style:italic;margin-bottom:10px;line-height:1.6;border-left:2px solid rgba(255,204,0,.3);padding-left:10px">"'+v.english_meaning+'"</div>';
+  h+='<div style="font-size:var(--t-md);color:var(--text);font-style:italic;margin-bottom:10px;line-height:1.6;border-left:2px solid rgba(255,204,0,.3);padding-left:10px">"'+v.english_meaning+'"</div>';
   // Explanation
-  h+='<div style="font-size:11px;color:var(--dim);line-height:1.7;margin-bottom:10px">'+v.verse_explanation+'</div>';
+  h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.7;margin-bottom:10px">'+v.verse_explanation+'</div>';
   // Scholars — always shown, each with a unique tinted background
   if(v.scholars_opinions&&v.scholars_opinions.length){
     var scholarShades=[
@@ -7163,14 +7163,14 @@ function qtRenderVerse(v, expanded, showMarkRead){
       var border=scholarBorders[si%scholarBorders.length];
       var nameCol=scholarNameCols[si%scholarNameCols.length];
       h+='<div style="padding:10px 12px;margin-bottom:6px;border:1px solid '+border+';background:'+shade+';border-left:3px solid '+nameCol+'">';
-      h+='<div style="font-size:9px;color:'+nameCol+';letter-spacing:1px;margin-bottom:5px;font-family:monospace">'+s.scholar+'</div>';
-      h+='<div style="font-size:11px;color:rgba(255,255,255,.75);line-height:1.7">'+s.opinion+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:'+nameCol+';letter-spacing:1px;margin-bottom:5px;font-family:monospace">'+s.scholar+'</div>';
+      h+='<div style="font-size:var(--t-base);color:rgba(255,255,255,.75);line-height:1.7">'+s.opinion+'</div>';
       h+='</div>';
     });
   }
   // Mark as read
   if(showMarkRead){
-    h+='<button data-qtread="1" style="width:100%;margin-top:8px;padding:10px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">✓ MARK AS READ</button>';
+    h+='<button data-qtread="1" style="width:100%;margin-top:8px;padding:10px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">✓ MARK AS READ</button>';
   }
   return h;
 }
@@ -7180,7 +7180,7 @@ function qtRender(){
   if(!el) return;
 
   if(!QT_DATA){
-    el.innerHTML='<div style="font-size:11px;color:var(--dim);text-align:center;padding:20px 0">⏳ Loading...</div>';
+    el.innerHTML='<div style="font-size:var(--t-base);color:var(--dim);text-align:center;padding:20px 0">⏳ Loading...</div>';
     setTimeout(qtRender,500); return;
   }
 
@@ -7195,7 +7195,7 @@ function qtRender(){
   h+='<div style="display:flex;gap:5px;margin-bottom:12px">';
   [{t:'today',l:'TODAY'},{t:'history',l:'HISTORY'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-qttab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(255,204,0,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'var(--ca)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-qttab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(255,204,0,.5)':'var(--c-border)')+';color:'+(a?'var(--ca)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -7205,8 +7205,8 @@ function qtRender(){
     else if(qtState.readToday){
       h+='<div style="padding:12px;text-align:center;border:1px solid rgba(255,204,0,.15);margin-bottom:12px">';
       h+='<div style="font-size:20px;margin-bottom:6px">✓</div>';
-      h+='<div style="font-size:12px;color:var(--ca)">Read for today</div>';
-      h+='<div style="font-size:10px;color:var(--dim);margin-top:4px">'+v.surah_name+' · '+v.verse+'</div>';
+      h+='<div style="font-size:var(--t-md);color:var(--ca)">Read for today</div>';
+      h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-top:4px">'+v.surah_name+' · '+v.verse+'</div>';
       h+='</div>';
       h+=qtRenderVerse(v, !!qtState._expanded, false);
     } else {
@@ -7215,16 +7215,16 @@ function qtRender(){
   } else {
     // History tab
     if(!qtState.history.length){
-      h+='<div style="font-size:11px;color:var(--dim);padding:20px 0;text-align:center">No history yet.<br>Mark verses as read to build your history.</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--dim);padding:20px 0;text-align:center">No history yet.<br>Mark verses as read to build your history.</div>';
     } else {
       qtState.history.forEach(function(entry,i){
         var v2=QT_DATA.find(function(x){return x.id_number===entry.id;});
         var open=qtState._histOpen===i;
-        h+='<div style="border-bottom:1px solid rgba(255,255,255,.06);padding:8px 0">';
+        h+='<div style="border-bottom:1px solid var(--c-ghost);padding:8px 0">';
         h+='<div data-qthistopen="'+i+'" style="display:flex;align-items:center;gap:8px;cursor:pointer">';
-        h+='<div style="flex:1"><div style="font-size:11px;color:var(--ca)">'+entry.surah+'</div>';
+        h+='<div style="flex:1"><div style="font-size:var(--t-base);color:var(--ca)">'+entry.surah+'</div>';
         h+='<div class="dim-9">'+entry.verse+' · '+entry.date+'</div></div>';
-        h+='<span style="color:var(--dim);font-size:12px">'+(open?'▲':'▼')+'</span>';
+        h+='<span style="color:var(--dim);font-size:var(--t-md)">'+(open?'▲':'▼')+'</span>';
         h+='</div>';
         if(open&&v2){
           h+='<div style="margin-top:10px">'+qtRenderVerse(v2,false,false)+'</div>';
@@ -7339,7 +7339,7 @@ function questRender(){
   h += '<div style="display:flex;gap:5px;margin-bottom:14px">';
   [{t:'current',l:'CURRENT'},{t:'log',l:'COMPLETED ('+completed.length+')'}].forEach(function(x){
     var a = tab===x.t;
-    h += '<span data-questtab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(255,165,0,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#ffa500':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h += '<span data-questtab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(255,165,0,.5)':'var(--c-border)')+';color:'+(a?'#ffa500':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h += '</div>';
 
@@ -7347,8 +7347,8 @@ function questRender(){
     if(current > 100){
       h += '<div style="text-align:center;padding:30px 0">';
       h += '<div style="font-size:40px;margin-bottom:10px">🏆</div>';
-      h += '<div style="font-size:16px;color:#ffa500;font-family:monospace">QUEST COMPLETE</div>';
-      h += '<div style="font-size:11px;color:var(--dim);margin-top:6px">You memorized Juz Amma</div>';
+      h += '<div style="font-size:var(--t-sub);color:#ffa500;font-family:monospace">QUEST COMPLETE</div>';
+      h += '<div style="font-size:var(--t-base);color:var(--dim);margin-top:6px">You memorized Juz Amma</div>';
       h += '</div>';
     } else {
       var step = steps.find(function(s){ return s.step === current; });
@@ -7356,28 +7356,28 @@ function questRender(){
       else {
         // Progress bar
         var pct = Math.round((current-1)/100*100);
-        h += '<div style="height:3px;background:rgba(255,255,255,.06);margin-bottom:14px">';
+        h += '<div style="height:3px;background:var(--c-ghost);margin-bottom:14px">';
         h += '<div style="height:100%;width:'+pct+'%;background:#ffa500;transition:width .4s"></div>';
         h += '</div>';
 
         // Phase label
         h += '<div style="font-size:8px;color:rgba(255,165,0,.3);letter-spacing:1px;margin-bottom:4px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
-        h+='<div style="font-size:9px;color:rgba(255,165,0,.5);letter-spacing:2px;margin-bottom:8px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
+        h+='<div style="font-size:var(--t-xs);color:rgba(255,165,0,.5);letter-spacing:2px;margin-bottom:8px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
 
         // Step card
         h += '<div style="padding:20px 16px;border:1px solid rgba(255,165,0,.2);background:rgba(255,165,0,.04);margin-bottom:16px">';
-        h += '<div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:10px;letter-spacing:1px">STEP '+current+' OF 100</div>';
-        h += '<div style="font-size:16px;color:var(--text);line-height:1.7">'+step.task+'</div>';
+        h += '<div style="font-size:var(--t-base);color:rgba(255,255,255,.4);margin-bottom:10px;letter-spacing:1px">STEP '+current+' OF 100</div>';
+        h += '<div style="font-size:var(--t-sub);color:var(--text);line-height:1.7">'+step.task+'</div>';
         h += '</div>';
 
         // Done button
-        h += '<button id="quest-done-btn" style="width:100%;padding:14px;background:rgba(255,165,0,.08);border:1px solid rgba(255,165,0,.4);color:#ffa500;font-family:monospace;font-size:13px;cursor:pointer;letter-spacing:2px">✓ DONE</button>';
+        h += '<button id="quest-done-btn" style="width:100%;padding:14px;background:rgba(255,165,0,.08);border:1px solid rgba(255,165,0,.4);color:#ffa500;font-family:monospace;font-size:var(--t-lg);cursor:pointer;letter-spacing:2px">✓ DONE</button>';
       }
     }
   } else {
     // Completed log
     if(!completed.length){
-      h += '<div style="font-size:11px;color:var(--dim);padding:20px 0;text-align:center">No steps completed yet.</div>';
+      h += '<div style="font-size:var(--t-base);color:var(--dim);padding:20px 0;text-align:center">No steps completed yet.</div>';
     } else {
       // Show most recent first
       var sorted = completed.slice().reverse();
@@ -7385,13 +7385,13 @@ function questRender(){
         var s = steps.find(function(x){ return x.step===entry.step; });
         var dateStr = new Date(entry.completedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
         var timeStr = new Date(entry.completedAt).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-        h += '<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
+        h += '<div style="padding:10px 0;border-bottom:1px solid var(--c-ghost)">';
         h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
-        h += '<span style="font-size:10px;color:#ffa500;font-family:monospace;flex-shrink:0">Step '+entry.step+'</span>';
-        h += '<span style="font-size:9px;color:rgba(255,165,0,.4)">'+(s?s.phase.toUpperCase():'')+'</span>';
-        h += '<span style="font-size:9px;color:var(--dim);margin-left:auto">'+dateStr+' · '+timeStr+'</span>';
+        h += '<span style="font-size:var(--t-sm);color:#ffa500;font-family:monospace;flex-shrink:0">Step '+entry.step+'</span>';
+        h += '<span style="font-size:var(--t-xs);color:rgba(255,165,0,.4)">'+(s?s.phase.toUpperCase():'')+'</span>';
+        h += '<span style="font-size:var(--t-xs);color:var(--dim);margin-left:auto">'+dateStr+' · '+timeStr+'</span>';
         h += '</div>';
-        h += '<div style="font-size:11px;color:var(--dim);line-height:1.5">'+(s?s.task:'')+'</div>';
+        h += '<div style="font-size:var(--t-base);color:var(--dim);line-height:1.5">'+(s?s.task:'')+'</div>';
         h += '</div>';
       });
     }

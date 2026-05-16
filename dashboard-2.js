@@ -164,29 +164,29 @@ function pomoRenderLog(){
   });
   Object.keys(months).sort().reverse().forEach(function(mo){
     var moLabel=new Date(mo+'-01').toLocaleDateString('en-US',{month:'long',year:'numeric'});
-    h+='<div style="font-size:10px;letter-spacing:2px;color:var(--dim);margin:10px 0 4px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">'+moLabel+'</div>';
+    h+='<div style="font-size:var(--t-sm);letter-spacing:2px;color:var(--dim);margin:10px 0 4px;padding-top:8px;border-top:1px solid var(--c-ghost)">'+moLabel+'</div>';
     months[mo].forEach(function(d){
       var log=allLog[d]||[];
       var workSessions=log.filter(function(e){return e.type==='work';}).length;
       var breakSessions=log.filter(function(e){return e.type==='break';}).length;
-      var trail=log.map(function(e){var mode=e.type||e;var mins=e.mins||'';if(mode==='work')return '<span class="pomo-work-seg">['+mins+']</span>';return '<span class="pomo-break-seg">('+mins+')</span>';}).join(' <span style="color:var(--dim);font-size:10px">&rarr;</span> ');
+      var trail=log.map(function(e){var mode=e.type||e;var mins=e.mins||'';if(mode==='work')return '<span class="pomo-work-seg">['+mins+']</span>';return '<span class="pomo-break-seg">('+mins+')</span>';}).join(' <span style="color:var(--dim);font-size:var(--t-sm)">&rarr;</span> ');
       h+='<div class="pomo-log-day">';
       h+='<div class="pomo-log-date" style="display:flex;justify-content:space-between;align-items:baseline">'+
         '<span>'+d+' &mdash; <span style="color:#39ff88">'+workSessions+'w</span> <span style="color:#00e5ff">'+breakSessions+'b</span></span>'+
         '</div>';
       // Individual session pills with delete
-      h+='<div style="font-size:11px;line-height:2;word-break:break-all">';
+      h+='<div style="font-size:var(--t-base);line-height:2;word-break:break-all">';
       log.forEach(function(e,ei){
         var mode=e.type||e;var mins=e.mins||'';
         var pill=mode==='work'?'<span class="pomo-work-seg">['+mins+']</span>':'<span class="pomo-break-seg">('+mins+')</span>';
         var isPendingPomoDel=window._pomoPendingDel&&window._pomoPendingDel.d===d&&window._pomoPendingDel.i===ei;
         if(isPendingPomoDel){
-          h+=pill+'<span data-pomocanceldel="1" style="font-size:9px;color:var(--dim);cursor:pointer;margin-right:2px;vertical-align:super">no</span>';
-          h+='<span data-pomoconfirmdel="1" data-date="'+d+'" data-idx="'+ei+'" style="font-size:9px;color:var(--cr);cursor:pointer;margin-right:6px;vertical-align:super;border:1px solid rgba(255,68,68,.4);padding:0 4px">sure?</span>';
+          h+=pill+'<span data-pomocanceldel="1" style="font-size:var(--t-xs);color:var(--dim);cursor:pointer;margin-right:2px;vertical-align:super">no</span>';
+          h+='<span data-pomoconfirmdel="1" data-date="'+d+'" data-idx="'+ei+'" style="font-size:var(--t-xs);color:var(--cr);cursor:pointer;margin-right:6px;vertical-align:super;border:1px solid rgba(255,68,68,.4);padding:0 4px">sure?</span>';
         } else {
-          h+=pill+'<span data-pomoreqdel="1" data-date="'+d+'" data-idx="'+ei+'" style="font-size:9px;color:var(--dim);cursor:pointer;opacity:.4;margin-right:6px;vertical-align:super">✕</span>';
+          h+=pill+'<span data-pomoreqdel="1" data-date="'+d+'" data-idx="'+ei+'" style="font-size:var(--t-xs);color:var(--dim);cursor:pointer;opacity:.4;margin-right:6px;vertical-align:super">✕</span>';
         }
-        if(ei<log.length-1)h+='<span style="color:var(--dim);font-size:10px">&rarr;</span> ';
+        if(ei<log.length-1)h+='<span style="color:var(--dim);font-size:var(--t-sm)">&rarr;</span> ';
       });
       h+='</div>';
       h+='</div>';
@@ -204,7 +204,7 @@ function pomoRenderStats(){
   ['day','week','year','all'].forEach(function(t){
     var labels={day:'TODAY',week:'WEEK',year:'YEAR',all:'ALL TIME'};
     var active=subTab===t;
-    h+='<span data-pst="'+t+'" onclick="window._pomoStatTab=this.dataset.pst;pomoRenderStats()" style="font-size:9px;padding:2px 8px;border:1px solid '+(active?'var(--cp)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cp)':'var(--dim)')+';cursor:pointer;letter-spacing:.5px">'+labels[t]+'</span>';
+    h+='<span data-pst="'+t+'" onclick="window._pomoStatTab=this.dataset.pst;pomoRenderStats()" style="font-size:var(--t-xs);padding:2px 8px;border:1px solid '+(active?'var(--cp)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cp)':'var(--dim)')+';cursor:pointer;letter-spacing:.5px">'+labels[t]+'</span>';
   });
   h+='</div>';
 
@@ -267,14 +267,14 @@ function pomoRenderStats(){
     h+=stat(fmins(Math.round(totalBreakMins/n)),'AVG BREAK/DAY','var(--cg)');
     h+='</div>';
     var bestDay=dates.reduce(function(a,b){return (workMinsByDate[b]||0)>(workMinsByDate[a]||0)?b:a;},dates[0]);
-    if(bestDay&&workMinsByDate[bestDay])h+='<div style="font-size:11px;color:var(--dim);margin-bottom:10px">Best day: <span style="color:var(--ca)">'+bestDay+'</span> — '+fmins(workMinsByDate[bestDay])+'</div>';
+    if(bestDay&&workMinsByDate[bestDay])h+='<div style="font-size:var(--t-base);color:var(--dim);margin-bottom:10px">Best day: <span style="color:var(--ca)">'+bestDay+'</span> — '+fmins(workMinsByDate[bestDay])+'</div>';
   }
 
   // Day-of-week breakdown
   if(subTab==='week'||subTab==='year'||subTab==='all'){
     var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     var maxDow=Math.max.apply(null,workMinsByDow)||1;
-    h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin-bottom:6px">BY DAY OF WEEK</div>';
+    h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin-bottom:6px">BY DAY OF WEEK</div>';
     h+='<div style="display:flex;align-items:flex-end;gap:3px;height:50px;margin-bottom:4px">';
     workMinsByDow.forEach(function(m,i){
       var pct=maxDow>0?Math.round(m/maxDow*100):0;
@@ -291,7 +291,7 @@ function pomoRenderStats(){
   var hasHourData=workMinsByHour.some(function(v){return v>0;});
   if(hasHourData){
     var maxHr=Math.max.apply(null,workMinsByHour)||1;
-    h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin:10px 0 6px">BY HOUR OF DAY</div>';
+    h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin:10px 0 6px">BY HOUR OF DAY</div>';
     h+='<div style="display:flex;align-items:flex-end;gap:1px;height:40px;margin-bottom:4px">';
     for(var hr=0;hr<24;hr++){
       var pct=maxHr>0?Math.round(workMinsByHour[hr]/maxHr*100):0;
@@ -311,12 +311,12 @@ function pomoRenderStats(){
     var months=Object.keys(workMinsByMonth).sort().slice(-6).reverse();
     if(months.length){
       var maxWm=Math.max.apply(null,months.map(function(m){return workMinsByMonth[m]||0;}))||1;
-      h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin:10px 0 6px">MONTHLY</div>';
+      h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin:10px 0 6px">MONTHLY</div>';
       months.forEach(function(mo){
         var moLabel=new Date(mo+'-01').toLocaleDateString('en-US',{month:'short',year:'2-digit'});
         var wm=workMinsByMonth[mo]||0;
         var wpct=Math.round(wm/maxWm*100);
-        h+='<div class="mb-6"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-bottom:2px"><span>'+moLabel+'</span><span style="color:var(--cr)">'+fmins(wm)+'</span></div>';
+        h+='<div class="mb-6"><div style="display:flex;justify-content:space-between;font-size:var(--t-xs);color:var(--dim);margin-bottom:2px"><span>'+moLabel+'</span><span style="color:var(--cr)">'+fmins(wm)+'</span></div>';
         h+='<div style="height:6px;background:rgba(255,255,255,.07);border-radius:2px"><div style="width:'+wpct+'%;height:100%;background:var(--cr);border-radius:2px"></div></div></div>';
       });
     }
@@ -370,7 +370,7 @@ function pomoRender(){
         var mins=typeof m==='object'?m.mins:'';
         if(mode==='work')return '<span class="pomo-work-seg">['+mins+']</span>';
         return '<span class="pomo-break-seg">('+mins+')</span>';
-      }).join(' <span style="color:var(--dim);font-size:10px">&rarr;</span> ');
+      }).join(' <span style="color:var(--dim);font-size:var(--t-sm)">&rarr;</span> ');
     }
   }
 
@@ -856,7 +856,7 @@ function wdLoad(){
       wdRender();
     })
     .catch(function(err){
-      if(el)el.innerHTML='<div class="it-err">&#9888; write.json: '+err.message+'<br><span style="font-size:9px;opacity:.6">Works on Netlify — open via server, not file://</span></div>';
+      if(el)el.innerHTML='<div class="it-err">&#9888; write.json: '+err.message+'<br><span style="font-size:var(--t-xs);opacity:.6">Works on Netlify — open via server, not file://</span></div>';
     });
 }
 
@@ -950,8 +950,8 @@ function wdRender(){
   } else {
     h+='<button class="wd-meditate-btn" onclick="wdMeditate()" style="width:70%">&#9998; MARK AS REFLECTED</button>';
   }
-  h+='<button id="wd-star-inline" style="flex:1;padding:6px 0;background:transparent;border:1px solid rgba(0,229,255,'+(_wdStarredNow?'.5':'.2')+');color:'+(_wdStarredNow?'var(--cc)':'rgba(255,255,255,.3)')+';font-size:14px;cursor:pointer;">'+(_wdStarredNow?'\u2605':'\u2606')+'</button>';
-  h+='<button id="wd-skip-btn" style="flex:1;padding:6px 0;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">SKIP</button>';
+  h+='<button id="wd-star-inline" style="flex:1;padding:6px 0;background:transparent;border:1px solid rgba(0,229,255,'+(_wdStarredNow?'.5':'.2')+');color:'+(_wdStarredNow?'var(--cc)':'rgba(255,255,255,.3)')+';font-size:var(--t-body);cursor:pointer;">'+(_wdStarredNow?'\u2605':'\u2606')+'</button>';
+  h+='<button id="wd-skip-btn" style="flex:1;padding:6px 0;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SKIP</button>';
   h+='</div>';
   h+='</div>';
   el.innerHTML=h;
@@ -1028,7 +1028,7 @@ function itLoad(){
       itRender();
     })
     .catch(function(err){
-      if(el)el.innerHTML='<div class="it-err">&#9888; islam.json: '+err.message+'<br><span style="font-size:9px;opacity:.6">Works on Netlify — open via server, not file://</span></div>';
+      if(el)el.innerHTML='<div class="it-err">&#9888; islam.json: '+err.message+'<br><span style="font-size:var(--t-xs);opacity:.6">Works on Netlify — open via server, not file://</span></div>';
     });
 }
 
@@ -1094,7 +1094,7 @@ function itRender(){
   } else {
     h+='<button class="it-meditate-btn" id="it-med-btn" onclick="itMeditate()" style="flex:1">&#9770; MARK AS MEDITATED</button>';
   }
-  h+='<button id="it-star-inline" style="width:15%;padding:6px 0;background:transparent;border:1px solid rgba(255,204,0,'+(  _itStarred?'.5':'.2')+');color:'+(_itStarred?'var(--ca)':'rgba(255,255,255,.3)')+';font-size:14px;cursor:pointer;">'+(_itStarred?'★':'☆')+'</button>';
+  h+='<button id="it-star-inline" style="width:15%;padding:6px 0;background:transparent;border:1px solid rgba(255,204,0,'+(  _itStarred?'.5':'.2')+');color:'+(_itStarred?'var(--ca)':'rgba(255,255,255,.3)')+';font-size:var(--t-body);cursor:pointer;">'+(_itStarred?'★':'☆')+'</button>';
   h+='</div>';
   h+='</div>';
   el.innerHTML=h;
@@ -1289,7 +1289,7 @@ function wwRender(){
     // Header row: day name + date + status pills
     h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
     h+='<div style="flex:1">';
-    h+='<div style="font-size:13px;font-family:monospace;color:'+edge+';text-shadow:0 0 8px '+edge+'44;letter-spacing:1px">'+day.label+'</div>';
+    h+='<div style="font-size:var(--t-lg);font-family:monospace;color:'+edge+';text-shadow:0 0 8px '+edge+'44;letter-spacing:1px">'+day.label+'</div>';
     h+='<div class="dim-9">'+dateStr+(day.holiday?' · 🎉 '+day.holiday:'')+'</div>';
     h+='</div>';
     // Status toggle buttons
@@ -1301,7 +1301,7 @@ function wwRender(){
     ];
     statuses.forEach(function(s){
       var active=status===s.v;
-      h+='<button data-wwstatus="'+k+'" data-wwval="'+s.v+'" style="width:32px;height:32px;border:1px solid '+(active?s.col:'rgba(255,255,255,.12)')+';background:'+(active?s.bg:'transparent')+';color:'+(active?s.col:'var(--dim)')+';font-size:14px;cursor:pointer;font-family:monospace">'+s.label+'</button>';
+      h+='<button data-wwstatus="'+k+'" data-wwval="'+s.v+'" style="width:32px;height:32px;border:1px solid '+(active?s.col:'rgba(255,255,255,.12)')+';background:'+(active?s.bg:'transparent')+';color:'+(active?s.col:'var(--dim)')+';font-size:var(--t-body);cursor:pointer;font-family:monospace">'+s.label+'</button>';
     });
     h+='</div>';
     h+='</div>';
@@ -1309,7 +1309,7 @@ function wwRender(){
     // Goal input
     h+='<div class="dim-9-ls" style="margin-bottom:4px">GOAL</div>';
     var gv=(entry.goal||'').replace(/"/g,'&quot;');
-    h+='<input class="ww-goal-inp" id="wwg-'+k+'" value="'+gv+'" placeholder="Mission for the day..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:11px;padding:7px 9px;outline:none;margin-bottom:8px" oninput="wwSaveField(\''+k+'\',\'goal\',this.value)">';
+    h+='<input class="ww-goal-inp" id="wwg-'+k+'" value="'+gv+'" placeholder="Mission for the day..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:7px 9px;outline:none;margin-bottom:8px" oninput="wwSaveField(\''+k+'\',\'goal\',this.value)">';
 
     // Notes
     h+='<div class="dim-9-ls" style="margin-bottom:4px">NOTES</div>';
@@ -1317,11 +1317,11 @@ function wwRender(){
     notes.forEach(function(n,ni){
       var nv=(n||'').replace(/"/g,'&quot;');
       h+='<div style="display:flex;gap:6px;margin-bottom:4px">';
-      h+='<input value="'+nv+'" placeholder="Note..." style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--dim);font-family:monospace;font-size:10px;padding:5px 8px;outline:none" oninput="wwSaveNote(\''+k+'\','+ni+',this.value)">';
-      h+='<button data-wwnote-del="'+k+'" data-wwnote-idx="'+ni+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:12px;cursor:pointer">✕</button>';
+      h+='<input value="'+nv+'" placeholder="Note..." style="flex:1;background:transparent;border:1px solid var(--c-ghost);color:var(--dim);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none" oninput="wwSaveNote(\''+k+'\','+ni+',this.value)">';
+      h+='<button data-wwnote-del="'+k+'" data-wwnote-idx="'+ni+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-md);cursor:pointer">✕</button>';
       h+='</div>';
     });
-    h+='<button data-wwnote-add="'+k+'" style="width:100%;padding:5px;background:transparent;border:1px dashed rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">+ ADD NOTE</button>';
+    h+='<button data-wwnote-add="'+k+'" style="width:100%;padding:5px;background:transparent;border:1px dashed var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">+ ADD NOTE</button>';
 
     h+='</div>';
   });
@@ -1406,7 +1406,7 @@ function wwPrevWeek(){if(wwOffset>-5){wwOffset--;wwExpandedKey='';wwRender();}}
 function wwNextWeek(){if(wwOffset<5){wwOffset++;wwExpandedKey='';wwRender();}}
 
 // Add to snapshot + export
-setTimeout(wwRender,200);
+window.addEventListener('load',function(){if(typeof wwRender==='function')wwRender();});
 
 function snapshotData(){
   return {
@@ -1660,7 +1660,7 @@ function renderBackupList(){
 
   // Recent
   if(recent.length){
-    h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin-bottom:4px">RECENT (last 3)</div>';
+    h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin-bottom:4px">RECENT (last 3)</div>';
     recent.forEach(function(snap,i){
       var t=fmtBackupTime(snap.ts);
       var pid='recent-'+i;
@@ -1675,7 +1675,7 @@ function renderBackupList(){
   // Daily
   var dayKeys=Object.keys(daily).sort().reverse();
   if(dayKeys.length){
-    h+='<div style="font-size:9px;letter-spacing:1px;color:var(--dim);margin:8px 0 4px">DAILY (7 days)</div>';
+    h+='<div style="font-size:var(--t-xs);letter-spacing:1px;color:var(--dim);margin:8px 0 4px">DAILY (7 days)</div>';
     dayKeys.forEach(function(dk){
       var snap=daily[dk];
       var t=fmtBackupTime(snap.ts);
@@ -1968,7 +1968,7 @@ function renderReorderModal(){
   var modal=document.createElement('div');
   modal.id='reorder-modal';
   modal.className='reorder-modal';
-  var h='<div class="reorder-header">'    +'<span class="reorder-title">&#8942; DRAG TO REORDER</span>'    +'<div class="flex-row">'    +'<button class="settings-btn" onclick="applyReorder()" style="padding:4px 14px;font-size:10px">&#10003; APPLY</button>'    +'<button class="reorder-close" onclick="closeReorder()">&#10005;</button>'    +'</div></div>'    +'<div style="font-size:9px;color:var(--dim);padding:4px 12px 8px;letter-spacing:1px">Drag to reorder &bull; tap APPLY to save</div>'    +'<div class="ro-grid" id="ro-grid">';
+  var h='<div class="reorder-header">'    +'<span class="reorder-title">&#8942; DRAG TO REORDER</span>'    +'<div class="flex-row">'    +'<button class="settings-btn" onclick="applyReorder()" style="padding:4px 14px;font-size:var(--t-sm)">&#10003; APPLY</button>'    +'<button class="reorder-close" onclick="closeReorder()">&#10005;</button>'    +'</div></div>'    +'<div style="font-size:var(--t-xs);color:var(--dim);padding:4px 12px 8px;letter-spacing:1px">Drag to reorder &bull; tap APPLY to save</div>'    +'<div class="ro-grid" id="ro-grid">';
   reorderList.forEach(function(id,i){
     var name=TILE_NAMES[id]||id;
     var emoji=TILE_EMOJI[id]||'▪';
@@ -2312,7 +2312,7 @@ function renderBdayView(){
   var soonCount=birthdays.filter(function(b){return bdayDaysUntil(b.month,b.day)<=30;}).length;
   h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,105,180,.1)">'
     +'<span class="dim-10">'+birthdays.length+' people</span>'
-    +(soonCount?'<span style="font-size:10px;color:#ff69b4">·  '+soonCount+' in next 30 days</span>':'')
+    +(soonCount?'<span style="font-size:var(--t-sm);color:#ff69b4">·  '+soonCount+' in next 30 days</span>':'')
     +(withYear.length?'<span class="dim-10">·  '+withYear.length+' with age</span>':'')
     +'</div>';
 
@@ -2324,7 +2324,7 @@ function renderBdayPeople(){
   var el=document.getElementById('bday-people-list');
   if(!el)return;
   if(!birthdays.length){
-    el.innerHTML='<div style="font-size:11px;color:var(--dim);padding:6px 0 10px">No people added yet.</div>';
+    el.innerHTML='<div style="font-size:var(--t-base);color:var(--dim);padding:6px 0 10px">No people added yet.</div>';
     return;
   }
   var alphaSorted=birthdays.slice().sort(function(a,b){return a.name.localeCompare(b.name);});
@@ -2603,7 +2603,7 @@ function loadPickleball(){
     })
     .catch(function(){
       document.getElementById('pb-badge').textContent='ERROR';
-      document.getElementById('pb-list').innerHTML='<div style="color:var(--cr);font-size:11px">Failed to load weather.</div>';
+      document.getElementById('pb-list').innerHTML='<div style="color:var(--cr);font-size:var(--t-base)">Failed to load weather.</div>';
     });
 }
 
@@ -2710,27 +2710,27 @@ function renderPickleball(){
     var tempPhrase=r.tempHard?pbRandPhrase(PB_TEMP_BAD,seed)
       :r.tempStatus==='suboptimal'?pbRandPhrase(PB_TEMP_OK,seed)
       :pbRandPhrase(PB_TEMP_GREAT,seed);
-    var tempLine='<div style="font-size:9px;color:'+tempColor+';margin-top:2px">'+r.minTemp+'°–'+r.maxTemp+'°F · '+tempPhrase+'</div>';
+    var tempLine='<div style="font-size:var(--t-xs);color:'+tempColor+';margin-top:2px">'+r.minTemp+'°–'+r.maxTemp+'°F · '+tempPhrase+'</div>';
 
     // Friendly wind line
     var windColor=r.windHard?'var(--cr)':r.windStatus==='suboptimal'?'var(--ca)':'var(--cg)';
     var windPhrase=r.windHard?pbRandPhrase(PB_WIND_BAD,seed+1)
       :r.windStatus==='suboptimal'?pbRandPhrase(PB_WIND_OK,seed+1)
       :pbRandPhrase(PB_WIND_GREAT,seed+1);
-    var windLine='<div style="font-size:9px;color:'+windColor+';margin-top:2px">'+r.maxWind+'mph · '+windPhrase+'</div>';
+    var windLine='<div style="font-size:var(--t-xs);color:'+windColor+';margin-top:2px">'+r.maxWind+'mph · '+windPhrase+'</div>';
 
     // Other issues (rain/wet)
     var otherLine=r.otherIssues.length
-      ?'<div style="font-size:9px;color:var(--cr);margin-top:2px">'+r.otherIssues.join(' · ')+'</div>'
+      ?'<div style="font-size:var(--t-xs);color:var(--cr);margin-top:2px">'+r.otherIssues.join(' · ')+'</div>'
       :'';
 
     h+='<div class="pb-day" style="flex-wrap:wrap">'
       +'<div style="width:44px;flex-shrink:0">'
       +'<div class="pb-day-name'+(isToday?' today':'')+'">'+dayName+'</div>'
-      +'<div style="font-size:11px;color:var(--dim);margin-top:1px">'+dayNum+'</div>'
+      +'<div style="font-size:var(--t-base);color:var(--dim);margin-top:1px">'+dayNum+'</div>'
       +'</div>'
       +'<div class="pb-verdict '+verdict+'" style="flex-direction:column;gap:1px;height:auto;padding:6px 0;width:40px;border-color:'+verdictColor+';background:'+verdictColor+'18">'
-      +'<span style="font-size:14px;color:'+verdictColor+'">'+icon+'</span>'
+      +'<span style="font-size:var(--t-body);color:'+verdictColor+'">'+icon+'</span>'
       +'<span style="font-size:8px;color:'+verdictColor+';letter-spacing:.5px;font-weight:bold">'+verdictLabel+'</span>'
       +'</div>'
       +'<div class="flex-1">'
@@ -2738,7 +2738,7 @@ function renderPickleball(){
       +windLine
       +otherLine
       +'</div>'
-      +'<span style="font-size:9px;color:var(--dim);flex-shrink:0;align-self:flex-start;margin-top:2px">'+(isWeekend?'8a–10p':'5–10p')+'</span>'
+      +'<span style="font-size:var(--t-xs);color:var(--dim);flex-shrink:0;align-self:flex-start;margin-top:2px">'+(isWeekend?'8a–10p':'5–10p')+'</span>'
       +'</div>';
   }
   if(badge){
@@ -2746,7 +2746,7 @@ function renderPickleball(){
     badge.style.color=goodCount===0?(mehCount?'var(--ca)':'var(--cr)'):goodCount<=2?'var(--ca)':'var(--cg)';
     badge.style.borderColor=badge.style.color;
   }
-  el.innerHTML=h||'<div style="color:var(--dim);font-size:11px">No data.</div>';
+  el.innerHTML=h||'<div style="color:var(--dim);font-size:var(--t-base)">No data.</div>';
 }
 
 loadPickleball();
@@ -2963,10 +2963,10 @@ function renderHideTileSettings(){
   var h='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">';
   ids.forEach(function(id){
     var hidden=hiddenTiles.indexOf(id)>=0;
-    h+='<div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)">';
+    h+='<div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border:1px solid var(--c-ghost);background:rgba(255,255,255,.02)">';
     h+='<button class="sset-toggle'+(hidden?'':' on')+'" id="toghide-'+id+'"';
     h+=' onclick="event.stopPropagation();toggleHideTile(\''+id+'\')"><div class="sset-knob"></div></button>';
-    h+='<div style="font-size:9px;color:var(--dim);text-align:center;letter-spacing:.3px;line-height:1.2">'+names[id]+'</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);text-align:center;letter-spacing:.3px;line-height:1.2">'+names[id]+'</div>';
     h+='</div>';
   });
   h+='</div>';
@@ -3139,7 +3139,7 @@ function applyTheme(t){
     pad.style.padding='10px 12px';
     pad.style.background='rgba(0,0,0,.9)';
     pad.style.backdropFilter='blur(6px)';
-    pad.style.borderBottom='1px solid rgba(0,255,136,.15)';
+    pad.style.borderBottom='1px solid var(--c-ok-dim)';
     pad.style.display='grid';
     pad.style.gridTemplateColumns='repeat(3,1fr)';
     pad.style.gap='6px';
@@ -3157,11 +3157,11 @@ function applyTheme(t){
         +'padding:6px 10px;cursor:pointer;transition:all .12s;'
         +'display:flex;flex-direction:column;align-items:center;gap:1px;min-width:52px'
         +'">'
-        +'<span style="font-size:18px;color:var(--cg);font-weight:bold">'+card.l+'</span>'
+        +'<span style="font-size:var(--t-title);color:var(--cg);font-weight:bold">'+card.l+'</span>'
         +'<span style="font-size:8px;color:var(--dim);letter-spacing:.5px">'+card.name+'</span>'
         +'</button>';
     });
-    h+='<button onclick="closeLNav()" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;padding:6px 12px;cursor:pointer;font-size:11px;align-self:center">&#10005;</button>';
+    h+='<button onclick="closeLNav()" style="background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;padding:6px 12px;cursor:pointer;font-size:var(--t-base);align-self:center">&#10005;</button>';
     pad.innerHTML=h;
   }
 
@@ -3602,7 +3602,7 @@ function wmRender(){
   h+='<div class="flex-row-4">';
   [{t:'routines',l:'ROUTINES'},{t:'log',l:'LOG'},{t:'chain',l:'CHAIN'}].forEach(function(x){
     var active=tab===x.t;
-    h+='<span data-wmtab="'+x.t+'" style="font-size:10px;padding:3px 10px;border:1px solid '+(active?'var(--ca)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--ca)':'var(--dim)')+';cursor:pointer">'+x.l+'</span>';
+    h+='<span data-wmtab="'+x.t+'" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+(active?'var(--ca)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--ca)':'var(--dim)')+';cursor:pointer">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -3611,7 +3611,7 @@ function wmRender(){
     var curWkNum=wrGetISOWeek?wrGetISOWeek(new Date().toISOString().slice(0,10)):0;
     if(curWkNum)h+='<div class="label-dim">WEEK #'+curWkNum+'</div>';
     if(!wmData.items.length){
-      h+='<div style="color:var(--dim);font-size:12px;padding:8px 0">No routines yet. Add one below.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-md);padding:8px 0">No routines yet. Add one below.</div>';
     } else {
       // Get last week's completed items for prior-week indicator
       var lastWk=wmGetLastWeekKey();
@@ -3619,37 +3619,37 @@ function wmRender(){
       var lastDone=lastLog?lastLog.done||[]:[];
       wmData.items.forEach(function(it,i){
         var doneLastWeek=lastDone.indexOf(it.text)>=0;
-        h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--c-ghost)">';
         // Tap-friendly checkbox
         h+='<div '+(locked?'':'data-wmtoggle="'+i+'"')+' style="flex-shrink:0;width:28px;height:28px;border-radius:4px;border:2px solid '+(it.done?'var(--ca)':locked?'rgba(255,255,255,.08)':'rgba(255,255,255,.2)')+';background:'+(it.done?'var(--ca)':'transparent')+';cursor:'+(locked?'default':'pointer')+';display:flex;align-items:center;justify-content:center;transition:all .15s;opacity:'+(locked&&!it.done?'.4':'1')+'">';
-        h+=it.done?'<span style="color:#000;font-size:16px;font-weight:bold;line-height:1">&#10003;</span>':'';
+        h+=it.done?'<span style="color:#000;font-size:var(--t-sub);font-weight:bold;line-height:1">&#10003;</span>':'';
         h+='</div>';
         h+='<div class="flex-1">';
-        h+='<span style="font-size:13px;color:'+(it.done?'var(--dim)':'var(--text)')+';'+(it.done?'text-decoration:line-through':'')+'">' +it.text+'</span>';
-        if(doneLastWeek)h+='<span style="margin-left:6px;font-size:9px;color:rgba(255,204,0,.45);letter-spacing:.5px">✓ last wk</span>';
+        h+='<span style="font-size:var(--t-lg);color:'+(it.done?'var(--dim)':'var(--text)')+';'+(it.done?'text-decoration:line-through':'')+'">' +it.text+'</span>';
+        if(doneLastWeek)h+='<span style="margin-left:6px;font-size:var(--t-xs);color:rgba(255,204,0,.45);letter-spacing:.5px">✓ last wk</span>';
         h+='</div>';
-        if(!locked)h+='<span data-wmdel="'+i+'" style="font-size:11px;color:var(--dim);cursor:pointer;opacity:.4;flex-shrink:0">✕</span>';
+        if(!locked)h+='<span data-wmdel="'+i+'" style="font-size:var(--t-base);color:var(--dim);cursor:pointer;opacity:.4;flex-shrink:0">✕</span>';
         h+='</div>';
       });
     }
     if(locked){
       var lockDay=['','Mon','Tue','Wed','Thu'][dow]||'';
-      h+='<div style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:5px 8px;border:1px solid rgba(255,204,0,.2);background:rgba(255,204,0,.04)"><span>🔒</span><span style="font-size:9px;color:var(--ca)">Check-ins open Fri – Sun only'+(lockDay?' · today is '+lockDay:'')+'</span></div>';
+      h+='<div style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:5px 8px;border:1px solid var(--c-gold-dim);background:rgba(255,204,0,.04)"><span>🔒</span><span style="font-size:var(--t-xs);color:var(--ca)">Check-ins open Fri – Sun only'+(lockDay?' · today is '+lockDay:'')+'</span></div>';
     }
     h+='<div style="display:flex;gap:6px;margin-top:8px">';
-    h+='<input id="wm-inp" placeholder="Add routine..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 2px;outline:none">';
-    h+='<button id="wm-add-btn" style="font-size:10px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);color:var(--dim);background:transparent;cursor:pointer">+</button>';
+    h+='<input id="wm-inp" placeholder="Add routine..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--c-faint);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 2px;outline:none">';
+    h+='<button id="wm-add-btn" style="font-size:var(--t-sm);padding:4px 10px;border:1px solid var(--c-faint);color:var(--dim);background:transparent;cursor:pointer">+</button>';
     h+='</div>';
   } else if(tab==='log'){
     var log=wmData.log||[];
     if(!log.length){
-      h+='<div style="color:var(--dim);font-size:12px;padding:8px 0">No history yet.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-md);padding:8px 0">No history yet.</div>';
     } else {
       log.slice(0,12).forEach(function(entry){
-        h+='<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)">';
+        h+='<div style="margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--c-ghost)">';
         h+='<div class="label-dim-xs">WEEK #'+wrGetISOWeek(entry.week)+' &mdash; '+entry.week+'</div>';
         entry.done.forEach(function(text){
-          h+='<div style="font-size:12px;color:var(--text);padding:2px 0">&#10003; '+text+'</div>';
+          h+='<div style="font-size:var(--t-md);color:var(--text);padding:2px 0">&#10003; '+text+'</div>';
         });
         h+='</div>';
       });
@@ -3657,7 +3657,7 @@ function wmRender(){
   } else if(tab==='chain'){
     var log=wmData.log||[];
     if(!wmData.items.length){
-      h+='<div style="color:var(--dim);font-size:12px;padding:8px 0">Add routines first.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-md);padding:8px 0">Add routines first.</div>';
     } else {
       h+='<div class="label-dim-md">Consecutive weeks completed</div>';
       wmData.items.forEach(function(it){
@@ -3674,9 +3674,9 @@ function wmRender(){
         h+='<div class="mb-10">';
         h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
         h+='<span class="text-12">'+it.text+'</span>';
-        h+='<span style="font-size:11px;color:var(--ca);font-weight:bold">'+streak+'w</span>';
+        h+='<span style="font-size:var(--t-base);color:var(--ca);font-weight:bold">'+streak+'w</span>';
         h+='</div>';
-        h+='<div style="display:flex;flex-wrap:wrap;gap:3px">'+dots+(streak>12?'<span style="font-size:10px;color:var(--ca)">+'+(streak-12)+'</span>':'')+'</div>';
+        h+='<div style="display:flex;flex-wrap:wrap;gap:3px">'+dots+(streak>12?'<span style="font-size:var(--t-sm);color:var(--ca)">+'+(streak-12)+'</span>':'')+'</div>';
         h+='</div>';
       });
     }
@@ -3715,7 +3715,7 @@ function wmRender(){
         +_remaining+' remaining. Week resets in '+_timeStr+'.';
     }
   }
-  h+='<div style="margin-top:10px;padding:6px 8px;border-left:2px solid rgba(255,204,0,.2);font-size:10px;color:var(--dim);line-height:1.6">'+_resetSentence+'</div>';
+  h+='<div style="margin-top:10px;padding:6px 8px;border-left:2px solid var(--c-gold-dim);font-size:var(--t-sm);color:var(--dim);line-height:1.6">'+_resetSentence+'</div>';
 
   el.innerHTML=h;
 
@@ -3810,9 +3810,9 @@ function wmStartEdit(i){
   if(!row)return;
   var it=wmData.items[i];
   var safe=it.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-  var eHtml='<input id="wm-ei-'+i+'" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,204,0,.4);color:var(--text);font-family:monospace;font-size:12px;padding:3px 2px;outline:none" value="'+safe+'" onkeydown="var k=event.key;if(k===String.fromCharCode(13))wmSaveEdit('+i+');if(k===String.fromCharCode(27))wmRender()">';
-  eHtml+='<span onclick="wmSaveEdit('+i+')" style="font-size:11px;color:var(--ca);cursor:pointer;padding:2px 6px;border:1px solid rgba(255,204,0,.3);margin-left:4px">OK</span>';
-  eHtml+='<span onclick="wmRender()" style="font-size:11px;color:var(--dim);cursor:pointer;padding:2px 6px">&#x2715;</span>';
+  var eHtml='<input id="wm-ei-'+i+'" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,204,0,.4);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:3px 2px;outline:none" value="'+safe+'" onkeydown="var k=event.key;if(k===String.fromCharCode(13))wmSaveEdit('+i+');if(k===String.fromCharCode(27))wmRender()">';
+  eHtml+='<span onclick="wmSaveEdit('+i+')" style="font-size:var(--t-base);color:var(--ca);cursor:pointer;padding:2px 6px;border:1px solid rgba(255,204,0,.3);margin-left:4px">OK</span>';
+  eHtml+='<span onclick="wmRender()" style="font-size:var(--t-base);color:var(--dim);cursor:pointer;padding:2px 6px">&#x2715;</span>';
   row.innerHTML=eHtml;
   setTimeout(function(){var inp=document.getElementById('wm-ei-'+i);if(inp){inp.focus();inp.select();}},20);
 }
@@ -3869,12 +3869,12 @@ function wrRenderWrite(){
   ];
   var h='';
   if(existing){
-    h+='<div style="font-size:10px;color:var(--cg);padding:6px 0;margin-bottom:8px;letter-spacing:1px">&#10003; Week #'+wrGetISOWeek(wk)+' — review saved</div>';
-    PROMPTS.forEach(function(p){if(existing[p.id]){h+='<div class="mb-8"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:2px">'+p.label.toUpperCase()+'</div><div style="font-size:12px;color:var(--text);line-height:1.5">'+existing[p.id]+'</div></div>';}});
-    h+='<button onclick="wrStartNew()" style="width:100%;padding:7px;background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:10px;cursor:pointer;margin-top:4px">EDIT / UPDATE</button>';
+    h+='<div style="font-size:var(--t-sm);color:var(--cg);padding:6px 0;margin-bottom:8px;letter-spacing:1px">&#10003; Week #'+wrGetISOWeek(wk)+' — review saved</div>';
+    PROMPTS.forEach(function(p){if(existing[p.id]){h+='<div class="mb-8"><div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:2px">'+p.label.toUpperCase()+'</div><div style="font-size:var(--t-md);color:var(--text);line-height:1.5">'+existing[p.id]+'</div></div>';}});
+    h+='<button onclick="wrStartNew()" style="width:100%;padding:7px;background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:var(--t-sm);cursor:pointer;margin-top:4px">EDIT / UPDATE</button>';
   } else {
     PROMPTS.forEach(function(p){h+='<div class="mb-10"><div class="wr-prompt">'+p.label+'</div><textarea class="wr-inp" id="wr-'+p.id+'" placeholder="'+p.ph+'"></textarea></div>';});
-    h+='<button onclick="wrSaveEntry()" style="width:100%;padding:9px;background:transparent;border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">SAVE REVIEW</button>';
+    h+='<button onclick="wrSaveEntry()" style="width:100%;padding:9px;background:transparent;border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px">SAVE REVIEW</button>';
   }
 
   // Verbose timing sentence
@@ -3908,7 +3908,7 @@ function wrRenderWrite(){
       _wrSentence='Review window opens on the weekend. Next in '+_wrTimeStr+'.';
     }
   }
-  h+='<div style="margin-top:10px;padding:6px 8px;border-left:2px solid rgba(0,255,136,.2);font-size:10px;color:var(--dim);line-height:1.6">'+_wrSentence+'</div>';
+  h+='<div style="margin-top:10px;padding:6px 8px;border-left:2px solid rgba(0,255,136,.2);font-size:var(--t-sm);color:var(--dim);line-height:1.6">'+_wrSentence+'</div>';
 
   el.innerHTML=h;
 }
@@ -3930,9 +3930,9 @@ function wrRenderHistory(){
   var h='';
   wrData.forEach(function(entry){
     h+='<div class="wr-entry"><div class="wr-entry-date">Week #'+wrGetISOWeek(entry.week)+' &mdash; '+entry.week+'</div>';
-    if(entry.win)h+='<div class="mb-4"><span style="font-size:9px;color:var(--cg)">WIN: </span><span class="wr-entry-text">'+entry.win+'</span></div>';
-    if(entry.next)h+='<div class="mb-4"><span style="font-size:9px;color:var(--ca)">NEXT: </span><span class="wr-entry-text">'+entry.next+'</span></div>';
-    if(entry.miss)h+='<div class="mb-4"><span style="font-size:9px;color:var(--cr)">MISSED: </span><span class="wr-entry-text">'+entry.miss+'</span></div>';
+    if(entry.win)h+='<div class="mb-4"><span style="font-size:var(--t-xs);color:var(--cg)">WIN: </span><span class="wr-entry-text">'+entry.win+'</span></div>';
+    if(entry.next)h+='<div class="mb-4"><span style="font-size:var(--t-xs);color:var(--ca)">NEXT: </span><span class="wr-entry-text">'+entry.next+'</span></div>';
+    if(entry.miss)h+='<div class="mb-4"><span style="font-size:var(--t-xs);color:var(--cr)">MISSED: </span><span class="wr-entry-text">'+entry.miss+'</span></div>';
     h+='</div>';
   });
   el.innerHTML=h;
@@ -3962,19 +3962,19 @@ function dlRenderAdd(){
   if(badge)badge.textContent=dlData.length;
   var qActive=dlAddMode==='quick';
   var h='<div class="flex-row-4">';
-  h+='<span data-m="quick" onclick="dlSetMode(this.dataset.m)" style="font-size:10px;padding:3px 10px;border:1px solid '+(qActive?'var(--cpr)':'rgba(255,255,255,.15)')+';color:'+(qActive?'var(--cpr)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">QUICK</span>';
-  h+='<span data-m="structured" onclick="dlSetMode(this.dataset.m)" style="font-size:10px;padding:3px 10px;border:1px solid '+(!qActive?'var(--cpr)':'rgba(255,255,255,.15)')+';color:'+(!qActive?'var(--cpr)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">STRUCTURED</span>';
+  h+='<span data-m="quick" onclick="dlSetMode(this.dataset.m)" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+(qActive?'var(--cpr)':'var(--c-faint)')+';color:'+(qActive?'var(--cpr)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">QUICK</span>';
+  h+='<span data-m="structured" onclick="dlSetMode(this.dataset.m)" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+(!qActive?'var(--cpr)':'var(--c-faint)')+';color:'+(!qActive?'var(--cpr)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">STRUCTURED</span>';
   h+='</div>';
   if(qActive){
     h+='<textarea class="wr-inp" id="dl-inp-quick" placeholder="Quick decision note..." style="min-height:80px"></textarea>';
-    h+='<button onclick="dlSaveQuick()" style="width:100%;padding:9px;background:transparent;border:1px solid var(--cpr);color:var(--cpr);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px;margin-top:4px">LOG</button>';
+    h+='<button onclick="dlSaveQuick()" style="width:100%;padding:9px;background:transparent;border:1px solid var(--cpr);color:var(--cpr);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px;margin-top:4px">LOG</button>';
   } else {
-    h+='<div class="mb-8"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">THE DECISION</div><textarea class="wr-inp" id="dl-inp-decision" placeholder="What am I deciding?" style="min-height:44px"></textarea></div>';
-    h+='<div class="mb-8"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">WHY</div><textarea class="wr-inp" id="dl-inp-why" placeholder="Reasoning, context..." style="min-height:44px"></textarea></div>';
-    h+='<div class="mb-10"><div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">ALTERNATIVES CONSIDERED</div><textarea class="wr-inp" id="dl-inp-alts" placeholder="What else did I consider?" style="min-height:36px"></textarea></div>';
+    h+='<div class="mb-8"><div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:3px">THE DECISION</div><textarea class="wr-inp" id="dl-inp-decision" placeholder="What am I deciding?" style="min-height:44px"></textarea></div>';
+    h+='<div class="mb-8"><div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:3px">WHY</div><textarea class="wr-inp" id="dl-inp-why" placeholder="Reasoning, context..." style="min-height:44px"></textarea></div>';
+    h+='<div class="mb-10"><div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:3px">ALTERNATIVES CONSIDERED</div><textarea class="wr-inp" id="dl-inp-alts" placeholder="What else did I consider?" style="min-height:36px"></textarea></div>';
     h+='<div class="flex-row">';
-    h+='<button onclick="dlSaveEntry()" style="flex:1;padding:9px;background:transparent;border:1px solid var(--cpr);color:var(--cpr);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">LOG DECISION</button>';
-    h+='<button id="dl-copy-prompt-btn" style="padding:9px 12px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px;white-space:nowrap">📋 AI</button>';
+    h+='<button onclick="dlSaveEntry()" style="flex:1;padding:9px;background:transparent;border:1px solid var(--cpr);color:var(--cpr);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px">LOG DECISION</button>';
+    h+='<button id="dl-copy-prompt-btn" style="padding:9px 12px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px;white-space:nowrap">📋 AI</button>';
     h+='</div>';
   }
   el.innerHTML=h;
@@ -4034,7 +4034,7 @@ function dlRenderLog(){
   });
   if(overdueReview.length){
     h+='<div class="inactivity-notice'+(overdueReview.length>0?' jiggle':'')+'" style="margin-bottom:12px;border-color:rgba(245,166,35,.4);background:rgba(245,166,35,.05)">';
-    h+='<span style="color:#f5a623;font-size:11px">&#9650; '+overdueReview.length+' decision'+(overdueReview.length>1?'s':'')+' need a 30-day review</span>';
+    h+='<span style="color:#f5a623;font-size:var(--t-base)">&#9650; '+overdueReview.length+' decision'+(overdueReview.length>1?'s':'')+' need a 30-day review</span>';
     h+='</div>';
   }
   dlData.forEach(function(entry){
@@ -4044,25 +4044,25 @@ function dlRenderLog(){
     var needsReview=daysSinceReview>=30;
     var outcomes=Array.isArray(entry.outcomes)?entry.outcomes:(entry.outcome?[{text:entry.outcome,ts:''}]:[]);
     h+='<div class="dl-entry">';
-    h+='<div class="dl-decision">'+entry.decision+(entry.quick?' <span style="font-size:9px;color:var(--dim);font-weight:normal">[quick]</span>':'')+'</div>';
-    if(entry.why)h+='<div class="dl-field"><span style="font-size:9px;letter-spacing:.5px">WHY: </span>'+entry.why+'</div>';
-    if(entry.alts)h+='<div class="dl-field"><span style="font-size:9px;letter-spacing:.5px">ALT: </span>'+entry.alts+'</div>';
+    h+='<div class="dl-decision">'+entry.decision+(entry.quick?' <span style="font-size:var(--t-xs);color:var(--dim);font-weight:normal">[quick]</span>':'')+'</div>';
+    if(entry.why)h+='<div class="dl-field"><span style="font-size:var(--t-xs);letter-spacing:.5px">WHY: </span>'+entry.why+'</div>';
+    if(entry.alts)h+='<div class="dl-field"><span style="font-size:var(--t-xs);letter-spacing:.5px">ALT: </span>'+entry.alts+'</div>';
     // Outcomes list
     if(outcomes.length){
       h+='<div style="margin-top:6px;display:flex;flex-direction:column;gap:3px">';
       outcomes.forEach(function(o,oi){
         h+='<div style="display:flex;gap:6px;align-items:flex-start;padding:4px 8px;background:rgba(0,255,136,.05);border-left:2px solid rgba(0,255,136,.3)">';
-        h+='<div style="flex:1"><span style="font-size:9px;color:var(--cg);letter-spacing:.5px">OUTCOME'+(outcomes.length>1?' '+(oi+1):'')+':</span><span style="font-size:11px;color:var(--text);margin-left:6px">'+o.text+'</span>'+(o.ts?'<div style="font-size:9px;color:var(--dim);margin-top:1px">'+o.ts.slice(0,16).replace('T',' ')+'</div>':'')+'</div>';
-        h+='<span data-eid="'+entry.id+'" data-oi="'+oi+'" onclick="dlDeleteOutcome(this.dataset.eid,+this.dataset.oi)" style="font-size:10px;color:var(--dim);cursor:pointer;opacity:.4;flex-shrink:0">✕</span>';
+        h+='<div style="flex:1"><span style="font-size:var(--t-xs);color:var(--cg);letter-spacing:.5px">OUTCOME'+(outcomes.length>1?' '+(oi+1):'')+':</span><span style="font-size:var(--t-base);color:var(--text);margin-left:6px">'+o.text+'</span>'+(o.ts?'<div style="font-size:var(--t-xs);color:var(--dim);margin-top:1px">'+o.ts.slice(0,16).replace('T',' ')+'</div>':'')+'</div>';
+        h+='<span data-eid="'+entry.id+'" data-oi="'+oi+'" onclick="dlDeleteOutcome(this.dataset.eid,+this.dataset.oi)" style="font-size:var(--t-sm);color:var(--dim);cursor:pointer;opacity:.4;flex-shrink:0">✕</span>';
         h+='</div>';
       });
       h+='</div>';
     }
     h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">';
-    h+='<span class="dl-date">'+entry.date+(needsReview?' <span style="color:#f5a623;font-size:9px">&#9650; review due</span>':'')+'</span>';
+    h+='<span class="dl-date">'+entry.date+(needsReview?' <span style="color:#f5a623;font-size:var(--t-xs)">&#9650; review due</span>':'')+'</span>';
     h+='<div style="display:flex;gap:4px">';
     h+='<button class="dl-outcome-btn" data-eid="'+entry.id+'" onclick="dlAddOutcome(this.dataset.eid)">'+(needsReview?'&#9650; update':'+ outcome')+'</button>';
-    h+='<button data-eid="'+entry.id+'" onclick="dlDelete(this.dataset.eid)" style="font-size:9px;padding:2px 6px;border:1px solid rgba(255,68,68,.3);color:var(--cr);background:transparent;cursor:pointer">del</button>';
+    h+='<button data-eid="'+entry.id+'" onclick="dlDelete(this.dataset.eid)" style="font-size:var(--t-xs);padding:2px 6px;border:1px solid rgba(255,68,68,.3);color:var(--cr);background:transparent;cursor:pointer">del</button>';
     h+='</div>';
     h+='</div>';
     h+='</div>';
@@ -4125,7 +4125,7 @@ function emRender(){
     allSessions.forEach(function(s){if(s.ts&&s.ts.length>10){hasTime=true;var h=new Date(s.ts).getHours();hourMins[h]+=s.mins;}});
     var maxM=Math.max.apply(null,hourMins);
     var h='<div class="label-dim">FOCUS INTENSITY BY HOUR</div>';
-    if(!hasTime){h+='<div style="color:var(--dim);font-size:11px">Hour data appears after future sessions.</div>';}
+    if(!hasTime){h+='<div style="color:var(--dim);font-size:var(--t-base)">Hour data appears after future sessions.</div>';}
     else{
       h+='<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-bottom:8px">';
       for(var hr=0;hr<24;hr++){
@@ -4135,7 +4135,7 @@ function emRender(){
         var textCol=intensity>0.45?'rgba(0,20,30,0.9)':'rgba(255,255,255,0.8)';
         var subCol=intensity>0.45?'rgba(0,20,30,0.6)':'rgba(255,255,255,0.35)';
         h+='<div style="font-size:8px;color:'+subCol+'">'+(hr===0?'12a':hr<12?hr+'a':hr===12?'12p':(hr-12)+'p')+'</div>';
-        h+='<div style="font-size:9px;font-weight:'+(intensity>0.3?'600':'normal')+';color:'+textCol+'">'+( hourMins[hr]?hourMins[hr]+'m':'')+'</div>';
+        h+='<div style="font-size:var(--t-xs);font-weight:'+(intensity>0.3?'600':'normal')+';color:'+textCol+'">'+( hourMins[hr]?hourMins[hr]+'m':'')+'</div>';
         h+='</div>';
       }
       h+='</div>';
@@ -4155,7 +4155,7 @@ function emRender(){
       var pct=maxDow>0?Math.round(dowMins[dw]/maxDow*100):0;
       var isTop=dowMins[dw]===maxDow&&maxDow>0;
       h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">';
-      h+='<div style="font-size:9px;color:'+(isTop?'var(--cc)':'var(--dim)')+'">'+( dowMins[dw]?dowMins[dw]+'m':'')+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:'+(isTop?'var(--cc)':'var(--dim)')+'">'+( dowMins[dw]?dowMins[dw]+'m':'')+'</div>';
       h+='<div style="width:100%;background:'+(isTop?'var(--cc)':'rgba(0,229,255,.35)')+';height:'+Math.max(2,pct)+'%;border-radius:1px 1px 0 0;min-height:'+( dowMins[dw]?'4px':'2px')+'"></div>';
       h+='<div class="dim-9">'+DOW[dw].slice(0,2)+'</div>';
       h+='</div>';
@@ -4203,14 +4203,14 @@ function lsRender(){
   var h='';
   STREAMS.forEach(function(s){
     var dots='';
-    s.days.forEach(function(active){dots+='<div class="streak-dot" style="background:'+(active?s.col:'rgba(255,255,255,.1)')+'"></div>';});
+    s.days.forEach(function(active){dots+='<div class="streak-dot" style="background:'+(active?s.col:'var(--c-border)')+'"></div>';});
     h+='<div class="streak-row">';
     h+='<span class="streak-label">'+s.label+'</span>';
     h+='<div class="streak-bar">'+dots+'</div>';
-    h+='<span class="streak-val" style="color:'+(s.streak>0?s.col:'rgba(255,255,255,.15)')+'">'+(s.streak>0?s.streak+' day'+(s.streak!==1?'s':''):'')+'</span>';
+    h+='<span class="streak-val" style="color:'+(s.streak>0?s.col:'var(--c-faint)')+'">'+(s.streak>0?s.streak+' day'+(s.streak!==1?'s':''):'')+'</span>';
     h+='</div>';
   });
-  h+='<div style="font-size:9px;color:var(--dim);margin-top:8px;letter-spacing:.5px">Dots = days done · Right = today · Missing days not shown</div>';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:8px;letter-spacing:.5px">Dots = days done · Right = today · Missing days not shown</div>';
   el.innerHTML=h;
 }
 setTimeout(function(){lsRender();},600);
@@ -4482,7 +4482,7 @@ function mlCheckNotice(){
   var lastDate=sorted[0].date;
   var daysSince=Math.round((new Date()-new Date(lastDate+'T00:00:00'))/(864e5));
   if(daysSince>=3){
-    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" class="mb-6"><span>&#9650; No mood logged in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last entry: '+lastDate+'</span><button data-dismiss="ml-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
+    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" class="mb-6"><span>&#9650; No mood logged in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last entry: '+lastDate+'</span><button data-dismiss="ml-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:var(--t-lg);padding:0 2px">&#10005;</button></div>';
   } else {
     el.innerHTML='';
   }
@@ -4501,7 +4501,7 @@ function mlRenderLog(){
   }
   var h='';
   // Mood scale
-  h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:10px;margin-bottom:6px">HOW ARE YOU RIGHT NOW?</div>';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-top:10px;margin-bottom:6px">HOW ARE YOU RIGHT NOW?</div>';
   h+='<div class="mood-scale" style="display:flex;flex-direction:column;gap:4px">';
   h+='<div style="display:flex;gap:4px;justify-content:space-between">';
   ML_MOODS.slice(0,5).forEach(function(m){
@@ -4529,14 +4529,14 @@ function mlRenderLog(){
   ML_TAG_CATS.forEach(function(cat){
     var expanded=!!mlCatExpanded[cat.id];
     var selInCat=cat.tags.filter(function(t){return mlSelectedTags.indexOf(t)>=0;}).length;
-    var borderCol=expanded?cat.color.replace('0.7','0.8'):'rgba(255,255,255,.1)';
+    var borderCol=expanded?cat.color.replace('0.7','0.8'):'var(--c-border)';
     var bgCol=expanded?cat.color.replace('0.7','0.12'):'transparent';
     var textCol=expanded?'var(--text)':'var(--dim)';
     h+='<div data-mlcat="'+cat.id+'" onclick="mlCatExpanded[this.dataset.mlcat]=!mlCatExpanded[this.dataset.mlcat];mlRenderLog()" style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid '+borderCol+';background:'+bgCol+';cursor:pointer;user-select:none">';
-    h+='<span style="font-size:16px">'+cat.emoji+'</span>';
+    h+='<span style="font-size:var(--t-sub)">'+cat.emoji+'</span>';
     h+='<div class="flex-1">';
-    h+='<div style="font-size:10px;color:'+textCol+';line-height:1.3">'+cat.label+'</div>';
-    if(selInCat>0)h+='<div style="font-size:9px;color:'+cat.color.replace('0.7','0.9')+'">'+selInCat+' selected</div>';
+    h+='<div style="font-size:var(--t-sm);color:'+textCol+';line-height:1.3">'+cat.label+'</div>';
+    if(selInCat>0)h+='<div style="font-size:var(--t-xs);color:'+cat.color.replace('0.7','0.9')+'">'+selInCat+' selected</div>';
     h+='</div>';
     h+='</div>';
   });
@@ -4548,10 +4548,10 @@ function mlRenderLog(){
     activeCats.forEach(function(cat){
       cat.tags.forEach(function(tag){
         var sel=mlSelectedTags.indexOf(tag)>=0;
-        var borderCol=sel?cat.color.replace('0.7','0.8'):'rgba(255,255,255,.1)';
+        var borderCol=sel?cat.color.replace('0.7','0.8'):'var(--c-border)';
         var bgCol=sel?cat.color.replace('0.7','0.2'):'transparent';
         var textCol=sel?'var(--text)':'rgba(255,255,255,.45)';
-        h+='<span data-tag="'+tag+'" onclick="mlToggleTag(this.dataset.tag)" style="font-size:10px;padding:4px 10px;border:1px solid '+borderCol+';background:'+bgCol+';color:'+textCol+';cursor:pointer">'+tag+'</span>';
+        h+='<span data-tag="'+tag+'" onclick="mlToggleTag(this.dataset.tag)" style="font-size:var(--t-sm);padding:4px 10px;border:1px solid '+borderCol+';background:'+bgCol+';color:'+textCol+';cursor:pointer">'+tag+'</span>';
       });
     });
     h+='</div>';
@@ -4559,10 +4559,10 @@ function mlRenderLog(){
     h+='<div class="mb-12"></div>';
   }
   // Note
-  h+='<textarea class="wr-inp" id="ml-note" placeholder="Write anything... or nothing. You don&apos;t have to explain yourself." style="min-height:72px;font-size:12px"></textarea>';
+  h+='<textarea class="wr-inp" id="ml-note" placeholder="Write anything... or nothing. You don&apos;t have to explain yourself." style="min-height:72px;font-size:var(--t-md)"></textarea>';
   // Affirmation if low mood selected
   if(mlSelectedMood!==null&&mlSelectedMood<=3){
-    h+='<div style="padding:10px;border-left:2px solid rgba(134,155,171,.3);background:rgba(83,104,120,.08);margin-bottom:10px;font-size:12px;color:var(--text);line-height:1.6">';
+    h+='<div style="padding:10px;border-left:2px solid rgba(134,155,171,.3);background:rgba(83,104,120,.08);margin-bottom:10px;font-size:var(--t-md);color:var(--text);line-height:1.6">';
     var affirmations=[
       "This feeling is temporary. It will shift.",
       "You don't have to feel better right now. Just stay.",
@@ -4577,19 +4577,19 @@ function mlRenderLog(){
   }
   // Resources if very low
   if(mlSelectedMood===1){
-    h+='<div style="padding:10px;border:1px solid rgba(122,80,89,.3);background:rgba(122,80,89,.06);margin-bottom:10px;font-size:11px;color:var(--text);line-height:1.7">';
-    h+='<div style="font-size:9px;color:rgba(170,100,110,.8);letter-spacing:1px;margin-bottom:6px">IF YOU NEED SUPPORT</div>';
+    h+='<div style="padding:10px;border:1px solid rgba(122,80,89,.3);background:rgba(122,80,89,.06);margin-bottom:10px;font-size:var(--t-base);color:var(--text);line-height:1.7">';
+    h+='<div style="font-size:var(--t-xs);color:rgba(170,100,110,.8);letter-spacing:1px;margin-bottom:6px">IF YOU NEED SUPPORT</div>';
     h+='Crisis Text Line: Text HOME to 741741<br>';
     h+='988 Suicide &amp; Crisis Lifeline: Call or text 988<br>';
     h+='<span class="dim-10">You are not alone in this.</span>';
     h+='</div>';
   }
-  h+='<button onclick="mlSaveEntry()" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(134,155,171,.3);color:#869BAB;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">SAVE</button>';
+  h+='<button onclick="mlSaveEntry()" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(134,155,171,.3);color:#869BAB;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px">SAVE</button>';
   var todayCount=mlData.filter(function(e){return e.date===today;}).length;
   if(todayCount>0&&todayCount<3){
-    h+='<div style="font-size:10px;color:var(--dim);text-align:center;margin-top:8px">'+todayCount+' of 3 logs today. '+( todayCount===1?'2 more':'1 more')+' allowed.</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);text-align:center;margin-top:8px">'+todayCount+' of 3 logs today. '+( todayCount===1?'2 more':'1 more')+' allowed.</div>';
   } else if(todayCount>=3){
-    h+='<div style="font-size:10px;color:var(--dim);text-align:center;margin-top:8px">3 of 3 logs done for today.</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);text-align:center;margin-top:8px">3 of 3 logs done for today.</div>';
   }
   el.innerHTML=h;
   // Disable save button if at 3/day limit
@@ -4699,7 +4699,7 @@ function mlRenderHistory(){
     var yTicks='';
     [2,4,6,8,10].forEach(function(v){
       var y=cy(v);
-      yTicks+='<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="rgba(255,255,255,.06)" stroke-width="1"/>';
+      yTicks+='<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="var(--c-ghost)" stroke-width="1"/>';
       yTicks+='<text x="'+(padL-3)+'" y="'+(y+3)+'" fill="rgba(134,155,171,.6)" font-size="7" text-anchor="end">'+v+'</text>';
     });
     // X axis ticks: day labels at 0, 10, 20, 29
@@ -4759,11 +4759,11 @@ function mlRenderHistory(){
         timeExact=t.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
       }
       h+='<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-left:2px solid rgba(134,155,171,.2);padding-left:8px;margin-bottom:4px">';
-      if(timeLabel)h+='<div style="white-space:nowrap;min-width:60px;padding-top:2px"><div class="dim-9">'+timeLabel+'</div><div style="font-size:9px;color:rgba(134,155,171,.5)">'+timeExact+'</div></div>';
+      if(timeLabel)h+='<div style="white-space:nowrap;min-width:60px;padding-top:2px"><div class="dim-9">'+timeLabel+'</div><div style="font-size:var(--t-xs);color:rgba(134,155,171,.5)">'+timeExact+'</div></div>';
       h+='<div style="flex:1">';
-      h+='<span style="font-size:14px">'+ML_MOODS[e.mood-1].e+'</span> <span class="text-12">'+e.mood+'/10</span>';
-      if(e.tags&&e.tags.length)h+='<div style="font-size:10px;color:var(--dim);margin-top:3px">'+e.tags.join(', ')+'</div>';
-      if(e.note)h+='<div style="font-size:11px;color:var(--text);margin-top:4px;font-style:italic;line-height:1.5">'+e.note+'</div>';
+      h+='<span style="font-size:var(--t-body)">'+ML_MOODS[e.mood-1].e+'</span> <span class="text-12">'+e.mood+'/10</span>';
+      if(e.tags&&e.tags.length)h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-top:3px">'+e.tags.join(', ')+'</div>';
+      if(e.note)h+='<div style="font-size:var(--t-base);color:var(--text);margin-top:4px;font-style:italic;line-height:1.5">'+e.note+'</div>';
       h+='</div></div>';
     });
     h+='</div>';
@@ -4830,7 +4830,7 @@ function applyCategoryNav(){
   if(!on)return;
   var h='';
   CARD_CATS.forEach(function(cat){
-    h+='<button data-catid="'+cat.id+'" onclick="catNavJump(this.dataset.catid)" style="display:inline-block;padding:8px 14px;background:transparent;border:none;color:var(--dim);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px;border-bottom:2px solid transparent;transition:all .15s" id="catnav-'+cat.id+'">'+cat.label+'</button>';
+    h+='<button data-catid="'+cat.id+'" onclick="catNavJump(this.dataset.catid)" style="display:inline-block;padding:8px 14px;background:transparent;border:none;color:var(--dim);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px;border-bottom:2px solid transparent;transition:all .15s" id="catnav-'+cat.id+'">'+cat.label+'</button>';
   });
   bar.innerHTML=h;
 }
@@ -4887,7 +4887,7 @@ function applySectionHeaders(){
       var hdr=document.createElement('div');
       hdr.className='grid-section-header';
       hdr.dataset.cat=cat.id;
-      hdr.style.cssText='grid-column:1/-1;padding:8px 4px 4px;font-size:9px;letter-spacing:3px;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2px;font-family:monospace;opacity:.7;user-select:none';
+      hdr.style.cssText='grid-column:1/-1;padding:8px 4px 4px;font-size:var(--t-xs);letter-spacing:3px;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2px;font-family:monospace;opacity:.7;user-select:none';
       hdr.textContent='── '+cat.label.toUpperCase()+' ──';
       grid.insertBefore(hdr,tile);
     }
@@ -4942,9 +4942,9 @@ function applyPinnedCards(){
   sep.id='pinned-separator';
   sep.style.cssText='grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:8px 0;cursor:pointer';
   var unpinnedCount=allTiles.filter(function(t){return pinnedIds.indexOf(t.dataset.id)<0&&t.dataset.id!=='settings';}).length;
-  sep.innerHTML='<div style="flex:1;height:1px;background:rgba(255,255,255,.1)"></div>'
-    +'<button id="pinned-toggle-btn" onclick="togglePinnedOverflow()" style="font-size:10px;padding:5px 14px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;cursor:pointer;letter-spacing:1px;white-space:nowrap">▼ '+unpinnedCount+' MORE CARDS</button>'
-    +'<div style="flex:1;height:1px;background:rgba(255,255,255,.1)"></div>';
+  sep.innerHTML='<div style="flex:1;height:1px;background:var(--c-border)"></div>'
+    +'<button id="pinned-toggle-btn" onclick="togglePinnedOverflow()" style="font-size:var(--t-sm);padding:5px 14px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;cursor:pointer;letter-spacing:1px;white-space:nowrap">▼ '+unpinnedCount+' MORE CARDS</button>'
+    +'<div style="flex:1;height:1px;background:var(--c-border)"></div>';
 
   // Move unpinned tiles to innerGrid
   allTiles.forEach(function(tile){
@@ -4990,15 +4990,15 @@ function renderPinSettings(){
   var pinnedIds=getPinnedIds();
   var allIds=Array.from(document.querySelectorAll('#grid [data-id]')).map(function(t){return t.dataset.id;}).filter(function(id){return id!=='settings';});
   var NAMES=typeof TILE_NAMES!=='undefined'?TILE_NAMES:{};
-  var h='<div style="font-size:10px;color:var(--dim);margin-bottom:8px">Tap to pin/unpin. Pinned cards always show — rest collapse under a ▼ button.</div>';
+  var h='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:8px">Tap to pin/unpin. Pinned cards always show — rest collapse under a ▼ button.</div>';
   h+='<div style="display:flex;flex-wrap:wrap;gap:6px">';
   allIds.forEach(function(id){
     var pinned=pinnedIds.indexOf(id)>=0;
     var name=NAMES[id]||id;
-    h+='<span data-pid="'+id+'" onclick="togglePin(this.dataset.pid)" style="font-size:10px;padding:4px 10px;border:1px solid '+(pinned?'var(--cg)':'rgba(255,255,255,.15)')+';color:'+(pinned?'var(--cg)':'var(--dim)')+';cursor:pointer;transition:all .15s;letter-spacing:.5px">'+name+'</span>';
+    h+='<span data-pid="'+id+'" onclick="togglePin(this.dataset.pid)" style="font-size:var(--t-sm);padding:4px 10px;border:1px solid '+(pinned?'var(--cg)':'var(--c-faint)')+';color:'+(pinned?'var(--cg)':'var(--dim)')+';cursor:pointer;transition:all .15s;letter-spacing:.5px">'+name+'</span>';
   });
   h+='</div>';
-  h+='<button onclick="savePinnedIds('+JSON.stringify(DEFAULT_PINS)+');applyPinnedCards();renderPinSettings();" style="margin-top:10px;font-size:10px;padding:4px 10px;border:1px solid rgba(255,255,255,.12);color:var(--dim);background:transparent;cursor:pointer">reset to default</button>';
+  h+='<button onclick="savePinnedIds('+JSON.stringify(DEFAULT_PINS)+');applyPinnedCards();renderPinSettings();" style="margin-top:10px;font-size:var(--t-sm);padding:4px 10px;border:1px solid rgba(255,255,255,.12);color:var(--dim);background:transparent;cursor:pointer">reset to default</button>';
   el.innerHTML=h;
 }
 
@@ -5279,7 +5279,7 @@ function applySnapToCard(){
 
 function showToast(msg){
   var t=document.getElementById('drag-toast');
-  if(!t){t=document.createElement('div');t.id='drag-toast';t.style.cssText='position:fixed;bottom:30%;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.85);color:#fff;font-family:monospace;font-size:13px;padding:10px 20px;border-radius:3px;z-index:9999;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;letter-spacing:1px;white-space:nowrap;border:1px solid rgba(255,255,255,.2)';document.body.appendChild(t);}
+  if(!t){t=document.createElement('div');t.id='drag-toast';t.style.cssText='position:fixed;bottom:30%;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.85);color:#fff;font-family:monospace;font-size:var(--t-lg);padding:10px 20px;border-radius:3px;z-index:9999;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;letter-spacing:1px;white-space:nowrap;border:1px solid rgba(255,255,255,.2)';document.body.appendChild(t);}
   t.textContent=msg;
   t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
   clearTimeout(t._to);
@@ -5335,7 +5335,7 @@ function milCheckNotice(){
   var lastDate=mostRecent.slice(0,10);
   var daysSince=Math.round((new Date()-new Date(lastDate+'T00:00:00'))/(864e5));
   if(daysSince>=7){
-    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" class="mb-6"><span>&#9650; No milestone update in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last note: '+lastDate+'</span><button data-dismiss="mil-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:0 2px">&#10005;</button></div>';
+    el.innerHTML='<div class="inactivity-notice'+(daysSince>5?' jiggle':'')+'" class="mb-6"><span>&#9650; No milestone update in '+daysSince+' day'+(daysSince!==1?'s':'')+'. Last note: '+lastDate+'</span><button data-dismiss="mil-notice" style="background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:var(--t-lg);padding:0 2px">&#10005;</button></div>';
   } else {
     el.innerHTML='';
   }
@@ -5354,15 +5354,15 @@ function milRender(){
 
   // Tab header
   var h='<div class="flex-row-4">';
-  h+='<span data-tab="main" onclick="milSwitchTab(this.dataset.tab)" style="font-size:10px;padding:3px 10px;border:1px solid '+(milTab==='main'?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(milTab==='main'?'var(--cg)':'var(--dim)')+';cursor:pointer">MAIN</span>';
-  h+='<span data-tab="settings" onclick="milSwitchTab(this.dataset.tab)" style="font-size:10px;padding:3px 10px;border:1px solid '+(milTab==='settings'?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(milTab==='settings'?'var(--cg)':'var(--dim)')+';cursor:pointer">&#9881; SETTINGS</span>';
+  h+='<span data-tab="main" onclick="milSwitchTab(this.dataset.tab)" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+(milTab==='main'?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(milTab==='main'?'var(--cg)':'var(--dim)')+';cursor:pointer">MAIN</span>';
+  h+='<span data-tab="settings" onclick="milSwitchTab(this.dataset.tab)" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+(milTab==='settings'?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(milTab==='settings'?'var(--cg)':'var(--dim)')+';cursor:pointer">&#9881; SETTINGS</span>';
   h+='</div>';
 
   if(milTab==='settings'){
     // ── SETTINGS TAB ──
     h+='<div class="mb-14">';
     h+='<div class="label-dim-xs">BIRTHDAY</div>';
-    h+='<input type="date" id="mil-bday-inp" value="'+(milData.birthday||'')+'" onchange="milSetBirthday(this.value)" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:13px;padding:7px 10px;outline:none;box-sizing:border-box">';
+    h+='<input type="date" id="mil-bday-inp" value="'+(milData.birthday||'')+'" onchange="milSetBirthday(this.value)" style="width:100%;background:transparent;border:1px solid var(--c-faint);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:7px 10px;outline:none;box-sizing:border-box">';
     h+='</div>';
     h+='<div class="mb-14">';
     h+='<div class="label-dim-sm">TARGET AGE</div>';
@@ -5371,20 +5371,20 @@ function milRender(){
       h+='<button class="mil-target-btn'+(target===t?' active':'')+'" data-t="'+t+'" onclick="milSetTarget(+this.dataset.t)">'+t+'</button>';
     });
     h+='</div>';
-    h+='<input type="number" id="mil-custom-target" placeholder="Custom age" min="1" max="120" value="'+(([35,40,45,50,55,60].indexOf(target)<0)?target:'')+'" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:6px 10px;outline:none;box-sizing:border-box" onchange="milSetTarget(+this.value||target)">';
+    h+='<input type="number" id="mil-custom-target" placeholder="Custom age" min="1" max="120" value="'+(([35,40,45,50,55,60].indexOf(target)<0)?target:'')+'" style="width:100%;background:transparent;border:1px solid var(--c-faint);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:6px 10px;outline:none;box-sizing:border-box" onchange="milSetTarget(+this.value||target)">';
     h+='</div>';
     h+='<div class="label-dim-sm">GOALS</div>';
     var goals=milData.goals||[];
     goals.forEach(function(g,i){
-      h+='<div style="display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
-      h+='<span style="flex:1;font-size:12px;color:var(--text)">'+g.name+'</span>';
+      h+='<div style="display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid var(--c-ghost)">';
+      h+='<span style="flex:1;font-size:var(--t-md);color:var(--text)">'+g.name+'</span>';
       h+='<span class="dim-9">'+( g.pct||0)+'%</span>';
-      h+='<button onclick="milDeleteGoal('+i+')" style="font-size:10px;padding:2px 8px;border:1px solid rgba(255,68,68,.3);color:var(--cr);background:transparent;cursor:pointer">✕</button>';
+      h+='<button onclick="milDeleteGoal('+i+')" style="font-size:var(--t-sm);padding:2px 8px;border:1px solid rgba(255,68,68,.3);color:var(--cr);background:transparent;cursor:pointer">✕</button>';
       h+='</div>';
     });
     h+='<div style="display:flex;gap:6px;margin-top:10px">';
-    h+='<input id="mil-new-goal-inp" placeholder="New goal name..." style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:12px;padding:6px 8px;outline:none" onkeydown="if(event.key===String.fromCharCode(13))milAddGoal()">';
-    h+='<button onclick="milAddGoal()" style="padding:6px 12px;background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:11px;cursor:pointer">ADD</button>';
+    h+='<input id="mil-new-goal-inp" placeholder="New goal name..." style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:6px 8px;outline:none" onkeydown="if(event.key===String.fromCharCode(13))milAddGoal()">';
+    h+='<button onclick="milAddGoal()" style="padding:6px 12px;background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:var(--t-base);cursor:pointer">ADD</button>';
     h+='</div>';
   } else {
     // ── MAIN TAB ──
@@ -5397,20 +5397,20 @@ function milRender(){
       h+='</div>';
       h+='<div class="mil-age-display">'+( age!==null?'Currently '+age+' years old':'')+'</div>';
     } else {
-      h+='<div style="color:var(--dim);font-size:12px;text-align:center;padding:20px 0;line-height:1.8">Set your birthday and target age<br>in ⚙ SETTINGS above.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-md);text-align:center;padding:20px 0;line-height:1.8">Set your birthday and target age<br>in ⚙ SETTINGS above.</div>';
     }
 
     // Goals with chat-style notes
     var goals=milData.goals||[];
     if(goals.length){
-      h+='<div style="font-size:9px;letter-spacing:2px;color:var(--dim);margin:14px 0 8px">GOALS FOR '+target+'</div>';
+      h+='<div style="font-size:var(--t-xs);letter-spacing:2px;color:var(--dim);margin:14px 0 8px">GOALS FOR '+target+'</div>';
       goals.forEach(function(g,i){
         h+='<div class="mil-goal-row" class="mb-12">';
         // Goal name + % input
         h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">';
         h+='<span class="mil-goal-name" style="flex:1">'+g.name+'</span>';
         h+='<div style="display:flex;align-items:center;gap:4px">';
-        h+='<input type="number" min="0" max="100" value="'+(g.pct||0)+'" data-gi="'+i+'" onchange="milSetPct(+this.dataset.gi,+this.value)" style="width:48px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--cg);font-family:monospace;font-size:12px;padding:3px 6px;outline:none;text-align:center">';
+        h+='<input type="number" min="0" max="100" value="'+(g.pct||0)+'" data-gi="'+i+'" onchange="milSetPct(+this.dataset.gi,+this.value)" style="width:48px;background:transparent;border:1px solid var(--c-faint);color:var(--cg);font-family:monospace;font-size:var(--t-md);padding:3px 6px;outline:none;text-align:center">';
         h+='<span class="dim-10">%</span>';
         h+='</div>';
         h+='</div>';
@@ -5424,22 +5424,22 @@ function milRender(){
           h+='<div style="margin-top:6px;display:flex;flex-direction:column;gap:4px;'+(notes.length>5?'max-height:180px;overflow-y:auto;padding-right:4px':'')+'">';
           notes.forEach(function(n,ni){
             var ts=n.ts?new Date(n.ts).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}):'';
-            h+='<div style="background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.12);padding:5px 10px;font-size:11px;color:var(--dim);display:flex;justify-content:space-between;align-items:flex-start;gap:6px">';
-            h+='<div style="flex:1"><div style="line-height:1.5;color:var(--text)">'+n.text+'</div>'+(ts?'<div style="font-size:9px;color:var(--dim);opacity:.6;margin-top:2px">'+ts+'</div>':'')+'</div>';
-            h+='<span data-gi="'+i+'" data-ni="'+ni+'" onclick="milDeleteNote(+this.dataset.gi,+this.dataset.ni)" style="color:var(--dim);cursor:pointer;opacity:.4;font-size:10px;flex-shrink:0">✕</span>';
+            h+='<div style="background:rgba(255,255,255,.04);border-left:2px solid rgba(255,255,255,.12);padding:5px 10px;font-size:var(--t-base);color:var(--dim);display:flex;justify-content:space-between;align-items:flex-start;gap:6px">';
+            h+='<div style="flex:1"><div style="line-height:1.5;color:var(--text)">'+n.text+'</div>'+(ts?'<div style="font-size:var(--t-xs);color:var(--dim);opacity:.6;margin-top:2px">'+ts+'</div>':'')+'</div>';
+            h+='<span data-gi="'+i+'" data-ni="'+ni+'" onclick="milDeleteNote(+this.dataset.gi,+this.dataset.ni)" style="color:var(--dim);cursor:pointer;opacity:.4;font-size:var(--t-sm);flex-shrink:0">✕</span>';
             h+='</div>';
           });
           h+='</div>';
         }
         // Note input
         h+='<div style="display:flex;gap:4px;margin-top:5px">';
-        h+='<input id="mil-note-'+i+'" placeholder="Add note..." style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:11px;padding:3px 2px;outline:none" onkeydown="if(event.key===String.fromCharCode(13))milAddNote('+i+')">';
-        h+='<button onclick="milAddNote('+i+')" style="font-size:10px;padding:2px 8px;border:1px solid rgba(255,255,255,.1);color:var(--dim);background:transparent;cursor:pointer">+</button>';
+        h+='<input id="mil-note-'+i+'" placeholder="Add note..." style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-base);padding:3px 2px;outline:none" onkeydown="if(event.key===String.fromCharCode(13))milAddNote('+i+')">';
+        h+='<button onclick="milAddNote('+i+')" style="font-size:var(--t-sm);padding:2px 8px;border:1px solid var(--c-border);color:var(--dim);background:transparent;cursor:pointer">+</button>';
         h+='</div>';
         h+='</div>';
       });
     } else {
-      h+='<div style="color:var(--dim);font-size:11px;margin-top:12px">No goals yet — add them in ⚙ SETTINGS.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-base);margin-top:12px">No goals yet — add them in ⚙ SETTINGS.</div>';
     }
   }
 
@@ -5563,16 +5563,16 @@ function wSummaryRender(){
   else{tone='You did something this week. That is not nothing.';}
 
   var h='';
-  h+='<div style="font-size:11px;color:rgba(126,184,255,.7);line-height:1.7;margin-bottom:12px;font-style:italic">'+tone+'</div>';
+  h+='<div style="font-size:var(--t-base);color:rgba(126,184,255,.7);line-height:1.7;margin-bottom:12px;font-style:italic">'+tone+'</div>';
   if(things.length){
     h+='<div class="mb-14">';
     things.forEach(function(t){
       h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
-      h+='<span style="color:#7eb8ff;font-size:14px">&#8226;</span><span class="text-12">'+t+'</span></div>';
+      h+='<span style="color:#7eb8ff;font-size:var(--t-body)">&#8226;</span><span class="text-12">'+t+'</span></div>';
     });
     h+='</div>';
   } else {
-    h+='<div style="font-size:11px;color:var(--dim);opacity:.6;margin-bottom:14px">Nothing logged this week yet. The week is not over.</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);opacity:.6;margin-bottom:14px">Nothing logged this week yet. The week is not over.</div>';
   }
   var _wsNow=new Date();
 var _wsDow=_wsNow.getDay();
@@ -5585,8 +5585,8 @@ var _wsSentence='';
 if(_wsDow===0)_wsSentence='This summary is for last week. Next summary appears next Sunday.';
 else if(_wsDow===1)_wsSentence='Last week is now closed. This summary disappears today. Next in '+_wsTimeStr+'.';
 else _wsSentence='Next weekly summary in '+_wsTimeStr+'.';
-h+='<div style="font-size:10px;color:var(--dim);margin-bottom:10px;padding:5px 8px;border-left:2px solid rgba(126,184,255,.2);line-height:1.6">'+_wsSentence+'</div>';
-h+='<button id="wsum-dismiss" style="width:100%;padding:8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">CLOSE FOR THIS WEEK</button>';
+h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:10px;padding:5px 8px;border-left:2px solid rgba(126,184,255,.2);line-height:1.6">'+_wsSentence+'</div>';
+h+='<button id="wsum-dismiss" style="width:100%;padding:8px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">CLOSE FOR THIS WEEK</button>';
   el.innerHTML=h;
   var btn=document.getElementById('wsum-dismiss');
   if(btn)btn.onclick=function(){localStorage.setItem(dismissKey,'1');tile.style.display='none';safeToast('See you next week');};
@@ -5622,13 +5622,13 @@ function certRender(){
   h+='<div style="display:flex;gap:6px;margin-bottom:12px">';
   [{t:'list',l:'LIST'},{t:'add',l:'+ ADD'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-certtab="'+x.t+'" style="font-size:9px;padding:3px 12px;border:1px solid '+(a?'rgba(80,250,200,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#50fac8':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-certtab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 12px;border:1px solid '+(a?'rgba(80,250,200,.5)':'var(--c-border)')+';color:'+(a?'#50fac8':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
   if(tab==='list'){
     if(!sorted.length){
-      h+='<div style="font-size:11px;color:var(--dim);padding:20px 0;text-align:center">No certifications yet.<br>Tap + ADD to get started.</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--dim);padding:20px 0;text-align:center">No certifications yet.<br>Tap + ADD to get started.</div>';
     } else {
       sorted.forEach(function(c){
         var exp=new Date(c.expiry);
@@ -5640,29 +5640,29 @@ function certRender(){
         var status=expired?'EXPIRED':(urgent||warning)?daysLeft+'d left':'';
         var expStr=exp.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
         var notesOpen=!!(certNotesOpen&&certNotesOpen[c.id]);
-        h+='<div style="border-bottom:1px solid rgba(255,255,255,.06);padding:8px 0">';
+        h+='<div style="border-bottom:1px solid var(--c-ghost);padding:8px 0">';
         h+='<div class="flex-center">';
         h+='<div class="flex-1">';
         h+='<div class="text-12">'+c.name+'</div>';
         if(c.issuer)h+='<div class="dim-9">'+c.issuer+'</div>';
         h+='</div>';
         h+='<div style="text-align:right;flex-shrink:0">';
-        h+='<div style="font-size:10px;color:'+col+'">'+expStr+'</div>';
-        if(status)h+='<div style="font-size:9px;font-weight:bold;color:'+col+'">'+status+'</div>';
+        h+='<div style="font-size:var(--t-sm);color:'+col+'">'+expStr+'</div>';
+        if(status)h+='<div style="font-size:var(--t-xs);font-weight:bold;color:'+col+'">'+status+'</div>';
         h+='</div>';
-        h+='<button data-certnotes="'+c.id+'" style="flex-shrink:0;background:transparent;border:none;color:'+(notesOpen?'#50fac8':'rgba(255,255,255,.3)')+';font-size:11px;cursor:pointer;padding:0 3px">📝</button>';
-        h+='<button data-certdel="'+c.id+'" style="flex-shrink:0;background:transparent;border:none;color:rgba(255,255,255,.25);font-size:13px;cursor:pointer;padding:0 2px">✕</button>';
+        h+='<button data-certnotes="'+c.id+'" style="flex-shrink:0;background:transparent;border:none;color:'+(notesOpen?'#50fac8':'rgba(255,255,255,.3)')+';font-size:var(--t-base);cursor:pointer;padding:0 3px">📝</button>';
+        h+='<button data-certdel="'+c.id+'" style="flex-shrink:0;background:transparent;border:none;color:rgba(255,255,255,.25);font-size:var(--t-lg);cursor:pointer;padding:0 2px">✕</button>';
         h+='</div>';
         if(notesOpen){
-          h+='<textarea data-certnotesinp="'+c.id+'" style="width:100%;box-sizing:border-box;background:rgba(80,250,200,.04);border:1px solid rgba(80,250,200,.15);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;outline:none;resize:vertical;min-height:56px;margin-top:6px">'+( c.notes||'')+'</textarea>';
-          h+='<button data-certnotessave="'+c.id+'" style="margin-top:4px;padding:4px 12px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.25);color:#50fac8;font-family:monospace;font-size:10px;cursor:pointer">SAVE</button>';
+          h+='<textarea data-certnotesinp="'+c.id+'" style="width:100%;box-sizing:border-box;background:rgba(80,250,200,.04);border:1px solid rgba(80,250,200,.15);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;outline:none;resize:vertical;min-height:56px;margin-top:6px">'+( c.notes||'')+'</textarea>';
+          h+='<button data-certnotessave="'+c.id+'" style="margin-top:4px;padding:4px 12px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.25);color:#50fac8;font-family:monospace;font-size:var(--t-sm);cursor:pointer">SAVE</button>';
         } else if(c.notes){
-          h+='<div style="font-size:10px;color:var(--dim);padding:3px 0;line-height:1.5">'+c.notes+'</div>';
+          h+='<div style="font-size:var(--t-sm);color:var(--dim);padding:3px 0;line-height:1.5">'+c.notes+'</div>';
         }
         if(c.certKey){
           h+='<div style="display:flex;align-items:center;gap:6px;padding:3px 0">';
-          h+='<span style="font-size:9px;color:rgba(80,250,200,.5);font-family:monospace">'+c.certKey+'</span>';
-          h+='<button data-certkeycopy="'+c.id+'" style="font-size:9px;padding:1px 7px;background:transparent;border:1px solid rgba(80,250,200,.2);color:rgba(80,250,200,.5);font-family:monospace;cursor:pointer">📋</button>';
+          h+='<span style="font-size:var(--t-xs);color:rgba(80,250,200,.5);font-family:monospace">'+c.certKey+'</span>';
+          h+='<button data-certkeycopy="'+c.id+'" style="font-size:var(--t-xs);padding:1px 7px;background:transparent;border:1px solid rgba(80,250,200,.2);color:rgba(80,250,200,.5);font-family:monospace;cursor:pointer">📋</button>';
           h+='</div>';
         }
         h+='</div>';
@@ -5671,22 +5671,22 @@ function certRender(){
   } else {
     // ADD tab
     var _kw=certData._keyword;
-    h+='<input id="cert-inp-name" placeholder="Name (e.g. CPR, CNMT License)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.2);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:6px;outline:none">';
-    h+='<input id="cert-inp-issuer" placeholder="Issuer (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:6px;outline:none">';
-    h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><span style="font-size:9px;color:var(--dim);flex-shrink:0">EXPIRES</span><input id="cert-inp-expiry" type="date" style="flex:1;background:transparent;border:1px solid rgba(80,250,200,.2);color:var(--text);font-family:monospace;font-size:11px;padding:5px 8px;outline:none"></div>';
-    h+='<textarea id="cert-inp-notes" placeholder="Notes (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:8px;outline:none;resize:vertical;min-height:48px"></textarea>';
+    h+='<input id="cert-inp-name" placeholder="Name (e.g. CPR, CNMT License)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:6px;outline:none">';
+    h+='<input id="cert-inp-issuer" placeholder="Issuer (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:6px;outline:none">';
+    h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><span style="font-size:var(--t-xs);color:var(--dim);flex-shrink:0">EXPIRES</span><input id="cert-inp-expiry" type="date" style="flex:1;background:transparent;border:1px solid rgba(80,250,200,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:5px 8px;outline:none"></div>';
+    h+='<textarea id="cert-inp-notes" placeholder="Notes (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none;resize:vertical;min-height:48px"></textarea>';
     h+=
-    h+='<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:8px;outline:none">';
-    '<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:8px;outline:none">';
-    '<button id="cert-add-btn" style="width:100%;padding:9px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.3);color:#50fac8;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px;margin-bottom:16px">+ ADD CERTIFICATION</button>';
+    h+='<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none">';
+    '<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none">';
+    '<button id="cert-add-btn" style="width:100%;padding:9px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.3);color:#50fac8;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px;margin-bottom:16px">+ ADD CERTIFICATION</button>';
     // Keyword section at bottom of add tab
     h+='<div style="border-top:1px solid rgba(255,255,255,.08);padding-top:12px">';
-    h+='<div style="font-size:9px;color:rgba(80,250,200,.5);letter-spacing:1px;margin-bottom:6px">GMAIL SEARCH KEYWORD</div>';
-    h+='<div style="font-size:14px;color:#50fac8;font-family:monospace;letter-spacing:2px;margin-bottom:4px">'+_kw+'</div>';
-    h+='<div style="font-size:9px;color:var(--dim);line-height:1.5;margin-bottom:8px">Include this keyword in any email you send yourself about a cert. Search Gmail for it to find all your cert emails.</div>';
+    h+='<div style="font-size:var(--t-xs);color:rgba(80,250,200,.5);letter-spacing:1px;margin-bottom:6px">GMAIL SEARCH KEYWORD</div>';
+    h+='<div style="font-size:var(--t-body);color:#50fac8;font-family:monospace;letter-spacing:2px;margin-bottom:4px">'+_kw+'</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);line-height:1.5;margin-bottom:8px">Include this keyword in any email you send yourself about a cert. Search Gmail for it to find all your cert emails.</div>';
     h+='<div class="flex-row">';
-    h+='<button data-certkwcopy="1" style="padding:4px 12px;background:transparent;border:1px solid rgba(80,250,200,.2);color:rgba(80,250,200,.6);font-family:monospace;font-size:9px;cursor:pointer">📋 COPY</button>';
-    h+='<button data-certkwregen="1" style="padding:4px 12px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer">↻ REGENERATE</button>';
+    h+='<button data-certkwcopy="1" style="padding:4px 12px;background:transparent;border:1px solid rgba(80,250,200,.2);color:rgba(80,250,200,.6);font-family:monospace;font-size:var(--t-xs);cursor:pointer">📋 COPY</button>';
+    h+='<button data-certkwregen="1" style="padding:4px 12px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer">↻ REGENERATE</button>';
     h+='</div></div>';
   }
 
@@ -5809,7 +5809,7 @@ function medRender(){
   h+='<div style="display:flex;gap:5px;margin-bottom:12px;flex-wrap:wrap">';
   tabs.forEach(function(x){
     var a=medTab===x.t;
-    h+='<span data-medtab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(200,150,255,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#c896ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-medtab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(200,150,255,.5)':'var(--c-border)')+';color:'+(a?'#c896ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -5817,7 +5817,7 @@ function medRender(){
 
   if(medTab==='today'){
     if(!medData.meds.length){
-      h+='<div style="font-size:11px;color:var(--dim);text-align:center;padding:20px 0">No medicines yet.<br>Add them in ⚙ MANAGE.</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--dim);text-align:center;padding:20px 0">No medicines yet.<br>Add them in ⚙ MANAGE.</div>';
     } else {
       h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">';
       medData.meds.forEach(function(m){
@@ -5833,17 +5833,17 @@ function medRender(){
         var bg=takenToday?'rgba('+hexToRgb(col)+',.12)':'rgba(255,255,255,.03)';
         var border=takenToday?col:(pending?'rgba(255,184,108,.6)':'rgba(255,255,255,.12)');
         h+='<div data-medlog="'+m.id+'" style="padding:14px 10px;border:1px solid '+border+';background:'+bg+';cursor:pointer;text-align:center;user-select:none">';
-        h+='<div style="font-size:13px;font-weight:bold;color:'+col+';font-family:monospace;margin-bottom:4px">'+m.name+'</div>';
-        if(m.dose)h+='<div style="font-size:9px;color:var(--dim);margin-bottom:6px">'+m.dose+'</div>';
+        h+='<div style="font-size:var(--t-lg);font-weight:bold;color:'+col+';font-family:monospace;margin-bottom:4px">'+m.name+'</div>';
+        if(m.dose)h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:6px">'+m.dose+'</div>';
         if(pending){
-          h+='<div style="font-size:9px;color:rgba(255,184,108,.9);letter-spacing:1px">TAP AGAIN ✓</div>';
+          h+='<div style="font-size:var(--t-xs);color:rgba(255,184,108,.9);letter-spacing:1px">TAP AGAIN ✓</div>';
         } else if(takenToday){
           var hrsAgo=Math.floor((now-new Date(lastLog.ts))/36e5);
           var minsAgo=Math.floor((now-new Date(lastLog.ts))/6e4)%60;
           var timeStr=hrsAgo>0?hrsAgo+'h ago':minsAgo+'m ago';
-          h+='<div style="font-size:9px;color:'+col+'">✓ '+timeStr+'</div>';
+          h+='<div style="font-size:var(--t-xs);color:'+col+'">✓ '+timeStr+'</div>';
         } else {
-          h+='<div style="font-size:9px;color:rgba(255,255,255,.25)">tap to log</div>';
+          h+='<div style="font-size:var(--t-xs);color:rgba(255,255,255,.25)">tap to log</div>';
         }
         h+='</div>';
       });
@@ -5864,7 +5864,7 @@ function medRender(){
       var dates=Object.keys(byDate).sort().reverse();
       dates.slice(0,30).forEach(function(d){
         var label=new Date(d+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-        h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin:10px 0 4px">'+label+'</div>';
+        h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 4px">'+label+'</div>';
         byDate[d].slice().reverse().forEach(function(e){
           var m=medData.meds.find(function(x){return x.id===e.mid;})||{name:e.mname||'?',color:'#c896ff'};
           var t=new Date(e.ts);
@@ -5875,11 +5875,11 @@ function medRender(){
           h+='<div class="text-11-flex">'+m.name+'</div>';
           if(m.dose)h+='<div class="dim-9">'+m.dose+'</div>';
           h+='<div class="dim-10">'+timeStr+'</div>';
-          h+='<button data-meddel="'+e.ts+'|'+e.mid+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:11px;cursor:pointer">✕</button>';
+          h+='<button data-meddel="'+e.ts+'|'+e.mid+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-base);cursor:pointer">✕</button>';
           h+='</div>';
         });
       });
-      h+='<button id="med-export-btn" style="width:100%;margin-top:14px;padding:8px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">📋 COPY LOG TO CLIPBOARD</button>';
+      h+='<button id="med-export-btn" style="width:100%;margin-top:14px;padding:8px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">📋 COPY LOG TO CLIPBOARD</button>';
     }
 
   } else if(medTab==='pk'){
@@ -5909,7 +5909,7 @@ function medRender(){
         var barH=Math.max(pct*52,c>0?4:0);
         var isToday=d===now.toISOString().slice(0,10);
         h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:60px">';
-        if(c>0)h+='<div style="font-size:7px;color:var(--dim);margin-bottom:2px">'+c+'</div>';
+        if(c>0)h+='<div style="font-size:var(--t-xxs);color:var(--dim);margin-bottom:2px">'+c+'</div>';
         h+='<div style="width:100%;height:'+barH+'px;background:'+(isToday?'#c896ff':'rgba(200,150,255,.4)')+';min-height:'+(c>0?'4px':'0')+'"></div>';
         h+='</div>';
       });
@@ -5918,7 +5918,7 @@ function medRender(){
       h+='<div style="display:flex;gap:3px;margin-bottom:16px">';
       days14.forEach(function(d,i){
         var label=i%4===0?new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'numeric',day:'numeric'}):'';
-        h+='<div style="flex:1;font-size:7px;color:rgba(255,255,255,.25);text-align:center">'+label+'</div>';
+        h+='<div style="flex:1;font-size:var(--t-xxs);color:rgba(255,255,255,.25);text-align:center">'+label+'</div>';
       });
       h+='</div>';
       // Per-med stats
@@ -5937,7 +5937,7 @@ function medRender(){
           if(medData.log.some(function(e){return e.mid===m.id&&e.ts.slice(0,10)===ds;})){streak++;d.setDate(d.getDate()-1);}
           else break;
         }
-        h+='<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
+        h+='<div style="padding:8px 0;border-bottom:1px solid var(--c-ghost)">';
         h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">';
         h+='<div style="width:10px;height:10px;border-radius:50%;background:'+col+'"></div>';
         h+='<span class="text-11">'+m.name+'</span>';
@@ -5950,36 +5950,36 @@ function medRender(){
   } else if(medTab==='manage'){
     h+='<div class="label-dim-md">YOUR MEDICINES</div>';
     if(!medData.meds.length){
-      h+='<div style="font-size:11px;color:var(--dim);margin-bottom:12px">None yet. Add below.</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--dim);margin-bottom:12px">None yet. Add below.</div>';
     } else {
       medData.meds.forEach(function(m,idx){
         var col=m.color||'#c896ff';
-        h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)">';
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--c-ghost)">';
         h+='<div style="width:12px;height:12px;border-radius:50%;background:'+col+';flex-shrink:0"></div>';
         h+='<div style="flex:1"><div class="text-12">'+m.name+'</div>';
         if(m.dose)h+='<div class="dim-9">'+m.dose+'</div></div>';
         else h+='</div>';
-        h+='<button data-meddelmeds="'+m.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.25);font-size:13px;cursor:pointer;padding:0 4px">✕</button>';
+        h+='<button data-meddelmeds="'+m.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.25);font-size:var(--t-lg);cursor:pointer;padding:0 4px">✕</button>';
         h+='</div>';
       });
     }
     // Add form
     h+='<div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px">';
     h+='<div class="label-dim">ADD MEDICINE</div>';
-    h+='<input id="med-inp-name" placeholder="Name (e.g. Loratadine)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.2);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:6px;outline:none">';
-    h+='<input id="med-inp-dose" placeholder="Dose label (e.g. 10mg) — optional" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:11px;padding:6px 8px;margin-bottom:6px;outline:none">';
+    h+='<input id="med-inp-name" placeholder="Name (e.g. Loratadine)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:6px;outline:none">';
+    h+='<input id="med-inp-dose" placeholder="Dose label (e.g. 10mg) — optional" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:6px;outline:none">';
     h+='<div style="display:flex;gap:6px;margin-bottom:8px">';
-    h+='<div style="flex:1"><div style="font-size:9px;color:var(--dim);margin-bottom:3px">TMAX (hrs to peak)</div><input id="med-inp-tmax" type="number" min="0.5" max="12" step="0.5" value="2" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:11px;padding:5px 8px;outline:none"></div>';
-    h+='<div style="flex:1"><div style="font-size:9px;color:var(--dim);margin-bottom:3px">HALF-LIFE (hrs)</div><input id="med-inp-hl" type="number" min="1" max="72" step="0.5" value="8" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:11px;padding:5px 8px;outline:none"></div>';
+    h+='<div style="flex:1"><div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:3px">TMAX (hrs to peak)</div><input id="med-inp-tmax" type="number" min="0.5" max="12" step="0.5" value="2" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:5px 8px;outline:none"></div>';
+    h+='<div style="flex:1"><div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:3px">HALF-LIFE (hrs)</div><input id="med-inp-hl" type="number" min="1" max="72" step="0.5" value="8" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(200,150,255,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:5px 8px;outline:none"></div>';
     h+='</div>';
-    h+='<div style="font-size:9px;color:var(--dim);margin-bottom:6px;letter-spacing:1px">BUTTON COLOR</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:6px;letter-spacing:1px">BUTTON COLOR</div>';
     h+='<div class="flex-row-mb">';
     MED_COLORS.forEach(function(col,ci){
-      h+='<div data-medcol="'+col+'" style="width:22px;height:22px;border-radius:50%;background:'+col+';cursor:pointer;border:2px solid rgba(255,255,255,.15)"></div>';
+      h+='<div data-medcol="'+col+'" style="width:22px;height:22px;border-radius:50%;background:'+col+';cursor:pointer;border:2px solid var(--c-faint)"></div>';
     });
     h+='</div>';
     h+='<input type="hidden" id="med-inp-color" value="'+MED_COLORS[0]+'">';
-    h+='<button id="med-add-btn" style="width:100%;padding:9px;background:rgba(200,150,255,.06);border:1px solid rgba(200,150,255,.3);color:#c896ff;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">+ ADD</button>';
+    h+='<button id="med-add-btn" style="width:100%;padding:9px;background:rgba(200,150,255,.06);border:1px solid rgba(200,150,255,.3);color:#c896ff;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">+ ADD</button>';
     h+='</div>';
   }
 
@@ -6066,7 +6066,7 @@ function medRender(){
   el.querySelectorAll('[data-medcol]').forEach(function(dot){
     dot.onclick=function(){
       if(colorInp)colorInp.value=this.dataset.medcol;
-      el.querySelectorAll('[data-medcol]').forEach(function(d){d.style.borderColor='rgba(255,255,255,.15)';});
+      el.querySelectorAll('[data-medcol]').forEach(function(d){d.style.borderColor='var(--c-faint)';});
       this.style.borderColor='#fff';
     };
   });
@@ -6088,7 +6088,7 @@ function medRender(){
 
 function medRenderPK(){
   if(!medData.meds.length||!medData.log.length)
-    return '<div style="font-size:11px;color:var(--dim);padding:20px 0;text-align:center">Log some doses to see the curve.</div>';
+    return '<div style="font-size:var(--t-base);color:var(--dim);padding:20px 0;text-align:center">Log some doses to see the curve.</div>';
 
   var W=320,H=180,PAD={t:20,r:10,b:30,l:36};
   var plotW=W-PAD.l-PAD.r, plotH=H-PAD.t-PAD.b;
@@ -6148,7 +6148,7 @@ function medRenderPK(){
   // Grid lines (horizontal)
   for(var g=0;g<=4;g++){
     var gy=PAD.t+plotH-g/4*plotH;
-    svg+='<line x1="'+PAD.l+'" y1="'+gy.toFixed(1)+'" x2="'+(PAD.l+plotW)+'" y2="'+gy.toFixed(1)+'" stroke="rgba(255,255,255,.06)" stroke-width="1"/>';
+    svg+='<line x1="'+PAD.l+'" y1="'+gy.toFixed(1)+'" x2="'+(PAD.l+plotW)+'" y2="'+gy.toFixed(1)+'" stroke="var(--c-ghost)" stroke-width="1"/>';
     if(g>0){
       var label=(g/4*100).toFixed(0)+'%';
       svg+='<text x="'+(PAD.l-4)+'" y="'+(gy+4).toFixed(1)+'" text-anchor="end" font-family="monospace" font-size="7" fill="rgba(255,255,255,.3)">'+label+'</text>';
@@ -6208,10 +6208,10 @@ function medRenderPK(){
   h+=svg;
 
   h+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px">';
-  h+='<button data-medpkiso="all" style="padding:3px 10px;font-size:9px;font-family:monospace;cursor:pointer;border:1px solid '+(isolated?'rgba(255,255,255,.15)':'rgba(255,255,255,.4)')+';background:transparent;color:'+(isolated?'var(--dim)':'var(--text)')+'">ALL</button>';
+  h+='<button data-medpkiso="all" style="padding:3px 10px;font-size:var(--t-xs);font-family:monospace;cursor:pointer;border:1px solid '+(isolated?'var(--c-faint)':'rgba(255,255,255,.4)')+';background:transparent;color:'+(isolated?'var(--dim)':'var(--text)')+'">ALL</button>';
   medData.meds.forEach(function(m){
     var isol=isolated===m.id;
-    h+='<button data-medpkiso="'+m.id+'" style="padding:3px 10px;font-size:9px;font-family:monospace;cursor:pointer;border:1px solid '+(isol?m.color:'rgba(255,255,255,.15)')+';color:'+(isol?m.color:'var(--dim)')+';background:'+(isol?'rgba(255,255,255,.04)':'transparent')+'">'+m.name+'</button>';
+    h+='<button data-medpkiso="'+m.id+'" style="padding:3px 10px;font-size:var(--t-xs);font-family:monospace;cursor:pointer;border:1px solid '+(isol?m.color:'var(--c-faint)')+';color:'+(isol?m.color:'var(--dim)')+';background:'+(isol?'rgba(255,255,255,.04)':'transparent')+'">'+m.name+'</button>';
   });
   h+='</div>';
 
@@ -6225,5 +6225,164 @@ function hexToRgb(hex){
 }
 
 setTimeout(function(){medRender();},400);
+
+// ── MEAL PREP ──
+var mpData = lsGet('dash_mp', {meals:[]});
+if(!mpData.meals)mpData.meals=[];
+function mpSave(){ lsSet('dash_mp', mpData); }
+
+function mpRender(){
+  var el=document.getElementById('mp-body');
+  var badge=document.getElementById('mp-badge');
+  if(!el)return;
+
+  var meals=mpData.meals;
+
+  // Badge: unchecked items count
+  var total=0,done=0;
+  meals.forEach(function(m){
+    (m.items||[]).forEach(function(it){ total++; if(it.done)done++; });
+  });
+  if(badge){
+    if(total>0){ badge.textContent=done+'/'+total; badge.style.display=''; }
+    else badge.style.display='none';
+  }
+
+  var h='';
+
+  // Add meal input
+  h+='<div style="display:flex;gap:6px;margin-bottom:12px">';
+  h+='<input id="mp-new-meal" placeholder="Add a meal..." style="flex:1;background:transparent;border:1px solid rgba(255,140,66,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:7px 9px;outline:none">';
+  h+='<button id="mp-add-meal" style="padding:7px 12px;background:rgba(255,140,66,.08);border:1px solid rgba(255,140,66,.3);color:rgba(255,140,66,.8);font-family:monospace;font-size:var(--t-base);cursor:pointer">+</button>';
+  h+='</div>';
+
+  if(!meals.length){
+    h+='<div class="empty-msg">No meals added yet.</div>';
+  } else {
+    meals.forEach(function(meal,mi){
+      var items=meal.items||[];
+      var mDone=items.filter(function(it){return it.done;}).length;
+      var allDone=items.length>0&&mDone===items.length;
+
+      h+='<div style="border:1px solid rgba(255,140,66,'+(allDone?'.4':'.15')+');background:rgba(255,140,66,'+(allDone?'.06':'.02')+');padding:10px;margin-bottom:8px">';
+
+      // Meal header
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+      h+='<div style="font-size:var(--t-lg);color:rgba(255,140,66,.9);flex:1;font-family:monospace">'+(allDone?'✓ ':'')+meal.name+'</div>';
+      if(items.length>0)h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+mDone+'/'+items.length+'</span>';
+      h+='<button data-mp-del-meal="'+mi+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-md);cursor:pointer">✕</button>';
+      h+='</div>';
+
+      // Checklist items
+      items.forEach(function(it,ii){
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
+        h+='<div data-mp-toggle="'+mi+'-'+ii+'" style="width:16px;height:16px;border:1px solid rgba(255,140,66,'+(it.done?'.6':'.25')+');background:'+(it.done?'rgba(255,140,66,.2)':'transparent')+';cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:var(--t-sm);color:rgba(255,140,66,.8)">'+(it.done?'✓':'')+'</div>';
+        h+='<span style="font-size:var(--t-base);color:'+(it.done?'var(--dim)':'var(--text)')+';flex:1;'+(it.done?'text-decoration:line-through;':'')+'">'+it.text+'</span>';
+        h+='<button data-mp-del-item="'+mi+'-'+ii+'" style="background:transparent;border:none;color:var(--c-faint);font-size:var(--t-base);cursor:pointer">✕</button>';
+        h+='</div>';
+      });
+
+      // Add item input
+      h+='<div style="display:flex;gap:5px;margin-top:7px">';
+      h+='<input data-mp-inp="'+mi+'" placeholder="Add prep step..." style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 7px;outline:none">';
+      h+='<button data-mp-add-item="'+mi+'" style="padding:5px 10px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer">+</button>';
+      h+='</div>';
+
+      h+='</div>';
+    });
+
+    // Clear done button if any done
+    if(done>0){
+      h+='<button id="mp-clear-done" style="width:100%;padding:7px;background:transparent;border:1px dashed var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px;margin-top:4px">CLEAR COMPLETED ('+done+')</button>';
+    }
+  }
+
+  el.innerHTML=h;
+
+  // Wire add meal
+  var addMealBtn=el.querySelector('#mp-add-meal');
+  var addMealInp=el.querySelector('#mp-new-meal');
+  function doAddMeal(){
+    var v=(addMealInp.value||'').trim();
+    if(!v)return;
+    mpData.meals.push({name:v,items:[]});
+    addMealInp.value='';
+    safeHap(HAP.save);
+    mpSave();mpRender();
+  }
+  if(addMealBtn)addMealBtn.onclick=doAddMeal;
+  if(addMealInp)addMealInp.onkeydown=function(e){if(e.key==='Enter')doAddMeal();};
+
+  // Wire delete meal
+  el.querySelectorAll('[data-mp-del-meal]').forEach(function(btn){
+    btn.onclick=function(){
+      var mi=parseInt(this.dataset.mpDelMeal);
+      mpData.meals.splice(mi,1);
+      mpSave();mpRender();
+    };
+  });
+
+  // Wire toggle item
+  el.querySelectorAll('[data-mp-toggle]').forEach(function(box){
+    box.onclick=function(){
+      var p=this.dataset.mpToggle.split('-');
+      var mi=parseInt(p[0]),ii=parseInt(p[1]);
+      mpData.meals[mi].items[ii].done=!mpData.meals[mi].items[ii].done;
+      safeHap(HAP.check);
+      mpSave();mpRender();
+    };
+  });
+
+  // Wire delete item
+  el.querySelectorAll('[data-mp-del-item]').forEach(function(btn){
+    btn.onclick=function(){
+      var p=this.dataset.mpDelItem.split('-');
+      var mi=parseInt(p[0]),ii=parseInt(p[1]);
+      mpData.meals[mi].items.splice(ii,1);
+      mpSave();mpRender();
+    };
+  });
+
+  // Wire add item per meal
+  el.querySelectorAll('[data-mp-add-item]').forEach(function(btn){
+    btn.onclick=function(){
+      var mi=parseInt(this.dataset.mpAddItem);
+      var inp=el.querySelector('[data-mp-inp="'+mi+'"]');
+      var v=(inp?inp.value||'':'').trim();
+      if(!v)return;
+      if(!mpData.meals[mi].items)mpData.meals[mi].items=[];
+      mpData.meals[mi].items.push({text:v,done:false});
+      inp.value='';
+      safeHap(HAP.soft);
+      mpSave();mpRender();
+    };
+  });
+  el.querySelectorAll('[data-mp-inp]').forEach(function(inp){
+    inp.onkeydown=function(e){
+      if(e.key==='Enter'){
+        var mi=parseInt(this.dataset.mpInp);
+        var v=(this.value||'').trim();
+        if(!v)return;
+        if(!mpData.meals[mi].items)mpData.meals[mi].items=[];
+        mpData.meals[mi].items.push({text:v,done:false});
+        this.value='';
+        safeHap(HAP.soft);
+        mpSave();mpRender();
+      }
+    };
+  });
+
+  // Wire clear done
+  var clearBtn=el.querySelector('#mp-clear-done');
+  if(clearBtn)clearBtn.onclick=function(){
+    mpData.meals.forEach(function(m){
+      m.items=(m.items||[]).filter(function(it){return !it.done;});
+    });
+    mpSave();mpRender();
+  };
+}
+
+window.addEventListener('load',function(){if(typeof mpRender==='function')mpRender();});
+// ── END MEAL PREP ──
 
 // ── END OF dashboard-2.js (Part 2 of 3) — continues in dashboard-3.js ──

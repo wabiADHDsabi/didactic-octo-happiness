@@ -71,7 +71,7 @@ function dbRenderBlocks(){
     for(var bi=0;bi<bph;bi++){
       var key=hr+':'+bi;var state=dbData.blocks[key]||null;
       var isNow=(cur.h===hr&&cur.b===bi);
-      var bgCol=state?(colors[state]||DB_DEFAULT_COLORS[state]||'rgba(255,255,255,.15)'):'rgba(255,255,255,.04)';
+      var bgCol=state?(colors[state]||DB_DEFAULT_COLORS[state]||'var(--c-faint)'):'rgba(255,255,255,.04)';
       var cls='db-block'+(isNow?' db-now':'');
       // Compute time range for this block
       var _minsPerBlock=60/bph;
@@ -126,15 +126,15 @@ function dbRender(){
     h+='<div class="label-dim-md">GRID SETUP</div>';
     h+='<div style="display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap">';
     h+='<label class="dim-10">From</label>';
-    h+='<input type="number" min="0" max="23" value="'+startH+'" onchange="dbData.startH=+this.value;dbSave();dbRender()" style="width:48px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px;outline:none;text-align:center">';
+    h+='<input type="number" min="0" max="23" value="'+startH+'" onchange="dbData.startH=+this.value;dbSave();dbRender()" style="width:48px;background:transparent;border:1px solid var(--c-faint);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px;outline:none;text-align:center">';
     h+='<label class="dim-10">to</label>';
-    h+='<input type="number" min="1" max="24" value="'+endH+'" onchange="dbData.endH=+this.value;dbSave();dbRender()" style="width:48px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px;outline:none;text-align:center">';
+    h+='<input type="number" min="1" max="24" value="'+endH+'" onchange="dbData.endH=+this.value;dbSave();dbRender()" style="width:48px;background:transparent;border:1px solid var(--c-faint);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px;outline:none;text-align:center">';
     h+='<label class="dim-10">h</label>';
     h+='</div>';
-    h+='<div class="mb-12"><div style="font-size:10px;color:var(--dim);margin-bottom:6px">BLOCKS PER HOUR</div><div class="flex-row">';
+    h+='<div class="mb-12"><div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:6px">BLOCKS PER HOUR</div><div class="flex-row">';
     [1,2,3,4,5,6,7,8].forEach(function(n){
       var active=bph===n;
-      h+='<button data-dbph="'+n+'" style="padding:4px 7px;background:'+(active?'rgba(199,125,255,.12)':'transparent')+';border:1px solid '+(active?'var(--cpr)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cpr)':'var(--dim)')+';font-family:monospace;font-size:11px;cursor:pointer">'+n+'</button>';
+      h+='<button data-dbph="'+n+'" style="padding:4px 7px;background:'+(active?'rgba(199,125,255,.12)':'transparent')+';border:1px solid '+(active?'var(--cpr)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cpr)':'var(--dim)')+';font-family:monospace;font-size:var(--t-base);cursor:pointer">'+n+'</button>';
     });
     h+='</div></div>';
     DB_STATES.filter(function(s){return s!==null;}).forEach(function(t){
@@ -142,31 +142,31 @@ function dbRender(){
       var name=(dbData.names&&dbData.names[t])||DB_DEFAULT_NAMES[t];
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
       h+='<div style="width:20px;height:20px;border-radius:3px;flex-shrink:0;background:'+col+'"></div>';
-      h+='<input value="'+name+'" data-dbnt="'+t+'" onchange="dbData.names[this.dataset.dbnt]=this.value.trim()||DB_DEFAULT_NAMES[this.dataset.dbnt];dbSave();dbRender()" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:3px 2px;outline:none" placeholder="Type name...">';
+      h+='<input value="'+name+'" data-dbnt="'+t+'" onchange="dbData.names[this.dataset.dbnt]=this.value.trim()||DB_DEFAULT_NAMES[this.dataset.dbnt];dbSave();dbRender()" style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--c-faint);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:3px 2px;outline:none" placeholder="Type name...">';
       h+='<input type="color" value="'+col+'" data-ck="'+t+'" onchange="dbData.colors[this.dataset.ck]=this.value;dbSave();dbRender()" style="width:32px;height:26px;border:none;background:transparent;cursor:pointer;padding:0;flex-shrink:0">';
       h+='</div>';
     });
-    h+='<button id="db-regen-btn" style="margin-top:8px;width:100%;padding:8px;background:transparent;border:1px solid rgba(199,125,255,.3);color:var(--cpr);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">&#8635; REGENERATE</button>';
+    h+='<button id="db-regen-btn" style="margin-top:8px;width:100%;padding:8px;background:transparent;border:1px solid rgba(199,125,255,.3);color:var(--cpr);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">&#8635; REGENERATE</button>';
   } else if(tab==='setup'||tab!=='blocks'){
     // Setup / empty state — show config + BUILD button
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:12px">CONFIGURE YOUR DAY</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:12px">CONFIGURE YOUR DAY</div>';
     h+='<div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap">';
     h+='<span class="dim-11">From</span>';
-    h+='<input type="number" min="0" max="23" value="'+startH+'" onchange="dbData.startH=+this.value;dbSave()" style="width:52px;background:transparent;border:1px solid rgba(199,125,255,.25);color:var(--text);font-family:monospace;font-size:13px;padding:5px;outline:none;text-align:center">';
+    h+='<input type="number" min="0" max="23" value="'+startH+'" onchange="dbData.startH=+this.value;dbSave()" style="width:52px;background:transparent;border:1px solid rgba(199,125,255,.25);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:5px;outline:none;text-align:center">';
     h+='<span class="dim-11">to</span>';
-    h+='<input type="number" min="1" max="24" value="'+endH+'" onchange="dbData.endH=+this.value;dbSave()" style="width:52px;background:transparent;border:1px solid rgba(199,125,255,.25);color:var(--text);font-family:monospace;font-size:13px;padding:5px;outline:none;text-align:center">';
+    h+='<input type="number" min="1" max="24" value="'+endH+'" onchange="dbData.endH=+this.value;dbSave()" style="width:52px;background:transparent;border:1px solid rgba(199,125,255,.25);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:5px;outline:none;text-align:center">';
     h+='<span class="dim-11">h</span>';
     h+='</div>';
-    h+='<div style="margin-bottom:16px"><div style="font-size:10px;color:var(--dim);margin-bottom:8px;letter-spacing:1px">BLOCKS PER HOUR</div><div class="flex-row-8">';
+    h+='<div style="margin-bottom:16px"><div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:8px;letter-spacing:1px">BLOCKS PER HOUR</div><div class="flex-row-8">';
     [1,2,3,4,5,6,7,8].forEach(function(n){
       var active=bph===n;
-      h+='<button data-dbph="'+n+'" style="flex:1;padding:5px 2px;background:'+(active?'rgba(199,125,255,.12)':'transparent')+';border:1px solid '+(active?'var(--cpr)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cpr)':'var(--dim)')+';font-family:monospace;font-size:11px;cursor:pointer">'+n+'</button>';
+      h+='<button data-dbph="'+n+'" style="flex:1;padding:5px 2px;background:'+(active?'rgba(199,125,255,.12)':'transparent')+';border:1px solid '+(active?'var(--cpr)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cpr)':'var(--dim)')+';font-family:monospace;font-size:var(--t-base);cursor:pointer">'+n+'</button>';
     });
-    h+='</div><div style="font-size:9px;color:var(--dim);margin-top:4px;opacity:.6">'+(bph===2?'30 min':bph===3?'20 min':bph===4?'15 min':'10 min')+' per block</div>';
+    h+='</div><div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;opacity:.6">'+(bph===2?'30 min':bph===3?'20 min':bph===4?'15 min':'10 min')+' per block</div>';
     h+='</div>';
     var totalHours=Math.max(0,endH-startH);var totalBlocks=totalHours*bph;
-    h+='<div style="font-size:10px;color:var(--dim);margin-bottom:12px;opacity:.7">'+totalHours+' hours &times; '+bph+' blocks = '+totalBlocks+' total blocks</div>';
-    h+='<button id="db-build-btn" style="width:100%;padding:12px;background:rgba(199,125,255,.1);border:1px solid var(--ca);color:var(--cpr);font-family:monospace;font-size:13px;cursor:pointer;letter-spacing:2px;transition:all .2s">&#9654; BUILD DAY</button>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:12px;opacity:.7">'+totalHours+' hours &times; '+bph+' blocks = '+totalBlocks+' total blocks</div>';
+    h+='<button id="db-build-btn" style="width:100%;padding:12px;background:rgba(199,125,255,.1);border:1px solid var(--ca);color:var(--cpr);font-family:monospace;font-size:var(--t-lg);cursor:pointer;letter-spacing:2px;transition:all .2s">&#9654; BUILD DAY</button>';
   } else {
     // Blocks exist — show the grid
     h+='<div id="db-grid-area"></div>';
@@ -385,11 +385,11 @@ function wlRenderActive(){
   var h='';
   // Date picker for manual sessions
   if(wlActiveSession.manual){
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)">';
-    h+='<span style="font-size:10px;color:var(--dim);white-space:nowrap">SESSION DATE</span>';
-    h+='<input type="date" id="wl-manual-date" value="'+wlActiveSession.date+'" onchange="wlActiveSession.date=this.value;wlActiveSession.startTs=new Date(this.value).getTime();wlActiveSession.endTs=wlActiveSession.startTs;wlSaveActive()" style="flex:1;background:transparent;border:1px solid rgba(255,95,160,.25);color:var(--text);font-family:monospace;font-size:12px;padding:4px 6px;outline:none">';
-    h+='<span style="font-size:10px;color:var(--dim);white-space:nowrap">Duration (min)</span>';
-    h+='<input type="number" id="wl-manual-dur" min="0" max="300" placeholder="60" style="width:52px;background:transparent;border:1px solid rgba(255,95,160,.25);color:var(--text);font-family:monospace;font-size:12px;padding:4px;outline:none;text-align:center" onchange="wlActiveSession.endTs=wlActiveSession.startTs+(+this.value*60000);wlSaveActive()">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px;background:rgba(255,255,255,.04);border:1px solid var(--c-border)">';
+    h+='<span style="font-size:var(--t-sm);color:var(--dim);white-space:nowrap">SESSION DATE</span>';
+    h+='<input type="date" id="wl-manual-date" value="'+wlActiveSession.date+'" onchange="wlActiveSession.date=this.value;wlActiveSession.startTs=new Date(this.value).getTime();wlActiveSession.endTs=wlActiveSession.startTs;wlSaveActive()" style="flex:1;background:transparent;border:1px solid rgba(255,95,160,.25);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 6px;outline:none">';
+    h+='<span style="font-size:var(--t-sm);color:var(--dim);white-space:nowrap">Duration (min)</span>';
+    h+='<input type="number" id="wl-manual-dur" min="0" max="300" placeholder="60" style="width:52px;background:transparent;border:1px solid rgba(255,95,160,.25);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px;outline:none;text-align:center" onchange="wlActiveSession.endTs=wlActiveSession.startTs+(+this.value*60000);wlSaveActive()">';
     h+='</div>';
   }
   wlActiveSession.exercises.forEach(function(ex,ei){
@@ -397,12 +397,12 @@ function wlRenderActive(){
     var mtxt=WL_MUSCLE_TEXT[ex.muscle]||WL_MUSCLE_TEXT.other;
     h+='<div class="wl-ex-row" style="background:'+mcol+';padding:8px;margin-bottom:6px;border-radius:2px">';
     h+='<div class="wl-ex-name"><span style="flex:1">'+ex.name+'</span>';
-    h+='<select data-wlei="'+ei+'" data-wlfield="muscle" style="background:transparent;border:none;color:'+mtxt+';font-size:9px;cursor:pointer;font-family:monospace" onchange="wlUpdateMuscle(+this.dataset.wlei,this.value)">';
+    h+='<select data-wlei="'+ei+'" data-wlfield="muscle" style="background:transparent;border:none;color:'+mtxt+';font-size:var(--t-xs);cursor:pointer;font-family:monospace" onchange="wlUpdateMuscle(+this.dataset.wlei,this.value)">';
     ['chest','back','shoulders','arms','legs','core','cardio','other'].forEach(function(m){
       h+='<option value="'+m+'"'+(ex.muscle===m?' selected':'')+'>'+m+'</option>';
     });
     h+='</select>';
-    h+='<span data-wldex="'+ei+'" style="font-size:10px;color:var(--cr);cursor:pointer;opacity:.5;padding:2px 6px">✕</span>';
+    h+='<span data-wldex="'+ei+'" style="font-size:var(--t-sm);color:var(--cr);cursor:pointer;opacity:.5;padding:2px 6px">✕</span>';
     h+='</div>';
     // Sets
     ex.sets.forEach(function(set,si){
@@ -412,11 +412,11 @@ function wlRenderActive(){
       h+='<span class="wl-set-lbl">×</span>';
       h+='<input class="wl-set-inp" type="number" min="0" data-wlei="'+ei+'" data-wlsi="'+si+'" data-wlf="weight" value="'+set.weight+'" placeholder="lbs" onchange="wlUpdateSet(+this.dataset.wlei,+this.dataset.wlsi,this.dataset.wlf,this.value)" style="width:48px">';
       h+='<span class="wl-set-lbl">lbs</span>';
-      if(ex.sets.length>1)h+='<span data-wldsi="'+si+'" data-wlei="'+ei+'" style="font-size:10px;color:var(--dim);cursor:pointer;opacity:.4">✕</span>';
+      if(ex.sets.length>1)h+='<span data-wldsi="'+si+'" data-wlei="'+ei+'" style="font-size:var(--t-sm);color:var(--dim);cursor:pointer;opacity:.4">✕</span>';
       h+='</div>';
     });
     h+='<div style="display:flex;gap:6px;margin-top:4px">';
-    h+='<span data-wladdset="'+ei+'" style="font-size:10px;color:var(--cp);cursor:pointer;border:1px solid rgba(255,95,160,.3);padding:2px 8px">+ set</span>';
+    h+='<span data-wladdset="'+ei+'" style="font-size:var(--t-sm);color:var(--cp);cursor:pointer;border:1px solid rgba(255,95,160,.3);padding:2px 8px">+ set</span>';
     h+='</div>';
     h+='<input class="wl-note-inp" placeholder="note..." value="'+( ex.note||'')+'" data-wlei="'+ei+'" onchange="wlUpdateNote(+this.dataset.wlei,this.value)">';
     h+='</div>';
@@ -427,9 +427,9 @@ function wlRenderActive(){
   // Recent from history first
   var hist=wlGetHistory().slice(0,6);
   if(hist.length){
-    h+='<div class="mb-8"><div style="font-size:9px;color:var(--cp);opacity:.7;margin-bottom:4px">RECENT</div>';
+    h+='<div class="mb-8"><div style="font-size:var(--t-xs);color:var(--cp);opacity:.7;margin-bottom:4px">RECENT</div>';
     h+='<div style="display:flex;flex-wrap:wrap;gap:4px">';
-    hist.forEach(function(n){h+='<span data-wlpick="'+n+'" style="font-size:11px;padding:4px 10px;border:1px solid rgba(255,95,160,.25);color:var(--cp);cursor:pointer;background:rgba(255,95,160,.05)">'+n+'</span>';});
+    hist.forEach(function(n){h+='<span data-wlpick="'+n+'" style="font-size:var(--t-base);padding:4px 10px;border:1px solid rgba(255,95,160,.25);color:var(--cp);cursor:pointer;background:rgba(255,95,160,.05)">'+n+'</span>';});
     h+='</div></div>';
   }
   // Muscle group collapsible sections
@@ -441,13 +441,13 @@ function wlRenderActive(){
     var isOpen=window[openKey];
     h+='<div style="margin-bottom:4px;border:1px solid rgba(255,255,255,.07)">';
     h+='<div data-wlgroup="'+m+'" style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;background:rgba(255,255,255,.03)">';
-    h+='<span style="font-size:11px;color:'+col+';letter-spacing:1px">'+m.toUpperCase()+'</span>';
+    h+='<span style="font-size:var(--t-base);color:'+col+';letter-spacing:1px">'+m.toUpperCase()+'</span>';
     h+='<span class="dim-11">'+( isOpen?'▲':'▼')+'</span>';
     h+='</div>';
     if(isOpen){
       h+='<div style="display:flex;flex-wrap:wrap;gap:4px;padding:8px">';
       exs.forEach(function(n){
-        h+='<span data-wlpick="'+n+'" style="font-size:11px;padding:5px 10px;border:1px solid rgba(255,255,255,.12);color:var(--text);cursor:pointer;background:rgba(255,255,255,.03);transition:background .12s">'+n+'</span>';
+        h+='<span data-wlpick="'+n+'" style="font-size:var(--t-base);padding:5px 10px;border:1px solid rgba(255,255,255,.12);color:var(--text);cursor:pointer;background:rgba(255,255,255,.03);transition:background .12s">'+n+'</span>';
       });
       h+='</div>';
     }
@@ -455,8 +455,8 @@ function wlRenderActive(){
   });
   // Custom exercise input
   h+='<div style="display:flex;gap:6px;margin-top:8px">';
-  h+='<input id="wl-ex-inp" placeholder="Custom exercise..." autocomplete="off" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,95,160,.3);color:var(--text);font-family:monospace;font-size:12px;padding:5px 2px;outline:none">';
-  h+='<button id="wl-custom-add-btn" style="padding:5px 12px;background:transparent;border:1px solid rgba(255,95,160,.3);color:var(--cp);font-family:monospace;font-size:11px;cursor:pointer">ADD</button>';
+  h+='<input id="wl-ex-inp" placeholder="Custom exercise..." autocomplete="off" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,95,160,.3);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:5px 2px;outline:none">';
+  h+='<button id="wl-custom-add-btn" style="padding:5px 12px;background:transparent;border:1px solid rgba(255,95,160,.3);color:var(--cp);font-family:monospace;font-size:var(--t-base);cursor:pointer">ADD</button>';
   h+='</div>';
   h+='</div>';
   el.innerHTML=h;
@@ -495,8 +495,8 @@ function wlRender(){
     h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">';
     h+='<span class="dim-11">'+sessDateLabel+'</span>';
     h+='<div class="flex-row">';
-    h+='<button id="wl-cancel-btn" style="padding:7px 12px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:11px;cursor:pointer">&#x2715; CANCEL</button>';
-    h+='<button id="wl-end-btn" style="padding:7px 16px;background:rgba(255,95,160,.1);border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">&#10003; SAVE</button>';
+    h+='<button id="wl-cancel-btn" style="padding:7px 12px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-base);cursor:pointer">&#x2715; CANCEL</button>';
+    h+='<button id="wl-end-btn" style="padding:7px 16px;background:rgba(255,95,160,.1);border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">&#10003; SAVE</button>';
     h+='</div>';
     h+='</div>';
     h+='<div id="wl-active-area"></div>';
@@ -509,7 +509,7 @@ function wlRender(){
   h+='<div style="display:flex;gap:4px;margin-bottom:12px">';
   ['log','stats'].forEach(function(t){
     var labels={log:'LOG',stats:'STATS'};
-    h+='<span data-wltab="'+t+'" class="wl-tab'+(wlTab===t?' active':'')+'" style="font-size:10px;padding:3px 10px;border:1px solid '+(wlTab===t?'var(--cp)':'rgba(255,255,255,.12)')+';color:'+(wlTab===t?'var(--cp)':'var(--dim)')+';cursor:pointer">'+labels[t]+'</span>';
+    h+='<span data-wltab="'+t+'" class="wl-tab'+(wlTab===t?' active':'')+'" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+(wlTab===t?'var(--cp)':'rgba(255,255,255,.12)')+';color:'+(wlTab===t?'var(--cp)':'var(--dim)')+';cursor:pointer">'+labels[t]+'</span>';
   });
   h+='</div>';
 
@@ -518,12 +518,12 @@ function wlRender(){
   } else {
     // Start buttons
     h+='<div style="display:flex;gap:6px;margin-bottom:14px">';
-    h+='<button id="wl-start-btn" style="flex:2;padding:12px;background:rgba(255,95,160,.08);border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px">&#9654; START SESSION</button>';
-    h+='<button id="wl-log-past-btn" style="flex:1;padding:12px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">+ LOG PAST</button>';
+    h+='<button id="wl-start-btn" style="flex:2;padding:12px;background:rgba(255,95,160,.08);border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px">&#9654; START SESSION</button>';
+    h+='<button id="wl-log-past-btn" style="flex:1;padding:12px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">+ LOG PAST</button>';
     h+='</div>';
     // Past sessions
     if(!wlData.length){
-      h+='<div style="color:var(--dim);font-size:12px">No sessions yet. Start your first workout above.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-md)">No sessions yet. Start your first workout above.</div>';
     } else {
       wlData.slice(0,20).forEach(function(s,si){
         var dur=s.endTs?wlFmt(s.endTs-s.startTs):'—';
@@ -534,13 +534,13 @@ function wlRender(){
         h+='<span class="text-11">'+s.date+'</span>';
         h+='<div style="display:flex;align-items:center;gap:6px">';
         h+='<span class="dim-10">'+s.exercises.length+' ex</span>';
-        h+='<span data-wleditsess="'+s.id+'" style="font-size:10px;color:var(--cc);cursor:pointer;opacity:.6;padding:2px 6px;border:1px solid rgba(0,229,255,.2)">✎ edit</span>';
+        h+='<span data-wleditsess="'+s.id+'" style="font-size:var(--t-sm);color:var(--cc);cursor:pointer;opacity:.6;padding:2px 6px;border:1px solid rgba(0,229,255,.2)">✎ edit</span>';
         if(isPendingDel){
-          h+='<span style="font-size:10px;color:var(--cr)">sure?</span>';
-          h+='<span data-wldelses="'+s.id+'" style="font-size:10px;color:var(--cr);cursor:pointer;padding:2px 8px;border:1px solid rgba(255,68,68,.5);background:rgba(255,68,68,.1)">YES</span>';
-          h+='<span data-wlcanceldel="1" style="font-size:10px;color:var(--dim);cursor:pointer;padding:2px 6px;border:1px solid rgba(255,255,255,.15)">no</span>';
+          h+='<span style="font-size:var(--t-sm);color:var(--cr)">sure?</span>';
+          h+='<span data-wldelses="'+s.id+'" style="font-size:var(--t-sm);color:var(--cr);cursor:pointer;padding:2px 8px;border:1px solid rgba(255,68,68,.5);background:rgba(255,68,68,.1)">YES</span>';
+          h+='<span data-wlcanceldel="1" style="font-size:var(--t-sm);color:var(--dim);cursor:pointer;padding:2px 6px;border:1px solid var(--c-faint)">no</span>';
         } else {
-          h+='<span data-wldelses="'+s.id+'" style="font-size:10px;color:var(--cr);cursor:pointer;opacity:.4;padding:2px 6px;border:1px solid rgba(255,68,68,.2)">✕</span>';
+          h+='<span data-wldelses="'+s.id+'" style="font-size:var(--t-sm);color:var(--cr);cursor:pointer;opacity:.4;padding:2px 6px;border:1px solid rgba(255,68,68,.2)">✕</span>';
         }
         h+='</div>';
         h+='</div>';
@@ -548,11 +548,11 @@ function wlRender(){
           var mtxt=WL_MUSCLE_TEXT[ex.muscle]||WL_MUSCLE_TEXT.other;
           var setsStr=ex.sets.map(function(st){return st.reps+'×'+st.weight+'lb';}).join(' / ');
           h+='<div style="display:flex;align-items:baseline;gap:6px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
-          h+='<span style="font-size:12px;color:var(--text);flex:1">'+ex.name+'</span>';
-          h+='<span style="font-size:9px;color:'+mtxt+'">'+ex.muscle+'</span>';
+          h+='<span style="font-size:var(--t-md);color:var(--text);flex:1">'+ex.name+'</span>';
+          h+='<span style="font-size:var(--t-xs);color:'+mtxt+'">'+ex.muscle+'</span>';
           h+='</div>';
-          h+='<div style="font-size:10px;color:var(--dim);padding:2px 0 4px">'+setsStr+'</div>';
-          if(ex.note)h+='<div style="font-size:10px;color:var(--dim);font-style:italic;padding-bottom:4px">'+ex.note+'</div>';
+          h+='<div style="font-size:var(--t-sm);color:var(--dim);padding:2px 0 4px">'+setsStr+'</div>';
+          if(ex.note)h+='<div style="font-size:var(--t-sm);color:var(--dim);font-style:italic;padding-bottom:4px">'+ex.note+'</div>';
         });
         h+='</div>';
       });
@@ -572,7 +572,7 @@ function wlBuildStats(){
   h+='<div style="display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap">';
   [{t:'overview',l:'OVERVIEW'},{t:'trends',l:'TRENDS'},{t:'exercises',l:'EXERCISES'}].forEach(function(x){
     var a=st===x.t;
-    h+='<span data-wlstab="'+x.t+'" style="font-size:9px;padding:2px 10px;border:1px solid '+(a?'var(--cp)':'rgba(255,255,255,.12)')+';color:'+(a?'var(--cp)':'var(--dim)')+';cursor:pointer;letter-spacing:.5px">'+x.l+'</span>';
+    h+='<span data-wlstab="'+x.t+'" style="font-size:var(--t-xs);padding:2px 10px;border:1px solid '+(a?'var(--cp)':'rgba(255,255,255,.12)')+';color:'+(a?'var(--cp)':'var(--dim)')+';cursor:pointer;letter-spacing:.5px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -631,7 +631,7 @@ function wlBuildStats(){
     h+='</div>';
 
     // Muscle group frequency this month vs last month
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin:14px 0 8px">MUSCLE GROUPS THIS MONTH VS LAST</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:14px 0 8px">MUSCLE GROUPS THIS MONTH VS LAST</div>';
     var muscleThisMonth={};var muscleLastMonth={};
     wlData.forEach(function(s){
       var mo=s.date.slice(0,7);
@@ -650,16 +650,16 @@ function wlBuildStats(){
       var tr=cur>prev?'↑ more':cur<prev?'↓ less':'same';
       var trCol=cur>prev?'var(--cg)':cur<prev?'var(--cr)':'var(--dim)';
       h+='<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
-      h+='<span style="font-size:10px;color:'+col+';width:80px">'+m.toUpperCase()+'</span>';
+      h+='<span style="font-size:var(--t-sm);color:'+col+';width:80px">'+m.toUpperCase()+'</span>';
       h+='<span class="text-11-flex">'+cur+'x this month</span>';
-      h+='<span style="font-size:10px;color:'+trCol+'">'+tr+' ('+prev+')</span>';
+      h+='<span style="font-size:var(--t-sm);color:'+trCol+'">'+tr+' ('+prev+')</span>';
       h+='</div>';
     });
 
   } else if(st==='trends'){
     // Weight progression per exercise
     h+='<div class="label-dim-md">WEIGHT PROGRESSION</div>';
-    h+='<div style="font-size:10px;color:var(--dim);margin-bottom:10px;opacity:.7">Best weight per session for each exercise.</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:10px;opacity:.7">Best weight per session for each exercise.</div>';
 
     // Build per-exercise progression
     var exSessions={};
@@ -675,7 +675,7 @@ function wlBuildStats(){
     // Show exercises that have 2+ data points
     var exNames=Object.keys(exSessions).filter(function(n){return exSessions[n].length>=2;});
     if(!exNames.length){
-      h+='<div style="color:var(--dim);font-size:11px">Log 2+ sessions with the same exercise to see progression.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-base)">Log 2+ sessions with the same exercise to see progression.</div>';
     } else {
       exNames.forEach(function(name){
         var pts=exSessions[name];
@@ -689,8 +689,8 @@ function wlBuildStats(){
         var mcol=WL_MUSCLE_TEXT[muscle]||'#aaa';
         h+='<div class="mb-12">';
         h+='<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">';
-        h+='<span style="font-size:12px;color:var(--text);flex:1">'+name+'</span>';
-        h+='<span style="font-size:9px;color:'+mcol+'">'+muscle+'</span>';
+        h+='<span style="font-size:var(--t-md);color:var(--text);flex:1">'+name+'</span>';
+        h+='<span style="font-size:var(--t-xs);color:'+mcol+'">'+muscle+'</span>';
         h+='</div>';
         // Mini sparkline SVG
         var W=200,H=28,pad=2;
@@ -713,7 +713,7 @@ function wlBuildStats(){
           });
         }
         h+='</svg>';
-        h+='<div style="display:flex;gap:12px;font-size:10px">';
+        h+='<div style="display:flex;gap:12px;font-size:var(--t-sm)">';
         h+='<span style="color:var(--dim)">Start: <span style="color:var(--text)">'+first+'lb</span></span>';
         h+='<span style="color:var(--dim)">Now: <span style="color:var(--text)">'+last+'lb</span></span>';
         h+='<span style="color:var(--dim)">PR: <span style="color:var(--ca)">'+pr+'lb</span></span>';
@@ -724,7 +724,7 @@ function wlBuildStats(){
     }
 
     // Session frequency trend
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin:14px 0 8px">WORKOUT FREQUENCY TREND</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:14px 0 8px">WORKOUT FREQUENCY TREND</div>';
     var months4=monthKeys(4);
     var byMo=sessionsByMonth();
     var vals=months4.map(function(m){return byMo[m]||0;});
@@ -732,16 +732,16 @@ function wlBuildStats(){
     var consistent=vals.every(function(v){return Math.abs(v-vals[0])<=1;});
     var msg=consistent?'Consistent frequency across months':increasing?'Frequency is trending up lately ↑':'Frequency has dipped recently — time to push ↑';
     var msgCol=consistent?'var(--ca)':increasing?'var(--cg)':'var(--dim)';
-    h+='<div style="font-size:11px;color:'+msgCol+';margin-bottom:8px;line-height:1.5">'+msg+'</div>';
+    h+='<div style="font-size:var(--t-base);color:'+msgCol+';margin-bottom:8px;line-height:1.5">'+msg+'</div>';
     h+='<div class="flex-row-8">';
     months4.forEach(function(mo,i){
       var v=byMo[mo]||0;
       var isCur=mo===( now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0'));
       h+='<div style="flex:1;text-align:center">';
-      h+='<div style="font-size:16px;color:'+(isCur?'var(--cp)':'var(--text)')+'">'+v+'</div>';
+      h+='<div style="font-size:var(--t-sub);color:'+(isCur?'var(--cp)':'var(--text)')+'">'+v+'</div>';
       h+='<div class="dim-9">'+fmtMo(mo)+'</div>';
       h+='</div>';
-      if(i<3){var arrow=vals[i+1]>v?'↑':vals[i+1]<v?'↓':'→';var ac=vals[i+1]>v?'var(--cg)':vals[i+1]<v?'var(--cr)':'var(--dim)';h+='<div style="font-size:14px;color:'+ac+';align-self:center">'+arrow+'</div>';}
+      if(i<3){var arrow=vals[i+1]>v?'↑':vals[i+1]<v?'↓':'→';var ac=vals[i+1]>v?'var(--cg)':vals[i+1]<v?'var(--cr)':'var(--dim)';h+='<div style="font-size:var(--t-body);color:'+ac+';align-self:center">'+arrow+'</div>';}
     });
     h+='</div>';
 
@@ -765,13 +765,13 @@ function wlBuildStats(){
       if(!groups[m])return;
       var col=WL_MUSCLE_TEXT[m]||'#aaa';
       h+='<div class="mb-12">';
-      h+='<div style="font-size:9px;color:'+col+';letter-spacing:2px;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.08)">'+m.toUpperCase()+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:'+col+';letter-spacing:2px;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.08)">'+m.toUpperCase()+'</div>';
       Object.keys(groups[m]).sort().forEach(function(name){
         var ex=groups[m][name];
         h+='<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
-        h+='<span style="font-size:12px;color:var(--text);flex:1">'+name+'</span>';
+        h+='<span style="font-size:var(--t-md);color:var(--text);flex:1">'+name+'</span>';
         h+='<span class="dim-9">'+ex.sessions+'x</span>';
-        if(ex.pr>0)h+='<span style="font-size:9px;color:var(--ca);background:rgba(255,204,0,.1);border:1px solid rgba(255,204,0,.25);padding:1px 5px">'+ex.pr+'lb PR</span>';
+        if(ex.pr>0)h+='<span style="font-size:var(--t-xs);color:var(--ca);background:rgba(255,204,0,.1);border:1px solid rgba(255,204,0,.25);padding:1px 5px">'+ex.pr+'lb PR</span>';
         h+='</div>';
       });
       h+='</div>';
@@ -998,18 +998,18 @@ function qnavRender(){
       var a=_qnavMode===x.k;
       h+='<div data-qnavmode="'+x.k+'" style="display:flex;align-items:center;gap:10px;padding:8px 10px;margin-bottom:4px;'
         +'border:1px solid rgba(255,255,255,'+(a?'.25':'.07')+');background:rgba(255,255,255,'+(a?'.07':'0')+');cursor:pointer">';
-      h+='<span style="font-size:13px;color:'+(a?'var(--cc)':'var(--dim)')+';">'+(a?'◉':'○')+'</span>';
-      h+='<span style="font-size:12px;color:'+(a?'var(--text)':'var(--dim)')+'">'+x.l+'</span>';
+      h+='<span style="font-size:var(--t-lg);color:'+(a?'var(--cc)':'var(--dim)')+';">'+(a?'◉':'○')+'</span>';
+      h+='<span style="font-size:var(--t-md);color:'+(a?'var(--text)':'var(--dim)')+'">'+x.l+'</span>';
       h+='</div>';
     });
 
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin:12px 0 8px">SORT ORDER</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:2px;margin:12px 0 8px">SORT ORDER</div>';
     [{k:'default',l:'Default'},{k:'mostused',l:'Most Used First'},{k:'alpha',l:'Alphabetical A\u2013Z'}].forEach(function(x){
       var a=_qnavSort===x.k;
       h+='<div data-qnavsort="'+x.k+'" style="display:flex;align-items:center;gap:10px;padding:8px 10px;margin-bottom:4px;'
         +'border:1px solid rgba(255,255,255,'+(a?'.25':'.07')+');background:rgba(255,255,255,'+(a?'.07':'0')+');cursor:pointer">';
-      h+='<span style="font-size:13px;color:'+(a?'var(--cc)':'var(--dim)')+';">'+(a?'◉':'○')+'</span>';
-      h+='<span style="font-size:12px;color:'+(a?'var(--text)':'var(--dim)')+'">'+x.l+'</span>';
+      h+='<span style="font-size:var(--t-lg);color:'+(a?'var(--cc)':'var(--dim)')+';">'+(a?'◉':'○')+'</span>';
+      h+='<span style="font-size:var(--t-md);color:'+(a?'var(--text)':'var(--dim)')+'">'+x.l+'</span>';
       h+='</div>';
     });
 
@@ -1269,7 +1269,7 @@ function qcRenderLearn(){
   var _lRev=Object.keys(qcState.learnRevealed||{}).length;
   var _lSeen=Object.keys(qcState.learnSeen||{}).length;
   var h='';
-  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:10px;color:var(--dim)">';
+  h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:var(--t-sm);color:var(--dim)">';
   h+='<span style="color:var(--cc)">'+_lRev+'</span><span>/'+_lW.length+' revealed</span>';
   h+='<div class="divider"><div style="height:100%;width:'+(_lW.length?_lRev/_lW.length*100:0)+'%;background:var(--cc);transition:width .3s"></div></div>';
   h+='<span class="dim-9-faint">'+_lSeen+' total</span>';
@@ -1277,31 +1277,31 @@ function qcRenderLearn(){
   if(!_lW.length){
     h+='<div style="padding:20px;text-align:center;border:1px solid rgba(0,229,255,.15);background:rgba(0,229,255,.04)">';
     h+='<div class="icon-lg">📖</div>';
-    h+='<div style="font-size:13px;color:var(--cc);margin-bottom:4px">All cards learned!</div>';
+    h+='<div style="font-size:var(--t-lg);color:var(--cc);margin-bottom:4px">All cards learned!</div>';
     h+='<div class="dim-10">'+_lSeen+' total · come back tomorrow</div>';
     h+='</div>';
   } else {
     h+='<table style="width:100%;border-collapse:collapse">';
-    h+='<thead><tr style="border-bottom:1px solid rgba(255,255,255,.1)">';
-    h+='<th style="padding:5px 6px;font-size:9px;color:var(--dim);letter-spacing:1px;text-align:left;width:26px">#</th>';
-    h+='<th style="padding:5px 6px;font-size:9px;color:var(--dim);letter-spacing:1px;text-align:left">QUESTION</th>';
-    h+='<th style="padding:5px 6px;font-size:9px;color:var(--dim);letter-spacing:1px;text-align:left">ANSWER</th>';
+    h+='<thead><tr style="border-bottom:1px solid var(--c-border)">';
+    h+='<th style="padding:5px 6px;font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;text-align:left;width:26px">#</th>';
+    h+='<th style="padding:5px 6px;font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;text-align:left">QUESTION</th>';
+    h+='<th style="padding:5px 6px;font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;text-align:left">ANSWER</th>';
     h+='</tr></thead><tbody>';
     _lW.forEach(function(w,i){
       var rev=!!(qcState.learnRevealed&&qcState.learnRevealed[w.id]);
       h+='<tr style="border-bottom:1px solid rgba(255,255,255,.04)">';
-      h+='<td style="padding:9px 6px;color:rgba(255,255,255,.2);font-size:10px;vertical-align:middle">'+(i+1)+'</td>';
-      h+='<td style="padding:9px 6px;vertical-align:middle;font-size:11px;color:var(--text);line-height:1.4">'+w.q+'</td>';
+      h+='<td style="padding:9px 6px;color:rgba(255,255,255,.2);font-size:var(--t-sm);vertical-align:middle">'+(i+1)+'</td>';
+      h+='<td style="padding:9px 6px;vertical-align:middle;font-size:var(--t-base);color:var(--text);line-height:1.4">'+w.q+'</td>';
       h+='<td style="padding:9px 6px;vertical-align:middle">';
       if(rev){
-        h+='<span style="font-size:12px;color:var(--cc)">'+w.a+'</span>';
+        h+='<span style="font-size:var(--t-md);color:var(--cc)">'+w.a+'</span>';
       } else {
-        h+='<button data-qcreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">SHOW</button>';
+        h+='<button data-qcreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SHOW</button>';
       }
       h+='</td></tr>';
     });
     h+='</tbody></table>';
-    h+='<button data-qclearnall="1" style="width:100%;margin-top:12px;padding:9px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">✓ MARK ALL LEARNED</button>';
+    h+='<button data-qclearnall="1" style="width:100%;margin-top:12px;padding:9px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">✓ MARK ALL LEARNED</button>';
   }
   el.innerHTML=h;
   el.querySelectorAll('[data-qcreveal]').forEach(function(btn){
@@ -1370,13 +1370,13 @@ function qcOrderInfographic(cardId){
 
     // Surah box
     h+='<div style="display:flex;flex-direction:column;align-items:center;padding:8px 10px;border:1px solid '+borderCol+';background:'+bgCol+';min-width:72px;text-align:center">';
-    h+='<div style="font-size:9px;color:'+numCol+';font-family:monospace;margin-bottom:3px">'+n+'</div>';
-    h+='<div style="font-size:10px;color:'+textCol+';line-height:1.3;max-width:70px">'+name+'</div>';
+    h+='<div style="font-size:var(--t-xs);color:'+numCol+';font-family:monospace;margin-bottom:3px">'+n+'</div>';
+    h+='<div style="font-size:var(--t-sm);color:'+textCol+';line-height:1.3;max-width:70px">'+name+'</div>';
     h+='</div>';
 
     // Arrow between boxes (not after last)
     if(i < sequence.length-1){
-      h+='<div style="font-size:16px;color:rgba(255,255,255,.25);padding:0 3px">→</div>';
+      h+='<div style="font-size:var(--t-sub);color:rgba(255,255,255,.25);padding:0 3px">→</div>';
     }
   });
 
@@ -1401,29 +1401,29 @@ function qcJuzInfographic(cardId){
   for(var n=start;n<=end;n++){
     var isCurrent=n===num;
     var d=QC_JUZ_MAP[n]||{ss:'',sr:'',es:'',er:''};
-    var borderCol=isCurrent?'rgba(0,229,255,.6)':'rgba(255,255,255,.1)';
+    var borderCol=isCurrent?'rgba(0,229,255,.6)':'var(--c-border)';
     var bgCol=isCurrent?'rgba(0,229,255,.08)':'rgba(255,255,255,.02)';
     var numCol=isCurrent?'var(--cc)':'var(--dim)';
     var metaCol=isCurrent?'rgba(0,229,255,.5)':'rgba(255,255,255,.2)';
 
     h+='<div style="display:flex;flex-direction:column;align-items:center;border:1px solid '+borderCol+';background:'+bgCol+';min-width:80px;max-width:100px">';
     // Start ref above
-    h+='<div style="font-size:7px;color:'+metaCol+';padding:4px 6px 2px;text-align:center;line-height:1.3;border-bottom:1px solid '+borderCol+'">';
+    h+='<div style="font-size:var(--t-xxs);color:'+metaCol+';padding:4px 6px 2px;text-align:center;line-height:1.3;border-bottom:1px solid '+borderCol+'">';
     h+=d.ss+'<br>'+d.sr;
     h+='</div>';
     // Juz number center
     h+='<div style="padding:6px 10px;text-align:center">';
-    h+='<div style="font-size:9px;color:'+metaCol+';letter-spacing:1px">JUZ</div>';
-    h+='<div style="font-size:22px;font-family:monospace;color:'+numCol+';line-height:1;font-weight:'+(isCurrent?'bold':'normal')+'">'+n+'</div>';
+    h+='<div style="font-size:var(--t-xs);color:'+metaCol+';letter-spacing:1px">JUZ</div>';
+    h+='<div style="font-size:var(--t-h2);font-family:monospace;color:'+numCol+';line-height:1;font-weight:'+(isCurrent?'bold':'normal')+'">'+n+'</div>';
     h+='</div>';
     // End ref below
-    h+='<div style="font-size:7px;color:'+metaCol+';padding:2px 6px 4px;text-align:center;line-height:1.3;border-top:1px solid '+borderCol+'">';
+    h+='<div style="font-size:var(--t-xxs);color:'+metaCol+';padding:2px 6px 4px;text-align:center;line-height:1.3;border-top:1px solid '+borderCol+'">';
     h+=d.es+'<br>'+d.er;
     h+='</div>';
     h+='</div>';
 
     if(n<end){
-      h+='<div style="font-size:16px;color:rgba(255,255,255,.2);padding:0 2px;flex-shrink:0">→</div>';
+      h+='<div style="font-size:var(--t-sub);color:rgba(255,255,255,.2);padding:0 2px;flex-shrink:0">→</div>';
     }
   }
   h+='</div></div>';
@@ -1457,9 +1457,9 @@ function qcRenderStudy(){
   if(allDone){
     el.innerHTML=streakH
       +'<div class="qc-card" class="text-center">'
-      +'<div style="font-size:28px;margin-bottom:8px">&#10003;</div>'
-      +'<div style="font-size:13px;color:var(--cg);letter-spacing:1px">All done for today!</div>'
-      +'<div style="font-size:10px;color:var(--dim);margin-top:6px">Come back tomorrow for more.'+(wrong?' '+wrong+' card'+(wrong!==1?'s':'')+' will be repeated.':'')+'</div>'
+      +'<div style="font-size:var(--t-h1);margin-bottom:8px">&#10003;</div>'
+      +'<div style="font-size:var(--t-lg);color:var(--cg);letter-spacing:1px">All done for today!</div>'
+      +'<div style="font-size:var(--t-sm);color:var(--dim);margin-top:6px">Come back tomorrow for more.'+(wrong?' '+wrong+' card'+(wrong!==1?'s':'')+' will be repeated.':'')+'</div>'
       +'</div>';
     return;
   }
@@ -1482,8 +1482,8 @@ function qcRenderStudy(){
   h+='<div class="qc-card">';
   h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">';
   h+='<div class="qc-cat" style="margin-bottom:0">'+card.cat+'</div>';
-  h+='<span style="margin-left:auto;font-size:9px;padding:2px 7px;border:1px solid rgba(255,255,255,.15);color:'+(_qcIsReview?'var(--cc)':'var(--cg)')+';letter-spacing:1px">'+(_qcIsReview?'REVIEW':'NEW')+'</span>';
-  if(_qcStreak>=3)h+='<span style="font-size:9px;color:var(--ca)">'+('★'.repeat(Math.min(_qcStreak,6)))+'</span>';
+  h+='<span style="margin-left:auto;font-size:var(--t-xs);padding:2px 7px;border:1px solid var(--c-faint);color:'+(_qcIsReview?'var(--cc)':'var(--cg)')+';letter-spacing:1px">'+(_qcIsReview?'REVIEW':'NEW')+'</span>';
+  if(_qcStreak>=3)h+='<span style="font-size:var(--t-xs);color:var(--ca)">'+('★'.repeat(Math.min(_qcStreak,6)))+'</span>';
   h+='</div>';
   if(card.hadith)h+='<div class="qc-hadith">&ldquo;'+card.hadith+'&rdquo;</div>';
   h+='<div class="qc-q">'+card.q+'</div>';
@@ -1491,11 +1491,11 @@ function qcRenderStudy(){
     h+='<button class="qc-choice" data-qcc="'+i+'" data-answer="'+encodeURIComponent(c)+'" data-correct="'+(c===card.a?'1':'0')+'" style="display:block">'+c+'</button>';
   });
   h+='<button class="qc-choice" data-qcc="99" data-answer="dontknow" data-correct="0" style="display:block;opacity:.5;font-style:italic;margin-top:4px">I don\'t know</button>';
-  h+='<button id="qc-skip-btn" style="display:block;width:100%;margin-top:6px;padding:6px;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">SKIP ↷</button>';
+  h+='<button id="qc-skip-btn" style="display:block;width:100%;margin-top:6px;padding:6px;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">SKIP ↷</button>';
   h+='<div id="qc-result" style="min-height:24px"></div>';
-  h+='<div style="text-align:right;margin-top:4px"><button id="qc-copy-btn" style="font-size:9px;padding:2px 8px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;cursor:pointer;letter-spacing:1px">&#128203; COPY Q</button></div>';
+  h+='<div style="text-align:right;margin-top:4px"><button id="qc-copy-btn" style="font-size:var(--t-xs);padding:2px 8px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;cursor:pointer;letter-spacing:1px">&#128203; COPY Q</button></div>';
   h+='</div>';
-  h+='<div style="font-size:9px;color:var(--dim);text-align:right;margin-top:4px">'+(done+1)+' of 6 today · '+Object.keys(qcState.seen||{}).length+' of '+QC_CARDS.length+' cards seen</div>';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);text-align:right;margin-top:4px">'+(done+1)+' of 6 today · '+Object.keys(qcState.seen||{}).length+' of '+QC_CARDS.length+' cards seen</div>';
   el.innerHTML=h;
 
   // Wire choices
@@ -1531,7 +1531,7 @@ function qcRenderStudy(){
       // Add NEXT button
       var _skipNext=document.createElement('button');
       _skipNext.textContent='NEXT →';
-      _skipNext.style.cssText='display:block;width:100%;margin-top:6px;padding:7px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);color:var(--cc);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:2px';
+      _skipNext.style.cssText='display:block;width:100%;margin-top:6px;padding:7px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);color:var(--cc);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:2px';
       var _doNext=function(){qcCurrentCard=null;qcAnswered=false;qcSave();qcRenderStudy();};
       _skipNext.onclick=_doNext;
       _skipNext.ontouchend=function(e){e.preventDefault();_doNext();};
@@ -1616,7 +1616,7 @@ function qcAnswer(isCorrect,cardId,clickedBtn){
     if(res){
       var qcResCol=isCorrect?'var(--cg)':'var(--cr)';
       var qcResMsg=isCorrect?'\u2713 Correct!':'\u2717 Wrong - correct answer highlighted';
-      res.innerHTML='<div class="qc-result" style="color:'+qcResCol+'">'+qcResMsg+' <button onclick="qcNext()" style="margin-left:10px;padding:4px 14px;background:transparent;border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:11px;cursor:pointer">NEXT</button></div>';
+      res.innerHTML='<div class="qc-result" style="color:'+qcResCol+'">'+qcResMsg+' <button onclick="qcNext()" style="margin-left:10px;padding:4px 14px;background:transparent;border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:var(--t-base);cursor:pointer">NEXT</button></div>';
     }
     if(isCorrect)confetti(window.innerWidth/2,200,'#00ff88');
     // Show infographic for order and juz location cards
@@ -1675,16 +1675,16 @@ function qcRenderReview(){
   }
   if(qcReviewIdx>=cards.length)qcReviewIdx=0;
   var card=cards[qcReviewIdx];
-  var h='<div style="font-size:10px;color:var(--dim);margin-bottom:8px">'+( qcReviewIdx+1)+' of '+cards.length+' missed cards (past 7 days)</div>';
+  var h='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:8px">'+( qcReviewIdx+1)+' of '+cards.length+' missed cards (past 7 days)</div>';
   // Nav arrows
   h+='<div class="flex-row-mb">';
-  h+='<button id="qcrev-prev" style="padding:4px 14px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:12px;cursor:pointer'+(qcReviewIdx===0?';opacity:.3':'')+'">←</button>';
+  h+='<button id="qcrev-prev" style="padding:4px 14px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer'+(qcReviewIdx===0?';opacity:.3':'')+'">←</button>';
   h+='<div style="flex:1;display:flex;align-items:center;justify-content:center"><div style="display:flex;gap:3px">';
   cards.forEach(function(_,i){
-    h+='<div style="width:7px;height:7px;border-radius:50%;background:'+(i===qcReviewIdx?'var(--cc)':'rgba(255,255,255,.15)')+';flex-shrink:0"></div>';
+    h+='<div style="width:7px;height:7px;border-radius:50%;background:'+(i===qcReviewIdx?'var(--cc)':'var(--c-faint)')+';flex-shrink:0"></div>';
   });
   h+='</div></div>';
-  h+='<button id="qcrev-next" style="padding:4px 14px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:12px;cursor:pointer'+(qcReviewIdx===cards.length-1?';opacity:.3':'')+'">→</button>';
+  h+='<button id="qcrev-next" style="padding:4px 14px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer'+(qcReviewIdx===cards.length-1?';opacity:.3':'')+'">→</button>';
   h+='</div>';
   var revealed=qcReviewRevealed[qcReviewIdx];
   // Shuffle choices same way as study mode
@@ -1704,9 +1704,9 @@ function qcRenderReview(){
       var isCorrect=(c===card.a);
       h+='<div class="qc-choice '+(isCorrect?'correct':'wrong')+'">'+c+'</div>';
     });
-    h+='<div style="font-size:11px;color:var(--cg);text-align:center;padding:8px">&#10003; Answer revealed</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--cg);text-align:center;padding:8px">&#10003; Answer revealed</div>';
   }
-  h+='<div style="text-align:right;margin-top:8px"><button id="qcrev-copy" style="font-size:9px;padding:2px 8px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY Q</button></div>';
+  h+='<div style="text-align:right;margin-top:8px"><button id="qcrev-copy" style="font-size:var(--t-xs);padding:2px 8px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY Q</button></div>';
   h+='</div>';
   el.innerHTML=h;
   var prev=document.getElementById('qcrev-prev');
@@ -1739,7 +1739,7 @@ function qcRenderStats(){
   var pct=total>0?Math.round(correct/total*100):0;
 
   var h='<div class="grid-2col">';
-  function st(v,l){return '<div style="text-align:center;padding:8px;border:1px solid rgba(0,229,255,.12);background:rgba(0,229,255,.04)"><div style="font-family:VT323,monospace;font-size:28px;color:var(--cc)">'+v+'</div><div class="dim-9">'+l+'</div></div>';}
+  function st(v,l){return '<div style="text-align:center;padding:8px;border:1px solid rgba(0,229,255,.12);background:rgba(0,229,255,.04)"><div style="font-family:VT323,monospace;font-size:var(--t-h1);color:var(--cc)">'+v+'</div><div class="dim-9">'+l+'</div></div>';}
   h+=st(seen+'/'+QC_CARDS.length,'CARDS SEEN');
   h+=st(pct+'%','ACCURACY');
   h+=st(correct,'CORRECT');
@@ -1769,18 +1769,18 @@ function qcRenderStats(){
 
   // Wrong cards list
   if(wrong){
-    h+='<div style="font-size:9px;color:var(--dim);letter-spacing:2px;margin:12px 0 6px">CARDS TO REVIEW ('+wrong+')</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:2px;margin:12px 0 6px">CARDS TO REVIEW ('+wrong+')</div>';
     (qcState.wrong||[]).slice(0,10).forEach(function(id){
       var card=QC_CARDS.find(function(c){return c.id===id;});
       if(!card)return;
-      h+='<div style="font-size:11px;color:var(--dim);padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)">'+card.q.slice(0,60)+'...</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--dim);padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)">'+card.q.slice(0,60)+'...</div>';
     });
-    if(wrong>10)h+='<div style="font-size:9px;color:var(--dim);opacity:.5">+ '+(wrong-10)+' more</div>';
+    if(wrong>10)h+='<div style="font-size:var(--t-xs);color:var(--dim);opacity:.5">+ '+(wrong-10)+' more</div>';
   }
 
   // Reset button
   h+='<div style="margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:12px">';
-  h+='<button id="qc-reset-btn" style="font-size:10px;padding:5px 14px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;cursor:pointer;letter-spacing:1px">RESET ALL PROGRESS</button>';
+  h+='<button id="qc-reset-btn" style="font-size:var(--t-sm);padding:5px 14px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;cursor:pointer;letter-spacing:1px">RESET ALL PROGRESS</button>';
   h+='</div>';
   el.innerHTML=h;
   var rb=document.getElementById('qc-reset-btn');
@@ -1840,12 +1840,12 @@ function itRenderStarred(){
     if(!entry)return;
     h+='<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)">';
     h+='<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">';
-    h+='<span style="font-size:10px;color:var(--ca);flex-shrink:0">#'+num+'</span>';
-    h+='<span style="font-size:12px;color:var(--text);font-weight:bold">'+entry.title+'</span>';
+    h+='<span style="font-size:var(--t-sm);color:var(--ca);flex-shrink:0">#'+num+'</span>';
+    h+='<span style="font-size:var(--t-md);color:var(--text);font-weight:bold">'+entry.title+'</span>';
     h+='</div>';
-    if(entry.topic)h+='<div style="font-size:9px;color:var(--ca);opacity:.7;margin-bottom:4px">'+entry.topic+'</div>';
-    if(entry.question)h+='<div style="font-size:11px;color:var(--dim);line-height:1.5;margin-bottom:4px">'+entry.question+'</div>';
-    h+='<span data-itunstar="'+num+'" style="font-size:9px;color:var(--dim);cursor:pointer;opacity:.5">✕ unstar</span>';
+    if(entry.topic)h+='<div style="font-size:var(--t-xs);color:var(--ca);opacity:.7;margin-bottom:4px">'+entry.topic+'</div>';
+    if(entry.question)h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.5;margin-bottom:4px">'+entry.question+'</div>';
+    h+='<span data-itunstar="'+num+'" style="font-size:var(--t-xs);color:var(--dim);cursor:pointer;opacity:.5">✕ unstar</span>';
     h+='</div>';
   });
   el.innerHTML=h;
@@ -1890,9 +1890,9 @@ function wdRenderStarred(){
     var entry=wdData[id];
     if(!entry)return;
     h+='<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)">';
-    h+='<div style="font-size:12px;color:var(--text);font-weight:bold;margin-bottom:4px">'+entry.title+'</div>';
-    if(entry.prompt||entry.body)h+='<div style="font-size:11px;color:var(--dim);line-height:1.5;margin-bottom:4px">'+(entry.prompt||entry.body||'').slice(0,120)+'...</div>';
-    h+='<span data-wdunstar="'+id+'" style="font-size:9px;color:var(--dim);cursor:pointer;opacity:.5">✕ unstar</span>';
+    h+='<div style="font-size:var(--t-md);color:var(--text);font-weight:bold;margin-bottom:4px">'+entry.title+'</div>';
+    if(entry.prompt||entry.body)h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.5;margin-bottom:4px">'+(entry.prompt||entry.body||'').slice(0,120)+'...</div>';
+    h+='<span data-wdunstar="'+id+'" style="font-size:var(--t-xs);color:var(--dim);cursor:pointer;opacity:.5">✕ unstar</span>';
     h+='</div>';
   });
   el.innerHTML=h;
@@ -1949,20 +1949,20 @@ function gratRenderLog(){
   h+='</div>';
 
   if(todayEntry){
-    h+='<div style="font-size:10px;color:var(--cg);margin-bottom:8px;letter-spacing:1px">&#10003; Logged today</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--cg);margin-bottom:8px;letter-spacing:1px">&#10003; Logged today</div>';
     todayEntry.items.forEach(function(item,i){
-      h+='<div style="display:flex;gap:8px;padding:4px 0"><span style="color:var(--cg);font-size:12px">'+(i+1)+'.</span><span style="font-size:13px;color:var(--text)">'+item+'</span></div>';
+      h+='<div style="display:flex;gap:8px;padding:4px 0"><span style="color:var(--cg);font-size:var(--t-md)">'+(i+1)+'.</span><span style="font-size:var(--t-lg);color:var(--text)">'+item+'</span></div>';
     });
-    h+='<button onclick="gratClear()" style="margin-top:10px;font-size:9px;padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button>';
+    h+='<button onclick="gratClear()" style="margin-top:10px;font-size:var(--t-xs);padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button>';
   } else {
-    h+='<div style="font-size:10px;color:var(--dim);margin-bottom:8px">What are you grateful for today?</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:8px">What are you grateful for today?</div>';
     [1,2,3].forEach(function(n){
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
-      h+='<span style="color:var(--cg);font-size:12px;flex-shrink:0">'+n+'.</span>';
-      h+='<input id="grat-inp-'+n+'" autocomplete="off" placeholder="Something good..." style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(0,255,136,.2);color:var(--text);font-family:monospace;font-size:13px;padding:4px 2px;outline:none">';
+      h+='<span style="color:var(--cg);font-size:var(--t-md);flex-shrink:0">'+n+'.</span>';
+      h+='<input id="grat-inp-'+n+'" autocomplete="off" placeholder="Something good..." style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(0,255,136,.2);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:4px 2px;outline:none">';
       h+='</div>';
     });
-    h+='<button id="grat-save-btn" style="width:100%;padding:9px;background:rgba(0,255,136,.06);border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px;margin-top:4px">SAVE &#10003;</button>';
+    h+='<button id="grat-save-btn" style="width:100%;padding:9px;background:rgba(0,255,136,.06);border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px;margin-top:4px">SAVE &#10003;</button>';
   }
   el.innerHTML=h;
   // Wire
@@ -2020,23 +2020,23 @@ function gratRenderHistory(){
   ['all','year','month'].forEach(function(f){
     var lbl=f==='all'?'ALL':f==='year'?thisYear:thisMonth;
     var active=_gratFilter===f;
-    h+='<span data-gratfilter="'+f+'" style="font-size:10px;padding:3px 10px;border:1px solid '+(active?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cg)':'var(--dim)')+';cursor:pointer">'+lbl+'</span>';
+    h+='<span data-gratfilter="'+f+'" style="font-size:var(--t-sm);padding:3px 10px;border:1px solid '+(active?'var(--cg)':'rgba(255,255,255,.12)')+';color:'+(active?'var(--cg)':'var(--dim)')+';cursor:pointer">'+lbl+'</span>';
   });
-  h+='<button data-gratcopy="1" style="margin-left:auto;font-size:9px;padding:3px 10px;background:transparent;border:1px solid rgba(0,255,136,.2);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY</button>';
+  h+='<button data-gratcopy="1" style="margin-left:auto;font-size:var(--t-xs);padding:3px 10px;background:transparent;border:1px solid rgba(0,255,136,.2);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY</button>';
   h+='</div>';
 
   if(!filtered.length){
-    h+='<div style="color:var(--dim);font-size:12px">No entries for this period.</div>';
+    h+='<div style="color:var(--dim);font-size:var(--t-md)">No entries for this period.</div>';
     el.innerHTML=h;
     return;
   }
 
-  h+='<div style="font-size:9px;color:var(--dim);margin-bottom:8px">'+filtered.length+' entries</div>';
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:8px">'+filtered.length+' entries</div>';
   filtered.forEach(function(entry){
     h+='<div class="grat-entry">';
     h+='<div class="grat-date">'+entry.date+'</div>';
     entry.items.forEach(function(item,i){
-      h+='<div class="grat-entry-text">'+(i+1)+'. '+item+' <span style="font-size:10px;color:var(--dim);opacity:.5;font-style:italic">(alhumdulillah)</span></div>';
+      h+='<div class="grat-entry-text">'+(i+1)+'. '+item+' <span style="font-size:var(--t-sm);color:var(--dim);opacity:.5;font-style:italic">(alhumdulillah)</span></div>';
     });
     h+='</div>';
   });
@@ -2289,14 +2289,14 @@ function duaRender(){
       var recitedToday=recited[dua.id]===today;
       h+='<div style="padding:12px 0;border-bottom:1px solid rgba(255,204,0,.08)">';
       h+='<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">';
-      h+='<div style="font-size:11px;color:var(--ca);font-weight:bold">'+dua.title+'</div>';
-      if(recitedToday)h+='<span style="font-size:9px;color:var(--cg)">&#10003; today</span>';
+      h+='<div style="font-size:var(--t-base);color:var(--ca);font-weight:bold">'+dua.title+'</div>';
+      if(recitedToday)h+='<span style="font-size:var(--t-xs);color:var(--cg)">&#10003; today</span>';
       h+='</div>';
       h+='<div class="dua-arabic" style="font-family:'+fontCss.css+';font-size:'+(fontCss.key==="lateef"?"33":"22")+'px">'+dua.arabic+'</div>';
       h+='<div class="dua-transliteration">'+dua.transliteration+'</div>';
       h+='<div class="dua-translation">'+dua.translation+'</div>';
       h+='<div class="dua-source">'+dua.source+'</div>';
-      h+='<button data-duarecite="'+dua.id+'" style="margin-top:8px;padding:5px 14px;background:'+(recitedToday?'rgba(0,255,136,.08)':'transparent')+';border:1px solid '+(recitedToday?'var(--cg)':'rgba(255,204,0,.3)')+';color:'+(recitedToday?'var(--cg)':'var(--ca)')+';font-family:monospace;font-size:10px;cursor:pointer">'+(recitedToday?'&#10003; RECITED TODAY':'MARK AS RECITED')+'</button>';
+      h+='<button data-duarecite="'+dua.id+'" style="margin-top:8px;padding:5px 14px;background:'+(recitedToday?'rgba(0,255,136,.08)':'transparent')+';border:1px solid '+(recitedToday?'var(--cg)':'rgba(255,204,0,.3)')+';color:'+(recitedToday?'var(--cg)':'var(--ca)')+';font-family:monospace;font-size:var(--t-sm);cursor:pointer">'+(recitedToday?'&#10003; RECITED TODAY':'MARK AS RECITED')+'</button>';
       h+='</div>';
     });
     el.innerHTML=h;
@@ -2308,12 +2308,12 @@ function duaRender(){
     if(badge){badge.textContent=totalRecited?'\u2713 '+totalRecited+' today':'';}
     var h=duaFontPicker();
     h+='<div class="label-dim">DUA OF THE DAY</div>';
-    h+='<div style="font-size:11px;color:var(--ca);font-weight:bold;margin-bottom:10px">'+dua.title+'</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--ca);font-weight:bold;margin-bottom:10px">'+dua.title+'</div>';
     h+='<div class="dua-arabic" style="font-family:'+fontCss.css+';font-size:'+(fontCss.key==="lateef"?"35":"24")+'px">'+dua.arabic+'</div>';
     h+='<div class="dua-transliteration">'+dua.transliteration+'</div>';
     h+='<div class="dua-translation">'+dua.translation+'</div>';
     h+='<div class="dua-source">'+dua.source+'</div>';
-    h+='<button data-duarecite="'+dua.id+'" style="width:100%;margin-top:10px;padding:10px;background:'+(recitedToday?'rgba(0,255,136,.08)':'rgba(255,204,0,.06)')+';border:1px solid '+(recitedToday?'var(--cg)':'var(--ca)')+';color:'+(recitedToday?'var(--cg)':'var(--ca)')+';font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px">'+(recitedToday?'&#10003; RECITED TODAY':'&#127768; MARK AS RECITED')+'</button>';
+    h+='<button data-duarecite="'+dua.id+'" style="width:100%;margin-top:10px;padding:10px;background:'+(recitedToday?'rgba(0,255,136,.08)':'rgba(255,204,0,.06)')+';border:1px solid '+(recitedToday?'var(--cg)':'var(--ca)')+';color:'+(recitedToday?'var(--cg)':'var(--ca)')+';font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px">'+(recitedToday?'&#10003; RECITED TODAY':'&#127768; MARK AS RECITED')+'</button>';
     el.innerHTML=h;
   }
   // Wire recite buttons
@@ -2455,17 +2455,17 @@ function akhiraRenderDhikr(){
   if(allDone){
     h+='<div style="text-align:center;padding:20px 0">';
     h+='<div style="font-size:36px;margin-bottom:8px">🌙</div>';
-    h+='<div style="font-size:13px;color:var(--cg);letter-spacing:1px">Dhikr complete — baarakAllahu feek</div>';
-    h+='<div style="font-size:10px;color:var(--dim);margin-top:6px">'+totalTapped+' total remembrances today</div>';
-    h+='<button onclick="akhiraDhikrReset()" style="margin-top:14px;font-size:10px;padding:4px 14px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;cursor:pointer">START AGAIN</button>';
+    h+='<div style="font-size:var(--t-lg);color:var(--cg);letter-spacing:1px">Dhikr complete — baarakAllahu feek</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-top:6px">'+totalTapped+' total remembrances today</div>';
+    h+='<button onclick="akhiraDhikrReset()" style="margin-top:14px;font-size:var(--t-sm);padding:4px 14px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;cursor:pointer">START AGAIN</button>';
     h+='</div>';
   } else {
     var cur=DHIKR_SEQUENCE[phase];
     var count=d.counts[phase]||0;
     var remaining=cur.target-count;
     h+='<div class="dhikr-name">'+cur.name+'</div>';
-    h+='<div style="text-align:center;font-size:18px;color:var(--ca);margin-bottom:6px;direction:rtl">'+cur.arabic+'</div>';
-    h+='<div class="dhikr-counter">'+count+'<span style="font-size:28px;color:var(--dim)">/'+cur.target+'</span></div>';
+    h+='<div style="text-align:center;font-size:var(--t-title);color:var(--ca);margin-bottom:6px;direction:rtl">'+cur.arabic+'</div>';
+    h+='<div class="dhikr-counter">'+count+'<span style="font-size:var(--t-h1);color:var(--dim)">/'+cur.target+'</span></div>';
     // Dot progress
     h+='<div class="dhikr-progress">';
     for(var di=0;di<cur.target;di++){
@@ -2478,7 +2478,7 @@ function akhiraRenderDhikr(){
     DHIKR_SEQUENCE.forEach(function(s,i){
       var isDone=i<phase;
       var isCur=i===phase;
-      h+='<div style="font-size:9px;padding:2px 8px;border:1px solid '+(isDone?'var(--cg)':isCur?'var(--ca)':'rgba(255,255,255,.12)')+';color:'+(isDone?'var(--cg)':isCur?'var(--ca)':'var(--dim)')+'">'+s.name.split(' ')[0]+'</div>';
+      h+='<div style="font-size:var(--t-xs);padding:2px 8px;border:1px solid '+(isDone?'var(--cg)':isCur?'var(--ca)':'rgba(255,255,255,.12)')+';color:'+(isDone?'var(--cg)':isCur?'var(--ca)':'var(--dim)')+'">'+s.name.split(' ')[0]+'</div>';
     });
     h+='</div>';
   }
@@ -2539,14 +2539,14 @@ function akhiraRenderAudit(){
   var q=AUDIT_QUESTIONS[doy%AUDIT_QUESTIONS.length];
   var h='';
   if(todayEntry){
-    h+='<div style="font-size:10px;color:var(--cg);letter-spacing:1px;margin-bottom:8px">&#10003; Answered today</div>';
+    h+='<div style="font-size:var(--t-sm);color:var(--cg);letter-spacing:1px;margin-bottom:8px">&#10003; Answered today</div>';
     h+='<div class="audit-q">'+todayEntry.q+'</div>';
-    h+='<div style="font-size:13px;color:var(--text);line-height:1.6;padding:8px;background:rgba(255,204,0,.04);border-left:2px solid rgba(255,204,0,.2)">'+todayEntry.answer+'</div>';
-    h+='<button onclick="akhiraAuditClear()" style="margin-top:8px;font-size:9px;padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button>';
+    h+='<div style="font-size:var(--t-lg);color:var(--text);line-height:1.6;padding:8px;background:rgba(255,204,0,.04);border-left:2px solid var(--c-gold-dim)">'+todayEntry.answer+'</div>';
+    h+='<button onclick="akhiraAuditClear()" style="margin-top:8px;font-size:var(--t-xs);padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button>';
   } else {
     h+='<div class="audit-q">&ldquo;'+q+'&rdquo;</div>';
-    h+='<textarea id="audit-inp" placeholder="Be honest. No one sees this but Allah." style="width:100%;min-height:80px;background:rgba(255,204,0,.03);border:1px solid rgba(255,204,0,.15);color:var(--text);font-family:monospace;font-size:12px;padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.6"></textarea>';
-    h+='<button id="audit-save-btn" style="width:100%;margin-top:6px;padding:9px;background:rgba(255,204,0,.06);border:1px solid var(--ca);color:var(--ca);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">SAVE REFLECTION</button>';
+    h+='<textarea id="audit-inp" placeholder="Be honest. No one sees this but Allah." style="width:100%;min-height:80px;background:rgba(255,204,0,.03);border:1px solid rgba(255,204,0,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.6"></textarea>';
+    h+='<button id="audit-save-btn" style="width:100%;margin-top:6px;padding:9px;background:rgba(255,204,0,.06);border:1px solid var(--ca);color:var(--ca);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">SAVE REFLECTION</button>';
   }
   // History
   if(log.length){
@@ -2555,7 +2555,7 @@ function akhiraRenderAudit(){
     log.slice(todayEntry?1:0,8).forEach(function(e){
       h+='<div class="audit-entry">';
       h+='<div class="audit-entry-date">'+e.date+' &mdash; &ldquo;'+e.q.slice(0,40)+'...&rdquo;</div>';
-      h+='<div style="font-size:12px;color:var(--text);line-height:1.5">'+e.answer+'</div>';
+      h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.5">'+e.answer+'</div>';
       h+='</div>';
     });
     h+='</div>';
@@ -2598,14 +2598,14 @@ function akhiraRenderIntentions(){
   var log=akhiraData.intentions||[];
   var todayEntry=log.find(function(e){return e.date===today;});
   var h='';
-  h+='<div style="font-size:10px;color:var(--dim);margin-bottom:8px;line-height:1.6">Write your intention for tomorrow. What you seek forgiveness for. What you are grateful for tonight. A private letter — only Allah reads it.</div>';
+  h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:8px;line-height:1.6">Write your intention for tomorrow. What you seek forgiveness for. What you are grateful for tonight. A private letter — only Allah reads it.</div>';
   if(todayEntry){
-    h+='<div style="font-size:10px;color:var(--cg);letter-spacing:1px;margin-bottom:8px">&#10003; Written tonight</div>';
-    h+='<div style="font-size:12px;color:var(--text);line-height:1.7;padding:10px;background:rgba(255,204,0,.04);border-left:2px solid rgba(255,204,0,.2);white-space:pre-wrap">'+todayEntry.text+'</div>';
-    h+='<button onclick="akhiraIntentClear()" style="margin-top:8px;font-size:9px;padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button>';
+    h+='<div style="font-size:var(--t-sm);color:var(--cg);letter-spacing:1px;margin-bottom:8px">&#10003; Written tonight</div>';
+    h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.7;padding:10px;background:rgba(255,204,0,.04);border-left:2px solid var(--c-gold-dim);white-space:pre-wrap">'+todayEntry.text+'</div>';
+    h+='<button onclick="akhiraIntentClear()" style="margin-top:8px;font-size:var(--t-xs);padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button>';
   } else {
-    h+='<textarea id="intent-inp" placeholder="Bismillah..." style="width:100%;min-height:120px;background:rgba(255,204,0,.03);border:1px solid rgba(255,204,0,.15);color:var(--text);font-family:monospace;font-size:12px;padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.7"></textarea>';
-    h+='<button id="intent-save-btn" style="width:100%;margin-top:6px;padding:9px;background:rgba(255,204,0,.06);border:1px solid var(--ca);color:var(--ca);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">&#9790; SEAL FOR TONIGHT</button>';
+    h+='<textarea id="intent-inp" placeholder="Bismillah..." style="width:100%;min-height:120px;background:rgba(255,204,0,.03);border:1px solid rgba(255,204,0,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.7"></textarea>';
+    h+='<button id="intent-save-btn" style="width:100%;margin-top:6px;padding:9px;background:rgba(255,204,0,.06);border:1px solid var(--ca);color:var(--ca);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">&#9790; SEAL FOR TONIGHT</button>';
   }
   if(log.length){
     h+='<div style="margin-top:14px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px">';
@@ -2613,7 +2613,7 @@ function akhiraRenderIntentions(){
     log.slice(todayEntry?1:0,5).forEach(function(e){
       h+='<div class="audit-entry">';
       h+='<div class="audit-entry-date">'+e.date+'</div>';
-      h+='<div style="font-size:11px;color:var(--dim);line-height:1.6">'+e.text.slice(0,120)+(e.text.length>120?'...':'')+'</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.6">'+e.text.slice(0,120)+(e.text.length>120?'...':'')+'</div>';
       h+='</div>';
     });
     h+='</div>';
@@ -2724,7 +2724,7 @@ function rentRender(){
     var paid=rentData.find(function(r){return r.year===_rentSelYear&&r.month===mn;});
     var seasonCol=MONTH_SEASON_COLS[i];
     var active=mn===_rentSelMonth;
-    var borderCol=active?seasonCol:paid?'rgba(0,255,136,.5)':'rgba(255,255,255,.1)';
+    var borderCol=active?seasonCol:paid?'rgba(0,255,136,.5)':'var(--c-border)';
     var textCol=active?seasonCol:paid?'var(--cg)':'var(--dim)';
     var bg=active?seasonCol.replace('.9)','.12)'):'transparent';
     h+='<span data-rentmonth="'+mn+'" class="rent-pill" style="border-color:'+borderCol+';color:'+textCol+';background:'+bg+'">'+m+(paid?' ✓':'')+'</span>';
@@ -2733,21 +2733,21 @@ function rentRender(){
 
   // Selected month entry
   var existing=rentData.find(function(r){return r.year===_rentSelYear&&r.month===_rentSelMonth;});
-  h+='<div style="font-size:10px;color:var(--dim);letter-spacing:1px;margin-bottom:8px">'+RENT_MONTHS[_rentSelMonth-1]+' '+_rentSelYear+'</div>';
+  h+='<div style="font-size:var(--t-sm);color:var(--dim);letter-spacing:1px;margin-bottom:8px">'+RENT_MONTHS[_rentSelMonth-1]+' '+_rentSelYear+'</div>';
   if(existing){
     h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);margin-bottom:8px">';
     h+='<div><div style="font-family:VT323,monospace;font-size:32px;color:var(--cg)">$'+existing.amount.toLocaleString()+'</div>';
     if(existing.note)h+='<div class="dim-10">'+existing.note+'</div>';
     h+='</div>';
-    h+='<button data-rentdel="'+existing.id+'" style="font-size:10px;padding:4px 10px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;cursor:pointer">DELETE</button>';
+    h+='<button data-rentdel="'+existing.id+'" style="font-size:var(--t-sm);padding:4px 10px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;cursor:pointer">DELETE</button>';
     h+='</div>';
   } else {
     h+='<div style="display:flex;gap:6px;margin-bottom:6px">';
-    h+='<span style="color:var(--cp);font-size:16px;align-self:center">$</span>';
+    h+='<span style="color:var(--cp);font-size:var(--t-sub);align-self:center">$</span>';
     h+='<input id="rent-amt-inp" type="number" min="0" placeholder="Amount paid" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,45,120,.25);color:var(--text);font-family:VT323,monospace;font-size:24px;padding:4px 2px;outline:none">';
     h+='</div>';
-    h+='<input id="rent-note-inp" placeholder="Note (optional)..." style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:var(--text);font-family:monospace;font-size:11px;padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:8px">';
-    h+='<button id="rent-save-btn" style="width:100%;padding:8px;background:rgba(255,45,120,.06);border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">LOG PAYMENT</button>';
+    h+='<input id="rent-note-inp" placeholder="Note (optional)..." style="width:100%;background:transparent;border:none;border-bottom:1px solid var(--c-border);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:8px">';
+    h+='<button id="rent-save-btn" style="width:100%;padding:8px;background:rgba(255,45,120,.06);border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">LOG PAYMENT</button>';
   }
 
   // Stats
@@ -2779,9 +2779,9 @@ function rentRender(){
       var pct=Math.round(yearTotals[y]/maxYr*100);
       var yc=YEAR_COLORS[y]||'#aaa';
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">';
-      h+='<span style="font-size:10px;color:'+yc+';min-width:36px">'+y+'</span>';
-      h+='<div style="flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:1px"><div style="width:'+pct+'%;height:100%;background:'+yc+';border-radius:1px"></div></div>';
-      h+='<span style="font-size:10px;color:'+yc+';min-width:60px;text-align:right">$'+yearTotals[y].toLocaleString()+'</span>';
+      h+='<span style="font-size:var(--t-sm);color:'+yc+';min-width:36px">'+y+'</span>';
+      h+='<div style="flex:1;height:8px;background:var(--c-ghost);border-radius:1px"><div style="width:'+pct+'%;height:100%;background:'+yc+';border-radius:1px"></div></div>';
+      h+='<span style="font-size:var(--t-sm);color:'+yc+';min-width:60px;text-align:right">$'+yearTotals[y].toLocaleString()+'</span>';
       h+='</div>';
     });
     h+='</div>';
@@ -2789,7 +2789,7 @@ function rentRender(){
 
   // Copy button
   h+='<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.07)">';
-  h+='<button id="rent-copy-btn" style="font-size:9px;padding:3px 12px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY RENT DATA</button>';
+  h+='<button id="rent-copy-btn" style="font-size:var(--t-xs);padding:3px 12px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY RENT DATA</button>';
   h+='</div>';
 
   el.innerHTML=h;
@@ -3112,29 +3112,29 @@ function cdRender(){
     var editing=cdData.items.find(function(it){return it.id===_cdEditId;});
     if(editing){
       h+='<div style="padding:10px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.15);margin-bottom:10px">';
-      h+='<div style="font-size:9px;color:var(--cc);letter-spacing:1px;margin-bottom:8px">EDIT ENTRY</div>';
-      h+='<input id="cd-edit-label" placeholder="Label..." value="'+editing.label.replace(/"/g,'&quot;')+'" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--text);font-family:monospace;font-size:13px;padding:4px 2px;outline:none;margin-bottom:8px;box-sizing:border-box">';
+      h+='<div style="font-size:var(--t-xs);color:var(--cc);letter-spacing:1px;margin-bottom:8px">EDIT ENTRY</div>';
+      h+='<input id="cd-edit-label" placeholder="Label..." value="'+editing.label.replace(/"/g,'&quot;')+'" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:4px 2px;outline:none;margin-bottom:8px;box-sizing:border-box">';
       h+='<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">';
       h+='<span class="dim-10">In</span>';
-      h+='<input id="cd-edit-days" type="number" min="1" value="'+(editing.type==='days'?editing.days:'')+'" placeholder="days" style="width:70px;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:VT323,monospace;font-size:22px;padding:2px;outline:none">';
+      h+='<input id="cd-edit-days" type="number" min="1" value="'+(editing.type==='days'?editing.days:'')+'" placeholder="days" style="width:70px;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:VT323,monospace;font-size:var(--t-h2);padding:2px;outline:none">';
       h+='<span class="dim-10">days &nbsp;or&nbsp;</span>';
-      h+='<input id="cd-edit-date" type="date" value="'+(editing.type==='date'?editing.targetDate:'')+'" style="background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:monospace;font-size:11px;padding:2px;outline:none">';
+      h+='<input id="cd-edit-date" type="date" value="'+(editing.type==='date'?editing.targetDate:'')+'" style="background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:monospace;font-size:var(--t-base);padding:2px;outline:none">';
       h+='</div>';
       h+='<div class="flex-row">';
-      h+='<button id="cd-edit-save" style="flex:1;padding:7px;background:rgba(0,229,255,.06);border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:11px;cursor:pointer">SAVE</button>';
-      h+='<button id="cd-edit-cancel" style="padding:7px 12px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;font-size:11px;cursor:pointer">CANCEL</button>';
+      h+='<button id="cd-edit-save" style="flex:1;padding:7px;background:rgba(0,229,255,.06);border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:var(--t-base);cursor:pointer">SAVE</button>';
+      h+='<button id="cd-edit-cancel" style="padding:7px 12px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;font-size:var(--t-base);cursor:pointer">CANCEL</button>';
       h+='</div></div>';
     }
   } else {
     h+='<div class="mb-10">';
-    h+='<input id="cd-new-label" placeholder="What are you counting down to?" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.2);color:var(--text);font-family:monospace;font-size:12px;padding:5px 2px;outline:none;margin-bottom:8px;box-sizing:border-box">';
+    h+='<input id="cd-new-label" placeholder="What are you counting down to?" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:5px 2px;outline:none;margin-bottom:8px;box-sizing:border-box">';
     h+='<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">';
     h+='<span class="dim-10">In</span>';
-    h+='<input id="cd-new-days" type="number" min="1" placeholder="days" style="width:70px;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:VT323,monospace;font-size:22px;padding:2px;outline:none">';
+    h+='<input id="cd-new-days" type="number" min="1" placeholder="days" style="width:70px;background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:VT323,monospace;font-size:var(--t-h2);padding:2px;outline:none">';
     h+='<span class="dim-10">days &nbsp;or&nbsp;</span>';
-    h+='<input id="cd-new-date" type="date" style="background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:monospace;font-size:11px;padding:2px;outline:none">';
+    h+='<input id="cd-new-date" type="date" style="background:transparent;border:none;border-bottom:1px solid rgba(0,229,255,.25);color:var(--cc);font-family:monospace;font-size:var(--t-base);padding:2px;outline:none">';
     h+='</div>';
-    h+='<button id="cd-add-btn" style="width:100%;padding:8px;background:rgba(0,229,255,.05);border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">+ ADD COUNTDOWN</button>';
+    h+='<button id="cd-add-btn" style="width:100%;padding:8px;background:rgba(0,229,255,.05);border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">+ ADD COUNTDOWN</button>';
     h+='</div>';
   }
 
@@ -3151,25 +3151,25 @@ function cdRender(){
       h+='<div style="font-family:VT323,monospace;font-size:24px;color:'+col+';line-height:1">'+daysTxt+'</div>';
       h+='</div>';
       // Label
-      h+='<div style="flex:1;font-size:12px;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+it.label+'</div>';
+      h+='<div style="flex:1;font-size:var(--t-md);color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+it.label+'</div>';
       // Buttons
       h+='<div style="display:flex;gap:4px;flex-shrink:0">';
-      h+='<span data-cdmark="'+it.id+'" style="font-size:11px;padding:3px 7px;border:1px solid rgba(0,255,136,.3);color:var(--cg);cursor:pointer" title="Mark done">✓</span>';
-      h+='<span data-cdedit="'+it.id+'" style="font-size:11px;padding:3px 7px;border:1px solid rgba(255,255,255,.15);color:var(--dim);cursor:pointer">✎</span>';
-      h+='<span data-cddel="'+it.id+'" style="font-size:11px;padding:3px 7px;border:1px solid rgba(255,68,68,.3);color:'+(pending?'var(--cr)':'var(--dim)')+';cursor:pointer">'+(pending?'SURE?':'✕')+'</span>';
+      h+='<span data-cdmark="'+it.id+'" style="font-size:var(--t-base);padding:3px 7px;border:1px solid rgba(0,255,136,.3);color:var(--cg);cursor:pointer" title="Mark done">✓</span>';
+      h+='<span data-cdedit="'+it.id+'" style="font-size:var(--t-base);padding:3px 7px;border:1px solid var(--c-faint);color:var(--dim);cursor:pointer">✎</span>';
+      h+='<span data-cddel="'+it.id+'" style="font-size:var(--t-base);padding:3px 7px;border:1px solid rgba(255,68,68,.3);color:'+(pending?'var(--cr)':'var(--dim)')+';cursor:pointer">'+(pending?'SURE?':'✕')+'</span>';
       h+='</div></div>';
     });
   }
 
   // Log
   if(cdData.log&&cdData.log.length){
-    h+='<div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">';
+    h+='<div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--c-ghost)">';
     h+='<div style="display:flex;align-items:center;margin-bottom:6px">';
     h+='<div class="dim-9-ls">COMPLETED (last '+cdData.log.length+')</div>';
-    h+='<button id="cd-copy-btn" style="margin-left:auto;font-size:9px;padding:2px 8px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY</button>';
+    h+='<button id="cd-copy-btn" style="margin-left:auto;font-size:var(--t-xs);padding:2px 8px;background:transparent;border:1px solid rgba(0,229,255,.2);color:var(--dim);font-family:monospace;cursor:pointer">&#128203; COPY</button>';
     h+='</div>';
     cdData.log.forEach(function(entry){
-      h+='<div style="font-size:10px;color:var(--dim);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between">';
+      h+='<div style="font-size:var(--t-sm);color:var(--dim);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between">';
       h+='<span>'+entry.label+'</span>';
       h+='<span style="opacity:.5">'+entry.completedOn+'</span>';
       h+='</div>';
@@ -3437,7 +3437,7 @@ function pbBuild() {
     wrapper.dataset.tileid = id;
     var savedW=pb.sizes[id]?pb.sizes[id].w:320; var savedH = pb.sizes[id] ? pb.sizes[id].h : null;
     // Get real border color from tile
-    var tileBorderColor = tile.style.borderColor || getComputedStyle(tile).borderColor || 'rgba(255,255,255,.15)';
+    var tileBorderColor = tile.style.borderColor || getComputedStyle(tile).borderColor || 'var(--c-faint)';
     wrapper.style.cssText = 'left:'+pos.x+'px;top:'+pos.y+'px;position:absolute;z-index:'+(100+pinIdx)+';width:'+savedW+'px'+(savedH?';height:'+savedH+'px':'')+';border:1px solid '+tileBorderColor+';border-radius:2px;box-shadow:0 0 12px '+tileBorderColor.replace(')',',0.15)').replace('rgba','rgba').replace('rgb(','rgba(').replace(/,\s*[\d.]+\)$/,',0.15)');
 
     // Pin
@@ -3459,7 +3459,7 @@ function pbBuild() {
 
     // Expand/contract toggle button
     var expandBtn = document.createElement('button');
-    expandBtn.style.cssText = 'position:absolute;bottom:4px;right:4px;z-index:10;font-size:9px;padding:2px 7px;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.4);font-family:monospace;cursor:pointer;letter-spacing:1px';
+    expandBtn.style.cssText = 'position:absolute;bottom:4px;right:4px;z-index:10;font-size:var(--t-xs);padding:2px 7px;background:rgba(0,0,0,.7);border:1px solid var(--c-faint);color:rgba(255,255,255,.4);font-family:monospace;cursor:pointer;letter-spacing:1px';
     var isExpanded = pb.sizes[id] && pb.sizes[id].h;
     expandBtn.textContent = isExpanded ? '▲ COLLAPSE' : '▼ EXPAND';
     expandBtn.onclick = function(e) {
@@ -3725,7 +3725,7 @@ function pbDrawGrid() {
   for(var x=ox;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
   for(var y=oy;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
   var ms=gs*5, mox=pb.panX%ms, moy=pb.panY%ms;
-  ctx.strokeStyle='rgba(255,255,255,.06)';
+  ctx.strokeStyle='var(--c-ghost)';
   for(var mx=mox;mx<W;mx+=ms){ctx.beginPath();ctx.moveTo(mx,0);ctx.lineTo(mx,H);ctx.stroke();}
   for(var my=moy;my<H;my+=ms){ctx.beginPath();ctx.moveTo(0,my);ctx.lineTo(W,my);ctx.stroke();}
 }
@@ -3846,9 +3846,9 @@ function wallRender(){
   wallData.walls.forEach(function(w,wi){
     var a=w.id===wall.id;
     var wci=WALL_COLORS[wi%WALL_COLORS.length];
-    h+='<span data-wallswitch="'+w.id+'" style="font-size:10px;padding:3px 9px;border:1px solid '+(a?wci.border:'rgba(255,255,255,.12)')+';color:'+(a?wci.main:'var(--dim)')+';background:'+(a?'rgba(0,0,0,.2)':'transparent')+';cursor:pointer">'+w.name+'</span>';
+    h+='<span data-wallswitch="'+w.id+'" style="font-size:var(--t-sm);padding:3px 9px;border:1px solid '+(a?wci.border:'rgba(255,255,255,.12)')+';color:'+(a?wci.main:'var(--dim)')+';background:'+(a?'rgba(0,0,0,.2)':'transparent')+';cursor:pointer">'+w.name+'</span>';
   });
-  h+='<span data-wallnew="1" style="font-size:10px;padding:3px 9px;border:1px dashed rgba(255,255,255,.15);color:rgba(255,255,255,.25);cursor:pointer">+ NEW</span>';
+  h+='<span data-wallnew="1" style="font-size:var(--t-sm);padding:3px 9px;border:1px dashed var(--c-faint);color:rgba(255,255,255,.25);cursor:pointer">+ NEW</span>';
   h+='</div>';
 
   if(tab==='wall'){
@@ -3861,16 +3861,16 @@ function wallRender(){
     }
     if(bricksSinceEval>=evalEvery&&bricksSinceEval>0){
       h+='<div class="wall-eval-prompt" style="margin-bottom:10px;border-color:'+wc.border+'">';
-      h+='<div style="font-size:11px;color:'+wc.main+';margin-bottom:6px">&#8987; '+bricksSinceEval+' bricks since last reflection</div>';
-      h+='<div style="font-size:11px;color:var(--text);line-height:1.6;margin-bottom:8px">'+(wall.linkedGoal?'Your goal: <em style="color:#ff8c42">'+wall.linkedGoal+'</em><br>':'')+'Look back at your last '+bricksSinceEval+' bricks. Did they move you forward — or were you mostly planning?</div>';
+      h+='<div style="font-size:var(--t-base);color:'+wc.main+';margin-bottom:6px">&#8987; '+bricksSinceEval+' bricks since last reflection</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--text);line-height:1.6;margin-bottom:8px">'+(wall.linkedGoal?'Your goal: <em style="color:#ff8c42">'+wall.linkedGoal+'</em><br>':'')+'Look back at your last '+bricksSinceEval+' bricks. Did they move you forward — or were you mostly planning?</div>';
       h+='<div class="flex-row">';
-      h+='<button data-walleval="real" style="flex:1;padding:7px;background:rgba(0,255,136,.06);border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:10px;cursor:pointer">&#10003; REAL PROGRESS</button>';
-      h+='<button data-walleval="plan" style="flex:1;padding:7px;background:rgba(0,229,255,.06);border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:10px;cursor:pointer">&#9737; MOSTLY PLANNING</button>';
+      h+='<button data-walleval="real" style="flex:1;padding:7px;background:rgba(0,255,136,.06);border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:var(--t-sm);cursor:pointer">&#10003; REAL PROGRESS</button>';
+      h+='<button data-walleval="plan" style="flex:1;padding:7px;background:rgba(0,229,255,.06);border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:var(--t-sm);cursor:pointer">&#9737; MOSTLY PLANNING</button>';
       h+='</div></div>';
     }
 
     if(!bricks.length){
-      h+='<div style="color:var(--dim);font-size:12px;padding:20px 0;text-align:center;line-height:2">No bricks yet.<br>Every small step counts.<br>Lay the first one.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-md);padding:20px 0;text-align:center;line-height:2">No bricks yet.<br>Every small step counts.<br>Lay the first one.</div>';
     } else {
       // Show oldest first so grid fills bottom→top visually (grid scaleY(-1))
       var display=bricks.slice(-50);
@@ -3885,6 +3885,7 @@ function wallRender(){
         curRow.push(b);curCols+=bCols;
       });
       if(curRow.length)wallRows.push(curRow);
+      var totalRows=wallRows.length;
       for(var ri=0;ri<wallRows.length;ri++){
         var rowIdx=ri;
         var isOdd=rowIdx%2===1;
@@ -3894,7 +3895,7 @@ function wallRender(){
           if(b.type==='eval'){
             var evalCol=b.answer==='real'?'var(--cg)':'var(--cc)';
             h+='<div class="brick brick-eval brick-in" style="color:'+evalCol+'">';
-            h+='<span style="font-size:10px">'+(b.answer==='real'?'✓':'○')+' '+b.label+'</span>';
+            h+='<span style="font-size:var(--t-sm)">'+(b.answer==='real'?'✓':'○')+' '+b.label+'</span>';
             h+='<span style="font-size:8px;opacity:.5">'+b.date+'</span>';
             h+='</div>';
           } else {
@@ -3912,7 +3913,7 @@ function wallRender(){
             if(b.link)h+='<div class="brick-link">'+b.link+'</div>';
             h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px">';
             h+='<div class="brick-tag">'+(b.type==='do'?'DO':'PLAN')+'</div>';
-            h+='<div style="display:flex;gap:2px"><span data-brickedit="'+b.id+'" style="font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;padding:2px 4px;line-height:1">✎</span><span data-brickdel="'+b.id+'" style="font-size:11px;color:rgba(255,68,68,.5);cursor:pointer;padding:2px 4px;line-height:1">✕</span></div>';
+            h+='<div style="display:flex;gap:2px"><span data-brickedit="'+b.id+'" style="font-size:var(--t-base);color:rgba(255,255,255,.4);cursor:pointer;padding:2px 4px;line-height:1">✎</span><span data-brickdel="'+b.id+'" style="font-size:var(--t-base);color:rgba(255,68,68,.5);cursor:pointer;padding:2px 4px;line-height:1">✕</span></div>';
             h+='</div>';
             h+='</div>';
           }
@@ -3932,7 +3933,7 @@ function wallRender(){
         h+='</div>';
       }
       h+='</div>';
-      if(bricks.length>50)h+='<div style="font-size:9px;color:var(--dim);text-align:center;margin-top:6px">'+(bricks.length-50)+' more in archive</div>';
+      if(bricks.length>50)h+='<div style="font-size:var(--t-xs);color:var(--dim);text-align:center;margin-top:6px">'+(bricks.length-50)+' more in archive</div>';
     }
 
     // Quick-add strip at bottom of wall
@@ -3944,14 +3945,14 @@ function wallRender(){
     h+='</div>';
 
   } else if(tab==='add'){
-    h+='<input id="wall-label-inp" placeholder="What did you do? (optional)" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.25);color:var(--text);font-family:monospace;font-size:13px;padding:5px 2px;outline:none;box-sizing:border-box;margin-bottom:12px">';
+    h+='<input id="wall-label-inp" placeholder="What did you do? (optional)" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.25);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:5px 2px;outline:none;box-sizing:border-box;margin-bottom:12px">';
     h+='<div class="label-dim">WHAT KIND OF BRICK?</div>';
     h+='<div style="display:flex;gap:8px;margin-bottom:12px">';
-    h+='<div data-wallbricktype="do" id="wall-type-do" style="flex:1;padding:14px 8px;border:2px solid #ff8c42;background:rgba(255,140,66,.1);cursor:pointer;text-align:center"><div style="font-size:20px">🔨</div><div style="font-size:10px;color:#ff8c42;margin-top:4px;letter-spacing:1px">DOING</div><div class="dim-9-mt">Real action taken</div></div>';
-    h+='<div data-wallbricktype="plan" id="wall-type-plan" style="flex:1;padding:14px 8px;border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.04);cursor:pointer;text-align:center"><div style="font-size:20px">📋</div><div style="font-size:10px;color:var(--cc);margin-top:4px;letter-spacing:1px">PLANNING</div><div class="dim-9-mt">Organizing, prep</div></div>';
+    h+='<div data-wallbricktype="do" id="wall-type-do" style="flex:1;padding:14px 8px;border:2px solid #ff8c42;background:rgba(255,140,66,.1);cursor:pointer;text-align:center"><div style="font-size:20px">🔨</div><div style="font-size:var(--t-sm);color:#ff8c42;margin-top:4px;letter-spacing:1px">DOING</div><div class="dim-9-mt">Real action taken</div></div>';
+    h+='<div data-wallbricktype="plan" id="wall-type-plan" style="flex:1;padding:14px 8px;border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.04);cursor:pointer;text-align:center"><div style="font-size:20px">📋</div><div style="font-size:var(--t-sm);color:var(--cc);margin-top:4px;letter-spacing:1px">PLANNING</div><div class="dim-9-mt">Organizing, prep</div></div>';
     h+='</div>';
-    h+='<input id="wall-link-inp" placeholder="Link to goal/countdown (optional)..." style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:11px;padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:12px">';
-    h+='<button id="wall-add-btn" style="width:100%;padding:12px;background:rgba(255,140,66,.08);border:2px solid #ff8c42;color:#ff8c42;font-family:monospace;font-size:13px;cursor:pointer;letter-spacing:2px">+ LAY BRICK</button>';
+    h+='<input id="wall-link-inp" placeholder="Link to goal/countdown (optional)..." style="width:100%;background:transparent;border:none;border-bottom:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-base);padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:12px">';
+    h+='<button id="wall-add-btn" style="width:100%;padding:12px;background:rgba(255,140,66,.08);border:2px solid #ff8c42;color:#ff8c42;font-family:monospace;font-size:var(--t-lg);cursor:pointer;letter-spacing:2px">+ LAY BRICK</button>';
 
   } else if(tab==='eval'){
     var evals=bricks.filter(function(b){return b.type==='eval';});
@@ -3960,23 +3961,23 @@ function wallRender(){
     } else {
       evals.slice().reverse().forEach(function(ev){
         var col=ev.answer==='real'?'var(--cg)':'var(--cc)';
-        h+='<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;color:'+col+'">'+(ev.answer==='real'?'✓':'○')+' '+ev.label+'</span><span class="dim-9">'+ev.date+'</span></div></div>';
+        h+='<div style="padding:10px 0;border-bottom:1px solid var(--c-ghost)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:var(--t-sm);color:'+col+'">'+(ev.answer==='real'?'✓':'○')+' '+ev.label+'</span><span class="dim-9">'+ev.date+'</span></div></div>';
       });
     }
 
 
   } else if(tab==='settings'){
     h+='<div class="mb-12"><div class="label-dim-sm">WALL NAME</div>';
-    h+='<input id="wall-name-inp" value="'+wall.name+'" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.25);color:var(--text);font-family:monospace;font-size:14px;padding:4px 2px;outline:none;box-sizing:border-box"></div>';
+    h+='<input id="wall-name-inp" value="'+wall.name+'" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.25);color:var(--text);font-family:monospace;font-size:var(--t-body);padding:4px 2px;outline:none;box-sizing:border-box"></div>';
     h+='<div class="mb-12"><div class="label-dim-sm">GOAL THIS WALL IS BUILDING TOWARD</div>';
-    h+='<input id="wall-goal-inp" value="'+(wall.linkedGoal||'')+'" placeholder="e.g. launch my app, learn Arabic..." style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.2);color:var(--text);font-family:monospace;font-size:12px;padding:4px 2px;outline:none;box-sizing:border-box"></div>';
+    h+='<input id="wall-goal-inp" value="'+(wall.linkedGoal||'')+'" placeholder="e.g. launch my app, learn Arabic..." style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.2);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 2px;outline:none;box-sizing:border-box"></div>';
     h+='<div style="margin-bottom:14px;display:flex;align-items:center;gap:10px"><div class="dim-9-ls">EVALUATE EVERY</div>';
-    h+='<input id="wall-eval-every" type="number" min="5" max="100" value="'+(wall.evalEvery||25)+'" style="width:55px;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.3);color:#ff8c42;font-family:VT323,monospace;font-size:28px;padding:2px;outline:none;text-align:center">';
+    h+='<input id="wall-eval-every" type="number" min="5" max="100" value="'+(wall.evalEvery||25)+'" style="width:55px;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.3);color:#ff8c42;font-family:VT323,monospace;font-size:var(--t-h1);padding:2px;outline:none;text-align:center">';
     h+='<span class="dim-11">bricks</span></div>';
-    h+='<button id="wall-settings-save" style="width:100%;padding:9px;background:rgba(255,140,66,.07);border:1px solid rgba(255,140,66,.4);color:#ff8c42;font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px;margin-bottom:8px">SAVE CHANGES</button>';
+    h+='<button id="wall-settings-save" style="width:100%;padding:9px;background:rgba(255,140,66,.07);border:1px solid rgba(255,140,66,.4);color:#ff8c42;font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px;margin-bottom:8px">SAVE CHANGES</button>';
     // Delete wall option (if more than one wall)
     if(wallData.walls.length>1){
-      h+='<button id="wall-delete-btn" style="width:100%;padding:7px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">DELETE THIS WALL</button>';
+      h+='<button id="wall-delete-btn" style="width:100%;padding:7px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">DELETE THIS WALL</button>';
     }
 
   } else if(tab==='archive'){
@@ -3985,7 +3986,7 @@ function wallRender(){
     else{
       h+='<div class="label-dim">'+archived.length+' archived bricks</div>';
       archived.slice().reverse().slice(0,40).forEach(function(b){
-        h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:9px;padding:2px 5px;border:1px solid '+(b.type==='do'?'rgba(255,140,66,.4)':'rgba(0,229,255,.3)')+';color:'+(b.type==='do'?'#ff8c42':'var(--cc)')+'">'+(b.type==='do'?'DO':'PLAN')+'</span><span style="flex:1;font-size:11px;color:var(--dim)">'+( b.label||'·')+'</span><span class="dim-9-faint">'+b.date+'</span></div>';
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:var(--t-xs);padding:2px 5px;border:1px solid '+(b.type==='do'?'rgba(255,140,66,.4)':'rgba(0,229,255,.3)')+';color:'+(b.type==='do'?'#ff8c42':'var(--cc)')+'">'+(b.type==='do'?'DO':'PLAN')+'</span><span style="flex:1;font-size:var(--t-base);color:var(--dim)">'+( b.label||'·')+'</span><span class="dim-9-faint">'+b.date+'</span></div>';
       });
     }
   }
@@ -4175,19 +4176,19 @@ function rfRender(){
   h+='<div style="display:flex;gap:6px;margin-bottom:12px">';
   [{t:'reframe',l:'REFRAME'},{t:'log',l:'LOG'},{t:'settings',l:'⚙'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-rftab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(126,184,255,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#7eb8ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-rftab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(126,184,255,.5)':'var(--c-border)')+';color:'+(a?'#7eb8ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
   if(tab==='reframe'){
     if(!hasKey){
-      h+='<div style="padding:10px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.2);font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:10px">';
+      h+='<div style="padding:10px;background:rgba(255,204,0,.06);border:1px solid var(--c-gold-dim);font-size:var(--t-base);color:var(--dim);line-height:1.6;margin-bottom:10px">';
       h+='No API key set. Add your Anthropic API key in the ⚙ tab to use Reframe.';
       h+='</div>';
     }
-    h+='<div style="font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:10px">Write a thought that\'s weighing on you. Get a gentle, grounded reframe.</div>';
-    h+='<textarea id="rf-inp" placeholder="I feel like I have been wasting my time..." style="width:100%;min-height:80px;background:transparent;border:none;border-bottom:1px solid rgba(126,184,255,.2);color:var(--text);font-family:monospace;font-size:13px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6"></textarea>';
-    h+='<button id="rf-btn" onclick="rfSubmit()" style="width:100%;margin-top:10px;padding:10px;background:rgba(126,184,255,.06);border:1px solid rgba(126,184,255,.25);color:#7eb8ff;font-family:monospace;font-size:13px;cursor:pointer;letter-spacing:1px">REFRAME ↻</button>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.6;margin-bottom:10px">Write a thought that\'s weighing on you. Get a gentle, grounded reframe.</div>';
+    h+='<textarea id="rf-inp" placeholder="I feel like I have been wasting my time..." style="width:100%;min-height:80px;background:transparent;border:none;border-bottom:1px solid rgba(126,184,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6"></textarea>';
+    h+='<button id="rf-btn" onclick="rfSubmit()" style="width:100%;margin-top:10px;padding:10px;background:rgba(126,184,255,.06);border:1px solid rgba(126,184,255,.25);color:#7eb8ff;font-family:monospace;font-size:var(--t-lg);cursor:pointer;letter-spacing:1px">REFRAME ↻</button>';
     h+='<div id="rf-response" style="margin-top:12px"></div>';
 
   } else if(tab==='log'){
@@ -4198,30 +4199,30 @@ function rfRender(){
       rfData.forEach(function(e,i){
         h+='<div style="margin-bottom:12px;padding:10px;background:rgba(126,184,255,.04);border-left:2px solid rgba(126,184,255,.2)">';
         h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">';
-        h+='<span style="font-size:9px;color:rgba(255,255,255,.2);flex:1">'+e.date+'</span>';
-        h+='<button data-rfcopy="'+i+'" style="font-size:9px;padding:2px 8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.3);font-family:monospace;cursor:pointer;letter-spacing:1px">📋</button>';
+        h+='<span style="font-size:var(--t-xs);color:rgba(255,255,255,.2);flex:1">'+e.date+'</span>';
+        h+='<button data-rfcopy="'+i+'" style="font-size:var(--t-xs);padding:2px 8px;background:transparent;border:1px solid var(--c-border);color:rgba(255,255,255,.3);font-family:monospace;cursor:pointer;letter-spacing:1px">📋</button>';
         h+='</div>';
-        h+='<div style="font-size:11px;color:var(--dim);margin-bottom:6px;font-style:italic;line-height:1.5">&ldquo;'+e.thought+'&rdquo;</div>';
-        h+='<div style="font-size:12px;color:var(--text);line-height:1.7">'+e.reframe+'</div>';
+        h+='<div style="font-size:var(--t-base);color:var(--dim);margin-bottom:6px;font-style:italic;line-height:1.5">&ldquo;'+e.thought+'&rdquo;</div>';
+        h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.7">'+e.reframe+'</div>';
         h+='</div>';
       });
       h+='</div>';
-      h+='<div style="font-size:9px;color:var(--dim);margin-top:6px;opacity:.5">'+rfData.length+' entries stored</div>';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:6px;opacity:.5">'+rfData.length+' entries stored</div>';
     }
 
   } else {
     // Settings
-    h+='<div style="font-size:9px;color:rgba(126,184,255,.6);letter-spacing:2px;margin-bottom:10px">ANTHROPIC API KEY</div>';
-    h+='<div style="font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:10px">';
+    h+='<div style="font-size:var(--t-xs);color:rgba(126,184,255,.6);letter-spacing:2px;margin-bottom:10px">ANTHROPIC API KEY</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.6;margin-bottom:10px">';
     h+='Your OpenAI key is stored locally only. Get one at platform.openai.com → API keys.';
     h+='</div>';
     h+='<input id="rf-key-inp" type="password" placeholder="sk-..." value="'+(rfGetKey()||'')+'" ';
-    h+='style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(126,184,255,.2);color:var(--text);font-family:monospace;font-size:12px;padding:6px 0;outline:none;box-sizing:border-box;margin-bottom:10px">';
-    h+='<button id="rf-key-save" style="width:100%;padding:9px;background:rgba(126,184,255,.06);border:1px solid rgba(126,184,255,.3);color:#7eb8ff;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">SAVE KEY</button>';
+    h+='style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(126,184,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:6px 0;outline:none;box-sizing:border-box;margin-bottom:10px">';
+    h+='<button id="rf-key-save" style="width:100%;padding:9px;background:rgba(126,184,255,.06);border:1px solid rgba(126,184,255,.3);color:#7eb8ff;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">SAVE KEY</button>';
     if(hasKey){
-      h+='<button id="rf-key-clear" style="width:100%;margin-top:6px;padding:9px;background:transparent;border:1px solid rgba(255,85,85,.2);color:rgba(255,85,85,.6);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">CLEAR KEY</button>';
+      h+='<button id="rf-key-clear" style="width:100%;margin-top:6px;padding:9px;background:transparent;border:1px solid rgba(255,85,85,.2);color:rgba(255,85,85,.6);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">CLEAR KEY</button>';
     }
-    h+='<div style="margin-top:12px;font-size:9px;color:var(--dim);line-height:1.6;opacity:.6">';
+    h+='<div style="margin-top:12px;font-size:var(--t-xs);color:var(--dim);line-height:1.6;opacity:.6">';
     h+='Key is stored in localStorage and never sent anywhere except Anthropic\'s API directly from your browser.';
     h+='</div>';
   }
@@ -4275,7 +4276,7 @@ async function rfSubmit(){
   var thought=inp.value.trim();
   btn.textContent='Thinking...';
   btn.disabled=true;
-  resp.innerHTML='<div style="color:var(--dim);font-size:11px;animation:pulse 1.5s infinite">...</div>';
+  resp.innerHTML='<div style="color:var(--dim);font-size:var(--t-base);animation:pulse 1.5s infinite">...</div>';
   try{
     var res=await fetch('https://api.openai.com/v1/chat/completions',{
       method:'POST',
@@ -4292,12 +4293,12 @@ async function rfSubmit(){
     var data=await res.json();
     if(!res.ok){
       var _apiErr=(data.error&&data.error.message)||JSON.stringify(data);
-      resp.innerHTML='<div style="color:var(--cr);font-size:11px">API error ('+res.status+'): '+_apiErr+'</div>';
+      resp.innerHTML='<div style="color:var(--cr);font-size:var(--t-base)">API error ('+res.status+'): '+_apiErr+'</div>';
       btn.textContent='REFRAME ↻';btn.disabled=false;
       return;
     }
     var reframe=data.choices&&data.choices[0]&&data.choices[0].message&&data.choices[0].message.content||'Could not generate reframe.';
-    resp.innerHTML='<div style="font-size:12px;color:var(--text);line-height:1.8;padding:10px;background:rgba(126,184,255,.05);border-left:2px solid rgba(126,184,255,.4)">'+reframe+'</div>';
+    resp.innerHTML='<div style="font-size:var(--t-md);color:var(--text);line-height:1.8;padding:10px;background:rgba(126,184,255,.05);border-left:2px solid rgba(126,184,255,.4)">'+reframe+'</div>';
     rfData.unshift({thought:thought,reframe:reframe,date:new Date().toISOString().slice(0,10),ts:Date.now()});
     if(rfData.length>30)rfData=rfData.slice(0,30);
     rfSave();
@@ -4305,7 +4306,7 @@ async function rfSubmit(){
   }catch(err){
     var _errMsg=err.message||String(err);
     // If it's a JSON parse error, the API returned an error response
-    resp.innerHTML='<div style="color:var(--cr);font-size:11px">'
+    resp.innerHTML='<div style="color:var(--cr);font-size:var(--t-base)">'
       +'<div class="mb-4">Error: '+_errMsg+'</div>'
       +'<div style="opacity:.7">Check: valid OpenAI key in ⚙ tab (starts sk-...), key has credits, no VPN blocking api.openai.com</div>'
       +'</div>';
@@ -4335,32 +4336,32 @@ function legacyRender(){
   var el=document.getElementById('legacy-body');
   if(!el)return;
   var h='';
-  h+='<div style="font-size:11px;color:rgba(245,166,35,.6);margin-bottom:10px;font-style:italic;line-height:1.6">A letter to your future self. Add to it over time. No pressure, no format. Just truth.</div>';
+  h+='<div style="font-size:var(--t-base);color:rgba(245,166,35,.6);margin-bottom:10px;font-style:italic;line-height:1.6">A letter to your future self. Add to it over time. No pressure, no format. Just truth.</div>';
   // Tab bar
   var tab=legacyData._tab||'write';
   h+='<div class="flex-row-mb">';
   [{t:'write',l:'✍ WRITE'},{t:'history',l:'📜 HISTORY'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-legacytab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(245,166,35,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#f5a623':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-legacytab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(245,166,35,.5)':'var(--c-border)')+';color:'+(a?'#f5a623':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
   if(tab==='write'){
-    h+='<textarea id="legacy-inp" placeholder="Dear future me,\n\nI am writing this on..." style="width:100%;min-height:180px;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:13px;padding:4px 0;outline:none;resize:vertical;box-sizing:border-box;line-height:1.8">'+( legacyData.draft||'')+'</textarea>';
+    h+='<textarea id="legacy-inp" placeholder="Dear future me,\n\nI am writing this on..." style="width:100%;min-height:180px;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:4px 0;outline:none;resize:vertical;box-sizing:border-box;line-height:1.8">'+( legacyData.draft||'')+'</textarea>';
     h+='<div style="display:flex;gap:6px;margin-top:8px">';
-    h+='<button id="legacy-save-draft" style="flex:1;padding:8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer">SAVE DRAFT</button>';
-    h+='<button id="legacy-add-entry" style="flex:2;padding:8px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">ADD TO LETTER ↓</button>';
+    h+='<button id="legacy-save-draft" style="flex:1;padding:8px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer">SAVE DRAFT</button>';
+    h+='<button id="legacy-add-entry" style="flex:2;padding:8px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">ADD TO LETTER ↓</button>';
     h+='</div>';
-    h+='<div style="font-size:9px;color:var(--dim);margin-top:6px;opacity:.5">'+( legacyData.entries&&legacyData.entries.length?legacyData.entries.length+' entries so far · started '+(legacyData.entries[0]&&legacyData.entries[0].date||'today'):'First entry. Begin whenever.')+'</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:6px;opacity:.5">'+( legacyData.entries&&legacyData.entries.length?legacyData.entries.length+' entries so far · started '+(legacyData.entries[0]&&legacyData.entries[0].date||'today'):'First entry. Begin whenever.')+'</div>';
   } else {
     var entries=legacyData.entries||[];
     if(!entries.length){
-      h+='<div style="color:var(--dim);font-size:11px;padding:10px 0">No entries yet. Start writing.</div>';
+      h+='<div style="color:var(--dim);font-size:var(--t-base);padding:10px 0">No entries yet. Start writing.</div>';
     } else {
       entries.slice().reverse().forEach(function(e,i){
         h+='<div style="margin-bottom:14px;padding:10px;background:rgba(245,166,35,.03);border-left:2px solid rgba(245,166,35,'+(i===0?'.4':'.15')+')">';
-        h+='<div style="font-size:9px;color:rgba(245,166,35,.5);margin-bottom:6px">'+e.date+'</div>';
-        h+='<div style="font-size:12px;color:var(--text);line-height:1.8;white-space:pre-wrap">'+e.text+'</div>';
+        h+='<div style="font-size:var(--t-xs);color:rgba(245,166,35,.5);margin-bottom:6px">'+e.date+'</div>';
+        h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.8;white-space:pre-wrap">'+e.text+'</div>';
         h+='</div>';
       });
     }
@@ -4395,27 +4396,27 @@ function shadowRender(){
   var el=document.getElementById('shadow-body');
   if(!el)return;
   var h='';
-  h+='<div style="font-size:11px;color:rgba(191,95,255,.6);margin-bottom:10px;line-height:1.6;font-style:italic">What bothered, irritated, or shamed you today? What does that reaction reveal about you?</div>';
+  h+='<div style="font-size:var(--t-base);color:rgba(191,95,255,.6);margin-bottom:10px;line-height:1.6;font-style:italic">What bothered, irritated, or shamed you today? What does that reaction reveal about you?</div>';
   // Add form
   h+='<div class="mb-12">';
-  h+='<textarea id="shadow-trigger" placeholder="What triggered you? (anger, jealousy, shame...)" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6;margin-bottom:8px"></textarea>';
-  h+='<textarea id="shadow-reflection" placeholder="What does this reaction say about me honestly?" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6"></textarea>';
-  h+='<button id="shadow-add" style="width:100%;margin-top:8px;padding:9px;background:rgba(191,95,255,.06);border:1px solid rgba(191,95,255,.25);color:#bf5fff;font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px">LOG SHADOW ↓</button>';
+  h+='<textarea id="shadow-trigger" placeholder="What triggered you? (anger, jealousy, shame...)" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6;margin-bottom:8px"></textarea>';
+  h+='<textarea id="shadow-reflection" placeholder="What does this reaction say about me honestly?" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6"></textarea>';
+  h+='<button id="shadow-add" style="width:100%;margin-top:8px;padding:9px;background:rgba(191,95,255,.06);border:1px solid rgba(191,95,255,.25);color:#bf5fff;font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px">LOG SHADOW ↓</button>';
   h+='</div>';
   // Log
   if(shadowData.length){
-    h+='<div style="border-top:1px solid rgba(255,255,255,.06);padding-top:10px">';
+    h+='<div style="border-top:1px solid var(--c-ghost);padding-top:10px">';
     shadowData.slice().reverse().slice(0,10).forEach(function(e){
       h+='<div style="margin-bottom:10px;padding:8px;background:rgba(191,95,255,.04);border-left:2px solid rgba(191,95,255,.2)">';
-      h+='<div style="font-size:10px;color:var(--dim);font-style:italic;margin-bottom:4px">'+e.trigger+'</div>';
-      h+='<div style="font-size:11px;color:rgba(191,95,255,.8);line-height:1.5">↳ '+e.reflection+'</div>';
-      h+='<div style="font-size:9px;color:rgba(255,255,255,.15);margin-top:4px">'+e.date+'</div>';
+      h+='<div style="font-size:var(--t-sm);color:var(--dim);font-style:italic;margin-bottom:4px">'+e.trigger+'</div>';
+      h+='<div style="font-size:var(--t-base);color:rgba(191,95,255,.8);line-height:1.5">↳ '+e.reflection+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:var(--c-faint);margin-top:4px">'+e.date+'</div>';
       h+='</div>';
     });
-    if(shadowData.length>10)h+='<div style="font-size:9px;color:var(--dim);opacity:.4">+ '+(shadowData.length-10)+' more entries</div>';
+    if(shadowData.length>10)h+='<div style="font-size:var(--t-xs);color:var(--dim);opacity:.4">+ '+(shadowData.length-10)+' more entries</div>';
     h+='</div>';
   } else {
-    h+='<div style="font-size:11px;color:var(--dim);opacity:.5">No entries yet. The shadow grows when ignored.</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);opacity:.5">No entries yet. The shadow grows when ignored.</div>';
   }
   el.innerHTML=h;
 
@@ -4467,26 +4468,26 @@ function fearRender(){
   h+='<div class="flex-row-mb">';
   [{t:'fears',l:'💀 FEARS'},{t:'mori',l:'⏳ DEATHBED'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-feartab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(255,140,66,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#ff8c42':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-feartab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(255,140,66,.5)':'var(--c-border)')+';color:'+(a?'#ff8c42':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
   if(tab==='fears'){
-    h+='<div style="font-size:11px;color:rgba(255,140,66,.6);margin-bottom:10px;line-height:1.6;font-style:italic">Name the real fear underneath the surface. What are you actually avoiding?</div>';
+    h+='<div style="font-size:var(--t-base);color:rgba(255,140,66,.6);margin-bottom:10px;line-height:1.6;font-style:italic">Name the real fear underneath the surface. What are you actually avoiding?</div>';
     var fears=fearData.fears||[];
     h+='<div class="flex-row-mb">';
-    h+='<input id="fear-inp" placeholder="I am afraid of..." style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.2);color:var(--text);font-family:monospace;font-size:12px;padding:4px 2px;outline:none">';
-    h+='<button id="fear-add" style="padding:4px 12px;background:rgba(255,140,66,.07);border:1px solid rgba(255,140,66,.3);color:#ff8c42;font-family:monospace;font-size:11px;cursor:pointer">ADD</button>';
+    h+='<input id="fear-inp" placeholder="I am afraid of..." style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.2);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 2px;outline:none">';
+    h+='<button id="fear-add" style="padding:4px 12px;background:rgba(255,140,66,.07);border:1px solid rgba(255,140,66,.3);color:#ff8c42;font-family:monospace;font-size:var(--t-base);cursor:pointer">ADD</button>';
     h+='</div>';
     if(!fears.length){
-      h+='<div style="font-size:11px;color:var(--dim);opacity:.5;padding:8px 0">No fears named yet. Naming them is the first act of courage.</div>';
+      h+='<div style="font-size:var(--t-base);color:var(--dim);opacity:.5;padding:8px 0">No fears named yet. Naming them is the first act of courage.</div>';
     } else {
       fears.forEach(function(f,i){
         h+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
-        h+='<span data-fearface="'+i+'" style="font-size:16px;cursor:pointer;color:'+(f.faced?'#ff8c42':'rgba(255,255,255,.15)')+'" title="'+(f.faced?'Faced':'Mark as faced')+'">'+(f.faced?'◉':'○')+'</span>';
-        h+='<span style="flex:1;font-size:12px;color:'+(f.faced?'var(--dim)':'var(--text)')+(f.faced?';text-decoration:line-through':'')+'">'+f.text+'</span>';
-        h+='<span style="font-size:9px;color:rgba(255,255,255,.15)">'+f.date+'</span>';
-        h+='<span data-feardel="'+i+'" style="font-size:10px;color:rgba(255,68,68,.3);cursor:pointer;padding:2px 4px">✕</span>';
+        h+='<span data-fearface="'+i+'" style="font-size:var(--t-sub);cursor:pointer;color:'+(f.faced?'#ff8c42':'var(--c-faint)')+'" title="'+(f.faced?'Faced':'Mark as faced')+'">'+(f.faced?'◉':'○')+'</span>';
+        h+='<span style="flex:1;font-size:var(--t-md);color:'+(f.faced?'var(--dim)':'var(--text)')+(f.faced?';text-decoration:line-through':'')+'">'+f.text+'</span>';
+        h+='<span style="font-size:var(--t-xs);color:var(--c-faint)">'+f.date+'</span>';
+        h+='<span data-feardel="'+i+'" style="font-size:var(--t-sm);color:rgba(255,68,68,.3);cursor:pointer;padding:2px 4px">✕</span>';
         h+='</div>';
       });
     }
@@ -4496,23 +4497,23 @@ function fearRender(){
     var doy=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/(864e5));
     var prompt=MORI_PROMPTS[doy%MORI_PROMPTS.length];
     var todayMori=(fearData.mori||[]).find(function(m){return m.date===todayStr;});
-    h+='<div style="font-size:13px;color:rgba(255,140,66,.8);line-height:1.7;margin-bottom:12px;font-style:italic;padding:10px;border-left:2px solid rgba(255,140,66,.3)">'+prompt+'</div>';
+    h+='<div style="font-size:var(--t-lg);color:rgba(255,140,66,.8);line-height:1.7;margin-bottom:12px;font-style:italic;padding:10px;border-left:2px solid rgba(255,140,66,.3)">'+prompt+'</div>';
     if(todayMori){
-      h+='<div style="font-size:12px;color:var(--text);line-height:1.7;padding:8px;background:rgba(255,140,66,.04);border-left:2px solid rgba(255,140,66,.2)">'+todayMori.answer+'</div>';
-      h+='<div style="font-size:9px;color:var(--dim);margin-top:6px;opacity:.5">Written today</div>';
+      h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.7;padding:8px;background:rgba(255,140,66,.04);border-left:2px solid rgba(255,140,66,.2)">'+todayMori.answer+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:6px;opacity:.5">Written today</div>';
     } else {
-      h+='<textarea id="mori-inp" placeholder="Be honest..." style="width:100%;min-height:80px;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.7"></textarea>';
-      h+='<button id="mori-save" style="width:100%;margin-top:8px;padding:9px;background:rgba(255,140,66,.06);border:1px solid rgba(255,140,66,.25);color:#ff8c42;font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px">ANSWER ↓</button>';
+      h+='<textarea id="mori-inp" placeholder="Be honest..." style="width:100%;min-height:80px;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.7"></textarea>';
+      h+='<button id="mori-save" style="width:100%;margin-top:8px;padding:9px;background:rgba(255,140,66,.06);border:1px solid rgba(255,140,66,.25);color:#ff8c42;font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px">ANSWER ↓</button>';
     }
     // History
     var moriLog=(fearData.mori||[]).slice().reverse().slice(1,6);
     if(moriLog.length){
-      h+='<div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">';
+      h+='<div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--c-ghost)">';
       h+='<div class="label-dim">PAST REFLECTIONS</div>';
       moriLog.forEach(function(m){
         h+='<div style="margin-bottom:8px;padding:6px 8px;background:rgba(255,140,66,.03);border-left:1px solid rgba(255,140,66,.15)">';
-        h+='<div style="font-size:9px;color:rgba(255,255,255,.2);margin-bottom:3px">'+m.date+'</div>';
-        h+='<div style="font-size:11px;color:var(--dim);line-height:1.5">'+m.answer+'</div>';
+        h+='<div style="font-size:var(--t-xs);color:rgba(255,255,255,.2);margin-bottom:3px">'+m.date+'</div>';
+        h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.5">'+m.answer+'</div>';
         h+='</div>';
       });
       h+='</div>';
@@ -4971,28 +4972,28 @@ function peopleRender(){
   var el=document.getElementById('people-body');
   if(!el)return;
   var h='';
-  h+='<div style="font-size:11px;color:rgba(245,166,35,.6);line-height:1.6;margin-bottom:10px;font-style:italic">Not inspiration. Study. Who are they, what do you admire, and how does it translate to a real behavior?</div>';
+  h+='<div style="font-size:var(--t-base);color:rgba(245,166,35,.6);line-height:1.6;margin-bottom:10px;font-style:italic">Not inspiration. Study. Who are they, what do you admire, and how does it translate to a real behavior?</div>';
   var adding=window._peopleAdding;
   if(!adding){
-    h+='<button id="people-add-btn" style="width:100%;padding:9px;background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.25);color:#f5a623;font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:1px;margin-bottom:10px">+ ADD PERSON</button>';
+    h+='<button id="people-add-btn" style="width:100%;padding:9px;background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.25);color:#f5a623;font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px;margin-bottom:10px">+ ADD PERSON</button>';
   } else {
     h+='<div style="padding:10px;background:rgba(245,166,35,.04);border:1px solid rgba(245,166,35,.15);margin-bottom:10px">';
-    h+='<input id="people-name" placeholder="Name..." style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.2);color:var(--text);font-family:monospace;font-size:13px;padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:8px">';
-    h+='<textarea id="people-admire" placeholder="What specifically do you admire?" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6;margin-bottom:8px"></textarea>';
-    h+='<textarea id="people-behavior" placeholder="What concrete behavior does this translate to for you?" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6;margin-bottom:8px"></textarea>';
-    h+='<div class="flex-row"><button id="people-save" style="flex:1;padding:8px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:11px;cursor:pointer">SAVE</button><button id="people-cancel" style="padding:8px 14px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:11px;cursor:pointer">CANCEL</button></div>';
+    h+='<input id="people-name" placeholder="Name..." style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.2);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:8px">';
+    h+='<textarea id="people-admire" placeholder="What specifically do you admire?" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6;margin-bottom:8px"></textarea>';
+    h+='<textarea id="people-behavior" placeholder="What concrete behavior does this translate to for you?" style="width:100%;min-height:52px;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 0;outline:none;resize:none;box-sizing:border-box;line-height:1.6;margin-bottom:8px"></textarea>';
+    h+='<div class="flex-row"><button id="people-save" style="flex:1;padding:8px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:var(--t-base);cursor:pointer">SAVE</button><button id="people-cancel" style="padding:8px 14px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-base);cursor:pointer">CANCEL</button></div>';
     h+='</div>';
   }
-  if(!peopleData.length&&!adding){h+='<div style="color:var(--dim);font-size:11px;opacity:.5;line-height:1.8">No one yet. Think carefully.</div>';}
+  if(!peopleData.length&&!adding){h+='<div style="color:var(--dim);font-size:var(--t-base);opacity:.5;line-height:1.8">No one yet. Think carefully.</div>';}
   peopleData.forEach(function(p,i){
     var expanded=window['_peopleOpen_'+i];
     h+='<div style="margin-bottom:8px;border:1px solid rgba(245,166,35,'+(expanded?'.2':'.08')+')">';
-    h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer" data-peopleexpand="'+i+'"><span style="font-size:18px">&#11088;</span><div style="flex:1"><div style="font-size:13px;color:var(--text);font-weight:600">'+p.name+'</div></div><span class="dim-10">'+(expanded?'&#9650;':'&#9660;')+'</span></div>';
+    h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer" data-peopleexpand="'+i+'"><span style="font-size:var(--t-title)">&#11088;</span><div style="flex:1"><div style="font-size:var(--t-lg);color:var(--text);font-weight:600">'+p.name+'</div></div><span class="dim-10">'+(expanded?'&#9650;':'&#9660;')+'</span></div>';
     if(expanded){
       h+='<div style="padding:0 12px 12px">';
-      if(p.admire)h+='<div class="mb-8"><div style="font-size:9px;color:rgba(245,166,35,.6);letter-spacing:1px;margin-bottom:3px">WHAT I ADMIRE</div><div style="font-size:12px;color:var(--text);line-height:1.6">'+p.admire+'</div></div>';
-      if(p.behavior)h+='<div class="mb-8"><div style="font-size:9px;color:rgba(245,166,35,.6);letter-spacing:1px;margin-bottom:3px">HOW I APPLY IT</div><div style="font-size:12px;color:var(--text);line-height:1.6">'+p.behavior+'</div></div>';
-      h+='<div class="flex-row"><button data-peopleedit="'+i+'" style="font-size:9px;padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button><button data-peopledel="'+i+'" style="font-size:9px;padding:3px 10px;background:transparent;border:1px solid rgba(255,68,68,.25);color:var(--cr);font-family:monospace;cursor:pointer">REMOVE</button></div>';
+      if(p.admire)h+='<div class="mb-8"><div style="font-size:var(--t-xs);color:rgba(245,166,35,.6);letter-spacing:1px;margin-bottom:3px">WHAT I ADMIRE</div><div style="font-size:var(--t-md);color:var(--text);line-height:1.6">'+p.admire+'</div></div>';
+      if(p.behavior)h+='<div class="mb-8"><div style="font-size:var(--t-xs);color:rgba(245,166,35,.6);letter-spacing:1px;margin-bottom:3px">HOW I APPLY IT</div><div style="font-size:var(--t-md);color:var(--text);line-height:1.6">'+p.behavior+'</div></div>';
+      h+='<div class="flex-row"><button data-peopleedit="'+i+'" style="font-size:var(--t-xs);padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;cursor:pointer">EDIT</button><button data-peopledel="'+i+'" style="font-size:var(--t-xs);padding:3px 10px;background:transparent;border:1px solid rgba(255,68,68,.25);color:var(--cr);font-family:monospace;cursor:pointer">REMOVE</button></div>';
       h+='</div>';
     }
     h+='</div>';
@@ -5031,40 +5032,40 @@ function writeRender(){
   if(badge){if(streak>0){badge.textContent=streak+'d';badge.style.display='';}else badge.style.display='none';}
   var h='';
   if(!todayEntry){
-    h+='<div style="font-size:11px;color:rgba(191,95,255,.6);margin-bottom:10px;font-style:italic">You wrote today. Log it.</div>';
+    h+='<div style="font-size:var(--t-base);color:rgba(191,95,255,.6);margin-bottom:10px;font-style:italic">You wrote today. Log it.</div>';
     h+='<div style="display:flex;gap:8px;margin-bottom:8px">';
-    h+='<input id="write-words" type="number" min="1" placeholder="words" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.2);color:var(--text);font-family:monospace;font-size:13px;padding:4px 2px;outline:none">';
-    h+='<input id="write-mins" type="number" min="1" placeholder="mins" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.2);color:var(--text);font-family:monospace;font-size:13px;padding:4px 2px;outline:none">';
+    h+='<input id="write-words" type="number" min="1" placeholder="words" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:4px 2px;outline:none">';
+    h+='<input id="write-mins" type="number" min="1" placeholder="mins" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:4px 2px;outline:none">';
     h+='</div>';
-    h+='<input id="write-note" placeholder="what did you write? (optional)" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:10px">';
+    h+='<input id="write-note" placeholder="what did you write? (optional)" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(191,95,255,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:10px">';
     h+='<div class="flex-row">';
-    h+='<button id="write-log-btn" style="flex:1;padding:10px;background:rgba(191,95,255,.06);border:1px solid rgba(191,95,255,.3);color:#bf5fff;font-family:VT323,monospace;font-size:18px;cursor:pointer;letter-spacing:2px">I WROTE TODAY &#10003;</button>';
-    h+='<a href="https://glyph-istan-2a3684.netlify.app/" target="_blank" style="display:flex;align-items:center;justify-content:center;padding:0 14px;background:rgba(191,95,255,.04);border:1px solid rgba(191,95,255,.2);color:#bf5fff;font-family:VT323,monospace;font-size:13px;text-decoration:none;white-space:nowrap;cursor:pointer;letter-spacing:1px">GLYPHWRITER &#8599;</a>';
+    h+='<button id="write-log-btn" style="flex:1;padding:10px;background:rgba(191,95,255,.06);border:1px solid rgba(191,95,255,.3);color:#bf5fff;font-family:VT323,monospace;font-size:var(--t-title);cursor:pointer;letter-spacing:2px">I WROTE TODAY &#10003;</button>';
+    h+='<a href="https://glyph-istan-2a3684.netlify.app/" target="_blank" style="display:flex;align-items:center;justify-content:center;padding:0 14px;background:rgba(191,95,255,.04);border:1px solid rgba(191,95,255,.2);color:#bf5fff;font-family:VT323,monospace;font-size:var(--t-lg);text-decoration:none;white-space:nowrap;cursor:pointer;letter-spacing:1px">GLYPHWRITER &#8599;</a>';
     h+='</div>';
   } else {
     h+='<div style="padding:10px;background:rgba(191,95,255,.06);border-left:2px solid #bf5fff;margin-bottom:12px">';
-    h+='<div style="font-size:10px;color:#bf5fff;margin-bottom:4px">&#10003; Logged today</div>';
-    if(todayEntry.words)h+='<div style="font-size:13px;color:var(--text)">'+todayEntry.words.toLocaleString()+' words</div>';
+    h+='<div style="font-size:var(--t-sm);color:#bf5fff;margin-bottom:4px">&#10003; Logged today</div>';
+    if(todayEntry.words)h+='<div style="font-size:var(--t-lg);color:var(--text)">'+todayEntry.words.toLocaleString()+' words</div>';
     if(todayEntry.mins)h+='<div class="dim-12">'+todayEntry.mins+'m</div>';
-    if(todayEntry.note)h+='<div style="font-size:11px;color:var(--dim);margin-top:4px;font-style:italic">'+todayEntry.note+'</div>';
-    h+='<button data-writeedit="1" style="font-size:9px;margin-top:8px;padding:2px 8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;cursor:pointer">edit</button>';
+    if(todayEntry.note)h+='<div style="font-size:var(--t-base);color:var(--dim);margin-top:4px;font-style:italic">'+todayEntry.note+'</div>';
+    h+='<button data-writeedit="1" style="font-size:var(--t-xs);margin-top:8px;padding:2px 8px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;cursor:pointer">edit</button>';
     h+='</div>';
-    h+='<a href="https://glyph-istan-2a3684.netlify.app/" target="_blank" style="display:block;text-align:center;padding:8px;background:rgba(191,95,255,.04);border:1px solid rgba(191,95,255,.2);color:#bf5fff;font-family:VT323,monospace;font-size:13px;text-decoration:none;margin-bottom:10px;letter-spacing:1px">GLYPHWRITER &#8599;</a>';
+    h+='<a href="https://glyph-istan-2a3684.netlify.app/" target="_blank" style="display:block;text-align:center;padding:8px;background:rgba(191,95,255,.04);border:1px solid rgba(191,95,255,.2);color:#bf5fff;font-family:VT323,monospace;font-size:var(--t-lg);text-decoration:none;margin-bottom:10px;letter-spacing:1px">GLYPHWRITER &#8599;</a>';
   }
   if(writeData.length){
     var totalWords=writeData.reduce(function(a,e){return a+(e.words||0);},0);
     h+='<div style="display:flex;gap:12px;margin-bottom:10px;padding:8px;background:rgba(191,95,255,.04);border:1px solid rgba(191,95,255,.1)">';
-    h+='<div class="text-center-flex"><div style="font-size:18px;color:#bf5fff;font-family:VT323,monospace">'+writeData.length+'</div><div class="dim-9">sessions</div></div>';
-    if(totalWords)h+='<div class="text-center-flex"><div style="font-size:18px;color:#bf5fff;font-family:VT323,monospace">'+totalWords.toLocaleString()+'</div><div class="dim-9">words</div></div>';
-    if(streak)h+='<div class="text-center-flex"><div style="font-size:18px;color:#bf5fff;font-family:VT323,monospace">'+streak+'</div><div class="dim-9">streak</div></div>';
+    h+='<div class="text-center-flex"><div style="font-size:var(--t-title);color:#bf5fff;font-family:VT323,monospace">'+writeData.length+'</div><div class="dim-9">sessions</div></div>';
+    if(totalWords)h+='<div class="text-center-flex"><div style="font-size:var(--t-title);color:#bf5fff;font-family:VT323,monospace">'+totalWords.toLocaleString()+'</div><div class="dim-9">words</div></div>';
+    if(streak)h+='<div class="text-center-flex"><div style="font-size:var(--t-title);color:#bf5fff;font-family:VT323,monospace">'+streak+'</div><div class="dim-9">streak</div></div>';
     h+='</div>';
-    h+='<div style="border-top:1px solid rgba(255,255,255,.06);padding-top:8px">';
+    h+='<div style="border-top:1px solid var(--c-ghost);padding-top:8px">';
     writeData.slice(0,30).forEach(function(e,i){
       h+='<div style="display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
-      h+='<span style="font-size:10px;color:rgba(255,255,255,.25);flex-shrink:0">'+e.date+'</span>';
+      h+='<span style="font-size:var(--t-sm);color:rgba(255,255,255,.25);flex-shrink:0">'+e.date+'</span>';
       var parts=[];if(e.words)parts.push(e.words.toLocaleString()+' words');if(e.mins)parts.push(e.mins+'m');
-      h+='<span style="font-size:12px;color:'+(i===0?'#bf5fff':'var(--dim)')+'">'+( parts.length?parts.join(' � '):'wrote')+'</span>';
-      if(e.note)h+='<span style="font-size:10px;color:rgba(255,255,255,.3);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">\u2014 '+e.note+'</span>';
+      h+='<span style="font-size:var(--t-md);color:'+(i===0?'#bf5fff':'var(--dim)')+'">'+( parts.length?parts.join(' � '):'wrote')+'</span>';
+      if(e.note)h+='<span style="font-size:var(--t-sm);color:rgba(255,255,255,.3);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">\u2014 '+e.note+'</span>';
       h+='</div>';
     });
     h+='</div>';
@@ -5104,23 +5105,23 @@ function stressRender(){
   h+='<div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">';
   [{t:'menu',l:'\uD83C\uDF1A MENU'},{t:'rule',l:'\u23F0 THE RULE'},{t:'log',l:'\uD83D\uDCCB LOG'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-stresstab="'+x.t+'" style="font-size:9px;padding:4px 12px;border:1px solid '+(a?'rgba(88,232,200,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#58e8c8':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-stresstab="'+x.t+'" style="font-size:var(--t-xs);padding:4px 12px;border:1px solid '+(a?'rgba(88,232,200,.5)':'var(--c-border)')+';color:'+(a?'#58e8c8':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
   if(tab==='menu'){
     var q=STRESS_QUOTES[new Date().getDate()%STRESS_QUOTES.length];
-    h+='<div style="font-size:11px;color:rgba(88,232,200,.55);font-style:italic;line-height:1.6;margin-bottom:14px;padding:8px;border-left:2px solid rgba(88,232,200,.2)">'+q+'</div>';
+    h+='<div style="font-size:var(--t-base);color:rgba(88,232,200,.55);font-style:italic;line-height:1.6;margin-bottom:14px;padding:8px;border-left:2px solid rgba(88,232,200,.2)">'+q+'</div>';
     h+='<button id="stress-tap-btn" style="width:100%;padding:12px;background:rgba(88,232,200,.07);border:1px solid rgba(88,232,200,.3);color:#58e8c8;font-family:VT323,monospace;font-size:20px;cursor:pointer;letter-spacing:2px;margin-bottom:14px">I AM OVERWHELMED \u2192</button>';
     STRESS_MENU.forEach(function(cat){
       var open=window['_stressOpen_'+cat.id];
       h+='<div style="margin-bottom:6px;border:1px solid rgba(88,232,200,'+(open?'.15':'.06')+')">';
       h+='<div data-stresscat="'+cat.id+'" style="display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer">';
-      h+='<span style="font-size:16px">'+cat.icon+'</span><span class="text-11-flex">'+cat.label+'</span><span style="font-size:10px;color:rgba(88,232,200,.4)">'+(open?'\u25b2':'\u25bc')+'</span></div>';
+      h+='<span style="font-size:var(--t-sub)">'+cat.icon+'</span><span class="text-11-flex">'+cat.label+'</span><span style="font-size:var(--t-sm);color:rgba(88,232,200,.4)">'+(open?'\u25b2':'\u25bc')+'</span></div>';
       if(open){
         h+='<div style="padding:6px 10px 10px 36px">';
         cat.tools.forEach(function(tool,ti){
           h+='<div data-stresstool="'+cat.id+'-'+ti+'" style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer">';
-          h+='<span style="color:rgba(88,232,200,.4);font-size:12px;flex-shrink:0">\u25cb</span><span style="font-size:12px;color:var(--dim);line-height:1.5">'+tool+'</span></div>';
+          h+='<span style="color:rgba(88,232,200,.4);font-size:var(--t-md);flex-shrink:0">\u25cb</span><span style="font-size:var(--t-md);color:var(--dim);line-height:1.5">'+tool+'</span></div>';
         });
         h+='</div>';
       }
@@ -5128,24 +5129,24 @@ function stressRender(){
     });
   } else if(tab==='rule'){
     h+='<div style="background:rgba(88,232,200,.04);border:1px solid rgba(88,232,200,.15);padding:14px;margin-bottom:12px">';
-    h+='<div style="font-size:9px;color:rgba(88,232,200,.6);letter-spacing:2px;margin-bottom:8px">THE BUFFER RULE</div>';
-    h+='<div style="font-size:13px;color:var(--text);line-height:1.8">When the craving hits &mdash; do <strong>one 3-minute tool</strong> first. Then decide on dessert after.</div>';
-    h+='<div style="font-size:11px;color:var(--dim);margin-top:10px;line-height:1.7">Not never. Just insert a buffer. Often the urge drops.</div></div>';
+    h+='<div style="font-size:var(--t-xs);color:rgba(88,232,200,.6);letter-spacing:2px;margin-bottom:8px">THE BUFFER RULE</div>';
+    h+='<div style="font-size:var(--t-lg);color:var(--text);line-height:1.8">When the craving hits &mdash; do <strong>one 3-minute tool</strong> first. Then decide on dessert after.</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);margin-top:10px;line-height:1.7">Not never. Just insert a buffer. Often the urge drops.</div></div>';
     h+='<div style="background:rgba(88,232,200,.03);border:1px solid rgba(88,232,200,.1);padding:12px;margin-bottom:12px">';
-    h+='<div style="font-size:9px;color:rgba(88,232,200,.6);letter-spacing:2px;margin-bottom:8px">EMERGENCY KIT</div>';
-    ['\u2605 Cold sparkling drink','\u2605 Headphones + 1 song alone','\u2605 3 min private sit (car, bathroom, outside)','\u2605 Written note: 10 min first, dessert later if needed'].forEach(function(item){h+='<div style="font-size:12px;color:var(--text);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+item+'</div>';});
+    h+='<div style="font-size:var(--t-xs);color:rgba(88,232,200,.6);letter-spacing:2px;margin-bottom:8px">EMERGENCY KIT</div>';
+    ['\u2605 Cold sparkling drink','\u2605 Headphones + 1 song alone','\u2605 3 min private sit (car, bathroom, outside)','\u2605 Written note: 10 min first, dessert later if needed'].forEach(function(item){h+='<div style="font-size:var(--t-md);color:var(--text);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+item+'</div>';});
     h+='</div>';
-    h+='<div style="font-size:10px;color:rgba(255,255,255,.3);line-height:1.7;font-style:italic">The lane widens only by use, not by understanding it.</div>';
+    h+='<div style="font-size:var(--t-sm);color:rgba(255,255,255,.3);line-height:1.7;font-style:italic">The lane widens only by use, not by understanding it.</div>';
   } else {
     var log=stressData.log||[];
-    if(!log.length){h+='<div style="color:var(--dim);font-size:11px;padding:10px 0">No sessions logged yet.</div>';}
+    if(!log.length){h+='<div style="color:var(--dim);font-size:var(--t-base);padding:10px 0">No sessions logged yet.</div>';}
     else{
-      h+='<div style="font-size:9px;color:var(--dim);margin-bottom:10px">'+log.length+' session'+(log.length!==1?'s':'')+' logged</div>';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:10px">'+log.length+' session'+(log.length!==1?'s':'')+' logged</div>';
       log.slice(0,33).forEach(function(e){
         h+='<div style="margin-bottom:8px;padding:8px;background:rgba(88,232,200,.03);border-left:2px solid rgba(88,232,200,'+(e.used?'.35':'.12')+')">';
-        h+='<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:9px;color:rgba(255,255,255,.25)">'+e.date+(e.time?' \xb7 '+e.time:'')+'</span><span style="font-size:9px;color:'+(e.used?'#58e8c8':'var(--dim)')+'">'+(e.used?'\u2713 tool used':'noted')+'</span></div>';
-        if(e.tool)h+='<div style="font-size:11px;color:#58e8c8;margin-bottom:2px">'+e.tool+'</div>';
-        if(e.note)h+='<div style="font-size:11px;color:var(--dim);font-style:italic">'+e.note+'</div>';
+        h+='<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:var(--t-xs);color:rgba(255,255,255,.25)">'+e.date+(e.time?' \xb7 '+e.time:'')+'</span><span style="font-size:var(--t-xs);color:'+(e.used?'#58e8c8':'var(--dim)')+'">'+(e.used?'\u2713 tool used':'noted')+'</span></div>';
+        if(e.tool)h+='<div style="font-size:var(--t-base);color:#58e8c8;margin-bottom:2px">'+e.tool+'</div>';
+        if(e.note)h+='<div style="font-size:var(--t-base);color:var(--dim);font-style:italic">'+e.note+'</div>';
         h+='</div>';
       });
     }
@@ -5181,27 +5182,27 @@ function calRender(){
   var tab=window._calTab||'log';var _cn=new Date();if(_cn.getHours()<4)_cn=new Date(_cn.getTime()-864e5);
   var today=_cn.getFullYear()+'-'+String(_cn.getMonth()+1).padStart(2,'0')+'-'+String(_cn.getDate()).padStart(2,'0');var h='';
   h+='<div class="flex-row-mb">';
-  [{t:'log',l:'TODAY'},{t:'history',l:'HISTORY'},{t:'export',l:'EXPORT'}].forEach(function(x){var a=tab===x.t;h+='<span data-caltab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(245,166,35,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#f5a623':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';});
+  [{t:'log',l:'TODAY'},{t:'history',l:'HISTORY'},{t:'export',l:'EXPORT'}].forEach(function(x){var a=tab===x.t;h+='<span data-caltab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(245,166,35,.5)':'var(--c-border)')+';color:'+(a?'#f5a623':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';});
   h+='</div>';
   var todayEntries=calData.filter(function(e){return e.date===today;});
   if(tab==='log'){
-    h+='<div class="mb-10"><input id="cal-inp" placeholder="what did you eat?" autocomplete="off" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.25);color:var(--text);font-family:monospace;font-size:13px;padding:6px 2px;outline:none;box-sizing:border-box;margin-bottom:8px"><div style="display:flex;gap:6px;margin-bottom:8px"><input id="cal-cal" type="number" min="0" placeholder="calories (optional)" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:12px;padding:4px 2px;outline:none"><select id="cal-meal" style="flex:1;background:#12121a;border:1px solid rgba(245,166,35,.15);color:var(--dim);font-family:monospace;font-size:11px;padding:3px;outline:none">';
+    h+='<div class="mb-10"><input id="cal-inp" placeholder="what did you eat?" autocomplete="off" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.25);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:6px 2px;outline:none;box-sizing:border-box;margin-bottom:8px"><div style="display:flex;gap:6px;margin-bottom:8px"><input id="cal-cal" type="number" min="0" placeholder="calories (optional)" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 2px;outline:none"><select id="cal-meal" style="flex:1;background:#12121a;border:1px solid rgba(245,166,35,.15);color:var(--dim);font-family:monospace;font-size:var(--t-base);padding:3px;outline:none">';
     ['snack','breakfast','lunch','dinner','drink','other'].forEach(function(m){h+='<option value="'+m+'">'+m+'</option>';});
-    h+='</select></div><button id="cal-add-btn" style="width:100%;padding:9px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:VT323,monospace;font-size:18px;cursor:pointer;letter-spacing:2px">LOG IT</button></div>';
+    h+='</select></div><button id="cal-add-btn" style="width:100%;padding:9px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:VT323,monospace;font-size:var(--t-title);cursor:pointer;letter-spacing:2px">LOG IT</button></div>';
     if(todayEntries.length){
       var totalCal=todayEntries.reduce(function(a,e){return a+(e.cal||0);},0);
-      h+='<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:6px"><span class="dim-9">'+todayEntries.length+' item'+(todayEntries.length!==1?'s':'')+'</span>'+(totalCal?'<span style="font-size:13px;color:#f5a623;font-family:VT323,monospace">'+totalCal+' cal</span>':'')+'</div>';
-      todayEntries.slice().reverse().forEach(function(e){var idx=calData.findIndex(function(x){return x.id===e.id;});var isEditing=window._calEdit===e.id;var isPendingDel=window._calDelPending===e.id;if(isEditing){h+='<div style="padding:8px;background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.2);margin-bottom:4px">';h+='<input id="cal-edit-food-'+e.id+'" value="'+e.food.replace(/"/g,'&quot;')+'" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.2);color:var(--text);font-family:monospace;font-size:12px;padding:4px 0;outline:none;box-sizing:border-box;margin-bottom:6px">';h+='<div style="display:flex;gap:6px;margin-bottom:6px">';h+='<input id="cal-edit-cal-'+e.id+'" type="number" value="'+(e.cal||'')+'" placeholder="cal" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:12px;padding:3px 0;outline:none">';h+='<select id="cal-edit-meal-'+e.id+'" style="flex:1;background:#12121a;border:1px solid rgba(245,166,35,.15);color:var(--dim);font-family:monospace;font-size:11px;padding:3px;outline:none">';['snack','breakfast','lunch','dinner','drink','other'].forEach(function(m){h+='<option value="'+m+'"'+(e.meal===m?' selected':'')+'>'+m+'</option>';});h+='</select></div>';h+='<div class="flex-row">';h+='<button data-calsave="'+e.id+'" data-calidx="'+idx+'" style="flex:1;padding:6px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:10px;cursor:pointer">SAVE</button>';h+='<button data-caleditcancel="'+e.id+'" style="padding:6px 10px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer">CANCEL</button>';h+='</div></div>';}else if(isPendingDel){h+='<div style="display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid rgba(255,68,68,.15);background:rgba(255,68,68,.05)">';h+='<span style="font-size:11px;color:rgba(255,68,68,.8);flex:1">Delete &quot;'+e.food+'&quot;?</span>';h+='<button data-calconfirmdel="'+idx+'" style="font-size:10px;padding:3px 8px;background:rgba(255,68,68,.15);border:1px solid rgba(255,68,68,.4);color:var(--cr);font-family:monospace;cursor:pointer">YES</button>';h+='<button data-calcanceldet="'+e.id+'" style="font-size:10px;padding:3px 8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;cursor:pointer">NO</button>';h+='</div>';}else{h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">';h+='<span style="font-size:9px;color:rgba(255,255,255,.2);flex-shrink:0;min-width:45px">'+e.time+'</span>';h+='<div class="flex-1"><div class="text-12">'+e.food+'</div><span style="font-size:9px;color:rgba(245,166,35,.5)">'+e.meal+'</span></div>';h+=(e.cal?'<span style="font-size:12px;color:#f5a623;flex-shrink:0">'+e.cal+'</span>':'');h+='<button data-caledit="'+e.id+'" style="font-size:9px;padding:2px 6px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;cursor:pointer">edit</button>';h+='<button data-caldel="'+e.id+'" style="font-size:10px;color:rgba(255,68,68,.3);cursor:pointer;padding:2px 6px;background:transparent;border:none">x</button>';h+='</div>';}});
-    } else {h+='<div style="font-size:11px;color:var(--dim);opacity:.5;padding:8px 0">Nothing logged today.</div>';}
+      h+='<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--c-ghost);margin-bottom:6px"><span class="dim-9">'+todayEntries.length+' item'+(todayEntries.length!==1?'s':'')+'</span>'+(totalCal?'<span style="font-size:var(--t-lg);color:#f5a623;font-family:VT323,monospace">'+totalCal+' cal</span>':'')+'</div>';
+      todayEntries.slice().reverse().forEach(function(e){var idx=calData.findIndex(function(x){return x.id===e.id;});var isEditing=window._calEdit===e.id;var isPendingDel=window._calDelPending===e.id;if(isEditing){h+='<div style="padding:8px;background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.2);margin-bottom:4px">';h+='<input id="cal-edit-food-'+e.id+'" value="'+e.food.replace(/"/g,'&quot;')+'" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.2);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 0;outline:none;box-sizing:border-box;margin-bottom:6px">';h+='<div style="display:flex;gap:6px;margin-bottom:6px">';h+='<input id="cal-edit-cal-'+e.id+'" type="number" value="'+(e.cal||'')+'" placeholder="cal" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(245,166,35,.15);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:3px 0;outline:none">';h+='<select id="cal-edit-meal-'+e.id+'" style="flex:1;background:#12121a;border:1px solid rgba(245,166,35,.15);color:var(--dim);font-family:monospace;font-size:var(--t-base);padding:3px;outline:none">';['snack','breakfast','lunch','dinner','drink','other'].forEach(function(m){h+='<option value="'+m+'"'+(e.meal===m?' selected':'')+'>'+m+'</option>';});h+='</select></div>';h+='<div class="flex-row">';h+='<button data-calsave="'+e.id+'" data-calidx="'+idx+'" style="flex:1;padding:6px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:var(--t-sm);cursor:pointer">SAVE</button>';h+='<button data-caleditcancel="'+e.id+'" style="padding:6px 10px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer">CANCEL</button>';h+='</div></div>';}else if(isPendingDel){h+='<div style="display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid rgba(255,68,68,.15);background:rgba(255,68,68,.05)">';h+='<span style="font-size:var(--t-base);color:rgba(255,68,68,.8);flex:1">Delete &quot;'+e.food+'&quot;?</span>';h+='<button data-calconfirmdel="'+idx+'" style="font-size:var(--t-sm);padding:3px 8px;background:rgba(255,68,68,.15);border:1px solid rgba(255,68,68,.4);color:var(--cr);font-family:monospace;cursor:pointer">YES</button>';h+='<button data-calcanceldet="'+e.id+'" style="font-size:var(--t-sm);padding:3px 8px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;cursor:pointer">NO</button>';h+='</div>';}else{h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">';h+='<span style="font-size:var(--t-xs);color:rgba(255,255,255,.2);flex-shrink:0;min-width:45px">'+e.time+'</span>';h+='<div class="flex-1"><div class="text-12">'+e.food+'</div><span style="font-size:var(--t-xs);color:rgba(245,166,35,.5)">'+e.meal+'</span></div>';h+=(e.cal?'<span style="font-size:var(--t-md);color:#f5a623;flex-shrink:0">'+e.cal+'</span>':'');h+='<button data-caledit="'+e.id+'" style="font-size:var(--t-xs);padding:2px 6px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;cursor:pointer">edit</button>';h+='<button data-caldel="'+e.id+'" style="font-size:var(--t-sm);color:rgba(255,68,68,.3);cursor:pointer;padding:2px 6px;background:transparent;border:none">x</button>';h+='</div>';}});
+    } else {h+='<div style="font-size:var(--t-base);color:var(--dim);opacity:.5;padding:8px 0">Nothing logged today.</div>';}
   } else if(tab==='history'){
     var byDate={};calData.forEach(function(e){if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
     var dates=Object.keys(byDate).sort().reverse().slice(0,30);
-    if(!dates.length){h+='<div style="font-size:11px;color:var(--dim);opacity:.5;padding:10px 0">No history yet.</div>';}
-    dates.forEach(function(dk){var entries=byDate[dk];var total=entries.reduce(function(a,e){return a+(e.cal||0);},0);h+='<div class="mb-10"><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(245,166,35,.15);margin-bottom:4px"><span style="font-size:10px;color:#f5a623;letter-spacing:1px">'+dk+'</span>'+(total?'<span style="font-size:12px;color:#f5a623;font-family:VT323,monospace">'+total+' cal</span>':'')+'</div>';entries.forEach(function(e){h+='<div style="display:flex;gap:8px;padding:4px 0;font-size:11px"><span style="color:rgba(255,255,255,.2);flex-shrink:0;min-width:45px">'+e.time+'</span><span style="color:rgba(245,166,35,.5);flex-shrink:0;min-width:55px">'+e.meal+'</span><span style="color:var(--dim);flex:1">'+e.food+'</span>'+(e.cal?'<span style="color:#f5a623;flex-shrink:0">'+e.cal+'</span>':'')+'</div>';});h+='</div>';});
+    if(!dates.length){h+='<div style="font-size:var(--t-base);color:var(--dim);opacity:.5;padding:10px 0">No history yet.</div>';}
+    dates.forEach(function(dk){var entries=byDate[dk];var total=entries.reduce(function(a,e){return a+(e.cal||0);},0);h+='<div class="mb-10"><div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(245,166,35,.15);margin-bottom:4px"><span style="font-size:var(--t-sm);color:#f5a623;letter-spacing:1px">'+dk+'</span>'+(total?'<span style="font-size:var(--t-md);color:#f5a623;font-family:VT323,monospace">'+total+' cal</span>':'')+'</div>';entries.forEach(function(e){h+='<div style="display:flex;gap:8px;padding:4px 0;font-size:var(--t-base)"><span style="color:rgba(255,255,255,.2);flex-shrink:0;min-width:45px">'+e.time+'</span><span style="color:rgba(245,166,35,.5);flex-shrink:0;min-width:55px">'+e.meal+'</span><span style="color:var(--dim);flex:1">'+e.food+'</span>'+(e.cal?'<span style="color:#f5a623;flex-shrink:0">'+e.cal+'</span>':'')+'</div>';});h+='</div>';});
   } else {
     var period=window._calPeriod||'today';
     h+='<div class="flex-row-mb">';
-    [{t:'today',l:'TODAY'},{t:'week',l:'WEEK'},{t:'month',l:'MONTH'}].forEach(function(x){var a=period===x.t;h+='<span data-calperiod="'+x.t+'" style="font-size:9px;padding:3px 8px;border:1px solid '+(a?'rgba(245,166,35,.4)':'rgba(255,255,255,.1)')+';color:'+(a?'#f5a623':'var(--dim)')+';cursor:pointer">'+x.l+'</span>';});
+    [{t:'today',l:'TODAY'},{t:'week',l:'WEEK'},{t:'month',l:'MONTH'}].forEach(function(x){var a=period===x.t;h+='<span data-calperiod="'+x.t+'" style="font-size:var(--t-xs);padding:3px 8px;border:1px solid '+(a?'rgba(245,166,35,.4)':'var(--c-border)')+';color:'+(a?'#f5a623':'var(--dim)')+';cursor:pointer">'+x.l+'</span>';});
     h+='</div>';
     var now=new Date();var filtered=calData.filter(function(e){var d=new Date(e.date+'T12:00:00');if(period==='today')return e.date===today;if(period==='week')return (now-d)/(864e5)<=7;return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
     if(!filtered.length){h+='<div class="card-empty-v">No entries for this period.</div>';}
@@ -5210,9 +5211,9 @@ function calRender(){
       var lines=['Please estimate calories for each item and give me a daily total.\n'];
       Object.keys(byD).sort().forEach(function(dk){lines.push('DATE: '+dk);byD[dk].forEach(function(e){var l='  ['+e.time+'] '+e.meal.toUpperCase()+': '+e.food;if(e.cal)l+=' ('+e.cal+' cal noted)';lines.push(l);});lines.push('');});
       var exportText=lines.join('\n');
-      h+='<div style="font-size:9px;color:var(--dim);margin-bottom:6px">PASTE INTO ANY AI FOR CALORIE ESTIMATES</div>';
-      h+='<textarea id="cal-export" readonly style="width:100%;min-height:160px;background:rgba(245,166,35,.03);border:1px solid rgba(245,166,35,.15);color:var(--dim);font-family:monospace;font-size:10px;padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.6">'+exportText+'</textarea>';
-      h+='<button id="cal-copy" style="width:100%;margin-top:6px;padding:8px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">COPY TO CLIPBOARD</button>';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:6px">PASTE INTO ANY AI FOR CALORIE ESTIMATES</div>';
+      h+='<textarea id="cal-export" readonly style="width:100%;min-height:160px;background:rgba(245,166,35,.03);border:1px solid rgba(245,166,35,.15);color:var(--dim);font-family:monospace;font-size:var(--t-sm);padding:8px;outline:none;resize:vertical;box-sizing:border-box;line-height:1.6">'+exportText+'</textarea>';
+      h+='<button id="cal-copy" style="width:100%;margin-top:6px;padding:8px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.3);color:#f5a623;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">COPY TO CLIPBOARD</button>';
     }
   }
   el.innerHTML=h;
@@ -5227,7 +5228,7 @@ function calRender(){
       var p=document.createElement('span');
       p.textContent=m[0].toUpperCase()+m.slice(1);
       var act=(window._calMealType||'snack')===m;
-      p.style.cssText='padding:3px 9px;font-size:9px;cursor:pointer;font-family:monospace;border:1px solid '+(act?'rgba(245,166,35,.6)':'rgba(245,166,35,.15)')+';background:'+(act?'rgba(245,166,35,.15)':'transparent')+';color:'+(act?'#f5a623':'var(--dim)');
+      p.style.cssText='padding:3px 9px;font-size:var(--t-xs);cursor:pointer;font-family:monospace;border:1px solid '+(act?'rgba(245,166,35,.6)':'rgba(245,166,35,.15)')+';background:'+(act?'rgba(245,166,35,.15)':'transparent')+';color:'+(act?'#f5a623':'var(--dim)');
       p.onclick=function(){
         window._calMealType=m;
         var s=el.querySelector('#cal-meal');if(s)s.value=m;
@@ -5378,25 +5379,25 @@ function qwRenderStudy(){
   h+='<div class="flex-row-mb">';
   [{'t':'study','l':'STUDY'},{'t':'learn','l':'LEARN'},{'t':'stats','l':'STATS'},{'t':'settings','l':'\u2699'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-qwtab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(0,255,136,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#00ff88':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-qwtab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(0,255,136,.5)':'var(--c-border)')+';color:'+(a?'#00ff88':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
   if(tab==='study'){
     // Progress bar
-    h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px;font-size:10px;color:var(--dim)">';
+    h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px;font-size:var(--t-sm);color:var(--dim)">';
     h+='<span style="color:#00ff88">'+nd+'</span><span>/'+(ultraQW?21:6)+' new</span>';
     if(rt>0)h+='<span style="margin-left:4px;color:rgba(0,255,136,.5)">'+rd+'/'+(ultraQW?rt+25:rt)+' review</span>';
-    h+='<div style="flex:1;height:2px;background:rgba(255,255,255,.06);margin-left:4px"><div style="height:100%;width:'+(nd/Math.max(ultraQW?21:6,1)*100)+'%;background:#00ff88;transition:width .3s"></div></div>';
+    h+='<div style="flex:1;height:2px;background:var(--c-ghost);margin-left:4px"><div style="height:100%;width:'+(nd/Math.max(ultraQW?21:6,1)*100)+'%;background:#00ff88;transition:width .3s"></div></div>';
     h+='</div>';
     h+='<div style="text-align:right;margin-bottom:10px">';
-    h+='<button data-qwultra="1" style="font-size:9px;padding:2px 10px;background:rgba(255,204,0,'+(ultraQW?'.15':'0')+');border:1px solid rgba(255,204,0,'+(ultraQW?'.5':'.2')+');color:'+(ultraQW?'#ffcc00':'rgba(255,255,255,.3)')+';font-family:monospace;cursor:pointer;letter-spacing:1px">⚡ ULTRA</button>';
+    h+='<button data-qwultra="1" style="font-size:var(--t-xs);padding:2px 10px;background:rgba(255,204,0,'+(ultraQW?'.15':'0')+');border:1px solid rgba(255,204,0,'+(ultraQW?'.5':'.2')+');color:'+(ultraQW?'#ffcc00':'rgba(255,255,255,.3)')+';font-family:monospace;cursor:pointer;letter-spacing:1px">⚡ ULTRA</button>';
     h+='</div>';
 
     if(allDone){
-      h+='<div style="padding:20px;text-align:center;border:1px solid rgba(0,255,136,.15);background:rgba(0,255,136,.04)">';
-      h+='<div style="font-size:28px;margin-bottom:8px">\u2705</div>';
-      h+='<div style="font-size:13px;color:#00ff88;margin-bottom:4px">All done for today.</div>';
+      h+='<div style="padding:20px;text-align:center;border:1px solid var(--c-ok-dim);background:rgba(0,255,136,.04)">';
+      h+='<div style="font-size:var(--t-h1);margin-bottom:8px">\u2705</div>';
+      h+='<div style="font-size:var(--t-lg);color:#00ff88;margin-bottom:4px">All done for today.</div>';
       h+='<div class="dim-10">'+QW_CARDS.length+' total words · '+(qwState.correct||[]).length+' learned</div>';
       h+='</div>';
     } else if(card){
@@ -5406,10 +5407,10 @@ function qwRenderStudy(){
       var streak=qwState.streaks&&qwState.streaks[card.id]||0;
       h+='<div class="qw-card-area" class="mb-10">';
       h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">';
-      if(card.cat)h+='<span style="font-size:9px;color:rgba(0,255,136,.5);letter-spacing:1px">'+card.cat+'</span>';
-      if(isReview){h+='<span style="font-size:9px;padding:2px 8px;border:1px solid rgba(0,229,255,.4);color:var(--cc);letter-spacing:1px;font-family:monospace">REVIEW</span>';}
-      else{h+='<span style="font-size:9px;padding:2px 8px;border:1px solid rgba(255,184,108,.4);color:rgba(255,184,108,.9);letter-spacing:1px;font-family:monospace">NEW</span>';}
-      if(streak>=3)h+='<span style="font-size:9px;color:rgba(255,204,0,.6)">'+'\u2605'.repeat(Math.min(streak,6))+'</span>';
+      if(card.cat)h+='<span style="font-size:var(--t-xs);color:rgba(0,255,136,.5);letter-spacing:1px">'+card.cat+'</span>';
+      if(isReview){h+='<span style="font-size:var(--t-xs);padding:2px 8px;border:1px solid rgba(0,229,255,.4);color:var(--cc);letter-spacing:1px;font-family:monospace">REVIEW</span>';}
+      else{h+='<span style="font-size:var(--t-xs);padding:2px 8px;border:1px solid rgba(255,184,108,.4);color:rgba(255,184,108,.9);letter-spacing:1px;font-family:monospace">NEW</span>';}
+      if(streak>=3)h+='<span style="font-size:var(--t-xs);color:rgba(255,204,0,.6)">'+'\u2605'.repeat(Math.min(streak,6))+'</span>';
       h+='</div>';
       // Detect if question contains Arabic chars — apply selected Arabic font
       var _qwHasAr=/[\u0600-\u06ff]/.test(card.q);
@@ -5440,16 +5441,16 @@ function qwRenderStudy(){
       opts.forEach(function(opt){
         var isCorrect=opt===card.a;
         var _optHasAr=/[\u0600-\u06ff]/.test(opt);
-        var _optStyle='padding:10px 8px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.15);color:var(--text);cursor:pointer;line-height:1.4;';
+        var _optStyle='padding:10px 8px;background:rgba(0,255,136,.04);border:1px solid var(--c-ok-dim);color:var(--text);cursor:pointer;line-height:1.4;';
         if(_optHasAr){
           _optStyle+='font-family:'+_qwOptFontCss2.css+';font-size:24px;direction:rtl;text-align:right;';
         } else {
-          _optStyle+='font-family:monospace;font-size:12px;text-align:left;';
+          _optStyle+='font-family:monospace;font-size:var(--t-md);text-align:left;';
         }
         h+='<button data-qwcorrect="'+(isCorrect?'1':'0')+'" data-qwopt="'+opt.replace(/"/g,'&quot;')+'" style="'+_optStyle+'">'+opt+'</button>';
       });
       h+='</div>';
-      h+='<button data-qwdontknow="1" style="margin-top:8px;width:100%;padding:7px;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">I DON\'T KNOW</button>';
+      h+='<button data-qwdontknow="1" style="margin-top:8px;width:100%;padding:7px;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">I DON\'T KNOW</button>';
       h+='</div>';
     }
   } else if(tab==='learn'){
@@ -5490,7 +5491,7 @@ function qwRenderStudy(){
     var _lW=qwState.learnWords||[];
     var _lRev=Object.keys(qwState.learnRevealed||{}).length;
     var _lSeen=Object.keys(qwState.learnSeen||{}).length;
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:10px;color:var(--dim)">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:var(--t-sm);color:var(--dim)">';
     h+='<span style="color:#00ff88">'+_lRev+'</span><span>/'+_lW.length+' revealed</span>';
     h+='<div class="divider"><div style="height:100%;width:'+(_lW.length?_lRev/_lW.length*100:0)+'%;background:#00ff88;transition:width .3s"></div></div>';
     h+='<span class="dim-9-faint">'+_lSeen+' total</span>';
@@ -5499,40 +5500,40 @@ function qwRenderStudy(){
       h+='<div class="card-empty">Loading words...</div>';
       setTimeout(function(){if(QW_CARDS&&QW_CARDS.length&&(qwState._tab||'study')==='learn')qwRenderStudy();},600);
     } else if(!_lW.length){
-      h+='<div style="padding:20px;text-align:center;border:1px solid rgba(0,255,136,.15);background:rgba(0,255,136,.04)">';
+      h+='<div style="padding:20px;text-align:center;border:1px solid var(--c-ok-dim);background:rgba(0,255,136,.04)">';
       h+='<div class="icon-lg">📖</div>';
-      h+='<div style="font-size:13px;color:#00ff88;margin-bottom:4px">All words learned!</div>';
+      h+='<div style="font-size:var(--t-lg);color:#00ff88;margin-bottom:4px">All words learned!</div>';
       h+='<div class="dim-10">'+_lSeen+' total · come back tomorrow</div>';
       h+='</div>';
     } else {
       h+='<table style="width:100%;border-collapse:collapse">';
-      h+='<thead><tr style="border-bottom:1px solid rgba(255,255,255,.1)">';
-      h+='<th style="padding:5px 6px;font-size:9px;color:var(--dim);letter-spacing:1px;text-align:left;width:26px">#</th>';
-      h+='<th style="padding:5px 6px;font-size:9px;color:var(--dim);letter-spacing:1px;text-align:right">ARABIC</th>';
-      h+='<th style="padding:5px 6px;font-size:9px;color:var(--dim);letter-spacing:1px;text-align:left">MEANING</th>';
+      h+='<thead><tr style="border-bottom:1px solid var(--c-border)">';
+      h+='<th style="padding:5px 6px;font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;text-align:left;width:26px">#</th>';
+      h+='<th style="padding:5px 6px;font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;text-align:right">ARABIC</th>';
+      h+='<th style="padding:5px 6px;font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;text-align:left">MEANING</th>';
       h+='</tr></thead><tbody>';
       _lW.forEach(function(w,i){
         var rev=!!(qwState.learnRevealed&&qwState.learnRevealed[w.id]);
         h+='<tr style="border-bottom:1px solid rgba(255,255,255,.04)">';
-        h+='<td style="padding:10px 6px;color:rgba(255,255,255,.2);font-size:10px;vertical-align:middle">'+(i+1)+'</td>';
+        h+='<td style="padding:10px 6px;color:rgba(255,255,255,.2);font-size:var(--t-sm);vertical-align:middle">'+(i+1)+'</td>';
         h+='<td style="padding:10px 6px;text-align:right;vertical-align:middle">';
-        h+='<div style="font-size:28px;font-family:\'Scheherazade New\',serif;color:#ffcc00;direction:rtl">'+w.arabic+'</div>';
+        h+='<div style="font-size:var(--t-h1);font-family:\'Scheherazade New\',serif;color:#ffcc00;direction:rtl">'+w.arabic+'</div>';
         h+='<div style="font-size:8px;color:rgba(255,255,255,.2);margin-top:2px">'+w.cat+'</div></td>';
         h+='<td style="padding:10px 6px;vertical-align:middle">';
         if(rev){
           h+='<div style="display:flex;align-items:center;gap:6px">';
-          h+='<span style="font-size:13px;color:var(--text)">'+w.answer+'</span>';
+          h+='<span style="font-size:var(--t-lg);color:var(--text)">'+w.answer+'</span>';
           var isLearned=!!(qwState.learnSeen&&qwState.learnSeen[w.id]);
           if(!isLearned)h+='<button data-qwlearned="'+w.id+'" style="padding:2px 8px;background:rgba(80,250,123,.06);border:1px solid rgba(80,250,123,.3);color:rgba(80,250,123,.8);font-family:monospace;font-size:8px;cursor:pointer;letter-spacing:1px">✓ LEARNED</button>';
           else h+='<span style="font-size:8px;color:rgba(80,250,123,.5)">✓</span>';
           h+='</div>';
         } else {
-          h+='<button data-qwreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">SHOW</button>';
+          h+='<button data-qwreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SHOW</button>';
         }
         h+='</td></tr>';
       });
       h+='</tbody></table>';
-      h+='<button data-qwlearnall="1" style="width:100%;margin-top:12px;padding:9px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#00ff88;font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">✓ MARK ALL LEARNED</button>';
+      h+='<button data-qwlearnall="1" style="width:100%;margin-top:12px;padding:9px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.25);color:#00ff88;font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">✓ MARK ALL LEARNED</button>';
     }
 
   } else if(tab==='stats') {
@@ -5547,7 +5548,7 @@ function qwRenderStudy(){
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">';
     [{'v':total,'l':'total words'},{'v':learned,'l':'learned'},{'v':wrongCount,'l':'needs work'}].forEach(function(s){
       h+='<div style="text-align:center;padding:8px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.1)">';
-      h+='<div style="font-size:22px;color:#00ff88;font-family:VT323,monospace">'+s.v+'</div>';
+      h+='<div style="font-size:var(--t-h2);color:#00ff88;font-family:VT323,monospace">'+s.v+'</div>';
       h+='<div class="dim-9">'+s.l+'</div></div>';
     });
     h+='</div>';
@@ -5568,39 +5569,39 @@ function qwRenderStudy(){
       var base=_qwBaseCat(c.cat);
       learnedByCat[base]=(learnedByCat[base]||0)+1;
     });
-    h+='<div style="border-top:1px solid rgba(255,255,255,.06);padding-top:10px;margin-bottom:10px">';
+    h+='<div style="border-top:1px solid var(--c-ghost);padding-top:10px;margin-bottom:10px">';
     Object.keys(cats).sort().forEach(function(cat){
       var tot=cats[cat],lrn=learnedByCat[cat]||0;
       var pct=Math.round(lrn/tot*100);
-      h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:11px">';
+      h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:var(--t-base)">';
       h+='<span style="flex:1;color:var(--dim)">'+cat+'</span>';
-      h+='<div style="width:80px;height:4px;background:rgba(255,255,255,.06)">';
+      h+='<div style="width:80px;height:4px;background:var(--c-ghost)">';
       h+='<div style="height:100%;width:'+pct+'%;background:#00ff88;opacity:.7"></div></div>';
-      h+='<span style="font-size:10px;color:rgba(0,255,136,.7);min-width:30px;text-align:right">'+lrn+'/'+tot+'</span>';
+      h+='<span style="font-size:var(--t-sm);color:rgba(0,255,136,.7);min-width:30px;text-align:right">'+lrn+'/'+tot+'</span>';
       h+='</div>';
     });
     h+='</div>';
 
     if(cooled3||cooled6){
-      h+='<div style="padding:6px 8px;background:rgba(0,255,136,.04);border-left:2px solid rgba(0,255,136,.2);font-size:10px;color:var(--dim)">';
+      h+='<div style="padding:6px 8px;background:rgba(0,255,136,.04);border-left:2px solid rgba(0,255,136,.2);font-size:var(--t-sm);color:var(--dim)">';
       if(cooled3)h+='<div>\u231b '+cooled3+' word'+(cooled3!==1?'s':'')+' resting 1 week</div>';
       if(cooled6)h+='<div>\u231b '+cooled6+' word'+(cooled6!==1?'s':'')+' resting 1 month</div>';
       h+='</div>';
     }
-    h+='<div style="font-size:9px;color:var(--dim);margin-top:8px;opacity:.5">'+total+' total Quran words</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:8px;opacity:.5">'+total+' total Quran words</div>';
   } else if(tab==='settings'){
     var QWFONTS=DUA_ARABIC_FONTS;
-    h+='<div style="font-size:9px;color:rgba(0,255,136,.6);letter-spacing:2px;margin-bottom:10px">ARABIC TEXT STYLE</div>';
-    h+='<div style="font-size:11px;color:var(--dim);margin-bottom:12px;line-height:1.6">Choose how Arabic words appear on flashcards.</div>';
+    h+='<div style="font-size:var(--t-xs);color:rgba(0,255,136,.6);letter-spacing:2px;margin-bottom:10px">ARABIC TEXT STYLE</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);margin-bottom:12px;line-height:1.6">Choose how Arabic words appear on flashcards.</div>';
     QWFONTS.forEach(function(f){
       var active=_qwFont===f.key;
       h+='<div data-qwfont="'+f.key+'" style="display:flex;align-items:center;gap:12px;padding:10px;margin-bottom:6px;border:1px solid rgba(0,255,136,'+(active?'.4':'.1')+');background:rgba(0,255,136,'+(active?'.06':'0')+');cursor:pointer">';
       h+='<div style="flex:1">';
-      h+='<div style="font-size:11px;color:'+(active?'#00ff88':'var(--text)')+'">'+f.name+'</div>';
+      h+='<div style="font-size:var(--t-base);color:'+(active?'#00ff88':'var(--text)')+'">'+f.name+'</div>';
       h+='<div style="font-size:26px;font-family:'+f.css+';direction:rtl;text-align:right;color:'+(active?'#00ff88':'var(--dim)')+';margin-top:4px">';
       h+='\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div>';
       h+='</div>';
-      if(active)h+='<span style="color:#00ff88;font-size:18px">\u2713</span>';
+      if(active)h+='<span style="color:#00ff88;font-size:var(--t-title)">\u2713</span>';
       h+='</div>';
     });
   }
@@ -5740,12 +5741,12 @@ function qwRenderStudy(){
         // Show the answer text and a NEXT button instead of auto-advancing
         var _ansDiv=document.createElement('div');
         _ansDiv.style.cssText='margin-top:10px;padding:10px;border:1px solid rgba(0,255,136,.2);background:rgba(0,255,136,.06)';
-        _ansDiv.innerHTML='<div style="font-size:9px;color:rgba(0,255,136,.5);letter-spacing:1px;margin-bottom:4px">CORRECT ANSWER</div>'
-          +'<div style="font-size:16px;color:#00ff88">'+card.a+'</div>'
-          +(card.a2?'<div style="font-size:12px;color:rgba(0,255,136,.6);margin-top:2px">'+card.a2+'</div>':'');
+        _ansDiv.innerHTML='<div style="font-size:var(--t-xs);color:rgba(0,255,136,.5);letter-spacing:1px;margin-bottom:4px">CORRECT ANSWER</div>'
+          +'<div style="font-size:var(--t-sub);color:#00ff88">'+card.a+'</div>'
+          +(card.a2?'<div style="font-size:var(--t-md);color:rgba(0,255,136,.6);margin-top:2px">'+card.a2+'</div>':'');
         var _nxt=document.createElement('button');
         _nxt.textContent='NEXT →';
-        _nxt.style.cssText='width:100%;margin-top:8px;padding:10px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.3);color:#00ff88;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';
+        _nxt.style.cssText='width:100%;margin-top:8px;padding:10px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.3);color:#00ff88;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px';
         var _nxtFn=function(){qwRenderStudy();};
         _nxt.onclick=_nxtFn;
         _nxt.ontouchend=function(e){e.preventDefault();e.stopPropagation();_nxtFn();};
@@ -5817,7 +5818,7 @@ function qwRenderStudy(){
           // Show NEXT button on wrong — add it to DOM directly
           var _nBtn=document.createElement('button');
           _nBtn.textContent='NEXT →';
-          _nBtn.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';
+          _nBtn.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px';
           var _qwNext=function(){qwAnswered=false;qwRenderStudy();};
           _nBtn.onclick=_qwNext;
           _nBtn.ontouchend=function(e){e.preventDefault();_qwNext();};
@@ -6040,7 +6041,7 @@ function arRender(){
   h+='<div class="flex-row-mb">';
   [{t:'recall',l:'RECALL'},{t:'memorized',l:'MEMORIZED'},{t:'surah',l:'SURAH'},{t:'stats',l:'STATS'},{t:'settings',l:'\u2699'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-artab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(255,204,0,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#ffcc00':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-artab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(255,204,0,.5)':'var(--c-border)')+';color:'+(a?'#ffcc00':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -6052,18 +6053,18 @@ function arRender(){
     // Progress bar
     var done=arState.todayDone||0;
     var total=arState.todayQueue?arState.todayQueue.length:0;
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:10px;color:var(--dim)">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:var(--t-sm);color:var(--dim)">';
     h+='<span style="color:#ffcc00">'+done+'</span><span>/'+total+' today'+(ultraAR?' ⚡':'')+'</span>';
     h+='<div class="divider"><div style="height:100%;width:'+(total?done/total*100:0)+'%;background:#ffcc00;transition:width .3s"></div></div>';
     h+='</div>';
     h+='<div style="text-align:right;margin-bottom:10px">';
-    h+='<button data-arultra="1" style="font-size:9px;padding:2px 10px;background:rgba(255,204,0,'+(ultraAR?'.15':'0')+');border:1px solid rgba(255,204,0,'+(ultraAR?'.5':'.2')+');color:'+(ultraAR?'#ffcc00':'rgba(255,255,255,.3)')+';font-family:monospace;cursor:pointer;letter-spacing:1px">⚡ ULTRA</button>';
+    h+='<button data-arultra="1" style="font-size:var(--t-xs);padding:2px 10px;background:rgba(255,204,0,'+(ultraAR?'.15':'0')+');border:1px solid rgba(255,204,0,'+(ultraAR?'.5':'.2')+');color:'+(ultraAR?'#ffcc00':'rgba(255,255,255,.3)')+';font-family:monospace;cursor:pointer;letter-spacing:1px">⚡ ULTRA</button>';
     h+='</div>';
 
     if(!card){
       h+='<div style="padding:20px;text-align:center;border:1px solid rgba(255,204,0,.15);background:rgba(255,204,0,.04)">';
-      h+='<div style="font-size:28px;margin-bottom:8px">✅</div>';
-      h+='<div style="font-size:13px;color:#ffcc00;margin-bottom:4px">All done for today.</div>';
+      h+='<div style="font-size:var(--t-h1);margin-bottom:8px">✅</div>';
+      h+='<div style="font-size:var(--t-lg);color:#ffcc00;margin-bottom:4px">All done for today.</div>';
       h+='<div class="dim-10">'+knownCount+' ayahs memorized · '+totalAyahs+' total</div>';
       h+='</div>';
     } else {
@@ -6071,17 +6072,17 @@ function arRender(){
       var isReview=!!arState.known[card.key]||!!arState.struggling[card.key];
       h+='<div class="mb-10">';
       // Label
-      h+='<div style="font-size:9px;color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:8px">';
+      h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:8px">';
       h+=card.surah.name+' · Ayah '+card.ayahNum+(isReview?' · review':'')+(streak>=3?' · '+'★'.repeat(Math.min(streak,6)):'');
       h+='</div>';
       // Prompt box
       h+='<div style="font-size:15px;color:#ffcc00;padding:14px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.15);text-align:center;margin-bottom:12px;letter-spacing:1px">';
-      h+=card.surah.name+'<br><span style="font-size:22px;font-family:monospace">'+card.ayahNum+'</span>';
+      h+=card.surah.name+'<br><span style="font-size:var(--t-h2);font-family:monospace">'+card.ayahNum+'</span>';
       h+='</div>';
 
       if(!arRevealed){
-        h+='<div style="font-size:10px;color:var(--dim);text-align:center;margin-bottom:10px">Recite it — then reveal</div>';
-        h+='<button id="ar-reveal" style="width:100%;padding:10px;background:rgba(255,204,0,.08);border:1px solid rgba(255,204,0,.3);color:#ffcc00;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">REVEAL AYAH</button>';
+        h+='<div style="font-size:var(--t-sm);color:var(--dim);text-align:center;margin-bottom:10px">Recite it — then reveal</div>';
+        h+='<button id="ar-reveal" style="width:100%;padding:10px;background:rgba(255,204,0,.08);border:1px solid rgba(255,204,0,.3);color:#ffcc00;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px">REVEAL AYAH</button>';
       } else {
         // Context: prior, current, next ayah
         var _ayahs=card.surah.ayahs;
@@ -6092,24 +6093,24 @@ function arRender(){
         if(_prevText){
           h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-bottom:6px;opacity:.65">';
           h+='<div style="font-size:24px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_prevText+'</div>';
-          h+='<div style="font-size:28px;font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an-1)+'</div>';
+          h+='<div style="font-size:var(--t-h1);font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an-1)+'</div>';
           h+='</div>';
         }
         // Current ayah
         h+='<div style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,204,0,.05);border:1px solid rgba(255,204,0,.25);margin-bottom:6px">';
-        h+='<div style="font-size:28px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:var(--text)">'+card.text+'</div>';
+        h+='<div style="font-size:var(--t-h1);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:var(--text)">'+card.text+'</div>';
         h+='<div style="font-size:36px;font-family:monospace;color:rgba(255,204,0,.7);flex-shrink:0;min-width:36px;text-align:center;line-height:1">'+_an+'</div>';
         h+='</div>';
         // Next ayah
         if(_nextText){
           h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-bottom:12px;opacity:.65">';
           h+='<div style="font-size:24px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_nextText+'</div>';
-          h+='<div style="font-size:28px;font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an+1)+'</div>';
+          h+='<div style="font-size:var(--t-h1);font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an+1)+'</div>';
           h+='</div>';
         }
         h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
-        h+='<button data-arknew="0" style="padding:10px;background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.3);color:#ff4444;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">✗ MISSED</button>';
-        h+='<button data-arknew="1" style="padding:10px;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);color:#00ff88;font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">✓ GOT IT</button>';
+        h+='<button data-arknew="0" style="padding:10px;background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.3);color:#ff4444;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">✗ MISSED</button>';
+        h+='<button data-arknew="1" style="padding:10px;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);color:#00ff88;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">✓ GOT IT</button>';
         h+='</div>'; // ar-surah-scroll
         h+='</div>'; // ar-firefly-wrap
       }
@@ -6120,15 +6121,15 @@ function arRender(){
   } else if(tab==='memorized'){
     if(!arState.memorizedSurahs)arState.memorizedSurahs={};
     var mFilter=arState._mFilter||'30';
-    h+='<div style="font-size:9px;color:rgba(255,204,0,.6);letter-spacing:2px;margin-bottom:10px">SURAHS YOU HAVE MEMORIZED</div>';
-    h+='<div style="font-size:11px;color:var(--dim);line-height:1.6;margin-bottom:12px">Mark surahs you already know. They enter review rotation immediately.</div>';
+    h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.6);letter-spacing:2px;margin-bottom:10px">SURAHS YOU HAVE MEMORIZED</div>';
+    h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.6;margin-bottom:12px">Mark surahs you already know. They enter review rotation immediately.</div>';
     h+='<div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">';
     [{v:'30',l:'Juz 30'},{v:'29',l:'Juz 29'},{v:'28',l:'Juz 28'},{v:'all',l:'All'}].forEach(function(x){
       var a=mFilter===x.v;
-      h+='<span data-arjuzfilter="'+x.v+'" style="font-size:9px;padding:3px 10px;border:1px solid rgba(255,204,0,'+(a?'.5':'.15')+');color:'+(a?'#ffcc00':'var(--dim)')+';cursor:pointer">'+x.l+'</span>';
+      h+='<span data-arjuzfilter="'+x.v+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid rgba(255,204,0,'+(a?'.5':'.15')+');color:'+(a?'#ffcc00':'var(--dim)')+';cursor:pointer">'+x.l+'</span>';
     });
-    h+='<span data-arselectjuz="1" style="margin-left:auto;font-size:9px;padding:3px 8px;border:1px solid rgba(255,204,0,.2);color:rgba(255,204,0,.6);cursor:pointer">✓ All in view</span>';
-    h+='<span data-arclearjuz="1" style="font-size:9px;padding:3px 8px;border:1px solid rgba(255,85,85,.2);color:rgba(255,85,85,.5);cursor:pointer">✕ Clear</span>';
+    h+='<span data-arselectjuz="1" style="margin-left:auto;font-size:var(--t-xs);padding:3px 8px;border:1px solid var(--c-gold-dim);color:rgba(255,204,0,.6);cursor:pointer">✓ All in view</span>';
+    h+='<span data-arclearjuz="1" style="font-size:var(--t-xs);padding:3px 8px;border:1px solid rgba(255,85,85,.2);color:rgba(255,85,85,.5);cursor:pointer">✕ Clear</span>';
     h+='</div>';
     var mSurahs=AR_DATA.filter(function(s){return mFilter==='all'||s.juz===parseInt(mFilter);});
     var memCount=AR_DATA.filter(function(s){return arState.memorizedSurahs[s.n];}).length;
@@ -6138,26 +6139,26 @@ function arRender(){
       var mem=!!arState.memorizedSurahs[s.n];
       h+='<div data-armemsurah="'+s.n+'" style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid rgba(255,204,0,'+(mem?'.4':'.1')+');background:rgba(255,204,0,'+(mem?'.07':'0')+');cursor:pointer">';
       h+='<span style="font-size:15px;color:'+(mem?'#ffcc00':'rgba(255,255,255,.2)')+';flex-shrink:0">'+(mem?'✓':'○')+'</span>';
-      h+='<div style="min-width:0"><div style="font-size:11px;color:'+(mem?'#ffcc00':'var(--dim)')+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</div>';
+      h+='<div style="min-width:0"><div style="font-size:var(--t-base);color:'+(mem?'#ffcc00':'var(--dim)')+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</div>';
       h+='<div class="dim-9-faint">'+s.n+' · '+s.ayahs.length+'</div></div></div>';
     });
     h+='</div>';
-    h+='<div style="margin-top:8px;font-size:9px;color:var(--dim)">'+memCount+' surahs · '+memAyahs+' ayahs memorized</div>';
+    h+='<div style="margin-top:8px;font-size:var(--t-xs);color:var(--dim)">'+memCount+' surahs · '+memAyahs+' ayahs memorized</div>';
 
   } else if(tab==='surah'){
     var selSurah=arState._viewSurah||null;
     var rainbow=!!arState._rainbow;
     var WORD_COLORS=['#ffd6a5','#caffbf','#9bf6ff','#ffc6ff','#fdffb6'];
     if(!selSurah){
-      h+='<div style="font-size:9px;color:rgba(255,204,0,.6);letter-spacing:2px;margin-bottom:10px">SELECT A SURAH</div>';
+      h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.6);letter-spacing:2px;margin-bottom:10px">SELECT A SURAH</div>';
       [30,29,28].forEach(function(juz){
         var juzSurahs=AR_DATA.filter(function(s){return s.juz===juz;});
-        h+='<div class="mb-14"><div style="font-size:9px;color:rgba(255,204,0,.4);letter-spacing:2px;margin-bottom:6px">JUZ '+juz+'</div>';
+        h+='<div class="mb-14"><div style="font-size:var(--t-xs);color:rgba(255,204,0,.4);letter-spacing:2px;margin-bottom:6px">JUZ '+juz+'</div>';
         h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">';
         juzSurahs.forEach(function(s){
           var mem=arState.memorizedSurahs&&arState.memorizedSurahs[s.n];
           h+='<div data-arviewsurah="'+s.n+'" style="padding:8px 10px;border:1px solid rgba(255,204,0,'+(mem?'.3':'.1')+');cursor:pointer;background:rgba(255,204,0,'+(mem?'.05':'0')+')">'
-            +'<div style="font-size:11px;color:'+(mem?'#ffcc00':'var(--text)')+'">'+s.name+'</div>'
+            +'<div style="font-size:var(--t-base);color:'+(mem?'#ffcc00':'var(--text)')+'">'+s.name+'</div>'
             +'<div class="dim-9-faint">'+s.n+' · '+s.ayahs.length+' ayahs</div>'
           +'</div>';
         });
@@ -6168,10 +6169,10 @@ function arRender(){
       if(viewS){
         var _arFontCssV=(typeof DUA_ARABIC_FONTS!=='undefined'?(DUA_ARABIC_FONTS.find(function(f){return f.key===_arFont;})||DUA_ARABIC_FONTS[0]).css:"'Scheherazade New',serif");
         h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">';
-        h+='<button data-arviewsurah="null" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;padding:3px 8px">← BACK</button>';
-        h+='<div style="flex:1"><div style="font-size:14px;color:#ffcc00">'+viewS.name+'</div>';
+        h+='<button data-arviewsurah="null" style="background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;padding:3px 8px">← BACK</button>';
+        h+='<div style="flex:1"><div style="font-size:var(--t-body);color:#ffcc00">'+viewS.name+'</div>';
         h+='<div class="dim-9">Surah '+viewS.n+' · Juz '+viewS.juz+' · '+viewS.ayahs.length+' ayahs</div></div>';
-        h+='<button data-arrainbow="1" style="background:rgba(255,204,0,'+(rainbow?'.12':'0')+');border:1px solid rgba(255,204,0,'+(rainbow?'.4':'.2')+');color:'+(rainbow?'#ffcc00':'var(--dim)')+';font-family:monospace;font-size:10px;cursor:pointer;padding:3px 8px">🎨</button>';
+        h+='<button data-arrainbow="1" style="background:rgba(255,204,0,'+(rainbow?'.12':'0')+');border:1px solid rgba(255,204,0,'+(rainbow?'.4':'.2')+');color:'+(rainbow?'#ffcc00':'var(--dim)')+';font-family:monospace;font-size:var(--t-sm);cursor:pointer;padding:3px 8px">🎨</button>';
         h+='</div>';
         h+='<div id="ar-firefly-wrap" style="position:relative;overflow:hidden;border-radius:2px">';
         h+='<canvas id="ar-firefly-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>';
@@ -6181,8 +6182,8 @@ function arRender(){
           var ayahText=ayah;
           if(rainbow){var words=ayah.split(' ');ayahText=words.map(function(w,wi){return '<span style="color:'+WORD_COLORS[wi%WORD_COLORS.length]+'">'+w+'</span>';}).join(' ');}
           h+='<div style="margin-bottom:12px;padding:10px 12px;border-left:2px solid rgba(255,204,0,'+(known?'.5':'.15')+');background:rgba(255,204,0,'+(known?'.05':'0')+')">'
-            +'<div style="font-size:28px;color:rgba(255,255,255,.85);margin-bottom:8px;font-family:monospace;font-weight:bold;letter-spacing:2px">'+(i+1)+'</div>'
-            +'<div style="font-size:28px;font-family:'+_arFontCssV+';direction:rtl;text-align:right;line-height:1.9;color:'+(rainbow?'inherit':'#ffcc00')+'">'+ayahText+'</div>'
+            +'<div style="font-size:var(--t-h1);color:rgba(255,255,255,.85);margin-bottom:8px;font-family:monospace;font-weight:bold;letter-spacing:2px">'+(i+1)+'</div>'
+            +'<div style="font-size:var(--t-h1);font-family:'+_arFontCssV+';direction:rtl;text-align:right;line-height:1.9;color:'+(rainbow?'inherit':'#ffcc00')+'">'+ayahText+'</div>'
           +'</div>';
         });
         h+='</div>';
@@ -6193,17 +6194,17 @@ function arRender(){
     // Wide card toggle
     var isWide=!!arState._wide;
     h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:10px;border:1px solid rgba(255,204,0,'+(isWide?'.3':'.1')+');background:rgba(255,204,0,'+(isWide?'.06':'0')+')">'
-      +'<div style="flex:1"><div style="font-size:11px;color:'+(isWide?'#ffcc00':'var(--text)')+'">Wide Card (2 columns)</div>'
+      +'<div style="flex:1"><div style="font-size:var(--t-base);color:'+(isWide?'#ffcc00':'var(--text)')+'">Wide Card (2 columns)</div>'
       +'<div class="dim-9-mt">Stretches card across 2 grid columns for more reading space</div></div>'
-      +'<button data-arwide="1" style="padding:4px 14px;background:rgba(255,204,0,'+(isWide?'.2':'.05')+');border:1px solid rgba(255,204,0,'+(isWide?'.5':'.2')+');color:'+(isWide?'#ffcc00':'var(--dim)')+';font-family:monospace;font-size:10px;cursor:pointer">'+(isWide?'ON':'OFF')+'</button>'
+      +'<button data-arwide="1" style="padding:4px 14px;background:rgba(255,204,0,'+(isWide?'.2':'.05')+');border:1px solid rgba(255,204,0,'+(isWide?'.5':'.2')+');color:'+(isWide?'#ffcc00':'var(--dim)')+';font-family:monospace;font-size:var(--t-sm);cursor:pointer">'+(isWide?'ON':'OFF')+'</button>'
     +'</div>';
-    h+='<div style="font-size:9px;color:rgba(255,204,0,.6);letter-spacing:2px;margin-bottom:10px">ARABIC TEXT STYLE</div>';
+    h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.6);letter-spacing:2px;margin-bottom:10px">ARABIC TEXT STYLE</div>';
     DUA_ARABIC_FONTS.forEach(function(f){
       var a=_arFont===f.key;
       h+='<div data-arfont="'+f.key+'" style="display:flex;align-items:center;gap:12px;padding:10px;margin-bottom:6px;border:1px solid rgba(255,204,0,'+(a?'.4':'.1')+');background:rgba(255,204,0,'+(a?'.06':'0')+');cursor:pointer">';
-      h+='<div style="flex:1"><div style="font-size:11px;color:'+(a?'#ffcc00':'var(--text)')+'">'+f.name+'</div>';
+      h+='<div style="flex:1"><div style="font-size:var(--t-base);color:'+(a?'#ffcc00':'var(--text)')+'">'+f.name+'</div>';
       h+='<div style="font-size:24px;font-family:'+f.css+';direction:rtl;text-align:right;color:'+(a?'#ffcc00':'var(--dim)')+';margin-top:4px">\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div></div>';
-      if(a)h+='<span style="color:#ffcc00;font-size:18px">\u2713</span>';
+      if(a)h+='<span style="color:#ffcc00;font-size:var(--t-title)">\u2713</span>';
       h+='</div>';
     });
 
@@ -6499,7 +6500,7 @@ function acRender(){
   h+='<div class="flex-row-mb">';
   [{t:'study',l:'STUDY'},{t:'stats',l:'STATS'},{t:'settings',l:'\u2699'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-actab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(0,229,255,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#00e5ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-actab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(0,229,255,.5)':'var(--c-border)')+';color:'+(a?'#00e5ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -6510,18 +6511,18 @@ function acRender(){
 
     var ultraAC=!!acState._ultra;
     // Progress bar
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:10px;color:var(--dim)">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:var(--t-sm);color:var(--dim)">';
     h+='<span style="color:#00e5ff">'+done+'</span><span>/'+total+' today'+(ultraAC?' ⚡':'')+'</span>';
     h+='<div class="divider"><div style="height:100%;width:'+(total?done/total*100:0)+'%;background:#00e5ff;transition:width .3s"></div></div>';
     h+='</div>';
     h+='<div style="text-align:right;margin-bottom:10px">';
-    h+='<button data-acultra="1" style="font-size:9px;padding:2px 10px;background:rgba(0,229,255,'+(ultraAC?'.15':'0')+');border:1px solid rgba(0,229,255,'+(ultraAC?'.5':'.2')+');color:'+(ultraAC?'#00e5ff':'rgba(255,255,255,.3)')+';font-family:monospace;cursor:pointer;letter-spacing:1px">⚡ ULTRA</button>';
+    h+='<button data-acultra="1" style="font-size:var(--t-xs);padding:2px 10px;background:rgba(0,229,255,'+(ultraAC?'.15':'0')+');border:1px solid rgba(0,229,255,'+(ultraAC?'.5':'.2')+');color:'+(ultraAC?'#00e5ff':'rgba(255,255,255,.3)')+';font-family:monospace;cursor:pointer;letter-spacing:1px">⚡ ULTRA</button>';
     h+='</div>';
 
     if(!card){
       h+='<div style="padding:20px;text-align:center;border:1px solid rgba(0,229,255,.15);background:rgba(0,229,255,.04)">';
-      h+='<div style="font-size:28px;margin-bottom:8px">✅</div>';
-      h+='<div style="font-size:13px;color:#00e5ff;margin-bottom:4px">All done for today.</div>';
+      h+='<div style="font-size:var(--t-h1);margin-bottom:8px">✅</div>';
+      h+='<div style="font-size:var(--t-lg);color:#00e5ff;margin-bottom:4px">All done for today.</div>';
       h+='<div class="dim-10">'+correctCount+' completions mastered</div>';
       h+='</div>';
     } else {
@@ -6530,7 +6531,7 @@ function acRender(){
       var streak=acState.streaks&&acState.streaks[card.key]||0;
       var isReview=!!acState.correct[card.key];
 
-      h+='<div style="font-size:9px;color:rgba(0,229,255,.5);letter-spacing:1px;margin-bottom:8px">';
+      h+='<div style="font-size:var(--t-xs);color:rgba(0,229,255,.5);letter-spacing:1px;margin-bottom:8px">';
       h+=card.surah.name+' · Ayah '+card.ayahNum+(isReview?' · review':'')+(streak>=3?' · '+'★'.repeat(Math.min(streak,6)):'');
       h+='</div>';
 
@@ -6550,24 +6551,24 @@ function acRender(){
       opts.forEach(function(opt,idx){
         h+='<button data-acopt="'+idx+'" data-accorrect="'+(opt.c?'1':'0')+'" ';
         h+='style="padding:10px 12px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.15);';
-        h+='color:var(--text);font-family:\'Scheherazade New\',serif;font-size:22px;direction:rtl;';
+        h+='color:var(--text);font-family:\'Scheherazade New\',serif;font-size:var(--t-h2);direction:rtl;';
         h+='text-align:right;cursor:pointer;line-height:1.6;width:100%">'+opt.t+'</button>';
       });
       h+='</div>';
 
       // Don't know button
       h+='<button data-acdontknow="1" style="margin-top:8px;width:100%;padding:7px;background:transparent;';
-      h+='border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">I DON\'T KNOW</button>';
+      h+='border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">I DON\'T KNOW</button>';
     }
 
   } else if(tab==='settings'){
-    h+='<div style="font-size:9px;color:rgba(0,229,255,.6);letter-spacing:2px;margin-bottom:10px">ARABIC TEXT STYLE</div>';
+    h+='<div style="font-size:var(--t-xs);color:rgba(0,229,255,.6);letter-spacing:2px;margin-bottom:10px">ARABIC TEXT STYLE</div>';
     DUA_ARABIC_FONTS.forEach(function(f){
       var a=_acFont===f.key;
       h+='<div data-acfont="'+f.key+'" style="display:flex;align-items:center;gap:12px;padding:10px;margin-bottom:6px;border:1px solid rgba(0,229,255,'+(a?'.4':'.1')+');background:rgba(0,229,255,'+(a?'.06':'0')+');cursor:pointer">';
-      h+='<div style="flex:1"><div style="font-size:11px;color:'+(a?'#00e5ff':'var(--text)')+'">'+f.name+'</div>';
+      h+='<div style="flex:1"><div style="font-size:var(--t-base);color:'+(a?'#00e5ff':'var(--text)')+'">'+f.name+'</div>';
       h+='<div style="font-size:24px;font-family:'+f.css+';direction:rtl;text-align:right;color:'+(a?'#00e5ff':'var(--dim)')+';margin-top:4px">\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div></div>';
-      if(a)h+='<span style="color:#00e5ff;font-size:18px">\u2713</span>';
+      if(a)h+='<span style="color:#00e5ff;font-size:var(--t-title)">\u2713</span>';
       h+='</div>';
     });
 
@@ -6587,7 +6588,7 @@ function acRender(){
       h+='</div>';
     });
     h+='</div>';
-    h+='<div style="font-size:9px;color:var(--dim);margin-top:4px;opacity:.5">'+totalCards+' total completions · 6 new per day</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;opacity:.5">'+totalCards+' total completions · 6 new per day</div>';
   }
 
   el.innerHTML=h;
@@ -6661,7 +6662,7 @@ function acRender(){
         // Show NEXT button on wrong
         var _acNBtn=document.createElement('button');
         _acNBtn.textContent='NEXT →';
-        _acNBtn.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';
+        _acNBtn.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px';
         var _acNext=function(){acAnswered=false;acRender();};
         _acNBtn.onclick=_acNext;
         _acNBtn.ontouchend=function(e){e.preventDefault();_acNext();};
@@ -6707,7 +6708,7 @@ function acRender(){
       // Show NEXT button
       var _dkNBtn=document.createElement('button');
       _dkNBtn.textContent='NEXT →';
-      _dkNBtn.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px';
+      _dkNBtn.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px';
       var _dkNext=function(){acAnswered=false;acRender();};
       _dkNBtn.onclick=_dkNext;
       _dkNBtn.ontouchend=function(e){e.preventDefault();_dkNext();};
@@ -6752,7 +6753,7 @@ function smCycleStatus(key){
 
 // ── SURAH MAP STATE HELPERS (module-level so event handlers can access) ──
 var SM_STATES={
-  'none':     {col:'rgba(255,255,255,.1)',  label:'Not Started',   icon:'○'},
+  'none':     {col:'var(--c-border)',  label:'Not Started',   icon:'○'},
   'learning': {col:'rgba(255,204,0,.85)',   label:'Learning',      icon:'◑'},
   'memorized':{col:'rgba(126,184,255,.85)', label:'Memorized',     icon:'✓'},
   'revision': {col:'rgba(255,68,68,.8)',    label:'Needs Revision', icon:'↻'}
@@ -6806,7 +6807,7 @@ function smRender(){
   h+='<div class="flex-row-mb">';
   [{t:'map',l:'MAP'},{t:'stats',l:'STATS'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-smtab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(126,184,255,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#7eb8ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-smtab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(126,184,255,.5)':'var(--c-border)')+';color:'+(a?'#7eb8ff':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -6814,7 +6815,7 @@ function smRender(){
   h+='<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">';
   ['none','learning','memorized','revision'].forEach(function(k){
     var s=SM_STATES[k];
-    h+='<span style="font-size:9px;color:var(--dim);display:flex;align-items:center;gap:4px">'
+    h+='<span style="font-size:var(--t-xs);color:var(--dim);display:flex;align-items:center;gap:4px">'
       +'<span style="display:inline-block;width:9px;height:9px;background:'+s.col+';border-radius:1px"></span>'+s.label+'</span>';
   });
   h+='</div>';
@@ -6830,8 +6831,8 @@ function smRender(){
       h+='<div class="mb-14">';
       // Collapsible header
       h+='<div data-smcollapse="'+juz+'" style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(126,184,255,.05);border:1px solid rgba(126,184,255,.15);cursor:pointer;margin-bottom:'+(collapsed?'0':'8px')+'">';
-      h+='<span style="font-size:11px;color:#7eb8ff;font-weight:bold">JUZ '+juz+'</span>';
-      h+='<span style="font-size:9px;color:var(--dim);flex:1">';
+      h+='<span style="font-size:var(--t-base);color:#7eb8ff;font-weight:bold">JUZ '+juz+'</span>';
+      h+='<span style="font-size:var(--t-xs);color:var(--dim);flex:1">';
       if(juzMem)h+='<span style="color:rgba(126,184,255,.7)">'+juzMem+' mem</span> ';
       if(juzLearn)h+='<span style="color:rgba(255,204,0,.7)">'+juzLearn+' learning</span> ';
       if(juzRev)h+='<span style="color:rgba(255,68,68,.7)">'+juzRev+' revision</span>';
@@ -6856,12 +6857,12 @@ function smRender(){
         h+='<div style="margin-bottom:8px;border:1px solid '+borderCol+';background:'+bgCol+';border-radius:3px;overflow:hidden">';
 
         // Surah header row
-        h+='<div data-smsurahn="'+s.n+'" style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.06)">';
-        h+='<span style="font-size:9px;color:rgba(255,255,255,.3);min-width:24px;text-align:right;font-family:monospace">'+s.n+'</span>';
+        h+='<div data-smsurahn="'+s.n+'" style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--c-ghost)">';
+        h+='<span style="font-size:var(--t-xs);color:rgba(255,255,255,.3);min-width:24px;text-align:right;font-family:monospace">'+s.n+'</span>';
         var _nameCol=sst&&SM_STATES[sst]?SM_STATES[sst].col:'var(--text)';
-        h+='<span style="font-size:12px;color:'+_nameCol+';flex:1;font-weight:'+(sst?'bold':'normal')+'">'+s.name+'</span>';
+        h+='<span style="font-size:var(--t-md);color:'+_nameCol+';flex:1;font-weight:'+(sst?'bold':'normal')+'">'+s.name+'</span>';
         h+='<span class="dim-9">'+s.ayahs.length+' ayahs</span>';
-        h+='<span style="font-size:13px;color:'+ssInfo.col+'">'+ssInfo.icon+'</span>';
+        h+='<span style="font-size:var(--t-lg);color:'+ssInfo.col+'">'+ssInfo.icon+'</span>';
         h+='</div>';
 
         // Ayah blocks — flush inside the card
@@ -6882,13 +6883,13 @@ function smRender(){
     });
 
     // Bulk actions
-    h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)">';
+    h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid var(--c-ghost)">';
     h+='<span class="dim-9">Bulk:</span>';
     [{st:'learning',l:'All Learning'},{st:'memorized',l:'All Memorized'},{st:'revision',l:'All Revision'},{st:'null',l:'Clear All'}].forEach(function(x){
-      h+='<span data-smbulk="'+x.st+'" style="font-size:9px;padding:2px 8px;border:1px solid rgba(255,255,255,.1);color:var(--dim);cursor:pointer">'+x.l+'</span>';
+      h+='<span data-smbulk="'+x.st+'" style="font-size:var(--t-xs);padding:2px 8px;border:1px solid var(--c-border);color:var(--dim);cursor:pointer">'+x.l+'</span>';
     });
     h+='</div>';
-    h+='<div style="font-size:9px;color:var(--dim);margin-top:6px;opacity:.5">Tap surah row to cycle state · tap ayah block to cycle individually</div>';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:6px;opacity:.5">Tap surah row to cycle state · tap ayah block to cycle individually</div>';
 
   } else {
     // STATS
@@ -6905,9 +6906,9 @@ function smRender(){
       var jMem=juzS.filter(function(s){return smState.surah[String(s.n)]==='memorized';}).length;
       var pct=Math.round(jMem/juzS.length*100);
       h+='<div style="margin-bottom:8px;display:flex;align-items:center;gap:8px">';
-      h+='<span style="font-size:10px;color:var(--dim);min-width:40px">Juz '+juz+'</span>';
-      h+='<div style="flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:2px"><div style="height:100%;width:'+pct+'%;background:#7eb8ff;border-radius:2px"></div></div>';
-      h+='<span style="font-size:9px;color:var(--dim);min-width:40px;text-align:right">'+jMem+'/'+juzS.length+'</span>';
+      h+='<span style="font-size:var(--t-sm);color:var(--dim);min-width:40px">Juz '+juz+'</span>';
+      h+='<div style="flex:1;height:5px;background:var(--c-ghost);border-radius:2px"><div style="height:100%;width:'+pct+'%;background:#7eb8ff;border-radius:2px"></div></div>';
+      h+='<span style="font-size:var(--t-xs);color:var(--dim);min-width:40px;text-align:right">'+jMem+'/'+juzS.length+'</span>';
       h+='</div>';
     });
   }
@@ -7021,7 +7022,7 @@ function vsRender(){
   h+='<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">';
   [{t:'read',l:'READ'},{t:'browse',l:'BROWSE'},{t:'stats',l:'STATS'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-vstab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(80,250,123,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'var(--cg)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-vstab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(80,250,123,.5)':'var(--c-border)')+';color:'+(a?'var(--cg)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -7034,7 +7035,7 @@ function vsRender(){
     var revTotal=(vsState.todayReview||[]).length;
     var allDone=!todayEntry;
 
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:10px;color:var(--dim)">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:var(--t-sm);color:var(--dim)">';
     h+='<span style="color:var(--cg)">'+newDone+'</span><span>/'+newTotal+' new</span>';
     if(revTotal>0)h+='<span style="margin-left:6px;color:rgba(80,250,123,.5)">'+revDone+'/'+revTotal+' review</span>';
     h+='<div class="divider"><div style="height:100%;width:'+((newDone+revDone)/Math.max(newTotal+revTotal,1)*100)+'%;background:var(--cg);transition:width .3s"></div></div>';
@@ -7043,7 +7044,7 @@ function vsRender(){
     if(allDone){
       h+='<div style="padding:20px;text-align:center;border:1px solid rgba(80,250,123,.15);background:rgba(80,250,123,.04)">';
       h+='<div class="icon-lg">✅</div>';
-      h+='<div style="font-size:13px;color:var(--cg);margin-bottom:4px">All done for today.</div>';
+      h+='<div style="font-size:var(--t-lg);color:var(--cg);margin-bottom:4px">All done for today.</div>';
       h+='<div class="dim-10">'+totalStudied+' entries studied · come back tomorrow</div>';
       h+='</div>';
     } else {
@@ -7052,27 +7053,27 @@ function vsRender(){
       var entryType=todayEntry.type;
       var revealed=vsState._revealed===entry.id;
 
-      h+='<div style="border:1px solid rgba(255,255,255,.1);padding:14px;margin-bottom:10px">';
+      h+='<div style="border:1px solid var(--c-border);padding:14px;margin-bottom:10px">';
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
-      h+='<div style="font-size:9px;color:'+catData.color+';letter-spacing:1px">'+catData.name+'</div>';
-      h+='<span style="margin-left:auto;font-size:9px;padding:2px 7px;border:1px solid rgba(255,255,255,.15);color:'+(entryType==='review'?'var(--cc)':'var(--cg)')+'">'+entryType.toUpperCase()+'</span>';
+      h+='<div style="font-size:var(--t-xs);color:'+catData.color+';letter-spacing:1px">'+catData.name+'</div>';
+      h+='<span style="margin-left:auto;font-size:var(--t-xs);padding:2px 7px;border:1px solid var(--c-faint);color:'+(entryType==='review'?'var(--cc)':'var(--cg)')+'">'+entryType.toUpperCase()+'</span>';
       h+='</div>';
       h+='"'+entry.excerpt+'"</div>';
-      h+='<div style="font-size:11px;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:14px;padding:0 12px;border-left:2px solid '+catData.color+'40">';
+      h+='<div style="font-size:var(--t-base);color:var(--text);line-height:1.8;font-style:italic;margin-bottom:14px;padding:0 12px;border-left:2px solid '+catData.color+'40">';
       // Author + work label
-      h+='<div style="font-size:9px;color:var(--dim);margin-bottom:8px;letter-spacing:1px">';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-bottom:8px;letter-spacing:1px">';
       h+='<span style="color:var(--text)">'+entry.author+'</span>';
       h+=' · <em>'+entry.work+'</em>';
       h+='</div>';
       if(!revealed){
-        h+='<button data-vsreveal="'+entry.id+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(80,250,123,.3);color:var(--cg);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">WHAT TO NOTICE</button>';
+        h+='<button data-vsreveal="'+entry.id+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(80,250,123,.3);color:var(--cg);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">WHAT TO NOTICE</button>';
       } else {
-        h+='<div style="padding:10px;background:rgba(80,250,123,.05);border:1px solid rgba(80,250,123,.2);font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:8px">'+entry.notice+'</div>';
-        h+='<button data-vscopy="1" style="width:100%;padding:7px;margin-bottom:10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">📋 COPY FOR AI</button>';
+        h+='<div style="padding:10px;background:rgba(80,250,123,.05);border:1px solid rgba(80,250,123,.2);font-size:var(--t-md);color:var(--dim);line-height:1.7;margin-bottom:8px">'+entry.notice+'</div>';
+        h+='<button data-vscopy="1" style="width:100%;padding:7px;margin-bottom:10px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">📋 COPY FOR AI</button>';
         if(!vsGetStudied(entry.id)){
-          h+='<button data-vsmark="'+entry.id+'" data-vstype="'+entryType+'" style="width:100%;padding:9px;background:rgba(80,250,123,.08);border:1px solid rgba(80,250,123,.4);color:var(--cg);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">✓ MARK STUDIED · NEXT</button>';
+          h+='<button data-vsmark="'+entry.id+'" data-vstype="'+entryType+'" style="width:100%;padding:9px;background:rgba(80,250,123,.08);border:1px solid rgba(80,250,123,.4);color:var(--cg);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">✓ MARK STUDIED · NEXT</button>';
         } else {
-          h+='<button data-vsnext="'+entryType+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">NEXT →</button>';
+          h+='<button data-vsnext="'+entryType+'" style="width:100%;padding:9px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">NEXT →</button>';
         }
       }
       h+='</div>';
@@ -7081,22 +7082,22 @@ function vsRender(){
     if(!vsState._expanded)vsState._expanded={};
     VS_DATA.categories.forEach(function(c){
       h+='<div style="margin-bottom:16px">';
-      h+='<div style="font-size:9px;color:'+c.color+';letter-spacing:2px;margin-bottom:8px">'+c.name.toUpperCase()+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:'+c.color+';letter-spacing:2px;margin-bottom:8px">'+c.name.toUpperCase()+'</div>';
       c.entries.forEach(function(e){
         var studied=vsGetStudied(e.id);
         var expanded=!!vsState._expanded[e.id];
         h+='<div style="border-bottom:1px solid rgba(255,255,255,.05);padding:6px 0">';
         h+='<div class="flex-center">';
-        h+='<span style="font-size:12px;color:'+(studied?'var(--cg)':'rgba(255,255,255,.2)')+';flex-shrink:0">'+( studied?'✓':'○')+'</span>';
+        h+='<span style="font-size:var(--t-md);color:'+(studied?'var(--cg)':'rgba(255,255,255,.2)')+';flex-shrink:0">'+( studied?'✓':'○')+'</span>';
         h+='<div class="flex-1"><div class="text-11">'+e.author+'</div>';
         h+='<div class="dim-9">'+e.work+'</div></div>';
-        h+='<button data-vsexpand="'+e.id+'" style="flex-shrink:0;padding:2px 8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer">'+(expanded?'▴':'▾')+'</button>';
+        h+='<button data-vsexpand="'+e.id+'" style="flex-shrink:0;padding:2px 8px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer">'+(expanded?'▴':'▾')+'</button>';
         h+='</div>';
         if(expanded){
           h+='<div style="margin:8px 0 4px 20px;padding:10px;background:rgba(255,255,255,.03);border-left:2px solid '+c.color+'40">';
-          h+='<div style="font-size:12px;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:8px">&ldquo;'+e.excerpt+'&rdquo;</div>';
-          h+='<div style="font-size:11px;color:var(--dim);line-height:1.6">'+e.notice+'</div>';
-          if(!studied)h+='<button data-vsmarkb="'+e.id+'" style="margin-top:8px;padding:4px 12px;background:rgba(80,250,123,.08);border:1px solid rgba(80,250,123,.3);color:var(--cg);font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">✓ MARK STUDIED</button>';
+          h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.8;font-style:italic;margin-bottom:8px">&ldquo;'+e.excerpt+'&rdquo;</div>';
+          h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.6">'+e.notice+'</div>';
+          if(!studied)h+='<button data-vsmarkb="'+e.id+'" style="margin-top:8px;padding:4px 12px;background:rgba(80,250,123,.08);border:1px solid rgba(80,250,123,.3);color:var(--cg);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">✓ MARK STUDIED</button>';
           h+='</div>';
         }
         h+='</div>';
@@ -7109,7 +7110,7 @@ function vsRender(){
     h+='<div class="grid-2col">';
     [{v:totalStudied,l:'studied'},{v:totalAll-totalStudied,l:'remaining'}].forEach(function(x){
       h+='<div style="text-align:center;padding:10px;background:rgba(80,250,123,.04);border:1px solid rgba(80,250,123,.1)">';
-      h+='<div style="font-size:28px;color:var(--cg);font-family:VT323,monospace">'+x.v+'</div>';
+      h+='<div style="font-size:var(--t-h1);color:var(--cg);font-family:VT323,monospace">'+x.v+'</div>';
       h+='<div class="dim-9">'+x.l+'</div></div>';
     });
     h+='</div>';
@@ -7117,10 +7118,10 @@ function vsRender(){
       var done=c.entries.filter(function(e){return vsGetStudied(e.id);}).length;
       var pct=Math.round(done/c.entries.length*100);
       h+='<div style="margin-bottom:8px;display:flex;align-items:center;gap:8px">';
-      h+='<span style="font-size:10px;color:var(--dim);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+c.name+'</span>';
-      h+='<div style="width:80px;height:4px;background:rgba(255,255,255,.06);flex-shrink:0">';
+      h+='<span style="font-size:var(--t-sm);color:var(--dim);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+c.name+'</span>';
+      h+='<div style="width:80px;height:4px;background:var(--c-ghost);flex-shrink:0">';
       h+='<div style="height:100%;width:'+pct+'%;background:'+c.color+'"></div></div>';
-      h+='<span style="font-size:9px;color:var(--dim);min-width:28px;text-align:right">'+done+'/'+c.entries.length+'</span>';
+      h+='<span style="font-size:var(--t-xs);color:var(--dim);min-width:28px;text-align:right">'+done+'/'+c.entries.length+'</span>';
       h+='</div>';
     });
   }
@@ -7249,7 +7250,7 @@ function artRender(){
   h+='<div class="flex-row-mb">';
   [{t:'read',l:'READ'},{t:'browse',l:'BROWSE'},{t:'stats',l:'STATS'}].forEach(function(x){
     var a=tab===x.t;
-    h+='<span data-arttab="'+x.t+'" style="font-size:9px;padding:3px 10px;border:1px solid '+(a?'rgba(255,184,108,.5)':'rgba(255,255,255,.1)')+';color:'+(a?'#ffb86c':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h+='<span data-arttab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(255,184,108,.5)':'var(--c-border)')+';color:'+(a?'#ffb86c':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
   });
   h+='</div>';
 
@@ -7262,7 +7263,7 @@ function artRender(){
     var revTotalA=(artState.todayReview||[]).length;
     var allDoneA=!todayEntryA;
 
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:10px;color:var(--dim)">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:var(--t-sm);color:var(--dim)">';
     h+='<span style="color:#ffb86c">'+newDoneA+'</span><span>/'+newTotalA+' new</span>';
     if(revTotalA>0)h+='<span style="margin-left:6px;color:rgba(255,184,108,.5)">'+revDoneA+'/'+revTotalA+' review</span>';
     h+='<div class="divider"><div style="height:100%;width:'+((newDoneA+revDoneA)/Math.max(newTotalA+revTotalA,1)*100)+'%;background:#ffb86c;transition:width .3s"></div></div>';
@@ -7271,7 +7272,7 @@ function artRender(){
     if(allDoneA){
       h+='<div style="padding:20px;text-align:center;border:1px solid rgba(255,184,108,.15);background:rgba(255,184,108,.04)">';
       h+='<div class="icon-lg">✅</div>';
-      h+='<div style="font-size:13px;color:#ffb86c;margin-bottom:4px">All done for today.</div>';
+      h+='<div style="font-size:var(--t-lg);color:#ffb86c;margin-bottom:4px">All done for today.</div>';
       h+='<div class="dim-10">'+totalStudied+' tips studied · come back tomorrow</div>';
       h+='</div>';
     } else {
@@ -7282,28 +7283,28 @@ function artRender(){
 
       h+='<div style="border:1px solid rgba(255,184,108,.2);background:rgba(255,184,108,.03);padding:14px;margin-bottom:10px">';
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
-      h+='<div style="font-size:9px;color:'+catData.color+';letter-spacing:1px">'+catData.name+'</div>';
-      h+='<span style="margin-left:auto;font-size:9px;padding:2px 7px;border:1px solid rgba(255,255,255,.15);color:'+(entryTypeA==='review'?'var(--cc)':'#ffb86c')+'">'+entryTypeA.toUpperCase()+'</span>';
+      h+='<div style="font-size:var(--t-xs);color:'+catData.color+';letter-spacing:1px">'+catData.name+'</div>';
+      h+='<span style="margin-left:auto;font-size:var(--t-xs);padding:2px 7px;border:1px solid var(--c-faint);color:'+(entryTypeA==='review'?'var(--cc)':'#ffb86c')+'">'+entryTypeA.toUpperCase()+'</span>';
       h+='</div>';
-      h+='<div style="font-size:14px;color:#ffb86c;font-weight:bold;line-height:1.5;margin-bottom:12px">'+entry.tip+'</div>';
+      h+='<div style="font-size:var(--t-body);color:#ffb86c;font-weight:bold;line-height:1.5;margin-bottom:12px">'+entry.tip+'</div>';
       h+='<div style="margin-bottom:10px;padding:10px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,184,108,.4)">';
       h+='<div class="label-dim-xs">EXAMPLE</div>';
-      h+='<div style="font-size:12px;color:var(--text);line-height:1.6">'+entry.example+'</div>';
+      h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.6">'+entry.example+'</div>';
       h+='</div>';
       if(revealId!==entry.id){
-        h+='<button data-artreveal="'+entry.id+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,184,108,.3);color:#ffb86c;font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">REVEAL FULL TIP</button>';
+        h+='<button data-artreveal="'+entry.id+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,184,108,.3);color:#ffb86c;font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">REVEAL FULL TIP</button>';
       } else {
         h+='<div style="margin-bottom:8px;padding:10px;background:rgba(255,85,85,.05);border-left:2px solid rgba(255,85,85,.4)">';
-        h+='<div style="font-size:9px;color:rgba(255,85,85,.7);letter-spacing:1px;margin-bottom:4px">DON\'T</div>';
-        h+='<div style="font-size:12px;color:var(--dim);line-height:1.6">'+entry.not+'</div></div>';
+        h+='<div style="font-size:var(--t-xs);color:rgba(255,85,85,.7);letter-spacing:1px;margin-bottom:4px">DON\'T</div>';
+        h+='<div style="font-size:var(--t-md);color:var(--dim);line-height:1.6">'+entry.not+'</div></div>';
         h+='<div style="margin-bottom:10px;padding:10px;background:rgba(80,250,123,.05);border-left:2px solid rgba(80,250,123,.4)">';
-        h+='<div style="font-size:9px;color:rgba(80,250,123,.7);letter-spacing:1px;margin-bottom:4px">WHY IT WORKS</div>';
-        h+='<div style="font-size:12px;color:var(--dim);line-height:1.6">'+entry.why+'</div></div>';
-        h+='<button data-artcopy="1" style="width:100%;padding:7px;margin-bottom:8px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:1px">📋 COPY FOR AI</button>';
+        h+='<div style="font-size:var(--t-xs);color:rgba(80,250,123,.7);letter-spacing:1px;margin-bottom:4px">WHY IT WORKS</div>';
+        h+='<div style="font-size:var(--t-md);color:var(--dim);line-height:1.6">'+entry.why+'</div></div>';
+        h+='<button data-artcopy="1" style="width:100%;padding:7px;margin-bottom:8px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px">📋 COPY FOR AI</button>';
         if(!artStudied(entry.id)){
-          h+='<button data-artmark="'+entry.id+'" data-arttype="'+entryTypeA+'" style="width:100%;padding:9px;background:rgba(255,184,108,.08);border:1px solid rgba(255,184,108,.4);color:#ffb86c;font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">✓ GOT IT · NEXT</button>';
+          h+='<button data-artmark="'+entry.id+'" data-arttype="'+entryTypeA+'" style="width:100%;padding:9px;background:rgba(255,184,108,.08);border:1px solid rgba(255,184,108,.4);color:#ffb86c;font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">✓ GOT IT · NEXT</button>';
         } else {
-          h+='<button data-artnext="'+entryTypeA+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:10px;cursor:pointer;letter-spacing:2px">NEXT →</button>';
+          h+='<button data-artnext="'+entryTypeA+'" style="width:100%;padding:9px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">NEXT →</button>';
         }
       }
       h+='</div>';
@@ -7312,28 +7313,28 @@ function artRender(){
     if(!artState._expanded)artState._expanded={};
     ART_DATA.categories.forEach(function(c){
       h+='<div class="mb-14">';
-      h+='<div style="font-size:9px;color:'+c.color+';letter-spacing:2px;margin-bottom:6px">'+c.name.toUpperCase()+'</div>';
+      h+='<div style="font-size:var(--t-xs);color:'+c.color+';letter-spacing:2px;margin-bottom:6px">'+c.name.toUpperCase()+'</div>';
       c.entries.forEach(function(e){
         var done=artStudied(e.id);
         var expanded=!!artState._expanded[e.id];
         h+='<div style="border-bottom:1px solid rgba(255,255,255,.04);padding:6px 0">';
         h+='<div style="display:flex;align-items:flex-start;gap:8px">';
-        h+='<span style="font-size:12px;color:'+(done?c.color:'rgba(255,255,255,.2)')+';flex-shrink:0;margin-top:2px">'+(done?'✓':'○')+'</span>';
-        h+='<div style="flex:1;font-size:11px;color:'+(done?'var(--text)':'var(--dim)')+';line-height:1.4">'+e.tip+'</div>';
-        h+='<button data-artexpand="'+e.id+'" style="flex-shrink:0;padding:2px 8px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:9px;cursor:pointer">'+(expanded?'▴':'▾')+'</button>';
+        h+='<span style="font-size:var(--t-md);color:'+(done?c.color:'rgba(255,255,255,.2)')+';flex-shrink:0;margin-top:2px">'+(done?'✓':'○')+'</span>';
+        h+='<div style="flex:1;font-size:var(--t-base);color:'+(done?'var(--text)':'var(--dim)')+';line-height:1.4">'+e.tip+'</div>';
+        h+='<button data-artexpand="'+e.id+'" style="flex-shrink:0;padding:2px 8px;background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer">'+(expanded?'▴':'▾')+'</button>';
         h+='</div>';
         if(expanded){
           h+='<div style="margin:8px 0 4px 20px;padding:10px;background:rgba(255,184,108,.03);border-left:2px solid rgba(255,184,108,.3)">';
           h+='<div style="margin-bottom:8px;padding:8px;background:rgba(255,255,255,.04);border-left:2px solid rgba(255,184,108,.4)">';
-          h+='<div style="font-size:9px;color:var(--dim);letter-spacing:1px;margin-bottom:3px">EXAMPLE</div>';
-          h+='<div style="font-size:11px;color:var(--text);line-height:1.5">'+e.example+'</div></div>';
+          h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:3px">EXAMPLE</div>';
+          h+='<div style="font-size:var(--t-base);color:var(--text);line-height:1.5">'+e.example+'</div></div>';
           h+='<div style="margin-bottom:6px;padding:8px;background:rgba(255,85,85,.05);border-left:2px solid rgba(255,85,85,.3)">';
-          h+='<div style="font-size:9px;color:rgba(255,85,85,.7);letter-spacing:1px;margin-bottom:3px">DON\'T</div>';
-          h+='<div style="font-size:11px;color:var(--dim);line-height:1.5">'+e.not+'</div></div>';
+          h+='<div style="font-size:var(--t-xs);color:rgba(255,85,85,.7);letter-spacing:1px;margin-bottom:3px">DON\'T</div>';
+          h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.5">'+e.not+'</div></div>';
           h+='<div style="padding:8px;background:rgba(80,250,123,.05);border-left:2px solid rgba(80,250,123,.3)">';
-          h+='<div style="font-size:9px;color:rgba(80,250,123,.7);letter-spacing:1px;margin-bottom:3px">WHY IT WORKS</div>';
-          h+='<div style="font-size:11px;color:var(--dim);line-height:1.5">'+e.why+'</div></div>';
-          if(!done)h+='<button data-artmarkb="'+e.id+'" style="margin-top:8px;padding:4px 12px;background:rgba(255,184,108,.08);border:1px solid rgba(255,184,108,.3);color:#ffb86c;font-family:monospace;font-size:9px;cursor:pointer;letter-spacing:1px">✓ MARK LEARNED</button>';
+          h+='<div style="font-size:var(--t-xs);color:rgba(80,250,123,.7);letter-spacing:1px;margin-bottom:3px">WHY IT WORKS</div>';
+          h+='<div style="font-size:var(--t-base);color:var(--dim);line-height:1.5">'+e.why+'</div></div>';
+          if(!done)h+='<button data-artmarkb="'+e.id+'" style="margin-top:8px;padding:4px 12px;background:rgba(255,184,108,.08);border:1px solid rgba(255,184,108,.3);color:#ffb86c;font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">✓ MARK LEARNED</button>';
           h+='</div>';
         }
         h+='</div>';
@@ -7346,7 +7347,7 @@ function artRender(){
     h+='<div class="grid-2col">';
     [{v:totalStudied,l:'learned'},{v:totalAll-totalStudied,l:'remaining'}].forEach(function(x){
       h+='<div style="text-align:center;padding:10px;background:rgba(255,184,108,.04);border:1px solid rgba(255,184,108,.1)">';
-      h+='<div style="font-size:28px;color:#ffb86c;font-family:VT323,monospace">'+x.v+'</div>';
+      h+='<div style="font-size:var(--t-h1);color:#ffb86c;font-family:VT323,monospace">'+x.v+'</div>';
       h+='<div class="dim-9">'+x.l+'</div></div>';
     });
     h+='</div>';
@@ -7354,9 +7355,9 @@ function artRender(){
       var done=c.entries.filter(function(e){return artStudied(e.id);}).length;
       var pct=Math.round(done/c.entries.length*100);
       h+='<div style="margin-bottom:7px;display:flex;align-items:center;gap:8px">';
-      h+='<span style="font-size:10px;color:var(--dim);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+c.name+'</span>';
-      h+='<div style="width:70px;height:4px;background:rgba(255,255,255,.06);flex-shrink:0"><div style="height:100%;width:'+pct+'%;background:'+c.color+'"></div></div>';
-      h+='<span style="font-size:9px;color:var(--dim);min-width:28px;text-align:right">'+done+'/'+c.entries.length+'</span>';
+      h+='<span style="font-size:var(--t-sm);color:var(--dim);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+c.name+'</span>';
+      h+='<div style="width:70px;height:4px;background:var(--c-ghost);flex-shrink:0"><div style="height:100%;width:'+pct+'%;background:'+c.color+'"></div></div>';
+      h+='<span style="font-size:var(--t-xs);color:var(--dim);min-width:28px;text-align:right">'+done+'/'+c.entries.length+'</span>';
       h+='</div>';
     });
   }
@@ -7484,20 +7485,20 @@ function modeOpen(){
   document.body.style.overflow='hidden';
 
   var h = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">';
-  h += '<div style="font-size:13px;color:var(--dim);letter-spacing:3px">FOCUS MODE</div>';
-  h += '<button onclick="modeClose()" style="background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:11px;cursor:pointer;padding:4px 10px">✕ CLOSE</button>';
+  h += '<div style="font-size:var(--t-lg);color:var(--dim);letter-spacing:3px">FOCUS MODE</div>';
+  h += '<button onclick="modeClose()" style="background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-base);cursor:pointer;padding:4px 10px">✕ CLOSE</button>';
   h += '</div>';
 
   FOCUS_MODES.forEach(function(m){
-    h += '<div onclick="modeStart(\''+m.id+'\')" style="margin-bottom:14px;padding:20px;border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .2s" '
+    h += '<div onclick="modeStart(\''+m.id+'\')" style="margin-bottom:14px;padding:20px;border:1px solid var(--c-border);cursor:pointer;transition:all .2s" '
        + 'onmouseenter="this.style.borderColor=\''+m.color+'40\';this.style.background=\'rgba(255,255,255,.03)\'" '
-       + 'onmouseleave="this.style.borderColor=\'rgba(255,255,255,.1)\';this.style.background=\'transparent\'">';
+       + 'onmouseleave="this.style.borderColor=\'var(--c-border)\';this.style.background=\'transparent\'">';
     h += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">';
-    h += '<span style="font-size:28px">'+m.icon+'</span>';
-    h += '<div><div style="font-size:16px;color:'+m.color+';letter-spacing:1px">'+m.label+'</div>';
-    h += '<div style="font-size:10px;color:var(--dim);margin-top:2px">'+m.desc+'</div></div>';
+    h += '<span style="font-size:var(--t-h1)">'+m.icon+'</span>';
+    h += '<div><div style="font-size:var(--t-sub);color:'+m.color+';letter-spacing:1px">'+m.label+'</div>';
+    h += '<div style="font-size:var(--t-sm);color:var(--dim);margin-top:2px">'+m.desc+'</div></div>';
     h += '</div>';
-    h += '<div style="font-size:9px;color:rgba(255,255,255,.2);letter-spacing:1px">'+m.cards.length+' CARDS</div>';
+    h += '<div style="font-size:var(--t-xs);color:rgba(255,255,255,.2);letter-spacing:1px">'+m.cards.length+' CARDS</div>';
     h += '</div>';
   });
 
@@ -7538,9 +7539,9 @@ function modeShowCard(){
     // Done
     session.innerHTML = '<div style="text-align:center;padding:40px 20px">'
       + '<div style="font-size:48px;margin-bottom:16px">'+mode.icon+'</div>'
-      + '<div style="font-size:18px;color:'+mode.color+';letter-spacing:1px;margin-bottom:8px">Session complete.</div>'
-      + '<div style="font-size:12px;color:var(--dim);margin-bottom:32px">All '+total+' cards done.</div>'
-      + '<button onclick="modeClose()" style="padding:12px 32px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:12px;cursor:pointer;letter-spacing:2px">BACK TO DASHBOARD</button>'
+      + '<div style="font-size:var(--t-title);color:'+mode.color+';letter-spacing:1px;margin-bottom:8px">Session complete.</div>'
+      + '<div style="font-size:var(--t-md);color:var(--dim);margin-bottom:32px">All '+total+' cards done.</div>'
+      + '<button onclick="modeClose()" style="padding:12px 32px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:2px">BACK TO DASHBOARD</button>'
       + '</div>';
     return;
   }
@@ -7560,7 +7561,7 @@ function modeShowCard(){
   var h = '';
   // Progress bar
   h += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">';
-  h += '<button onclick="modeClose()" style="background:transparent;border:none;color:var(--dim);font-size:18px;cursor:pointer;padding:0">✕</button>';
+  h += '<button onclick="modeClose()" style="background:transparent;border:none;color:var(--dim);font-size:var(--t-title);cursor:pointer;padding:0">✕</button>';
   h += '<div style="flex:1;height:3px;background:rgba(255,255,255,.08);border-radius:2px">';
   h += '<div style="height:100%;width:'+(idx/total*100)+'%;background:'+mode.color+';border-radius:2px;transition:width .4s ease"></div>';
   h += '</div>';
@@ -7572,10 +7573,10 @@ function modeShowCard(){
 
   // Card header
   h += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">';
-  h += '<span style="font-size:22px">'+mode.icon+'</span>';
+  h += '<span style="font-size:var(--t-h2)">'+mode.icon+'</span>';
   h += '<div style="flex:1">';
-  h += '<div style="font-size:14px;color:'+mode.color+';letter-spacing:1px">'+cardLabel+'</div>';
-  h += '<div style="font-size:9px;color:var(--dim);letter-spacing:2px">'+mode.label.toUpperCase()+' · '+(idx+1)+' OF '+total+'</div>';
+  h += '<div style="font-size:var(--t-body);color:'+mode.color+';letter-spacing:1px">'+cardLabel+'</div>';
+  h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:2px">'+mode.label.toUpperCase()+' · '+(idx+1)+' OF '+total+'</div>';
   h += '</div>';
   h += '</div>';
 
@@ -7590,8 +7591,8 @@ function modeShowCard(){
 
   // Action buttons
   h += '<div style="display:flex;gap:10px">';
-  h += '<button onclick="modeSkip()" style="flex:1;padding:12px;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:1px">SKIP →</button>';
-  h += '<button onclick="modeNext()" style="flex:2;padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.25);color:var(--text);font-family:monospace;font-size:11px;cursor:pointer;letter-spacing:2px">DONE · NEXT →</button>';
+  h += '<button onclick="modeSkip()" style="flex:1;padding:12px;background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.65);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">SKIP →</button>';
+  h += '<button onclick="modeNext()" style="flex:2;padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.25);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px">DONE · NEXT →</button>';
   h += '</div>';
 
   h += '</div>'; // mode-card-wrap
