@@ -1,3 +1,35 @@
+// ── GLOBAL UTILITIES ──
+function todayKey(){
+  var n=new Date();
+  if(n.getHours()<4)n=new Date(n.getTime()-864e5);
+  return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
+}
+function todayKeyRaw(){ return new Date().toISOString().slice(0,10); }
+function safeHap(type){ if(typeof hap==='function')hap(type); }
+function safeToast(msg){ if(typeof showToast==='function')showToast(msg); }
+function lsGet(key,def){
+  try{ var v=localStorage.getItem(key); return v?JSON.parse(v):def; }
+  catch(e){ return def; }
+}
+function lsSet(key,val){
+  try{ localStorage.setItem(key,JSON.stringify(val)); }
+  catch(e){ console.warn('lsSet failed:',key,e); }
+}
+function copyToClipboard(text){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).catch(function(){
+      var ta=document.createElement('textarea');ta.value=text;
+      document.body.appendChild(ta);ta.select();
+      document.execCommand('copy');document.body.removeChild(ta);
+    });
+  } else {
+    var ta=document.createElement('textarea');ta.value=text;
+    document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+  }
+}
+// ── END GLOBAL UTILITIES ──
+
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
@@ -4930,7 +4962,7 @@ var hiddenTiles=(function(){
 var currentTheme=localStorage.getItem('dash_theme')||'default';
 function saveHiddenTiles(showMsg){lsSet('dash_hidden_tiles',hiddenTiles);if(showMsg)showToast('\u2715 Card hidden');}
 
-function getSetting(k){return sSettings[k]!==undefined?sSettings[k]:SETTING_DEFAULTS[k];}
+function getSetting(k){if(!sSettings)return SETTING_DEFAULTS?SETTING_DEFAULTS[k]:undefined;return sSettings[k]!==undefined?sSettings[k]:SETTING_DEFAULTS[k];}
 function setSetting(k,v){sSettings[k]=v;lsSet('dash_settings',sSettings);}
 
 var VIEW_MODES=['compact','slimScreen','iconMode','minimalMode','singleCol','bigCat'];
