@@ -4194,13 +4194,21 @@ var _arFont=localStorage.getItem('ar_font')||'scheherazade';
 
 
 (function(){
-  fetch('quranMemory.json')
-    .then(function(r){return r.json();})
+  fetch('quranMemory.json?v='+Date.now())
+    .then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
     .then(function(d){
+      if(!d||!d.surahs)throw new Error('No surahs in data');
       AR_DATA=d.surahs;
       arRender();
     })
-    .catch(function(e){console.warn('quranMemory.json failed',e);});
+    .catch(function(e){
+      console.warn('quranMemory.json failed',e);
+      var el=document.getElementById('ar-body');
+      if(el)el.innerHTML='<div style="color:var(--cr);font-size:var(--t-sm);padding:12px 0">⚠ Failed to load: '+e.message+'</div>';
+    });
 })();
 
 
@@ -4218,10 +4226,21 @@ var _acFont=localStorage.getItem('ac_font')||'scheherazade';
 // Reuse quranMemory.json — loaded by ayah recall if that card exists, else fetch again
 (function(){
   if(window.AR_DATA){AC_DATA=window.AR_DATA;acRender();return;}
-  fetch('quranMemory.json')
-    .then(function(r){return r.json();})
-    .then(function(d){AC_DATA=d.surahs;acRender();})
-    .catch(function(e){console.warn('quranMemory.json failed',e);});
+  fetch('quranMemory.json?v='+Date.now())
+    .then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(d){
+      if(!d||!d.surahs)throw new Error('No surahs in data');
+      AC_DATA=d.surahs;
+      acRender();
+    })
+    .catch(function(e){
+      console.warn('quranMemory.json failed',e);
+      var el=document.getElementById('ac-body');
+      if(el)el.innerHTML='<div style="color:var(--cr);font-size:var(--t-sm);padding:12px 0">⚠ Failed to load: '+e.message+'</div>';
+    });
 })();
 
 
