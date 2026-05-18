@@ -1311,60 +1311,17 @@ body.large-text .sset-lbl{font-size:16px!important}
 body.large-text .goal-text{font-size:17px!important}
 body.large-text .it-title{font-size:19px!important}
 body.large-text .ptime{font-size:30px!important}
-/* ── EXTRA LARGE TEXT ── */
-body.extra-large-text{font-size:22px}
-body.extra-large-text{font-size:27px!important}
-body.extra-large-text .th-label{font-size:26px!important}
-body.extra-large-text .ttx{font-size:26px!important}
-body.extra-large-text .note-text{font-size:24px!important}
-body.extra-large-text .sset-lbl{font-size:24px!important}
-body.extra-large-text .goal-text{font-size:26px!important}
-body.extra-large-text .it-title{font-size:28px!important}
-body.extra-large-text .ptime{font-size:45px!important}
-
-
-.pomo-tab{font-size:11px;padding:3px 10px;border:1px solid rgba(255,255,255,.15);color:var(--dim);cursor:pointer;background:rgba(0,0,0,.75);transition:all .15s;letter-spacing:1px}
-.pomo-tab.active{color:var(--cp);border-color:var(--cp);background:rgba(255,95,160,.06)}
-.pomo-work-seg{color:#39ff88;font-weight:bold}
-.pomo-break-seg{color:#00e5ff}
-.pomo-log-day{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-.pomo-log-day:last-child{border-bottom:none}
-.pomo-log-date{font-size:11px;letter-spacing:1px;color:var(--ca);margin-bottom:4px}
-.pomo-stat-num{font-family:'VT323',monospace;font-size:36px;line-height:1}
-.pomo-stat-lbl{font-size:10px;color:var(--dim);letter-spacing:1px}
-
-
-body.compact-mode .pomo-time{font-size:clamp(44px,13vw,68px)!important}
-body.compact-mode .pomo-display{padding:6px 0 4px}
-
-.inactivity-notice{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:8px 10px;margin-bottom:10px;
-  border:1px solid rgba(255,204,0,.35);
-  background:rgba(255,204,0,.06);
-  border-radius:1px;
+/* ── TEXT SIZE MODES — override typography tokens ── */
+body.large-text{
+  --t-xxs:9px; --t-xs:12px; --t-sm:13px; --t-base:14px;
+  --t-md:15px; --t-lg:16px; --t-body:17px; --t-sub:20px;
+  --t-title:22px; --t-h2:26px; --t-h1:34px; --t-hero:58px;
 }
-@keyframes jiggle{
-  0%,100%{transform:rotate(0deg)}
-  15%{transform:rotate(-2.5deg)}
-  30%{transform:rotate(2.5deg)}
-  45%{transform:rotate(-2deg)}
-  60%{transform:rotate(2deg)}
-  75%{transform:rotate(-1deg)}
-  90%{transform:rotate(1deg)}
+body.extra-large-text{
+  --t-xxs:11px; --t-xs:14px; --t-sm:15px; --t-base:17px;
+  --t-md:18px; --t-lg:20px; --t-body:21px; --t-sub:24px;
+  --t-title:27px; --t-h2:33px; --t-h1:42px; --t-hero:72px;
 }
-.inactivity-notice.jiggle{
-  animation:jiggle 0.6s ease-in-out;
-  animation-iteration-count:3;
-  transform-origin:center;
-}
-.inactivity-notice span{font-size:12px;color:var(--ca);letter-spacing:.3px;line-height:1.4}
-.inactivity-notice button{
-  background:transparent;border:none;color:var(--dim);
-  font-size:14px;cursor:pointer;padding:0 2px;flex-shrink:0;line-height:1;
-}
-.inactivity-notice button:hover{color:var(--text)}
-
 /* WEEKEND WARRIOR */
 .ww-col{flex:0 0 calc(50% - 4px);min-width:0;border:1px solid rgba(0,229,255,.15);background:rgba(0,229,255,.03);padding:10px;display:flex;flex-direction:column;gap:6px;box-sizing:border-box;transition:flex-basis .32s ease,box-shadow .22s ease,transform .22s ease}
 .ww-col-header{font-size:10px;letter-spacing:2px;color:var(--cc);margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
@@ -2769,6 +2726,9 @@ body.slim-screen-mode #cat-nav{top:42px}
 .qc-choice.correct{background:rgba(0,255,136,.12);border-color:var(--cg);color:var(--cg)}
 .qc-choice.wrong{background:rgba(255,68,68,.1);border-color:var(--cr);color:var(--cr)}
 .qc-choice.reveal-correct{background:rgba(0,255,136,.07);border-color:rgba(0,255,136,.4);color:var(--cg)}
+/* Single col — taller answer buttons */
+body.single-col-mode .qc-choice{padding:11px 12px !important}
+body.single-col-mode #qw-choices button{padding:11px 8px !important}
 .qc-result{font-size:12px;text-align:center;padding:10px;margin-top:6px;letter-spacing:1px}
 .qc-streak{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
 .qc-streak-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.1)}
@@ -3137,6 +3097,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
       <span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="qctab-learn" onclick="qcTab('learn')">LEARN</span>
       <span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="qctab-review" onclick="qcTab('review')">REVIEW</span>
       <span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="qctab-stats" onclick="qcTab('stats')">STATS</span>
+      <a href="https://glowing-juzamma-6d.netlify.app/" target="_blank" rel="noopener" class="th-badge" style="color:var(--ca);border-color:var(--ca);cursor:pointer;margin-left:4px;text-decoration:none">MEMORIZE ↗</a>
     </div>
     <div id="qc-panel-study"></div>
     <div id="qc-panel-learn" style="display:none"></div>

@@ -618,9 +618,9 @@ function wlBuildStats(){
     var trendCol=thisM>lastM?'var(--cg)':thisM<lastM?'var(--cr)':'var(--dim)';
 
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">';
-    h+='<div class="text-center"><div style="font-size:24px;color:var(--cp)">'+wlData.length+'</div><div class="dim-9">TOTAL</div></div>';
-    h+='<div class="text-center"><div style="font-size:24px;color:var(--cp)">'+thisM+'</div><div class="dim-9">THIS MONTH</div></div>';
-    h+='<div class="text-center"><div style="font-size:24px;color:'+trendCol+'">'+trend+'</div><div class="dim-9">VS LAST MO</div></div>';
+    h+='<div class="text-center"><div style="font-size:var(--t-sub);color:var(--cp)">'+wlData.length+'</div><div class="dim-9">TOTAL</div></div>';
+    h+='<div class="text-center"><div style="font-size:var(--t-sub);color:var(--cp)">'+thisM+'</div><div class="dim-9">THIS MONTH</div></div>';
+    h+='<div class="text-center"><div style="font-size:var(--t-sub);color:'+trendCol+'">'+trend+'</div><div class="dim-9">VS LAST MO</div></div>';
     h+='</div>';
 
     // 6-month session bar chart
@@ -631,9 +631,9 @@ function wlBuildStats(){
       var pct=maxSess>0?Math.round(v/maxSess*100):0;
       var isCur=mo===thisMonthKey;
       h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">';
-      h+='<div style="font-size:8px;color:'+(isCur?'var(--cp)':'var(--dim)')+'">'+( v||'')+'</div>';
+      h+='<div style="font-size:var(--t-xxs);color:'+(isCur?'var(--cp)':'var(--dim)')+'">'+( v||'')+'</div>';
       h+='<div style="width:100%;background:'+(isCur?'var(--cp)':'rgba(255,95,160,.4)')+';height:'+Math.max(2,pct)+'%;border-radius:1px 1px 0 0;min-height:'+(v?'4px':'2px')+'"></div>';
-      h+='<div style="font-size:8px;color:'+(isCur?'var(--cp)':'var(--dim)')+'">'+fmtMo(mo)+'</div>';
+      h+='<div style="font-size:var(--t-xxs);color:'+(isCur?'var(--cp)':'var(--dim)')+'">'+fmtMo(mo)+'</div>';
       h+='</div>';
     });
     h+='</div>';
@@ -1054,7 +1054,7 @@ function qnavRender(){
     h+='<button class="qnav-btn" style="opacity:0;border-color:'+col+'40;color:'+col+'" data-qnavto="'+id+'" title="'+label+(cnt?' ('+cnt+'x)':'')+'">';
     if(_qnavMode!=='labels')h+='<span class="qnav-emoji">'+emoji+'</span>';
     if(_qnavMode!=='icons')h+='<span>'+label+'</span>';
-    if(_qnavSort==='mostused'&&cnt>0)h+='<span style="font-size:8px;opacity:.4;margin-left:2px">'+cnt+'</span>';
+    if(_qnavSort==='mostused'&&cnt>0)h+='<span style="font-size:var(--t-xxs);opacity:.4;margin-left:2px">'+cnt+'</span>';
     h+='</button>';
   });
   h+='</div>';
@@ -1408,10 +1408,10 @@ function qcJuzInfographic(cardId){
   for(var n=start;n<=end;n++){
     var isCurrent=n===num;
     var d=QC_JUZ_MAP[n]||{ss:'',sr:'',es:'',er:''};
-    var borderCol=isCurrent?'rgba(0,229,255,.6)':'var(--c-border)';
-    var bgCol=isCurrent?'rgba(0,229,255,.08)':'rgba(255,255,255,.02)';
-    var numCol=isCurrent?'var(--cc)':'var(--dim)';
-    var metaCol=isCurrent?'rgba(0,229,255,.5)':'rgba(255,255,255,.2)';
+    var borderCol=isCurrent?'rgba(0,229,255,.6)':'rgba(255,255,255,.25)';
+    var bgCol=isCurrent?'rgba(0,229,255,.08)':'rgba(255,255,255,.06)';
+    var numCol=isCurrent?'var(--cc)':'rgba(255,255,255,.7)';
+    var metaCol=isCurrent?'rgba(0,229,255,.5)':'rgba(255,255,255,.45)';
 
     h+='<div style="display:flex;flex-direction:column;align-items:center;border:1px solid '+borderCol+';background:'+bgCol+';min-width:80px;max-width:100px">';
     // Start ref above
@@ -2517,12 +2517,15 @@ function akhiraRenderDhikr(){
       var dy=Math.abs(e.changedTouches[0].clientY-_dhikrTY);
       if(dx>10||dy>10)return; // swipe — ignore
       e.preventDefault();
+      e.stopPropagation();
+      if(_dhikrTapped)return; // guard double-fire
       _dhikrTapped=true;
       var t=e.changedTouches&&e.changedTouches[0];
       doTap(t?t.clientX:window.innerWidth/2,t?t.clientY:200);
-      setTimeout(function(){_dhikrTapped=false;},300);
+      setTimeout(function(){_dhikrTapped=false;},500);
     };
     tapBtn.onmouseup=function(e){if(_dhikrTapped)return;doTap(e.clientX,e.clientY);};
+    tapBtn.onclick=function(e){e.preventDefault();e.stopPropagation();}; // block synthetic click after touch
   }
 }
 
@@ -2743,7 +2746,7 @@ function rentRender(){
   h+='<div style="font-size:var(--t-sm);color:var(--dim);letter-spacing:1px;margin-bottom:8px">'+RENT_MONTHS[_rentSelMonth-1]+' '+_rentSelYear+'</div>';
   if(existing){
     h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);margin-bottom:8px">';
-    h+='<div><div style="font-family:VT323,monospace;font-size:32px;color:var(--cg)">$'+existing.amount.toLocaleString()+'</div>';
+    h+='<div><div style="font-family:VT323,monospace;font-size:var(--t-h1);color:var(--cg)">$'+existing.amount.toLocaleString()+'</div>';
     if(existing.note)h+='<div class="dim-10">'+existing.note+'</div>';
     h+='</div>';
     h+='<button data-rentdel="'+existing.id+'" style="font-size:var(--t-sm);padding:4px 10px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;cursor:pointer">DELETE</button>';
@@ -2751,7 +2754,7 @@ function rentRender(){
   } else {
     h+='<div style="display:flex;gap:6px;margin-bottom:6px">';
     h+='<span style="color:var(--cp);font-size:var(--t-sub);align-self:center">$</span>';
-    h+='<input id="rent-amt-inp" type="number" min="0" placeholder="Amount paid" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,45,120,.25);color:var(--text);font-family:VT323,monospace;font-size:24px;padding:4px 2px;outline:none">';
+    h+='<input id="rent-amt-inp" type="number" min="0" placeholder="Amount paid" style="flex:1;background:transparent;border:none;border-bottom:1px solid rgba(255,45,120,.25);color:var(--text);font-family:VT323,monospace;font-size:var(--t-sub);padding:4px 2px;outline:none">';
     h+='</div>';
     h+='<input id="rent-note-inp" placeholder="Note (optional)..." style="width:100%;background:transparent;border:none;border-bottom:1px solid var(--c-border);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:8px">';
     h+='<button id="rent-save-btn" style="width:100%;padding:8px;background:rgba(255,45,120,.06);border:1px solid var(--cp);color:var(--cp);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">LOG PAYMENT</button>';
@@ -3155,7 +3158,7 @@ function cdRender(){
       h+='<div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)">';
       // Days pill
       h+='<div style="flex-shrink:0;min-width:60px;text-align:center;padding:4px 6px;border:1px solid '+col+'44;background:'+col+'11">';
-      h+='<div style="font-family:VT323,monospace;font-size:24px;color:'+col+';line-height:1">'+daysTxt+'</div>';
+      h+='<div style="font-family:VT323,monospace;font-size:var(--t-sub);color:'+col+';line-height:1">'+daysTxt+'</div>';
       h+='</div>';
       // Label
       h+='<div style="flex:1;font-size:var(--t-md);color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+it.label+'</div>';
@@ -4757,7 +4760,7 @@ function stressRender(){
   if(tab==='menu'){
     var q=STRESS_QUOTES[new Date().getDate()%STRESS_QUOTES.length];
     h+='<div style="font-size:var(--t-base);color:rgba(88,232,200,.55);font-style:italic;line-height:1.6;margin-bottom:14px;padding:8px;border-left:2px solid rgba(88,232,200,.2)">'+q+'</div>';
-    h+='<button id="stress-tap-btn" style="width:100%;padding:12px;background:rgba(88,232,200,.07);border:1px solid rgba(88,232,200,.3);color:#58e8c8;font-family:VT323,monospace;font-size:20px;cursor:pointer;letter-spacing:2px;margin-bottom:14px">I AM OVERWHELMED \u2192</button>';
+    h+='<button id="stress-tap-btn" style="width:100%;padding:12px;background:rgba(88,232,200,.07);border:1px solid rgba(88,232,200,.3);color:#58e8c8;font-family:VT323,monospace;font-size:var(--t-body);cursor:pointer;letter-spacing:2px;margin-bottom:14px">I AM OVERWHELMED \u2192</button>';
     STRESS_MENU.forEach(function(cat){
       var open=window['_stressOpen_'+cat.id];
       h+='<div style="margin-bottom:6px;border:1px solid rgba(88,232,200,'+(open?'.15':'.06')+')">';
@@ -5062,7 +5065,7 @@ function qwRenderStudy(){
       var _qwHasAr=/[\u0600-\u06ff]/.test(card.q);
       var _qwFontCss=DUA_ARABIC_FONTS.find(function(f){{return f.key===_qwFont;}})||(DUA_ARABIC_FONTS[0]);
       var _qwQStyle="font-size:19px;color:var(--text);line-height:1.5;margin-bottom:14px;padding:12px;background:rgba(0,255,136,.04);border:1px solid rgba(0,255,136,.12);text-align:center;";
-      if(_qwHasAr)_qwQStyle+="font-family:"+_qwFontCss.css+";direction:rtl;font-size:26px;";
+      if(_qwHasAr)_qwQStyle+="font-family:"+_qwFontCss.css+";direction:rtl;font-size:var(--t-h1);";
       h+='<div id="qw-question" style="'+_qwQStyle+'">'+card.q.replace(/^['‘’“”"\u0022]+|['‘’“”"\u0022?\u061f]+$/g,'').trim()+'</div>';
       h+='<div id="qw-choices" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
       // For verb cards, add 2 extra wrong answers from other verb cards
@@ -5089,7 +5092,7 @@ function qwRenderStudy(){
         var _optHasAr=/[\u0600-\u06ff]/.test(opt);
         var _optStyle='padding:10px 8px;background:rgba(0,255,136,.04);border:1px solid var(--c-ok-dim);color:var(--text);cursor:pointer;line-height:1.4;';
         if(_optHasAr){
-          _optStyle+='font-family:'+_qwOptFontCss2.css+';font-size:24px;direction:rtl;text-align:right;';
+          _optStyle+='font-family:'+_qwOptFontCss2.css+';font-size:var(--t-sub);direction:rtl;text-align:right;';
         } else {
           _optStyle+='font-family:monospace;font-size:var(--t-md);text-align:left;';
         }
@@ -5164,14 +5167,14 @@ function qwRenderStudy(){
         h+='<td style="padding:10px 6px;color:rgba(255,255,255,.2);font-size:var(--t-sm);vertical-align:middle">'+(i+1)+'</td>';
         h+='<td style="padding:10px 6px;text-align:right;vertical-align:middle">';
         h+='<div style="font-size:var(--t-h1);font-family:\'Scheherazade New\',serif;color:#ffcc00;direction:rtl">'+w.arabic+'</div>';
-        h+='<div style="font-size:8px;color:rgba(255,255,255,.2);margin-top:2px">'+w.cat+'</div></td>';
+        h+='<div style="font-size:var(--t-xxs);color:rgba(255,255,255,.2);margin-top:2px">'+w.cat+'</div></td>';
         h+='<td style="padding:10px 6px;vertical-align:middle">';
         if(rev){
           h+='<div style="display:flex;align-items:center;gap:6px">';
           h+='<span style="font-size:var(--t-lg);color:var(--text)">'+w.answer+'</span>';
           var isLearned=!!(qwState.learnSeen&&qwState.learnSeen[w.id]);
-          if(!isLearned)h+='<button data-qwlearned="'+w.id+'" style="padding:2px 8px;background:rgba(80,250,123,.06);border:1px solid rgba(80,250,123,.3);color:rgba(80,250,123,.8);font-family:monospace;font-size:8px;cursor:pointer;letter-spacing:1px">✓ LEARNED</button>';
-          else h+='<span style="font-size:8px;color:rgba(80,250,123,.5)">✓</span>';
+          if(!isLearned)h+='<button data-qwlearned="'+w.id+'" style="padding:2px 8px;background:rgba(80,250,123,.06);border:1px solid rgba(80,250,123,.3);color:rgba(80,250,123,.8);font-family:monospace;font-size:var(--t-xxs);cursor:pointer;letter-spacing:1px">✓ LEARNED</button>';
+          else h+='<span style="font-size:var(--t-xxs);color:rgba(80,250,123,.5)">✓</span>';
           h+='</div>';
         } else {
           h+='<button data-qwreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SHOW</button>';
@@ -5244,7 +5247,7 @@ function qwRenderStudy(){
       h+='<div data-qwfont="'+f.key+'" style="display:flex;align-items:center;gap:12px;padding:10px;margin-bottom:6px;border:1px solid rgba(0,255,136,'+(active?'.4':'.1')+');background:rgba(0,255,136,'+(active?'.06':'0')+');cursor:pointer">';
       h+='<div style="flex:1">';
       h+='<div style="font-size:var(--t-base);color:'+(active?'#00ff88':'var(--text)')+'">'+f.name+'</div>';
-      h+='<div style="font-size:26px;font-family:'+f.css+';direction:rtl;text-align:right;color:'+(active?'#00ff88':'var(--dim)')+';margin-top:4px">';
+      h+='<div style="font-size:var(--t-h1);font-family:'+f.css+';direction:rtl;text-align:right;color:'+(active?'#00ff88':'var(--dim)')+';margin-top:4px">';
       h+='\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div>';
       h+='</div>';
       if(active)h+='<span style="color:#00ff88;font-size:var(--t-title)">\u2713</span>';
@@ -5726,7 +5729,7 @@ function arRender(){
       h+=card.surah.name+' · Ayah '+card.ayahNum+(isReview?' · review':'')+(streak>=3?' · '+'★'.repeat(Math.min(streak,6)):'');
       h+='</div>';
       // Prompt box
-      h+='<div style="font-size:15px;color:#ffcc00;padding:14px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.15);text-align:center;margin-bottom:12px;letter-spacing:1px">';
+      h+='<div style="font-size:var(--t-sub);color:#ffcc00;padding:14px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.15);text-align:center;margin-bottom:12px;letter-spacing:1px">';
       h+=card.surah.name+'<br><span style="font-size:var(--t-h2);font-family:monospace">'+card.ayahNum+'</span>';
       h+='</div>';
 
@@ -5742,7 +5745,7 @@ function arRender(){
         // Prior ayah
         if(_prevText){
           h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-bottom:6px;opacity:.65">';
-          h+='<div style="font-size:24px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_prevText+'</div>';
+          h+='<div style="font-size:var(--t-sub);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_prevText+'</div>';
           h+='<div style="font-size:var(--t-h1);font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an-1)+'</div>';
           h+='</div>';
         }
@@ -5754,7 +5757,7 @@ function arRender(){
         // Next ayah
         if(_nextText){
           h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-bottom:12px;opacity:.65">';
-          h+='<div style="font-size:24px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_nextText+'</div>';
+          h+='<div style="font-size:var(--t-sub);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_nextText+'</div>';
           h+='<div style="font-size:var(--t-h1);font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an+1)+'</div>';
           h+='</div>';
         }
@@ -5788,7 +5791,7 @@ function arRender(){
     mSurahs.forEach(function(s){
       var mem=!!arState.memorizedSurahs[s.n];
       h+='<div data-armemsurah="'+s.n+'" style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid rgba(255,204,0,'+(mem?'.4':'.1')+');background:rgba(255,204,0,'+(mem?'.07':'0')+');cursor:pointer">';
-      h+='<span style="font-size:15px;color:'+(mem?'#ffcc00':'rgba(255,255,255,.2)')+';flex-shrink:0">'+(mem?'✓':'○')+'</span>';
+      h+='<span style="font-size:var(--t-sub);color:'+(mem?'#ffcc00':'rgba(255,255,255,.2)')+';flex-shrink:0">'+(mem?'✓':'○')+'</span>';
       h+='<div style="min-width:0"><div style="font-size:var(--t-base);color:'+(mem?'#ffcc00':'var(--dim)')+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</div>';
       h+='<div class="dim-9-faint">'+s.n+' · '+s.ayahs.length+'</div></div></div>';
     });
@@ -5853,7 +5856,7 @@ function arRender(){
       var a=_arFont===f.key;
       h+='<div data-arfont="'+f.key+'" style="display:flex;align-items:center;gap:12px;padding:10px;margin-bottom:6px;border:1px solid rgba(255,204,0,'+(a?'.4':'.1')+');background:rgba(255,204,0,'+(a?'.06':'0')+');cursor:pointer">';
       h+='<div style="flex:1"><div style="font-size:var(--t-base);color:'+(a?'#ffcc00':'var(--text)')+'">'+f.name+'</div>';
-      h+='<div style="font-size:24px;font-family:'+f.css+';direction:rtl;text-align:right;color:'+(a?'#ffcc00':'var(--dim)')+';margin-top:4px">\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div></div>';
+      h+='<div style="font-size:var(--t-sub);font-family:'+f.css+';direction:rtl;text-align:right;color:'+(a?'#ffcc00':'var(--dim)')+';margin-top:4px">\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div></div>';
       if(a)h+='<span style="color:#ffcc00;font-size:var(--t-title)">\u2713</span>';
       h+='</div>';
     });
@@ -5874,7 +5877,7 @@ function arRender(){
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">';
     [{l:'Juz 30',k:juzKnown(juz30),t:juzTotal(juz30)},{l:'Juz 29',k:juzKnown(juz29),t:juzTotal(juz29)},{l:'Juz 28',k:juzKnown(juz28),t:juzTotal(juz28)}].forEach(function(x){
       h+='<div style="text-align:center;padding:8px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.1)">';
-      h+='<div style="font-size:20px;color:#ffcc00;font-family:VT323,monospace">'+x.k+'/'+x.t+'</div>';
+      h+='<div style="font-size:var(--t-body);color:#ffcc00;font-family:VT323,monospace">'+x.k+'/'+x.t+'</div>';
       h+='<div class="dim-9">'+x.l+'</div>';
       h+='</div>';
     });
@@ -5882,7 +5885,7 @@ function arRender(){
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">';
     [{v:knownCount,l:'memorized'},{v:struggling,l:'struggling'},{v:totalAyahs-knownCount-struggling,l:'not started'}].forEach(function(x){
       h+='<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)">';
-      h+='<div style="font-size:20px;color:var(--text);font-family:VT323,monospace">'+x.v+'</div>';
+      h+='<div style="font-size:var(--t-body);color:var(--text);font-family:VT323,monospace">'+x.v+'</div>';
       h+='<div class="dim-9">'+x.l+'</div>';
       h+='</div>';
     });
@@ -6186,7 +6189,7 @@ function acRender(){
       h+='</div>';
 
       // Prompt
-      h+='<div style="font-size:26px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;';
+      h+='<div style="font-size:var(--t-h1);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;';
       h+='padding:12px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.15);margin-bottom:12px;line-height:1.8;color:#00e5ff">';
       h+=card.prompt+' <span style="opacity:.3">...</span></div>';
 
@@ -6217,7 +6220,7 @@ function acRender(){
       var a=_acFont===f.key;
       h+='<div data-acfont="'+f.key+'" style="display:flex;align-items:center;gap:12px;padding:10px;margin-bottom:6px;border:1px solid rgba(0,229,255,'+(a?'.4':'.1')+');background:rgba(0,229,255,'+(a?'.06':'0')+');cursor:pointer">';
       h+='<div style="flex:1"><div style="font-size:var(--t-base);color:'+(a?'#00e5ff':'var(--text)')+'">'+f.name+'</div>';
-      h+='<div style="font-size:24px;font-family:'+f.css+';direction:rtl;text-align:right;color:'+(a?'#00e5ff':'var(--dim)')+';margin-top:4px">\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div></div>';
+      h+='<div style="font-size:var(--t-sub);font-family:'+f.css+';direction:rtl;text-align:right;color:'+(a?'#00e5ff':'var(--dim)')+';margin-top:4px">\u0628\u0650\u0633\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650</div></div>';
       if(a)h+='<span style="color:#00e5ff;font-size:var(--t-title)">\u2713</span>';
       h+='</div>';
     });
@@ -6233,7 +6236,7 @@ function acRender(){
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">';
     [{l:'Juz 30',k:juzCorrect(juz30),t:juzTotal2(juz30)},{l:'Juz 29',k:juzCorrect(juz29),t:juzTotal2(juz29)},{l:'Juz 28',k:juzCorrect(juz28),t:juzTotal2(juz28)}].forEach(function(x){
       h+='<div style="text-align:center;padding:8px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.1)">';
-      h+='<div style="font-size:20px;color:#00e5ff;font-family:VT323,monospace">'+x.k+'/'+x.t+'</div>';
+      h+='<div style="font-size:var(--t-body);color:#00e5ff;font-family:VT323,monospace">'+x.k+'/'+x.t+'</div>';
       h+='<div class="dim-9">'+x.l+'</div>';
       h+='</div>';
     });
@@ -6522,7 +6525,7 @@ function smRender(){
           var col=smAyahCol(key,s.n);
           var _numCol=(!sst||sst==='none')?'rgba(255,255,255,.4)':'rgba(0,0,0,.6)';
           h+='<div data-smayahkey="'+key+'" style="width:21px;height:21px;background:'+col+';border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center">'
-          +'<span style="font-size:8px;font-family:monospace;color:'+_numCol+';font-weight:bold;line-height:1;user-select:none">'+(i+1)+'</span>'
+          +'<span style="font-size:var(--t-xxs);font-family:monospace;color:'+_numCol+';font-weight:bold;line-height:1;user-select:none">'+(i+1)+'</span>'
           +'</div>';
         });
         h+='</div>';
@@ -6546,7 +6549,7 @@ function smRender(){
     h+='<div class="grid-2col">';
     [{v:sLearn,l:'learning',c:SM_STATES.learning.col},{v:sMem,l:'memorized',c:SM_STATES.memorized.col},{v:sRev,l:'needs revision',c:SM_STATES.revision.col},{v:SM_DATA.length-sLearn-sMem-sRev,l:'not started',c:SM_STATES.none.col}].forEach(function(x){
       h+='<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)">';
-      h+='<div style="font-size:24px;color:'+x.c+';font-family:VT323,monospace">'+x.v+'</div>';
+      h+='<div style="font-size:var(--t-sub);color:'+x.c+';font-family:VT323,monospace">'+x.v+'</div>';
       h+='<div class="dim-9">'+x.l+'</div>';
       h+='</div>';
     });
@@ -6840,11 +6843,12 @@ function vsRender(){
   var markBtn=el.querySelector('[data-vsmark]');
   if(markBtn){
     markBtn.onclick=function(){
-      var t=this.dataset.vsmark;
-      vsMarkStudied(t);
+      var entryId=this.dataset.vsmark;
+      var entryType=this.dataset.vstype;
+      vsMarkStudied(entryId);
       vsState._revealed=null;
-      if(t==='new')vsState.todayNewDone=(vsState.todayNewDone||0)+1;
-      else if(t==='review')vsState.todayReviewDone=(vsState.todayReviewDone||0)+1;
+      if(entryType==='new')vsState.todayNewDone=(vsState.todayNewDone||0)+1;
+      else if(entryType==='review')vsState.todayReviewDone=(vsState.todayReviewDone||0)+1;
       safeHap(HAP.check);
       vsSave();vsRender();
     };
@@ -7070,11 +7074,12 @@ function artRender(){
 
   var markBtn=el.querySelector('[data-artmark]');
   if(markBtn)markBtn.onclick=function(){
-    var t=this.dataset.artmark;
-    artMarkStudied(t);
+    var entryId=this.dataset.artmark;
+    var entryType=this.dataset.arttype;
+    artMarkStudied(entryId);
     artState._revealed=null;
-    if(t==='new')artState.todayNewDone=(artState.todayNewDone||0)+1;
-    else if(t==='review')artState.todayReviewDone=(artState.todayReviewDone||0)+1;
+    if(entryType==='new')artState.todayNewDone=(artState.todayNewDone||0)+1;
+    else if(entryType==='review')artState.todayReviewDone=(artState.todayReviewDone||0)+1;
     safeHap(HAP.check);
     artSave();artRender();
   };

@@ -1287,13 +1287,36 @@ function renderTodos(){
 }())
         +'<button class="ti-mv" id="tedit-btn-'+t.id+'" title="Edit">&#9998;</button>'
         +'<span class="tdel" id="tdel-'+t.id+'">[x]</span>'
-        +'</div>';
+        +'</div>'
+        +(ageDays>10&&!t.done?'<div style="display:flex;align-items:center;gap:8px;margin:3px 0 6px 24px;padding:6px 10px;background:rgba(180,70,20,.12);border:1px solid rgba(180,70,20,.4);border-left:3px solid rgba(180,70,20,.8)">'
+          +'<span style="font-size:var(--t-xs);color:rgba(180,70,20,.9);flex:1">⚠ '+ageDays+' days old — finish it or cut it</span>'
+          +'<span data-todo-age-del="'+t.id+'" style="font-size:var(--t-xs);color:rgba(255,68,68,.7);cursor:pointer;padding:2px 6px;border:1px solid rgba(255,68,68,.3)">DELETE</span>'
+          +'<span data-todo-age-done="'+t.id+'" style="font-size:var(--t-xs);color:rgba(0,255,136,.7);cursor:pointer;padding:2px 6px;border:1px solid rgba(0,255,136,.3)">DONE</span>'
+          +'</div>':'');
     }
   }
   el.innerHTML=h;
   renderTodoDoneList();
   todoSwitchTab(todoTab,true);
 
+  // Wire age warning buttons
+  el.querySelectorAll('[data-todo-age-del]').forEach(function(btn){
+    btn.onclick=function(){
+      var id=parseInt(this.dataset.todoAgeDel);
+      todos=todos.filter(function(t){return t.id!==id;});
+      safeHap(HAP.soft);
+      saveTodos();renderTodos();
+    };
+  });
+  el.querySelectorAll('[data-todo-age-done]').forEach(function(btn){
+    btn.onclick=function(){
+      var id=parseInt(this.dataset.todoAgeDone);
+      var t=todos.find(function(t){return t.id===id;});
+      if(t){t.done=true;t.doneAt=Date.now();}
+      safeHap(HAP.check);
+      saveTodos();renderTodos();
+    };
+  });
   // Wire events after render
   for(var i=0;i<visible.length;i++){
     var t=visible[i];
@@ -1965,7 +1988,7 @@ function openModal(type){
   } else if(type==='stocks'){
     box.style.borderColor='var(--cl)';title.className='cl';title.textContent='// MARKET DATA';
     var open=mktOpen(),h='<div class="sl">STATUS: <span style="color:'+(open?'var(--cl)':'var(--cr)')+'">'+( open?'OPEN':'CLOSED')+'</span> - DEMO DATA</div>';
-    for(var i=0;i<stocks.length;i++){var s=stocks[i];h+='<div class="drow"><div><div class="vt cl" style="font-size:32px;text-shadow:var(--gl)">'+s.t+'</div><div class="dim-11">'+s.lb+'</div></div><div style="text-align:right"><div class="vt" style="font-size:var(--t-h1)">$'+s.p+'</div><div class="sc '+(s.up?'sup':'sdn')+'" style="font-size:var(--t-body);margin-top:2px">'+s.ch+' ('+s.pt+')</div></div></div>';}
+    for(var i=0;i<stocks.length;i++){var s=stocks[i];h+='<div class="drow"><div><div class="vt cl" style="font-size:var(--t-h1);text-shadow:var(--gl)">'+s.t+'</div><div class="dim-11">'+s.lb+'</div></div><div style="text-align:right"><div class="vt" style="font-size:var(--t-h1)">$'+s.p+'</div><div class="sc '+(s.up?'sup':'sdn')+'" style="font-size:var(--t-body);margin-top:2px">'+s.ch+' ('+s.pt+')</div></div></div>';}
     h+='<div style="margin-top:18px;border:1px dashed var(--dim);padding:12px;font-size:var(--t-base);color:var(--dim)">DEMO MODE - integrate Finnhub API for live prices.</div>';
     mc.innerHTML=h;
   }
@@ -3011,7 +3034,7 @@ function renderBookReviews(){
     var hasReview=Object.keys(rev).some(function(k){return rev[k];});
     var stars=rev.q1||0;
     var starStr='';
-    for(var s=1;s<=5;s++)starStr+='<span data-brstar="'+b.id+'" data-val="'+s+'" style="font-size:20px;cursor:pointer;color:'+(s<=stars?'#ffcc00':'rgba(255,255,255,.2)')+'">&#9733;</span>';
+    for(var s=1;s<=5;s++)starStr+='<span data-brstar="'+b.id+'" data-val="'+s+'" style="font-size:var(--t-body);cursor:pointer;color:'+(s<=stars?'#ffcc00':'rgba(255,255,255,.2)')+'">&#9733;</span>';
     h+='<div style="border:1px solid rgba(255,255,255,.07);border-radius:2px;margin-bottom:10px;overflow:hidden">';
     h+='<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(255,255,255,.02);cursor:pointer" data-brexpand="'+b.id+'">';
     h+='<div style="font-size:var(--t-md);font-weight:600;flex:1">'+b.title+'</div>';
@@ -3160,7 +3183,7 @@ function renderBooksStats(){
     return '<div style="text-align:center;padding:8px 4px;border:1px solid rgba(122,79,255,.12);background:rgba(122,79,255,.04)">'
       +'<div style="font-family:VT323,monospace;font-size:30px;color:#9b6fff;line-height:1">'+val+'</div>'
       +'<div class="dim-9-ls">'+lbl+'</div>'
-      +(sub?'<div style="font-size:8px;color:var(--dim);opacity:.5;margin-top:2px">'+sub+'</div>':'')
+      +(sub?'<div style="font-size:var(--t-xxs);color:var(--dim);opacity:.5;margin-top:2px">'+sub+'</div>':'')
       +'</div>';
   }
   h+=pstat(thisMonthBooks.length,'THIS MONTH');
@@ -3971,7 +3994,7 @@ function renderSMain(){
         var isLast=gi===gaps.length-1;
         th+='<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0">';
         th+='<div style="width:8px;height:8px;border-radius:50%;background:'+col+';box-shadow:0 0 6px '+col+'88"></div>';
-        th+='<div style="font-size:8px;color:'+col+';white-space:nowrap">'+lbl+'</div>';
+        th+='<div style="font-size:var(--t-xxs);color:'+col+';white-space:nowrap">'+lbl+'</div>';
         th+='</div>';
         // After last gap add a final line to "now"
         if(isLast){
@@ -3980,7 +4003,7 @@ function renderSMain(){
           th+='<div style="height:2px;flex:1;min-width:10px;background:'+nowCol+';opacity:.3"></div>';
           th+='<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0">';
           th+='<div style="width:8px;height:8px;border-radius:50%;background:'+nowCol+';box-shadow:0 0 6px '+nowCol+'88;animation:pulse 1.5s ease-in-out infinite"></div>';
-          th+='<div style="font-size:8px;color:'+nowCol+'">now</div>';
+          th+='<div style="font-size:var(--t-xxs);color:'+nowCol+'">now</div>';
           th+='</div>';
         }
       });
@@ -4255,7 +4278,7 @@ function ptRenderFocus(){
   var h='';
   // Stats row
   h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">';
-  function fstat(v,l,col){return '<div class="text-center"><div style="font-family:VT323,monospace;font-size:32px;color:'+(col||'var(--cc)')+'">'+v+'</div><div class="dim-9">'+l+'</div></div>';}
+  function fstat(v,l,col){return '<div class="text-center"><div style="font-family:VT323,monospace;font-size:var(--t-h1);color:'+(col||'var(--cc)')+'">'+v+'</div><div class="dim-9">'+l+'</div></div>';}
   h+=fstat(avg,'AVG FOCUS');
   h+=fstat(best+'/10','BEST DAY','var(--cg)');
   h+=fstat(trendIcon,'7-DAY TREND',trendCol);
@@ -4270,7 +4293,7 @@ function ptRenderFocus(){
     var col=v<=3?'var(--cr)':v<=6?'var(--ca)':'var(--cg)';
     h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">';
     h+='<div style="width:100%;background:'+col+';height:'+pct+'%;min-height:2px;border-radius:1px 1px 0 0" title="'+d+': '+v+'"></div>';
-    h+='<div style="font-size:8px;color:var(--dim)">'+d.slice(8)+'</div>';
+    h+='<div style="font-size:var(--t-xxs);color:var(--dim)">'+d.slice(8)+'</div>';
     h+='</div>';
   });
   h+='</div>';
@@ -6938,7 +6961,7 @@ function juaRenderStudy(){
   h+='</div>';
   if(!juaSectionUnlocked(sec)){
     var prev=SECTIONS[SECTIONS.findIndex(function(s){return s.id===sec;})-1];
-    return h+'<div style="padding:20px;text-align:center;border:1px solid var(--c-border)"><div style="font-size:20px;margin-bottom:8px">??</div><div class="text-12">Locked</div><div class="dim-10">Complete '+prev.label+' first</div></div>';
+    return h+'<div style="padding:20px;text-align:center;border:1px solid var(--c-border)"><div style="font-size:var(--t-body);margin-bottom:8px">??</div><div class="text-12">Locked</div><div class="dim-10">Complete '+prev.label+' first</div></div>';
   }
   var idx=juaGetCard(sec);
   if(idx===null)return h+'<div style="padding:20px;text-align:center;border:1px solid rgba(255,204,0,.15)"><div class="icon-lg">✓</div><div style="font-size:var(--t-lg);color:var(--ca)">All done for today!</div><div class="dim-10">Come back tomorrow</div></div>';
@@ -7017,7 +7040,7 @@ function juaRenderMeanings(surah,idx){
   choices.sort(function(){return Math.random()-.5;});
   var h='<div style="border:1px solid var(--c-gold-dim);padding:14px">';
   h+='<div style="font-size:var(--t-base);color:var(--dim);margin-bottom:6px">What does this surah name mean?</div>';
-  h+='<div style="font-size:20px;color:var(--ca);font-family:monospace;margin-bottom:4px">'+surah.surah+'</div>';
+  h+='<div style="font-size:var(--t-body);color:var(--ca);font-family:monospace;margin-bottom:4px">'+surah.surah+'</div>';
   h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-bottom:12px">Surah '+surah.order+'</div>';
   choices.forEach(function(c){
     h+='<button data-juachoice="1" data-juacorrect="'+(c.correct?'1':'0')+'" data-juaidx="'+idx+'" style="width:100%;padding:10px;text-align:left;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;margin-bottom:6px">'+c.text+'</button>';
@@ -7033,10 +7056,10 @@ function juaRenderOrder(surah,idx,dir){
   if(dir==='forward'){
     h+='<div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+leftSurah.surah+'</div><div class="dim-9">('+leftSurah.order+')</div></div>';
     h+='<div style="color:var(--ca);font-size:var(--t-sub)">►</div>';
-    h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:15px;color:rgba(255,204,0,.4)">???</div></div>';
+    h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:var(--t-sub);color:rgba(255,204,0,.4)">???</div></div>';
     if(rightSurah){h+='<div style="color:var(--ca);font-size:var(--t-sub)">►</div><div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
   } else {
-    h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:15px;color:rgba(255,204,0,.4)">???</div></div>';
+    h+='<div style="text-align:center;flex:1;padding:8px;border:2px solid rgba(255,204,0,.4);background:rgba(255,204,0,.06)"><div style="font-size:var(--t-sub);color:rgba(255,204,0,.4)">???</div></div>';
     h+='<div style="color:var(--ca);font-size:var(--t-sub)">◄</div>';
     h+='<div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+correctSurah.surah+'</div><div class="dim-9">('+correctSurah.order+')</div></div>';
     if(rightSurah){h+='<div style="color:var(--ca);font-size:var(--t-sub)">◄</div><div class="text-center-flex"><div style="font-size:var(--t-md);color:var(--text);font-family:monospace">'+rightSurah.surah+'</div><div class="dim-9">('+rightSurah.order+')</div></div>';}
@@ -7147,7 +7170,7 @@ function qtRenderVerse(v, expanded, showMarkRead){
   h+='<button data-qtcopy="1" style="background:transparent;border:1px solid var(--c-gold-dim);color:rgba(255,204,0,.5);font-family:monospace;font-size:var(--t-xs);padding:4px 10px;cursor:pointer">📋</button>';
   h+='</div>';
   // Arabic
-  h+='<div style="font-size:20px;color:var(--ca);text-align:right;line-height:1.8;margin-bottom:10px;font-family:serif;direction:rtl">'+v.quran_text+'</div>';
+  h+='<div style="font-size:var(--t-body);color:var(--ca);text-align:right;line-height:1.8;margin-bottom:10px;font-family:serif;direction:rtl">'+v.quran_text+'</div>';
   // Meaning
   h+='<div style="font-size:var(--t-md);color:var(--text);font-style:italic;margin-bottom:10px;line-height:1.6;border-left:2px solid rgba(255,204,0,.3);padding-left:10px">"'+v.english_meaning+'"</div>';
   // Explanation
@@ -7213,7 +7236,7 @@ function qtRender(){
     if(!v){h+='<div class="dim-11">No verse found.</div>';}
     else if(qtState.readToday){
       h+='<div style="padding:12px;text-align:center;border:1px solid rgba(255,204,0,.15);margin-bottom:12px">';
-      h+='<div style="font-size:20px;margin-bottom:6px">✓</div>';
+      h+='<div style="font-size:var(--t-body);margin-bottom:6px">✓</div>';
       h+='<div style="font-size:var(--t-md);color:var(--ca)">Read for today</div>';
       h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-top:4px">'+v.surah_name+' · '+v.verse+'</div>';
       h+='</div>';
@@ -7370,7 +7393,7 @@ function questRender(){
         h += '</div>';
 
         // Phase label
-        h += '<div style="font-size:8px;color:rgba(255,165,0,.3);letter-spacing:1px;margin-bottom:4px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
+        h += '<div style="font-size:var(--t-xxs);color:rgba(255,165,0,.3);letter-spacing:1px;margin-bottom:4px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
         h+='<div style="font-size:var(--t-xs);color:rgba(255,165,0,.5);letter-spacing:2px;margin-bottom:8px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
 
         // Step card

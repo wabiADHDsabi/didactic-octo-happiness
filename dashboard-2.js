@@ -289,7 +289,7 @@ function pomoRenderStats(){
       var isToday=i===now.getDay();
       h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">';
       h+='<div style="width:100%;background:'+(isToday?'var(--cp)':'rgba(255,95,160,.4)')+';border-radius:1px 1px 0 0;height:'+pct+'%" title="'+fmins(m)+'"></div>';
-      h+='<div style="font-size:8px;color:'+(isToday?'var(--cp)':'var(--dim)')+'">'+DOW[i].slice(0,2)+'</div>';
+      h+='<div style="font-size:var(--t-xxs);color:'+(isToday?'var(--cp)':'var(--dim)')+'">'+DOW[i].slice(0,2)+'</div>';
       h+='</div>';
     });
     h+='</div>';
@@ -306,7 +306,7 @@ function pomoRenderStats(){
       h+='<div style="flex:1;background:'+(pct>0?'var(--cr)':'rgba(255,255,255,.04)')+';border-radius:1px 1px 0 0;height:'+pct+'%" title="'+hr+':00 — '+fmins(workMinsByHour[hr])+'"></div>';
     }
     h+='</div>';
-    h+='<div style="display:flex;justify-content:space-between;font-size:8px;color:var(--dim)"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>11p</span></div>';
+    h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-xxs);color:var(--dim)"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>11p</span></div>';
   }
 
   // Monthly breakdown for year/all
@@ -2737,7 +2737,7 @@ function renderPickleball(){
       +'</div>'
       +'<div class="pb-verdict '+verdict+'" style="flex-direction:column;gap:1px;height:auto;padding:6px 0;width:40px;border-color:'+verdictColor+';background:'+verdictColor+'18">'
       +'<span style="font-size:var(--t-body);color:'+verdictColor+'">'+icon+'</span>'
-      +'<span style="font-size:8px;color:'+verdictColor+';letter-spacing:.5px;font-weight:bold">'+verdictLabel+'</span>'
+      +'<span style="font-size:var(--t-xxs);color:'+verdictColor+';letter-spacing:.5px;font-weight:bold">'+verdictLabel+'</span>'
       +'</div>'
       +'<div class="flex-1">'
       +tempLine
@@ -3164,7 +3164,7 @@ function applyTheme(t){
         +'display:flex;flex-direction:column;align-items:center;gap:1px;min-width:52px'
         +'">'
         +'<span style="font-size:var(--t-title);color:var(--cg);font-weight:bold">'+card.l+'</span>'
-        +'<span style="font-size:8px;color:var(--dim);letter-spacing:.5px">'+card.name+'</span>'
+        +'<span style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:.5px">'+card.name+'</span>'
         +'</button>';
     });
     h+='<button onclick="closeLNav()" style="background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;padding:6px 12px;cursor:pointer;font-size:var(--t-base);align-self:center">&#10005;</button>';
@@ -4140,7 +4140,7 @@ function emRender(){
         h+='<div style="text-align:center;padding:4px 2px;background:'+bg+';border-radius:2px">';
         var textCol=intensity>0.45?'rgba(0,20,30,0.9)':'rgba(255,255,255,0.8)';
         var subCol=intensity>0.45?'rgba(0,20,30,0.6)':'rgba(255,255,255,0.35)';
-        h+='<div style="font-size:8px;color:'+subCol+'">'+(hr===0?'12a':hr<12?hr+'a':hr===12?'12p':(hr-12)+'p')+'</div>';
+        h+='<div style="font-size:var(--t-xxs);color:'+subCol+'">'+(hr===0?'12a':hr<12?hr+'a':hr===12?'12p':(hr-12)+'p')+'</div>';
         h+='<div style="font-size:var(--t-xs);font-weight:'+(intensity>0.3?'600':'normal')+';color:'+textCol+'">'+( hourMins[hr]?hourMins[hr]+'m':'')+'</div>';
         h+='</div>';
       }
@@ -6221,7 +6221,7 @@ function medRenderPK(){
   });
   h+='</div>';
 
-  h+='<div style="font-size:8px;color:rgba(255,255,255,.2);margin-top:8px;line-height:1.5">Illustrative only. Based on 1-compartment oral model using Tmax and half-life set in ⚙ MANAGE. Not clinical advice.</div>';
+  h+='<div style="font-size:var(--t-xxs);color:rgba(255,255,255,.2);margin-top:8px;line-height:1.5">Illustrative only. Based on 1-compartment oral model using Tmax and half-life set in ⚙ MANAGE. Not clinical advice.</div>';
   return h;
 }
 
