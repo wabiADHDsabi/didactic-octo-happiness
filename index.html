@@ -3849,63 +3849,99 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 <script>
 // ── MOBILE DEBUG PANEL ──
 window._dbgErrors = [];
+window._dbgStartTime = Date.now();
+
 window.onerror = function(msg, src, line, col, err){
-  window._dbgErrors.push('[ERR] '+msg+' ('+src.split('/').pop()+':'+line+')');
+  var t=((Date.now()-window._dbgStartTime)/1000).toFixed(1);
+  window._dbgErrors.push('[ERR +'+t+'s] '+msg+' ('+src.split('/').pop()+':'+line+')');
   dbgUpdate();
 };
 var _origLog = console.log;
 console.log = function(){
-  window._dbgErrors.push('[LOG] '+Array.from(arguments).join(' '));
+  var t=((Date.now()-window._dbgStartTime)/1000).toFixed(1);
+  window._dbgErrors.push('[LOG +'+t+'s] '+Array.from(arguments).join(' '));
   dbgUpdate();
   _origLog.apply(console, arguments);
 };
 window.addEventListener('unhandledrejection', function(e){
-  window._dbgErrors.push('[PROMISE] '+(e.reason||'unknown'));
+  var t=((Date.now()-window._dbgStartTime)/1000).toFixed(1);
+  window._dbgErrors.push('[PROMISE +'+t+'s] '+(e.reason&&e.reason.message||e.reason||'unknown'));
   dbgUpdate();
 });
 var _origWarn = console.warn;
 console.warn = function(){
-  window._dbgErrors.push('[WARN] '+Array.from(arguments).join(' '));
+  var t=((Date.now()-window._dbgStartTime)/1000).toFixed(1);
+  window._dbgErrors.push('[WARN +'+t+'s] '+Array.from(arguments).join(' '));
   dbgUpdate();
   _origWarn.apply(console, arguments);
 };
+var _origErr = console.error;
+console.error = function(){
+  var t=((Date.now()-window._dbgStartTime)/1000).toFixed(1);
+  window._dbgErrors.push('[ERR +'+t+'s] '+Array.from(arguments).join(' '));
+  dbgUpdate();
+  _origErr.apply(console, arguments);
+};
+
+function dbgFlags(){
+  var flags = [];
+  flags.push('── STATE FLAGS ──');
+  var checks = {
+    'lsGet':typeof lsGet,'lsSet':typeof lsSet,'safeHap':typeof safeHap,'todayKey':typeof todayKey,
+    'AR_DATA':typeof AR_DATA==='undefined'?'UNDEF':(AR_DATA?AR_DATA.length+'surahs':'null'),
+    'AC_DATA':typeof AC_DATA==='undefined'?'UNDEF':(AC_DATA?AC_DATA.length+'surahs':'null'),
+    'QW_CARDS':typeof QW_CARDS==='undefined'?'UNDEF':QW_CARDS.length,
+    'QC_CARDS':typeof QC_CARDS==='undefined'?'UNDEF':QC_CARDS.length,
+    'VS_DATA':typeof VS_DATA==='undefined'?'UNDEF':(VS_DATA?'ok':'null'),
+    'JUA_DATA':typeof JUA_DATA==='undefined'?'UNDEF':JUA_DATA.length,
+    'QT_DATA':typeof QT_DATA==='undefined'?'UNDEF':QT_DATA.length,
+    'sbClient':typeof sbClient==='undefined'?'UNDEF':(sbClient?'ok':'null'),
+  };
+  Object.keys(checks).forEach(function(k){ flags.push('  '+k+': '+checks[k]); });
+  flags.push('── CHECKPOINTS ──');
+  var cp = window._dbgCheckpoints||{};
+  Object.keys(cp).forEach(function(k){ flags.push('  ✓ '+k); });
+  flags.push('── STORAGE ──');
+  flags.push('  localStorage keys: '+localStorage.length);
+  try{ flags.push('  dash_ar: '+(localStorage.getItem('dash_ar')?'set':'empty')); } catch(e){}
+  try{ flags.push('  dash_ac: '+(localStorage.getItem('dash_ac')?'set':'empty')); } catch(e){}
+  try{ flags.push('  dash_qw: '+(localStorage.getItem('dash_qw')?'set':'empty')); } catch(e){}
+  return flags;
+}
+
 function dbgUpdate(){
-  var el = document.getElementById('_dbg_panel');
+  var el = document.getElementById('_dbg_log');
   if(!el) return;
-  el.innerHTML = window._dbgErrors.slice(-10).map(function(e){
-    return '<div style="border-bottom:1px solid rgba(255,255,255,.08);padding:4px 0;word-break:break-all">'+e+'</div>';
+  var colored = window._dbgErrors.slice(-50).map(function(e){
+    var col = e.indexOf('[ERR')===0?'rgba(255,80,80,.9)':e.indexOf('[WARN')===0?'rgba(255,200,80,.8)':e.indexOf('[LOG')===0?'rgba(160,220,160,.8)':'rgba(200,200,200,.7)';
+    return '<div style="border-bottom:1px solid rgba(255,255,255,.06);padding:3px 0;word-break:break-all;color:'+col+'">'+e+'</div>';
+  });
+  el.innerHTML = colored.length ? colored.join('') : '<span style="color:rgba(255,255,255,.3)">No output yet.</span>';
+
+  var flagEl = document.getElementById('_dbg_flags');
+  if(flagEl) flagEl.innerHTML = dbgFlags().map(function(f){
+    var col = f.indexOf('──')===0?'rgba(100,200,255,.6)':f.indexOf('  ✓')===0?'rgba(0,255,136,.6)':'rgba(200,200,200,.6)';
+    return '<div style="color:'+col+';padding:1px 0">'+f+'</div>';
   }).join('');
 }
+
 function dbgShow(){
-  var el = document.getElementById('_dbg_panel');
+  var el = document.getElementById('_dbg_panel_outer');
   if(el) el.style.display = el.style.display==='none'?'block':'none';
 }
-window.dbgJua = function(){
-  var el = document.getElementById('jua-body');
-  window._dbgErrors.push('[JUA] body exists:'+(!!el)+' JUA_DATA:'+(typeof JUA_DATA!=='undefined'?JUA_DATA.length:'UNDEF')+' juaState:'+(typeof juaState)+' juaRender:'+(typeof juaRender));
-  dbgUpdate();
-  if(typeof juaRender==='function') try{juaRender();}catch(e){window._dbgErrors.push('[JUA ERR] '+e.message);dbgUpdate();}
-};
-window.dbgQt = function(){
-  var el = document.getElementById('qtafsir-body');
-  var chk = 'checkpoints: '+JSON.stringify(window._dbgCheckpoints||{});
-  window._dbgErrors.push('[QT] body exists:'+(!!el)+' QT_DATA:'+(typeof QT_DATA!=='undefined'?QT_DATA.length:'UNDEF')+' qtState:'+(typeof qtState)+' qtRender:'+(typeof qtRender));
-  window._dbgErrors.push(chk);
-  dbgUpdate();
-  if(typeof qtRender==='function') try{qtRender();}catch(e){window._dbgErrors.push('[QT ERR] '+e.message);dbgUpdate();}
-};
-window.dbgQt = function(){
-  var el = document.getElementById('qtafsir-body');
-  window._dbgErrors.push('[QT] body exists:'+(!!el)+' QT_DATA:'+(typeof QT_DATA!=='undefined'?QT_DATA.length:'UNDEF')+' qtState:'+(typeof qtState)+' qtRender:'+(typeof qtRender));
-  dbgUpdate();
-  if(typeof qtRender==='function') try{qtRender();}catch(e){window._dbgErrors.push('[QT ERR] '+e.message);dbgUpdate();}
-};
-window.dbgJua = function(){
-  var el = document.getElementById('jua-body');
-  window._dbgErrors.push('[JUA] body exists:'+(!!el)+' JUA_DATA:'+(typeof JUA_DATA!=='undefined'?JUA_DATA.length:'UNDEF')+' juaRender:'+(typeof juaRender));
-  dbgUpdate();
-  if(typeof juaRender==='function') juaRender();
-};
+
+function dbgCopyAll(){
+  var log = window._dbgErrors.join('\n');
+  var flags = dbgFlags().join('\n');
+  var text = '=== DEBUG LOG ===\n'+log+'\n\n'+flags;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){if(typeof safeToast==='function')safeToast('Debug copied');});
+  } else {
+    var ta=document.createElement('textarea');ta.value=text;
+    document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+  }
+}
 </script>
 <script src="dashboard-1.js"></script>
 <script src="dashboard-2.js"></script>
@@ -4027,13 +4063,20 @@ window.dbgJua = function(){
 
 
 
-<div id="_dbg_panel" style="display:none;position:fixed;top:52px;right:0;left:0;z-index:9998;background:rgba(0,0,0,.95);border:1px solid rgba(255,0,0,.5);color:rgba(255,100,100,.9);font-family:monospace;font-size:10px;padding:8px;max-height:300px;overflow-y:auto">
-  <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-    <span>CONSOLE</span>
-    <span onclick="dbgJua()" style="cursor:pointer;color:#ffcc00">▶ JUA</span>&nbsp;<span onclick="dbgQt()" style="cursor:pointer;color:#88aaff">▶ QT</span>
-    <span onclick="window._dbgErrors=[];dbgUpdate()" style="cursor:pointer">CLEAR</span>&nbsp;<span onclick="var t=window._dbgErrors.join('\n');if(navigator.clipboard)navigator.clipboard.writeText(t);else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}" style="cursor:pointer;color:#50fac8">COPY</span>
+<div id="_dbg_panel_outer" style="display:none;position:fixed;top:52px;right:0;left:0;bottom:0;z-index:9998;background:rgba(0,0,0,.96);border-top:2px solid rgba(255,60,60,.6);font-family:monospace;font-size:10px;display:none;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,40,40,.08);flex-shrink:0">
+    <span style="color:rgba(255,100,100,.9);letter-spacing:1px;font-weight:bold">🐛 DEBUG</span>
+    <span style="color:rgba(255,255,255,.3);font-size:9px" id="_dbg_count"></span>
+    <span style="flex:1"></span>
+    <span onclick="dbgUpdate()" style="cursor:pointer;color:rgba(100,200,255,.7);font-size:9px;padding:2px 7px;border:1px solid rgba(100,200,255,.3)">REFRESH</span>
+    <span onclick="window._dbgErrors=[];dbgUpdate()" style="cursor:pointer;color:rgba(255,200,80,.7);font-size:9px;padding:2px 7px;border:1px solid rgba(255,200,80,.3)">CLEAR</span>
+    <span onclick="dbgCopyAll()" style="cursor:pointer;color:#50fac8;font-size:9px;padding:2px 7px;border:1px solid rgba(80,250,200,.3)">COPY ALL</span>
+    <span onclick="dbgShow()" style="cursor:pointer;color:rgba(255,255,255,.4);font-size:14px;padding:0 4px">✕</span>
   </div>
-  <div id="_dbg_panel" style="font-size:9px">No errors yet.</div>
+  <div style="display:flex;flex:1;overflow:hidden">
+    <div style="flex:3;overflow-y:auto;padding:8px 10px;border-right:1px solid rgba(255,255,255,.08)" id="_dbg_log"><span style="color:rgba(255,255,255,.3)">No output yet.</span></div>
+    <div style="flex:2;overflow-y:auto;padding:8px 10px;font-size:9px;color:rgba(200,200,200,.6)" id="_dbg_flags"></div>
+  </div>
 </div>
 </body>
 

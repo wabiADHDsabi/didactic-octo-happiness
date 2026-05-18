@@ -1278,8 +1278,9 @@ function renderTodos(){
     } else {
       h+='<div class="ti reorder-ready'+(t.done?' done':'')+ageClass+'" id="ti-'+t.id+'" data-todo-id="'+t.id+'" style="gap:4px">'
         +'<div class="tbox" id="tbox-'+t.id+'">'+(t.done?'&#10003;':'')+'</div>'
-        +(function(){
++(function(){
   var ageDays=Math.floor((now-(t.created||t.id))/86400000);
+  t._ageDays=ageDays;
   var ageCol=ageDays<=0?'':ageDays<=3?'rgba(255,180,80,.65)':ageDays<=7?'rgba(210,110,40,.75)':'rgba(180,70,20,.85)';
   var ageStr=ageDays>=1?' <span style="font-size:var(--t-xs);color:'+ageCol+'">('
   +ageDays+' day'+(ageDays===1?'':'s')+' old)</span>':'';
@@ -1288,8 +1289,8 @@ function renderTodos(){
         +'<button class="ti-mv" id="tedit-btn-'+t.id+'" title="Edit">&#9998;</button>'
         +'<span class="tdel" id="tdel-'+t.id+'">[x]</span>'
         +'</div>'
-        +(ageDays>10&&!t.done?'<div style="display:flex;align-items:center;gap:8px;margin:3px 0 6px 24px;padding:6px 10px;background:rgba(180,70,20,.12);border:1px solid rgba(180,70,20,.4);border-left:3px solid rgba(180,70,20,.8)">'
-          +'<span style="font-size:var(--t-xs);color:rgba(180,70,20,.9);flex:1">⚠ '+ageDays+' days old — finish it or cut it</span>'
+        +(t._ageDays>10&&!t.done?'<div style="display:flex;align-items:center;gap:8px;margin:3px 0 6px 24px;padding:6px 10px;background:rgba(180,70,20,.12);border:1px solid rgba(180,70,20,.4);border-left:3px solid rgba(180,70,20,.8)">'
+          +'<span style="font-size:var(--t-xs);color:rgba(180,70,20,.9);flex:1">⚠ '+t._ageDays+' days old — finish it or cut it</span>'
           +'<span data-todo-age-del="'+t.id+'" style="font-size:var(--t-xs);color:rgba(255,68,68,.7);cursor:pointer;padding:2px 6px;border:1px solid rgba(255,68,68,.3)">DELETE</span>'
           +'<span data-todo-age-done="'+t.id+'" style="font-size:var(--t-xs);color:rgba(0,255,136,.7);cursor:pointer;padding:2px 6px;border:1px solid rgba(0,255,136,.3)">DONE</span>'
           +'</div>':'');
