@@ -3114,7 +3114,7 @@ function renderBooksStats(){
 
   // Period filters on finished+dropped (all "done" books)
   function doneInPeriod(startDate){
-    return done.filter(function(b){
+    return finished.filter(function(b){
       var d=parseDate(b.doneDate);
       return d&&d>=startDate;
     });
@@ -3156,8 +3156,8 @@ function renderBooksStats(){
   });
 
   // Genre breakdown
-  var fDone=done.filter(function(b){return (b.genre||'fiction')==='fiction';}).length;
-  var nDone=done.filter(function(b){return b.genre==='nonfiction';}).length;
+  var fDone=finished.filter(function(b){return (b.genre||'fiction')==='fiction';}).length;
+  var nDone=finished.filter(function(b){return b.genre==='nonfiction';}).length;
   var maxBar=Math.max(fDone,nDone,1);
 
   // Pages per year breakdown (last 4 years)
@@ -3168,7 +3168,7 @@ function renderBooksStats(){
     pagesByYear[yr]=(pagesByYear[yr]||0)+(b.dropped?b.current:b.total);
   });
   var booksByYear={};
-  done.forEach(function(b){
+  finished.forEach(function(b){
     var d=parseDate(b.doneDate);if(!d)return;
     var yr=d.getFullYear();
     booksByYear[yr]=(booksByYear[yr]||0)+1;
@@ -3189,7 +3189,7 @@ function renderBooksStats(){
   h+=pstat(thisMonthBooks.length,'THIS MONTH');
   h+=pstat(thisYearBooks.length,'THIS YEAR',thisYear+'');
   h+=pstat(twoYearBooks.length,'PAST 2 YEARS');
-  h+=pstat(done.length,'ALL TIME',dropped.length?dropped.length+' dropped':'');
+  h+=pstat(finished.length,'ALL TIME',dropped.length?dropped.length+' dropped':'');
   h+='</div>';
 
   //  READING ACTIVITY 
@@ -4170,6 +4170,64 @@ function exportSchedule(){
     lines.push(day.label+': '+display);
   });
   clipCopy(lines.join('\n'),'Schedule');
+}
+
+function exportScheduleWife(){
+  var days=schedGetWeekDays(schedWeekOffset);
+  var dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  
+  function parseTime(t){
+    // t like "7:30" or "8:00"
+    var parts=t.split(':');
+    return {h:parseInt(parts[0]),m:parseInt(parts[1]||'0')};
+  }
+  function addMinutes(h,m,mins){
+    var total=h*60+m+mins;
+    return {h:Math.floor(total/60)%24,m:total%60};
+  }
+  function fmt12(h,m){
+    var ampm=h>=12?'pm':'am';
+    var hh=h%12||12;
+    var mm=m===0?'':':'+String(m).padStart(2,'0');
+    return hh+mm+ampm;
+  }
+  
+  var lines=[];
+  var hasAny=false;
+  
+  days.forEach(function(day){
+    var val=schedule[day.key]||null;
+    if(!val||val==='OFF')return;
+    hasAny=true;
+    var maybe=val.endsWith('?');
+    var timeStr=maybe?val.slice(0,-1):val;
+    var parsed=parseTime(timeStr);
+    var leave=addMinutes(parsed.h,parsed.m,510); // 8.5 hours = 510 minutes
+    
+    // Format: "Mon 23 - arrive 7:30am, leave ~4pm"
+    var d=new Date(day.key);
+    var dayLabel=dayNames[d.getDay()]+' '+d.getDate();
+    var arriveStr=fmt12(parsed.h,parsed.m);
+    var leaveStr=fmt12(leave.h,leave.m);
+    var line='• '+dayLabel+' — arrive '+arriveStr+', leave ~'+leaveStr;
+    if(maybe)line+=' *(maybe)*';
+    lines.push(line);
+  });
+  
+  if(!hasAny){lines.push('No shifts scheduled this week.');}
+  
+  var weekLabel=schedWeekOffset===0?'This week':schedWeekOffset===1?'Next week':'Last week';
+  var msg=weekLabel+':\n'+lines.join('\n');
+  
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(msg).then(function(){safeToast('Copied for wife 💕');});
+  } else {
+    var ta=document.createElement('textarea');ta.value=msg;
+    document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    safeToast('Copied for wife 💕');
+  }
 }
 
 function exportBooks(){

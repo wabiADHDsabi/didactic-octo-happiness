@@ -2955,7 +2955,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
   <div class="tile tg" data-id="schedule"><div class="icon-label-wrap"><span class="icon-emoji">🕖</span><span class="icon-label">SCHEDULE</span></div>
     <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    <div class="th"><span class="th-icon">&#128336;</span><span class="th-label cg">Work Arrival</span><button class="export-btn" onclick="exportSchedule()" title="Copy schedule" style="margin-left:auto">&#128203;</button></div>
+    <div class="th"><span class="th-icon">&#128336;</span><span class="th-label cg">Work Arrival</span><button class="export-btn" onclick="exportSchedule()" title="Copy schedule" style="margin-left:auto">&#128203;</button><button class="export-btn" onclick="exportScheduleWife()" title="Copy for wife" style="margin-left:4px;color:var(--cp);border-color:var(--cp)">&#128149;</button></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
       <button onclick="schedNav(-1)" style="background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);padding:3px 10px;cursor:pointer;font-size:13px">&#8592;</button>
       <span id="sched-week-label" style="font-size:10px;letter-spacing:2px;color:var(--cg)">THIS WEEK</span>
@@ -3097,9 +3097,9 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
       <span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="qctab-learn" onclick="qcTab('learn')">LEARN</span>
       <span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="qctab-review" onclick="qcTab('review')">REVIEW</span>
       <span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="qctab-stats" onclick="qcTab('stats')">STATS</span>
-      <a href="https://glowing-juzamma-6d.netlify.app/" target="_blank" rel="noopener" class="th-badge" style="color:var(--ca);border-color:var(--ca);cursor:pointer;margin-left:4px;text-decoration:none">MEMORIZE ↗</a>
     </div>
     <div id="qc-panel-study"></div>
+    <a href="https://glowing-juzamma-6d.netlify.app/" target="_blank" rel="noopener" id="qc-memorize-link" style="display:block;width:100%;box-sizing:border-box;text-align:center;padding:7px;margin-bottom:8px;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-xs);cursor:pointer;text-decoration:none;letter-spacing:1px">⚡ MEMORIZE APP ↗</a>
     <div id="qc-panel-learn" style="display:none"></div>
     <div id="qc-panel-review" style="display:none"></div>
     <div id="qc-panel-stats" style="display:none"></div>
