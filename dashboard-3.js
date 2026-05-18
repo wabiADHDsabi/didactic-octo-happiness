@@ -1,3 +1,16 @@
+// Guard: define todayKey locally if dash-1 hasn't loaded yet
+if(typeof todayKey==='undefined'){
+  window.todayKey=function(){
+    var n=new Date();
+    if(n.getHours()<4)n=new Date(n.getTime()-864e5);
+    return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
+  };
+  window.todayKeyRaw=function(){return new Date().toISOString().slice(0,10);};
+  window.lsGet=function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}};
+  window.lsSet=function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+  window.safeHap=function(t){if(typeof hap==='function')hap(t);};
+}
+
 // ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-18 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
@@ -1043,7 +1056,7 @@ function qnavRender(){
   sorted.forEach(function(c){
     var id=c[0],emoji=c[1],label=c[2],col=c[3];
     var cnt=counts[id]||0;
-    h+='<button class="qnav-btn" style="opacity:0" data-qnavto="'+id+'" style="border-color:'+col+'40;color:'+col+'" title="'+label+(cnt?' ('+cnt+'x)':'')+'">';
+    h+='<button class="qnav-btn" style="opacity:0;border-color:'+col+'40;color:'+col+'" data-qnavto="'+id+'" title="'+label+(cnt?' ('+cnt+'x)':'')+'">';
     if(_qnavMode!=='labels')h+='<span class="qnav-emoji">'+emoji+'</span>';
     if(_qnavMode!=='icons')h+='<span>'+label+'</span>';
     if(_qnavSort==='mostused'&&cnt>0)h+='<span style="font-size:8px;opacity:.4;margin-left:2px">'+cnt+'</span>';
