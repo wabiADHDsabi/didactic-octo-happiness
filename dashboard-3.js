@@ -4575,7 +4575,7 @@ var _arFont=localStorage.getItem('ar_font')||'scheherazade';
 var arRevealed=false;
 
 
-setTimeout(function(){arRender();},800);
+window.addEventListener('load',function(){if(typeof arRender==='function')arRender();});
 
 // ── AYAH COMPLETION ──
 var AC_DATA = null;
@@ -4598,7 +4598,7 @@ var acCurrentCard=null;
 var acCurrentOpts=null;
 
 
-setTimeout(function(){acRender();},900);
+window.addEventListener('load',function(){if(typeof acRender==='function')acRender();});
 
 // ── AUTO-PROMOTE: if all ayahs in a learning surah are known, promote to memorized ──
 function qmCheckAutoPromote(surahNum){
@@ -6011,6 +6011,10 @@ function arRender(){
   var el=document.getElementById('ar-body');
   var badge=document.getElementById('ar-badge');
   if(!el)return;
+  if(!AR_DATA){
+    el.innerHTML='<div style="font-size:var(--t-sm);color:var(--c-dim);text-align:center;padding:20px 0">⏳ Loading...</div>';
+    return;
+  }
   el.style.maxHeight='800px';
   el.style.overflowY='auto';
   // Apply wide class if enabled
