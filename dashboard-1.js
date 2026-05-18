@@ -4,6 +4,7 @@ function todayKey(){
   if(n.getHours()<4)n=new Date(n.getTime()-864e5);
   return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
 }
+window._dash1_todayKey=todayKey;
 function todayKeyRaw(){ return new Date().toISOString().slice(0,10); }
 function safeHap(type){ if(typeof hap==='function')hap(type); }
 function safeToast(msg){ if(typeof showToast==='function')showToast(msg); }
