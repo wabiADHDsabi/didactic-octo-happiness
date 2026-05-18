@@ -5506,7 +5506,7 @@ function arEnsureState(){
     arState.todayDate=todayKey();
     arState.todayDone=0;
     // Build today's queue: new cards + due reviews
-    var todayKey=todayKey();
+    var todayStr=todayKey();
     var allKeys=[];
     if(AR_DATA)AR_DATA.forEach(function(s){
       s.ayahs.forEach(function(txt,i){
@@ -5519,7 +5519,7 @@ function arEnsureState(){
     var reviewCards=allKeys.filter(function(k){
       if(!arState.known[k]&&!arState.struggling[k])return false;
       var nr=arState.nextReview[k];
-      return !nr||nr<=todayKey;
+      return !nr||nr<=todayStr;
     });
     // Shuffle
     for(var i=newCards.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=newCards[i];newCards[i]=newCards[j];newCards[j]=t;}
@@ -6086,7 +6086,7 @@ function acEnsureState(){
   if(acState.todayDate!==todayKey()){
     acState.todayDate=todayKey();
     acState.todayDone=0;
-    var todayKey=todayKey();
+    var todayStr=todayKey();
     var allKeys=[];
     if(AC_DATA)AC_DATA.forEach(function(s){
       s.ayahs.forEach(function(txt,i){
@@ -6098,7 +6098,7 @@ function acEnsureState(){
     var reviewCards=allKeys.filter(function(k){
       if(!acState.correct[k])return false;
       var nr=acState.nextReview[k];
-      return !nr||nr<=todayKey;
+      return !nr||nr<=todayStr;
     });
     for(var i=newCards.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=newCards[i];newCards[i]=newCards[j];newCards[j]=t;}
     acState.todayQueue=[].concat(reviewCards,newCards.slice(0,6));
