@@ -4177,57 +4177,42 @@ function exportScheduleWife(){
   var days=schedGetWeekDays(schedWeekOffset);
   var dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var monthNames=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  
-  function parseTime(t){
-    // t like "7:30" or "8:00"
-    var parts=t.split(':');
-    return {h:parseInt(parts[0]),m:parseInt(parts[1]||'0')};
-  }
-  function addMinutes(h,m,mins){
-    var total=h*60+m+mins;
-    return {h:Math.floor(total/60)%24,m:total%60};
-  }
+
+  function parseTime(t){var p=t.split(':');return {h:parseInt(p[0]),m:parseInt(p[1]||'0')};}
+  function addMins(h,m,mins){var tot=h*60+m+mins;return {h:Math.floor(tot/60)%24,m:tot%60};}
   function fmt12(h,m){
-    var ampm=h>=12?'pm':'am';
-    var hh=h%12||12;
+    var ampm=h>=12?'pm':'am';var hh=h%12||12;
     var mm=m===0?'':':'+String(m).padStart(2,'0');
     return hh+mm+ampm;
   }
-  
+
   var lines=[];
-  var hasAny=false;
-  
   days.forEach(function(day){
     var val=schedule[day.key]||null;
     if(!val||val==='OFF')return;
-    hasAny=true;
     var maybe=val.endsWith('?');
     var timeStr=maybe?val.slice(0,-1):val;
     var parsed=parseTime(timeStr);
-    var leave=addMinutes(parsed.h,parsed.m,510); // 8.5 hours = 510 minutes
-    
-    // Format: "Mon 23 - arrive 7:30am, leave ~4pm"
-    var d=new Date(day.key);
-    var dayLabel=dayNames[d.getDay()]+' '+d.getDate();
-    var arriveStr=fmt12(parsed.h,parsed.m);
-    var leaveStr=fmt12(leave.h,leave.m);
-    var line='• '+dayLabel+' — arrive '+arriveStr+', leave ~'+leaveStr;
-    if(maybe)line+=' *(maybe)*';
+    var leave=addMins(parsed.h,parsed.m,510);
+    var dp=day.key.split('-');
+    var d=new Date(parseInt(dp[0]),parseInt(dp[1])-1,parseInt(dp[2]));
+    var label=dayNames[d.getDay()]+' '+monthNames[d.getMonth()]+' '+d.getDate();
+    var line=label+' · '+fmt12(parsed.h,parsed.m)+'–'+fmt12(leave.h,leave.m);
+    if(maybe)line+=' (maybe)';
     lines.push(line);
   });
-  
-  if(!hasAny){lines.push('No shifts scheduled this week.');}
-  
-  var weekLabel=schedWeekOffset===0?'This week':schedWeekOffset===1?'Next week':'Last week';
-  var msg=weekLabel+':\n'+lines.join('\n');
-  
+
+  var weekLabel=schedWeekOffset===0?'this week':schedWeekOffset===1?'next week':'last week';
+  var header='?? Work '+weekLabel+':';
+  var msg=header+(lines.length?'\n\n'+lines.join('\n'):'No shifts scheduled.');
+
   if(navigator.clipboard){
-    navigator.clipboard.writeText(msg).then(function(){safeToast('Copied for wife 💕');});
+    navigator.clipboard.writeText(msg).then(function(){safeToast('Copied for wife ??');});
   } else {
     var ta=document.createElement('textarea');ta.value=msg;
     document.body.appendChild(ta);ta.select();
     document.execCommand('copy');document.body.removeChild(ta);
-    safeToast('Copied for wife 💕');
+    safeToast('Copied for wife ??');
   }
 }
 
