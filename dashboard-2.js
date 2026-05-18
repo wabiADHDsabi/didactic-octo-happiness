@@ -1,4 +1,4 @@
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-16 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-18 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -1454,7 +1454,7 @@ function snapshotData(){
     duaState:lsGet('dash_dua',{}),
     akhiraData:lsGet('dash_akhira',{}),
     cdData:JSON.parse(localStorage.getItem('dash_cd')||'{"items":[],"log":[]}'),
-    wallData:lsGet('dash_wall',{}),
+
     calorieLog:lsGet('dash_calories',[]),
     writeLog:lsGet('dash_write_log',[]),
     rfData:lsGet('dash_reframe',[]),
@@ -1538,7 +1538,6 @@ function restoreSnapshot(snap){
   if(snap.akhiraData)localStorage.setItem('dash_akhira',JSON.stringify(snap.akhiraData));
   if(snap.cdData)localStorage.setItem('dash_cd',JSON.stringify(snap.cdData));
   if(snap.userCalEvents)localStorage.setItem('dash_user_cal',JSON.stringify(snap.userCalEvents));
-  if(snap.wallData)localStorage.setItem('dash_wall',JSON.stringify(snap.wallData));
   if(snap.calorieLog)localStorage.setItem('dash_calories',JSON.stringify(snap.calorieLog));
   if(snap.writeLog)localStorage.setItem('dash_write_log',JSON.stringify(snap.writeLog));
   if(snap.rfData)localStorage.setItem('dash_reframe',JSON.stringify(snap.rfData));
@@ -1806,7 +1805,6 @@ function importAllData(evt){
       // Supabase credentials
       if(data.wlData)localStorage.setItem('dash_wl',JSON.stringify(data.wlData));
       if(data.cdData)localStorage.setItem('dash_cd',JSON.stringify(data.cdData));
-      if(data.wallData)localStorage.setItem('dash_wall',JSON.stringify(data.wallData));
       if(data.rfData)localStorage.setItem('dash_reframe',JSON.stringify(data.rfData));
       if(data.legacyData)localStorage.setItem('dash_legacy',JSON.stringify(data.legacyData));
       if(data.shadowData)localStorage.setItem('dash_shadow',JSON.stringify(data.shadowData));

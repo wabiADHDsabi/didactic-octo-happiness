@@ -34,7 +34,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-16 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-18 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -6695,7 +6695,6 @@ async function sbPull(){
         if(cloudPayload.akhiraData)safePayload.akhiraData=cloudPayload.akhiraData;
         if(cloudPayload.rentData)safePayload.rentData=cloudPayload.rentData;
         if(cloudPayload.cdData)safePayload.cdData=cloudPayload.cdData;
-        if(cloudPayload.wallData)safePayload.wallData=cloudPayload.wallData;
         if(cloudPayload.qcState)safePayload.qcState=cloudPayload.qcState;
         // dbData: cloud wins if same date, else keep local
         if(cloudPayload.dbData&&cloudPayload.dbData.date===localSnap.dbData&&localSnap.dbData.date){safePayload.dbData=cloudPayload.dbData;}else if(cloudPayload.dbData){safePayload.dbData=cloudPayload.dbData;}

@@ -2844,28 +2844,28 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 
 
 /* THE WALL */
-.wall-outer{display:flex;flex-direction:column-reverse;margin:10px 0}
-.wall-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:4px}
-.wall-grid.row-odd{transform:translateX(calc(5% + 2px))}
-.brick-s{grid-column:span 2}
-.brick-m{grid-column:span 3}
-.brick-l{display:none}
-.brick-row-lone{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:4px;justify-items:center}
-.brick-lone{grid-column:3/9;width:100%}
+
+
+
+
+
+
+
+
 .brick{border-radius:3px;padding:5px 6px;font-size:9px;font-family:monospace;line-height:1.3;cursor:pointer;position:relative;min-height:36px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;transform:translateY(-10px) scale(.95);transition:opacity .3s,transform .3s}
-.brick.brick-in{opacity:1;transform:translateY(0) scale(1)}
-.brick.brick-eval{grid-column:1/-1;min-height:auto;padding:10px;background:rgba(191,95,255,.12);border:1px solid rgba(191,95,255,.4)}
+
+
 .brick{border-radius:3px;padding:5px 6px;font-size:9px;font-family:monospace;line-height:1.3;cursor:pointer;position:relative;min-height:36px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .15s,box-shadow .15s;opacity:0;transform:translateY(-12px) scale(.95)}
-.brick.brick-in{opacity:1;transform:translateY(0) scale(1)}
-.brick.brick-do{background:rgba(255,140,66,.15);border:1px solid rgba(255,140,66,.4)}
-.brick.brick-plan{background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25)}
-.brick.brick-eval{background:rgba(191,95,255,.12);border:1px solid rgba(191,95,255,.4);grid-column:1/-1;min-height:auto;padding:10px}
-.brick-label{color:rgba(255,255,255,.75);letter-spacing:.3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.brick-tag{font-size:7px;opacity:.5;letter-spacing:1px;margin-top:2px}
-.brick-link{font-size:7px;color:#ff8c42;opacity:.6;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wall-eval-prompt{background:rgba(191,95,255,.08);border:1px solid rgba(191,95,255,.35);padding:12px;margin:8px 0}
-.wall-tab{font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,.12);color:var(--dim);cursor:pointer}
-.wall-tab.active{border-color:#ff8c42;color:#ff8c42}
+
+
+
+
+
+
+
+
+
+
 
 </style>
 </head>
@@ -3200,17 +3200,6 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     </div>
     <div id="cd-body" style="max-height:700px;overflow-y:auto;overflow-x:hidden"></div>
   </div>
-  <div class="tile" data-id="the-wall" style="border-color:rgba(255,140,66,.2)"><div class="icon-label-wrap"><span class="icon-emoji">🧱</span><span class="icon-label">THE WALL</span></div>
-    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    <div class="th" style="border-color:rgba(255,140,66,.2)">
-      <span class="th-icon" style="color:#ff8c42">🧱</span>
-      <span class="th-label" style="color:#ff8c42">The Wall</span>
-      <span id="wall-badge" class="th-badge" style="color:#ff8c42;border-color:rgba(255,140,66,.3);margin-left:auto"></span>
-    </div>
-    <div id="wall-body" style="max-height:700px;overflow-y:auto;overflow-x:hidden"></div>
-  </div>
-
-  <!-- ── REFRAME ── -->
   <div class="tile soul-card" data-id="reframe">
     <div class="icon-label-wrap"><span class="icon-emoji">🔄</span><span class="icon-label">REFRAME</span></div>
     <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>

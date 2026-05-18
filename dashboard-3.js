@@ -1,4 +1,4 @@
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-16 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-18 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -886,66 +886,65 @@ document.addEventListener('click',function(e){
 // ── QUICK NAV ──
 var QNAV_CARDS=[
   // [id, emoji, label, color]
-  ['clock',        '🕐', 'Clock',          'var(--cg)'],
-  ['prayer',       '☪',  'Prayer',          'var(--ca)'],
-  ['weather',      '⛅', 'Weather',         'var(--cc)'],
-  ['stocks',       '◆',  'Markets',         'var(--cl)'],
-  ['todo',         '▣',  'To-Do',           'var(--cp)'],
-  ['notes',        '▤',  'Notes',           'var(--cc)'],
-  ['meals',        '◉',  'Meals',           'var(--co)'],
-  ['calendar',     '▦',  'Calendar',        'var(--cpr)'],
-  ['schedule',     '🕖', 'Schedule',        'var(--cg)'],
-  ['books',        '📖', 'Books',           '#9b6fff'],
-  ['goals',        '🎯', 'Goals',           'var(--ca)'],
-  ['pomodoro',     '⏱', 'Pomodoro',        'var(--cp)'],
-  ['prayer-tracker','📈','Salah Tracker',   'var(--ca)'],
-  ['mood-log',     '🌊', 'Mood Log',        '#869BAB'],
-  ['milestone',    '🎯', 'Days Until',      'var(--cg)'],
-  ['day-blocks',   '🟧', 'Day Blocks',      'var(--cpr)'],
-  ['workout-log',  '💪', 'Workout',         'var(--cp)'],
-  ['weekly-moments','✨','Routines',        'var(--ca)'],
-  ['weekly-review','📋', 'Weekly Review',   'var(--cg)'],
-  ['decision-log', '⚖', 'Decision Log',    'var(--cpr)'],
-  ['energy-map',   '⚡', 'Energy Map',     'var(--cc)'],
-  ['life-streaks', '🔥', 'Life Streaks',    'var(--cp)'],
-  ['writers-den',  '✍',  "Writer's Den",   'var(--cc)'],
-  ['islamic-topics','☯', 'Islamic Topics',  'var(--ca)'],
-  ['quran-tracker','📖', 'Quran Pages',     'var(--ca)'],
-  ['juz-amma',     '📱', 'Juz Amma',        'var(--ca)'],
-  ['birthdays',    '🎂', 'Birthdays',       '#ff69b4'],
-  ['season-traditions','🍂','Seasons',      'var(--co)'],
-  ['ebook-library','📚', 'E-Book Lib',      '#9b6fff'],
-  ['weekend-warrior','🏋','Weekend Warrior','var(--cg)'],
-  ['raft',         '🚣', 'Raft',            '#5ecfff'],
-  ['quran-cards',  '🃏', 'Quran Cards',      'var(--cc)'],
-  ['for-akhira',   '🌙', 'For Akhira',       'var(--ca)'],
-  ['the-wall',     '🧱', 'The Wall',         '#ff8c42'],
-  ['reframe',      '🔄', 'Reframe',          '#7eb8ff'],
-  ['legacy-letter','✉️',  'Legacy Letter',    '#f5a623'],
-  ['shadow-log',   '🌑', 'Shadow Log',       '#bf5fff'],
-  ['fear-inventory','💀', 'Fear Inventory',   '#ff8c42'],
-  ['countdown',    '⏳', 'In X Days',        'var(--cc)'],
-  ['gratitude-log','🌿', 'Gratitude',       'var(--cg)'],
-  ['dua-card',     '🤲', 'Dua',              'var(--ca)'],
-  ['rent-payments','🏠', 'Rent',             'var(--cp)'],
-  ['bookmarks',    '🔖', 'Bookmarks',       'var(--cc)'],
-  ['settings',     '⚙',  'Settings',        'var(--dim)'],
-  ['people-become', '⭐', 'People I Become',  '#f5a623'],
-  ['writing-log',   '✍', 'Creative Writing', '#bf5fff'],
+  ['clock', '🕐', 'Clock', 'var(--cc)'],
+  ['prayer', '☪', 'Prayer', 'var(--ca)'],
+  ['weather', '⛅', 'Weather', 'var(--cc)'],
+  ['stocks', '◆', 'Markets', 'var(--cc)'],
+  ['todo', '▣', 'To-Do', 'var(--cc)'],
+  ['notes', '▤', 'Notes', 'var(--cc)'],
+  ['meals', '◉', 'Meals', 'var(--co)'],
+  ['calendar', '▦', 'Calendar', 'var(--cpr)'],
+  ['schedule', '🕖', 'Schedule', 'var(--cpr)'],
+  ['books', '📖', 'Books', '#9b6fff'],
+  ['goals', '🎯', 'Goals', '#bf5fff'],
+  ['pomodoro', '⏱', 'Pomodoro', 'var(--cp)'],
+  ['prayer-tracker', '📈', 'Salah Tracker', 'var(--ca)'],
+  ['mood-log', '🌊', 'Mood Log', '#869BAB'],
+  ['milestone', '🎯', 'Days Until', 'var(--co)'],
+  ['day-blocks', '🟧', 'Day Blocks', 'var(--cpr)'],
+  ['workout-log', '💪', 'Workout', 'var(--cp)'],
+  ['weekly-moments', '✨', 'Routines', 'var(--ca)'],
+  ['weekly-review', '📋', 'Weekly Review', 'var(--cg)'],
+  ['decision-log', '⚖', 'Decision Log', 'var(--cpr)'],
+  ['energy-map', '⚡', 'Energy Map', 'var(--cc)'],
+  ['life-streaks', '🔥', 'Life Streaks', 'var(--cp)'],
+  ['islamic-topics', '☯', 'Islamic Topics', 'var(--ca)'],
+  ['quran-tracker', '📖', 'Quran Pages', 'var(--ca)'],
+  ['juz-amma', '📱', 'Juz Amma', 'var(--ca)'],
+  ['birthdays', '🎂', 'Birthdays', '#ff69b4'],
+  ['season-traditions', '🍂', 'Seasons', 'var(--co)'],
+  ['ebook-library', '📚', 'E-Book Lib', '#9b6fff'],
+  ['weekend-warrior', '🏋', 'Weekend Warrior', 'var(--cc)'],
+  ['raft', '🚣', 'Raft', '#5ecfff'],
+  ['quran-cards', '🃏', 'Quran Cards', 'var(--cc)'],
+  ['for-akhira', '🌙', 'For Akhira', 'var(--ca)'],
+  ['reframe', '🔄', 'Reframe', '#7eb8ff'],
+  ['legacy-letter', '✉️', 'Legacy Letter', '#f5a623'],
+  ['shadow-log', '🌑', 'Shadow Log', '#bf5fff'],
+  ['fear-inventory', '💀', 'Fear Inventory', '#ff8c42'],
+  ['countdown', '⏳', 'In X Days', 'var(--cc)'],
+  ['gratitude-log', '🌿', 'Gratitude', 'var(--cg)'],
+  ['dua-card', '🤲', 'Dua', 'var(--ca)'],
+  ['rent-payments', '🏠', 'Rent', 'var(--cp)'],
+  ['bookmarks', '🔖', 'Bookmarks', 'var(--cc)'],
+  ['settings', '⚙', 'Settings', 'var(--dim)'],
+  ['people-become', '⭐', 'People I Become', '#f5a623'],
+  ['writing-log', '✍', 'Creative Writing', '#bf5fff'],
   ['stress-demess', '🌊', 'Stress Demess', '#c77dff'],
-  ['calorie-counter','🍽', 'Calorie Log',  '#00e5ff'],
-  ['quran-words',    '📗', 'Quran Words',  '#00ff88'],
-  ['ayah-recall',    '🕌', 'Ayah Recall',  '#ffcc00'],
-  ['ayah-completion','📖', 'Ayah Completion','#00e5ff'],
-  ['surah-map',       '🗺️', 'Surah Map',     '#7eb8ff'],
-  ['voice-study',    '✍️',        'Voice Study',   '#50fa7b'],
-  ['articulate',     '🗣️',    'Articulate',    '#ffb86c'],
-  ['quran-tafsir',   '📖',    'Quran Tafsir',  'var(--ca)'],
-  ['certifications', '🏅',    'Certifications','#50fac8'],
-  ['medicine',       '💊',    'Medicine',      '#c896ff'],
-  ['quest',          '⚔',     'Quest',         '#ffa500']
+  ['calorie-counter', '🍽', 'Calorie Log', 'var(--cg)'],
+  ['quran-words', '📗', 'Quran Words', 'var(--cc)'],
+  ['ayah-recall', '🕌', 'Ayah Recall', 'var(--ca)'],
+  ['ayah-completion', '📖', 'Ayah Completion', 'var(--cc)'],
+  ['surah-map', '🗺️', 'Surah Map', 'var(--ca)'],
+  ['voice-study', '✍️', 'Voice Study', 'var(--cc)'],
+  ['articulate', '🗣️', 'Articulate', 'var(--cc)'],
+  ['quran-tafsir', '📖', 'Quran Tafsir', 'var(--ca)'],
+  ['certifications', '🏅', 'Certifications', '#50fac8'],
+  ['medicine', '💊', 'Medicine', '#c896ff'],
+  ['quest', '⚔', 'Quest', '#ffa500'],
+  ['study', 'learn', 'review', 'stats'],
+  ['none', 'learning', 'memorized', 'revision']
 ];
-
 
 var _qnavMode=localStorage.getItem('qnav_mode')||'both'; // 'both','labels','icons'
 var _qnavMostUsed=localStorage.getItem('qnav_mostused')==='1';
@@ -3778,386 +3777,6 @@ function pbSnapTo(key) {
   }
   pbApplyTransform();
 }
-
-// ── THE WALL ──
-var _wallEditBrickId = null;
-var _wallDelBrickPending = null;
-
-var wallData = (function(){
-  try{
-    var d=lsGet('dash_wall',{});
-    return {
-      walls: Array.isArray(d.walls)?d.walls:[{id:'default',name:'Main Wall',evalEvery:25,linkedGoal:null,linkedCd:null}],
-      bricks: Array.isArray(d.bricks)?d.bricks:[],
-      archive: Array.isArray(d.archive)?d.archive:[],
-      _tab: d._tab||'wall',
-      _activeWall: d._activeWall||'default',
-    };
-  }catch(e){return {walls:[{id:'default',name:'Main Wall',evalEvery:25,linkedGoal:null,linkedCd:null}],bricks:[],archive:[],_tab:'wall',_activeWall:'default'};}
-})();
-
-function wallSave(){lsSet('dash_wall',wallData);}
-
-var WALL_COLORS=[
-  {main:'#ff8c42',border:'rgba(255,140,66,.4)',ghost:'rgba(255,140,66,',do_bg:'rgba(255,140,66,.15)',plan_bg:'rgba(0,229,255,.08)'},
-  {main:'#bf5fff',border:'rgba(191,95,255,.4)',ghost:'rgba(191,95,255,',do_bg:'rgba(191,95,255,.15)',plan_bg:'rgba(0,255,136,.08)'},
-  {main:'#00e5ff',border:'rgba(0,229,255,.4)',ghost:'rgba(0,229,255,',do_bg:'rgba(0,229,255,.12)',plan_bg:'rgba(255,140,66,.08)'},
-  {main:'#00ff88',border:'rgba(0,255,136,.4)',ghost:'rgba(0,255,136,',do_bg:'rgba(0,255,136,.12)',plan_bg:'rgba(191,95,255,.08)'},
-  {main:'#ff5fa0',border:'rgba(255,95,160,.4)',ghost:'rgba(255,95,160,',do_bg:'rgba(255,95,160,.12)',plan_bg:'rgba(255,204,0,.08)'},
-];
-
-function wallColor(){
-  var idx=wallData.walls.findIndex(function(w){return w.id===wallData._activeWall;});
-  return WALL_COLORS[Math.max(0,idx)%WALL_COLORS.length];
-}
-
-function wallGetActive(){
-  return wallData.walls.find(function(w){return w.id===wallData._activeWall;})||wallData.walls[0];
-}
-
-function wallBricks(wallId){
-  return wallData.bricks.filter(function(b){return b.wallId===(wallId||wallData._activeWall);});
-}
-
-function wallRender(){
-  var el=document.getElementById('wall-body');
-  var badge=document.getElementById('wall-badge');
-  if(!el)return;
-
-  var wall=wallGetActive();
-  var bricks=wallBricks(wall.id);
-  var total=bricks.length;
-  var doBricks=bricks.filter(function(b){return b.type==='do';}).length;
-  if(badge)badge.textContent=total+' bricks'+(total>0?' · '+doBricks+' doing':'');
-
-  var tab=wallData._tab||'wall';
-  var h='';
-
-  h+='<div style="display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap">';
-  [{t:'wall',l:'🧱 WALL'},{t:'add',l:'+ BRICK'},{t:'eval',l:'↺ EVAL'},{t:'settings',l:'⚙ EDIT'},{t:'archive',l:'📦 ARCHIVE'}].forEach(function(x){
-    var a=tab===x.t;
-    h+='<span data-walltab="'+x.t+'" class="wall-tab'+(a?' active':'')+'" >'+x.l+'</span>';
-  });
-  h+='</div>';
-
-  // Wall switcher — always shown, separator above
-  var wc=wallColor();
-  h+='<div style="border-top:1px solid rgba(255,255,255,.07);padding-top:8px;display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center">';
-  wallData.walls.forEach(function(w,wi){
-    var a=w.id===wall.id;
-    var wci=WALL_COLORS[wi%WALL_COLORS.length];
-    h+='<span data-wallswitch="'+w.id+'" style="font-size:var(--t-sm);padding:3px 9px;border:1px solid '+(a?wci.border:'rgba(255,255,255,.12)')+';color:'+(a?wci.main:'var(--dim)')+';background:'+(a?'rgba(0,0,0,.2)':'transparent')+';cursor:pointer">'+w.name+'</span>';
-  });
-  h+='<span data-wallnew="1" style="font-size:var(--t-sm);padding:3px 9px;border:1px dashed var(--c-faint);color:rgba(255,255,255,.25);cursor:pointer">+ NEW</span>';
-  h+='</div>';
-
-  if(tab==='wall'){
-    h+='<div style="border-top:1px solid rgba(255,255,255,.07);margin-bottom:10px"></div>';
-    var evalEvery=wall.evalEvery||25;
-    var bricksSinceEval=0;
-    for(var bi=bricks.length-1;bi>=0;bi--){
-      if(bricks[bi].type==='eval')break;
-      bricksSinceEval++;
-    }
-    if(bricksSinceEval>=evalEvery&&bricksSinceEval>0){
-      h+='<div class="wall-eval-prompt" style="margin-bottom:10px;border-color:'+wc.border+'">';
-      h+='<div style="font-size:var(--t-base);color:'+wc.main+';margin-bottom:6px">&#8987; '+bricksSinceEval+' bricks since last reflection</div>';
-      h+='<div style="font-size:var(--t-base);color:var(--text);line-height:1.6;margin-bottom:8px">'+(wall.linkedGoal?'Your goal: <em style="color:#ff8c42">'+wall.linkedGoal+'</em><br>':'')+'Look back at your last '+bricksSinceEval+' bricks. Did they move you forward — or were you mostly planning?</div>';
-      h+='<div class="flex-row">';
-      h+='<button data-walleval="real" style="flex:1;padding:7px;background:rgba(0,255,136,.06);border:1px solid var(--cg);color:var(--cg);font-family:monospace;font-size:var(--t-sm);cursor:pointer">&#10003; REAL PROGRESS</button>';
-      h+='<button data-walleval="plan" style="flex:1;padding:7px;background:rgba(0,229,255,.06);border:1px solid var(--cc);color:var(--cc);font-family:monospace;font-size:var(--t-sm);cursor:pointer">&#9737; MOSTLY PLANNING</button>';
-      h+='</div></div>';
-    }
-
-    if(!bricks.length){
-      h+='<div style="color:var(--dim);font-size:var(--t-md);padding:20px 0;text-align:center;line-height:2">No bricks yet.<br>Every small step counts.<br>Lay the first one.</div>';
-    } else {
-      // Show oldest first so grid fills bottom→top visually (grid scaleY(-1))
-      var display=bricks.slice(-50);
-      // Chunk bricks into rows by column width (max 10 cols per row)
-      h+='<div class="wall-outer" id="wall-outer">';
-      var wallRows=[];
-      var curRow=[];var curCols=0;
-      display.forEach(function(b){
-        var llen=(b.label||'').length;
-        var bCols=b.type==='eval'?2:(llen<=20?2:llen<=36?3:4);
-        if(curCols+bCols>10&&curRow.length>0){wallRows.push(curRow);curRow=[];curCols=0;}
-        curRow.push(b);curCols+=bCols;
-      });
-      if(curRow.length)wallRows.push(curRow);
-      var totalRows=wallRows.length;
-      for(var ri=0;ri<wallRows.length;ri++){
-        var rowIdx=ri;
-        var isOdd=rowIdx%2===1;
-        var row=wallRows[ri];
-        h+='<div class="wall-grid'+(isOdd?' row-odd':'')+"'>";
-        row.forEach(function(b){
-          if(b.type==='eval'){
-            var evalCol=b.answer==='real'?'var(--cg)':'var(--cc)';
-            h+='<div class="brick brick-eval brick-in" style="color:'+evalCol+'">';
-            h+='<span style="font-size:var(--t-sm)">'+(b.answer==='real'?'✓':'○')+' '+b.label+'</span>';
-            h+='<span style="font-size:8px;opacity:.5">'+b.date+'</span>';
-            h+='</div>';
-          } else {
-            var brickBg=b.type==='do'?wc.do_bg:wc.plan_bg;
-            var brickBorder=b.type==='do'?wc.border:'rgba(0,229,255,.25)';
-            var llen=(b.label||'').length;
-            var sizeClass=llen<=20?'brick-s':llen<=36?'brick-m':'brick-l';
-            // Random hue/saturation variation per brick (seeded by brick id for consistency per session)
-            var brickSeed=(b.id%1000)/1000;
-            var hShift=Math.round((brickSeed*70)-35); // -35 to +35 deg hue
-            var sShift=Math.round((((b.id*17)%100)/100)*35); // 0-35% saturation boost
-            var brickFilter='hue-rotate('+hShift+'deg) saturate('+(100+sShift)+'%)';
-            h+='<div class="brick brick-'+(b.type||'do')+' '+sizeClass+'" id="brick-'+b.id+'" style="background:'+brickBg+';border-color:'+brickBorder+';filter:'+brickFilter+'">';
-            h+='<div class="brick-label">'+(b.label||'·')+'</div>';
-            if(b.link)h+='<div class="brick-link">'+b.link+'</div>';
-            h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px">';
-            h+='<div class="brick-tag">'+(b.type==='do'?'DO':'PLAN')+'</div>';
-            h+='<div style="display:flex;gap:2px"><span data-brickedit="'+b.id+'" style="font-size:var(--t-base);color:rgba(255,255,255,.4);cursor:pointer;padding:2px 4px;line-height:1">✎</span><span data-brickdel="'+b.id+'" style="font-size:var(--t-base);color:rgba(255,68,68,.5);cursor:pointer;padding:2px 4px;line-height:1">✕</span></div>';
-            h+='</div>';
-            h+='</div>';
-          }
-        });
-        h+='</div>';
-      }
-      // 2 ghost rows above (rendered after real = visually on top with column-reverse)
-      // rowIdx for ghost rows continues from totalRows
-      for(var ghostRow=0;ghostRow<2;ghostRow++){
-        var ghostRowIdx=totalRows+ghostRow;
-        var ghostOdd=ghostRowIdx%2===1;
-        var ghostOpacity=ghostRow===0?'0.18':'0.09';
-        h+='<div class="wall-grid'+(ghostOdd?' row-odd':'')+'">';
-        for(var gb=0;gb<5;gb++){
-          h+='<div class="brick brick-ghost brick-in" style="border:1px dashed '+wc.ghost+ghostOpacity+');background:transparent;min-height:36px"></div>';
-        }
-        h+='</div>';
-      }
-      h+='</div>';
-      if(bricks.length>50)h+='<div style="font-size:var(--t-xs);color:var(--dim);text-align:center;margin-top:6px">'+(bricks.length-50)+' more in archive</div>';
-    }
-
-    // Quick-add strip at bottom of wall
-    h+='<div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07)">';
-    h+='<div class="flex-row-8">';
-    h+='<button id="wall-quick-do" style="flex:1;padding:12px 8px;background:rgba(255,140,66,.08);border:2px solid rgba(255,140,66,.5);color:#ff8c42;font-family:VT323,monospace;font-size:20px;cursor:pointer;letter-spacing:1px;line-height:1">🔨 LAY BRICK</button>';
-    h+='<button id="wall-quick-plan" style="flex:1;padding:12px 8px;background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.3);color:var(--cc);font-family:VT323,monospace;font-size:20px;cursor:pointer;letter-spacing:1px;line-height:1">📋 PLAN BRICK</button>';
-    h+='</div>';
-    h+='</div>';
-
-  } else if(tab==='add'){
-    h+='<input id="wall-label-inp" placeholder="What did you do? (optional)" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.25);color:var(--text);font-family:monospace;font-size:var(--t-lg);padding:5px 2px;outline:none;box-sizing:border-box;margin-bottom:12px">';
-    h+='<div class="label-dim">WHAT KIND OF BRICK?</div>';
-    h+='<div style="display:flex;gap:8px;margin-bottom:12px">';
-    h+='<div data-wallbricktype="do" id="wall-type-do" style="flex:1;padding:14px 8px;border:2px solid #ff8c42;background:rgba(255,140,66,.1);cursor:pointer;text-align:center"><div style="font-size:20px">🔨</div><div style="font-size:var(--t-sm);color:#ff8c42;margin-top:4px;letter-spacing:1px">DOING</div><div class="dim-9-mt">Real action taken</div></div>';
-    h+='<div data-wallbricktype="plan" id="wall-type-plan" style="flex:1;padding:14px 8px;border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.04);cursor:pointer;text-align:center"><div style="font-size:20px">📋</div><div style="font-size:var(--t-sm);color:var(--cc);margin-top:4px;letter-spacing:1px">PLANNING</div><div class="dim-9-mt">Organizing, prep</div></div>';
-    h+='</div>';
-    h+='<input id="wall-link-inp" placeholder="Link to goal/countdown (optional)..." style="width:100%;background:transparent;border:none;border-bottom:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-base);padding:4px 2px;outline:none;box-sizing:border-box;margin-bottom:12px">';
-    h+='<button id="wall-add-btn" style="width:100%;padding:12px;background:rgba(255,140,66,.08);border:2px solid #ff8c42;color:#ff8c42;font-family:monospace;font-size:var(--t-lg);cursor:pointer;letter-spacing:2px">+ LAY BRICK</button>';
-
-  } else if(tab==='eval'){
-    var evals=bricks.filter(function(b){return b.type==='eval';});
-    if(!evals.length){
-      h+='<div class="empty-msg-sm">No evaluations yet. Keep laying bricks.</div>';
-    } else {
-      evals.slice().reverse().forEach(function(ev){
-        var col=ev.answer==='real'?'var(--cg)':'var(--cc)';
-        h+='<div style="padding:10px 0;border-bottom:1px solid var(--c-ghost)"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:var(--t-sm);color:'+col+'">'+(ev.answer==='real'?'✓':'○')+' '+ev.label+'</span><span class="dim-9">'+ev.date+'</span></div></div>';
-      });
-    }
-
-
-  } else if(tab==='settings'){
-    h+='<div class="mb-12"><div class="label-dim-sm">WALL NAME</div>';
-    h+='<input id="wall-name-inp" value="'+wall.name+'" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.25);color:var(--text);font-family:monospace;font-size:var(--t-body);padding:4px 2px;outline:none;box-sizing:border-box"></div>';
-    h+='<div class="mb-12"><div class="label-dim-sm">GOAL THIS WALL IS BUILDING TOWARD</div>';
-    h+='<input id="wall-goal-inp" value="'+(wall.linkedGoal||'')+'" placeholder="e.g. launch my app, learn Arabic..." style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.2);color:var(--text);font-family:monospace;font-size:var(--t-md);padding:4px 2px;outline:none;box-sizing:border-box"></div>';
-    h+='<div style="margin-bottom:14px;display:flex;align-items:center;gap:10px"><div class="dim-9-ls">EVALUATE EVERY</div>';
-    h+='<input id="wall-eval-every" type="number" min="5" max="100" value="'+(wall.evalEvery||25)+'" style="width:55px;background:transparent;border:none;border-bottom:1px solid rgba(255,140,66,.3);color:#ff8c42;font-family:VT323,monospace;font-size:var(--t-h1);padding:2px;outline:none;text-align:center">';
-    h+='<span class="dim-11">bricks</span></div>';
-    h+='<button id="wall-settings-save" style="width:100%;padding:9px;background:rgba(255,140,66,.07);border:1px solid rgba(255,140,66,.4);color:#ff8c42;font-family:monospace;font-size:var(--t-md);cursor:pointer;letter-spacing:1px;margin-bottom:8px">SAVE CHANGES</button>';
-    // Delete wall option (if more than one wall)
-    if(wallData.walls.length>1){
-      h+='<button id="wall-delete-btn" style="width:100%;padding:7px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">DELETE THIS WALL</button>';
-    }
-
-  } else if(tab==='archive'){
-    var archived=wallData.archive.filter(function(b){return b.wallId===wall.id;});
-    if(!archived.length){h+='<div class="empty-msg-sm">Archive is empty. Keep building.</div>';}
-    else{
-      h+='<div class="label-dim">'+archived.length+' archived bricks</div>';
-      archived.slice().reverse().slice(0,40).forEach(function(b){
-        h+='<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:var(--t-xs);padding:2px 5px;border:1px solid '+(b.type==='do'?'rgba(255,140,66,.4)':'rgba(0,229,255,.3)')+';color:'+(b.type==='do'?'#ff8c42':'var(--cc)')+'">'+(b.type==='do'?'DO':'PLAN')+'</span><span style="flex:1;font-size:var(--t-base);color:var(--dim)">'+( b.label||'·')+'</span><span class="dim-9-faint">'+b.date+'</span></div>';
-      });
-    }
-  }
-
-  el.innerHTML=h;
-
-  el.querySelectorAll('[data-walltab]').forEach(function(btn){btn.onclick=function(){wallData._tab=this.dataset.walltab;wallSave();wallRender();};});
-  el.querySelectorAll('[data-wallswitch]').forEach(function(btn){btn.onclick=function(){wallData._activeWall=this.dataset.wallswitch;wallSave();wallRender();};});
-  // Wire quick-add buttons
-  var quickDo=document.getElementById('wall-quick-do');
-  var quickPlan=document.getElementById('wall-quick-plan');
-  if(quickDo)quickDo.onclick=function(e){
-    var label=prompt('What did you do? (optional — leave blank to just mark the day)','');
-    if(label===null)return;
-    wallAddBrick(label.trim(),'do','',e);
-  };
-  if(quickPlan)quickPlan.onclick=function(e){
-    var label=prompt('What did you plan? (optional)','');
-    if(label===null)return;
-    wallAddBrick(label.trim(),'plan','',e);
-  };
-
-  el.querySelectorAll('[data-wallnew]').forEach(function(btn){
-    btn.onclick=function(){
-      var name=prompt('Name for new wall (e.g. Career, Health, Learning):');
-      if(!name||!name.trim())return;
-      var w={id:String(Date.now()),name:name.trim(),evalEvery:25,linkedGoal:null};
-      wallData.walls.push(w);
-      wallData._activeWall=w.id;
-      wallData._tab='wall';
-      wallSave();wallRender();
-    };
-  });
-  // Brick edit
-  el.querySelectorAll('[data-brickedit]').forEach(function(btn){
-    btn.onclick=function(e){
-      e.stopPropagation();
-      var bid=this.dataset.brickedit;
-      var b=wallData.bricks.find(function(x){return String(x.id)===String(bid);});
-      if(!b)return;
-      var newLabel=prompt('Edit brick label:',b.label||'');
-      if(newLabel===null)return;
-      b.label=newLabel.trim();
-      wallSave();wallRender();
-    };
-  });
-  // Brick delete
-  var _wallBrickDelPending={};
-  el.querySelectorAll('[data-brickdel]').forEach(function(btn){
-    btn.onclick=function(e){
-      e.stopPropagation();
-      var bid=this.dataset.brickdel;
-      if(_wallBrickDelPending[bid]){
-        wallData.bricks=wallData.bricks.filter(function(x){return String(x.id)!==String(bid);});
-        wallSave();wallRender();
-      } else {
-        _wallBrickDelPending={};_wallBrickDelPending[bid]=true;
-        var self=this;self.textContent='✕✕';self.style.color='var(--cr)';
-        setTimeout(function(){_wallBrickDelPending={};if(self.parentNode)self.textContent='✕';self.style.color='rgba(255,68,68,.35)';},2000);
-      }
-    };
-  });
-
-  var selectedType='do';
-  el.querySelectorAll('[data-wallbricktype]').forEach(function(btn){
-    btn.onclick=function(){
-      selectedType=this.dataset.wallbricktype;
-      el.querySelectorAll('[data-wallbricktype]').forEach(function(b){
-        var isDo=b.dataset.wallbricktype==='do';
-        var sel=b.dataset.wallbricktype===selectedType;
-        b.style.border=sel?(isDo?'2px solid #ff8c42':'2px solid var(--cc)'):(isDo?'1px solid rgba(255,140,66,.3)':'1px solid rgba(0,229,255,.3)');
-        b.style.background=sel?(isDo?'rgba(255,140,66,.1)':'rgba(0,229,255,.06)'):'transparent';
-      });
-    };
-  });
-
-  var addBtn=document.getElementById('wall-add-btn');
-  var labelInp=document.getElementById('wall-label-inp');
-  var linkInp=document.getElementById('wall-link-inp');
-  if(addBtn){
-    addBtn.onclick=function(e){wallAddBrick(labelInp?labelInp.value.trim():'',selectedType,linkInp?linkInp.value.trim():'',e);};
-  }
-  if(labelInp)labelInp.onkeydown=function(e){if(e.keyCode===13)addBtn&&addBtn.click();};
-
-  el.querySelectorAll('[data-walleval]').forEach(function(btn){btn.onclick=function(e){wallRecordEval(this.dataset.walleval,e);};});
-
-  var settingsSave=document.getElementById('wall-settings-save');
-  if(settingsSave)settingsSave.onclick=function(){
-    var w=wallGetActive();
-    var nameEl=document.getElementById('wall-name-inp');
-    var goalEl=document.getElementById('wall-goal-inp');
-    var evEl=document.getElementById('wall-eval-every');
-    if(nameEl&&nameEl.value.trim())w.name=nameEl.value.trim();
-    if(goalEl)w.linkedGoal=goalEl.value.trim()||null;
-    var v=parseInt(evEl?evEl.value:25,10);
-    if(v>=5&&v<=100)w.evalEvery=v;
-    wallSave();wallRender();
-  };
-  var delWallBtn=document.getElementById('wall-delete-btn');
-  if(delWallBtn)delWallBtn.onclick=function(){
-    if(!confirm('Delete "'+wall.name+'" and all its bricks?'))return;
-    var wid=wall.id;
-    wallData.walls=wallData.walls.filter(function(w){return w.id!==wid;});
-    wallData.bricks=wallData.bricks.filter(function(b){return b.wallId!==wid;});
-    wallData._activeWall=wallData.walls[0].id;
-    wallData._tab='wall';
-    wallSave();wallRender();
-  };
-
-
-  // Animate bricks row by row — each row appears 600ms after the previous
-  requestAnimationFrame(function(){
-    wallFixLoneBricks();
-    var bricks=Array.from(el.querySelectorAll('.brick:not(.brick-in):not(.brick-eval)'));
-    // Row appears every 600ms, bricks within each row stagger by 47ms
-    var rowDelay=600;
-    var brickStagger=47;
-    bricks.forEach(function(b,i){
-      var rowIdx=Math.floor(i/5);
-      var posInRow=i%5;
-      setTimeout(function(){b.classList.add('brick-in');},rowIdx*rowDelay+posInRow*brickStagger);
-    });
-  });
-}
-
-// Post-render: move long bricks to their own centered rows
-function wallFixLoneBricks(){
-  document.querySelectorAll('.brick-l').forEach(function(brick){
-    // Create a lone row
-    var loneRow=document.createElement('div');
-    loneRow.className='brick-row-lone';
-    brick.className=brick.className.replace('brick-l','brick-lone');
-    // Insert before brick's current parent row
-    var row=brick.parentNode;
-    if(row){
-      row.parentNode.insertBefore(loneRow,row);
-      loneRow.appendChild(brick);
-    }
-  });
-  // Remove empty rows
-  document.querySelectorAll('.wall-grid').forEach(function(r){
-    if(!r.children.length)r.remove();
-  });
-}
-
-function wallAddBrick(label,type,link,evt){
-  var wall=wallGetActive();
-  var bricks=wallBricks(wall.id);
-  if(bricks.length>=50){
-    var oldest=bricks[0];
-    wallData.bricks=wallData.bricks.filter(function(b){return b.id!==oldest.id;});
-    wallData.archive.push(oldest);
-    if(wallData.archive.length>500)wallData.archive=wallData.archive.slice(-500);
-  }
-  wallData.bricks.push({id:Date.now(),wallId:wall.id,label:label||'',type:type||'do',link:link||'',date:new Date().toISOString().slice(0,10),ts:Date.now()});
-  safeHap(HAP.brick);
-  wallSave();
-  wallData._tab='wall';
-  wallRender();
-  if(evt){confetti(evt.clientX||window.innerWidth/2,evt.clientY||200,type==='do'?'#ff8c42':'#00e5ff');}
-}
-
-function wallRecordEval(answer,evt){
-  var labels={'real':'Real progress — moving forward','plan':'Mostly planning — need more doing'};
-  wallData.bricks.push({id:Date.now(),wallId:wallGetActive().id,label:labels[answer],type:'eval',answer:answer,date:new Date().toISOString().slice(0,10),ts:Date.now()});
-  wallSave();
-  if(evt)confetti(evt.clientX||window.innerWidth/2,evt.clientY||200,answer==='real'?'#00ff88':'#00e5ff');
-  wallRender();
-}
-
-setTimeout(function(){wallRender();},480);
 
 // ──────────────────────────────────────────
 // ── REFRAME CARD ──
