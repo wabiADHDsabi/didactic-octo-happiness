@@ -1,3 +1,16 @@
+// Guard: define utilities locally if dash-1 hasn't loaded yet
+if(typeof todayKey==='undefined'){
+  window.todayKey=function(){
+    var n=new Date();
+    if(n.getHours()<4)n=new Date(n.getTime()-864e5);
+    return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
+  };
+  window.todayKeyRaw=function(){return new Date().toISOString().slice(0,10);};
+  window.lsGet=function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}};
+  window.lsSet=function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+  window.safeHap=function(t){if(typeof hap==='function')hap(t);};
+}
+
 // ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-18 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
