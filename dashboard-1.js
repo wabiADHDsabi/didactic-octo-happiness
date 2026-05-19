@@ -52,7 +52,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-18 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-19 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -5431,7 +5431,7 @@ var BIGCAT_DEFS = [
   {
     id:'life', icon:'⚙', label:'LIFE',
     color:'rgba(255,184,108,.6)',
-    cards:['todo','quick-notes','calendar','meals','goals','days-until','pomodoro','bookmarks','countdown','birthdays','raft','day-blocks','milestone']
+    cards:['todo','quick-notes','calendar','meals','goals','days-until','pomodoro','bookmarks','countdown','birthdays','raft','day-blocks','milestone','button-log','settings']
   }
 ];
 
