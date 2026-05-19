@@ -5273,7 +5273,6 @@ var VIEW_MODE_DEFS=[
   {key:'minimalMode',label:'Minimal',  desc:'Plain text, no borders, markdown style'},
   {key:'singleCol',  label:'1 Column',  desc:'One column always, no side by side'},
   {key:'bigCat',     label:'Categories', desc:'4 category buttons, expand to see cards'},
-  {key:'vibrateOff', label:'No Haptics',desc:'Disable all vibration feedback'},
 ];
 
 function getActiveView(){
@@ -5310,7 +5309,7 @@ function renderViewPills(){
 
 function updateSettingsUI(){
   // Appearance toggles
-  ['crt','vignette','magnetMode','bigBorders','scrollGlow','sbAutoSync','noGoogleFonts','largeText','extraLargeText','bgVisuals','bgVisualSinSin','letterNav','textGlow','categoryNav','sectionHeaders','pinnedCards','snapToCard','starfield','scrollTrail','cardEntrance'].forEach(function(k){
+  ['crt','vignette','magnetMode','bigBorders','scrollGlow','sbAutoSync','noGoogleFonts','largeText','extraLargeText','bgVisuals','bgVisualSinSin','letterNav','textGlow','categoryNav','sectionHeaders','pinnedCards','snapToCard','starfield','scrollTrail','cardEntrance','vibrateOff'].forEach(function(k){
     var t=document.getElementById('tog-'+k);
     if(t)t.classList.toggle('on',getSetting(k));
   });
@@ -7583,6 +7582,13 @@ function questRender(){
         h += '</div>';
 
         // Done button
+        // Undo last step
+        var lastDone = questState.completedSteps && questState.completedSteps.length > 0;
+        if(lastDone){
+          var lastStep = questState.completedSteps[questState.completedSteps.length-1];
+          var lastTime = new Date(lastStep.completedAt).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+          h += '<button id="quest-undo-btn" style="width:100%;padding:8px;background:transparent;border:1px solid rgba(255,165,0,.15);color:rgba(255,165,0,.4);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px;margin-bottom:6px">↩ UNDO LAST (step '+lastStep.step+' · '+lastTime+')</button>';
+        }
         h += '<button id="quest-done-btn" style="width:100%;padding:14px;background:rgba(255,165,0,.08);border:1px solid rgba(255,165,0,.4);color:#ffa500;font-family:monospace;font-size:var(--t-lg);cursor:pointer;letter-spacing:2px">✓ DONE</button>';
       }
     }
@@ -7629,8 +7635,27 @@ function questRender(){
       if(typeof hap==='function') hap(HAP.check);
       questRender();
     };
-    doneBtn.onclick = questDoneFn;
-    doneBtn.ontouchend = function(e){ e.preventDefault(); e.stopPropagation(); questDoneFn(); };
+  var undoBtn = el.querySelector('#quest-undo-btn');
+  if(undoBtn){
+    undoBtn.onclick = function(){
+      if(!questState.completedSteps||!questState.completedSteps.length)return;
+      var last = questState.completedSteps.pop();
+      questState.currentStep = last.step;
+      questSave();
+      safeHap(HAP.soft);
+      questRender();
+    };
+  }
+    var _qtX=0,_qtY=0;
+    doneBtn.ontouchstart = function(e){ _qtX=e.touches[0].clientX; _qtY=e.touches[0].clientY; };
+    doneBtn.ontouchend = function(e){
+      var dx=Math.abs(e.changedTouches[0].clientX-_qtX);
+      var dy=Math.abs(e.changedTouches[0].clientY-_qtY);
+      if(dx>8||dy>8)return; // was a scroll, ignore
+      e.preventDefault(); e.stopPropagation();
+      questDoneFn();
+    };
+    doneBtn.onclick = function(e){ if(e.detail===0)return; questDoneFn(); }; // mouse only, not synthetic
   }
 }
 
