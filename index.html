@@ -4162,10 +4162,39 @@ function dbgCopyAll(){
   }, true);
 
   // ── IntersectionObserver for card views ──
-  // 60% visible for 2 seconds
-  var _viewTimers = {};
-  var _viewedRecently = {};
-  var VIEW_DEBOUNCE = 30000; // don't re-log same card within 30s
+  // Only log the most-visible card. 2s to first log, then every 10s while still watching.
+  var _viewRatios = {};    // card -> current intersectionRatio
+  var _viewTimers = {};    // card -> initial 2s timer
+  var _viewIntervals = {}; // card -> 10s repeat interval
+
+  function _viewGetTop(){
+    // Return the card with highest intersectionRatio (>= 0.6)
+    var top = null; var topR = 0;
+    Object.keys(_viewRatios).forEach(function(card){
+      if(_viewRatios[card] > topR){ topR = _viewRatios[card]; top = card; }
+    });
+    return topR >= 0.6 ? top : null;
+  }
+
+  function _viewStart(card){
+    if(_viewTimers[card]) return; // already counting
+    _viewTimers[card] = setTimeout(function(){
+      delete _viewTimers[card];
+      // Only log if this card is still the most visible
+      if(_viewGetTop() !== card) return;
+      if(typeof blLog==='function') blLog('view', card, 'view', 'dwell_2s');
+      // Start 10s repeat interval
+      _viewIntervals[card] = setInterval(function(){
+        if(_viewGetTop() !== card){ _viewStop(card); return; }
+        if(typeof blLog==='function') blLog('view', card, 'view', 'dwell_10s');
+      }, 10000);
+    }, 2000);
+  }
+
+  function _viewStop(card){
+    if(_viewTimers[card]){ clearTimeout(_viewTimers[card]); delete _viewTimers[card]; }
+    if(_viewIntervals[card]){ clearInterval(_viewIntervals[card]); delete _viewIntervals[card]; }
+  }
 
   function setupObserver(){
     if(!window.IntersectionObserver) return;
@@ -4174,27 +4203,15 @@ function dbgCopyAll(){
         var card = entry.target.getAttribute('data-id');
         if(!card) return;
         if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
-          // Start 2s timer
-          if(!_viewTimers[card]){
-            _viewTimers[card] = setTimeout(function(){
-              delete _viewTimers[card];
-              var now = Date.now();
-              if(_viewedRecently[card] && now-_viewedRecently[card] < VIEW_DEBOUNCE) return;
-              _viewedRecently[card] = now;
-              if(typeof blLog==='function') blLog('view', card, 'view', 'intersection');
-            }, 2000);
-          }
+          _viewRatios[card] = entry.intersectionRatio;
+          _viewStart(card);
         } else {
-          // Card left viewport — cancel timer
-          if(_viewTimers[card]){
-            clearTimeout(_viewTimers[card]);
-            delete _viewTimers[card];
-          }
+          delete _viewRatios[card];
+          _viewStop(card);
         }
       });
-    },{threshold: 0.6});
+    },{threshold:[0.6, 0.7, 0.8, 0.9, 1.0]});
 
-    // Observe all tiles
     document.querySelectorAll('.tile[data-id]').forEach(function(tile){
       obs.observe(tile);
     });
