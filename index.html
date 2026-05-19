@@ -641,7 +641,6 @@ body.icon-mode.s-unlocked [data-id="s-tracker"]{display:flex!important}
 .tile.tile-hidden{display:none!important}
 .tile-hiding{pointer-events:none;overflow:hidden}
 
-
 /* ── THEMES ── */
 body.theme-severance{
   --bg:#020d14;--bg2:#041520;--text:#c8f0ff;--dim:#2a5a6a;
@@ -675,127 +674,7 @@ body.theme-oceans #topbar{background:rgba(0,0,8,.98);border-bottom:1px solid rgb
 body.theme-oceans .logo{color:#00ffcc;letter-spacing:4px;text-shadow:0 0 18px #00ffccaa,0 0 40px #00ffcc44}
 body.theme-oceans body::before{background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,204,.04) 2px,rgba(0,255,204,.04) 3px)}
 
-body.theme-vangogh{
-  /* Inspired by Café Terrace at Night palette: deep cobalt sky + cafe gold + burnt umber masonry */
-  --bg:#071a34;--bg2:#10284a;--text:#fff8eb;--dim:#e7cba7;
-  --cg:#ffd86d;--ca:#ffbf4d;--cc:#7ec8ff;--cp:#f29f5b;--cpr:#c18a67;
-  --co:#b56a3e;--cr:#ff6b4a;--cl:#ffd37a;
-  --gg:0 0 10px #ffd86d99,0 0 30px #ffd86d33;
-  --ga:0 0 10px #ffbf4d99,0 0 30px #ffbf4d33;
-  --gc:0 0 10px #7ec8ff99,0 0 30px #7ec8ff33;
-  --gpr:0 0 10px #c18a6799,0 0 30px #c18a6733;
-  --go:0 0 10px #b56a3e99,0 0 30px #b56a3e33;
-  --gl:0 0 10px #ffd37a99,0 0 30px #ffd37a33;
-}
-body.theme-vangogh{
-  background:
-    radial-gradient(1200px 520px at 8% 6%,rgba(255,196,86,.24),transparent 58%),
-    radial-gradient(900px 380px at 82% 14%,rgba(126,200,255,.2),transparent 64%),
-    linear-gradient(180deg,#0b2854 0%,#071a34 42%,#1a2f47 100%);
-}
-body.theme-vangogh .tile{
-  border-color:rgba(181,106,62,.58);
-  background:
-    linear-gradient(145deg,rgba(181,106,62,.2) 0%,rgba(16,40,74,.9) 36%,rgba(7,26,52,.96) 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,216,109,.14),inset 0 0 34px rgba(181,106,62,.1),0 0 0 1px rgba(255,216,109,.05);
-}
-body.theme-vangogh #topbar{
-  background:linear-gradient(90deg,rgba(13,34,63,.97) 0%,rgba(35,23,16,.94) 100%);
-  border-bottom-color:rgba(255,191,77,.45);
-}
-body.theme-vangogh .logo{color:#ffe39a;font-style:italic;text-shadow:0 0 12px rgba(255,216,109,.45)}
-body.theme-vangogh .th{border-bottom-color:rgba(255,216,109,.28)}
-body.theme-vangogh .tile::before{
-  background:
-    radial-gradient(ellipse at 18% 20%,rgba(255,216,109,.16) 0%,rgba(181,106,62,.08) 34%,transparent 70%);
-}
-body.theme-vangogh .tdr input,
-body.theme-vangogh .notes-input-row input,
-body.theme-vangogh .sb-inp{
-  border-color:rgba(255,216,109,.34);
-  color:#fff8eb;
-}
-body.theme-vangogh .tdr input:focus,
-body.theme-vangogh .notes-input-row input:focus,
-body.theme-vangogh .sb-inp:focus{border-color:#ffd86d}
-
 /* Van Gogh override v21: darker base + higher card differentiation */
-body.theme-vangogh{
-  --bg:#05070d;--bg2:#0b111d;--text:#fff6e6;--dim:#cfbb9e;
-  --cg:#ffd78a;--ca:#f5b25e;--cc:#89b8ff;--cp:#e89a66;--cpr:#c79a79;
-  --co:#9b5e3a;--cr:#ff7f63;--cl:#edd29a;
-  --gg:0 0 10px #ffd78a88,0 0 26px #ffd78a33;
-  --ga:0 0 10px #f5b25e88,0 0 26px #f5b25e33;
-  --gc:0 0 10px #89b8ff88,0 0 26px #89b8ff33;
-  --gpr:0 0 10px #c79a7988,0 0 26px #c79a7933;
-  --go:0 0 10px #9b5e3a88,0 0 26px #9b5e3a33;
-  --gl:0 0 10px #edd29a88,0 0 26px #edd29a33;
-  background:
-    radial-gradient(1200px 560px at 10% 4%,rgba(255,196,96,.14),transparent 60%),
-    radial-gradient(1000px 460px at 84% 10%,rgba(90,135,210,.13),transparent 62%),
-    linear-gradient(180deg,#0a1220 0%,#05070d 56%,#070d17 100%);
-}
-body.theme-vangogh .tile{
-  border-color:rgba(173,118,75,.52);
-  background:linear-gradient(145deg,rgba(106,64,36,.28) 0%,rgba(12,16,27,.95) 42%,rgba(4,6,11,.985) 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,219,146,.11),inset 0 0 30px rgba(126,75,46,.1),0 0 0 1px rgba(255,219,146,.04);
-}
-body.theme-vangogh #topbar{
-  background:linear-gradient(90deg,rgba(8,14,24,.98) 0%,rgba(28,18,12,.96) 100%);
-  border-bottom-color:rgba(239,187,111,.36);
-}
-body.theme-vangogh .logo{color:#ffd892;font-style:italic;text-shadow:0 0 10px rgba(255,214,140,.35)}
-body.theme-vangogh .th{border-bottom-color:rgba(239,187,111,.24)}
-body.theme-vangogh .tile::before{
-  background:radial-gradient(ellipse at 17% 18%,rgba(255,216,136,.12) 0%,rgba(151,88,51,.07) 38%,transparent 76%);
-}
-body.theme-vangogh .tdr input,
-body.theme-vangogh .notes-input-row input,
-body.theme-vangogh .sb-inp{
-  border-color:rgba(239,187,111,.34);
-  color:#fff6e6;
-  background:rgba(7,10,16,.68);
-}
-body.theme-vangogh .tdr input:focus,
-body.theme-vangogh .notes-input-row input:focus,
-body.theme-vangogh .sb-inp:focus{border-color:#ffd892}
-
-body.theme-vangogh [data-id]{
-  --vg-accent:#d9a06a;
-  --vg-card-a:rgba(92,58,34,.34);
-  --vg-card-b:rgba(11,15,25,.96);
-  background:linear-gradient(145deg,var(--vg-card-a) 0%,var(--vg-card-b) 58%,rgba(4,6,11,.99) 100%) !important;
-}
-body.theme-vangogh [data-id] .th-label,
-body.theme-vangogh [data-id] .th-icon{color:var(--vg-accent)!important}
-body.theme-vangogh [data-id="clock"]{--vg-accent:#ffd88f;--vg-card-a:rgba(96,71,35,.38);--vg-card-b:rgba(10,16,26,.97);border-color:rgba(255,216,143,.48)!important}
-body.theme-vangogh [data-id="prayer"]{--vg-accent:#f5be73;--vg-card-a:rgba(105,67,29,.4);--vg-card-b:rgba(11,15,24,.97);border-color:rgba(245,190,115,.48)!important}
-body.theme-vangogh [data-id="weather"]{--vg-accent:#8fb6ff;--vg-card-a:rgba(46,70,110,.38);--vg-card-b:rgba(8,14,24,.97);border-color:rgba(143,182,255,.46)!important}
-body.theme-vangogh [data-id="stocks"]{--vg-accent:#a6d5b6;--vg-card-a:rgba(54,79,57,.36);--vg-card-b:rgba(9,14,21,.97);border-color:rgba(166,213,182,.46)!important}
-body.theme-vangogh [data-id="todo"]{--vg-accent:#f4a37b;--vg-card-a:rgba(110,60,40,.42);--vg-card-b:rgba(11,14,21,.97);border-color:rgba(244,163,123,.5)!important}
-body.theme-vangogh [data-id="meals"]{--vg-accent:#cd8a60;--vg-card-a:rgba(102,54,31,.4);--vg-card-b:rgba(10,13,20,.97);border-color:rgba(205,138,96,.5)!important}
-body.theme-vangogh [data-id="calendar"]{--vg-accent:#cdb0ff;--vg-card-a:rgba(69,58,103,.38);--vg-card-b:rgba(10,13,22,.97);border-color:rgba(205,176,255,.46)!important}
-body.theme-vangogh [data-id="notes"]{--vg-accent:#9dbfff;--vg-card-a:rgba(56,75,114,.36);--vg-card-b:rgba(9,13,22,.97);border-color:rgba(157,191,255,.44)!important}
-body.theme-vangogh [data-id="schedule"]{--vg-accent:#b9d897;--vg-card-a:rgba(66,83,48,.35);--vg-card-b:rgba(9,13,21,.97);border-color:rgba(185,216,151,.45)!important}
-body.theme-vangogh [data-id="books"]{--vg-accent:#d8b0ff;--vg-card-a:rgba(77,56,110,.39);--vg-card-b:rgba(10,13,22,.97);border-color:rgba(216,176,255,.48)!important}
-body.theme-vangogh [data-id="birthdays"]{--vg-accent:#ff9dc2;--vg-card-a:rgba(111,52,78,.4);--vg-card-b:rgba(10,13,21,.97);border-color:rgba(255,157,194,.5)!important}
-body.theme-vangogh [data-id="pickleball"]{--vg-accent:#91d39f;--vg-card-a:rgba(49,82,59,.36);--vg-card-b:rgba(9,13,20,.97);border-color:rgba(145,211,159,.48)!important}
-body.theme-vangogh [data-id="prayer-tracker"]{--vg-accent:#ffd08b;--vg-card-a:rgba(102,73,35,.4);--vg-card-b:rgba(10,14,22,.97);border-color:rgba(255,208,139,.5)!important}
-body.theme-vangogh [data-id="s-tracker"]{--vg-accent:#ff9e97;--vg-card-a:rgba(106,53,48,.4);--vg-card-b:rgba(10,13,21,.97);border-color:rgba(255,158,151,.48)!important}
-body.theme-vangogh [data-id="quran-tracker"]{--vg-accent:#75d6c9;--vg-card-a:rgba(42,86,82,.38);--vg-card-b:rgba(8,13,21,.97);border-color:rgba(117,214,201,.5)!important}
-body.theme-vangogh [data-id="juz-amma"]{--vg-accent:#f5dc9a;--vg-card-a:rgba(98,88,46,.36);--vg-card-b:rgba(10,13,21,.97);border-color:rgba(245,220,154,.48)!important}
-body.theme-vangogh [data-id="goals"]{--vg-accent:#f2bb9d;--vg-card-a:rgba(106,71,53,.39);--vg-card-b:rgba(10,13,21,.97);border-color:rgba(242,187,157,.48)!important}
-body.theme-vangogh [data-id="pomodoro"]{--vg-accent:#ff936a;--vg-card-a:rgba(117,54,34,.42);--vg-card-b:rgba(11,13,20,.97);border-color:rgba(255,147,106,.5)!important}
-body.theme-vangogh [data-id="raft"]{--vg-accent:#8ea7f1;--vg-card-a:rgba(48,61,104,.39);--vg-card-b:rgba(8,13,22,.97);border-color:rgba(142,167,241,.46)!important}
-body.theme-vangogh [data-id="settings"]{--vg-accent:#d8c7b2;--vg-card-a:rgba(88,76,62,.35);--vg-card-b:rgba(10,13,20,.97);border-color:rgba(216,199,178,.42)!important}
-body.theme-vangogh [data-id="bookmarks"]{--vg-accent:#cfd894;--vg-card-a:rgba(79,88,47,.34);--vg-card-b:rgba(10,13,20,.97);border-color:rgba(207,216,148,.46)!important}
-body.theme-vangogh [data-id="islamic-topics"]{--vg-accent:#7ec5b7;--vg-card-a:rgba(44,81,75,.37);--vg-card-b:rgba(8,13,21,.97);border-color:rgba(126,197,183,.46)!important}
-body.theme-vangogh [data-id="ebook-library"]{--vg-accent:#91b5ea;--vg-card-a:rgba(52,71,105,.37);--vg-card-b:rgba(8,13,21,.97);border-color:rgba(145,181,234,.46)!important}
-body.theme-vangogh [data-id="meal-prep"]{--vg-accent:#e1a675;--vg-card-a:rgba(109,70,41,.4);--vg-card-b:rgba(10,13,20,.97);border-color:rgba(225,166,117,.48)!important}
-body.theme-vangogh [data-id="writers-den"]{--vg-accent:#c89fef;--vg-card-a:rgba(76,57,106,.39);--vg-card-b:rgba(10,13,21,.97);border-color:rgba(200,159,239,.48)!important}
-body.theme-vangogh [data-id="weekend-warrior"]{--vg-accent:#f0b57e;--vg-card-a:rgba(108,72,40,.4);--vg-card-b:rgba(10,13,20,.97);border-color:rgba(240,181,126,.5)!important}
-body.theme-vangogh [data-id="season-traditions"]{--vg-accent:#f1b69a;--vg-card-a:rgba(110,68,52,.4);--vg-card-b:rgba(10,13,20,.97);border-color:rgba(241,182,154,.5)!important}
-
 
 /* TODO AGE WEAR */
 .ti.age-light .ttx{opacity:.82;filter:sepia(.12)}
@@ -912,7 +791,6 @@ body.theme-vangogh [data-id="season-traditions"]{--vg-accent:#f1b69a;--vg-card-a
 @keyframes prayer-glow-pulse{0%,100%{box-shadow:0 0 6px rgba(0,255,136,.15)}50%{box-shadow:0 0 22px rgba(0,255,136,.5)}}
 .prayer-all-done{animation:prayer-glow-pulse 2.5s ease-in-out infinite!important}
 
-
 /* GOAL ACTION BUTTONS — match app button style */
 .goal-actions{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
 .goal-action-btn{font-family:'Share Tech Mono',monospace;font-size:10px;padding:3px 9px;border:1px solid rgba(255,255,255,.15);color:var(--dim);background:transparent;cursor:pointer;transition:all .12s;white-space:nowrap;letter-spacing:.5px}
@@ -994,7 +872,6 @@ body.large-text{font-size:15px}
   pointer-events:none;opacity:1;z-index:0;
   display:none;
 }
-
 
 /* ══ CYBERPUNK 2 THEME ══ */
 body.theme-cyber2{
@@ -1173,7 +1050,6 @@ body.theme-cyber2 .th{
   border-bottom-width:1px;
 }
 
-
 /* LETTER NAVIGATION */
 #letter-nav-pad{
   position:fixed;top:0;left:0;right:0;z-index:9400;
@@ -1212,7 +1088,6 @@ body.theme-cyber2 .th{
   transition:all .15s;
 }
 #lnav-trigger:hover{background:rgba(0,255,136,.15);box-shadow:0 0 20px rgba(0,255,136,.4)}
-
 
 /* ISLAMIC TOPICS CARD */
 .it-card{padding:4px 0}
@@ -1361,7 +1236,6 @@ body.extra-large-text{
 .wd-pbar{height:100%;background:var(--cc);border-radius:1px;transition:width .4s}
 .wd-id{font-family:'VT323',monospace;font-size:38px;color:var(--cc);line-height:1;text-shadow:var(--gc)}
 
-
 /* EXTRA CARDS */
 .wr-prompt{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:8px}
 .wr-inp{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:12px;padding:8px;outline:none;resize:vertical;min-height:60px;box-sizing:border-box;line-height:1.5;margin-bottom:6px}
@@ -1415,7 +1289,6 @@ body.slim-screen-mode #grid{
   pointer-events:none;opacity:1;z-index:0;
   display:none;
 }
-
 
 /* ══ CYBERPUNK 2 THEME ══ */
 body.theme-cyber2{
@@ -1594,7 +1467,6 @@ body.theme-cyber2 .th{
   border-bottom-width:1px;
 }
 
-
 /* LETTER NAVIGATION */
 #letter-nav-pad{
   position:fixed;top:0;left:0;right:0;z-index:9400;
@@ -1633,7 +1505,6 @@ body.theme-cyber2 .th{
   transition:all .15s;
 }
 #lnav-trigger:hover{background:rgba(0,255,136,.15);box-shadow:0 0 20px rgba(0,255,136,.4)}
-
 
 /* ISLAMIC TOPICS CARD */
 .it-card{padding:6px 0}
@@ -1742,7 +1613,6 @@ body.extra-large-text .ptime{font-size:45px!important}
 .pomo-stat-num{font-family:'VT323',monospace;font-size:54px;line-height:1}
 .pomo-stat-lbl{font-size:15px;color:var(--dim);letter-spacing:1px}
 
-
 body.compact-mode .pomo-time{font-size:clamp(44px,13vw,68px)!important}
 body.compact-mode .pomo-display{padding:9px 0 4px}
 
@@ -1812,7 +1682,6 @@ body.compact-mode .pomo-display{padding:9px 0 4px}
 .wd-pbar-wrap{flex:1;height:4px;background:rgba(0,229,255,.1);border-radius:1px}
 .wd-pbar{height:100%;background:var(--cc);border-radius:1px;transition:width .4s}
 .wd-id{font-family:'VT323',monospace;font-size:57px;color:var(--cc);line-height:1;text-shadow:var(--gc)}
-
 
 /* EXTRA CARDS */
 .wr-prompt{font-size:20px;color:var(--text);line-height:1.6;margin-bottom:8px}
@@ -1886,390 +1755,80 @@ body.slim-screen-mode .qt-today-lbl{font-size:13px !important}
 @media(max-width:900px){body.slim-screen-mode #grid{grid-template-columns:1fr 1fr !important}}
 
 /* ── PAYNE'S GRAY THEME ── light/white, high contrast, analogous pops */
-body.theme-paynes{
-  --bg:#F2F4F5;
-  --bg2:#FFFFFF;
-  --text:#141A1E;
-  --dim:#536878;
-  --cg:#537B63;
-  --ca:#537B75;
-  --cc:#535678;
-  --cp:#635378;
-  --cr:#8B3A3A;
-  --cpr:#6B2A2A;
-  --gc:linear-gradient(135deg,#537B63,#535678);
-  --ga:0 0 6px rgba(83,104,120,.2);
-  background:#F2F4F5;
-  color:#141A1E;
-}
-body.theme-paynes #topbar{
-  background:#FFFFFF;
-  border-bottom:2px solid #3E4E5A;
-  box-shadow:0 1px 12px rgba(20,26,30,.08);
-}
-body.theme-paynes .logo{color:#29343C;letter-spacing:3px;text-shadow:none;font-weight:bold}
-body.theme-paynes #top-clock{color:#29343C}
-body.theme-paynes #smsg{color:#536878}
-body.theme-paynes .tile{
-  background:#FFFFFF;
-  border:1px solid #D0D8DE;
-  box-shadow:0 1px 4px rgba(20,26,30,.06),0 2px 12px rgba(20,26,30,.04);
-}
-body.theme-paynes .tile::before{display:none}
-body.theme-paynes .th{border-bottom:1px solid #E0E6EA}
-body.theme-paynes .th-label{color:#29343C;font-weight:bold}
-body.theme-paynes .th-badge{color:#536878;border-color:#C8D2D9}
-body.theme-paynes .th-icon{opacity:.8}
 
 /* Analogous card header accent — left border stripe */
-body.theme-paynes [data-id="prayer-tracker"],
-body.theme-paynes [data-id="quran-tracker"],
-body.theme-paynes [data-id="goals"],
-body.theme-paynes [data-id="weekly-review"]{border-left:3px solid #537B63}
-body.theme-paynes [data-id="juz-amma"],
-body.theme-paynes [data-id="islamic-topics"],
-body.theme-paynes [data-id="weekly-moments"],
-body.theme-paynes [data-id="mood-log"]{border-left:3px solid #537B75}
-body.theme-paynes [data-id="pomodoro"],
-body.theme-paynes [data-id="energy-map"],
-body.theme-paynes [data-id="clock"],
-body.theme-paynes [data-id="weather"]{border-left:3px solid #536878}
-body.theme-paynes [data-id="decision-log"],
-body.theme-paynes [data-id="todo"],
-body.theme-paynes [data-id="notes"],
-body.theme-paynes [data-id="writers-den"]{border-left:3px solid #535678}
-body.theme-paynes [data-id="life-streaks"],
-body.theme-paynes [data-id="books"],
-body.theme-paynes [data-id="calendar"],
-body.theme-paynes [data-id="schedule"]{border-left:3px solid #635378}
 
 /* Text and inputs */
-body.theme-paynes .tile input,body.theme-paynes .tile textarea,
-body.theme-paynes .wr-inp,body.theme-paynes .wm-inp,
-body.theme-paynes .tdr input,body.theme-paynes .sb-inp{
-  background:#F2F4F5;
-  border-color:#C8D2D9;
-  color:#141A1E;
-}
-body.theme-paynes .tile input::placeholder,
-body.theme-paynes .tile textarea::placeholder{color:#869BAB}
 
 /* Notes */
-body.theme-paynes .note-bubble{background:#F8FAFB;border:1px solid #D0D8DE;color:#141A1E}
-body.theme-paynes .note-bubble.done{background:#EFF7F2!important;border-color:#537B63!important;border-left:3px solid #537B63!important}
 
 /* Buttons */
-body.theme-paynes .pomo-btn.primary{background:#537B75;border-color:#537B75;color:#fff}
-body.theme-paynes .pomo-btn.primary:hover{background:#3E5E5A}
-body.theme-paynes .pomo-btn.danger{background:transparent;border-color:#C8D2D9;color:#536878}
-body.theme-paynes .pomo-preset{background:#F2F4F5;border-color:#D0D8DE;color:#29343C}
-body.theme-paynes .pomo-preset:hover{background:#E8EDF0;border-color:#536878}
-body.theme-paynes .pomo-preset.active{background:#537B75;border-color:#537B75;color:#fff}
-body.theme-paynes .pomo-time{color:#141A1E}
-body.theme-paynes .pomo-label{color:#536878}
-body.theme-paynes .pomo-progress{background:#E0E6EA}
-body.theme-paynes .pomo-work-seg{color:#537B63;background:rgba(83,123,99,.12);border:1px solid rgba(83,123,99,.3)}
-body.theme-paynes .pomo-break-seg{color:#535678;background:rgba(83,86,120,.1);border:1px solid rgba(83,86,120,.25)}
-body.theme-paynes .pomo-trail{color:#29343C}
 
 /* Todo */
-body.theme-paynes .ti{background:#F8FAFB;border:1px solid #E0E6EA}
-body.theme-paynes .ti:hover{border-color:#C8D2D9}
-body.theme-paynes .ttx{color:#141A1E}
-body.theme-paynes .ti.done .ttx{color:#869BAB}
-body.theme-paynes .tck{border-color:#C8D2D9}
-body.theme-paynes .tck.checked{background:#537B63;border-color:#537B63}
 
 /* Quran cards */
-body.theme-paynes .qc-choice{background:#F8FAFB;border-color:#D0D8DE;color:#29343C}
-body.theme-paynes .qc-choice:hover{border-color:#537B75;background:#EFF5F4}
-body.theme-paynes .qc-choice.correct{border-color:#537B63!important;background:#EFF7F2!important;color:#2E5A3E!important}
-body.theme-paynes .qc-choice.wrong{border-color:#8B3A3A!important;background:#FDF0F0!important;color:#6B2A2A!important}
-body.theme-paynes .qc-question{color:#141A1E}
-body.theme-paynes .qc-category{color:#536878}
 
 /* Streaks */
-body.theme-paynes .streak-row{border-bottom-color:#E0E6EA}
-body.theme-paynes .streak-label{color:#536878}
-body.theme-paynes .streak-val{color:#29343C}
 
 /* Misc */
-body.theme-paynes .export-btn{color:#536878;border-color:#D0D8DE;background:#F8FAFB}
-body.theme-paynes .export-btn:hover{background:#E8EDF0}
-body.theme-paynes .th-badge[onclick]{cursor:pointer;color:#536878;border-color:#C8D2D9}
-body.theme-paynes .th-badge[onclick]:hover{color:#29343C;border-color:#536878}
-body.theme-paynes .drag-handle span{background:#C8D2D9}
-body.theme-paynes .mood-scale-btn{border-color:#D0D8DE;color:#536878;background:#F8FAFB}
-body.theme-paynes .mood-scale-btn:hover{border-color:#536878;color:#29343C}
-body.theme-paynes .mood-scale-btn.selected{border-color:#537B75;background:#EFF5F4;color:#29343C}
-body.theme-paynes .mood-tag{border-color:#D0D8DE;color:#536878}
-body.theme-paynes .mood-entry{border-color:#E0E6EA;background:#F8FAFB}
-body.theme-paynes .dl-entry{border-color:#E0E6EA;background:#F8FAFB}
-body.theme-paynes .wr-entry{border-bottom-color:#E0E6EA}
-body.theme-paynes .wm-item{border-bottom-color:#E0E6EA}
-body.theme-paynes .wm-text{color:#141A1E}
-body.theme-paynes .wm-check{border-color:#C8D2D9}
-body.theme-paynes .wm-check.done{background:#EFF7F2;border-color:#537B63;color:#537B63}
-body.theme-paynes #grid{background:#F2F4F5}
-body.theme-paynes body::before{display:none}
-body.theme-paynes .vignette{display:none}
+
 /* ── PAYNE'S GRAY: comprehensive light theme overrides ── */
 
 /* Kill all neon glows and dark-mode inset shadows */
-body.theme-paynes .tg,body.theme-paynes .ta,body.theme-paynes .tc,
-body.theme-paynes .tp,body.theme-paynes .tpr{
-  box-shadow:0 1px 4px rgba(20,26,30,.06),0 2px 12px rgba(20,26,30,.04) !important;
-}
-body.theme-paynes .tg:hover,body.theme-paynes .ta:hover,body.theme-paynes .tc:hover,
-body.theme-paynes .tp:hover,body.theme-paynes .tpr:hover{
-  box-shadow:0 2px 8px rgba(20,26,30,.1),0 4px 20px rgba(20,26,30,.06) !important;
-}
 
 /* Topbar items */
-body.theme-paynes #status-ticker{color:#536878}
-body.theme-paynes .pomo-topbar-mini{color:#29343C;background:#F2F4F5;border-color:#C8D2D9}
-body.theme-paynes #topbar-sync-btn{color:#536878;border-color:#C8D2D9;background:#F8FAFB}
-body.theme-paynes #topbar-sync-btn:hover{background:#E8EDF0}
 
 /* Prayer times card */
-body.theme-paynes .drow{color:#29343C;border-bottom-color:#E0E6EA}
-body.theme-paynes .vt{color:#141A1E}
-body.theme-paynes .ptrend{color:#536878}
-body.theme-paynes #nbadge{color:#537B75 !important}
-body.theme-paynes #prayer-countdown{color:#537B75 !important;text-shadow:none !important}
 
 /* Salah tracker — the prayer status pills */
-body.theme-paynes .pt-prayer-btn{
-  border-color:#E0E6EA;
-  background:#F8FAFB;
-}
-body.theme-paynes .pt-prayer-btn:hover{border-color:#C8D2D9;background:#F0F4F6}
-body.theme-paynes .pt-prayer-btn.active-prayer{border-color:#537B75 !important}
-body.theme-paynes .pt-prayer-name{color:#536878}
-body.theme-paynes .pt-prayer-name.active{color:#537B75;text-shadow:none}
-body.theme-paynes .pt-sp{
-  border-color:#D0D8DE;
-  color:#536878;
-  background:#F8FAFB;
-}
-body.theme-paynes .pt-sp:hover{background:#E8EDF0;border-color:#536878}
-body.theme-paynes .pt-sp.s-on{
-  background:#537B63;
-  border-color:#537B63;
-  color:#FFFFFF;
-  font-weight:bold;
-}
-body.theme-paynes .pt-sp[data-s="late"].s-on{background:#537B75;border-color:#537B75}
-body.theme-paynes .pt-sp[data-s="missed"].s-on{background:#8B3A3A;border-color:#8B3A3A}
-body.theme-paynes .pname{color:#29343C !important}
-body.theme-paynes .ptime{color:#141A1E !important}
-body.theme-paynes .pt-score{color:#536878}
-body.theme-paynes .pt-focus-inp{border-color:#D0D8DE;background:#F8FAFB;color:#141A1E}
-body.theme-paynes [id^="pt-easy"]{border-color:#D0D8DE;color:#536878;background:#F8FAFB}
 
 /* Juz Amma */
-body.theme-paynes .jm-tab{
-  border-color:#D0D8DE;
-  color:#536878;
-  background:#F8FAFB;
-}
-body.theme-paynes .jm-tab.active{
-  color:#535678;
-  border-color:#535678;
-  background:rgba(83,86,120,.08);
-}
-body.theme-paynes .jm-goal-box{border-bottom-color:#E0E6EA}
-body.theme-paynes .jm-goal-name{color:#535678 !important;text-shadow:none !important}
-body.theme-paynes .jm-goal-arabic{color:#635378 !important}
-body.theme-paynes .jm-goal-stats{color:#536878}
-body.theme-paynes .jm-goal-stats span{color:#535678 !important}
-body.theme-paynes .jm-pbar-wrap{background:#E0E6EA}
-body.theme-paynes .jm-pbar{background:#535678}
-body.theme-paynes .jm-last{color:#869BAB}
+
 /* juz amma adjust buttons */
-body.theme-paynes [data-id="juz-amma"] button{
-  border-color:#D0D8DE !important;
-  color:#535678 !important;
-  background:#F8FAFB !important;
-}
-body.theme-paynes [data-id="juz-amma"] button:hover{background:#E8EDF0 !important}
 
 /* Islamic topics */
-body.theme-paynes .it-title{color:#141A1E !important}
-body.theme-paynes .it-question{color:#29343C}
-body.theme-paynes .it-notes{color:#536878}
-body.theme-paynes .it-err{color:#8B3A3A}
-body.theme-paynes [data-id="islamic-topics"] button{
-  border-color:#D0D8DE;color:#537B75;background:#F8FAFB;
-}
-body.theme-paynes [data-id="islamic-topics"] button:hover{background:#EFF5F4}
 
 /* Quran tracker */
-body.theme-paynes .qt-today-num{color:#141A1E !important}
-body.theme-paynes .qt-today-lbl{color:#536878}
-body.theme-paynes .qt-tab{border-color:#D0D8DE;color:#536878;background:#F8FAFB}
-body.theme-paynes .qt-tab.active{color:#537B63;border-color:#537B63;background:rgba(83,123,99,.08)}
-body.theme-paynes .qt-inp{border-color:#D0D8DE;background:#F8FAFB;color:#141A1E}
-body.theme-paynes .qt-log-entry{border-bottom-color:#E0E6EA;color:#29343C}
-body.theme-paynes .qt-graph-bar{background:#537B63}
 
 /* Goals */
-body.theme-paynes .goal-tab{border-color:#D0D8DE;color:#536878;background:#F8FAFB}
-body.theme-paynes .goal-tab.active{color:#537B63;border-color:#537B63;background:rgba(83,123,99,.08)}
-body.theme-paynes .goal-text{color:#141A1E}
-body.theme-paynes .goal-done{color:#537B63}
-body.theme-paynes .goal-pbar-bg{background:#E0E6EA}
-body.theme-paynes .goal-pbar{background:#537B63}
-body.theme-paynes [data-id="goals"] button{border-color:#D0D8DE;color:#536878;background:#F8FAFB}
-body.theme-paynes [data-id="goals"] button:hover{background:#E8EDF0}
-body.theme-paynes [data-id="goals"] input{border-color:#D0D8DE;background:#F8FAFB;color:#141A1E}
 
 /* Books */
-body.theme-paynes .book-title{color:#141A1E}
-body.theme-paynes .book-author{color:#536878}
-body.theme-paynes .book-meta{color:#869BAB}
-body.theme-paynes .book-pbar-bg{background:#E0E6EA}
-body.theme-paynes .book-pbar{background:#635378}
-body.theme-paynes .book-tab{border-color:#D0D8DE;color:#536878;background:#F8FAFB}
-body.theme-paynes .book-tab.active{color:#635378;border-color:#635378;background:rgba(99,83,120,.08)}
 
 /* Stocks */
-body.theme-paynes .stock-up{color:#537B63}
-body.theme-paynes .stock-down{color:#8B3A3A}
-body.theme-paynes .stock-name{color:#29343C}
-body.theme-paynes .stock-price{color:#141A1E}
 
 /* Weather */
-body.theme-paynes .w-temp{color:#141A1E}
-body.theme-paynes .w-desc{color:#536878}
-body.theme-paynes .w-alert.rain{background:rgba(83,86,120,.08);border-color:rgba(83,86,120,.3);color:#535678}
-body.theme-paynes .w-alert.ok{background:rgba(83,123,99,.06);border-color:rgba(83,123,99,.25);color:#537B63}
-body.theme-paynes .w-meta-lbl{color:#869BAB}
-body.theme-paynes .w-meta-val{color:#29343C}
 
 /* Calendar */
-body.theme-paynes .cal-day{color:#29343C;border-color:#E0E6EA}
-body.theme-paynes .cal-day.today{background:rgba(83,86,120,.1);border-color:#535678;color:#141A1E}
-body.theme-paynes .cal-day.other-month{color:#C8D2D9}
-body.theme-paynes .cal-dot{background:#537B75}
-body.theme-paynes .cal-header{color:#536878}
-body.theme-paynes .cal-nav{color:#29343C;border-color:#D0D8DE;background:#F8FAFB}
 
 /* Writer's Den */
-body.theme-paynes .wd-title{color:#141A1E}
-body.theme-paynes .wd-question{color:#29343C}
-body.theme-paynes .wd-answer{color:#536878}
-body.theme-paynes .wd-source{color:#869BAB}
-body.theme-paynes .wd-meditate-btn{
-  border-color:#D0D8DE;color:#536878;background:#F8FAFB;
-}
-body.theme-paynes .wd-meditate-btn.done{border-color:#537B63;color:#537B63;background:rgba(83,123,99,.06)}
 
 /* Weekend Warrior */
-body.theme-paynes .ww-col{background:#F8FAFB;border-color:#E0E6EA}
-body.theme-paynes .ww-day{color:#29343C;border-bottom-color:#E0E6EA}
-body.theme-paynes .ww-note{border-color:#E0E6EA;background:#FFFFFF;color:#141A1E}
-body.theme-paynes .ww-note.done{background:#EFF7F2;border-color:#537B63}
 
 /* Schedule */
-body.theme-paynes .sched-row{border-bottom-color:#E0E6EA}
-body.theme-paynes .sched-label{color:#536878}
-body.theme-paynes .sched-time{color:#141A1E}
 
 /* Meals */
-body.theme-paynes .meal-day{color:#29343C}
-body.theme-paynes .meal-item{color:#536878;border-bottom-color:#E0E6EA}
-body.theme-paynes .meal-inp{border-color:#D0D8DE;background:#F8FAFB;color:#141A1E}
 
 /* Settings */
-body.theme-paynes .sset-row{border-bottom-color:#E0E6EA}
-body.theme-paynes .sset-lbl{color:#141A1E}
-body.theme-paynes .sset-desc{color:#536878}
-body.theme-paynes .sset-toggle{background:#D0D8DE}
-body.theme-paynes .sset-toggle.on{background:#537B75}
-body.theme-paynes .sset-knob{background:#FFFFFF}
-body.theme-paynes .view-mode-pill{border-color:#D0D8DE;color:#536878}
-body.theme-paynes .view-mode-pill.active{border-color:#535678;color:#535678;background:rgba(83,86,120,.06)}
-body.theme-paynes #settings-build{color:#869BAB}
 
 /* Birthdays */
-body.theme-paynes .bday-row{border-bottom-color:#E0E6EA;color:#29343C}
-body.theme-paynes .bday-soon{color:#635378}
 
 /* Pickleball */
-body.theme-paynes .pb-score{color:#141A1E}
-body.theme-paynes .pb-set{color:#536878;border-color:#E0E6EA}
-body.theme-paynes [data-id="pickleball"] button{border-color:#D0D8DE;color:#536878;background:#F8FAFB}
 
 /* Weekly Review */
-body.theme-paynes .wr-prompt{color:#29343C}
-body.theme-paynes .wr-inp{background:#F8FAFB;border-color:#D0D8DE;color:#141A1E}
-body.theme-paynes .wr-entry-date{color:#869BAB}
-body.theme-paynes .wr-entry-text{color:#29343C}
-body.theme-paynes [data-id="weekly-review"] button{
-  border-color:#D0D8DE;color:#537B63;background:#F8FAFB;
-}
-body.theme-paynes [data-id="weekly-review"] button:hover{background:#EFF7F2}
 
 /* Decision Log */
-body.theme-paynes .dl-decision{color:#141A1E}
-body.theme-paynes .dl-field{color:#536878}
-body.theme-paynes .dl-date{color:#869BAB}
-body.theme-paynes .dl-entry{background:#F8FAFB;border-color:#E0E6EA}
-body.theme-paynes .dl-outcome-btn{border-color:#D0D8DE;color:#535678}
-body.theme-paynes [data-id="decision-log"] button:not(.export-btn){
-  border-color:#D0D8DE;color:#536878;background:#F8FAFB;
-}
 
 /* Energy map */
-body.theme-paynes [data-id="energy-map"] .mood-bar{opacity:.85}
 
 /* Life streaks */
-body.theme-paynes .streak-dot[style*="rgba(255,255,255,.1)"]{background:#E0E6EA !important}
 
 /* Weekly moments */
-body.theme-paynes .wm-inp{background:#F8FAFB;border-color:#D0D8DE;color:#141A1E}
-body.theme-paynes .wm-del{color:#8B3A3A}
-body.theme-paynes [data-id="weekly-moments"] button{
-  border-color:rgba(83,123,117,.4);color:#537B75;background:#F8FAFB;
-}
-body.theme-paynes [data-id="weekly-moments"] button:hover{background:#EFF5F4}
 
 /* Quran cards */
-body.theme-paynes .qc-dot{background:#E0E6EA}
-body.theme-paynes .qc-dot.current{background:#535678}
-body.theme-paynes .qc-dot.done-right{background:#537B63}
-body.theme-paynes .qc-dot.done-wrong{background:#8B3A3A}
-body.theme-paynes .qc-stat{color:#29343C}
-body.theme-paynes [data-id="quran-cards"] button{
-  border-color:#D0D8DE;color:#536878;background:#F8FAFB;
-}
-body.theme-paynes [data-id="quran-cards"] button.qc-choice{
-  background:#F8FAFB;border-color:#D0D8DE;color:#29343C;
-}
-body.theme-paynes [data-id="quran-cards"] button.qc-choice:hover{
-  border-color:#535678;background:rgba(83,86,120,.05);
-}
 
 /* Pomodoro trail text */
-body.theme-paynes #pomo-trail{color:#29343C}
-body.theme-paynes .pomo-stat-num{color:#29343C}
-body.theme-paynes .pomo-stat-lbl{color:#536878}
 
 /* Modal/overlay */
-body.theme-paynes .sb-modal-inner,
-body.theme-paynes #help-modal > div{
-  background:#FFFFFF;
-  border-color:#D0D8DE;
-  color:#141A1E;
-}
-body.theme-paynes .sb-modal-inner input,
-body.theme-paynes .sb-inp{background:#F2F4F5;border-color:#C8D2D9;color:#141A1E}
-body.theme-paynes .sb-status{color:#536878}
-body.theme-paynes .sb-btn{border-color:#D0D8DE;color:#29343C;background:#F8FAFB}
-body.theme-paynes .sb-btn:hover{background:#E8EDF0}
-body.theme-paynes #help-title{color:#535678}
-body.theme-paynes #help-body{color:#29343C}
 
 /* MOOD LOG CARD */
 .mood-scale{display:flex;justify-content:space-between;gap:4px;margin:10px 0}
@@ -2294,7 +1853,6 @@ body.theme-paynes #help-body{color:#29343C}
 .mood-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
 .mood-bar{width:100%;border-radius:1px 1px 0 0;transition:height .3s;min-height:2px}
 .mood-bar-label{font-size:7px;color:var(--dim)}
-
 
 /* ── BLACK & WHITE THEME ── pure contrast, no color */
 body.theme-bw{
@@ -2545,7 +2103,6 @@ body.theme-bw .sb-btn{border-color:#404040;color:#C0C0C0;background:transparent}
 body.theme-bw .sb-btn:hover{border-color:#FFFFFF;color:#FFFFFF}
 body.theme-bw .sb-status{color:#808080}
 
-
 /* Category nav */
 #cat-nav::-webkit-scrollbar{display:none}
 #cat-nav button:hover{color:var(--text) !important}
@@ -2554,7 +2111,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 .grid-section-header{pointer-events:none}
 /* Pinned overflow */
 #pinned-overflow{transition:none}
-
 
 /* SORT MODE */
 #sort-mode-btn.active{color:var(--cg);border-color:var(--cg)}
@@ -2606,7 +2162,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 .sort-badge.visible{transform:scale(1)}
 .sort-card-icon-emoji{font-size:22px}
 
-
 /* MILESTONE CARD */
 .mil-counter{text-align:center;padding:16px 0 8px}
 .mil-days-num{font-family:'VT323',monospace;font-size:72px;line-height:1;color:var(--cg);text-shadow:var(--ga)}
@@ -2621,7 +2176,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 .mil-goal-note-inp{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:'Share Tech Mono',monospace;font-size:11px;padding:2px 0;outline:none;font-style:italic}
 .mil-target-btn{font-size:9px;padding:2px 8px;border:1px solid rgba(255,255,255,.12);color:var(--dim);background:transparent;cursor:pointer;transition:all .15s;letter-spacing:.5px}
 .mil-target-btn.active{border-color:var(--cg);color:var(--cg)}
-
 
 /* DAY BLOCKS CARD */
 .db-grid{display:flex;flex-direction:column;gap:3px}
@@ -2651,7 +2205,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 .db-tab{font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,.12);color:var(--dim);cursor:pointer;transition:all .15s}
 .db-tab.active{border-color:var(--cpr);color:var(--cpr)}
 
-
 /* WORKOUT LOG */
 .wl-session{border:1px solid rgba(255,95,160,.15);padding:10px;margin-bottom:8px;background:rgba(255,95,160,.03)}
 .wl-ex-row{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -2672,7 +2225,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 .wl-autocomplete-item{padding:7px 10px;font-size:12px;color:var(--text);cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05)}
 .wl-autocomplete-item:hover{background:rgba(255,95,160,.1)}
 
-
 /* Dark backdrop for pomo elements over canvas noise */
 .pomo-canvas-wrap ~ .pomo-display,
 .pomo-canvas-wrap ~ .pomo-progress,
@@ -2682,7 +2234,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 #ppanel-timer>div:not(.pomo-canvas-wrap):not(#pomo-trail){
   position:relative;z-index:1;
 }
-
 
 /* Day block hover time label */
 .db-time-label{
@@ -2699,7 +2250,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 /* Larger blocks show label always */
 .db-block:hover{z-index:10;}
 
-
 /* QUICK NAV */
 .qnav-btn{
   display:inline-flex;align-items:center;gap:5px;
@@ -2714,7 +2264,6 @@ body.slim-screen-mode #cat-nav{top:42px}
 .qnav-btn:hover{background:rgba(255,255,255,.08);}
 .qnav-btn .qnav-emoji{font-size:13px;flex-shrink:0}
 .qnav-grid{display:flex;flex-wrap:wrap;gap:8px}
-
 
 /* QURAN CARDS */
 .qc-card{background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.2);border-left:3px solid var(--cc);padding:14px 14px 12px;margin-bottom:8px}
@@ -2736,7 +2285,6 @@ body.single-col-mode #qw-choices button{padding:11px 8px !important}
 .qc-streak-dot.wrong{background:var(--cr)}
 .qc-stat-row{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 
-
 /* GRATITUDE LOG */
 .grat-entry{padding:8px 0;border-bottom:1px solid rgba(0,255,136,.08)}
 .grat-entry-text{font-size:13px;color:var(--text);line-height:1.5}
@@ -2751,7 +2299,6 @@ body.single-col-mode #qw-choices button{padding:11px 8px !important}
 .dua-source{font-size:9px;color:var(--dim);opacity:.7;letter-spacing:.5px}
 .dua-font-btn{font-size:9px;padding:2px 8px;border:1px solid rgba(255,255,255,.12);color:var(--dim);background:transparent;cursor:pointer;font-family:monospace}
 .dua-font-btn.active{border-color:var(--ca);color:var(--ca)}
-
 
 /* FOR AKHIRA */
 .akhira-tab{font-size:10px;padding:3px 10px;border:1px solid rgba(255,204,0,.2);color:var(--dim);cursor:pointer;background:transparent;transition:all .15s}
@@ -2774,7 +2321,6 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 .rent-stat-val{font-family:VT323,monospace;font-size:28px;color:var(--cp)}
 .rent-stat-lbl{font-size:9px;color:var(--dim);letter-spacing:1px}
 
-
 /* Card entrance animation */
 .tile.entrance-hidden{opacity:0;transform:translateY(40px) scale(.97);}
 .tile.entrance-reveal{transition:opacity 1.4s cubic-bezier(.22,1,.36,1),transform 1.4s cubic-bezier(.22,1,.36,1);opacity:1;transform:translateY(0) scale(1);}
@@ -2785,7 +2331,6 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   50%{filter:brightness(1.15) saturate(1.2) drop-shadow(0 0 8px currentColor);}
   100%{filter:brightness(1) saturate(1) drop-shadow(0 0 0 currentColor);}
 }
-
 
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 
@@ -2802,26 +2347,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 .pb-zone{position:absolute;border:1px dashed;border-radius:3px;pointer-events:none}
 .pb-zone-lbl{position:absolute;top:-18px;left:8px;font-size:8px;letter-spacing:3px;opacity:.5;font-family:monospace}
 
-
 /* THE WALL */
-
-
-
-
-
-
-
-
-.brick{border-radius:3px;padding:5px 6px;font-size:9px;font-family:monospace;line-height:1.3;cursor:pointer;position:relative;min-height:36px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;transform:translateY(-10px) scale(.95);transition:opacity .3s,transform .3s}
-
-
-.brick{border-radius:3px;padding:5px 6px;font-size:9px;font-family:monospace;line-height:1.3;cursor:pointer;position:relative;min-height:36px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .15s,box-shadow .15s;opacity:0;transform:translateY(-12px) scale(.95)}
-
-
-
-
-
-
 
 
 

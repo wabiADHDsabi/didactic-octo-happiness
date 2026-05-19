@@ -1353,6 +1353,17 @@ function wwRender(){
   el.querySelectorAll('[data-wwnote-add]').forEach(function(btn){
     btn.onclick=function(){
       var k=this.dataset.wwnoteAdd;
+      // Save any currently typed note values before re-render
+      // Save any currently typed note values before re-render
+      var noteInps=el.querySelectorAll('input[oninput]');
+      var ni=0;
+      noteInps.forEach(function(inp){
+        var attr=inp.getAttribute('oninput')||'';
+        if(attr.indexOf('wwSaveNote')>=0&&attr.indexOf(k)>=0){
+          if(!wwData[k].notes)wwData[k].notes=[];
+          wwData[k].notes[ni]=inp.value;ni++;
+        }
+      });
       if(!wwData[k])wwData[k]={goal:'',notes:[]};
       if(!wwData[k].notes)wwData[k].notes=[];
       wwData[k].notes.push('');
@@ -1407,6 +1418,12 @@ function wwDeleteNote(key,idx){
 function wwSaveField(key,field,val){
   if(!wwData[key])wwData[key]={goal:'',notes:[]};
   wwData[key][field]=val;
+  wwSave();
+}
+function wwSaveNote(key,idx,val){
+  if(!wwData[key])wwData[key]={goal:'',notes:[]};
+  if(!wwData[key].notes)wwData[key].notes=[];
+  wwData[key].notes[idx]=val;
   wwSave();
 }
 

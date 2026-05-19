@@ -5527,6 +5527,8 @@ function bigCatRender(){
 }
 
 function applySettings(){
+  // Reset deleted themes
+  if(['paynes','vangogh'].indexOf(getSetting('theme'))>=0){setSetting('theme','default');}
   var b=document.body;
   b.classList.toggle('compact-mode',getSetting('compact'));
   b.classList.toggle('slim-screen-mode',getSetting('slimScreen'));
