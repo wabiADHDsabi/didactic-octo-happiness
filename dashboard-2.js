@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-18 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-19 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -6443,62 +6443,119 @@ function blRender(){
   } else {
     // TRENDS tab
     if(log.length < 5){
-      h += '<div class="empty-msg">Need more events for trends.</div>';
+      h += '<div class="empty-msg">Need more events for trends. Use the dashboard a bit first.</div>';
     } else {
-      // Cards by view count
-      var cardCounts = {};
-      var hourCounts = {};
-      var dowCounts = {0:0,1:0,2:0,3:0,4:0,5:0,6:0};
-      var typeCounts = {view:0,action:0};
+      var cardCounts={}, cardViews={}, cardActions={};
+      var hourCounts={}, dowCounts={0:0,1:0,2:0,3:0,4:0,5:0,6:0};
+      var typeCounts={view:0,action:0};
+      var actionTypes={};
+      var todayStr2=todayKey();
+      var todayCount=0, yesterdayCount=0;
+      var yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+
       log.forEach(function(e){
-        cardCounts[e.card] = (cardCounts[e.card]||0)+1;
-        hourCounts[e.hour] = (hourCounts[e.hour]||0)+1;
+        cardCounts[e.card]=(cardCounts[e.card]||0)+1;
+        if(e.type==='view') cardViews[e.card]=(cardViews[e.card]||0)+1;
+        if(e.type==='action') cardActions[e.card]=(cardActions[e.card]||0)+1;
+        hourCounts[e.hour]=(hourCounts[e.hour]||0)+1;
         if(e.dow!==undefined) dowCounts[e.dow]=(dowCounts[e.dow]||0)+1;
         if(e.type) typeCounts[e.type]=(typeCounts[e.type]||0)+1;
+        if(e.action&&e.action!=='tap'&&e.action!=='view') actionTypes[e.action]=(actionTypes[e.action]||0)+1;
+        var eDate=new Date(e.ts).toISOString().slice(0,10);
+        if(eDate===todayStr2) todayCount++;
+        else if(eDate===yesterday) yesterdayCount++;
       });
 
-      // Top cards
-      var topCards = Object.keys(cardCounts).sort(function(a,b){return cardCounts[b]-cardCounts[a];}).slice(0,8);
-      var maxCard = cardCounts[topCards[0]]||1;
-      h += '<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TOP CARDS</div>';
+      var topCards=Object.keys(cardCounts).sort(function(a,b){return cardCounts[b]-cardCounts[a];}).slice(0,10);
+      var maxCard=cardCounts[topCards[0]]||1;
+
+      // ── Quick stats row ──
+      var unsynced=log.filter(function(e){return !e._synced;}).length;
+      h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:14px">';
+      [
+        {label:'TOTAL',val:log.length},
+        {label:'TODAY',val:todayCount},
+        {label:'YESTERDAY',val:yesterdayCount},
+        {label:'VIEWS',val:typeCounts.view},
+        {label:'ACTIONS',val:typeCounts.action},
+        {label:'PENDING',val:unsynced},
+      ].forEach(function(s){
+        h+='<div style="border:1px solid rgba(180,130,255,.2);padding:7px 6px;text-align:center">';
+        h+='<div style="font-size:var(--t-h2);color:var(--c-purple);line-height:1">'+s.val+'</div>';
+        h+='<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin-top:2px">'+s.label+'</div>';
+        h+='</div>';
+      });
+      h+='</div>';
+
+      // ── Top cards ──
+      h+='<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TOP CARDS (views + actions)</div>';
       topCards.forEach(function(card){
-        var pct = Math.round(cardCounts[card]/maxCard*100);
-        h += '<div style="margin-bottom:5px">';
-        h += '<div style="display:flex;justify-content:space-between;font-size:var(--t-xxs);color:var(--dim);margin-bottom:2px">';
-        h += '<span style="color:var(--text)">'+card+'</span><span>'+cardCounts[card]+'</span></div>';
-        h += '<div style="height:3px;background:rgba(255,255,255,.06)"><div style="height:100%;width:'+pct+'%;background:var(--c-purple)"></div></div>';
-        h += '</div>';
+        var pct=Math.round(cardCounts[card]/maxCard*100);
+        var views=cardViews[card]||0;
+        var actions=cardActions[card]||0;
+        h+='<div style="margin-bottom:6px">';
+        h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-xxs);margin-bottom:2px">';
+        h+='<span style="color:var(--text)">'+card+'</span>';
+        h+='<span style="color:var(--dim)">'+cardCounts[card]+' <span style="color:rgba(100,160,255,.5)">'+views+'v</span> <span style="color:rgba(180,130,255,.5)">'+actions+'a</span></span>';
+        h+='</div>';
+        h+='<div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px">';
+        h+='<div style="height:100%;width:'+pct+'%;background:var(--c-purple);border-radius:2px"></div>';
+        h+='</div></div>';
       });
 
-      // Busiest hours
-      var topHours = Object.keys(hourCounts).sort(function(a,b){return hourCounts[b]-hourCounts[a];}).slice(0,5);
-      h += '<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">BUSIEST HOURS</div>';
-      h += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
-      topHours.forEach(function(hr){
-        var h12 = parseInt(hr)%12||12;
-        var ampm = parseInt(hr)>=12?'pm':'am';
-        h += '<span style="font-size:var(--t-xxs);padding:3px 8px;border:1px solid rgba(180,130,255,.3);color:var(--c-purple)">'+h12+ampm+' ('+hourCounts[hr]+')</span>';
-      });
-      h += '</div>';
-
-      // Day of week
-      var dowNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-      var maxDow = Math.max.apply(null,Object.values(dowCounts))||1;
-      h += '<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">ACTIVITY BY DAY</div>';
-      h += '<div style="display:flex;gap:4px;align-items:flex-end;height:40px">';
-      for(var d=0;d<7;d++){
-        var ht = Math.round((dowCounts[d]||0)/maxDow*36);
-        h += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">';
-        h += '<div style="width:100%;height:'+ht+'px;background:rgba(180,130,255,'+(ht?'.4':'.1')+');min-height:2px"></div>';
-        h += '<div style="font-size:var(--t-xxs);color:var(--dim)">'+dowNames[d][0]+'</div>';
-        h += '</div>';
+      // ── Busiest hours ──
+      var sortedHours=Object.keys(hourCounts).filter(function(h2){return hourCounts[h2]>0;}).sort(function(a,b){return hourCounts[b]-hourCounts[a];});
+      if(sortedHours.length){
+        h+='<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">BUSIEST HOURS</div>';
+        h+='<div style="display:flex;gap:5px;flex-wrap:wrap">';
+        sortedHours.slice(0,6).forEach(function(hr){
+          var hh=parseInt(hr)%12||12;
+          var ampm=parseInt(hr)>=12?'pm':'am';
+          h+='<span style="font-size:var(--t-xxs);padding:3px 8px;border:1px solid rgba(180,130,255,.25);color:var(--c-purple)">'+hh+ampm+' · '+hourCounts[hr]+'</span>';
+        });
+        h+='</div>';
       }
-      h += '</div>';
 
-      // Summary
-      h += '<div style="margin-top:12px;font-size:var(--t-xxs);color:var(--dim);border-top:1px solid rgba(255,255,255,.06);padding-top:8px">';
-      h += log.length+' total events · '+typeCounts.view+' views · '+typeCounts.action+' actions';
-      h += '</div>';
+      // ── Day of week bar chart ──
+      var dowNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var maxDow=Math.max.apply(null,Object.values(dowCounts))||1;
+      h+='<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">ACTIVITY BY DAY</div>';
+      h+='<div style="display:flex;gap:4px;align-items:flex-end;height:48px">';
+      for(var di=0;di<7;di++){
+        var ht=Math.round((dowCounts[di]||0)/maxDow*44);
+        h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">';
+        h+='<div style="font-size:var(--t-xxs);color:var(--dim);line-height:1">'+(dowCounts[di]||0)+'</div>';
+        h+='<div style="width:100%;height:'+Math.max(ht,2)+'px;background:rgba(180,130,255,'+(ht?'.45':'.1')+');border-radius:2px 2px 0 0"></div>';
+        h+='<div style="font-size:var(--t-xxs);color:var(--dim)">'+dowNames[di][0]+'</div>';
+        h+='</div>';
+      }
+      h+='</div>';
+
+      // ── Action type breakdown ──
+      var topActions=Object.keys(actionTypes).sort(function(a,b){return actionTypes[b]-actionTypes[a];}).slice(0,6);
+      if(topActions.length){
+        h+='<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">ACTION TYPES</div>';
+        h+='<div style="display:flex;gap:5px;flex-wrap:wrap">';
+        topActions.forEach(function(a){
+          h+='<span style="font-size:var(--t-xxs);padding:3px 8px;border:1px solid rgba(255,255,255,.1);color:var(--dim)">'+a+' · '+actionTypes[a]+'</span>';
+        });
+        h+='</div>';
+      }
+
+      // ── 24h activity heatmap ──
+      h+='<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">24H HEATMAP</div>';
+      h+='<div style="display:flex;gap:2px;flex-wrap:wrap">';
+      var maxHour=Math.max.apply(null,Object.values(hourCounts))||1;
+      for(var hi=0;hi<24;hi++){
+        var hval=hourCounts[hi]||0;
+        var opacity=hval?Math.max(0.1,hval/maxHour*0.8):0.05;
+        var hh2=hi%12||12; var ampm2=hi>=12?'p':'a';
+        h+='<div style="flex:1;min-width:10px;height:22px;background:rgba(180,130,255,'+opacity.toFixed(2)+');border-radius:2px;position:relative" title="'+hh2+ampm2+': '+hval+'">';
+        if(hval) h+='<div style="font-size:5px;color:rgba(255,255,255,.5);text-align:center;line-height:22px">'+hval+'</div>';
+        h+='</div>';
+      }
+      h+='</div>';
+      h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-xxs);color:rgba(255,255,255,.2);margin-top:2px"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>11p</span></div>';
     }
   }
 

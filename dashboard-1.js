@@ -5,6 +5,7 @@ function todayKey(){
   return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
 }
 window._dash1_todayKey=todayKey;
+window.addEventListener('load',function(){if(typeof blPrune==='function')blPrune();});
 function todayKeyRaw(){ return new Date().toISOString().slice(0,10); }
 function safeHap(type, card, detail){
   if(typeof hap==='function')hap(type);
@@ -693,6 +694,7 @@ function blGetCardFromEl(el){
 }
 
 function blLog(type, card, action, detail){
+  if(card==='button-log')return; // don't log the log card itself
   var now = Date.now();
   var d = new Date(now);
   var entry = {
@@ -722,6 +724,18 @@ function blMarkSynced(ts_list){
   ts_list.forEach(function(ts){ tsSet[ts]=true; });
   log.forEach(function(e){ if(tsSet[e.ts]) e._synced=true; });
   lsSet(BL_KEY, log);
+}
+
+function blPrune(){
+  // Keep: unsynced events (any age) + synced events from last 48 hours
+  var cutoff = Date.now() - 48*60*60*1000;
+  var log = lsGet(BL_KEY, []);
+  var before = log.length;
+  log = log.filter(function(e){
+    return !e._synced || e.ts > cutoff;
+  });
+  lsSet(BL_KEY, log);
+  if(log.length < before) console.log('[BL] Pruned '+(before-log.length)+' old synced events');
 }
 
 async function blPushToSupabase(){
@@ -756,6 +770,7 @@ async function blPushToSupabase(){
     });
     if(res.ok||res.status===201){
       blMarkSynced(unsync.map(function(e){return e.ts;}));
+      blPrune(); // clean up old synced events
       console.log('[BL] Pushed '+rows.length+' events to Supabase');
     }
   }catch(e){
