@@ -4077,7 +4077,134 @@ function dbgCopyAll(){
     <div style="flex:3;overflow-y:auto;padding:8px 10px;border-right:1px solid rgba(255,255,255,.08)" id="_dbg_log"><span style="color:rgba(255,255,255,.3)">No output yet.</span></div>
     <div style="flex:2;overflow-y:auto;padding:8px 10px;font-size:9px;color:rgba(200,200,200,.6)" id="_dbg_flags"></div>
   </div>
+  <div class="tile" data-id="button-log" style="border-color:rgba(180,130,255,.3)"><div class="icon-label-wrap"><span class="icon-emoji">📊</span><span class="icon-label">BUTTON LOG</span></div>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="th" style="border-color:rgba(180,130,255,.3)"><span class="th-icon cv">📊</span><span class="th-label cv">Button Log</span><span id="bl-badge" class="th-badge" style="color:var(--c-purple);border-color:rgba(180,130,255,.3);margin-left:auto;display:none"></span></div>
+    <div id="bl-body"></div>
+  </div>
+
 </div>
+
+<script>
+// ── GLOBAL TAP + BUTTON LOG ──
+(function(){
+  var _tapCool = false;
+
+  // Helper: walk up DOM to get card data-id
+  function getCard(el){
+    var node = el;
+    for(var i=0;i<12;i++){
+      if(!node) break;
+      var did = node.getAttribute && node.getAttribute('data-id');
+      if(did) return did;
+      node = node.parentElement;
+    }
+    return 'unknown';
+  }
+
+  // Helper: get button label/detail
+  function getDetail(el){
+    var node = el;
+    for(var i=0;i<3;i++){
+      if(!node) break;
+      var tag = node.tagName;
+      if(tag==='BUTTON'||tag==='A'||tag==='SPAN'){
+        // Use id, dataset keys, or text content
+        if(node.id) return 'id:'+node.id;
+        var ds = Object.keys(node.dataset||{});
+        if(ds.length) return 'data:'+ds[0]+':'+(node.dataset[ds[0]]||'').slice(0,30);
+        var txt = (node.textContent||'').trim().slice(0,20);
+        if(txt) return 'btn:'+txt;
+      }
+      node = node.parentElement;
+    }
+    return '';
+  }
+
+  function isInteractive(el){
+    if(!el) return false;
+    var tag = el.tagName;
+    if(tag==='BUTTON'||tag==='A') return true;
+    if(el.onclick||el.getAttribute('onclick')) return true;
+    if(el.style&&el.style.cursor==='pointer') return true;
+    var ds = el.dataset||{};
+    if(ds.qctab||ds.qttab||ds.vstab||ds.qwtype||ds.qnavto||ds.bcid||
+       ds.ptStatus||ds.ptDate||ds.mpToggle||ds.mpAddItem||ds.brsave||
+       ds.todoAgeDel||ds.todoAgeDone) return true;
+    var cls = el.classList||{contains:function(){return false;}};
+    return cls.contains('pill')||cls.contains('qnav-btn')||
+           cls.contains('qc-choice')||cls.contains('th-badge')||
+           cls.contains('tbox')||cls.contains('tdel');
+  }
+
+  document.addEventListener('click', function(e){
+    if(_tapCool) return;
+    var el = e.target;
+    for(var i=0;i<5;i++){
+      if(!el) break;
+      if(isInteractive(el)){
+        // Minimal haptic
+        if(typeof hap==='function') try{hap(HAP.tap);}catch(_){}
+        // Log to button log
+        var card = getCard(el);
+        var detail = getDetail(el);
+        if(typeof blLog==='function') blLog('action', card, 'tap', detail);
+        _tapCool=true;
+        setTimeout(function(){_tapCool=false;},80);
+        return;
+      }
+      el=el.parentElement;
+    }
+  }, true);
+
+  // ── IntersectionObserver for card views ──
+  // 60% visible for 2 seconds
+  var _viewTimers = {};
+  var _viewedRecently = {};
+  var VIEW_DEBOUNCE = 30000; // don't re-log same card within 30s
+
+  function setupObserver(){
+    if(!window.IntersectionObserver) return;
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var card = entry.target.getAttribute('data-id');
+        if(!card) return;
+        if(entry.isIntersecting && entry.intersectionRatio >= 0.6){
+          // Start 2s timer
+          if(!_viewTimers[card]){
+            _viewTimers[card] = setTimeout(function(){
+              delete _viewTimers[card];
+              var now = Date.now();
+              if(_viewedRecently[card] && now-_viewedRecently[card] < VIEW_DEBOUNCE) return;
+              _viewedRecently[card] = now;
+              if(typeof blLog==='function') blLog('view', card, 'view', 'intersection');
+            }, 2000);
+          }
+        } else {
+          // Card left viewport — cancel timer
+          if(_viewTimers[card]){
+            clearTimeout(_viewTimers[card]);
+            delete _viewTimers[card];
+          }
+        }
+      });
+    },{threshold: 0.6});
+
+    // Observe all tiles
+    document.querySelectorAll('.tile[data-id]').forEach(function(tile){
+      obs.observe(tile);
+    });
+  }
+
+  // Setup after DOM ready
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', setupObserver);
+  } else {
+    setupObserver();
+  }
+})();
+// ── END GLOBAL TAP + BUTTON LOG ──
+</script>
 </body>
 
 </html>

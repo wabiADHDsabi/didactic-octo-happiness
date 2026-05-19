@@ -4298,7 +4298,7 @@ function lsExport(){
 }
 
 function downloadTxt(content, filename){
-  var blob=new Blob([content],{type:'text/plain'});
+  var blob=new Blob([content],{type:'text/plain;charset=utf-8'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a');
   a.href=url;a.download=filename;
@@ -6390,5 +6390,132 @@ function mpRender(){
 
 window.addEventListener('load',function(){if(typeof mpRender==='function')mpRender();});
 // ── END MEAL PREP ──
+
+// ══════════════════════════════════════════
+// BUTTON LOG CARD
+// ══════════════════════════════════════════
+var _blTab = 'log';
+
+function blRender(){
+  var el = document.getElementById('bl-body');
+  var badge = document.getElementById('bl-badge');
+  if(!el) return;
+
+  var log = lsGet('dash_button_log', []);
+  var unsynced = log.filter(function(e){return !e._synced;}).length;
+  if(badge){
+    badge.textContent = log.length + ' events' + (unsynced ? ' · ' + unsynced + ' pending' : '');
+    badge.style.display = '';
+  }
+
+  var h = '';
+
+  // Tabs
+  h += '<div style="display:flex;gap:6px;margin-bottom:10px">';
+  ['log','trends'].forEach(function(t){
+    var a = _blTab===t;
+    h += '<span data-bltab="'+t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(180,130,255,.5)':'var(--c-border)')+';color:'+(a?'var(--c-purple)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+t.toUpperCase()+'</span>';
+  });
+  h += '</div>';
+
+  if(_blTab === 'log'){
+    if(!log.length){
+      h += '<div class="empty-msg">No events logged yet.</div>';
+    } else {
+      var recent = log.slice().reverse().slice(0,50);
+      h += '<div style="font-size:var(--t-xxs);color:var(--dim);margin-bottom:6px;letter-spacing:1px">LAST '+recent.length+' EVENTS (newest first)</div>';
+      recent.forEach(function(e){
+        var d = new Date(e.ts);
+        var timeStr = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+        var typeCol = e.type==='view'?'rgba(100,160,255,.7)':'rgba(180,130,255,.7)';
+        var synced = e._synced?'<span style="color:rgba(0,255,136,.4);margin-left:4px">✓</span>':'<span style="color:rgba(255,200,80,.4);margin-left:4px">⏳</span>';
+        h += '<div style="border-bottom:1px solid rgba(255,255,255,.05);padding:5px 0;display:grid;grid-template-columns:auto 1fr auto;gap:6px;align-items:start">';
+        h += '<span style="font-size:var(--t-xxs);color:'+typeCol+';text-transform:uppercase;letter-spacing:1px;padding-top:1px">'+e.type+'</span>';
+        h += '<div>';
+        h += '<div style="font-size:var(--t-xs);color:var(--text)">'+e.card+(e.action?' · <span style="color:var(--dim)">'+e.action+'</span>':'')+'</div>';
+        if(e.detail) h += '<div style="font-size:var(--t-xxs);color:var(--dim);margin-top:1px">'+e.detail+'</div>';
+        h += '<div style="font-size:var(--t-xxs);color:rgba(255,255,255,.25);margin-top:2px">'+timeStr+'</div>';
+        h += '</div>';
+        h += synced;
+        h += '</div>';
+      });
+    }
+  } else {
+    // TRENDS tab
+    if(log.length < 5){
+      h += '<div class="empty-msg">Need more events for trends.</div>';
+    } else {
+      // Cards by view count
+      var cardCounts = {};
+      var hourCounts = {};
+      var dowCounts = {0:0,1:0,2:0,3:0,4:0,5:0,6:0};
+      var typeCounts = {view:0,action:0};
+      log.forEach(function(e){
+        cardCounts[e.card] = (cardCounts[e.card]||0)+1;
+        hourCounts[e.hour] = (hourCounts[e.hour]||0)+1;
+        if(e.dow!==undefined) dowCounts[e.dow]=(dowCounts[e.dow]||0)+1;
+        if(e.type) typeCounts[e.type]=(typeCounts[e.type]||0)+1;
+      });
+
+      // Top cards
+      var topCards = Object.keys(cardCounts).sort(function(a,b){return cardCounts[b]-cardCounts[a];}).slice(0,8);
+      var maxCard = cardCounts[topCards[0]]||1;
+      h += '<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TOP CARDS</div>';
+      topCards.forEach(function(card){
+        var pct = Math.round(cardCounts[card]/maxCard*100);
+        h += '<div style="margin-bottom:5px">';
+        h += '<div style="display:flex;justify-content:space-between;font-size:var(--t-xxs);color:var(--dim);margin-bottom:2px">';
+        h += '<span style="color:var(--text)">'+card+'</span><span>'+cardCounts[card]+'</span></div>';
+        h += '<div style="height:3px;background:rgba(255,255,255,.06)"><div style="height:100%;width:'+pct+'%;background:var(--c-purple)"></div></div>';
+        h += '</div>';
+      });
+
+      // Busiest hours
+      var topHours = Object.keys(hourCounts).sort(function(a,b){return hourCounts[b]-hourCounts[a];}).slice(0,5);
+      h += '<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">BUSIEST HOURS</div>';
+      h += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
+      topHours.forEach(function(hr){
+        var h12 = parseInt(hr)%12||12;
+        var ampm = parseInt(hr)>=12?'pm':'am';
+        h += '<span style="font-size:var(--t-xxs);padding:3px 8px;border:1px solid rgba(180,130,255,.3);color:var(--c-purple)">'+h12+ampm+' ('+hourCounts[hr]+')</span>';
+      });
+      h += '</div>';
+
+      // Day of week
+      var dowNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var maxDow = Math.max.apply(null,Object.values(dowCounts))||1;
+      h += '<div style="font-size:var(--t-xxs);color:var(--dim);letter-spacing:1px;margin:12px 0 6px">ACTIVITY BY DAY</div>';
+      h += '<div style="display:flex;gap:4px;align-items:flex-end;height:40px">';
+      for(var d=0;d<7;d++){
+        var ht = Math.round((dowCounts[d]||0)/maxDow*36);
+        h += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">';
+        h += '<div style="width:100%;height:'+ht+'px;background:rgba(180,130,255,'+(ht?'.4':'.1')+');min-height:2px"></div>';
+        h += '<div style="font-size:var(--t-xxs);color:var(--dim)">'+dowNames[d][0]+'</div>';
+        h += '</div>';
+      }
+      h += '</div>';
+
+      // Summary
+      h += '<div style="margin-top:12px;font-size:var(--t-xxs);color:var(--dim);border-top:1px solid rgba(255,255,255,.06);padding-top:8px">';
+      h += log.length+' total events · '+typeCounts.view+' views · '+typeCounts.action+' actions';
+      h += '</div>';
+    }
+  }
+
+  el.innerHTML = h;
+
+  // Wire tabs
+  el.querySelectorAll('[data-bltab]').forEach(function(btn){
+    btn.onclick = function(){
+      _blTab = this.dataset.bltab;
+      blRender();
+    };
+  });
+}
+
+window.addEventListener('load', function(){
+  if(typeof blRender==='function') blRender();
+});
+// ══════════════════════════════════════════
 
 // ── END OF dashboard-2.js (Part 2 of 3) — continues in dashboard-3.js ──

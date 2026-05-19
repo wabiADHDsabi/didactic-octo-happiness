@@ -6,7 +6,24 @@ function todayKey(){
 }
 window._dash1_todayKey=todayKey;
 function todayKeyRaw(){ return new Date().toISOString().slice(0,10); }
-function safeHap(type){ if(typeof hap==='function')hap(type); }
+function safeHap(type, card, detail){
+  if(typeof hap==='function')hap(type);
+  // Log to button log
+  var hapName = 'hap_unknown';
+  if(typeof HAP!=='undefined'){
+    if(type===HAP.check)hapName='hap_check';
+    else if(type===HAP.save)hapName='hap_save';
+    else if(type===HAP.soft)hapName='hap_soft';
+    else if(type===HAP.dhikr)hapName='hap_dhikr';
+    else if(type===HAP.dhikrDone)hapName='hap_dhikr_done';
+    else if(type===HAP.brick)hapName='hap_brick';
+    else if(type===HAP.tap)hapName='hap_tap';
+    else if(type===HAP.error)hapName='hap_error';
+  }
+  if(hapName!=='hap_tap'&&hapName!=='hap_error'){
+    if(typeof blLog==='function') blLog('action', card||'unknown', hapName, detail||'');
+  }
+}
 function safeToast(msg){ if(typeof showToast==='function')showToast(msg); }
 function lsGet(key,def){
   try{ var v=localStorage.getItem(key); return v?JSON.parse(v):def; }
@@ -654,6 +671,98 @@ function getSyncDeviceId(){
   }
   return id;
 }
+
+// ══════════════════════════════════════════
+// BUTTON LOG SYSTEM
+// ══════════════════════════════════════════
+var BL_KEY = 'dash_button_log';
+var BL_MAX_LOCAL = 500; // keep last 500 events locally
+
+function blGetCardFromEl(el){
+  // Walk up DOM to find parent tile data-id
+  var node = el;
+  for(var i=0;i<12;i++){
+    if(!node) break;
+    if(node.dataset && node.dataset.id) return node.dataset.id;
+    // Check data-id attribute
+    var did = node.getAttribute && node.getAttribute('data-id');
+    if(did) return did;
+    node = node.parentElement;
+  }
+  return 'unknown';
+}
+
+function blLog(type, card, action, detail){
+  var now = Date.now();
+  var d = new Date(now);
+  var entry = {
+    ts: now,
+    dow: d.getDay(),
+    hour: d.getHours(),
+    type: type,         // 'view' | 'action'
+    card: card || 'unknown',
+    action: action || '',
+    detail: detail || '',
+    device: getSyncDeviceId()
+  };
+  var log = lsGet(BL_KEY, []);
+  log.push(entry);
+  // Keep only last BL_MAX_LOCAL
+  if(log.length > BL_MAX_LOCAL) log = log.slice(-BL_MAX_LOCAL);
+  lsSet(BL_KEY, log);
+}
+
+function blGetUnsynced(){
+  return lsGet(BL_KEY, []).filter(function(e){ return !e._synced; });
+}
+
+function blMarkSynced(ts_list){
+  var log = lsGet(BL_KEY, []);
+  var tsSet = {};
+  ts_list.forEach(function(ts){ tsSet[ts]=true; });
+  log.forEach(function(e){ if(tsSet[e.ts]) e._synced=true; });
+  lsSet(BL_KEY, log);
+}
+
+async function blPushToSupabase(){
+  var cfg = sbGetConfig();
+  if(!cfg.url||!cfg.key||!cfg.account) return;
+  var unsync = blGetUnsynced();
+  if(!unsync.length) return;
+  try{
+    var rows = unsync.map(function(e){
+      return {
+        user_id: cfg.account,
+        ts: e.ts,
+        dow: e.dow,
+        hour: e.hour,
+        type: e.type,
+        card: e.card,
+        action: e.action,
+        detail: e.detail,
+        device_id: e.device
+      };
+    });
+    var endpoint = cfg.url.replace(/\/+$/,'')+'/rest/v1/button_log';
+    var res = await fetch(endpoint,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':cfg.key,
+        'Authorization':'Bearer '+cfg.key,
+        'Prefer':'return=minimal'
+      },
+      body: JSON.stringify(rows)
+    });
+    if(res.ok||res.status===201){
+      blMarkSynced(unsync.map(function(e){return e.ts;}));
+      console.log('[BL] Pushed '+rows.length+' events to Supabase');
+    }
+  }catch(e){
+    console.warn('[BL] Push failed:',e.message);
+  }
+}
+// ══════════════════════════════════════════
 function itemEffectiveMs(it){
   if(!it||typeof it!=='object')return 0;
   return Math.max(
@@ -6673,6 +6782,7 @@ async function sbPush(){
     if(res.ok||res.status===200||res.status===201){
       restoreSnapshot(payload);
       sbSetStatus('Push successful — data saved to cloud','ok');
+      blPushToSupabase(); // push button log to separate table
       sbAddLog('PUSH ↑',true,'Account: '+cfg.account);
       saveSyncLog('PUSH',getDeviceName(),new Date().toISOString());
       if(typeof confetti==='function'){
@@ -7275,16 +7385,27 @@ function qtRender(){
   });
   h+='</div>';
 
+  // Progress bar
+  var qtTotal=QT_DATA?QT_DATA.length:100;
+  var qtRead=(qtState.history||[]).length;
+  var qtPct=Math.round(qtRead/qtTotal*100);
+  h+='<div style="margin-bottom:12px">';
+  h+='<div style="display:flex;justify-content:space-between;font-size:var(--t-xs);color:var(--dim);margin-bottom:4px">';
+  h+='<span>'+qtRead+' / '+qtTotal+' tafsir read</span>';
+  h+='<span style="color:var(--ca)">'+qtPct+'%</span>';
+  h+='</div>';
+  h+='<div style="height:4px;background:rgba(255,255,255,.06);border-radius:2px">';
+  h+='<div style="height:100%;width:'+qtPct+'%;background:var(--ca);border-radius:2px;transition:width .4s"></div>';
+  h+='</div></div>';
+
   if(tab==='today'){
     var v = qtCurrent();
     if(!v){h+='<div class="dim-11">No verse found.</div>';}
     else if(qtState.readToday){
-      h+='<div style="padding:12px;text-align:center;border:1px solid rgba(255,204,0,.15);margin-bottom:12px">';
-      h+='<div style="font-size:var(--t-body);margin-bottom:6px">✓</div>';
-      h+='<div style="font-size:var(--t-md);color:var(--ca)">Read for today</div>';
-      h+='<div style="font-size:var(--t-sm);color:var(--dim);margin-top:4px">'+v.surah_name+' · '+v.verse+'</div>';
-      h+='</div>';
       h+=qtRenderVerse(v, !!qtState._expanded, false);
+      h+='<div style="margin-top:10px;padding:8px 12px;border:1px solid rgba(255,204,0,.2);background:rgba(255,204,0,.04);display:flex;align-items:center;justify-content:center;gap:8px">';
+      h+='<span style="color:var(--ca)">✓</span><span style="font-size:var(--t-sm);color:var(--ca)">Read for today</span><span style="font-size:var(--t-xs);color:var(--dim)">'+v.surah_name+' · '+v.verse+'</span>';
+      h+='</div>';
     } else {
       h+=qtRenderVerse(v, !!qtState._expanded, true);
     }
