@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-19 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-20 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -904,7 +904,7 @@ var QNAV_CARDS=[
   ['calendar', '▦', 'Calendar', 'var(--cpr)'],
   ['schedule', '🕖', 'Schedule', 'var(--cpr)'],
   ['books', '📖', 'Books', '#9b6fff'],
-  ['goals', '🎯', 'Goals', '#bf5fff'],
+  ['goals', '🎯', 'Goals', '#bf5fff'],,
   ['pomodoro', '⏱', 'Pomodoro', 'var(--cp)'],
   ['prayer-tracker', '📈', 'Salah Tracker', 'var(--ca)'],
   ['mood-log', '🌊', 'Mood Log', '#869BAB'],
@@ -5666,6 +5666,12 @@ function arStartFireflies(){
   draw();
 }
 
+var _arArabicSize=parseInt(localStorage.getItem('ar_arabic_size')||'28');
+function arSetSize(delta){
+  _arArabicSize=Math.max(16,Math.min(72,_arArabicSize+delta));
+  localStorage.setItem('ar_arabic_size',_arArabicSize);
+  arRender();
+}
 function arRender(){
   var el=document.getElementById('ar-body');
   var badge=document.getElementById('ar-badge');
@@ -5735,10 +5741,14 @@ function arRender(){
       var isReview=!!arState.known[card.key]||!!arState.struggling[card.key];
       h+='<div class="mb-10">';
       // Label
-      h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:8px">';
-      h+=card.surah.name+' · Ayah '+card.ayahNum+(isReview?' · review':'')+(streak>=3?' · '+'★'.repeat(Math.min(streak,6)):'');
+      // Card type badge + surah info
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
+      h+=isReview
+        ?'<span style="font-size:var(--t-xxs);padding:2px 8px;border:1px solid rgba(255,165,0,.5);background:rgba(255,165,0,.12);color:rgba(255,165,0,.9);letter-spacing:1px">↺ REVIEW</span>'
+        :'<span style="font-size:var(--t-xxs);padding:2px 8px;border:1px solid rgba(0,255,136,.4);background:rgba(0,255,136,.08);color:rgba(0,255,136,.9);letter-spacing:1px">★ NEW</span>';
+      h+='<span style="font-size:var(--t-xs);color:rgba(0,229,255,.6)">'+card.surah.name+' · Ayah '+card.ayahNum+'</span>';
+      if(streak>=3)h+='<span style="font-size:var(--t-xs);color:rgba(255,165,0,.7)">'+('★'.repeat(Math.min(streak,6)))+'</span>';
       h+='</div>';
-      // Prompt box
       h+='<div style="font-size:var(--t-sub);color:#ffcc00;padding:14px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.15);text-align:center;margin-bottom:12px;letter-spacing:1px">';
       h+=card.surah.name+'<br><span style="font-size:var(--t-h2);font-family:monospace">'+card.ayahNum+'</span>';
       h+='</div>';
@@ -5755,19 +5765,19 @@ function arRender(){
         // Prior ayah
         if(_prevText){
           h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-bottom:6px;opacity:.65">';
-          h+='<div style="font-size:var(--t-sub);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_prevText+'</div>';
+          h+='<div style="font-size:'+_arArabicSize+'px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.95)">'+_prevText+'</div>';
           h+='<div style="font-size:var(--t-h1);font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an-1)+'</div>';
           h+='</div>';
         }
         // Current ayah
         h+='<div style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,204,0,.05);border:1px solid rgba(255,204,0,.25);margin-bottom:6px">';
-        h+='<div style="font-size:var(--t-h1);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:var(--text)">'+card.text+'</div>';
+        h+='<div style="font-size:'+_arArabicSize+'px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:var(--text)">'+card.text+'</div>';
         h+='<div style="font-size:36px;font-family:monospace;color:rgba(255,204,0,.7);flex-shrink:0;min-width:36px;text-align:center;line-height:1">'+_an+'</div>';
         h+='</div>';
         // Next ayah
         if(_nextText){
           h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-bottom:12px;opacity:.65">';
-          h+='<div style="font-size:var(--t-sub);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.6)">'+_nextText+'</div>';
+          h+='<div style="font-size:'+_arArabicSize+'px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:rgba(255,255,255,.95)">'+_nextText+'</div>';
           h+='<div style="font-size:var(--t-h1);font-family:monospace;color:rgba(255,204,0,.25);flex-shrink:0;min-width:32px;text-align:center;line-height:1">'+(_an+1)+'</div>';
           h+='</div>';
         }
@@ -6124,8 +6134,18 @@ function acEnsureState(){
       var nr=acState.nextReview[k];
       return !nr||nr<=todayStr;
     });
+    // Shuffle new cards
     for(var i=newCards.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=newCards[i];newCards[i]=newCards[j];newCards[j]=t;}
-    acState.todayQueue=[].concat(reviewCards,newCards.slice(0,6));
+    // Shuffle review cards too — no sequential surah order
+    for(var i=reviewCards.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=reviewCards[i];reviewCards[i]=reviewCards[j];reviewCards[j]=t;}
+    // Interleave reviews and new cards so they're not grouped
+    var combined=[];
+    var ri=0,ni=0,newSlice=newCards.slice(0,6);
+    while(ri<reviewCards.length||ni<newSlice.length){
+      if(ri<reviewCards.length)combined.push(reviewCards[ri++]);
+      if(ni<newSlice.length)combined.push(newSlice[ni++]);
+    }
+    acState.todayQueue=combined;
     acState.todayIdx=0;
   }
   if(!acState.todayQueue)acState.todayQueue=[];
@@ -6153,6 +6173,12 @@ var acAnswered=false;
 var acCurrentCard=null;
 var acCurrentOpts=null;
 
+var _acArabicSize=parseInt(localStorage.getItem('ac_arabic_size')||'28');
+function acSetSize(delta){
+  _acArabicSize=Math.max(16,Math.min(72,_acArabicSize+delta));
+  localStorage.setItem('ac_arabic_size',_acArabicSize);
+  acRender();
+}
 function acRender(){
   var el=document.getElementById('ac-body');
   var badge=document.getElementById('ac-badge');
@@ -6169,6 +6195,18 @@ function acRender(){
   var totalCards=0;
   if(AC_DATA)AC_DATA.forEach(function(s){s.ayahs.forEach(function(txt){if(acSplitAyah(txt).completion.split(' ').length>1)totalCards++;});});
   if(badge){badge.textContent=correctCount+'/'+totalCards;badge.style.display='';}
+
+  // Arabic size controls
+  var _acSizeBar='<div style="display:flex;align-items:center;gap:5px;margin-bottom:8px;justify-content:flex-end">';
+  _acSizeBar+='<span style="font-size:var(--t-xs);color:var(--dim);margin-right:4px">Arabic</span>';
+  _acSizeBar+='<button onclick="acSetSize(-4)" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer;padding:1px 7px">A-</button>';
+  _acSizeBar+='<span style="font-size:var(--t-xs);color:var(--dim);min-width:30px;text-align:center">'+_acArabicSize+'px</span>';
+  _acSizeBar+='<button onclick="localStorage.removeItem(\'ac_arabic_size\');_acArabicSize=28;acRender()" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:1px 7px">↺</button>';
+  _acSizeBar+='<button onclick="acSetSize(4)" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer;padding:1px 7px">A+</button>';
+  _acSizeBar+='</div>';
+  if(el.children.length===0||!el.querySelector('.ac-size-bar')){    var _acBarDiv=document.createElement('div');_acBarDiv.className='ac-size-bar';
+    _acBarDiv.innerHTML=_acSizeBar;el.insertBefore(_acBarDiv,el.firstChild);
+  } else { el.querySelector('.ac-size-bar').innerHTML=_acSizeBar; }
 
   var h='';
   h+='<div class="flex-row-mb">';
@@ -6210,7 +6248,7 @@ function acRender(){
       h+='</div>';
 
       // Prompt
-      h+='<div style="font-size:var(--t-h1);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;';
+      h+='<div style="font-size:'+_acArabicSize+'px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;';
       h+='padding:12px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.15);margin-bottom:12px;line-height:1.8;color:#00e5ff">';
       h+=card.prompt+' <span style="opacity:.3">...</span></div>';
 
@@ -6698,7 +6736,7 @@ function vsRender(){
   h+='<div style="flex:1;height:4px;background:rgba(255,184,108,.1);border-radius:1px">';
   h+='<div style="flex:1;height:4px;background:rgba(0,255,136,.1);border-radius:1px">';
   h+='<div style="height:100%;width:'+vsPct+'%;background:var(--cg);border-radius:1px;transition:width .4s"></div>';
-  h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+artPct+'%</span>';
+  h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+vsPct+'%</span>';
   h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+vsPct+'%</span>';
 
   // Tab bar
