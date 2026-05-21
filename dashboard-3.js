@@ -6743,6 +6743,7 @@ function vsRender(){
   h+='<div style="height:100%;width:'+vsPct+'%;background:var(--cg);border-radius:1px;transition:width .4s"></div>';
   h+='</div>';
   h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+vsPct+'%</span>';
+  h+='</div>';
 
   // Tab bar
   h+='<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">';
