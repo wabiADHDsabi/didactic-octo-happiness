@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-20 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-21 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -6739,10 +6739,9 @@ function vsRender(){
   // Progress bar
   var vsPct=totalAll>0?Math.round(totalStudied/totalAll*100):0;
   h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
-  h+='<div style="flex:1;height:4px;background:rgba(255,184,108,.1);border-radius:1px">';
   h+='<div style="flex:1;height:4px;background:rgba(0,255,136,.1);border-radius:1px">';
   h+='<div style="height:100%;width:'+vsPct+'%;background:var(--cg);border-radius:1px;transition:width .4s"></div>';
-  h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+vsPct+'%</span>';
+  h+='</div>';
   h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+vsPct+'%</span>';
 
   // Tab bar
