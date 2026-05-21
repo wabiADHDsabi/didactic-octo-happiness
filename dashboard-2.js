@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-20 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-21 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -6032,6 +6032,9 @@ function medRender(){
         medData.log.push({ts:new Date().toISOString(),mid:mid,mname:m?m.name:'?'});
         medSave();medPending=null;medRender();
         safeHap(HAP.check);
+        // Confetti
+        var _r=this.getBoundingClientRect();
+        if(typeof confetti==='function')confetti(_r.left+_r.width/2,_r.top+_r.height/2,'#c896ff');
       } else {
         medPending=mid;
         medRender();
@@ -6417,6 +6420,8 @@ function blRender(){
   var el = document.getElementById('bl-body');
   var badge = document.getElementById('bl-badge');
   if(!el) return;
+  el.style.maxHeight='700px';
+  el.style.overflowY='auto';
 
   var log = lsGet('dash_button_log', []);
   var unsynced = log.filter(function(e){return !e._synced;}).length;

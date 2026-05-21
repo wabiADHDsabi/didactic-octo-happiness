@@ -5682,6 +5682,12 @@ function arRender(){
   }
   el.style.maxHeight='800px';
   el.style.overflowY='auto';
+
+  // Arabic size controls
+  var _arBar=el.querySelector('.ar-size-bar');
+  if(!_arBar){_arBar=document.createElement('div');_arBar.className='ar-size-bar';el.insertBefore(_arBar,el.firstChild);}
+  _arBar.innerHTML='<div style="display:flex;align-items:center;gap:5px;margin-bottom:8px;justify-content:flex-end">'+'<span style="font-size:var(--t-xs);color:var(--dim);margin-right:4px">Arabic</span>'+'<button onclick="arSetSize(-4)" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer;padding:1px 8px">A-</button>'+'<span style="font-size:var(--t-xs);color:var(--dim);min-width:32px;text-align:center">'+_arArabicSize+'px</span>'+'<button onclick="localStorage.removeItem(\'ar_arabic_size\');_arArabicSize=28;arRender()" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:1px 7px">↺</button>'+'<button onclick="arSetSize(4)" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer;padding:1px 8px">A+</button>'+'</div>';
+
   // Apply wide class if enabled
   var _tile=document.querySelector('[data-id="ayah-recall"]');
   if(_tile){
@@ -6263,7 +6269,7 @@ function acRender(){
       opts.forEach(function(opt,idx){
         h+='<button data-acopt="'+idx+'" data-accorrect="'+(opt.c?'1':'0')+'" ';
         h+='style="padding:10px 12px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.15);';
-        h+='color:var(--text);font-family:\'Scheherazade New\',serif;font-size:var(--t-h2);direction:rtl;';
+        h+='color:var(--text);font-family:\'Scheherazade New\',serif;font-size:'+_acArabicSize+'px;direction:rtl;';
         h+='text-align:right;cursor:pointer;line-height:1.6;width:100%">'+opt.t+'</button>';
       });
       h+='</div>';

@@ -53,7 +53,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-19 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-20 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -3458,8 +3458,126 @@ setTimeout(initSettings,200);
   var waveSpeedTarget=0.5;
   var stormTimer=0;
   var stormCooldown=0;
-  var MSGS_CALM=['stay on the raft.','the sea does not apologize.','breathe. keep rowing.','you have survived every storm so far.','the horizon is always honest.','stillness is not emptiness.','trust the current.','what you resist, you carry.','the water holds you.','rest. you earned it.','let the night be quiet.','one stroke at a time.'];
-  var MSGS_STORM=['stay on the raft.','this too shall pass.','hold on.','the storm is not forever.','you are stronger than the waves.','breathe through it.','keep your hands on the oar.','fear is not the enemy. stopping is.','rough seas make skilled sailors.','do not let go.'];
+  var MSGS_CALM=[
+    'stay on the raft.','breathe.','you got this.','one wave at a time.','still here.','grounded.',
+    'the water is beneath you, not inside you.','float. just float.','the horizon is steady.',
+    'you have survived every wave so far.','rest. the raft holds you.','it is okay to just exist.',
+    'the ocean does not ask permission.','you are not the water.','this moment is enough.',
+    'be still.','look at the horizon.','you are allowed to rest.','the raft is solid.',
+    'your weight is held.','drift gently.','peace is not the absence of waves.',
+    'you are doing it right now.','keep your eyes soft.','the water reflects the sky.',
+    'nothing is required of you right now.','breathe in. breathe out.','you belong here.',
+    'let the ocean carry what you cannot.','stillness is not weakness.','anchor yourself in now.',
+    'the raft knows your weight.','you are enough as you are.','gentleness is strength.',
+    'not every moment needs to mean something.','stay. just stay.','here. present. alive.',
+    'the stars have always been there.','float like you mean it.','rest is not retreat.',
+    'you have made it to today.','slow down. the destination can wait.',
+    'your breath is the only compass you need.','trust the raft.','you are not lost.',
+    'the sea has seen storms before. so have you.','small movements. steady hands.',
+    'you were built for this.','peace finds those who wait for it.',
+    'the raft is your ground.','you do not need to paddle right now.',
+    'watch the light on the water.','nothing is permanent, not even the storm.',
+    'you are more than the waves.','one breath. then another.',
+    'what is not in your control is not your concern.',
+    'the obstacle is the way.',
+    'you suffer more in imagination than in reality.',
+    'how long will you wait before you demand the best of yourself?',
+    'the impediment to action advances action. what stands in the way becomes the way.',
+    'do not indulge in dreams of what you do not have.',
+    'confine yourself to the present.',
+    'the happiness of your life depends on the quality of your thoughts.',
+    'you have power over your mind, not outside events.',
+    'waste no more time arguing what a good person should be. be one.',
+    'if it is not right, do not do it. if it is not true, do not say it.',
+    'never let the future disturb you. you will meet it with the same reason you bring today.',
+    'look within. within is the fountain of good.',
+    'the soul becomes dyed with the color of its thoughts.',
+    'dwell on the beauty of life. watch the stars, and see yourself running with them.',
+    'he who lives in harmony with himself lives in harmony with the universe.',
+    'nothing is as it seems to be at first glance.',
+    'this life is a single breath in eternity. breathe it with intention.',
+    'sabr is not waiting. it is trusting while you wait.',
+    'the dunya is a bridge. cross it. do not build your house upon it.',
+    'every soul shall taste death. what will you have given before that moment?',
+    'you were not created for this world. you were sent through it.',
+    'be patient. what Allah has decreed will reach you even if it is between two mountains.',
+    'the believer who perseveres through difficulty has already won.',
+    'this hardship is a station. not a destination.',
+    'what is destined for you will find you even if you are behind locked doors.',
+    'the world is the prison of the believer and the paradise of the disbeliever. so rest easy — your true home is ahead.',
+    'do not grieve over what has passed. it was written before you were born.',
+    'your sustenance will not stop because you are patient. it stops when it is finished.'
+  ];
+  var MSGS_STORM=[
+    'hold on.','this too shall pass.','breathe through it.','still on the raft.',
+    'you are not the storm.','steady.','the storm is not you.',
+    'grip the raft. breathe.','you have been through worse.',
+    'wild water, steady heart.','the raft holds in storms too.',
+    'this wave will end. they always do.','you are stronger than the sea.',
+    'do not fight it. ride it.','let the wave pass through you.',
+    'the storm does not define you.','you are the raft, not the water.',
+    'chaos outside. stillness inside.','lean into the raft.',
+    'every storm has a last wave.','you are still here. that matters.',
+    'breathe. the air is still there.','the horizon has not moved.',
+    'storms cannot last forever.','hold on. morning comes.',
+    'you are not alone on this water.','the raft was made for this.',
+    'do not mistake the storm for the truth.','rough water makes strong sailors.',
+    'this intensity will soften.','your presence here is an act of courage.',
+    'the waves are loud but you are louder.',
+    'pain moves through. it does not stay.',
+    'even in the storm, you are afloat.','breathe first. everything else second.',
+    'you are not required to be okay right now.','just stay on the raft.',
+    'the sea tests everyone eventually.','wild outside. you choose inside.',
+    'the storm thinks it owns you. it does not.',
+    'one moment at a time. just this one.','endure. then rest.',
+    'the raft does not sink in storms.','neither do you.',
+    'somewhere beyond this, there is calm water.',
+    'trust yourself the way you trust the raft.',
+    'it is okay to feel the waves. feel them. stay.',
+    'indeed, with hardship comes ease.',
+    'and He found you lost and guided you.',
+    'verily, Allah is with the patient.',
+    'do not grieve. indeed Allah is with us.',
+    'put your trust in Allah. He loves those who trust.',
+    'Allah does not burden a soul beyond what it can bear.',
+    'whoever fears Allah, He will make for him a way out.',
+    'be patient. the earth is wide and the mercy of Allah is wider.',
+    'turn to Allah before you return to Allah.',
+    'the heart finds rest in the remembrance of Allah.',
+    'be in this world as though you were a stranger or a traveler.',
+    'speak good or remain silent.',
+    'the strong person is not the one who wrestles. it is the one who controls himself in anger.',
+    'make things easy and do not make them difficult.',
+    'none of you truly believes until he loves for his brother what he loves for himself.',
+    'take benefit of five before five: youth before old age, health before sickness.',
+    'the best of you are those who are best to their families.',
+    'feed the hungry, visit the sick, free the captive.',
+    'whoever saves one life it is as though he saved all of mankind.',
+    'seek knowledge from the cradle to the grave.',
+    'the ink of the scholar is more sacred than the blood of the martyr.',
+    'be merciful to others and Allah will be merciful to you.',
+    'the world is a prison for the believer and a paradise for the disbeliever.',
+    'O turner of hearts, keep our hearts firm on your religion.',
+    'Allah is beautiful and loves beauty.',
+    'charity does not decrease wealth.',
+    'pray as though everything depends on Allah. work as though everything depends on you.',
+    'the greatest jihad is to battle your own soul.',
+    'make dua. the door of Allah is always open.',
+    'this life is but a moment. spend it in obedience.',
+    'patience is half of faith.',
+    'gratitude turns what we have into enough.',
+    'everything happens by the will of Allah. find peace in that.',
+    'verily, with hardship comes ease. with hardship comes ease. twice He said it.',
+    'Allah does not burden a soul beyond what it can bear. you can bear this.',
+    'the prophets were tested more than anyone. and they were the most beloved.',
+    'sabr has no expiry date. hold.',
+    'call upon Allah in the darkest hour. that is exactly what this hour is for.',
+    'your pain is not punishment. sometimes it is elevation.',
+    'the darkest point of the night is just before fajr.',
+    'do not despair of the mercy of Allah. He is closer than you think.',
+    'this too is written. and everything written has a wisdom you cannot yet see.',
+    'Allah is with those who are patient. you are not alone on this water.'
+  ];
   var curMsg=MSGS_CALM[0];
   var msgTimer=300;
 
@@ -7030,9 +7148,16 @@ function juaAllSeen(s){
 function juaGetCard(s){
   var today=todayKey();
   var count=s==='forward'||s==='backward'?JUA_DATA.length-1:JUA_DATA.length;
-  for(var i=0;i<count;i++){var k=juaCardKey(s,i);var c=juaState.cards[k];if(c&&c.seen&&c.nextReview&&c.nextReview<=today)return i;}
+  // Build shuffled index array so surahs come in random order
+  var indices=[];for(var i=0;i<count;i++)indices.push(i);
+  // Seeded shuffle based on today so order is consistent within a day
+  var seed=today.split('-').join('')%997;
+  for(var i=indices.length-1;i>0;i--){var j=(seed*31+i*17)%i|0;var t=indices[i];indices[i]=indices[j];indices[j]=t;}
+  // Review cards first (due today)
+  for(var n=0;n<indices.length;n++){var i=indices[n];var k=juaCardKey(s,i);var c=juaState.cards[k];if(c&&c.seen&&c.nextReview&&c.nextReview<=today)return i;}
+  // Then new cards
   var newCount=0;
-  for(var i=0;i<count;i++){var k=juaCardKey(s,i);var c=juaState.cards[k];if(!c||!c.seen){if(newCount<5)return i;newCount++;}}
+  for(var n=0;n<indices.length;n++){var i=indices[n];var k=juaCardKey(s,i);var c=juaState.cards[k];if(!c||!c.seen){if(newCount<5)return i;newCount++;}}
   return null;
 }
 function juaAnswerCard(s,idx,result){
@@ -7148,18 +7273,21 @@ function juaRenderStudy(){
   return h+juaRenderOrder(surah,idx,sec);
 }
 function juaCloze(text, seed){
-  // Split into words, blank ~50% of meaningful words (not stopwords)
+  // Blank ~30% of meaningful words, max 3 blanks per sentence
   var stopwords=['a','an','the','and','or','but','of','in','on','at','to','for',
     'is','are','was','were','be','been','being','it','its','that','this','which',
     'with','as','by','from','into','through','during','before','after','about',
     'against','between','into','through','he','she','they','we','you','who','what'];
   var words=text.split(' ');
-  // Seeded pseudo-random so same card shows same blanks in same session
   var rng=function(i){return ((seed*31+i*17)%100)/100;};
+  var blanked=0;
+  var maxBlanks=Math.max(1,Math.min(3,Math.floor(words.length*0.25)));
   return words.map(function(w,i){
     var clean=w.replace(/[^a-zA-Z]/g,'').toLowerCase();
     if(clean.length<=2||stopwords.indexOf(clean)>=0)return w;
-    return rng(i)<0.5?'<span style="color:rgba(255,204,0,.25);border-bottom:1px solid rgba(255,204,0,.3);min-width:40px;display:inline-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>':w;
+    if(blanked>=maxBlanks)return w;
+    if(rng(i)<0.3){blanked++;return '<span style="color:rgba(255,204,0,.25);border-bottom:1px solid rgba(255,204,0,.3);min-width:40px;display:inline-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';}
+    return w;
   }).join(' ');
 }
 
