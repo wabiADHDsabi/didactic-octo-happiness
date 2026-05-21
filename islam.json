@@ -1,0 +1,1692 @@
+[
+  {
+    "id": 1,
+    "title": "The Meaning of La Ilaaha Illa Allah",
+    "topic": "Tawheed (Monotheism)",
+    "question": "What are the conditions and the true meaning of the testimony of faith?",
+    "notes_sources": "It means there is no true God but Allah. It must be fulfilled truthfully and sincerely, dedicating all acts of worship solely to Him, and requires love for Allah, His Messenger, and all Muslims [1-3]."
+  },
+  {
+    "id": 2,
+    "title": "The Three Aspects of Tawheed",
+    "topic": "Tawheed (Monotheism)",
+    "question": "What are the three categories of Islamic Monotheism?",
+    "notes_sources": "1. Lordship (Rububiyya - Creator and Sustainer), 2. Worship (Uluhiyya - none has the right to be worshipped but Him), 3. Names & Attributes (Asma-was-Sifaat - confirming His attributes without twisting their meanings) [4, 5]."
+  },
+  {
+    "id": 3,
+    "title": "The Danger of Polytheism",
+    "topic": "Shirk",
+    "question": "Why is calling upon other than Allah considered the greatest wrongdoing?",
+    "notes_sources": "It is the greatest Shirk. Calling others for help from the unseen leads to disbelief (Kufr) and cancels good deeds. Paradise and sustenance can be requested from none other than Allah [6]."
+  },
+  {
+    "id": 4,
+    "title": "Hidden Polytheism",
+    "topic": "Amulets and Charms",
+    "question": "Is it permissible to wear rings, twine, or talismans for protection?",
+    "notes_sources": "No. To seek refuge in, vow to, or wear talismans/amulets for protection from other than Allah is an act of Shirk [7, 8]."
+  },
+  {
+    "id": 5,
+    "title": "The Six Pillars",
+    "topic": "Iman (Faith)",
+    "question": "What are the fundamental articles of Faith?",
+    "notes_sources": "Belief in: 1. Allah, 2. His Angels, 3. His Revealed Books, 4. His Messengers, 5. The Day of Resurrection, 6. Al-Qadr (Divine Decree - the good and bad thereof) [4, 9]."
+  },
+  {
+    "id": 6,
+    "title": "The World of Angels",
+    "topic": "Angels",
+    "question": "What are the specific duties of Jibreel, Mikaaeel, and Israafeel?",
+    "notes_sources": "Jibreel is in charge of revelation ('life of the heart'), Israafeel blows the trumpet for resurrection ('reviving bodies'), and Mikaaeel is responsible for rain and vegetation ('sources of life') [10]."
+  },
+  {
+    "id": 7,
+    "title": "The Divine Decree",
+    "topic": "Al-Qadr",
+    "question": "What are the four levels of belief in Predestination (Qadar)?",
+    "notes_sources": "1. Allah's eternal knowledge of everything, 2. Allah has written everything in the Preserved Tablet, 3. Allah's all-encompassing Irresistible Will, 4. Allah is the Creator of all things [11, 12]."
+  },
+  {
+    "id": 8,
+    "title": "The Five Pillars",
+    "topic": "Islam",
+    "question": "What are the five foundational pillars of Islam?",
+    "notes_sources": "1. Testimony of Faith, 2. Performing Prayers (5 times daily), 3. Paying Zakat, 4. Fasting Ramadan, 5. Performing Hajj (if capable) [3]."
+  },
+  {
+    "id": 9,
+    "title": "The Core Purpose",
+    "topic": "Worship ('Ibaadah)",
+    "question": "Why did Allah create mankind and jinn?",
+    "notes_sources": "'I did not create jinn and mankind except that they should worship Me' (51:56). Worship is a comprehensive term for everything Allah loves and approves of (prayer, honesty, charity, etc.) [13, 14]."
+  },
+  {
+    "id": 10,
+    "title": "Acceptance of Deeds",
+    "topic": "Worship",
+    "question": "What two conditions must be met for a deed to be accepted by Allah?",
+    "notes_sources": "1. Sincerity (done purely for Allah's sake to earn His pleasure). 2. Correctness (done according to the Sunnah of the Prophet Muhammad) [15-18]."
+  },
+  {
+    "id": 11,
+    "title": "The Soul of the Deed",
+    "topic": "Sincerity (Ikhlas)",
+    "question": "Why must deeds be completely free from showing off (Riyaa')?",
+    "notes_sources": "Allah does not accept a deed shared with another. Ikhlas means stripping oneself of worshipping any besides Allah; it is the exact opposite of associating partners with Him [19-21]."
+  },
+  {
+    "id": 12,
+    "title": "Transforming the Mundane",
+    "topic": "Intention (Niyyah)",
+    "question": "How can everyday habits become acts of worship?",
+    "notes_sources": "A believer with strong intention can transform permissible daily deeds (like sleeping to gain strength to worship, or spending on family) into acts of obedience pleasing to Allah [22-25]."
+  },
+  {
+    "id": 13,
+    "title": "Establishing the Prayer",
+    "topic": "Salah",
+    "question": "What is the difference between 'praying' and 'establishing the prayer'?",
+    "notes_sources": "Establishing prayer means executing it with proper outward mechanics (Wudhu, timing, congregation) and inward states (diligence, submission, humbleness, calmness) [26, 27]."
+  },
+  {
+    "id": 14,
+    "title": "The Pillar of the Religion",
+    "topic": "Salah",
+    "question": "What is the first matter a person will be held accountable for on the Day of Judgment?",
+    "notes_sources": "The prayer. If it is sound, the rest of the deeds will be sound. The Prophet warned that abandoning prayer is what separates a person from polytheism and disbelief (Kufr) [28, 29]."
+  },
+  {
+    "id": 15,
+    "title": "Preparing for Prayer",
+    "topic": "Conditions of Salah",
+    "question": "What are the seven conditions required before starting the prayer?",
+    "notes_sources": "1. Islamic faith, 2. Intention, 3. Cleanliness (body/clothes/place), 4. Purification (Wudhu/Ghusl), 5. Concealing the 'Awrah, 6. Facing the Qiblah, 7. Prescribed timing [30-32]."
+  },
+  {
+    "id": 16,
+    "title": "Nullifiers of Purity",
+    "topic": "Wudhu",
+    "question": "What actions invalidate a person's ablution (Wudhu)?",
+    "notes_sources": "Passing wind, urinating, defecating, or deep sleep. Note: Passing wind only requires performing a new Wudhu; it does not require washing the private parts (Istinja) [33]."
+  },
+  {
+    "id": 17,
+    "title": "The Barrier in Prayer",
+    "topic": "The Sutrah",
+    "question": "Why is it important to place an object (Sutrah) in front of you while praying?",
+    "notes_sources": "It acts as a barrier preventing passersby from invalidating or diminishing your prayer. The Prophet commanded stopping anyone who tries to pass between the worshipper and the Sutrah [34-37]."
+  },
+  {
+    "id": 18,
+    "title": "Common Prayer Mistakes",
+    "topic": "Errors in Salah",
+    "question": "What are some common physical mistakes people make during prostration (Sujood)?",
+    "notes_sources": "Failing to prostrate on all seven bones (forehead/nose, two palms, two knees, toes of both feet), raising the feet off the ground, or spreading the arms flat on the floor like a dog [38-40]."
+  },
+  {
+    "id": 19,
+    "title": "Presence of Heart",
+    "topic": "Khushu' in Salah",
+    "question": "How can one maintain focus and solemnity during prayer?",
+    "notes_sources": "By looking at the place of prostration, avoiding fidgeting, and realizing you are standing before Allah. Looking around is described by the Prophet as Shaytan 'stealing' from the prayer [41-43]."
+  },
+  {
+    "id": 20,
+    "title": "Invalidating the Prayer",
+    "topic": "Nullifiers of Salah",
+    "question": "What actions will render a prayer completely invalid?",
+    "notes_sources": "Talking intentionally, laughing, eating, drinking, uncovering the 'Awrah, turning away from the Qiblah, or failing to observe any of the core pillars of the prayer [44-46]."
+  },
+  {
+    "id": 21,
+    "title": "Rectifying Mistakes",
+    "topic": "Sujuud As-Sahw",
+    "question": "How do you correct an accidental omission or addition in your prayer?",
+    "notes_sources": "By performing two prostrations of forgetfulness (Sujuud As-Sahw) at the end of the prayer. If a core pillar was omitted, the pillar itself must first be repeated [45, 47, 48]."
+  },
+  {
+    "id": 22,
+    "title": "The Social Pillar",
+    "topic": "Zakat",
+    "question": "Why is paying Zakat a crucial foundation of Islamic society?",
+    "notes_sources": "It purifies wealth, cleanses the soul of greed, and supports the needy. It is ranked closely with prayer, mentioned alongside it 82 times in the Quran, and secures Allah's mercy [49]."
+  },
+  {
+    "id": 23,
+    "title": "The School of Self-Restraint",
+    "topic": "Fasting (Sawm)",
+    "question": "What are the main spiritual goals of fasting in Ramadan?",
+    "notes_sources": "Fasting generates self-restraint, piety, and God-consciousness. A valid fast requires the intention to fast to be made for the sake of Allah prior to dawn [50-52]."
+  },
+  {
+    "id": 24,
+    "title": "The Ultimate Journey",
+    "topic": "Hajj",
+    "question": "What is the spiritual reward for an accepted Hajj?",
+    "notes_sources": "The Prophet said: 'Whoever performs the Hajj for the sake of Allah and does not commit any lewdness or sins returns like the day in which his mother gave him birth' (sinless) [53]."
+  },
+  {
+    "id": 25,
+    "title": "Acknowledging the Sunnah",
+    "topic": "The Prophetic Way",
+    "question": "Why is the Prophet's Sunnah essential for understanding the Quran?",
+    "notes_sources": "The Sunnah is the practical explanation of the Quran. The Prophet's life defines the morals and laws of the Quran clearly; turning away from his practice is a rejection of true guidance [54, 55]."
+  },
+  {
+    "id": 26,
+    "title": "The Danger of Heresy",
+    "topic": "Bid'ah (Innovation)",
+    "question": "Why are innovations in religion so dangerous?",
+    "notes_sources": "Satan loves Bid'ah more than disobedience because people rarely repent from it, falsely thinking they are doing good. 'Whoever does an action which is not from our affair, it is rejected' [56, 57]."
+  },
+  {
+    "id": 27,
+    "title": "Supreme Love",
+    "topic": "Loving the Prophet",
+    "question": "How much must a believer love the Prophet Muhammad?",
+    "notes_sources": "Complete faith requires loving him more than one's fathers, sons, wealth, and even one's own self. Emulating his character and following his commands is the ultimate proof of this love [58-60]."
+  },
+  {
+    "id": 28,
+    "title": "Taking Account",
+    "topic": "Muhasabah",
+    "question": "Why should a Muslim perform a daily self-accounting?",
+    "notes_sources": "To review obligations and voluntary deeds at the end of the day. If there are shortcomings or sins, one must blame themselves, feel remorse, repent, and rectify the evil done [61, 62]."
+  },
+  {
+    "id": 29,
+    "title": "The Struggle for Patience",
+    "topic": "Sabr",
+    "question": "What are the three levels of patience in Islam?",
+    "notes_sources": "1. Steadfastness in obeying Allah, 2. Steadfastness in avoiding prohibited matters (sins), 3. Patience and restraint at the onset of calamity or hardship [63]."
+  },
+  {
+    "id": 30,
+    "title": "The Fire of Anger",
+    "topic": "Controlling Anger",
+    "question": "What physical mechanics did the Prophet teach to overcome anger?",
+    "notes_sources": "Seek refuge in Allah from Shaytan, keep silent, and change your physical posture (sit down if standing, lie down if sitting) to physically quell the physiological surge of rage [64, 65]."
+  },
+  {
+    "id": 31,
+    "title": "Honesty and Integrity",
+    "topic": "Truthfulness (Sidq)",
+    "question": "What is the true reality of truthfulness?",
+    "notes_sources": "It is having one's inner state conform exactly to their outer state, devoid of self-conceit or hypocrisy. Allah does not accept any action unless it is done with truthfulness [21, 66-71]."
+  },
+  {
+    "id": 32,
+    "title": "Gratitude to Parents",
+    "topic": "Family Rights",
+    "question": "Why is being dutiful to parents ranked so highly in Islam?",
+    "notes_sources": "Allah closely ties good behavior towards parents with the command to worship Him alone. A mother, in particular, has the greatest right to good companionship due to her hardships in childbearing [72-77]."
+  },
+  {
+    "id": 33,
+    "title": "Harmony in Marriage",
+    "topic": "Spousal Rights",
+    "question": "What are the shared rights between a husband and wife?",
+    "notes_sources": "Loyalty, honesty, mutual trust, love, mercy, and general good manners. The Prophet said: 'The best of you is the one who is best to his family' [78-81]."
+  },
+  {
+    "id": 34,
+    "title": "Leading the Household",
+    "topic": "Husband's Responsibilities",
+    "question": "What are the primary obligations of a husband towards his wife?",
+    "notes_sources": "Providing the dower, complete financial maintenance according to his means, treating her honorably, ensuring her sexual fulfillment, and teaching her the religion [82-86]."
+  },
+  {
+    "id": 35,
+    "title": "Devotion of the Wife",
+    "topic": "Wife's Responsibilities",
+    "question": "What are the main responsibilities of a wife towards her husband?",
+    "notes_sources": "Obeying him in matters that do not disobey Allah, protecting his honor and wealth, guarding the household, and not allowing anyone into the house without his permission [87-89]."
+  },
+  {
+    "id": 36,
+    "title": "Nurturing the Next Generation",
+    "topic": "Rights of Children",
+    "question": "What are the fundamental rights of a child in Islam?",
+    "notes_sources": "Being provided for in a healthy manner, being taught the tenets of the religion, being treated with mercy, impartiality among siblings, and having good examples set by parents [90-92]."
+  },
+  {
+    "id": 37,
+    "title": "Equality Among Offspring",
+    "topic": "Parenting",
+    "question": "Why does Islam strictly forbid favoring one child over another?",
+    "notes_sources": "Favoritism leads to dissension, enmity, and psychological conflict. The Prophet commanded, 'Fear Allah and treat your children fairly,' when a man tried to give a gift to only one of his sons [92, 93]."
+  },
+  {
+    "id": 38,
+    "title": "The Bond of Faith",
+    "topic": "Brotherhood",
+    "question": "Why is Islamic brotherhood stronger than blood ties?",
+    "notes_sources": "Blood ties are often severed for worldly gain, but ties forged by belief in Allah endure eternally. Believers are like one body; if one limb hurts, the rest of the body suffers sleeplessness and fever [94-97]."
+  },
+  {
+    "id": 39,
+    "title": "Obligations to Brethren",
+    "topic": "Islamic Courtesy",
+    "question": "What are the six obligatory acts of courtesy a Muslim owes another?",
+    "notes_sources": "1. Greet them with Salaam, 2. Accept their invitations, 3. Give sincere counsel when asked, 4. Bless them when they sneeze, 5. Visit them when ill, 6. Attend their funeral [98]."
+  },
+  {
+    "id": 40,
+    "title": "Dealing with the Creation",
+    "topic": "Non-Muslims and Animals",
+    "question": "How should a Muslim behave toward non-Muslims and animals?",
+    "notes_sources": "With justice, equity, and excellence. Muslims must call non-Muslims to Allah with wisdom, and treat animals mercifully, killing them humanely and without torture if required for consumption [99-101]."
+  },
+  {
+    "id": 41,
+    "title": "Integrity in Commerce",
+    "topic": "Business Transactions",
+    "question": "What destroys the blessing of a business transaction?",
+    "notes_sources": "Concealing facts, lying, or artificially inflating prices. Honesty and straightforwardness are the keys to a blessed transaction that benefits both parties in this world and the Hereafter [102-104]."
+  },
+  {
+    "id": 42,
+    "title": "The Catastrophe of Wealth",
+    "topic": "Usury (Riba)",
+    "question": "Why does Islam take such a firm stance against usury/interest?",
+    "notes_sources": "It is an appetite hidden in the lower self that seeks easy money without effort or risk, destroying the social fabric and exploiting the needy. The Prophet equated it to a heinous, destructive crime [105, 106]."
+  },
+  {
+    "id": 43,
+    "title": "Guarding the Senses",
+    "topic": "Chastity",
+    "question": "Why does the Quran emphasize lowering the gaze?",
+    "notes_sources": "Lowering the gaze blocks the entrance of Shaytan, protects the private parts, and purifies the heart from illicit sexual desires which lead to societal ruin and the wrath of Allah [107, 108]."
+  },
+  {
+    "id": 44,
+    "title": "The Deception of the World",
+    "topic": "Wealth and Children",
+    "question": "How can excessive love for wealth and children become a trial?",
+    "notes_sources": "If they distract a believer from fulfilling their duties to Allah or pursuing the truth. Wealth and children are a test, and ultimate success lies in preferring the eternal reward of the Hereafter [60, 109-112]."
+  },
+  {
+    "id": 45,
+    "title": "Remembering the Inevitable",
+    "topic": "Death",
+    "question": "How does remembering death benefit the believer?",
+    "notes_sources": "It crushes worldly attachments, encourages urgent repentance, and focuses the mind on preparing for the eternal life to come. Death is the doorway every soul must eventually pass through [113, 114]."
+  },
+  {
+    "id": 46,
+    "title": "The Ultimate Questions",
+    "topic": "The Grave (Barzakh)",
+    "question": "What happens to the soul immediately after burial?",
+    "notes_sources": "Two angels make the person sit up and ask: 'Who is your Lord?', 'What is your Deen?', 'Who is your Prophet?' The believer answers truthfully and receives a glimpse of Paradise, while the hypocrite doubts [115-117]."
+  },
+  {
+    "id": 47,
+    "title": "The Day of Justice",
+    "topic": "The Resurrection",
+    "question": "What occurs on the Day of Judgment?",
+    "notes_sources": "Mankind will be resurrected to stand before their Lord. No one will be wronged, and true success will be having one's deeds weighed, removing oneself from the Fire, and entering Paradise [118, 119]."
+  },
+  {
+    "id": 48,
+    "title": "The Abode of Bliss",
+    "topic": "Paradise (Jannah)",
+    "question": "How is the physical beauty of Paradise described?",
+    "notes_sources": "Its soil is musk and saffron, its rocks are pearls, and its buildings are bricks of gold and silver. It contains things no eye has seen, no ear has heard, and no mind has imagined [120-122]."
+  },
+  {
+    "id": 49,
+    "title": "The Supreme Reward",
+    "topic": "Seeing Allah",
+    "question": "What is the absolute greatest delight for the people of Paradise?",
+    "notes_sources": "Gazing upon the Face of Allah. It is a pleasure of the heart that completely surpasses all physical delights of Paradise, like rivers, mansions, or fruits [123-125]."
+  },
+  {
+    "id": 50,
+    "title": "The Examples of Greatness",
+    "topic": "The Sahabah (Companions)",
+    "question": "Why is it crucial to study the lives of the Prophet's Companions?",
+    "notes_sources": "They represent the highest pinnacle of faith, sacrifice, and loyalty. Following their example is the best way to understand how the Quran and Sunnah are practically applied [126-133]."
+  },
+  {
+    "id": 51,
+    "title": "Sincere Advice",
+    "topic": "Naseehah",
+    "question": "Why did the Prophet say 'The religion is Naseehah (sincere advice)'?",
+    "notes_sources": "It embodies every virtue. It means sincerity to Allah, His Book, His Messenger, the leaders of the Muslims, and the common folk, ensuring justice and truth prevail throughout the Ummah [134]."
+  },
+  {
+    "id": 52,
+    "title": "Advising with Wisdom",
+    "topic": "Giving Counsel",
+    "question": "How should a Muslim advise another believer?",
+    "notes_sources": "Advice should be given with kindness, gentleness, and in private. Exhorting someone in public is considered scolding and humiliation rather than sincere advice [135]."
+  },
+  {
+    "id": 53,
+    "title": "Healing the Heart",
+    "topic": "The Quran",
+    "question": "What is the reward and etiquette for reciting the Quran?",
+    "notes_sources": "It should be recited with reflection and understanding. It acts as an intercessor on the Day of Judgment, opening blind eyes and locked hearts, and serving as a light in this world [136, 137]."
+  },
+  {
+    "id": 54,
+    "title": "Reaping the Fruits of Knowledge",
+    "topic": "Seeking Knowledge",
+    "question": "Why is acquiring Islamic knowledge mandatory?",
+    "notes_sources": "Seeking knowledge atones for sins. However, knowledge without practice is fruitless; a scholar must practice what they preach to truly benefit themselves and others [138, 139]."
+  },
+  {
+    "id": 55,
+    "title": "Polishing the Soul",
+    "topic": "Dhikr (Remembrance)",
+    "question": "How does Dhikr impact the heart of the believer?",
+    "notes_sources": "Dhikr polishes the heart, removes the rust of heedlessness, and brings one closer to Allah. The Prophet called those who engage in abundant Dhikr 'the Mufarridoon' who take the lead [140, 141]."
+  },
+  {
+    "id": 56,
+    "title": "The Gardens of Jannah",
+    "topic": "Gatherings of Dhikr",
+    "question": "What happens when Muslims gather to remember Allah?",
+    "notes_sources": "Angels surround them, mercy descends upon them, and Allah mentions them to those with Him. The Prophet called these gatherings the 'gardens of Jannah' on earth [142]."
+  },
+  {
+    "id": 57,
+    "title": "Guarding the Tongue",
+    "topic": "Speech",
+    "question": "What are the dangers of unrestricted speech?",
+    "notes_sources": "Talking too much or joking excessively weakens one's honor, instills hatred, and hardens the heart. The Prophet said: 'Whoever remained silent, gained salvation' [143, 144]."
+  },
+  {
+    "id": 58,
+    "title": "The Etiquette of Greeting",
+    "topic": "Salaam",
+    "question": "Who should initiate the greeting of peace (Salaam)?",
+    "notes_sources": "The one who is closer to Allah precedes in saying Salaam. A complete greeting involves a warm smile and a physical handshake, which completes the courtesy [145, 146]."
+  },
+  {
+    "id": 59,
+    "title": "Visiting the Sick",
+    "topic": "Islamic Brotherhood",
+    "question": "What is the spiritual reward for visiting a sick Muslim?",
+    "notes_sources": "It is one of the foundational rights of a Muslim. The visitor is enveloped in mercy, and it serves as an opportunity to ask the sick person for supplications, as they are close to Allah's mercy [147, 148]."
+  },
+  {
+    "id": 60,
+    "title": "The Best of Generations",
+    "topic": "The Predecessors",
+    "question": "What made the generation of the Prophet the greatest?",
+    "notes_sources": "The Prophet said, 'The best people are those living in my generation.' They were unswerving in their faith, supported the Messenger, and sacrificed their wealth and lives for Islam [126, 130]."
+  },
+  {
+    "id": 61,
+    "title": "Steps of Wudhu",
+    "topic": "Purification",
+    "question": "What are the essential acts of Wudhu (ablution)?",
+    "notes_sources": "The essential acts include washing the entire face (including rinsing the mouth and nostrils), washing both arms up to the elbows, wiping the whole head from hairline to the nape, and washing both feet up to the ankles [1], [2]. These must be done in the correct sequence and continuously without unnecessary pauses [1]."
+  },
+  {
+    "id": 62,
+    "title": "Nullifiers of Wudhu",
+    "topic": "Purification",
+    "question": "What invalidates a person's Wudhu?",
+    "notes_sources": "Wudhu is invalidated by passing wind, urinating, defecating, deep sleep, or losing consciousness [1], [2]. If a person simply passes wind, they do not need to wash their private parts (Istinja); they only need to perform a new Wudhu [3], [4]."
+  },
+  {
+    "id": 63,
+    "title": "Dry Ablution",
+    "topic": "Tayammum",
+    "question": "When is Tayammum (dry ablution) permissible?",
+    "notes_sources": "Tayammum is permitted when water is completely unavailable, when acquiring it is too difficult or expensive, or when using water would cause physical harm or severe illness due to extreme cold [5], [6], [7]."
+  },
+  {
+    "id": 64,
+    "title": "Wiping Over Socks",
+    "topic": "Purification",
+    "question": "How long can a traveler or resident wipe over their leather socks for Wudhu?",
+    "notes_sources": "The Prophet established the limit for wiping over leather socks as three days and nights for a traveler, and one day and one night for a resident [7]. The wiping must be done over the top of the sock, not the bottom [8]."
+  },
+  {
+    "id": 65,
+    "title": "Establishing the Prayer",
+    "topic": "Salah",
+    "question": "What does it mean to truly 'establish' the prayer?",
+    "notes_sources": "Establishing the prayer goes beyond mere physical movements; it requires executing it with proper outward mechanics and inward states like diligence, humility, and submission [9]. It is the prayer of the heart and soul, standing silently in fear of Allah [10]."
+  },
+  {
+    "id": 66,
+    "title": "The Opening Takbeer",
+    "topic": "Arkan (Pillars) of Salah",
+    "question": "Why is the opening Takbeer critical to the prayer?",
+    "notes_sources": "Takbeerat-ul-Ihraam (saying 'Allahu Akbar' to start) initiates the prayer. If omitted, the entire prayer must be repeated [11]. The Prophet said the key to prayer is purification, it is entered by Takbeer, and exited by Tasleem [12], [13]."
+  },
+  {
+    "id": 67,
+    "title": "The Sutrah",
+    "topic": "Conditions of Salah",
+    "question": "What is the Sutrah and why is it used?",
+    "notes_sources": "The Sutrah is an object placed in front of the worshipper to act as a barrier [14]. It should be approximately a handspan or two above the ground, and it protects the prayer from being invalidated if someone or something passes in front [15], [16], [17]."
+  },
+  {
+    "id": 68,
+    "title": "The Perfect Prostration",
+    "topic": "Sujuud",
+    "question": "Which seven body parts must touch the ground during Sujuud?",
+    "notes_sources": "The Prophet commanded prostration on seven bones: the forehead (including the nose), both palms, both knees, and the toes of both feet [18], [19], [20]. Raising the feet invalidates the prostration [21], [22]."
+  },
+  {
+    "id": 69,
+    "title": "The Sitting of Rest",
+    "topic": "Salah Mechanics",
+    "question": "How should one sit between the two prostrations?",
+    "notes_sources": "One should spread the left leg and sit on it (Iftiraash), while keeping the right foot upright with the toes pointing to the Qiblah [23]. One must sit at ease until every bone and vertebra returns to its place [23], [24]."
+  },
+  {
+    "id": 70,
+    "title": "The Tashahhud",
+    "topic": "Salah",
+    "question": "What is recited during the sitting of the Tashahhud?",
+    "notes_sources": "The worshipper recites praises to Allah, sends peace upon the Prophet, peace upon the righteous slaves, and testifies that there is no god but Allah and Muhammad is His Messenger [25]. In the final Tashahhud, sending prayers (Salawat) upon the Prophet is obligatory [26], [27]."
+  },
+  {
+    "id": 71,
+    "title": "Humility in Prayer",
+    "topic": "Khushu'",
+    "question": "How does a worshipper achieve Khushu' in prayer?",
+    "notes_sources": "Khushu' requires the stillness of limbs and a heart completely focused on Allah [28]. The worshipper should look at the place of prostration and avoid looking around, as looking around is a 'snatching away' that Shaytan steals from the prayer [29], [30], [31]."
+  },
+  {
+    "id": 72,
+    "title": "Tranquility in Action",
+    "topic": "Errors in Salah",
+    "question": "Why is rushing through the prayer dangerous?",
+    "notes_sources": "The absence of ease and tranquility invalidates the prayer entirely [32]. The Prophet commanded a man who prayed hastily to repeat his prayer, teaching him that a worshipper must not move to the next pillar until his bones settle at ease in the current position [32], [33]."
+  },
+  {
+    "id": 73,
+    "title": "Congregational Prayer",
+    "topic": "Salah",
+    "question": "How important is praying in congregation for men?",
+    "notes_sources": "Establishing prayer in the congregation is obligatory for men unless there is a valid legislative excuse [34]. The Prophet strongly warned those who hear the call to prayer but fail to respond by coming to the mosque [35]."
+  },
+  {
+    "id": 74,
+    "title": "Prostration of Forgetfulness",
+    "topic": "Sujuud As-Sahw",
+    "question": "How do you correct omissions in your prayer?",
+    "notes_sources": "If a necessary duty (like a specific Takbeer) is missed unintentionally, it is rectified by making two additional prostrations at the end of the prayer [36], [37]. However, if a core pillar is omitted, the missed pillar itself must be repeated first [37], [38]."
+  },
+  {
+    "id": 75,
+    "title": "The Danger of Missing Prayer",
+    "topic": "Salah",
+    "question": "What is the ruling on intentionally abandoning prayer?",
+    "notes_sources": "Abandoning the prayer is what separates a person from polytheism and disbelief [39], [40]. The Companions did not consider the abandonment of any deed to be disbelief except the abandonment of prayer [41]."
+  },
+  {
+    "id": 76,
+    "title": "Timing of Prayers",
+    "topic": "Salah",
+    "question": "What is the consequence of delaying prayer past its time?",
+    "notes_sources": "Prayers are enjoined at fixed, prescribed hours [42]. Delaying them past their prescribed time without a valid excuse is a major sin. Intentionally waiting until the sun is setting to quickly rush through it resembles the prayer of the hypocrite [41], [43]."
+  },
+  {
+    "id": 77,
+    "title": "Testification of Faith",
+    "topic": "Tawheed",
+    "question": "What does testifying that 'Muhammad is the Messenger of Allah' entail?",
+    "notes_sources": "It means believing in what he informed us, obeying his commands, avoiding what he prohibited, and worshiping Allah only in the manner he prescribed [44]. It affirms he is a slave of Allah, not a divine being possessing the power to bring ultimate harm or benefit [44]."
+  },
+  {
+    "id": 78,
+    "title": "The True Meaning of Shirk",
+    "topic": "Tawheed",
+    "question": "Why is Shirk the only unforgivable sin?",
+    "notes_sources": "Shirk (associating partners with Allah) is a great wrongdoing because it diverts worship to beings that do not deserve it [45]. Allah forgives anything less than Shirk for whom He wills, but forbids Paradise to those who die committing it [45], [46]."
+  },
+  {
+    "id": 79,
+    "title": "Seeking Help from the Dead",
+    "topic": "Shirk",
+    "question": "Is it permissible to supplicate to inhabitants of graves?",
+    "notes_sources": "Seeking help from the dead, supplicating to them, or requesting their assistance is major Shirk [47]. Turning to graves for assistance or sacrificing animals for them associates partners with Allah, contradicting the command to worship Him alone [48], [47], [49]."
+  },
+  {
+    "id": 80,
+    "title": "Minor Shirk",
+    "topic": "Tawheed",
+    "question": "What actions constitute minor shirk?",
+    "notes_sources": "Swearing by other than Allah (like swearing by one's honesty or a trust) is minor shirk [50], [51]. Hanging an amulet for protection is also minor shirk, unless the person believes the object itself creates the benefit/harm, which escalates it to major shirk [52]."
+  },
+  {
+    "id": 81,
+    "title": "Extremism in Reverence",
+    "topic": "Tawheed",
+    "question": "Why does Islam forbid exaggerating the status of righteous people?",
+    "notes_sources": "Exaggerating the status of prophets or righteous people to the point of deifying them removes a person from the fold of Islam [53]. The Quran specifically warns against exceeding limits in religion, as seen in the case of Jesus, son of Maryam [54]."
+  },
+  {
+    "id": 82,
+    "title": "Innovation in Religion",
+    "topic": "Bid'ah",
+    "question": "Why are innovations (Bid'ah) rejected in Islam?",
+    "notes_sources": "The Prophet warned that any action introduced into the religion that is not part of the established legislation will be rejected [55], [56]. Specifying certain days or months for worship without proof from the Sunnah falls under this category [57]."
+  },
+  {
+    "id": 83,
+    "title": "Belief in Al-Qadr",
+    "topic": "Pillars of Faith",
+    "question": "Does predestination mean we shouldn't strive?",
+    "notes_sources": "No. Using Qadr (Divine Decree) as an excuse to abandon striving or justify sins is severe misguidance [58], [59], [60]. A believer must take the means to an end, trusting that Allah has decreed both the outcomes and the causes leading to them [61]."
+  },
+  {
+    "id": 84,
+    "title": "The Compassion of the Prophet",
+    "topic": "The Messenger's Character",
+    "question": "How did the Prophet treat children?",
+    "notes_sources": "He was incredibly merciful and playful. Once, while leading prayer, his grandson Al-Husayn climbed on his back during prostration. The Prophet extended the prostration to avoid rushing the child until he finished playing [62], [63]."
+  },
+  {
+    "id": 85,
+    "title": "Resembling the Prophet",
+    "topic": "Al-Hasan ibn Ali",
+    "question": "Which Companion closely resembled the Prophet physically?",
+    "notes_sources": "Al-Hasan ibn Ali bore a striking resemblance to the Prophet from his chest to his head [64]. The Prophet deeply loved him, called him a 'sayyid' (leader), and declared him one of the leaders of the youth in Paradise [65], [66]."
+  },
+  {
+    "id": 86,
+    "title": "The Reconciler",
+    "topic": "Al-Hasan ibn Ali",
+    "question": "How did Al-Hasan fulfill the Prophet's prophecy?",
+    "notes_sources": "The Prophet prophesied that Al-Hasan would reconcile two great groups of Muslims [67]. He achieved this by voluntarily yielding the Caliphate to Mu'awiyah, prioritizing the unity of the Ummah and the preservation of Muslim blood over worldly power [68], [69]."
+  },
+  {
+    "id": 87,
+    "title": "Asceticism of Ahl al-Bayt",
+    "topic": "The Prophet's Household",
+    "question": "What was the lifestyle of 'Ali and Fatimah?",
+    "notes_sources": "They lived a life of patience and striving, often facing severe hunger and manual labor [70], [71]. Even when worldly treasures were available later, 'Ali remained ascetic and prioritizing the Hereafter [72]."
+  },
+  {
+    "id": 88,
+    "title": "The Power of Patience",
+    "topic": "Sabr",
+    "question": "What are the two forces within a human regarding patience?",
+    "notes_sources": "Every person has a 'driving force' pushing them towards actions, and a 'restraining force' holding them back [73]. Patience harnesses the driving force for good deeds and the restraining force to prevent harmful or sinful actions [73]."
+  },
+  {
+    "id": 89,
+    "title": "Types of Patience",
+    "topic": "Sabr",
+    "question": "What is the difference between patience by choice and enforced patience?",
+    "notes_sources": "Patience by choice (e.g., actively refraining from sin) is of a higher spiritual status than enforced patience (e.g., enduring an illness you cannot control), as enforced patience is common to all, while chosen patience requires strong faith [74]."
+  },
+  {
+    "id": 90,
+    "title": "Patience in Sickness",
+    "topic": "Sabr",
+    "question": "How should a Muslim react to illness?",
+    "notes_sources": "A sick person must submit to Allah's decree without complaining against Him [75]. Enduring illness with patience obliterates sins. One should never wish for death or commit suicide due to the pain, but rather hope for Allah's mercy [76], [77]."
+  },
+  {
+    "id": 91,
+    "title": "Lowering the Gaze",
+    "topic": "Chastity",
+    "question": "Why is lowering the gaze a cure for forbidden desires?",
+    "notes_sources": "The eyes are the gateway to the heart. Continually looking at forbidden things exposes the heart to fatal arrows of temptation [78], [79]. Lowering the gaze blocks Shaytan and protects the heart from distraction and spiritual ruin [80], [79]."
+  },
+  {
+    "id": 92,
+    "title": "Taming the Stomach",
+    "topic": "Controlling Appetites",
+    "question": "How does the amount of food we eat affect our spiritual health?",
+    "notes_sources": "The stomach is the root of sickness. Eating to excess provides fuel for lower appetites like lust, making the soul rebellious [81], [82]. The Prophet advised filling only a third of the stomach with food, a third with drink, and leaving a third for breath [81]."
+  },
+  {
+    "id": 93,
+    "title": "Reliance on Allah",
+    "topic": "Tawakkul",
+    "question": "How does trusting Allah remove anxiety?",
+    "notes_sources": "Believing that whatever Allah decrees is ultimately good for the believer brings immense peace to the heart [83]. Knowing that what missed you could never have afflicted you, and what afflicted you could never have missed you, cures worry and distress [84], [85]."
+  },
+  {
+    "id": 94,
+    "title": "Avoiding 'If Only'",
+    "topic": "Qadar (Divine Decree)",
+    "question": "Why did the Prophet warn against saying 'If only...'?",
+    "notes_sources": "Saying 'If only I had done this...' opens the door for Shaytan's whispers, breeding regret and grief over the past [85]. Instead, a believer should say, 'Allah decreed and did what He willed,' accepting the outcome with contentment [85]."
+  },
+  {
+    "id": 95,
+    "title": "Remembrance of Death",
+    "topic": "The Hereafter",
+    "question": "Why should a believer constantly remember death?",
+    "notes_sources": "Remembering death destroys the illusions of worldly pleasures, crushes worldly attachments, and cures the rust of the heart [86], [87]. The Prophet advised living in this world like a stranger or a traveler shading himself briefly under a tree [88]."
+  },
+  {
+    "id": 96,
+    "title": "The Sweat of the Gathering",
+    "topic": "Day of Resurrection",
+    "question": "What happens to mankind on the Day of Judgment?",
+    "notes_sources": "People will stand before the Lord of the Worlds, and the sun will be brought so close that people will be drenched in their own sweat. The level of sweat—whether up to the knees, waist, or mouth like a bridle—will depend on their deeds [89]."
+  },
+  {
+    "id": 97,
+    "title": "The Testimony of the Limbs",
+    "topic": "The Reckoning",
+    "question": "How will a person's own body testify against them?",
+    "notes_sources": "On the Day of Judgment, mouths will be sealed, and hands, feet, and skin will speak and bear witness to the deeds they committed. Allah, who gives speech to all things, will grant them the ability to speak [90]."
+  },
+  {
+    "id": 98,
+    "title": "The Hideousness of Hellfire",
+    "topic": "Jahannam",
+    "question": "How is the physical punishment in Hell described?",
+    "notes_sources": "The inhabitants of the Fire will have layers of fire covering them from above and below [91]. The physical size of a disbeliever will be magnified immensely—with a molar tooth the size of Mount Uhud—so they may fully taste the severity of the torment [91]."
+  },
+  {
+    "id": 99,
+    "title": "The Beauty of Paradise",
+    "topic": "Jannah",
+    "question": "What are the physical traits of the people of Paradise?",
+    "notes_sources": "They will enter Jannah aged thirty-three, hairless on their bodies, and tall like their father Adam (sixty cubits) [92]. They will not suffer illness, bodily waste, or aging, and their garments will never wear out [93], [92]."
+  },
+  {
+    "id": 100,
+    "title": "The Homes in Paradise",
+    "topic": "Jannah",
+    "question": "What are the dwellings in Jannah made of?",
+    "notes_sources": "Believers will have palaces made of gold, jewels, and pearls [94], [95]. There are transparent apartments whose inside can be seen from the outside, specially prepared for those who fast, feed the poor, and pray at night while others sleep [96], [97]."
+  },
+  {
+    "id": 101,
+    "title": "The Market of Paradise",
+    "topic": "Jannah",
+    "question": "What happens when the inhabitants of Paradise gather?",
+    "notes_sources": "They will visit a market where a cloud of white musk will shower beautiful fragrances upon them [98, 99]. When they return to their spouses, their beauty and radiance will have increased significantly in the eyes of their partners [100]."
+  },
+  {
+    "id": 102,
+    "title": "The Ultimate Delight",
+    "topic": "Seeing Allah",
+    "question": "What is the absolute greatest reward in Paradise?",
+    "notes_sources": "The absolute greatest delight is gazing upon the Face of Allah [101, 102]. The believers will see Him as clearly as one sees the full moon on a cloudless night, a joy that completely surpasses all other heavenly pleasures [103]."
+  },
+  {
+    "id": 103,
+    "title": "Enjoining Good and Forbidding Evil",
+    "topic": "Social Responsibility",
+    "question": "What is the consequence of abandoning the command to forbid evil?",
+    "notes_sources": "Allah praised the Muslim Ummah for enjoining right and forbidding wrong [104]. Showing apathy towards this duty can incur the curse and punishment of Allah, as happened to previous nations (like the Children of Israel) who ignored evil actions within their societies [104], [105]."
+  },
+  {
+    "id": 104,
+    "title": "Extravagance and Waste",
+    "topic": "Wealth",
+    "question": "What is the Islamic stance on wasting food and wealth?",
+    "notes_sources": "Extravagance is strictly prohibited; Allah does not love those who waste [106]. Pouring away usable food or drink is a belittlement of Allah's favors. Believers are commanded to consume moderately and share with those who are hungry [106], [107]."
+  },
+  {
+    "id": 105,
+    "title": "Visiting the Sick",
+    "topic": "Islamic Brotherhood",
+    "question": "What are the spiritual benefits of visiting someone who is ill?",
+    "notes_sources": "It establishes deep love and affection in the heart of the invalid [108]. The visitor should bring happiness to the sick person, prolong the visit if desired, and remind them gently to repent without causing anxiety or fear [109], [110]."
+  },
+  {
+    "id": 106,
+    "title": "Supplications for the Sick",
+    "topic": "Du'aa",
+    "question": "What should a Muslim say when visiting the sick?",
+    "notes_sources": "The Prophet taught specific supplications asking Allah, the Lord of the people, to remove the illness, as He is the only Healer whose cure leaves no ailment behind [111], [112]. Reciting Surah Al-Fatihah is also a powerful form of Ruqyah (healing) [113]."
+  },
+  {
+    "id": 107,
+    "title": "The Danger of Tale-Carrying",
+    "topic": "Sins of the Tongue",
+    "question": "What is the punishment for spreading malicious gossip (Namimah)?",
+    "notes_sources": "The Prophet stated clearly that the tale-carrier will not enter Paradise [114]. Spreading lies and carrying tales to cause hatred and division between people is a major sin that leads to severe punishment in the grave [114]."
+  },
+  {
+    "id": 108,
+    "title": "Keeping Family Ties",
+    "topic": "Kinship (Silat ar-Rahm)",
+    "question": "Why is maintaining family ties essential?",
+    "notes_sources": "Keeping ties of kinship prolongs one's lifespan and increases provision [115]. Severing ties is a major sin that brings Allah's curse, blinding the sight and deafening the ears to the truth [115]."
+  },
+  {
+    "id": 109,
+    "title": "Financial Dealings",
+    "topic": "Commerce",
+    "question": "Can you sell something you do not currently own?",
+    "notes_sources": "No. The Prophet explicitly forbade selling goods that one does not physically possess or own [116], [117]. Merchants must learn the rules of buying and selling to avoid falling into impermissible transactions or usury (Riba) [118], [119]."
+  },
+  {
+    "id": 110,
+    "title": "False Oaths in Business",
+    "topic": "Commerce",
+    "question": "What happens when a seller uses false oaths to sell goods?",
+    "notes_sources": "Using false oaths to convince a buyer removes the divine blessing (Barakah) from the transaction [120]. It is a grave sin that ultimately destroys the spiritual and material benefit of the wealth earned [121], [118]."
+  },
+  {
+    "id": 111,
+    "title": "The Friday Prayer (Jumu'ah)",
+    "topic": "Salah",
+    "question": "What actions are prohibited during the Friday sermon?",
+    "notes_sources": "Talking while the Imam is delivering the sermon, fidgeting with clothes, phones, or pebbles, and stepping over people's necks to find a spot are all prohibited and ruin the reward of Jumu'ah [122], [123]."
+  },
+  {
+    "id": 112,
+    "title": "Fasting Ramadan",
+    "topic": "Sawm",
+    "question": "Does fasting only require abstaining from food and drink?",
+    "notes_sources": "No. Fasting requires abstaining from idle and obscene speech [124]. If someone insults a fasting person, they should simply reply, 'I am fasting.' Engaging in sins ruins the spiritual purpose and reward of the fast [124]."
+  },
+  {
+    "id": 113,
+    "title": "Paying Zakat",
+    "topic": "Charity",
+    "question": "What is the warning for those who hoard wealth and refuse to pay Zakat?",
+    "notes_sources": "Refusing to pay Zakat is a major sin. Hoarded gold and silver will be heated in the Fire of Hell and used to brand the foreheads, flanks, and backs of the hoarders on the Day of Resurrection [125], [126]."
+  },
+  {
+    "id": 114,
+    "title": "Rulings of Hajj",
+    "topic": "Pilgrimage",
+    "question": "Can one wear sewn garments while in the state of Ihram?",
+    "notes_sources": "A male pilgrim in Ihram is prohibited from wearing stitched garments tailored to the limbs, like shirts or pants [127]. Violating the prohibitions of Ihram out of apathy is a sin [128]."
+  },
+  {
+    "id": 115,
+    "title": "Stoning the Jamarat",
+    "topic": "Hajj",
+    "question": "Do the stones thrown at the Jamarat physically hit Shaytan?",
+    "notes_sources": "No. The Jamarat mark the places where Shaytan appeared to Prophet Ibrahim, but Shaytan is not physically standing there today [129]. It is an act of worship to remember Allah, and the stones do not need to be washed prior to throwing [130]."
+  },
+  {
+    "id": 116,
+    "title": "Celebrating Innovated Holidays",
+    "topic": "Bid'ah",
+    "question": "Is it permissible to celebrate non-Muslim holidays?",
+    "notes_sources": "Participating in or celebrating non-Muslim holidays (like New Year's or Mother's Day) is prohibited. It constitutes imitating the disbelievers in matters specific to them, which the Prophet strictly forbade [131], [132]."
+  },
+  {
+    "id": 117,
+    "title": "Cursing and Insulting",
+    "topic": "Sins of the Tongue",
+    "question": "Is it allowed to curse animals, the weather, or other creations?",
+    "notes_sources": "The Prophet forbade insulting anyone or anything, including animals, diseases, and time [133], [134]. This is because Allah is the Creator and ultimate Controller of all affairs and creations [134]."
+  },
+  {
+    "id": 118,
+    "title": "The Etiquette of Sleeping",
+    "topic": "Sunnah",
+    "question": "How should a Muslim prepare for sleep and wake up?",
+    "notes_sources": "One should recite specific words of remembrance (Dhikr), blow into the hands after reciting the last three Surahs, and wipe the body to seek protection [135], [136]. Upon waking, one should thank Allah for restoring life after the 'minor death' of sleep [137]."
+  },
+  {
+    "id": 119,
+    "title": "The Rights of Brotherhood",
+    "topic": "Islamic Etiquette",
+    "question": "What are the basic rights a Muslim owes to another?",
+    "notes_sources": "A Muslim owes obligatory acts of courtesy: greeting with Salaam, accepting invitations, giving sincere advice when asked, blessing them when they sneeze, visiting them when ill, and attending their funeral [138], [139]."
+  },
+  {
+    "id": 120,
+    "title": "The Best of People",
+    "topic": "Virtues",
+    "question": "Who is considered the best of people in the sight of Allah?",
+    "notes_sources": "The best of people is the one who lives a long life and uses it to perform good, righteous deeds [140]. Ultimately, the most honorable in the sight of Allah is the one who has the most Taqwa (piety and God-consciousness) [141], [142]."
+  },
+  {
+    "id": 121,
+    "title": "Leftover Water of Animals",
+    "topic": "Purification",
+    "question": "Is water that an animal has drunk from considered pure?",
+    "notes_sources": "Water left in a container after an 'allowable' animal (one whose meat is permissible to eat) has drunk from it is pure, as its saliva qualifies for consumption [1]. Water remaining in a pot after it has been drunk from by a donkey, mule, beasts, or birds of prey is also considered pure and permissible for ablution [1]."
+  },
+  {
+    "id": 122,
+    "title": "The Impurity of Dogs",
+    "topic": "Purification",
+    "question": "How should a container licked by a dog be cleansed?",
+    "notes_sources": "Dogs are considered impure [2]. Any container that a dog has licked must be washed seven times, with the first washing being done with dirt, until the water mixed with dirt becomes muddy [2]."
+  },
+  {
+    "id": 123,
+    "title": "Small Quantities of Unclean Water",
+    "topic": "Purification",
+    "question": "When does water become permanently unclean?",
+    "notes_sources": "If any impurities are mixed with a small quantity of water (defined as less than 2 Qullas), then this water is considered definitively unclean, regardless of whether or not there is a relative change in its taste, color, or odor [3]."
+  },
+  {
+    "id": 124,
+    "title": "The Danger of Appetites",
+    "topic": "Lower Desires",
+    "question": "What happens when human appetites are given free rein?",
+    "notes_sources": "An appetite is the desire of the lower self to obtain something which it imagines will satisfy it or give it enjoyment [4]. If the appetites are given free rein, people will continually seek more and more of what will ultimately lead them to destruction by making them overstep limits and leave the right path [4]."
+  },
+  {
+    "id": 125, "title": "Moderating Food Intake", "topic": "Eating Habits", "question": "How much food should a Muslim consume?", "notes_sources": "The Prophet Muhammad taught that a human being does not fill any vessel worse than his stomach [5]. Enough for the son of Adam are a few morsels to keep his back straight; if it cannot be avoided, then a third of the stomach is for food, a third is for drink, and a third is left empty for breath [5]."
+  },
+  {
+    "id": 126, "title": "Etiquette Before Eating", "topic": "Eating Habits", "question": "What should a Muslim intend and do before eating?", "notes_sources": "A Muslim should try to make his food and drink pure by preparing them from permissible, lawful sources [6]. The intention behind eating should be to strengthen oneself for the purpose of worshipping Allah, which transforms the permissible act of eating into an act of worship that is rewarded by Allah [6]."
+  },
+  {
+    "id": 127, "title": "Etiquette While Eating", "topic": "Eating Habits", "question": "What are the proper manners to observe while eating?", "notes_sources": "A person should begin his meal by saying 'In the name of Allah' [7]. He should eat with three fingers of his right hand, take small portions, chew well, and eat the food that is close to him rather than taking from the middle of the plate [7]. A Muslim should also lick his fingers clean before wiping or washing them [8]."
+  },
+  {
+    "id": 128, "title": "Etiquette After Eating", "topic": "Eating Habits", "question": "How should a believer conclude a meal?", "notes_sources": "A person should stop eating before becoming completely full to avoid debilitating indigestion and gluttony [9]. He must praise Allah after eating or drinking, and it is recommended to pick up whatever food has fallen as an act of thankfulness for Allah's bounties [9]."
+  },
+  {
+    "id": 129, "title": "Sunnahs of Drinking Water", "topic": "Drinking Habits", "question": "How did the Prophet instruct Muslims to drink water?", "notes_sources": "One should drink with the right hand while seated and recite Bismillah before drinking [10]. The Prophet forbade drinking water in one breath like a camel; rather, it should be drunk in two or three breaths, separating the glass from the mouth to breathe, and one should say Alhamdulillah after finishing [10], [11]."
+  },
+  {
+    "id": 130, "title": "Entering the Homes of Others", "topic": "Social Etiquette", "question": "What is the proper procedure for entering a private house?", "notes_sources": "A believer must ask permission to enter other people's homes and greet the inhabitants by saying 'Peace be upon you' three times [12], [13]. If no one is home, or if permission is not granted and the person is told to go away, it is an obligation for him to leave immediately [12], [13]."
+  },
+  {
+    "id": 131, "title": "Brotherhood and Mutual Support", "topic": "Islamic Brotherhood", "question": "How should believers support one another?", "notes_sources": "A believer with respect to another believer is like a building, where one part strengthens and reinforces the other [14]. The similitude of believers in their love, mercy, and compassion toward one another is like a body; if one limb is in pain, the rest of the body suffers sleeplessness and fever [14]."
+  },
+  {
+    "id": 132, "title": "The Rights of Neighbors", "topic": "Social Etiquette", "question": "How strictly does Islam command good treatment of neighbors?", "notes_sources": "The Prophet stated that whoever believes in Allah and the Last Day should be generous to his neighbor and absolutely not harm him [15]. He also mentioned that the Angel Gabriel kept advising him concerning the neighbor to the point that he thought the neighbor would be given a share of inheritance [15]."
+  },
+  {
+    "id": 133, "title": "Kindness Towards Animals", "topic": "Mercy to Creation", "question": "How should a Muslim treat animals?", "notes_sources": "A Muslim feeds or gives water to an animal if he finds it hungry or thirsty, knowing there is a divine reward for serving every living creature with a moist liver [16]. The Prophet also cursed anyone who uses a creature with a soul as an archery target, and prohibited tying down animals to kill them [16]."
+  },
+  {
+    "id": 134, "title": "Enjoining Good and Forbidding Evil", "topic": "Social Responsibility", "question": "What is the duty of a Muslim when witnessing wrongdoing?", "notes_sources": "The Quran commands that there must be a community among believers who call to the good, enjoin the right, and forbid the wrong [17]. The Prophet instructed that he who sees something objectionable should change it with his hand; if unable, then with his tongue; and if unable, then reject it in his heart, which is the weakest level of faith [18]."
+  },
+  {
+    "id": 135, "title": "The Sin of Backbiting", "topic": "Sins of the Tongue", "question": "Why is backbiting heavily condemned in the Quran?", "notes_sources": "A Muslim should not backbite, scorn, insult, ridicule, or call another by offensive nicknames [19]. Allah likens the sin of backbiting to the repulsive act of eating the flesh of one's dead brother, emphasizing how deeply it should be hated [19]."
+  },
+  {
+    "id": 136, "title": "The Prohibition of Insulting and Cursing", "topic": "Sins of the Tongue", "question": "What did the Prophet say about those who curse others?", "notes_sources": "The true believer is not given to insulting, cursing a great deal, obscene talk, or foul speech [20]. Those who curse a great deal will be deprived of being martyrs or intercessors on the Day of Resurrection, and abusing a Muslim is considered a wicked act [20]."
+  },
+  {
+    "id": 137, "title": "Upholding the Ties of Kinship", "topic": "Family Rights", "question": "What is the consequence of severing family ties?", "notes_sources": "Maintaining ties of kinship results in reward, increased provisions, and a prolonged lifespan [21]. The womb is suspended from the Divine Throne, declaring that whoever connects it, Allah will connect them, and whoever severs it, Allah will sever him [22]."
+  },
+  {
+    "id": 138, "title": "Modesty in Clothing", "topic": "Islamic Dress", "question": "What types of clothing are strictly prohibited for Muslims?", "notes_sources": "For men, dragging the garment below the ankles out of arrogance is forbidden, as Allah does not love those who drag their garments [23]. Furthermore, wearing tight, transparent, or flimsy clothing that reveals the 'awrah (private areas) in front of people is prohibited [23]."
+  },
+  {
+    "id": 139, "title": "Gold and Silver Vessels", "topic": "Material Moderation", "question": "Can Muslims eat or drink from expensive gold or silver plates?", "notes_sources": "It is strictly impermissible to drink from vessels made of gold or silver, or to eat from plates made of such materials [24]. The Prophet warned that whoever drinks from vessels of gold or silver is only gulping fire from Hellfire into his stomach [24]."
+  },
+  {
+    "id": 140, "title": "Lowering the Gaze", "topic": "Purity and Chastity", "question": "How does Islam protect society from unlawful sexual temptations?", "notes_sources": "Believing men and women are commanded by Allah to lower their eyes and strictly guard their private parts [25]. Watching visual media or looking at things that reveal the 'awrah of men or women is prohibited in order to safeguard one's religion and purity [26]."
+  },
+  {
+    "id": 141, "title": "The Abomination of Intoxicants", "topic": "Prohibitions", "question": "Why does Islam strictly forbid alcohol and drugs?", "notes_sources": "Alcohol, gambling, and intoxicants of all kinds are declared an abomination of Satan's handiwork [27]. Intoxicants deaden intellectual abilities, leading to misguidance, bad habits, and the disruption of personal and societal life, opening the door to further deviations [28]."
+  },
+  {
+    "id": 142, "title": "The Catastrophe of Usury (Riba)", "topic": "Financial Dealings", "question": "How severe is the sin of consuming interest (Riba)?", "notes_sources": "Usury is a heinous crime against which Islam takes a firm stance, as it is nourished by the greedy love of easy wealth [29]. The Prophet cursed anyone who consumes usury, gives it, records it, or witnesses it, equating it to incredibly grave sins like a man having intercourse with his mother [30], [31]."
+  },
+  {
+    "id": 143, "title": "The Sin of Hoarding", "topic": "Commerce", "question": "What is the punishment for a merchant who hoards food to inflate prices?", "notes_sources": "The Prophet warned that if anyone hoards staple grain for forty days, he has washed his hands of Allah and Allah has washed His hands of him [32]. Foodstuffs must not be withheld from people to artificially raise prices [32]."
+  },
+  {
+    "id": 144, "title": "Misappropriation and Theft", "topic": "Financial Integrity", "question": "What is the consequence of stealing public or private property?", "notes_sources": "Consuming another's property by false means or misappropriating public funds (ghulul) is strictly forbidden [33]. Whoever misappropriates anything will carry that very burden on their neck in total disgrace on the Day of Rising [34], [35]."
+  },
+  {
+    "id": 145, "title": "Tampering with Weights and Measures", "topic": "Fair Trade", "question": "How does Islam view stinting in commercial transactions?", "notes_sources": "Giving short weight or measure is a hidden form of theft and a foul disease that causes societal imbalance and injustice [36], [37]. Allah warns of a terrible woe for those who demand full measure for themselves but hand over less when weighing for others [36]."
+  },
+  {
+    "id": 146, "title": "The Evil of Fornication", "topic": "Major Sins", "question": "Why does Allah explicitly command not to even 'go near' fornication?", "notes_sources": "Fornication is a grave indecent act and an evil way [38]. When someone commits it, the halter of Islam slips from his neck, and their faces will be burned with fire on the Day of Rising unless they sincerely repent [39], [40]."
+  },
+  {
+    "id": 147, "title": "Patience in Sickness", "topic": "Dealing with Hardship", "question": "How should a Muslim react when struck by illness?", "notes_sources": "A Muslim should be contented with what Allah has predestined and patiently bear the sickness [41]. He should praise Allah, seek reward for the affliction, and understand that Allah ultimately replaces the hardship with something better for the patient believer [41]."
+  },
+  {
+    "id": 148, "title": "Crying vs. Wailing over the Dead", "topic": "Bereavement", "question": "Is it permissible to cry when a loved one dies?", "notes_sources": "Weeping gently over a deceased person is permitted both before and after death [42]. However, wailing (Niyaahah)—which includes shrieking, striking the cheeks, and tearing clothes—is strictly forbidden as it reflects the ignorant practices of Jahiliyyah and discontent with Allah's decree [43], [44]."
+  },
+  {
+    "id": 149, "title": "At the Point of Death", "topic": "End of Life", "question": "What should be done for a person in the throes of death?", "notes_sources": "Those present should encourage the dying person to pronounce the Shahaadah ('Laa ilaaha illallaah') so it is their last word [45]. They should also earnestly supplicate for them and only speak good words in their presence [45]."
+  },
+  {
+    "id": 150, "title": "Washing the Deceased", "topic": "Funeral Rites", "question": "Who should wash the dead body, and how?", "notes_sources": "Washing the deceased is a communal obligation (Fard Kifaayah) [46]. Men should be washed by men, and women by women; the washing should be done an odd number of times using water and sidr (lote tree leaves), keeping the body covered with a sheet [47], [48]."
+  },
+  {
+    "id": 151, "title": "Shrouding the Deceased", "topic": "Funeral Rites", "question": "How is a Muslim shrouded for burial?", "notes_sources": "The shroud must be paid for from the deceased's own wealth, even if it exhausts it [49]. It is sunnah to shroud a male in three white cotton cloths that are rolled up to cover the whole body, without using a tailored shirt or turban [49], [50]."
+  },
+  {
+    "id": 152, "title": "The Funeral Procession", "topic": "Funeral Rites", "question": "What is the etiquette for following a funeral bier?", "notes_sources": "It is a right of a Muslim to have his funeral procession followed, which is prescribed for men and not women [51], [52]. Participants should hasten with the procession without running, and strictly avoid loud weeping, carrying incense, or engaging in un-Islamic customs [52]."
+  },
+  {
+    "id": 153, "title": "The Funeral Prayer", "topic": "Funeral Rites", "question": "What are the mechanics of the funeral prayer (Salatul Janaazah)?", "notes_sources": "It is a Fard Kifaayah consisting of four takbeers [53], [54]. After the first takbeer, Al-Fatihah is recited silently; after the second, salawat is sent upon the Prophet; after the third, sincere supplication is made for the deceased; and after the fourth, a tasleem is given [55], [56]."
+  },
+  {
+    "id": 154, "title": "Burial Regulations", "topic": "Funeral Rites", "question": "How should the body be placed in the grave?", "notes_sources": "The body should be entered into the grave from the foot of the grave [57]. It must be placed on its right side with its face turned towards the Qiblah, while the person placing it recites: 'With the name of Allah and upon the Sunnah of Allah's Messenger' [57], [58]."
+  },
+  {
+    "id": 155, "title": "Giving Condolences", "topic": "Bereavement", "question": "What is the Sunnah method of consoling the grieving family?", "notes_sources": "Relatives should be encouraged to have patience and await the promise of reward [59]. However, gathering formally in a specific place to receive condolences or expecting the grieving family to prepare food for guests are innovations to be avoided [60]."
+  },
+  {
+    "id": 156, "title": "Benefiting the Deceased", "topic": "After Death", "question": "What actions of the living can benefit someone who has died?", "notes_sources": "A deceased person continues to benefit from Muslims supplicating for them, the payment of their outstanding debts, the carrying out of any fasts they had vowed, the righteous actions of their children, and any continuing charity or knowledge they left behind [61], [62]."
+  },
+  {
+    "id": 157, "title": "Visiting the Graves", "topic": "Cemeteries", "question": "What is the correct purpose of visiting a graveyard?", "notes_sources": "Visiting graves is permissible specifically to take admonition, remember the Hereafter, and to greet and supplicate for the deceased [62], [63]. It is strictly forbidden to seek aid from the dead, build structures over graves, or sacrifice animals there [62], [64]."
+  },
+  {
+    "id": 158, "title": "The Islamic Will", "topic": "Preparation for Death", "question": "Why is it important to write an Islamic Will?", "notes_sources": "To settle outstanding debts and rights, and because many people are overcome by religious innovations regarding funerals, it is a duty upon the Muslim to explicitly order in his will that he be prepared and buried strictly according to the Sunnah [65]."
+  },
+  {
+    "id": 159, "title": "The Angel of Death", "topic": "The Soul's Departure", "question": "What happens at the exact moment of death?", "notes_sources": "The Angel of Death comes to take the soul [66]. If it is the soul of a believer, the angel gives it to the angels of mercy who welcome it with peace, but if it is an unbeliever, it is harshly given to the angels of punishment [67]."
+  },
+  {
+    "id": 160, "title": "The Questioning in the Grave", "topic": "Barzakh", "question": "What questions are asked immediately after burial?", "notes_sources": "After burial, two angels will come, make the deceased sit up, and ask three fundamental questions: 'Who is your Lord?', 'What is your deen (religion)?', and 'Who is this man who was sent amongst you (Muhammad)?' [68], [69]."
+  },
+  {
+    "id": 161, "title": "Punishment and Bliss in the Grave", "topic": "Barzakh", "question": "Do souls experience reward or torture before Judgment Day?", "notes_sources": "Yes, the righteous believer will have a door to Paradise opened for them, bringing its fragrance and expanding the grave [70]. Conversely, the unbeliever or hypocrite who cannot answer the angels will be struck with an iron hammer, and their grave will compress until their ribs are crushed together [71], [72]."
+  },
+  {
+    "id": 162, "title": "The Trumpet and Resurrection", "topic": "The Last Day", "question": "How will the Day of Rising begin?", "notes_sources": "The Trumpet will be blown, causing all those in the heavens and earth to lose consciousness [73]. When it is blown a second time, everyone will instantly stand upright, resurrected from the coccyx bone, looking on in shock and bewilderment [73], [74]."
+  },
+  {
+    "id": 163, "title": "The Sweat of the Gathering", "topic": "The Reckoning", "question": "What physical trial will mankind face while waiting for Judgment?", "notes_sources": "The sun will come so close to everyone that it will be as if it is only a mile away [75]. People will be drenched in sweat depending on their worldly actions; for some, the sweat will reach their knees, for others the waist, and some will wear a bridle of sweat reaching their mouths [75]."
+  },
+  {
+    "id": 164, "title": "The Testimony of the Limbs", "topic": "The Reckoning", "question": "How will evidence be brought against sinners?", "notes_sources": "On the Day of Reckoning, Allah will seal up the mouths of the wrongdoers so they cannot lie [76]. Their own hands, feet, hearing, sight, and skin will be given speech by Allah to bear witness and testify against them concerning what they earned [76]."
+  },
+  {
+    "id": 165, "title": "The Balance (Mizan)", "topic": "The Reckoning", "question": "What exactly will be weighed on the Day of Judgment?", "notes_sources": "The physical slave themselves, the records and scrolls of their actions, and the actual rewards and forms of their good and bad actions will all be weighed in a true Balance to establish perfect justice [77], [78], [79]."
+  },
+  {
+    "id": 166, "title": "Crossing the Sirat", "topic": "The Bridge", "question": "What is the Sirat and how will people cross it?", "notes_sources": "The Sirat is a slippery bridge laid over the Fire of Hell, lined with massive hooks and thorns [80], [81]. The believers will cross it at different speeds depending on their deeds—some like the blink of an eye, lightning, or wind—while others will be snatched and piled up in the Fire [81]."
+  },
+  {
+    "id": 167, "title": "The Punishment of Hell", "topic": "Jahannam", "question": "What kind of torments await the inhabitants of the Fire?", "notes_sources": "The unbelievers will be dragged in chains and iron collars [82]. They will have garments of fire cut out for them, boiling water poured over their heads melting their skin and bellies, and they will be beaten with cudgels made of iron [83]."
+  },
+  {
+    "id": 168, "title": "Eternity Without Death", "topic": "The Final Abodes", "question": "Will anyone ever die in Paradise or Hell?", "notes_sources": "Once people are assigned to their final abodes, death will be brought in the visual form of a beautiful sheep and slaughtered between Paradise and Hell [84]. A caller will then announce to both groups that there is only eternity and no more death [84], [85]."
+  },
+  {
+    "id": 169, "title": "The Gates of Paradise", "topic": "Jannah", "question": "Will people enter Paradise through specific gates based on their deeds?", "notes_sources": "Yes, whoever is among the people of prayer will be called from the Gate of Prayer; the people of charity from the Gate of Sadaqa; the people of jihad from the Gate of Jihad; and the people of fasting from the Gate of the Well-Watered (Bab ar-Rayyan) [86]."
+  },
+  {
+    "id": 170, "title": "The Food and Drink of Paradise", "topic": "Jannah", "question": "Will the inhabitants of Paradise need to relieve themselves after eating?", "notes_sources": "The people of the Garden will eat delicious fruit and bird-meat as they desire [87]. However, they will not need to spit, urinate, or defecate; their food will digest simply as a burp and perspiration that smells like beautiful musk [88]."
+  },
+  {
+    "id": 171, "title": "The Rivers of Paradise", "topic": "Jannah", "question": "What flows through the rivers of Paradise?", "notes_sources": "Paradise contains magnificent rivers of water that are forever pure, rivers of milk whose taste never changes, rivers of wine that are a delight without any negative intoxicating effects, and rivers of clarified, pure honey [89], [90]."
+  },
+  {
+    "id": 172, "title": "Dress and Ornaments in Paradise", "topic": "Jannah", "question": "How will the believers be adorned?", "notes_sources": "The people of Paradise will wear green garments of fine silk and brocade [91]. They will be adorned with bracelets of gold and silver, garlands of pearls and rubies, and crowns like those of kings, remaining forever youthful and healthy [92]."
+  },
+  {
+    "id": 173, "title": "The Lowest Rank in Paradise", "topic": "Jannah", "question": "What will the last person to enter Paradise receive?", "notes_sources": "The last man to exit Hell and enter Paradise will be granted by Allah the equivalent of the greatest kingdom of the world, and then ten times more like it, simply out of Allah's immense mercy and generosity [93]."
+  },
+  {
+    "id": 174, "title": "The Highest Rank in Paradise (Al-Wasilah)", "topic": "Jannah", "question": "What is Al-Wasilah and who receives it?", "notes_sources": "Al-Wasilah is the absolute highest rank in Paradise, positioned above all other ranks [94]. It is reserved for only one chosen servant of Allah, which the Prophet Muhammad (peace be upon him) confirmed he hopes to be, asking his Ummah to pray he receives it [94]."
+  },
+  {
+    "id": 175, "title": "The Day of Increase (More)", "topic": "Jannah", "question": "What special event occurs every Friday in Paradise?", "notes_sources": "Friday in Paradise is called the 'Day of More'. The inhabitants will gather in a vast valley of white musk, and Allah will descend and invite them to ask Him for whatever they wish, granting them bounties no eye has seen nor ear heard [95], [96]."
+  },
+  {
+    "id": 176, "title": "The Great Intercession", "topic": "The Day of Judgement", "question": "Who will intercede for humanity when they are waiting for Judgement?", "notes_sources": "After all other Prophets decline, the Prophet Muhammad will fall prostrate before Allah beneath the Throne until he is given permission to speak [97]. Allah will say, 'Raise your head and speak... intercede, your intercession will be accepted,' allowing him to save vast numbers of his Ummah [97]."
+  },
+  {
+    "id": 177, "title": "Rescue from the Fire", "topic": "Hellfire and Mercy", "question": "Will any Muslims be taken out of the Fire?", "notes_sources": "After the angels, prophets, and believers intercede, Allah the Most Merciful will take a handful from Hell, bringing out people who had turned into charcoal but never associated partners with Him [98]. They will be bathed in the River of Life to heal and then enter Paradise [98]."
+  },
+  {
+    "id": 178, "title": "The Greatest Delight: Seeing Allah", "topic": "Jannah", "question": "What is the absolute highest reward for the believers?", "notes_sources": "The believers will have no doubt in seeing their Lord openly on the Day of Resurrection, just as there is no doubt in seeing the sun at noon or the full moon on a cloudless night [99], [100]. Looking at His Face is a joy that eclipses all other bounties of Paradise [101], [102]."
+  },
+  {
+    "id": 179, "title": "Perfection of Sincerity", "topic": "Intention", "question": "How can a Muslim maximize the reward of permissible daily actions?", "notes_sources": "The intention of a Muslim is better than his deed [103]. By consciously making multiple good intentions—such as eating to gain strength to worship, recite the Quran, serve parents, or acquire knowledge—a person transforms mundane habits into highly rewarded acts of worship [104]."
+  },
+  {
+    "id": 180, "title": "Acknowledging Allah's Favor", "topic": "Spiritual Tranquility", "question": "What is the result of truly recognizing Allah's favors upon oneself?", "notes_sources": "When a servant deeply acknowledges Allah's continuous favors and grace, they will lavish in the love and intimacy (al-uns) of Allah [105]. This brings profound tranquility, amiability in His company, and an intense longing to meet Him in the Hereafter [105]."
+  },
+  {
+    "id": 181, "title": "The Value of Time", "topic": "Self-Discipline", "question": "Why should a Muslim deeply value each passing day?", "notes_sources": "The Companion Ibn Mas'ud stated: 'I have never regretted anything as much as my regret over a day on which the sun sets and my life span decreases while my good deeds have not increased' [1]. Every sensible person must secure their time to achieve true happiness and righteousness [2]."
+  },
+  {
+    "id": 182, "title": "The Foundation of Islam", "topic": "Sincere Advice (Naseehah)", "question": "What does it mean that 'The religion is Naseehah'?", "notes_sources": "The Prophet equated the entire religion to giving Naseehah (sincere advice/sincerity). This sincerity is owed to Allah, His Book, His Messenger, the leaders of the Muslims, and the common folk [3, 4]. It is a way of wishing for your brother what you wish for yourself [5]."
+  },
+  {
+    "id": 183, "title": "The Etiquette of Counsel", "topic": "Giving Advice in Secret", "question": "How should a Muslim advise someone who is sinning?", "notes_sources": "The righteous predecessors always admonished others privately. Exhorting a brother in front of people is merely scolding and humiliating them, whereas giving advice in seclusion achieves the true objective of mending their faults [6]."
+  },
+  {
+    "id": 184, "title": "The Universal Key", "topic": "Gentleness (Rifq)", "question": "Why is gentleness essential when giving advice?", "notes_sources": "Gentleness is the best key to unlock a closed heart. The Prophet said: 'Kindness is not to be found in anything but that it adds to its beauty, and it is not withdrawn from anything but it makes it defective' [7]."
+  },
+  {
+    "id": 185, "title": "The Barrier to Paradise", "topic": "Arrogance (Kibr)", "question": "Why does pride prevent a person from accepting advice?", "notes_sources": "The Prophet warned that a person with an atom's worth of pride in their heart will not enter Paradise. He defined Kibr as 'to reject the truth, and to despise the people.' An arrogant person rejects advice because they look down upon the advisor, while a humble person accepts the truth regardless of the source [8]."
+  },
+  {
+    "id": 186, "title": "The Postures of Anger", "topic": "Controlling Anger", "question": "What should you do physically when you feel enraged?", "notes_sources": "The Prophet provided a physical cure for the escalation of anger: 'If any of you becomes angry and he is standing, let him sit down... then lie down.' Sitting or lying down minimizes the chance that a person will strike out, break things, or do something crazy that they will later regret [9]."
+  },
+  {
+    "id": 187, "title": "The True Measure of Strength", "topic": "Character", "question": "How does Islam define a 'strong' person?", "notes_sources": "True strength is not physical prowess. The Prophet said: 'The strong man is not the one who can overpower others (in wrestling); rather, the strong man is the one who controls himself when he gets angry' [10]."
+  },
+  {
+    "id": 188, "title": "Dealing with Ignorance", "topic": "Forbearance", "question": "How should a believer respond to foolish or offensive behavior?", "notes_sources": "The Quran instructs: 'Show forgiveness, enjoin what is good and turn away from the foolish' [11]. By realizing that everyone makes mistakes, a Muslim should cultivate a forgiving and calm character, protecting themselves from being easily provoked [11]."
+  },
+  {
+    "id": 189, "title": "Today is All You Have", "topic": "Living in the Present", "question": "Why should a Muslim focus their energy entirely on 'today'?", "notes_sources": "'When you wake up in the morning, do not expect to see the evening.' Your life span is essentially just one day. By focusing on today, you can organize your hours, pray with a wakeful heart, and avoid being caught between the obsession over the past and the anxieties of the future [12]."
+  },
+  {
+    "id": 190, "title": "The Past is Gone Forever", "topic": "Mental Well-being", "question": "Why is brooding over past tragedies spiritually harmful?", "notes_sources": "Brooding over the past is a form of sickness that destroys your resolve for the present. 'Episodes of the past are finished with; sadness cannot retrieve them... This is because the past is non-existent.' A believer must not perform an autopsy on history, but rather move forward [13]."
+  },
+  {
+    "id": 191, "title": "Leave the Future Alone", "topic": "Trust in Allah (Tawakkul)", "question": "Why shouldn't a person obsess over future disasters?", "notes_sources": "The future belongs to the realm of the unseen, and it has not yet been created. It is foolish to 'pick fruits before they become ripe.' Many anxieties about future poverty or disaster are directly inspired by Shaytan to paralyze the believer [14]."
+  },
+  {
+    "id": 192, "title": "How to Deal with Bitter Criticism", "topic": "Resilience", "question": "What is the best reaction to insults from the ignorant?", "notes_sources": "If you are wounded by their words, you have realized their hopes. Instead, remain firm, forgive them, and show them beautiful manners. A person sitting on the ground cannot fall, and people do not kick a dead dog; criticism often means you have surpassed them in righteousness or success [15, 16]."
+  },
+  {
+    "id": 193, "title": "Do Not Expect Gratitude", "topic": "Dealing with People", "question": "Why shouldn't you be dismayed when people are ungrateful for your help?", "notes_sources": "Allah created humans to worship Him, yet many are ungrateful to Him, their Creator. If they are ungrateful to the Lord, they will certainly disregard your favors. Perform acts of charity purely seeking Allah's pleasure, and you will be successful regardless of people's ungratefulness [16, 17]."
+  },
+  {
+    "id": 194, "title": "Convert a Lemon into a Sweet Drink", "topic": "Optimism", "question": "How does an intelligent believer handle misfortune?", "notes_sources": "An intelligent person transforms losses into profits, whereas a foolish person makes two disasters out of one. For example, Imam Ahmad emerged from imprisonment and torture as the Imam of the Sunnah. If you are handed a squeezed lemon, look for the bright side and turn it into a sweet drink [18]."
+  },
+  {
+    "id": 195, "title": "Do Not Be a Mimicker", "topic": "Individuality", "question": "Why does Islam encourage maintaining your own pure nature?", "notes_sources": "Do not feign to forget your own voice, movements, or habits to artificially imitate others. From Adam to the last baby, no two people are exactly the same. Go forth according to your own nature and disposition, and cultivate your unique personality based on revelation [19]."
+  },
+  {
+    "id": 196, "title": "The Power of a Smile", "topic": "A Positive Attitude", "question": "How does a smiling soul differ from a frowning one?", "notes_sources": "The smiling soul sees difficulties and loves to surmount them. The frowning soul magnifies problems and spends its time justifying failures. Confidence, friendly manners, and a generous smile are vital weapons in overcoming life's obstacles [20]."
+  },
+  {
+    "id": 197, "title": "The Six Ingredients of Happiness", "topic": "Handling Calamity", "question": "What are the components to mentally overcome a severe hardship?", "notes_sources": "A wise person formulated this six-part remedy: 1. Firm trust in Allah; 2. Resigning oneself to the inescapable decree; 3. Knowing patience has no substitute; 4. Unwavering belief that forbearance is essential; 5. Asking 'Why be a party to my own destruction?'; 6. Realizing that from one hour to the next, difficulties vanish [21, 22]."
+  },
+  {
+    "id": 198, "title": "Do Not Grieve Over Trivialities", "topic": "Perspective", "question": "How should a believer view the minor annoyances of the world?", "notes_sources": "The entire world is trivial. A righteous man was once thrown into a lion's cage and saved; when asked what he was thinking about, he said he was pondering whether the lion's saliva was pure or impure. By maintaining lofty aims for the Hereafter, earthly worries lose their power [23, 24]."
+  },
+  {
+    "id": 199, "title": "Finding Consolation in the Afflicted", "topic": "Gratitude", "question": "How can looking at others ease your own suffering?", "notes_sources": "Look to the right and left—every house experiences mourning. Find consolation with those who are worse off than you. Realize that your difficulties are tiny compared to those who are bedridden for years, imprisoned, or who have lost their children. Praise Allah that your trial wasn't worse [25]."
+  },
+  {
+    "id": 200, "title": "Presence of Mind in Recitation", "topic": "The Quran", "question": "How should the Quran be recited to maximize its benefit?", "notes_sources": "A person must recite the Quran while pondering over its meaning with due respect and presence of mind. Reciting it while heedless or contradicting its teachings risks inviting the curses mentioned within the verses upon oneself [26]."
+  },
+  {
+    "id": 201, "title": "The Supreme Right to Companionship", "topic": "Parents", "question": "Between parents, who has the most right to your excellent treatment?", "notes_sources": "The Prophet was asked, 'Who has the most right to my good company?' He answered, 'Your mother.' The man asked again twice, and both times the Prophet said, 'Your mother,' before finally saying 'Your father' on the fourth ask, highlighting her unmatched sacrifice [27]."
+  },
+  {
+    "id": 202, "title": "The Mutual Rights of Spouses", "topic": "Marriage Etiquette", "question": "What is the overarching Quranic rule for marital behavior?", "notes_sources": "Allah commands: 'And live with them honorably' (Quran 4:19). This fulfills the 'firm and strong covenant' of marriage, requiring mutual respect, liberality, and good treatment under all circumstances [28]."
+  },
+  {
+    "id": 203, "title": "Guarding Marital Secrets", "topic": "Spousal Rights", "question": "What is the consequence of exposing intimacy and private marital matters?", "notes_sources": "The Prophet strictly warned: 'The people in the worst position in Allah's sight on the Day of Resurrection is a man he goes to his wife and she to him and he then spreads her secrets.' A husband and wife must serve as trusted guardians of each other's honor [29]."
+  },
+  {
+    "id": 204, "title": "The Reality of Backbiting", "topic": "Sins of the Tongue", "question": "Does backbiting only apply when you lie about someone?", "notes_sources": "No. The Prophet defined backbiting (Gheebah) as: 'It is to mention something about your brother that he dislikes.' When the companions asked, 'Even if what you said is truly found in your brother?' He replied, 'If what you said is truly found in him, you have backbitten him' [30]."
+  },
+  {
+    "id": 205, "title": "Fulfilling Covenants and Pledges", "topic": "Social Etiquette", "question": "What happens if a person habitually breaks their promises?", "notes_sources": "Breaking promises is a core trait of hypocrisy. The Prophet said that possessing four traits makes someone a pure hypocrite: acting treacherously in pacts, lying when speaking, breaking promises, and behaving foully in disputes [31]."
+  },
+  {
+    "id": 206, "title": "Loving for the Sake of Allah", "topic": "Brotherhood", "question": "What is the reward for visiting a brother purely for Allah's sake?", "notes_sources": "A man visited a brother without any worldly motive, blood relation, or desire for bounty. An angel intercepted him and announced: 'Allah has sent me to you informing you that He loves you because you love that man for Allah's sake. Paradise has become obligatory for you' [32]."
+  },
+  {
+    "id": 207, "title": "The Rights of the Path", "topic": "Public Etiquette", "question": "If Muslims must sit in public pathways, what rules must they observe?", "notes_sources": "The Prophet outlined the rights of the path as: 'Lowering the gaze, refraining from harming, responding to the greetings, ordering the good and eradicating the evil,' as well as 'guiding the one who is lost' [33]."
+  },
+  {
+    "id": 208, "title": "The Expiation of the Gathering", "topic": "Gatherings", "question": "What should be recited when concluding a sitting or meeting?", "notes_sources": "It is a Sunnah to expiate for any mistakes or idle talk that occurred by saying: 'Glory be to You, O Allah, and to You is the Praise... I seek Your forgiveness and I repent to You' (Subhanak Allahumma...). This serves as an expiation for what took place during the sitting [33]."
+  },
+  {
+    "id": 209, "title": "The Blessing of the Meal", "topic": "Etiquette of Eating", "question": "From which part of the plate should a Muslim eat?", "notes_sources": "The Prophet commanded: 'The blessings descend from the middle of the food. So eat from the edges and do not eat from the middle' [34]."
+  },
+  {
+    "id": 210, "title": "Licking the Fingers", "topic": "Etiquette of Eating", "question": "What should a person do with their fingers after finishing a meal?", "notes_sources": "The Prophet instructed: 'When one of you eats, he should not wipe his fingers until he licks them or has them licked.' Jabir stated this is because 'You do not know in which part of your food lies its blessing' [34]."
+  },
+  {
+    "id": 211, "title": "Patience with Hot Sustenance", "topic": "Etiquette of Eating and Drinking", "question": "Why shouldn't a person blow on hot food or into a cup?", "notes_sources": "A Muslim should not blow over hot food; instead, they must wait until it cools down. Likewise, when drinking water, one should not blow into the glass but rather breathe three times outside of the vessel, separating the glass from the mouth [34, 35]."
+  },
+  {
+    "id": 212, "title": "Starting with the Right", "topic": "General Etiquette", "question": "In what daily matters is it preferred to use the right side?", "notes_sources": "Aisha noted: 'Allah’s Messenger loved to begin with the right in all his matters, in putting on his shoes, in combing his hair and in purifying himself.' This rule generally applies to all noble and clean tasks [36]."
+  },
+  {
+    "id": 213, "title": "Wearing New Clothes", "topic": "Dress Etiquette", "question": "What should you say when you see a fellow Muslim wearing new clothes?", "notes_sources": "It is a Sunnah to pray for them by saying: 'May you wear it until it disintegrates and falls apart' (meaning, may you have a long, blessed life). The Prophet made this supplication when he saw Umm Khalid wearing new clothing [36]."
+  },
+  {
+    "id": 214, "title": "The Etiquette of Sleeping", "topic": "Nightly Sunnahs", "question": "What specific words of Dhikr are highly recommended before sleeping?", "notes_sources": "When Ali and Fatimah asked the Prophet for a servant to help with chores, he taught them something better: 'When you go to your beds, glorify Allah thirty-three times (SubhanAllah), praise Him thirty-three times (Alhamdulillah), and extol His greatness thirty-four times (Allahu Akbar)' [37]."
+  },
+  {
+    "id": 215, "title": "The Six Obligations", "topic": "Islamic Brotherhood", "question": "What are the six basic obligations a Muslim owes to another?", "notes_sources": "1. Greet them when meeting; 2. Respond when invited; 3. Give sincere advice when sought; 4. Say 'Yarhamukallah' when they sneeze and praise Allah; 5. Visit them when ill; 6. Attend their funeral when they die [8, 38]."
+  },
+  {
+    "id": 216, "title": "The Etiquette of Sneezing", "topic": "Social Etiquette", "question": "How should the response (Tashmeet) to a sneeze differ based on who sneezes?", "notes_sources": "After the sneezer says 'Alhamdulillah', a man should respond ('Yarhamukallah') to an elderly woman in an audible voice, but respond to a young woman in a low voice (audible only to himself). If the sneezer does not say 'Alhamdulillah', no response is required [39]."
+  },
+  {
+    "id": 217, "title": "The Forty-Day Limit", "topic": "Personal Hygiene (Fitrah)", "question": "What is the absolute maximum time allowed for clipping nails and trimming hair?", "notes_sources": "Anas reported: 'A time limit has been prescribed for us for clipping the moustache and nails, plucking underarm hair and removing pubic hair, that it should not be left for more than forty days.' Spending more than 40 days without doing it is prohibited [40, 41]."
+  },
+  {
+    "id": 218, "title": "Burying Removed Body Parts", "topic": "Cleanliness", "question": "What should be done with clipped nails and removed hair?", "notes_sources": "It has been commanded in the tradition to appropriately bury four things out of respect for the human body: human blood, hair (from any part of the body), nails, and cloth used for cleaning menstrual blood [42]."
+  },
+  {
+    "id": 219, "title": "The Adornment of the Angels", "topic": "The Imamah (Turban)", "question": "What is the virtue of wearing an Imamah, especially on Friday?", "notes_sources": "The Prophet pointed to the Imamah and said, 'The crowns of angels are like this.' Ibn Umar advised his son to wear it on Fridays because the angels descend wearing Imamahs and send salutations upon those who wear them until the sun sets [43]."
+  },
+  {
+    "id": 220, "title": "The Greeting (Salam) Rewards", "topic": "The Greeting (Salam)", "question": "How do the words used in the Salam impact your reward?", "notes_sources": "Saying 'Assalamu Alaikum' earns 10 virtues. Adding 'Wa Rahmatullah' increases it to 20 virtues. Completing it with 'Wa Barakatuhu' earns 30 virtues. This demonstrates how easily a Muslim can multiply their good deeds in daily interactions [44]."
+  },
+  {
+    "id": 221, "title": "Conveying the Salam", "topic": "Social Etiquette", "question": "If someone tells you, 'Give my salam to so-and-so,' how should you respond?", "notes_sources": "You should not make an immediate reply to the Salam yourself, as your reply is not the objective. Rather, you must faithfully convey the greeting to the intended person. When that person receives it, they should reply: 'Alayka wa Alayhis-Salam' (peace be upon you and him) [45]."
+  },
+  {
+    "id": 222, "title": "Innovations in Purity", "topic": "Wudhu Errors", "question": "Is it a Sunnah to wipe the neck during ablution (Wudhu)?", "notes_sources": "No. Wiping the neck during Wudhu is listed among the common mistakes widespread among Muslims. The established Sunnah is to wipe the entire head and the ears, without extending the wiping down to the neck [46]."
+  },
+  {
+    "id": 223, "title": "Wiping Over Footwear", "topic": "Wudhu Errors", "question": "When wiping over leather socks (Khuff) or regular socks, should the bottom be wiped?", "notes_sources": "No. Wiping the bottom of the khuff or sock is a common mistake. Islamic law prescribes that only the top of the sock is to be wiped, demonstrating that religion is based on revelation rather than pure human logic [46, 47]."
+  },
+  {
+    "id": 224, "title": "Honoring the Prescribed Times", "topic": "Errors in Salah", "question": "What is the consequence of delaying prayer past its appointed window?", "notes_sources": "Delaying the prayer past its prescribed time without a valid Islamic excuse is a severe mistake. Prayers are enjoined at fixed hours, and consistently missing these windows disrupts the foundational pillar of the religion [48]."
+  },
+  {
+    "id": 225, "title": "Words in the Wrong Posture", "topic": "Errors in Salah", "question": "Is it permissible to recite the Quran while bowing (Rukoo') or prostrating (Sujood)?", "notes_sources": "No. Reciting the Quran during Rukoo' and Sujood is strictly forbidden [49]. These postures are specifically reserved for glorifying Allah and making intense supplications (Du'aa) [50]."
+  },
+  {
+    "id": 226, "title": "Guarding the Gaze in Worship", "topic": "Errors in Salah", "question": "Where should a worshipper look during the prayer?", "notes_sources": "A worshipper must look at the place of prostration. Raising the eyes towards the sky or looking to the right and left without necessity is a major mistake that breaks 'Khushu' (humility/focus) and allows Shaytan to steal from the prayer [50]."
+  },
+  {
+    "id": 227, "title": "Distractions of the Hands", "topic": "Errors in Salah", "question": "Why shouldn't a person interlock their fingers during prayer?", "notes_sources": "Interlocking the fingers, cracking the knuckles, or unnecessarily fidgeting with clothes and watches are all mistakes that distract the person and void the tranquility (Tum'aneenah) required for a valid prayer [51, 52]."
+  },
+  {
+    "id": 228, "title": "Modesty in the Mosque", "topic": "Etiquette of the Masjid", "question": "What rule must women observe when attending the mosque?", "notes_sources": "It is a mistake for women to come to the masjid beautified and perfumed. The mosque is a place of worship and humility, and both men and women must observe modesty to prevent distraction and temptation [53]."
+  },
+  {
+    "id": 229, "title": "Haste in Supplication", "topic": "Errors in Du'aa", "question": "What mindset can prevent a supplication from being answered?", "notes_sources": "A major mistake in Du'aa is losing hope that it will be accepted and being hasty in waiting for a response. A believer must supplicate with certainty and patience, knowing Allah answers in the manner and time He deems best [53]."
+  },
+  {
+    "id": 230, "title": "Disrupting the Sermon", "topic": "Errors in Jumu'ah", "question": "What action strictly violates the etiquette of the Friday congregation?", "notes_sources": "Stepping over the necks of people to get to the front while the Imam is delivering the sermon is a grave error. Once, the Prophet saw a man doing this and commanded him: 'Sit down, for you have annoyed (people)' [54]."
+  },
+  {
+    "id": 231, "title": "Ruining the Fast", "topic": "Errors in Ramadan", "question": "How do visual and auditory sins affect a fasting person?", "notes_sources": "Fasting is not just abstaining from food. Listening to music or watching romance and detective movies during Ramadan are mistakes that corrupt the ears and eyes, encourage wickedness, and destroy the spiritual reward of the fast [55, 56]."
+  },
+  {
+    "id": 232, "title": "Innovations on the Day of Arafah", "topic": "Errors in Hajj", "question": "Do pilgrims need to climb Mount Arafah to complete their Hajj?", "notes_sources": "No. Climbing Mount Arafah as an act of worship, or specifically facing the mountain instead of the Qiblah while supplicating, are common innovations. The entirety of the plain of Arafah is valid for standing [57]."
+  },
+  {
+    "id": 233, "title": "Obstacles to Marriage", "topic": "Errors in Matrimony", "question": "How does an excessively high dowry (Mahr) harm society?", "notes_sources": "Demanding an excessively high Mahr is a major societal mistake. It creates an artificial barrier to marriage, leading youth to delay it indefinitely (often until after studies), which opens the doors to temptation and corruption in the community [58]."
+  },
+  {
+    "id": 234, "title": "Complaining About the Era", "topic": "Sins of the Tongue", "question": "Why is it forbidden to curse or insult the time/days/years?", "notes_sources": "The Prophet said: 'Let none of you say, 'O woe is the time,' for surely Allah is the Time.' Because Allah alternates the night and the day, insulting time is effectively directing an insult toward the Creator who decrees what happens within it [59, 60]."
+  },
+  {
+    "id": 235, "title": "Barriers to Purity", "topic": "Errors in Purification", "question": "How does wearing nail polish affect Wudhu?", "notes_sources": "Using modern nail polish creates a waterproof barrier over the nails. Since water must touch all required skin and nails for ablution to be valid, wearing it prevents water from reaching the nail, rendering the Wudhu (and subsequent prayers) invalid [61]."
+  },
+  {
+    "id": 236, "title": "The Limits of Grief", "topic": "Bereavement", "question": "What is the maximum duration for mourning a deceased person?", "notes_sources": "It is a mistake to mourn the deceased for more than three days, as this contradicts submission to Allah's decree. The sole exception is a wife mourning the death of her husband, which is prescribed as four months and ten days [62]."
+  },
+  {
+    "id": 237, "title": "Dental Hygiene as Worship", "topic": "The Miswak", "question": "When is the use of the tooth-stick (Miswak) most highly recommended?", "notes_sources": "The Miswak purifies the mouth and pleases the Lord. While good at any time, it is heavily emphasized at five times: before prayer, before reading Quran, upon waking from sleep, when the taste of the mouth changes, and when entering the home [63]."
+  },
+  {
+    "id": 238, "title": "Changing Grey Hair", "topic": "Personal Grooming", "question": "What is the Islamic ruling on dyeing white or grey hair?", "notes_sources": "It is highly recommended to change the color of grey hair to differ from the practices of other nations. The best materials to use are henna and 'katm' (yielding a reddish/brownish dye), but dyeing the hair completely black is strictly forbidden [64]."
+  },
+  {
+    "id": 239, "title": "The Method of the Call", "topic": "Sunnah of the Adhan", "question": "What physical action should the Mu'adhin (caller) take while giving the Adhan?", "notes_sources": "It is a Sunnah for the caller to insert his index fingers into his ears. This practice stems from Bilal, the Prophet's caller, who said, 'I put my index fingers into my ears and made the adhan.' It is also recommended he turn his head right and left for 'Hayya 'alas-salah' and 'Hayya 'alal-falah' [65, 66]."
+  },
+  {
+    "id": 240, "title": "The Ultimate Salutation", "topic": "Sending Peace upon the Prophet", "question": "What is the immense reward for reciting Salawat upon the Prophet?", "notes_sources": "The Prophet Muhammad (peace be upon him) gave the glad tidings: 'Whoever recites Salat upon me once; Allah sends ten mercies upon him, forgives ten sins and elevates his rank by ten times.' It acts as a light on the Day of Judgment [67]."
+  },
+  {
+    "id": 241, "title": "The Soul of the Deed", "topic": "Pious Intentions", "question": "How does intention transform everyday actions?", "notes_sources": "The intention is the soul of the deed. A Muslim bases all deeds on a pious intention, as a permissible act can become an act of obedience worthy of reward simply through a good intention [1]. Conversely, an act of obedience void of pious intention becomes a burden [1]."
+  },
+  {
+    "id": 242, "title": "Initiating the Greeting", "topic": "Salaam", "question": "Who should initiate the greeting of peace?", "notes_sources": "When Muslims meet, the one riding should greet the one walking, the one walking should greet the one sitting, and the smaller group should greet the larger group [2]. It is also recommended to greet both those you know and those you do not know [3]."
+  },
+  {
+    "id": 243, "title": "The Etiquette of Handshakes", "topic": "Musafahah", "question": "How should Muslims shake hands when meeting?", "notes_sources": "Shaking hands completes the greeting of Salaam [4]. It is a Sunnah to use both hands for the handshake, and there should not be any cloth or barrier between the palms [5], [6]."
+  },
+  {
+    "id": 244, "title": "Seating in a Gathering", "topic": "Majlis Etiquette", "question": "Where should a person sit when entering a gathering?", "notes_sources": "A person should sit at the end of the gathering where there is space. They must not make someone else stand up to take their seat [7]. Additionally, the Prophet strictly forbade sitting in the open space in the middle of a circle or gathering [8]."
+  },
+  {
+    "id": 245, "title": "Expiation for the Gathering", "topic": "Kaffarat al-Majlis", "question": "What should be recited when concluding a sitting?", "notes_sources": "To expiate for any mistakes or idle talk during a gathering, one should seek Allah's forgiveness upon concluding by reciting: 'Glory be to You, O Allah, and to You is the Praise. I bear witness that none is worthy of worship except You. I seek Your forgiveness and I repent to You' [9], [10]."
+  },
+  {
+    "id": 246, "title": "The Etiquette of Sneezing", "topic": "Tashmeet", "question": "How should Muslims respond when someone sneezes?", "notes_sources": "The one who sneezes should praise Allah. It is then an obligation for the listener to audibly say 'Yarhamukallah' (May Allah have mercy on you). The sneezer then replies, 'May Allah guide you and set your affairs aright' [3], [11]."
+  },
+  {
+    "id": 247, "title": "The Sunnah of Footwear", "topic": "Dress Etiquette", "question": "In what order should shoes be put on and removed?", "notes_sources": "When putting on shoes, a Muslim must begin with the right foot, and when taking them off, they must begin with the left foot [12], [13]. It is also prohibited to walk wearing only one shoe; one should either wear both or walk barefoot [12]."
+  },
+  {
+    "id": 248, "title": "The Natural Disposition", "topic": "Fitrah", "question": "What are the five acts of the natural disposition?", "notes_sources": "Five acts are part of the Fitrah: circumcision, shaving the pubic hair, plucking armpit hairs, cutting the nails, and trimming the mustache [14]. The Prophet set a time limit that these should not be left for more than forty days [15]."
+  },
+  {
+    "id": 249, "title": "The Application of Fragrance", "topic": "Personal Grooming", "question": "What are the guidelines for using fragrance for men and women?", "notes_sources": "The Prophet stated that the fragrance for men is one whose smell is apparent but its color is hidden, while the fragrance for women is one whose color is visible but its smell is hidden [16]. Women are prohibited from wearing perfume when going to the mosque or leaving the house if unrelated men can smell it [17]."
+  },
+  {
+    "id": 250, "title": "The Virtue of Lending", "topic": "Financial Brotherhood", "question": "What is the spiritual reward for giving a loan to someone in need?", "notes_sources": "The Prophet stated that every loan is an act of charity (Sadaqah) [18]. Easing the burden of a debtor is highly rewarded; helping those in difficulties strengthens social cohesion and love within the community [19]."
+  },
+  {
+    "id": 251, "title": "The Sin of Scoffing", "topic": "Sins of the Tongue", "question": "Why is mocking or scoffing at others strictly forbidden?", "notes_sources": "Allah explicitly forbids groups of men or women from scoffing at one another, noting that the mocked person may be better in the sight of Allah than the mocker [20], [21]. It is also forbidden to insult one another with offensive nicknames [22]."
+  },
+  {
+    "id": 252, "title": "Avoiding Suspicion", "topic": "Sins of the Heart", "question": "Why must believers avoid undue suspicion?", "notes_sources": "The Prophet warned to avoid suspicion because it is the 'falsest of speech' [23]. Suspicion leads to spying on others and seeking out their private faults, which destroys brotherhood and breeds animosity [20], [24]."
+  },
+  {
+    "id": 253, "title": "The Past is Gone", "topic": "Mental Well-Being", "question": "Why should a Muslim avoid brooding over past tragedies?", "notes_sources": "Brooding over the past is a sickness that destroys your resolve for the present moment. Episodes of the past are finished, and sadness cannot retrieve them; a believer should not 'carry out an autopsy' on history but instead focus on today [25]."
+  },
+  {
+    "id": 254, "title": "Casting Off Anxiety", "topic": "Tawakkul (Trust in Allah)", "question": "How does trusting in predestination cure anxiety?", "notes_sources": "Do not be sad over what has been preordained, as it will take place regardless. The pens have dried, and the scrolls have been rolled up [26]. Recognizing that Allah forgets sins and accepts repentance brings peace to the heart and drives away worry [26]."
+  },
+  {
+    "id": 255, "title": "Handling Criticism", "topic": "Resilience", "question": "How should you respond to jealousy and unjust criticism?", "notes_sources": "Accept constructive criticism, but realize that the jealous and weak-minded will always exist [27]. The more you achieve, the more you may face envy, so do not broadcast all your affairs to sitting companions who might rejoice at your misfortune [28]."
+  },
+  {
+    "id": 256, "title": "Distractions in the Mosque", "topic": "Etiquette of the Masjid", "question": "Why is it forbidden to interlock fingers while waiting for prayer?", "notes_sources": "Interlacing the fingers or cracking the knuckles in the mosque is a distraction from Shaytan [29], [30]. A person is considered to be in a state of prayer from the moment they perform Wudhu and head to the mosque, so they must maintain tranquility [31]."
+  },
+  {
+    "id": 257, "title": "The Sanctity of the Praying Person", "topic": "Sutrah Rules", "question": "What is the sin of walking directly in front of someone praying?", "notes_sources": "The Prophet said that if a person knew the burden of sin they bear by passing in front of a praying person (between them and their Sutrah), they would prefer to stand and wait for 40 years rather than pass [32], [33]."
+  },
+  {
+    "id": 258, "title": "The Seven Bones of Prostration", "topic": "Sujood Mechanics", "question": "Which body parts must firmly touch the ground during prostration?", "notes_sources": "The Prophet was ordered to prostrate on seven bones: the forehead (including the nose), the two hands (palms), the two knees, and the toes of both feet [34], [35]. Raising the feet off the ground invalidates the prostration [36]."
+  },
+  {
+    "id": 259, "title": "Tranquility in Action", "topic": "Errors in Salah", "question": "Why is rushing through the prayer so dangerous?", "notes_sources": "The absence of ease and tranquility invalidates the prayer entirely [37]. A worshipper must bow and prostrate until every bone and joint settles at ease; the Prophet commanded a man who prayed hastily to repeat his prayer because 'he had not prayed' [38], [39]."
+  },
+  {
+    "id": 260, "title": "Following the Imam", "topic": "Congregational Prayer", "question": "What happens if a person purposely bows or prostrates before the Imam?", "notes_sources": "Preceding the Imam in the prayer purposely invalidates that rak'ah or the entire prayer [37], [40]. The Imam is appointed to be followed; worshippers must not say the takbeer or move into the next pillar until the Imam has done so first [41]."
+  },
+  {
+    "id": 261, "title": "The Extraction of the Soul", "topic": "Death", "question": "How does the soul leave the body at death?", "notes_sources": "For a believer, the angel of death gently tells the soul to come out to Allah's forgiveness, and it flows out smoothly like a drop from a waterskin [42]. For a disbeliever, the angel extracts it harshly, and it is given to angels of punishment [43], [44]."
+  },
+  {
+    "id": 262, "title": "The Trial of the Grave", "topic": "Barzakh", "question": "What three questions are asked by Munkar and Nakir in the grave?", "notes_sources": "Two angels will make the deceased sit up and ask: 'Who is your Lord?', 'What is your deen?', and 'Who is this man sent among you?' The believer answers correctly, while the disbeliever stammers 'Alas, I do not know' [45], [46]."
+  },
+  {
+    "id": 263, "title": "Washing the Deceased", "topic": "Ghusl al-Mayyit", "question": "What are the rules for washing a deceased Muslim?", "notes_sources": "Washing the body is a communal obligation (Fard Kifaayah) [47]. Men wash men, and women wash women, using water and sidr (lote-tree leaves), washing it an odd number of times (three, five, or seven) [48]. Spouses may wash each other [47]."
+  },
+  {
+    "id": 264, "title": "Shrouding the Deceased", "topic": "Al-Kafn", "question": "How should a deceased Muslim be shrouded?", "notes_sources": "It is a Sunnah to shroud a male in three white cotton cloths that are rolled up around the body without a shirt or turban [49], [50]. A female is typically shrouded in five pieces of cloth, including a veil and wrap [49]."
+  },
+  {
+    "id": 265, "title": "The Funeral Prayer Mechanics", "topic": "Salatul Janazah", "question": "What is recited during the funeral prayer?", "notes_sources": "The prayer consists of four Takbeers. After the first, Al-Fatihah is recited. After the second, Salawat upon the Prophet. After the third, sincere supplication for the deceased. After the fourth, a Tasleem is given to conclude [51], [52]."
+  },
+  {
+    "id": 266, "title": "The Funeral Procession", "topic": "Burial Rites", "question": "What is the proper etiquette when following a funeral bier?", "notes_sources": "Following the funeral is a right a Muslim owes another [53]. Participants should hasten with the procession without running, and it is strictly forbidden to raise voices in loud weeping, chanting, or engaging in un-Islamic customs [54], [55]."
+  },
+  {
+    "id": 267, "title": "Placing the Body in the Grave", "topic": "Burial", "question": "How must the body be positioned inside the grave?", "notes_sources": "The body should be entered from the foot of the grave and placed on its right side facing the Qiblah. The person placing the body should say: 'Bismillahi wa 'alaa sunnati rasoolillah' (With the name of Allah and upon the Sunnah of Allah's Messenger) [56], [57]."
+  },
+  {
+    "id": 268, "title": "The Limits of Mourning", "topic": "Bereavement", "question": "How long is a Muslim permitted to mourn a death?", "notes_sources": "It is forbidden for a woman to mourn any deceased person for more than three days, except for her husband, whom she mourns for four months and ten days [58]. During this specific period (Iddah), the widow must not wear adornments, perfume, or jewelry [59], [58]."
+  },
+  {
+    "id": 269, "title": "Visiting the Graveyard", "topic": "Cemeteries", "question": "What is the Islamic purpose of visiting graves?", "notes_sources": "Visiting graves is prescribed to remind oneself of the Hereafter and to supplicate for the deceased [60], [61]. It is strictly forbidden to call upon the dead in supplication, seek their aid, or sit upon the graves [61]."
+  },
+  {
+    "id": 270, "title": "Benefiting the Dead", "topic": "Ongoing Rewards", "question": "What actions of the living can benefit a person after they die?", "notes_sources": "The deceased benefits from the sincere supplications of Muslims, the payment of their outstanding debts, righteous children praying for them, and any continuing charity (Sadaqah Jariyah) or beneficial knowledge they left behind [62], [61]."
+  },
+  {
+    "id": 271, "title": "The Trumpet Blast", "topic": "The Hour", "question": "What happens when the Trumpet is blown?", "notes_sources": "The Trumpet will be blown, causing all in the heavens and earth to lose consciousness and die. When it is blown a second time, everyone will instantly stand upright from their graves, resurrected and looking on in horror [63], [64]."
+  },
+  {
+    "id": 272, "title": "The Resurrection", "topic": "Al-Ba'th", "question": "What is the physical state of humans when resurrected?", "notes_sources": "Mankind will be raised up barefoot, naked, and uncircumcised, just as they were originally created [65], [66]. The whole human body wastes away in the earth except for the coccyx bone, from which Allah recreates the body [64]."
+  },
+  {
+    "id": 273, "title": "The Gathering", "topic": "Al-Hashr", "question": "How will people be herded to the place of Judgment?", "notes_sources": "The believers will be gathered with ceremony, riding toward the Mercy of Allah [67]. Conversely, the evildoers and disbelievers will be gathered flat on their faces—blind, dumb, and deaf—driven toward Hell [68], [67]."
+  },
+  {
+    "id": 274, "title": "Drenched in Sweat", "topic": "The Reckoning", "question": "What physical trial will mankind face while waiting for judgment?", "notes_sources": "The sun will be brought so close to creation that people will be drenched in their own sweat. Depending on their worldly deeds, sweat will reach their knees, their waists, or even bridle their mouths [69]."
+  },
+  {
+    "id": 275, "title": "The Five Ultimate Questions", "topic": "The Reckoning", "question": "What must every person answer for before moving on the Day of Judgment?", "notes_sources": "The Prophet stated that no one's feet will move until they are questioned about five things: how they spent their life, what they did with their youth, how they earned their wealth, how they spent it, and how they acted upon their knowledge [70], [71]."
+  },
+  {
+    "id": 276, "title": "The Scales of Justice", "topic": "Al-Mizan", "question": "What exactly will be weighed on the Day of Judgment?", "notes_sources": "Allah will set up the Balances of Justice. The texts indicate that the actual deeds (taking physical forms), the records and scrolls of those deeds, and even the physical weight of the slave themselves will all be weighed [72], [73]."
+  },
+  {
+    "id": 277, "title": "Crossing the Bridge", "topic": "As-Sirat", "question": "How is the Bridge over Hell described?", "notes_sources": "The Sirat is laid over the Fire of Hell; it is slippery, lined with massive hooks and thorns [72], [74]. Believers will cross it at different speeds—like lightning, wind, or swift horses—while others will be snatched and fall into the Fire [74]."
+  },
+  {
+    "id": 278, "title": "The Great Intercession", "topic": "Ash-Shafa'ah", "question": "Who will intercede to begin the Judgment?", "notes_sources": "Prophet Muhammad will be granted the Great Intercession. He will fall prostrate beneath the Throne until Allah grants him permission to speak and intercede [75], [76]. Later, angels, prophets, and martyrs will also be permitted to intercede [76]."
+  },
+  {
+    "id": 279, "title": "The Slaughter of Death", "topic": "Eternity", "question": "Will anyone ever die in Paradise or Hell?", "notes_sources": "No. Death will be brought forth in the visual form of a beautiful sheep and slaughtered on the barrier between Paradise and Hell. A caller will then announce to both groups that there is only eternity and no more death [77], [78]."
+  },
+  {
+    "id": 280, "title": "Entering the Abode of Bliss", "topic": "Paradise", "question": "What happens at the gates of Paradise?", "notes_sources": "Believers will be welcomed by angels saying 'Peace be upon you.' Those who dedicated themselves to specific worship will be called from specific gates, such as the Gate of Prayer, the Gate of Charity, or Bab Ar-Rayyan for those who fasted [79], [80]."
+  },
+  {
+    "id": 281, "title": "Levels of Paradise", "topic": "Jannah", "question": "Are there different ranks within Paradise?", "notes_sources": "Yes, Paradise has one hundred grades or levels. If the entire world gathered in just one of them, it would be sufficient [81]. A person reading the Quran is told to read and ascend, climbing a degree for every verse [81]."
+  },
+  {
+    "id": 282, "title": "The Lowest Rank in Jannah", "topic": "Paradise", "question": "What does the last person to enter Paradise receive?", "notes_sources": "The very last man to exit Hell and enter Paradise will be granted by Allah the equivalent of the greatest kingdom of the world, and then ten times more like it, along with whatever his heart desires [82], [83]."
+  },
+  {
+    "id": 283, "title": "The Highest Rank (Al-Wasilah)", "topic": "Paradise", "question": "What is the ultimate station in Paradise?", "notes_sources": "Al-Wasilah is the absolute highest rank, positioned above all other ranks, reserved for only one chosen servant of Allah—Prophet Muhammad. Believers are encouraged to pray for him to attain it after every Adhan [84], [85]."
+  },
+  {
+    "id": 284, "title": "The Garments of the Believers", "topic": "Paradise", "question": "What will the inhabitants of Paradise wear?", "notes_sources": "They will be adorned with bracelets of gold and silver, garlands of pearls, and green garments of fine silk and rich brocade [86], [87]. Their garments will never wear out, and their youth will never fade [88]."
+  },
+  {
+    "id": 285, "title": "The Ornaments and Crowns", "topic": "Paradise", "question": "How beautiful will the adornments of Jannah be?", "notes_sources": "Believers will wear crowns like kings [89]. If a man from Paradise were to look down and his bracelet appeared, its brilliance would blot out the light of the sun just as the sun blots out the stars [90]."
+  },
+  {
+    "id": 286, "title": "Couches and Thrones", "topic": "Paradise", "question": "Where will the believers recline?", "notes_sources": "They will recline facing each other on couches (Ara'ik) raised high, woven with gold fabrics and studded with pearls, rubies, and chrysolite [91], [92]. These beds will have curtained canopies prepared for total relaxation [92]."
+  },
+  {
+    "id": 287, "title": "The Maidens of Paradise", "topic": "Al-Hoor Al-'Ayn", "question": "Who are the Hoor Al-'Ayn?", "notes_sources": "They are beautiful, dark-eyed maidens of Paradise, created in perfection [93]. They are immortal, fresh, and will never fade, welcoming the believers to their eternal homes with joy and sweet singing [94], [95]."
+  },
+  {
+    "id": 288, "title": "The Markets of Jannah", "topic": "Paradise", "question": "What happens in the markets of Paradise?", "notes_sources": "Believers will visit a market surrounded by angels, containing things no eye has seen. They can take whatever they wish without buying or selling [96]. Upon returning to their spouses, their beauty and radiance will have increased significantly [97]."
+  },
+  {
+    "id": 289, "title": "The Day of More", "topic": "Yawm al-Mazeed", "question": "What special event occurs every Friday in Paradise?", "notes_sources": "Friday is the 'Day of More.' The inhabitants will gather in a vast valley of white musk on pulpits of light, gold, and gems [98], [99]. Allah will shower them with fragrances and grant them bounties beyond imagination [100]."
+  },
+  {
+    "id": 290, "title": "The Ultimate Delight", "topic": "Seeing Allah", "question": "What is the greatest reward in Paradise?", "notes_sources": "The absolute greatest delight is gazing upon the Face of Allah [101]. The believers will see Him as clearly as one sees the full moon, and Allah will speak to them directly, a joy that surpasses all physical pleasures [102], [103]."
+  },
+  {
+    "id": 291, "title": "Earning a Lawful Livelihood", "topic": "Business Dealings", "question": "Why is earning Halal wealth so crucial?", "notes_sources": "Any flesh nourished by unlawful wealth is more entitled to the Fire [104], [105]. If a person earns unlawful money, even their prayers and acts of charity with that wealth are rejected by Allah [104], [106]."
+  },
+  {
+    "id": 292, "title": "Speculative Transactions (Gharar)", "topic": "Commerce", "question": "Why are overly risky sales forbidden?", "notes_sources": "Selling something with an overwhelming presence of undue risk or uncertainty (Gharar) is forbidden because it is tantamount to gambling and unjustly devouring another's wealth [107], [108]."
+  },
+  {
+    "id": 293, "title": "The Crime of Usury (Riba)", "topic": "Commerce", "question": "How severe is the sin of interest?", "notes_sources": "Riba is a heinous crime that destroys society by feeding greed without effort [109], [110]. The Prophet cursed the one who takes interest, the one who pays it, the one who records it, and the two witnesses, stating they are all alike in sin [111]."
+  },
+  {
+    "id": 294, "title": "The Evil of Hoarding", "topic": "Commerce", "question": "What is the punishment for hoarding essential goods?", "notes_sources": "A merchant who hoards staple foods to artificially inflate prices is cursed [112]. The Prophet warned that anyone who hoards grain for forty days has washed his hands of Allah, and Allah has washed His hands of him [113], [114]."
+  },
+  {
+    "id": 295, "title": "Fraud and Deception", "topic": "Commerce", "question": "Can you conceal a defect in a product you are selling?", "notes_sources": "No. The Prophet said, 'Whoever deceives us is not from us' [115]. It is obligatory to point out any faults in the merchandise. Intentionally concealing a defect destroys the blessing of the entire transaction [73], [116]."
+  },
+  {
+    "id": 296, "title": "Selling What You Do Not Own", "topic": "Commerce", "question": "Can you sell an item before you actually possess it?", "notes_sources": "It is prohibited to sell goods that you do not physically possess or own [117], [118]. This ensures trade remains fair and prevents disputes over items that the seller cannot guarantee they can procure."
+  },
+  {
+    "id": 297, "title": "Two Transactions in One", "topic": "Commerce", "question": "What is an 'Eenah transaction?", "notes_sources": "It involves selling an item for a deferred higher price, and then immediately buying it back from the buyer for a lower cash price [119]. This is a prohibited trick to execute a loan with interest under the guise of a sale [119]."
+  },
+  {
+    "id": 298, "title": "Undercutting a Brother's Sale", "topic": "Commerce", "question": "Can you outbid another Muslim's established sale?", "notes_sources": "The Prophet said, 'No man should sell over the sale of his brother' [120]. Offering a buyer a lower price after they have already agreed to a purchase with someone else breeds hatred, envy, and boycotting [121]."
+  },
+  {
+    "id": 299, "title": "Artificially Inflating Prices (Najsh)", "topic": "Commerce", "question": "What is Najsh in business?", "notes_sources": "Najsh is when a person offers the seller more than the selling price without any intention of buying it, simply to deceive the actual buyer into paying more [122], [121]. The Prophet strictly forbade this deceitful practice [122]."
+  },
+  {
+    "id": 300, "title": "Trading in the Impermissible", "topic": "Commerce", "question": "Is it allowed to sell Haram items if you do not consume them yourself?", "notes_sources": "No. Selling alcohol, indecent magazines, or anything Allah has forbidden is prohibited. The rule is: 'When Allah forbids a thing, He also forbids its price' [123], [124]. The money earned from it is unlawful."
+  },
+  {
+    "id": 301, "title": "The Obligation of Justice", "topic": "Character", "question": "To whom must a Muslim be just?", "notes_sources": "A Muslim must be just to everyone—rich and poor, friend and foe, Muslim and non-Muslim, and even to their own soul [125]. Allah commands believers to stand firmly for justice, even if it goes against themselves or their parents [126], [127]."
+  },
+  {
+    "id": 302, "title": "Ordering Good and Forbidding Evil", "topic": "Social Responsibility", "question": "What happens if Muslims abandon forbidding evil?", "notes_sources": "Enjoining good and forbidding evil is an essential part of faith [128]. If a society abandons this duty, they risk being deprived of good, facing Allah's punishment, and having their supplications rejected [129], [128]."
+  },
+  {
+    "id": 303, "title": "Mutual Support", "topic": "Islamic Brotherhood", "question": "How should believers support one another?", "notes_sources": "Believers are like a single building, reinforcing one another [130], [131]. If a Muslim brother is being oppressed, one must come to his aid. The Prophet commanded: 'Help your brother, whether he is an oppressor or he is oppressed' (helping the oppressor means stopping his oppression) [132], [133]."
+  },
+  {
+    "id": 304, "title": "Repelling Evil with Goodness", "topic": "Social Etiquette", "question": "How should you deal with antagonism from others?", "notes_sources": "Allah commands believers to repel evil with a deed that is better. By doing so, the one between whom you had enmity may become as though he was a close friend [113]."
+  },
+  {
+    "id": 305, "title": "Dealing with Non-Muslims", "topic": "Social Relations", "question": "How should a Muslim treat non-belligerent non-Muslims?", "notes_sources": "With justice, equity, and good behavior. A Muslim must fulfill trusts to them, must not deceive them, and may not wrong them with respect to their life, wealth, or honor [134], [135], [136]."
+  },
+  {
+    "id": 306, "title": "Kindness Towards Animals", "topic": "Mercy to Creation", "question": "Does Islam dictate how we treat animals?", "notes_sources": "Yes. It is prohibited to harm an animal without just cause. A Muslim earns divine reward for feeding or giving water to a hungry or thirsty animal [137]. The Prophet cursed anyone who uses a living creature as an archery target [138]."
+  },
+  {
+    "id": 307, "title": "Gratitude to Parents", "topic": "Family Rights", "question": "Why does Islam place such high emphasis on parents?", "notes_sources": "Allah closely ties the command to worship Him alone with good behavior toward parents [139]. The mother, in particular, has the greatest right to excellent companionship, surpassing even the father, due to her sacrifices [140], [141]."
+  },
+  {
+    "id": 308, "title": "Equitability Among Children", "topic": "Parenting", "question": "Can a parent give a special financial gift to only one child?", "notes_sources": "No. Islam prohibits showing favoritism among children, as it corrupts their souls with envy and destroys family cohesion. The Prophet ordered a father who gave a slave to only one son to take it back, saying, 'I will not be a witness to an injustice' [142], [143]."
+  },
+  {
+    "id": 309, "title": "The Rights of Close Relatives", "topic": "Kinship", "question": "How should one treat extended family?", "notes_sources": "One must treat aunts and uncles like parents, respecting elders and showing mercy to the young [144]. Giving charity to a poor relative yields a double reward: one for charity and one for upholding ties of kinship [145]."
+  },
+  {
+    "id": 310, "title": "Maintaining Ties of Kinship", "topic": "Silat ar-Rahm", "question": "What is the consequence of severing family ties?", "notes_sources": "Maintaining ties of kinship results in reward, increased provisions, and a prolonged lifespan [146]. Severing ties is a major sin; the Prophet stated that the person who severs ties of kinship will not enter Paradise [147]."
+  },
+  {
+    "id": 311, "title": "Mutual Rights of Spouses", "topic": "Marriage", "question": "What is the core foundation of interactions between husband and wife?", "notes_sources": "The overarching rule is to 'live with them honorably' [148], [149]. There must be mutual trust, love, mercy, and sincerity. A husband must be fair and just, while the wife obeys him in matters that do not disobey Allah [150], [151]."
+  },
+  {
+    "id": 312, "title": "Guarding Marital Secrets", "topic": "Spousal Rights", "question": "What is the ruling on discussing intimate marital details with others?", "notes_sources": "It is strictly forbidden. The Prophet warned that the people in the worst position in Allah's sight on the Day of Resurrection are those who spread the intimate secrets of their spouses to others [152], [153]."
+  },
+  {
+    "id": 313, "title": "Moderation in Spending", "topic": "Wealth", "question": "What is the Islamic stance on family expenditure?", "notes_sources": "A Muslim must spend on his dependents without meanness or extravagance [154]. Squandering wealth makes one a 'brother to the devils,' while being stingy exposes the family to social decay. Balance is the key [154]."
+  },
+  {
+    "id": 314, "title": "Extravagance in Weddings", "topic": "Marriage Errors", "question": "Why does Islam warn against excessively high dowries (Mahr)?", "notes_sources": "An outrageously high dowry creates artificial barriers to marriage, leading youth to delay it and opening doors to temptation [155], [156]. Likewise, going to excess regarding wedding food and lights violates the command against extravagance [157]."
+  },
+  {
+    "id": 315, "title": "Blurring Gender Distinctions", "topic": "Clothing", "question": "Is it permissible for men and women to wear each other's styles?", "notes_sources": "It is strictly prohibited. The Prophet cursed men who imitate women and women who imitate men in their clothing, appearance, or mannerisms [158]. Each gender has clothing specific to them to maintain distinct modesty [158]."
+  },
+  {
+    "id": 316, "title": "Garments of Fame", "topic": "Dress Etiquette", "question": "What is a 'garment of fame' (Libas al-Shuhrah)?", "notes_sources": "These are excessively extravagant or deliberately unusual clothes worn specifically to draw attention and become famous among people. The Prophet warned that whoever wears a garment of fame, Allah will dress him in a garment of humiliation [159], [160]."
+  },
+  {
+    "id": 317, "title": "The Dress of Ihram for Women", "topic": "Hajj Guidelines", "question": "Do women have a specific Ihram garment like men do?", "notes_sources": "No. Women do not have specific unstitched garments for Ihram. They may wear their regular permissible clothes, with the sole exception that they must not wear face veils (Niqab) or gloves while in the state of Ihram [161], [162]."
+  },
+  {
+    "id": 318, "title": "Praying at the Prophet's Mosque", "topic": "Ziyarah", "question": "Is it obligatory to visit the Prophet's grave for Hajj to be valid?", "notes_sources": "No. Believing Hajj is incomplete without visiting the Prophet's grave is a mistake [163]. However, it is highly recommended to travel to pray in the Prophet's Mosque due to its virtue, and while there, one respectfully conveys salaam to the Prophet without lingering excessively [164]."
+  },
+  {
+    "id": 319, "title": "Protecting Deeds from Riyaa'", "topic": "Sincerity (Ikhlas)", "question": "What happens if an act of worship is done for showing off?", "notes_sources": "If a deed is performed to seek the praise of people alongside Allah, Allah rejects it entirely [165], [166]. Sincerity means the deed is completely free from showing off (Riyaa'), which is considered minor shirk [166]."
+  },
+  {
+    "id": 320, "title": "Obedience to Leaders", "topic": "Civil Responsibility", "question": "When is a Muslim obligated to obey leaders?", "notes_sources": "Muslims must obey their leaders and abide by the laws of the state, provided those laws do not command disobedience to Allah [167], [168]. If ordered to commit a sin, there is no obedience to the creation in disobedience to the Creator [169]."
+  },
+  {
+    "id": 321, "title": "The Five Phases of Mortality", "topic": "The Stages of Life", "question": "What are the five distinct stages of human life?", "notes_sources": "According to scholars, human life is divided into five phases: childhood (birth to puberty), youthfulness (puberty to 35), maturity (35 to 50), old age (50 to 70), and decrepitude (70 until death)."
+  },
+  {
+    "id": 322, "title": "The Season of Youth", "topic": "The Stages of Life", "question": "What characterizes the stage of youth?", "notes_sources": "Spanning from puberty until 35 years of age, this is the peak of physical strength and desire. A believer must fiercely struggle against their desires during this stage, as protecting the self in youth yields immense spiritual reward."
+  },
+  {
+    "id": 323, "title": "The Dawn of Maturity", "topic": "The Stages of Life", "question": "What happens during the stage of maturity?", "notes_sources": "From age 35 to 50, physical youthfulness begins to wane, and the 'grey hair arrives with its soldiers.' It is a critical period demanding serious reflection and repentance, as the nearness of mortality becomes undeniable."
+  },
+  {
+    "id": 324, "title": "The Stage of Old Age", "topic": "The Stages of Life", "question": "How should a believer approach old age?", "notes_sources": "From 50 to 70, physical desires weaken significantly. Therefore, if an old person commits a sin purposefully, it is spiritually worse because the driving lust has extinguished. The Prophet severely warned against an old person who commits adultery."
+  },
+  {
+    "id": 325, "title": "Conveying the Prophetic Words", "topic": "Seeking Knowledge", "question": "What is the reward for preserving and transmitting Islamic knowledge?", "notes_sources": "The Prophet stated: 'If any person memorizes 40 Ahadees pertaining to Islamic matters for conveying them to my Ummah, Allah will resurrect him as an Islamic scholar on the Day of Resurrection, and I will be an Intercessor and a witness for him.'"
+  },
+  {
+    "id": 326, "title": "The Angel at the Grave", "topic": "Salawaat", "question": "How does the Prophet know when someone sends blessings upon him?", "notes_sources": "Allah has appointed an angel to the Prophet's grave with the ability to hear all creation. Whenever someone recites Salat upon the Prophet, the angel presents the person's name and father's name directly to him."
+  },
+  {
+    "id": 327, "title": "Light on the Sirat", "topic": "Salawaat", "question": "How does sending blessings upon the Prophet help on Judgment Day?", "notes_sources": "Recitation of Salat upon the Prophet serves as Noor (light) on the highly treacherous bridge of Siraat. Whoever recites it 80 times on Friday, their sins of 80 years will be forgiven."
+  },
+  {
+    "id": 328, "title": "The Ultimate Level of Worship", "topic": "Ihsaan", "question": "What is the highest tier of faith in Islam?", "notes_sources": "Ihsaan is to worship Allah as if you see Him in front of you. Even though you do not physically see Him, you worship with the absolute certainty that He sees you. It demands a state of constant awareness and complete sincerity."
+  },
+  {
+    "id": 329, "title": "The Finality of the Message", "topic": "Prophethood", "question": "Why can there be no prophets after Muhammad?", "notes_sources": "He was sent for all of humankind until the Day of Judgment, superseding and canceling the remnants of all previous teachings. Anyone claiming prophethood after him is considered a liar, and accepting them negates one's Islam entirely."
+  },
+  {
+    "id": 330, "title": "Physical Compliance", "topic": "Eemaan", "question": "Does faith only exist in the heart?", "notes_sources": "No. True faith requires submission and compliance, meaning the actual physical enactment of deeds. The very word 'Islam' means submission to the will and commands of Allah through physical action."
+  },
+  {
+    "id": 331, "title": "The Components of True Repentance", "topic": "Tawbah", "question": "What three conditions must be met for repentance to be valid?", "notes_sources": "1. Stopping the sin immediately. 2. Feeling deep remorse for committing it. 3. Having a sincere, firm intention never to return to the sin again. Without these three components, repentance is incomplete."
+  },
+  {
+    "id": 332, "title": "The Test of Quality", "topic": "The Purpose of Life", "question": "Does Allah judge us by the quantity or quality of our deeds?", "notes_sources": "Allah created life and death to test who is 'best in deed' (Quran 67:1-2). He did not create us to perform the most deeds with the least quality; He seeks pure intentions and correct execution according to the Sunnah."
+  },
+  {
+    "id": 333, "title": "The Dimensions of the Kursee", "topic": "The Unseen Creations", "question": "How vast is Allah's Footstool (Kursee)?", "notes_sources": "Ayat al-Kursee affirms that Allah's Kursee extends over and completely fits all of the heavens and the earth. It is a real, immense creation that demonstrates the unfathomable majesty and greatness of the Creator."
+  },
+  {
+    "id": 334, "title": "The Greatest Creation", "topic": "The Throne (Arsh)", "question": "What is the largest creation of Allah?", "notes_sources": "The Throne (Arsh) is the greatest of all creations. The Prophet compared the seven heavens to a mere ring thrown in a vast desert compared to the Kursee, and the Kursee to the Arsh is like that ring in the desert."
+  },
+  {
+    "id": 335, "title": "The Absolute Highness", "topic": "The Attributes of Allah", "question": "Where is Allah in relation to His creation?", "notes_sources": "Allah is the Most High. He is above the heavens and above the Throne, completely separate from and above His creation. His highness is real and literal, not merely a symbolic highness of status."
+  },
+  {
+    "id": 336, "title": "The Divine Voice", "topic": "The Attributes of Allah", "question": "Will Allah speak directly to humanity?", "notes_sources": "Allah has a Voice that is perfect, majestic, and completely unlike the voices of creation. On Judgment Day, He will call out with a Voice heard equally by those far away and those near, speaking directly to each person without a translator."
+  },
+  {
+    "id": 337, "title": "The Eternal Life", "topic": "The Attributes of Allah", "question": "How does Allah's Life differ from creation?", "notes_sources": "Allah's life is eternal and perfect, extending from before creation without a beginning, and it never ends. He is Al-Hayy (The Ever-Living) who sustains all things and is never overtaken by slumber or sleep."
+  },
+  {
+    "id": 338, "title": "The Unfathomable Knowledge", "topic": "The Attributes of Allah", "question": "What is the extent of Allah's knowledge?", "notes_sources": "With Him are the keys of the unseen. Not a single leaf falls from a tree, nor is there a grain in the darkness of the earth, except that He knows it perfectly and it is written in a clear record."
+  },
+  {
+    "id": 339, "title": "Erasing the Weight of Sins", "topic": "Comprehensive Adhkaar", "question": "What specific phrase multiplies praise immensely?", "notes_sources": "Reciting 'Subhaanallaahi wa Bihamdihi' 100 times equates to 124,000 good deeds. However, one must beware of letting the bounties of this world consume those deeds through lack of gratitude or committing sins."
+  },
+  {
+    "id": 340, "title": "The Meaning of the Praises", "topic": "Dhikr", "question": "How did Ali ibn Abi Talib explain 'Subhaanallah' and 'Alhamdulillah'?", "notes_sources": "'Alhamdulillah' is a phrase Allah is pleased to have His servants use, while 'Subhaanallah' means expressing Allaah's absolute purity from any defect, flaw, or anything unsuitable for His Majesty."
+  },
+  {
+    "id": 341, "title": "Seeking Refuge from Internal Evils", "topic": "Prophetic Supplication", "question": "What specific internal weaknesses did the Prophet seek refuge from?", "notes_sources": "The Prophet regularly sought refuge in Allah from four destructive matters: knowledge that does not benefit, a heart that does not submit/fear Allah, a soul that is never satiated, and a supplication that is not answered."
+  },
+  {
+    "id": 342, "title": "The Pebbles of Tasbeeh", "topic": "Miracles (Mu'jizaat)", "question": "How did inanimate objects recognize the Prophet?", "notes_sources": "While sitting with Abu Bakr, Umar, and Uthman, the Prophet picked up pebbles that audibly engaged in Tasbeeh (glorifying Allah), sounding like the humming of bees. This miraculously continued when placed in the hands of the three Caliphs."
+  },
+  {
+    "id": 343, "title": "The Subservience of the Ocean", "topic": "Miracles (Karaamaat)", "question": "Did the Sahabah ever experience miracles over nature?", "notes_sources": "Yes, through immense faith. For instance, the ocean was subjugated for Alaa bin Hadhrami and his army, and the Tigris River miraculously became traversable for the Muslims during the conquest of Madaa'in."
+  },
+  {
+    "id": 344, "title": "The Fire Obeys the Believer", "topic": "Miracles (Karaamaat)", "question": "How did Tameem Daari interact with a massive fire?", "notes_sources": "Unseen assistance manifested when a massive fire broke out. Tameem Daari drove the fire away, actively forcing it back into its source while it obeyed him, displaying the authority Allah grants His pious servants over creation."
+  },
+  {
+    "id": 345, "title": "The Heavenly Tree", "topic": "Jannah", "question": "What did the Prophet say about the shade of the trees in Paradise?", "notes_sources": "A Bedouin asked the Prophet about a tree in Jannah. The Prophet explained that a rider could travel under its shade for a hundred years without reaching its end, highlighting the unimaginable scale of the Hereafter."
+  },
+  {
+    "id": 346, "title": "Leading Unqualified", "topic": "Errors in Salah", "question": "Who should lead the congregational prayer?", "notes_sources": "It is a major mistake to push forward someone to lead the prayer who is unqualified (lacking Quranic memorization or Fiqh knowledge) while more qualified, knowledgeable people are present in the congregation."
+  },
+  {
+    "id": 347, "title": "Linguistic Errors in Recitation", "topic": "Errors in Salah", "question": "Why is proper pronunciation crucial in Al-Fatihah?", "notes_sources": "Grammatical mistakes in reciting the Quran, such as changing vowel sounds (like saying 'an'amtu' instead of 'an'amta'), can drastically alter the meaning of the verses and potentially invalidate the prayer entirely."
+  },
+  {
+    "id": 348, "title": "The Impermissibility of Images", "topic": "Errors in the Home", "question": "Why are photographs and statues of living beings forbidden?", "notes_sources": "Photographing, drawing, or hanging pictures of creatures with souls (humans and animals) in sitting rooms without vital necessity is prohibited, as it imitates the creation of Allah and prevents angels of mercy from entering the home."
+  },
+  {
+    "id": 349, "title": "Maintaining Distinct Identity", "topic": "Imitating Non-Muslims", "question": "How do men often unlawfully imitate non-Muslims in grooming?", "notes_sources": "Shaving the beard and growing the mustache long is a direct imitation of non-Muslims and contradicts the explicit command of the Prophet to 'trim the mustache and leave the beard to grow.'"
+  },
+  {
+    "id": 350, "title": "Deception in Appearances", "topic": "Errors in Grooming", "question": "Is wearing a wig permissible in Islam?", "notes_sources": "No. Wearing wigs or hairpieces is strictly prohibited for both men and women, as it is classified under forbidden hair extensions. The Prophet cursed the one who adds hair extensions and the one who has it done."
+  },
+  {
+    "id": 351, "title": "Ignoring Financial Obligations to Kin", "topic": "Family Rights", "question": "What is a severe error regarding wealthy individuals and their poor relatives?", "notes_sources": "Apathy towards spending on relatives whom it is legally or morally mandatory to support is a major sin. Neglecting poor family members while giving to distant charities violates the strict priorities of Islamic financial responsibility."
+  },
+  {
+    "id": 352, "title": "The Perils of Vacationing", "topic": "Errors in Travel", "question": "What are the spiritual dangers of traveling to non-Muslim lands for leisure?", "notes_sources": "Traveling abroad purely for vacation often leads to neglecting religious obligations, engaging in the impermissible, and failing to give Da'wah or display the beauty of Islam, thereby compromising one's faith."
+  },
+  {
+    "id": 353, "title": "Selling the Unknown", "topic": "Business Transactions", "question": "Can you sell a product without specifying its details?", "notes_sources": "Selling an unknown product, or selling a product without clarifying a known defect to the buyer, is heavily prohibited (Gharar). Transparency and honesty are mandatory for a transaction to be valid and blessed."
+  },
+  {
+    "id": 354, "title": "Trading in the Impermissible", "topic": "Business Transactions", "question": "Is it lawful to sell music or indecent material?", "notes_sources": "Selling music cassettes, videos featuring immodest images, or media promoting corrupt ideologies is entirely Haram. When Allah forbids a thing, He also forbids its price; thus, the wealth earned is unlawful."
+  },
+  {
+    "id": 355, "title": "Digging a Grave Prematurely", "topic": "Errors in Funerals", "question": "Is it a good practice to dig one's own grave before dying?", "notes_sources": "Digging a grave before death is an innovation (Bid'ah) not practiced by the Prophet or his Companions. Preparing for death should be done through righteous deeds and repentance, not by preemptively digging holes."
+  },
+  {
+    "id": 356, "title": "The Islamic Will (Wasiyyah)", "topic": "Preparation for Death", "question": "What should be the core message of a Muslim's final will?", "notes_sources": "An Islamic will must testify to the Oneness of Allah (Tawheed) and the finality of Muhammad. It should enjoin the family to fear Allah, maintain family ties, and explicitly demand burial according to the Sunnah without innovation."
+  },
+  {
+    "id": 357, "title": "The Sin of Altering a Will", "topic": "Preparation for Death", "question": "What is the consequence of changing someone's will?", "notes_sources": "If anyone alters a bequest after hearing it, the sin falls entirely upon the one who made the change. Allah strictly warns that He is All-Hearing and All-Knowing regarding the execution of final trusts."
+  },
+  {
+    "id": 358, "title": "Innovations at the Graveyard", "topic": "Errors in Funerals", "question": "Is it permissible to recite Surah Yaa-Seen over graves?", "notes_sources": "Reciting Surah Al-Faatihah or Yaa-Seen specifically over graves is an innovated practice not found in the Sunnah. Visitors should instead use the authentic Prophetic supplications designated for the deceased."
+  },
+  {
+    "id": 359, "title": "Psychological Ruin", "topic": "Entertainment", "question": "How do violent video games affect the Muslim mind?", "notes_sources": "Engaging in violent games exposes sensitive minds to cruelty, desensitizes them to bloodshed, and wastes immense amounts of precious time. This addiction destroys focus on the Hereafter and worldly productivity."
+  },
+  {
+    "id": 360, "title": "The Supplication of the Journey", "topic": "Travel Etiquette", "question": "What should a Muslim recite when boarding transportation?", "notes_sources": "One should say 'Bismillah,' then 'Alhamdulillah,' and recite the verse: 'Glory be to Him Who has given this transportation in our control, and this was not to be in our control. And indeed, we have to return to our Lord.'"
+  },
+  {
+    "id": 361, "title": "Seeking Protection on the Road", "topic": "Travel Etiquette", "question": "Which Surahs protect a traveler from hardship?", "notes_sources": "The Prophet advised reciting five Surahs when traveling: Al-Kafiroon, Al-Nasr, Al-Ikhlas, Al-Falaq, and An-Naas. Each should begin with Bismillah, ensuring immense prosperity and safety throughout the trip."
+  },
+  {
+    "id": 362, "title": "Hastening Back Home", "topic": "Travel Etiquette", "question": "Should a Muslim prolong a journey unnecessarily?", "notes_sources": "No. The Prophet described travel as a 'portion of torment' that keeps a person from normal sleep, drink, and food. Once the objective is achieved, a traveler should return quickly to their family."
+  },
+  {
+    "id": 363, "title": "The Return Supplication", "topic": "Travel Etiquette", "question": "What should be said upon returning from a journey?", "notes_sources": "Upon approaching one's town or home, it is a Sunnah to say 'Allahu Akbar' three times and then state: 'We are returning, repenting, serving our Lord, and praising Him.'"
+  },
+  {
+    "id": 364, "title": "The Corruption of the Heart", "topic": "Entertainment", "question": "What forms of entertainment destroy Islamic character?", "notes_sources": "Wasting time on romance movies, detective plays, wrestling, and music corrupts the eyes and ears. These media forms grow wickedness in the heart, encourage sin, and slowly destroy the desire for righteousness."
+  },
+  {
+    "id": 365, "title": "The Supplication of Qunoot", "topic": "Witr Prayer", "question": "What is the traditional du'aa recited during Witr?", "notes_sources": "The Prophet taught his grandson Al-Hasan to say: 'O Allah, guide me among those whom You have guided, pardon me among those whom You have pardoned, bless me in what You have bestowed, and save me from the evil of what You have decreed.'"
+  },
+  {
+    "id": 366, "title": "The Covenant of the Souls", "topic": "Predestination (Qadar)", "question": "When did humanity first testify to Allah's Lordship?", "notes_sources": "Before birth, Allah brought forth the seed of Adam from their loins and made them testify, asking: 'Am I not your Lord?' They all replied, 'Yes! We testify.' This was done so that no one could claim ignorance on the Day of Resurrection or blame their forefathers for their misguidance."
+  },
+  {
+    "id": 367, "title": "The Four Decrees in the Womb", "topic": "Predestination (Qadar)", "question": "What is written for a fetus while it is still in the mother's womb?", "notes_sources": "After 120 days of development, an angel is sent to breathe the soul into the fetus. The angel is commanded to write four absolute decrees: its provision, its lifespan, its deeds, and whether it will be doomed or blessed in the Hereafter."
+  },
+  {
+    "id": 368, "title": "The Danger of Fortunetellers", "topic": "'Aqeedah (Creed)", "question": "What is the Islamic ruling on visiting soothsayers and believing them?", "notes_sources": "Claiming knowledge of the unseen or believing in soothsayers, fortunetellers, and magicians is an act of disbelief and major Shirk. Allah states clearly in the Quran that 'None in the heavens and the earth knows the unseen except Allah.'"
+  },
+  {
+    "id": 369, "title": "The Perfection of Wudhu", "topic": "Purification", "question": "What is the Prophetic Sunnah for washing the hands and mouth during ablution?", "notes_sources": "It is highly recommended to wash the hands three times at the very beginning of Wudhu. Furthermore, one should rinse the mouth and sniff water into the nostrils three times, using the right hand to draw the water in and the left hand to blow it out."
+  },
+  {
+    "id": 370, "title": "Wasting Water in Ablution", "topic": "Purification", "question": "Is it permissible to use excessive amounts of water for Wudhu?", "notes_sources": "Extravagance and waste are prohibited. Using water beyond the Prophetic example—such as washing body parts more than three times—is considered a transgression and an innovation, even if one is performing Wudhu at a flowing river."
+  },
+  {
+    "id": 371, "title": "Supplications During Wudhu", "topic": "Purification", "question": "Are there specific prayers to say while washing each individual body part?", "notes_sources": "There is no authentic hadith stating that specific supplications should be recited while washing specific limbs. The established Sunnah is simply to say 'Bismillah' at the beginning and the Shahadah upon completion."
+  },
+  {
+    "id": 372, "title": "Awaiting the Prayer", "topic": "Etiquette of the Masjid", "question": "What physical action should be avoided when walking to the mosque?", "notes_sources": "Interlocking the fingers is prohibited after one has performed Wudhu at home and is heading to the masjid. The Prophet (peace be upon him) taught that the person is legally considered to be in a 'state of prayer' until they return home."
+  },
+  {
+    "id": 373, "title": "Straightening the Back in Bowing", "topic": "Mechanics of Salah", "question": "How should the back be positioned during Rukoo'?", "notes_sources": "The worshipper should spread his back and make it completely level, to the point that if water were poured on it, it would stay there and not run off. The head should neither be raised nor lowered, but kept perfectly level with the back."
+  },
+  {
+    "id": 374, "title": "Imitating Animals in Prayer", "topic": "Errors in Salah", "question": "What animal postures are strictly forbidden during Salah?", "notes_sources": "The Prophet strictly forbade pecking like a rooster (rushing through prostrations), squatting like a dog (resting the buttocks on the ground with knees up), looking around like a fox, and dropping to prostration front-first like a kneeling camel."
+  },
+  {
+    "id": 375, "title": "Prompting the Imam", "topic": "Congregational Prayer", "question": "What should a follower do if the Imam hesitates or forgets an Ayah?", "notes_sources": "It is prescribed and encouraged for the one praying behind the Imam to prompt him and correct his recitation if he forgets a portion of the Quran or hesitates during the prayer."
+  },
+  {
+    "id": 376, "title": "Sitting on the Heels (Iq'aa)", "topic": "Postures in Salah", "question": "Is it ever permissible to rest upon the heels during prayer?", "notes_sources": "Yes, it is permissible occasionally to sit in Iq'aa—which means resting the buttocks on the heels and the balls of the feet. However, this is specifically prescribed only for the brief sitting between the two prostrations."
+  },
+  {
+    "id": 377, "title": "Pointing the Index Finger", "topic": "Tashahhud", "question": "How should the right hand be positioned during the Tashahhud sitting?", "notes_sources": "One should clench the fingers of the right hand, occasionally making a circle with the thumb and middle finger. The index finger should be pointed towards the Qiblah and moved, making du'aa with it from the beginning of the Tashahhud until the end."
+  },
+  {
+    "id": 378, "title": "Qunoot During Calamities", "topic": "Special Prayers", "question": "When is the Qunoot supplication recited outside of Witr prayer?", "notes_sources": "It is a Sunnah to recite Qunoot (supplicating aloud after standing up from Rukoo' in the last Rak'ah of obligatory prayers) to pray for the Muslims when a major disaster, calamity, or tragedy befalls the Ummah."
+  },
+  {
+    "id": 379, "title": "Giving Just Weight and Measure", "topic": "Commerce", "question": "What is the Islamic warning against stinting in business?", "notes_sources": "Giving short weight or measure is severely condemned as a hidden form of theft. Allah promises a terrible woe to those who demand full measure for themselves but hand over less when weighing for others, forgetting they will soon stand before the Lord of the worlds."
+  },
+  {
+    "id": 380, "title": "The Interspace", "topic": "Al-Barzakh", "question": "What happens to a person who dies desiring to return to the world to do good?", "notes_sources": "When death comes to a transgressor, they beg to be sent back to act rightly. The Quran declares, 'No indeed! It is just words he utters.' Before them is an interspace (Barzakh) until the Day they are raised, sealing their earthly deeds forever."
+  },
+  {
+    "id": 381, "title": "The Testifying of the Skin", "topic": "Day of Reckoning", "question": "How will a person's own body bear witness against them?", "notes_sources": "On the Day of Reckoning, mouths will be sealed, and a person's hearing, sight, and skin will testify against them. When the sinners ask their skins why they testified, the skins will reply: 'Allah gave us speech as He has given speech to everything.'"
+  },
+  {
+    "id": 382, "title": "The Weight of the Shahadah", "topic": "The Balances (Mizan)", "question": "What is the Hadith of the Bitaqah (the piece of paper)?", "notes_sources": "A man will have 99 massive scrolls of sins weighed against a single piece of paper containing the Shahadah. The scrolls will become light and the paper heavily outweigh them, proving that nothing can compare in weight with the sincere Name of Allah."
+  },
+  {
+    "id": 383, "title": "Conveying Salaam for Another", "topic": "Social Etiquette", "question": "How do you reply when someone says 'Give my Salaam to so-and-so'?", "notes_sources": "The receiver must faithfully convey the greeting. When the intended person receives the greeting, they are required to reply by acknowledging both the sender and the conveyer, saying: 'Peace be upon you and him' (Alayka wa Alayhis-Salam)."
+  },
+  {
+    "id": 384, "title": "Replying to Written Salaam", "topic": "Etiquette of Communication", "question": "Is it mandatory to reply to a Salaam written in a letter or message?", "notes_sources": "Yes, it is compulsory. Because it is Wajib to reply to a Salaam immediately, it is recommended to give a verbal reply to the Salaam as soon as you read it, and then it is also proper to send a written reply back."
+  },
+  {
+    "id": 385, "title": "Interrupting Worship with Greetings", "topic": "Public Gatherings", "question": "Should you say Salaam to someone engaged in Zikr or reciting the Quran?", "notes_sources": "It is strictly disallowed to say Salaam to a person deeply engaged in Zikr, reciting the Quran, or waiting for congregational prayer. It is not an occasion for greetings, as it distracts them from their worship."
+  },
+  {
+    "id": 386, "title": "Supplication for Transport", "topic": "Travel Etiquette", "question": "What should be recited when boarding a vehicle or mount?", "notes_sources": "One should say Bismillah, then Alhamdulillah, and glorify Allah who has provided the transportation in our control, acknowledging that we must ultimately return to our Lord in the Hereafter."
+  },
+  {
+    "id": 387, "title": "Drinking in Breaths", "topic": "Etiquette of Drinking", "question": "What is the Sunnah method of drinking water?", "notes_sources": "One should drink with the right hand, seated, and recite Bismillah. It is forbidden to gulp it down in a single continuous breath like a camel; rather, it should be drunk in two or three sips, physically separating the vessel from the mouth to breathe each time."
+  },
+  {
+    "id": 388, "title": "The Number of Beddings", "topic": "Household Moderation", "question": "What did the Prophet advise regarding excess beds in a home?", "notes_sources": "A Muslim should reasonably have up to three beddings: one for himself, one for his wife, and a third for a guest. Having a fourth unnecessary bedding is prohibited and is said to be 'for Satan,' as it promotes extravagance and waste."
+  },
+  {
+    "id": 389, "title": "Adorning Oneself for the Mosque", "topic": "Dress Etiquette", "question": "Is it important to dress well when going to the Masjid?", "notes_sources": "Yes. It is highly encouraged to beautify oneself when attending the mosque out of reverence for Allah's house. Being unconcerned about one's appearance, wearing pajamas, or wearing tight sports apparel that reveals body shapes is a significant error."
+  },
+  {
+    "id": 390, "title": "The Wearing of the Imamah", "topic": "Islamic Dress", "question": "What is the virtue of wearing a turban (Imamah)?", "notes_sources": "Wearing the Imamah over a cap is a practice that historically distinguished Muslims. It is considered a perpetual Sunnah, and traditions state that the Angels send salutations upon those who wear an Imamah on Fridays."
+  },
+  {
+    "id": 391, "title": "The Steadfastness of Bilal", "topic": "The Sahabah (Companions)", "question": "How did Bilal ibn Rabah resist torture in Makkah?", "notes_sources": "While being tortured with heavy rocks on his chest under the scorching sun, he fiercely refused to praise the idols. Instead, to mock his executioners and buy his soul, he constantly chanted 'Ahad... Ahad' (One... One), maintaining unbreakable conviction."
+  },
+  {
+    "id": 392, "title": "The Falcon of Uhud", "topic": "The Sahabah (Companions)", "question": "Which Companion was praised for fulfilling his pledge of martyrdom while still walking the earth?", "notes_sources": "Talhah ibn Ubaidullah. The Prophet pointed to him after reciting the verse about men who fulfilled their pledges to Allah, highlighting his immense bravery, sacrifice, and physical defense of the Prophet at the Battle of Uhud."
+  },
+  {
+    "id": 393, "title": "The Compiler of the Quran", "topic": "The Sahabah (Companions)", "question": "Who was given the massive responsibility of physically compiling the Quran?", "notes_sources": "Zaid ibn Thaabit. He meticulously and eagerly compiled the scattered written verses of the Holy Quran from various materials into a single unified book, an accomplishment for which he deserves the eternal gratitude of the Ummah."
+  },
+  {
+    "id": 394, "title": "Seeking Rain through Al-Abbaas", "topic": "The Sahabah (Companions)", "question": "Who did Umar ask to supplicate for rain during the Year of Drought?", "notes_sources": "'Umar took Al-Abbaas, the Prophet's uncle, and supplicated to Allah for rain for his sake, recognizing his venerable status and close blood relationship to the Prophet. The congregation did not leave before heavy rain poured."
+  },
+  {
+    "id": 395, "title": "Good Books as Companions", "topic": "Seeking Knowledge", "question": "How does reading beneficial books aid one's psychological well-being?", "notes_sources": "Engaging with a beneficial book drives away anxiety, prevents one from delving into useless or sinful matters, and nourishes the soul with profound concepts. It serves as a companion that improves character, intellect, and peace of mind."
+  },
+  {
+    "id": 396, "title": "The Dangers of Violent Games", "topic": "Psychological Health", "question": "How can violent entertainment harm a Muslim's mind?", "notes_sources": "Exposing the mind to excessively violent media and video games exposes sensitive minds to cruelty, desensitizes them to bloodshed, and wastes immense amounts of precious time, destroying worldly productivity and focus on the Hereafter."
+  },
+  {
+    "id": 397, "title": "The Pivot of the Deen", "topic": "Enjoining Good", "question": "Why is 'enjoining good and forbidding evil' so fundamental?", "notes_sources": "It is the pivot of Islam and the primary reason Prophets were sent. If this principle is abandoned, the religion fades away, misguidance and corruption prevail, civilizations decline, and entire nations are ultimately destroyed."
+  },
+  {
+    "id": 398, "title": "Expressions of Joy for the Prophet's Birth", "topic": "Love for the Prophet", "question": "How can a believer appropriately express joy for the coming of the Prophet?", "notes_sources": "Believers can show love and joy for the Prophet's birth by displaying permissible decorations (like flags or lights), feeding the poor, gathering to recite Na'ts, and reading about his life, provided it strictly avoids intermingling, blocking traffic, or violating Shari'ah."
+  }
+]
