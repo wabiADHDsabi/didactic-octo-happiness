@@ -1350,6 +1350,17 @@ var QC_SURAH_MAP={
   110:'An-Nasr',111:'Al-Masad',112:'Al-Ikhlas',113:'Al-Falaq',114:'An-Nas'
 };
 
+var QC_SURAH_MEANINGS={
+  78:'The Tidings',79:'Those Who Drag Forth',80:'He Frowned',81:'The Overthrowing',
+  82:'The Cleaving',83:'The Defrauders',84:'The Sundering',85:'The Great Stars',
+  86:'The Nightcomer',87:'The Most High',88:'The Overwhelming',89:'The Dawn',
+  90:'The City',91:'The Sun',92:'The Night',93:'The Morning Hours',
+  94:'The Relief',95:'The Fig',96:'The Clot',97:'The Night of Power',
+  98:'The Clear Evidence',99:'The Earthquake',100:'The Chargers',101:'The Calamity',
+  102:'The Rivalry',103:'The Declining Day',104:'The Traducer',105:'The Elephant',
+  106:'Quraysh',107:'The Small Kindnesses',108:'The Abundance',109:'The Disbelievers',
+  110:'The Help',111:'The Palm Fiber',112:'Sincerity',113:'The Daybreak',114:'Mankind'
+};
 function qcOrderInfographic(cardId){
   // Parse surah number and direction from card id
   // ordn_78 = after surah 78, ord_79 = before surah 79
@@ -1381,6 +1392,8 @@ function qcOrderInfographic(cardId){
     h+='<div style="display:flex;flex-direction:column;align-items:center;padding:8px 10px;border:1px solid '+borderCol+';background:'+bgCol+';min-width:72px;text-align:center">';
     h+='<div style="font-size:var(--t-xs);color:'+numCol+';font-family:monospace;margin-bottom:3px">'+n+'</div>';
     h+='<div style="font-size:var(--t-sm);color:'+textCol+';line-height:1.3;max-width:70px">'+name+'</div>';
+    var meaning=QC_SURAH_MEANINGS[n]||'';
+    if(meaning)h+='<div style="font-size:var(--t-xxs);color:'+numCol+';line-height:1.3;max-width:70px;margin-top:2px">('+meaning+')</div>';
     h+='</div>';
 
     // Arrow between boxes (not after last)
@@ -5178,6 +5191,18 @@ function qwRenderStudy(){
           if(!isLearned)h+='<button data-qwlearned="'+w.id+'" style="padding:2px 8px;background:rgba(80,250,123,.06);border:1px solid rgba(80,250,123,.3);color:rgba(80,250,123,.8);font-family:monospace;font-size:var(--t-xxs);cursor:pointer;letter-spacing:1px">✓ LEARNED</button>';
           else h+='<span style="font-size:var(--t-xxs);color:rgba(80,250,123,.5)">✓</span>';
           h+='</div>';
+          // Example sentence from Quran
+          var _qwEx=QW_CARDS&&QW_CARDS.find(function(c){return String(c.id)===String(w.id);});
+          var _qwExData=_qwEx&&_qwEx.example;
+          if(_qwExData&&_qwExData.arabic){
+            var _qwAr=_qwExData.arabic;
+            var _qwHL=_qwExData.highlight||'';
+            if(_qwHL)_qwAr=_qwAr.replace(_qwHL,'<span style="color:#ffcc00">'+_qwHL+'</span>');
+            h+='<div style="margin-top:8px;padding:8px 10px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.12);border-right:3px solid rgba(255,204,0,.3)">';
+            h+='<div style="font-size:var(--t-base);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;color:var(--text)">'+_qwAr+'</div>';
+            h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;font-style:italic">'+(_qwExData.english||'')+'</div>';
+            h+='</div>';
+          }
         } else {
           h+='<button data-qwreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SHOW</button>';
         }
