@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-21 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-22 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -5402,9 +5402,7 @@ function qwRenderStudy(){
         if(wIdx<0)qwState.wrong.push(card.id);
         qwState.streaks[card.id]=0;
         delete qwState.nextReview[card.id];
-        var isRev=(qwState.todayReviewQueue||[]).indexOf(card.id)>=0;
-        if(isRev)qwState.todayReviewCount=(qwState.todayReviewCount||0)+1;
-        else qwState.todayNewCount=(qwState.todayNewCount||0)+1;
+        // Do NOT increment new/review counts on wrong — card goes back in queue
         qwState.todayCount=(qwState.todayCount||0)+1;
         safeHap(HAP.error);
         qwState._lastAnswered=card.id;
