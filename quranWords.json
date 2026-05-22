@@ -349,6 +349,11 @@
       "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
       "english": "All praise is for Allah, Lord of all worlds",
       "highlight": "رَبِّ"
+    },
+    "example2": {
+      "arabic": "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ",
+      "english": "My Lord, forgive me and my parents",
+      "highlight": "رَبِّ"
     }
   },
   "23": {
@@ -413,6 +418,11 @@
       "arabic": "وَهُوَ الْعَلِيمُ الْحَكِيمُ",
       "english": "And He is the Knowing, the Wise",
       "highlight": "الْحَكِيمُ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ يَحْكُمُ لَا مُعَقِّبَ لِحُكْمِهِ",
+      "english": "And Allah judges — there is no adjuster of His judgment",
+      "highlight": "يَحْكُمُ"
     }
   },
   "27": {
@@ -429,6 +439,11 @@
       "arabic": "إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ",
       "english": "Indeed Allah is Forgiving, Merciful",
       "highlight": "غَفُورٌ"
+    },
+    "example2": {
+      "arabic": "وَرَبُّكَ الْغَفُورُ ذُو الرَّحْمَةِ",
+      "english": "And your Lord is Forgiving, possessor of mercy",
+      "highlight": "الْغَفُورُ"
     }
   },
   "28": {
@@ -445,6 +460,11 @@
       "arabic": "إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
       "english": "Indeed Allah has power over all things",
       "highlight": "قَدِيرٌ"
+    },
+    "example2": {
+      "arabic": "وَكَانَ اللَّهُ عَلَىٰ كُلِّ شَيْءٍ قَدِيرًا",
+      "english": "And Allah is ever over all things competent",
+      "highlight": "قَدِيرًا"
     }
   },
   "29": {
@@ -509,6 +529,11 @@
       "arabic": "وَاللَّهُ غَنِيٌّ حَلِيمٌ",
       "english": "And Allah is Self-Sufficient, Forbearing",
       "highlight": "حَلِيمٌ"
+    },
+    "example2": {
+      "arabic": "وَإِنَّ اللَّهَ لَعَلِيمٌ حَلِيمٌ",
+      "english": "And indeed Allah is Knowing and Forbearing",
+      "highlight": "حَلِيمٌ"
     }
   },
   "33": {
@@ -525,6 +550,11 @@
       "arabic": "إِنَّ اللَّهَ خَبِيرٌ بِمَا تَعْمَلُونَ",
       "english": "Indeed Allah is Aware of what you do",
       "highlight": "خَبِيرٌ"
+    },
+    "example2": {
+      "arabic": "وَهُوَ اللَّطِيفُ الْخَبِيرُ",
+      "english": "And He is the Subtle, the Aware",
+      "highlight": "الْخَبِيرُ"
     }
   },
   "34": {
@@ -540,6 +570,11 @@
     "example": {
       "arabic": "وَاللَّهُ بِكُلِّ شَيْءٍ عَلِيمٌ",
       "english": "And Allah is Knowing of all things",
+      "highlight": "عَلِيمٌ"
+    },
+    "example2": {
+      "arabic": "إِنَّهُ عَلِيمٌ بِذَاتِ الصُّدُورِ",
+      "english": "Indeed He is Knowing of what is within the breasts",
       "highlight": "عَلِيمٌ"
     }
   },
@@ -557,6 +592,11 @@
       "arabic": "إِنَّ رَحْمَتَ اللَّهِ قَرِيبٌ مِّنَ الْمُحْسِنِينَ",
       "english": "Indeed Allah's mercy is near to those who do good",
       "highlight": "قَرِيبٌ"
+    },
+    "example2": {
+      "arabic": "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
+      "english": "And when My servants ask about Me — I am near",
+      "highlight": "قَرِيبٌ"
     }
   },
   "36": {
@@ -573,6 +613,11 @@
       "arabic": "وَهُوَ الْعَلِيُّ الْكَبِيرُ",
       "english": "And He is the Most High, the Grand",
       "highlight": "الْكَبِيرُ"
+    },
+    "example2": {
+      "arabic": "إِنَّهُ كَانَ عَلِيًّا كَبِيرًا",
+      "english": "Indeed He is the Most High, the Grand",
+      "highlight": "كَبِيرًا"
     }
   },
   "37": {
@@ -589,6 +634,11 @@
       "arabic": "وَهُوَ الْعَلِيُّ الْعَظِيمُ",
       "english": "And He is the Most High, the Most Great",
       "highlight": "الْعَظِيمُ"
+    },
+    "example2": {
+      "arabic": "وَلَهُ الْعَظَمَةُ فِي السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "And to Him belongs all grandeur in the heavens and earth",
+      "highlight": "الْعَظَمَةُ"
     }
   },
   "38": {
@@ -637,6 +687,11 @@
       "arabic": "وَكَفَىٰ بِاللَّهِ وَلِيًّا وَكَفَىٰ بِاللَّهِ نَصِيرًا",
       "english": "Sufficient is Allah as protector and sufficient is Allah as helper",
       "highlight": "نَصِيرًا"
+    },
+    "example2": {
+      "arabic": "فَاللَّهُ هُوَ الْوَلِيُّ وَهُوَ يُحْيِي الْمَوْتَىٰ",
+      "english": "Allah is the Protector and He gives life to the dead",
+      "highlight": "النَّصِيرُ"
     }
   },
   "41": {
@@ -653,6 +708,11 @@
       "arabic": "وَتَوَكَّلْ عَلَى اللَّهِ وَكَفَىٰ بِاللَّهِ وَكِيلًا",
       "english": "Put your trust in Allah; sufficient is Allah as Trustee",
       "highlight": "وَكِيلًا"
+    },
+    "example2": {
+      "arabic": "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
+      "english": "Sufficient for us is Allah and excellent is the Trustee",
+      "highlight": "الْوَكِيلُ"
     }
   },
   "42": {
@@ -685,6 +745,11 @@
       "arabic": "وَاللَّهُ أَشَدُّ بَأْسًا وَأَشَدُّ تَنكِيلًا",
       "english": "Allah is more severe in might and more severe in punishment",
       "highlight": "أَشَدُّ"
+    },
+    "example2": {
+      "arabic": "وَمِنَ النَّاسِ مَن يَتَّخِذُ مِن دُونِ اللَّهِ أَندَادًا يُحِبُّونَهُمْ كَحُبِّ اللَّهِ",
+      "english": "Some people take rivals to Allah loving them as they should love Allah",
+      "highlight": "أَشَدُّ"
     }
   },
   "44": {
@@ -700,6 +765,11 @@
     "example": {
       "arabic": "وَاللَّهُ أَعْلَمُ بِالظَّالِمِينَ",
       "english": "And Allah is most knowing of the wrongdoers",
+      "highlight": "أَعْلَمُ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ أَعْلَمُ بِأَعْدَائِكُمْ وَكَفَىٰ بِاللَّهِ وَلِيًّا",
+      "english": "And Allah is most knowing of your enemies and sufficient is Allah as a protector",
       "highlight": "أَعْلَمُ"
     }
   },
@@ -717,6 +787,11 @@
       "arabic": "وَلَذِكْرُ اللَّهِ أَكْبَرُ وَاللَّهُ يَعْلَمُ مَا تَصْنَعُونَ",
       "english": "The remembrance of Allah is greater — and Allah knows what you do",
       "highlight": "أَكْبَرُ"
+    },
+    "example2": {
+      "arabic": "اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا",
+      "english": "Allah is the Greatest and all praise belongs to Allah abundantly",
+      "highlight": "أَكْبَرُ"
     }
   },
   "46": {
@@ -733,6 +808,11 @@
       "arabic": "وَمَنْ أَحْسَنُ دِينًا مِّمَّنْ أَسْلَمَ وَجْهَهُ لِلَّهِ",
       "english": "Who is better in religion than one who submits his face to Allah",
       "highlight": "أَحْسَنُ"
+    },
+    "example2": {
+      "arabic": "إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ",
+      "english": "Indeed Allah commands justice and excellence",
+      "highlight": "الْإِحْسَانِ"
     }
   },
   "47": {
@@ -749,6 +829,11 @@
       "arabic": "وَمَنْ أَظْلَمُ مِمَّن مَّنَعَ مَسَاجِدَ اللَّهِ",
       "english": "Who is more unjust than one who prevents the mosques of Allah from being used",
       "highlight": "أَظْلَمُ"
+    },
+    "example2": {
+      "arabic": "وَمَنْ أَظْلَمُ مِمَّنِ افْتَرَىٰ عَلَى اللَّهِ الْكَذِبَ",
+      "english": "Who is more unjust than one who fabricates a lie against Allah",
+      "highlight": "أَظْلَمُ"
     }
   },
   "48": {
@@ -764,6 +849,11 @@
     "example": {
       "arabic": "وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْكُمْ وَلَٰكِن لَّا تُبْصِرُونَ",
       "english": "And We are nearer to him than you but you do not see",
+      "highlight": "أَقْرَبُ"
+    },
+    "example2": {
+      "arabic": "فَلَوْلَا إِذَا بَلَغَتِ الْحُلْقُومَ وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ",
+      "english": "So when the soul reaches the throat and you are at that moment looking on",
       "highlight": "أَقْرَبُ"
     }
   },
@@ -813,6 +903,11 @@
       "arabic": "وَالْأَنْعَامَ خَلَقَهَا لَكُمْ فِيهَا دِفْءٌ",
       "english": "And the cattle He created for you — in them is warmth",
       "highlight": "الْأَنْعَامَ"
+    },
+    "example2": {
+      "arabic": "وَإِنَّ لَكُمْ فِي الْأَنْعَامِ لَعِبْرَةً",
+      "english": "And indeed for you in the cattle is a lesson",
+      "highlight": "الْأَنْعَامِ"
     }
   },
   "52": {
@@ -844,6 +939,11 @@
     "example": {
       "arabic": "وَهُوَ الَّذِي سَخَّرَ الْبَحْرَ لِتَأْكُلُوا مِنْهُ لَحْمًا طَرِيًّا",
       "english": "And it is He who subjected the sea so you may eat fresh fish from it",
+      "highlight": "الْبَحْرَ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ الَّذِي سَخَّرَ الْبَحْرَ لِتَأْكُلُوا مِنْهُ لَحْمًا طَرِيًّا",
+      "english": "And it is Allah who subjected the sea for you to eat fresh meat from it",
       "highlight": "الْبَحْرَ"
     }
   },
@@ -941,6 +1041,11 @@
       "arabic": "أَلَمْ نَجْعَلِ السَّمَاءَ سَقْفًا مَّحْفُوظًا",
       "english": "Have We not made the sky a protected ceiling",
       "highlight": "السَّمَاءَ"
+    },
+    "example2": {
+      "arabic": "وَنَزَّلْنَا مِنَ السَّمَاءِ مَاءً مُّبَارَكًا",
+      "english": "And We sent down from the sky blessed water",
+      "highlight": "السَّمَاءِ"
     }
   },
   "60": {
@@ -956,6 +1061,11 @@
     "example": {
       "arabic": "وَأَرْسَلْنَا الرِّيَاحَ لَوَاقِحَ",
       "english": "And We sent the winds as fertilizers",
+      "highlight": "الرِّيَاحَ"
+    },
+    "example2": {
+      "arabic": "وَمِنْ آيَاتِهِ أَن يُرْسِلَ الرِّيَاحَ مُبَشِّرَاتٍ",
+      "english": "And of His signs is that He sends the winds as bringers of good tidings",
       "highlight": "الرِّيَاحَ"
     }
   },
@@ -973,6 +1083,11 @@
       "arabic": "وَالدَّارُ الْآخِرَةُ خَيْرٌ لِّلَّذِينَ يَتَّقُونَ",
       "english": "And the home of the Hereafter is better for those who fear Allah",
       "highlight": "الْآخِرَةُ"
+    },
+    "example2": {
+      "arabic": "وَمَا الْحَيَاةُ الدُّنْيَا فِي الْآخِرَةِ إِلَّا مَتَاعٌ",
+      "english": "And what is worldly life compared to the Hereafter except enjoyment",
+      "highlight": "الْآخِرَةِ"
     }
   },
   "62": {
@@ -1101,6 +1216,11 @@
       "arabic": "وَاللَّهُ عِندَهُ حُسْنُ الثَّوَابِ",
       "english": "And with Allah is the best reward",
       "highlight": "الثَّوَابِ"
+    },
+    "example2": {
+      "arabic": "فَآتَاهُمُ اللَّهُ ثَوَابَ الدُّنْيَا وَحُسْنَ ثَوَابِ الْآخِرَةِ",
+      "english": "So Allah gave them the reward of this world and the good reward of the Hereafter",
+      "highlight": "ثَوَابَ"
     }
   },
   "70": {
@@ -1117,6 +1237,11 @@
       "arabic": "وَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ",
       "english": "And Allah does not allow the reward of good-doers to be lost",
       "highlight": "أَجْرَ"
+    },
+    "example2": {
+      "arabic": "فَأَتِمُّوا إِلَيْهِمْ عَهْدَهُمْ إِلَىٰ مُدَّتِهِمْ",
+      "english": "Then indeed those who fear Allah will have a great reward",
+      "highlight": "أَجْرًا"
     }
   },
   "71": {
@@ -1132,6 +1257,11 @@
     "example": {
       "arabic": "وَإِلَى اللَّهِ الْمَصِيرُ",
       "english": "And to Allah is the final destination",
+      "highlight": "الْمَصِيرُ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَعْصِ اللَّهَ وَرَسُولَهُ فَإِنَّ لَهُ نَارَ جَهَنَّمَ",
+      "english": "Whoever disobeys Allah and His Messenger — for him is the fire of Hell",
       "highlight": "الْمَصِيرُ"
     }
   },
@@ -1149,6 +1279,11 @@
       "arabic": "خَالِدِينَ فِيهَا أَبَدًا ذَٰلِكَ الْفَوْزُ الْعَظِيمُ",
       "english": "Abiding therein forever — that is the great attainment",
       "highlight": "أَبَدًا"
+    },
+    "example2": {
+      "arabic": "لَا يَذُوقُونَ فِيهَا الْمَوْتَ إِلَّا الْمَوْتَةَ الْأُولَىٰ",
+      "english": "They will not taste death therein except the first death",
+      "highlight": "أَبَدًا"
     }
   },
   "73": {
@@ -1165,6 +1300,11 @@
       "arabic": "إِنَّ الدِّينَ عِندَ اللَّهِ الْإِسْلَامُ",
       "english": "Indeed the religion in the sight of Allah is Islam",
       "highlight": "الدِّينَ"
+    },
+    "example2": {
+      "arabic": "يَوْمَئِذٍ يُوَفِّيهِمُ اللَّهُ دِينَهُمُ الْحَقَّ",
+      "english": "That Day Allah will pay them in full their true account",
+      "highlight": "دِينَهُمُ"
     }
   },
   "74": {
@@ -1181,6 +1321,11 @@
       "arabic": "ذَٰلِكَ بِأَنَّ اللَّهَ هُوَ الْحَقُّ وَأَنَّهُ يُحْيِي الْمَوْتَىٰ",
       "english": "That is because Allah is the Truth and He gives life to the dead",
       "highlight": "الْحَقُّ"
+    },
+    "example2": {
+      "arabic": "وَقُلِ الْحَقُّ مِن رَّبِّكُمْ فَمَن شَاءَ فَلْيُؤْمِن",
+      "english": "And say: The truth is from your Lord — so whoever wills let him believe",
+      "highlight": "الْحَقُّ"
     }
   },
   "75": {
@@ -1196,6 +1341,11 @@
     "example": {
       "arabic": "وَقُلْ جَاءَ الْحَقُّ وَزَهَقَ الْبَاطِلُ",
       "english": "And say: Truth has come and falsehood has departed",
+      "highlight": "الْبَاطِلُ"
+    },
+    "example2": {
+      "arabic": "لَا يَأْتِيهِ الْبَاطِلُ مِن بَيْنِ يَدَيْهِ وَلَا مِنْ خَلْفِهِ",
+      "english": "Falsehood cannot approach it from before or behind",
       "highlight": "الْبَاطِلُ"
     }
   },
@@ -1228,6 +1378,11 @@
     "example": {
       "arabic": "يُخْرِجُهُم مِّنَ الظُّلُمَاتِ إِلَى النُّورِ",
       "english": "He brings them out from darkness into light",
+      "highlight": "الظُّلُمَاتِ"
+    },
+    "example2": {
+      "arabic": "قُلِ اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "He brings them out of darkness into light",
       "highlight": "الظُّلُمَاتِ"
     }
   },
@@ -1309,6 +1464,11 @@
       "arabic": "لَا إِلَٰهَ إِلَّا هُوَ الرَّحْمَٰنُ الرَّحِيمُ",
       "english": "There is no deity except Him, the Compassionate, the Merciful",
       "highlight": "إِلَٰهَ"
+    },
+    "example2": {
+      "arabic": "وَإِلَٰهُكُمْ إِلَٰهٌ وَاحِدٌ لَّا إِلَٰهَ إِلَّا هُوَ",
+      "english": "And your god is one God — there is no deity except Him",
+      "highlight": "إِلَٰهٌ"
     }
   },
   "83": {
@@ -1325,6 +1485,11 @@
       "arabic": "لِلَّهِ مُلْكُ السَّمَاوَاتِ وَالْأَرْضِ",
       "english": "To Allah belongs the dominion of the heavens and earth",
       "highlight": "مُلْكُ"
+    },
+    "example2": {
+      "arabic": "وَالْمَلَائِكَةُ صَافُّونَ وَيُسَبِّحُونَ بِحَمْدِ رَبِّهِمْ",
+      "english": "And the angels stand in rows glorifying the praise of their Lord",
+      "highlight": "وَالْمَلَائِكَةُ"
     }
   },
   "84": {
@@ -1373,6 +1538,11 @@
       "arabic": "عَالِمُ الْغَيْبِ وَالشَّهَادَةِ الْكَبِيرُ الْمُتَعَالِ",
       "english": "Knower of the unseen and the witnessed, the Grand, the Exalted",
       "highlight": "الشَّهَادَةِ"
+    },
+    "example2": {
+      "arabic": "وَمَا اللَّهُ بِغَافِلٍ عَمَّا تَعْمَلُونَ",
+      "english": "And Allah is not unaware of what you do",
+      "highlight": "شَهِيدٌ"
     }
   },
   "87": {
@@ -1388,6 +1558,11 @@
     "example": {
       "arabic": "حَبِطَتْ أَعْمَالُهُمْ فِي الدُّنْيَا وَالْآخِرَةِ",
       "english": "Their deeds have become worthless in this world and the Hereafter",
+      "highlight": "أَعْمَالُهُمْ"
+    },
+    "example2": {
+      "arabic": "أُولَٰئِكَ الَّذِينَ حَبِطَتْ أَعْمَالُهُمْ فِي الدُّنْيَا وَالْآخِرَةِ",
+      "english": "Those are the ones whose deeds have become worthless in this world and the Hereafter",
       "highlight": "أَعْمَالُهُمْ"
     }
   },
@@ -1405,6 +1580,11 @@
       "arabic": "مَن جَاءَ بِالْحَسَنَةِ فَلَهُ عَشْرُ أَمْثَالِهَا",
       "english": "Whoever comes with a good deed will have ten times its like",
       "highlight": "بِالْحَسَنَةِ"
+    },
+    "example2": {
+      "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً",
+      "english": "Our Lord give us good in this world and good in the Hereafter",
+      "highlight": "حَسَنَةً"
     }
   },
   "89": {
@@ -1437,6 +1617,11 @@
       "arabic": "وَمَا تَفْعَلُوا مِنْ خَيْرٍ يَعْلَمْهُ اللَّهُ",
       "english": "And whatever good you do, Allah knows it",
       "highlight": "خَيْرٍ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَعْمَلْ خَيْرًا فَإِنَّ اللَّهَ كَانَ شَاكِرًا عَلِيمًا",
+      "english": "And whoever does good — then indeed Allah is Appreciative, Knowing",
+      "highlight": "خَيْرًا"
     }
   },
   "91": {
@@ -1450,6 +1635,11 @@
     ],
     "correct_answer": "evil; bad; worse",
     "example": {
+      "arabic": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ",
+      "english": "And whoever does an atom's weight of evil will see it",
+      "highlight": "شَرًّا"
+    },
+    "example2": {
       "arabic": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ",
       "english": "And whoever does an atom's weight of evil will see it",
       "highlight": "شَرًّا"
@@ -1469,6 +1659,11 @@
       "arabic": "وَلَا تَعَاوَنُوا عَلَى الْإِثْمِ وَالْعُدْوَانِ",
       "english": "And do not cooperate in sin and aggression",
       "highlight": "الْإِثْمِ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَكْسِبْ إِثْمًا فَإِنَّمَا يَكْسِبُهُ عَلَىٰ نَفْسِهِ",
+      "english": "Whoever earns sin only earns it against himself",
+      "highlight": "إِثْمًا"
     }
   },
   "93": {
@@ -1485,6 +1680,11 @@
       "arabic": "وَمَن يَغْفِرُ الذُّنُوبَ إِلَّا اللَّهُ",
       "english": "And who forgives sins except Allah",
       "highlight": "الذُّنُوبَ"
+    },
+    "example2": {
+      "arabic": "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا",
+      "english": "Our Lord we have believed so forgive us our sins",
+      "highlight": "ذُنُوبَنَا"
     }
   },
   "94": {
@@ -1517,6 +1717,11 @@
       "arabic": "وَاللَّهُ ذُو الْفَضْلِ الْعَظِيمِ",
       "english": "And Allah is the possessor of great bounty",
       "highlight": "الْفَضْلِ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ يُضَاعِفُ لِمَن يَشَاءُ وَاللَّهُ وَاسِعٌ عَلِيمٌ",
+      "english": "And Allah multiplies for whom He wills — Allah is Encompassing, Knowing",
+      "highlight": "فَضْلِهِ"
     }
   },
   "96": {
@@ -1533,6 +1738,11 @@
       "arabic": "وَإِن تَعُدُّوا نِعْمَةَ اللَّهِ لَا تُحْصُوهَا",
       "english": "And if you count Allah's favors you could not enumerate them",
       "highlight": "نِعْمَةَ"
+    },
+    "example2": {
+      "arabic": "وَأَسْبَغَ عَلَيْكُمْ نِعَمَهُ ظَاهِرَةً وَبَاطِنَةً",
+      "english": "And He has given you His blessings both apparent and hidden",
+      "highlight": "نِعَمَهُ"
     }
   },
   "97": {
@@ -1565,6 +1775,11 @@
       "arabic": "قُلِ اللَّهُمَّ مَالِكَ الْمُلْكِ تُؤْتِي الْمُلْكَ مَن تَشَاءُ",
       "english": "Say: O Allah, Owner of Sovereignty — You give sovereignty to whom You will",
       "highlight": "الْمُلْكِ"
+    },
+    "example2": {
+      "arabic": "تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+      "english": "Blessed is He in whose hand is dominion and He is over all things competent",
+      "highlight": "الْمُلْكُ"
     }
   },
   "99": {
@@ -1580,6 +1795,11 @@
     "example": {
       "arabic": "وَوَصَّيْنَا الْإِنسَانَ بِوَالِدَيْهِ حَمَلَتْهُ أُمُّهُ وَهْنًا عَلَىٰ وَهْنٍ",
       "english": "We enjoined man to be dutiful to his parents — his mother carried him in weakness",
+      "highlight": "أُمُّهُ"
+    },
+    "example2": {
+      "arabic": "وَبِالْوَالِدَيْنِ إِحْسَانًا إِمَّا يَبْلُغَنَّ عِندَكَ الْكِبَرَ أَحَدُهُمَا",
+      "english": "And be good to parents — if one of them reaches old age with you",
       "highlight": "أُمُّهُ"
     }
   },
@@ -1613,6 +1833,11 @@
       "arabic": "وَخَلَقَ مِنْهَا زَوْجَهَا وَبَثَّ مِنْهُمَا رِجَالًا كَثِيرًا وَنِسَاءً",
       "english": "And created from it its mate and dispersed many men and women from them",
       "highlight": "زَوْجَهَا"
+    },
+    "example2": {
+      "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا يَحِلُّ لَكُمْ أَن تَرِثُوا النِّسَاءَ كَرْهًا",
+      "english": "O believers it is not lawful for you to inherit women by compulsion",
+      "highlight": "أَزْوَاجًا"
     }
   },
   "102": {
@@ -1661,6 +1886,11 @@
       "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
       "english": "He neither begets nor is He born",
       "highlight": "يَلِدْ"
+    },
+    "example2": {
+      "arabic": "الْمَالُ وَالْبَنُونَ زِينَةُ الْحَيَاةِ الدُّنْيَا",
+      "english": "Wealth and children are the adornments of worldly life",
+      "highlight": "الْبَنُونَ"
     }
   },
   "105": {
@@ -1741,6 +1971,11 @@
       "arabic": "لَا تُدْرِكُهُ الْأَبْصَارُ وَهُوَ يُدْرِكُ الْأَبْصَارَ",
       "english": "Vision perceives Him not but He perceives all vision",
       "highlight": "الْأَبْصَارُ"
+    },
+    "example2": {
+      "arabic": "فَكَشَفْنَا عَنكَ غِطَاءَكَ فَبَصَرُكَ الْيَوْمَ حَدِيدٌ",
+      "english": "So We have removed your cover and your sight today is sharp",
+      "highlight": "فَبَصَرُكَ"
     }
   },
   "110": {
@@ -1773,6 +2008,11 @@
       "arabic": "وَمِنْ آيَاتِهِ خَلْقُ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافُ أَلْسِنَتِكُمْ",
       "english": "And of His signs is the creation of the heavens and the diversity of your languages",
       "highlight": "أَلْسِنَتِكُمْ"
+    },
+    "example2": {
+      "arabic": "وَجَعَلْنَا لَهُ لِسَانَ صِدْقٍ عَلِيًّا",
+      "english": "And We gave him a lofty mention of truthfulness",
+      "highlight": "لِسَانَ"
     }
   },
   "112": {
@@ -1805,6 +2045,11 @@
       "arabic": "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
       "english": "Did We not expand for you your breast",
       "highlight": "صَدْرَكَ"
+    },
+    "example2": {
+      "arabic": "وَنَعْلَمُ مَا تُوَسْوِسُ بِهِ نَفْسُهُ وَنَحْنُ أَقْرَبُ إِلَيْهِ",
+      "english": "And We know what his soul whispers — We are closer to him than his jugular vein",
+      "highlight": "صُدُورِ"
     }
   },
   "114": {
@@ -2093,6 +2338,11 @@
       "arabic": "إِن يَنصُرْكُمُ اللَّهُ فَلَا غَالِبَ لَكُمْ",
       "english": "If Allah helps you — none can overcome you",
       "highlight": "يَنصُرْكُمُ"
+    },
+    "example2": {
+      "arabic": "وَمَا النَّصْرُ إِلَّا مِنْ عِندِ اللَّهِ",
+      "english": "And victory is not except from Allah",
+      "highlight": "النَّصْرُ"
     }
   },
   "132": {
@@ -2157,6 +2407,11 @@
       "arabic": "وَاللَّهُ يَحْكُمُ لَا مُعَقِّبَ لِحُكْمِهِ",
       "english": "And Allah judges — there is no adjuster of His judgment",
       "highlight": "يَحْكُمُ"
+    },
+    "example2": {
+      "arabic": "إِنِ الْحُكْمُ إِلَّا لِلَّهِ يَقُصُّ الْحَقَّ",
+      "english": "Legislation is not but for Allah — He relates the truth",
+      "highlight": "الْحُكْمُ"
     }
   },
   "136": {
@@ -2205,6 +2460,11 @@
       "arabic": "خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ وَجَعَلَ الظُّلُمَاتِ وَالنُّورَ",
       "english": "He created the heavens and earth and made the darkness and light",
       "highlight": "خَلَقَ"
+    },
+    "example2": {
+      "arabic": "وَلَقَدْ خَلَقْنَاكُمْ ثُمَّ صَوَّرْنَاكُمْ",
+      "english": "And We created you then shaped you",
+      "highlight": "خَلَقْنَاكُمْ"
     }
   },
   "139": {
@@ -2237,6 +2497,11 @@
       "arabic": "فَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ",
       "english": "So remember Allah often that you may succeed",
       "highlight": "فَاذْكُرُوا"
+    },
+    "example2": {
+      "arabic": "وَاذْكُر رَّبَّكَ فِي نَفْسِكَ تَضَرُّعًا وَخِيفَةً",
+      "english": "And remember your Lord within yourself humbly and with fear",
+      "highlight": "وَاذْكُر"
     }
   },
   "141": {
@@ -2269,6 +2534,11 @@
       "arabic": "وَلِلَّهِ يَسْجُدُ مَن فِي السَّمَاوَاتِ وَالْأَرْضِ",
       "english": "To Allah prostrates whoever is in the heavens and earth",
       "highlight": "يَسْجُدُ"
+    },
+    "example2": {
+      "arabic": "أَلَا يَسْجُدُوا لِلَّهِ الَّذِي يُخْرِجُ الْخَبْءَ فِي السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "That they do not prostrate to Allah who brings forth what is hidden in the heavens",
+      "highlight": "يَسْجُدُوا"
     }
   },
   "143": {
@@ -2301,6 +2571,11 @@
       "arabic": "لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ",
       "english": "If you are grateful I will increase you; if you deny — My punishment is severe",
       "highlight": "شَكَرْتُمْ"
+    },
+    "example2": {
+      "arabic": "وَسَيَجْزِي اللَّهُ الشَّاكِرِينَ",
+      "english": "And Allah will reward the grateful",
+      "highlight": "الشَّاكِرِينَ"
     }
   },
   "145": {
@@ -2333,6 +2608,11 @@
       "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
       "english": "You alone we worship and You alone we ask for help",
       "highlight": "نَعْبُدُ"
+    },
+    "example2": {
+      "arabic": "وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ",
+      "english": "I did not create jinn and mankind except to worship Me",
+      "highlight": "لِيَعْبُدُونِ"
     }
   },
   "147": {
@@ -2397,6 +2677,11 @@
       "arabic": "كَتَبَ اللَّهُ لَأَغْلِبَنَّ أَنَا وَرُسُلِي",
       "english": "Allah has written: I will surely overcome — I and My messengers",
       "highlight": "كَتَبَ"
+    },
+    "example2": {
+      "arabic": "كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ الرَّحْمَةَ",
+      "english": "Your Lord has decreed upon Himself mercy",
+      "highlight": "كَتَبَ"
     }
   },
   "151": {
@@ -2429,6 +2714,11 @@
       "arabic": "إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ",
       "english": "Indeed those who disbelieve — it is the same whether you warn them or not",
       "highlight": "كَفَرُوا"
+    },
+    "example2": {
+      "arabic": "وَمَن يَكْفُرْ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ",
+      "english": "Whoever disbelieves in Allah, His angels, His books and His messengers",
+      "highlight": "يَكْفُرْ"
     }
   },
   "153": {
@@ -2460,6 +2750,11 @@
     "example": {
       "arabic": "أَفَلَا يَنظُرُونَ إِلَى الْإِبِلِ كَيْفَ خُلِقَتْ",
       "english": "Do they not look at the camels — how they are created",
+      "highlight": "يَنظُرُونَ"
+    },
+    "example2": {
+      "arabic": "أَفَلَا يَنظُرُونَ إِلَى السَّمَاءِ فَوْقَهُمْ",
+      "english": "Do they not look at the sky above them",
       "highlight": "يَنظُرُونَ"
     }
   },
@@ -2541,6 +2836,11 @@
       "arabic": "إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ",
       "english": "Indeed to Allah we belong and to Him we return",
       "highlight": "رَاجِعُونَ"
+    },
+    "example2": {
+      "arabic": "وَإِلَيْهِ تُرْجَعُونَ",
+      "english": "And to Him you will be returned",
+      "highlight": "تُرْجَعُونَ"
     }
   },
   "160": {
@@ -2557,6 +2857,11 @@
       "arabic": "وَاصْبِرُوا إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
       "english": "And be patient; indeed Allah is with the patient",
       "highlight": "اصْبِرُوا"
+    },
+    "example2": {
+      "arabic": "وَالصَّابِرِينَ فِي الْبَأْسَاءِ وَالضَّرَّاءِ",
+      "english": "And those who are patient in poverty and hardship",
+      "highlight": "وَالصَّابِرِينَ"
     }
   },
   "161": {
@@ -2573,6 +2878,11 @@
       "arabic": "وَلَا يَظْلِمُ رَبُّكَ أَحَدًا",
       "english": "And your Lord does not wrong anyone",
       "highlight": "يَظْلِمُ"
+    },
+    "example2": {
+      "arabic": "وَلَا يَرْضَىٰ لِعِبَادِهِ الْكُفْرَ وَإِن تَشْكُرُوا يَرْضَهُ لَكُمْ",
+      "english": "He does not approve of disbelief for His servants — if you are grateful He approves",
+      "highlight": "ظَلَمُوا"
     }
   },
   "162": {
@@ -2621,6 +2931,11 @@
       "arabic": "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا",
       "english": "Our Lord, forgive us our sins and remove our evil deeds",
       "highlight": "اغْفِرْ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ يَغْفِرُ لِمَن يَشَاءُ وَاللَّهُ غَفُورٌ رَّحِيمٌ",
+      "english": "And Allah forgives whom He wills — Allah is Forgiving, Merciful",
+      "highlight": "يَغْفِرُ"
     }
   },
   "165": {
@@ -2669,6 +2984,11 @@
       "arabic": "لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ",
       "english": "For it is what it has earned and against it what it has incurred",
       "highlight": "كَسَبَتْ"
+    },
+    "example2": {
+      "arabic": "يَوْمَ تَجِدُ كُلُّ نَفْسٍ مَّا عَمِلَتْ مِنْ خَيْرٍ مُّحْضَرًا",
+      "english": "The day every soul finds what it has earned of good presented",
+      "highlight": "كَسَبَتْ"
     }
   },
   "168": {
@@ -2685,6 +3005,11 @@
       "arabic": "لِلَّهِ مُلْكُ السَّمَاوَاتِ وَالْأَرْضِ",
       "english": "To Allah belongs the dominion of the heavens and earth",
       "highlight": "مُلْكُ"
+    },
+    "example2": {
+      "arabic": "وَالْمَلَائِكَةُ صَافُّونَ وَيُسَبِّحُونَ بِحَمْدِ رَبِّهِمْ",
+      "english": "And the angels stand in rows glorifying the praise of their Lord",
+      "highlight": "وَالْمَلَائِكَةُ"
     }
   },
   "169": {
@@ -2797,6 +3122,11 @@
       "arabic": "شَهِدَ اللَّهُ أَنَّهُ لَا إِلَٰهَ إِلَّا هُوَ",
       "english": "Allah witnesses that there is no deity except Him",
       "highlight": "شَهِدَ"
+    },
+    "example2": {
+      "arabic": "وَمَا اللَّهُ بِغَافِلٍ عَمَّا تَعْمَلُونَ وَاللَّهُ شَهِيدٌ",
+      "english": "Allah is not unaware of what you do and Allah is Witness",
+      "highlight": "شَهِيدٌ"
     }
   },
   "176": {
@@ -3240,7 +3570,12 @@
       "حَفِظَ",
       "ملك"
     ],
-    "correct_answer": "هُوَ"
+    "correct_answer": "هُوَ",
+    "example": {
+      "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+      "english": "Say: He is Allah, the One",
+      "highlight": "هُوَ"
+    }
   },
   "204": {
     "category": "Pronouns (Reverse)",
@@ -3251,7 +3586,12 @@
       "أَحْسَن",
       "هُمْ"
     ],
-    "correct_answer": "هُمْ"
+    "correct_answer": "هُمْ",
+    "example": {
+      "arabic": "وَهُمْ فِي الْآخِرَةِ هُمُ الْخَاسِرُونَ",
+      "english": "And they — in the Hereafter — are the losers",
+      "highlight": "هُمْ"
+    }
   },
   "205": {
     "category": "Pronouns (Reverse)",
@@ -3262,7 +3602,12 @@
       "ذَهَبَ",
       "صَبَرَ"
     ],
-    "correct_answer": "أَنْتَ"
+    "correct_answer": "أَنْتَ",
+    "example": {
+      "arabic": "إِنَّكَ أَنْتَ الْعَلِيمُ الْحَكِيمُ",
+      "english": "Indeed You are the Knowing, the Wise",
+      "highlight": "أَنْتَ"
+    }
   },
   "206": {
     "category": "Pronouns (Reverse)",
@@ -3273,7 +3618,12 @@
       "أُمّ",
       "أَنْتُمْ"
     ],
-    "correct_answer": "أَنْتُمْ"
+    "correct_answer": "أَنْتُمْ",
+    "example": {
+      "arabic": "وَأَنْتُمُ الْأَعْلَوْنَ إِن كُنتُم مُّؤْمِنِينَ",
+      "english": "And you will be superior if you are believers",
+      "highlight": "أَنْتُمُ"
+    }
   },
   "207": {
     "category": "Pronouns (Reverse)",
@@ -3284,7 +3634,12 @@
       "كَلا",
       "إله"
     ],
-    "correct_answer": "أَنَا"
+    "correct_answer": "أَنَا",
+    "example": {
+      "arabic": "إِنَّنِي أَنَا اللَّهُ لَا إِلَٰهَ إِلَّا أَنَا",
+      "english": "Indeed I am Allah; there is no deity except Me",
+      "highlight": "أَنَا"
+    }
   },
   "208": {
     "category": "Pronouns (Reverse)",
@@ -3295,7 +3650,12 @@
       "لَبِثَ",
       "سَبَقَ"
     ],
-    "correct_answer": "نَحْنُ"
+    "correct_answer": "نَحْنُ",
+    "example": {
+      "arabic": "إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ",
+      "english": "Indeed it is We who sent down the remembrance and We will preserve it",
+      "highlight": "نَحْنُ"
+    }
   },
   "209": {
     "category": "Pronouns (Reverse)",
@@ -3306,7 +3666,12 @@
       "سَيِّئَة",
       "هِيَ"
     ],
-    "correct_answer": "هِيَ"
+    "correct_answer": "هِيَ",
+    "example": {
+      "arabic": "إِنَّهَا هِيَ الْفَوْزُ الْعَظِيمُ",
+      "english": "Indeed that is the great attainment",
+      "highlight": "هِيَ"
+    }
   },
   "210": {
     "category": "Pronouns (Reverse)",
@@ -3317,7 +3682,12 @@
       "أَلَا",
       "دَخَلَ"
     ],
-    "correct_answer": "هُنَّ"
+    "correct_answer": "هُنَّ",
+    "example": {
+      "arabic": "هُنَّ لِبَاسٌ لَّكُمْ وَأَنتُمْ لِبَاسٌ لَّهُنَّ",
+      "english": "They are garments for you and you are garments for them",
+      "highlight": "هُنَّ"
+    }
   },
   "211": {
     "category": "Pronouns (Reverse)",
@@ -3328,7 +3698,12 @@
       "إله",
       "خَرَجَ"
     ],
-    "correct_answer": "أَنْتِ"
+    "correct_answer": "أَنْتِ",
+    "example": {
+      "arabic": "وَأَنتِ حِلٌّ بِهَٰذَا الْبَلَدِ",
+      "english": "And you are free of restriction in this city",
+      "highlight": "أَنتِ"
+    }
   },
   "212": {
     "category": "Pronouns (Reverse)",
@@ -3339,7 +3714,12 @@
       "زوج",
       "غَفُور"
     ],
-    "correct_answer": "أَنْتُنَّ"
+    "correct_answer": "أَنْتُنَّ",
+    "example": {
+      "arabic": "لَسْتُنَّ كَأَحَدٍ مِّنَ النِّسَاءِ إِنِ اتَّقَيْتُنَّ",
+      "english": "You are not like any other women if you fear Allah",
+      "highlight": "اتَّقَيْتُنَّ"
+    }
   },
   "213": {
     "category": "Pronouns (Reverse)",
@@ -3350,7 +3730,12 @@
       "كَتَمَ",
       "هُمَا"
     ],
-    "correct_answer": "هُمَا"
+    "correct_answer": "هُمَا",
+    "example": {
+      "arabic": "فَأَكَلَا مِنْهَا فَبَدَتْ لَهُمَا سَوْآتُهُمَا",
+      "english": "So they both ate from it and their shame appeared to them",
+      "highlight": "لَهُمَا"
+    }
   },
   "214": {
     "category": "Pronouns (Reverse)",
@@ -3361,7 +3746,12 @@
       "كَبِير",
       "تَرَكَ"
     ],
-    "correct_answer": "أَنْتُمَا"
+    "correct_answer": "أَنْتُمَا",
+    "example": {
+      "arabic": "اذْهَبَا إِلَىٰ فِرْعَوْنَ إِنَّهُ طَغَىٰ",
+      "english": "Go both of you to Pharaoh; indeed he has transgressed",
+      "highlight": "اذْهَبَا"
+    }
   },
   "215": {
     "category": "Demonstratives (Reverse)",
@@ -3372,7 +3762,12 @@
       "شَهِدَ",
       "هذا"
     ],
-    "correct_answer": "هذا"
+    "correct_answer": "هذا",
+    "example": {
+      "arabic": "هَٰذَا بَلَاغٌ لِّلنَّاسِ وَلِيُنذَرُوا بِهِ",
+      "english": "This is a notification for the people that they may be warned",
+      "highlight": "هَٰذَا"
+    }
   },
   "216": {
     "category": "Demonstratives (Reverse)",
@@ -3383,7 +3778,12 @@
       "شَهَادَة",
       "ذَلِكَ"
     ],
-    "correct_answer": "ذَلِكَ"
+    "correct_answer": "ذَلِكَ",
+    "example": {
+      "arabic": "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ",
+      "english": "That is the Book about which there is no doubt, guidance for the righteous",
+      "highlight": "ذَٰلِكَ"
+    }
   },
   "217": {
     "category": "Demonstratives (Reverse)",
@@ -3394,7 +3794,12 @@
       "هذه",
       "أَلَا"
     ],
-    "correct_answer": "هذه"
+    "correct_answer": "هذه",
+    "example": {
+      "arabic": "هَٰذِهِ جَهَنَّمُ الَّتِي يُكَذِّبُ بِهَا الْمُجْرِمُونَ",
+      "english": "This is the Hellfire which the criminals denied",
+      "highlight": "هَٰذِهِ"
+    }
   },
   "218": {
     "category": "Demonstratives (Reverse)",
@@ -3405,7 +3810,12 @@
       "حَقّ",
       "خَسِرَ"
     ],
-    "correct_answer": "تِلْكَ"
+    "correct_answer": "تِلْكَ",
+    "example": {
+      "arabic": "تِلْكَ آيَاتُ اللَّهِ نَتْلُوهَا عَلَيْكَ بِالْحَقِّ",
+      "english": "These are the verses of Allah which We recite to you in truth",
+      "highlight": "تِلْكَ"
+    }
   },
   "219": {
     "category": "Demonstratives (Reverse)",
@@ -3416,7 +3826,12 @@
       "بَصِير",
       "هؤلاء"
     ],
-    "correct_answer": "هؤلاء"
+    "correct_answer": "هؤلاء",
+    "example": {
+      "arabic": "هَٰؤُلَاءِ قَوْمُنَا اتَّخَذُوا مِن دُونِهِ آلِهَةً",
+      "english": "These — our people — have taken deities besides Him",
+      "highlight": "هَٰؤُلَاءِ"
+    }
   },
   "220": {
     "category": "Demonstratives (Reverse)",
@@ -3427,7 +3842,12 @@
       "عَمِلَ",
       "أولئك"
     ],
-    "correct_answer": "أولئك"
+    "correct_answer": "أولئك",
+    "example": {
+      "arabic": "أُولَٰئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ",
+      "english": "Those are upon guidance from their Lord",
+      "highlight": "أُولَٰئِكَ"
+    }
   },
   "221": {
     "category": "Relative Pronouns (Reverse)",
@@ -3438,7 +3858,12 @@
       "آية",
       "الَّذِي"
     ],
-    "correct_answer": "الَّذِي"
+    "correct_answer": "الَّذِي",
+    "example": {
+      "arabic": "الَّذِي خَلَقَكَ فَسَوَّاكَ فَعَدَلَكَ",
+      "english": "Who created you and proportioned you and assembled you",
+      "highlight": "الَّذِي"
+    }
   },
   "222": {
     "category": "Relative Pronouns (Reverse)",
@@ -3449,7 +3874,12 @@
       "لِسَان",
       "الَّتِي"
     ],
-    "correct_answer": "الَّتِي"
+    "correct_answer": "الَّتِي",
+    "example": {
+      "arabic": "النَّارُ الَّتِي وَقُودُهَا النَّاسُ وَالْحِجَارَةُ",
+      "english": "The fire whose fuel is people and stones",
+      "highlight": "الَّتِي"
+    }
   },
   "223": {
     "category": "Relative Pronouns (Reverse)",
@@ -3460,7 +3890,12 @@
       "لَنْ",
       "مَكَرَ"
     ],
-    "correct_answer": "الَّذِينَ"
+    "correct_answer": "الَّذِينَ",
+    "example": {
+      "arabic": "الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ",
+      "english": "Those who believe in the unseen and establish prayer",
+      "highlight": "الَّذِينَ"
+    }
   },
   "224": {
     "category": "Attributes (Reverse)",
@@ -3471,7 +3906,17 @@
       "رَجُل",
       "حَفِيظ"
     ],
-    "correct_answer": "رَبّ"
+    "correct_answer": "رَبّ",
+    "example": {
+      "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      "english": "All praise is for Allah, Lord of all worlds",
+      "highlight": "رَبِّ"
+    },
+    "example2": {
+      "arabic": "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ",
+      "english": "My Lord, forgive me and my parents",
+      "highlight": "رَبِّ"
+    }
   },
   "225": {
     "category": "Attributes (Reverse)",
@@ -3482,7 +3927,12 @@
       "رَحْمٰن",
       "نَصِير"
     ],
-    "correct_answer": "رَحْمٰن"
+    "correct_answer": "رَحْمٰن",
+    "example": {
+      "arabic": "الرَّحْمَٰنُ عَلَى الْعَرْشِ اسْتَوَىٰ",
+      "english": "The Most Merciful rose above the Throne",
+      "highlight": "الرَّحْمَٰنُ"
+    }
   },
   "226": {
     "category": "Attributes (Reverse)",
@@ -3493,7 +3943,12 @@
       "ضَرَبَ",
       "رَحِيم"
     ],
-    "correct_answer": "رَحِيم"
+    "correct_answer": "رَحِيم",
+    "example": {
+      "arabic": "وَكَانَ اللَّهُ غَفُورًا رَّحِيمًا",
+      "english": "And Allah is Ever Forgiving, Merciful",
+      "highlight": "رَّحِيمًا"
+    }
   },
   "227": {
     "category": "Attributes (Reverse)",
@@ -3504,7 +3959,12 @@
       "أَشَدّ",
       "أَعْمَال"
     ],
-    "correct_answer": "عَزِيز"
+    "correct_answer": "عَزِيز",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ عَزِيزٌ حَكِيمٌ",
+      "english": "Indeed Allah is Mighty, Wise",
+      "highlight": "عَزِيزٌ"
+    }
   },
   "228": {
     "category": "Attributes (Reverse)",
@@ -3515,7 +3975,17 @@
       "مَكَرَ",
       "ب"
     ],
-    "correct_answer": "حَكِيم"
+    "correct_answer": "حَكِيم",
+    "example": {
+      "arabic": "وَهُوَ الْعَلِيمُ الْحَكِيمُ",
+      "english": "And He is the Knowing, the Wise",
+      "highlight": "الْحَكِيمُ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ يَحْكُمُ لَا مُعَقِّبَ لِحُكْمِهِ",
+      "english": "And Allah judges — there is no adjuster of His judgment",
+      "highlight": "يَحْكُمُ"
+    }
   },
   "229": {
     "category": "Attributes (Reverse)",
@@ -3526,7 +3996,17 @@
       "لَعَنَ",
       "غَفُور"
     ],
-    "correct_answer": "غَفُور"
+    "correct_answer": "غَفُور",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ",
+      "english": "Indeed Allah is Forgiving, Merciful",
+      "highlight": "غَفُورٌ"
+    },
+    "example2": {
+      "arabic": "وَرَبُّكَ الْغَفُورُ ذُو الرَّحْمَةِ",
+      "english": "And your Lord is Forgiving, possessor of mercy",
+      "highlight": "الْغَفُورُ"
+    }
   },
   "230": {
     "category": "Attributes (Reverse)",
@@ -3537,7 +4017,17 @@
       "أَنْتِ",
       "على"
     ],
-    "correct_answer": "قَدِير"
+    "correct_answer": "قَدِير",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+      "english": "Indeed Allah has power over all things",
+      "highlight": "قَدِيرٌ"
+    },
+    "example2": {
+      "arabic": "وَكَانَ اللَّهُ عَلَىٰ كُلِّ شَيْءٍ قَدِيرًا",
+      "english": "And Allah is ever over all things competent",
+      "highlight": "قَدِيرًا"
+    }
   },
   "231": {
     "category": "Attributes (Reverse)",
@@ -3548,7 +4038,12 @@
       "سَمِعَ",
       "سَمِيع"
     ],
-    "correct_answer": "سَمِيع"
+    "correct_answer": "سَمِيع",
+    "example": {
+      "arabic": "إِنَّهُ هُوَ السَّمِيعُ الْعَلِيمُ",
+      "english": "Indeed He is the All-Hearing, the All-Knowing",
+      "highlight": "السَّمِيعُ"
+    }
   },
   "232": {
     "category": "Attributes (Reverse)",
@@ -3559,7 +4054,12 @@
       "بَصِير",
       "سَمِعَ"
     ],
-    "correct_answer": "بَصِير"
+    "correct_answer": "بَصِير",
+    "example": {
+      "arabic": "وَاللَّهُ بَصِيرٌ بِمَا يَعْمَلُونَ",
+      "english": "And Allah is All-Seeing of what they do",
+      "highlight": "بَصِيرٌ"
+    }
   },
   "233": {
     "category": "Attributes (Reverse)",
@@ -3570,7 +4070,12 @@
       "ضَرَبَ",
       "أَنْتِ"
     ],
-    "correct_answer": "تَوَّاب"
+    "correct_answer": "تَوَّاب",
+    "example": {
+      "arabic": "إِنَّهُ هُوَ التَّوَّابُ الرَّحِيمُ",
+      "english": "Indeed He is the Accepting of repentance, the Merciful",
+      "highlight": "التَّوَّابُ"
+    }
   },
   "234": {
     "category": "Attributes (Reverse)",
@@ -3581,7 +4086,17 @@
       "مَكَرَ",
       "ذَنْب"
     ],
-    "correct_answer": "حَلِيم"
+    "correct_answer": "حَلِيم",
+    "example": {
+      "arabic": "وَاللَّهُ غَنِيٌّ حَلِيمٌ",
+      "english": "And Allah is Self-Sufficient, Forbearing",
+      "highlight": "حَلِيمٌ"
+    },
+    "example2": {
+      "arabic": "وَإِنَّ اللَّهَ لَعَلِيمٌ حَلِيمٌ",
+      "english": "And indeed Allah is Knowing and Forbearing",
+      "highlight": "حَلِيمٌ"
+    }
   },
   "235": {
     "category": "Attributes (Reverse)",
@@ -3592,7 +4107,17 @@
       "خَبِير",
       "نَعَمْ"
     ],
-    "correct_answer": "خَبِير"
+    "correct_answer": "خَبِير",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ خَبِيرٌ بِمَا تَعْمَلُونَ",
+      "english": "Indeed Allah is Aware of what you do",
+      "highlight": "خَبِيرٌ"
+    },
+    "example2": {
+      "arabic": "وَهُوَ اللَّطِيفُ الْخَبِيرُ",
+      "english": "And He is the Subtle, the Aware",
+      "highlight": "الْخَبِيرُ"
+    }
   },
   "236": {
     "category": "Attributes (Reverse)",
@@ -3603,7 +4128,17 @@
       "عَلِيم",
       "قَدَرَ"
     ],
-    "correct_answer": "عَلِيم"
+    "correct_answer": "عَلِيم",
+    "example": {
+      "arabic": "وَاللَّهُ بِكُلِّ شَيْءٍ عَلِيمٌ",
+      "english": "And Allah is Knowing of all things",
+      "highlight": "عَلِيمٌ"
+    },
+    "example2": {
+      "arabic": "إِنَّهُ عَلِيمٌ بِذَاتِ الصُّدُورِ",
+      "english": "Indeed He is Knowing of what is within the breasts",
+      "highlight": "عَلِيمٌ"
+    }
   },
   "237": {
     "category": "Attributes (Reverse)",
@@ -3614,7 +4149,17 @@
       "فِي",
       "سَيِّئَة"
     ],
-    "correct_answer": "قَرِيب"
+    "correct_answer": "قَرِيب",
+    "example": {
+      "arabic": "إِنَّ رَحْمَتَ اللَّهِ قَرِيبٌ مِّنَ الْمُحْسِنِينَ",
+      "english": "Indeed Allah's mercy is near to those who do good",
+      "highlight": "قَرِيبٌ"
+    },
+    "example2": {
+      "arabic": "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
+      "english": "And when My servants ask about Me — I am near",
+      "highlight": "قَرِيبٌ"
+    }
   },
   "238": {
     "category": "Attributes (Reverse)",
@@ -3625,7 +4170,17 @@
       "لَا",
       "حَكَمَ"
     ],
-    "correct_answer": "كَبِير"
+    "correct_answer": "كَبِير",
+    "example": {
+      "arabic": "وَهُوَ الْعَلِيُّ الْكَبِيرُ",
+      "english": "And He is the Most High, the Grand",
+      "highlight": "الْكَبِيرُ"
+    },
+    "example2": {
+      "arabic": "إِنَّهُ كَانَ عَلِيًّا كَبِيرًا",
+      "english": "Indeed He is the Most High, the Grand",
+      "highlight": "كَبِيرًا"
+    }
   },
   "239": {
     "category": "Attributes (Reverse)",
@@ -3636,7 +4191,17 @@
       "أَشَدّ",
       "حَزِنَ"
     ],
-    "correct_answer": "عَظِيم"
+    "correct_answer": "عَظِيم",
+    "example": {
+      "arabic": "وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+      "english": "And He is the Most High, the Most Great",
+      "highlight": "الْعَظِيمُ"
+    },
+    "example2": {
+      "arabic": "وَلَهُ الْعَظَمَةُ فِي السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "And to Him belongs all grandeur in the heavens and earth",
+      "highlight": "الْعَظَمَةُ"
+    }
   },
   "240": {
     "category": "Attributes (Reverse)",
@@ -3647,7 +4212,12 @@
       "ظَلَمَ",
       "فَعَلَ"
     ],
-    "correct_answer": "حَفِيظ"
+    "correct_answer": "حَفِيظ",
+    "example": {
+      "arabic": "وَاللَّهُ عَلَىٰ كُلِّ شَيْءٍ حَفِيظٌ",
+      "english": "And Allah is over all things a Guardian",
+      "highlight": "حَفِيظٌ"
+    }
   },
   "241": {
     "category": "Attributes (Reverse)",
@@ -3658,7 +4228,12 @@
       "آية",
       "نَعَمْ"
     ],
-    "correct_answer": "شَكُور"
+    "correct_answer": "شَكُور",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ شَاكِرٌ عَلِيمٌ",
+      "english": "Indeed Allah is Appreciative, All-Knowing",
+      "highlight": "شَاكِرٌ"
+    }
   },
   "242": {
     "category": "Attributes (Reverse)",
@@ -3669,7 +4244,17 @@
       "أَشَدّ",
       "غَفَرَ"
     ],
-    "correct_answer": "نَصِير"
+    "correct_answer": "نَصِير",
+    "example": {
+      "arabic": "وَكَفَىٰ بِاللَّهِ وَلِيًّا وَكَفَىٰ بِاللَّهِ نَصِيرًا",
+      "english": "Sufficient is Allah as protector and sufficient is Allah as helper",
+      "highlight": "نَصِيرًا"
+    },
+    "example2": {
+      "arabic": "فَاللَّهُ هُوَ الْوَلِيُّ وَهُوَ يُحْيِي الْمَوْتَىٰ",
+      "english": "Allah is the Protector and He gives life to the dead",
+      "highlight": "النَّصِيرُ"
+    }
   },
   "243": {
     "category": "Attributes (Reverse)",
@@ -3680,7 +4265,17 @@
       "تَرَكَ",
       "أَعْمَال"
     ],
-    "correct_answer": "وَكِيل"
+    "correct_answer": "وَكِيل",
+    "example": {
+      "arabic": "وَتَوَكَّلْ عَلَى اللَّهِ وَكَفَىٰ بِاللَّهِ وَكِيلًا",
+      "english": "Put your trust in Allah; sufficient is Allah as Trustee",
+      "highlight": "وَكِيلًا"
+    },
+    "example2": {
+      "arabic": "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
+      "english": "Sufficient for us is Allah and excellent is the Trustee",
+      "highlight": "الْوَكِيلُ"
+    }
   },
   "244": {
     "category": "Attributes (Reverse)",
@@ -3691,7 +4286,12 @@
       "أَنْتُمْ",
       "حَمِيد"
     ],
-    "correct_answer": "حَمِيد"
+    "correct_answer": "حَمِيد",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ لَغَنِيٌّ حَمِيدٌ",
+      "english": "Indeed Allah is Free of need, Praiseworthy",
+      "highlight": "حَمِيدٌ"
+    }
   },
   "245": {
     "category": "Superiority (Reverse)",
@@ -3702,7 +4302,17 @@
       "إِثْم",
       "أَنَا"
     ],
-    "correct_answer": "أَشَدّ"
+    "correct_answer": "أَشَدّ",
+    "example": {
+      "arabic": "وَاللَّهُ أَشَدُّ بَأْسًا وَأَشَدُّ تَنكِيلًا",
+      "english": "Allah is more severe in might and more severe in punishment",
+      "highlight": "أَشَدُّ"
+    },
+    "example2": {
+      "arabic": "وَمِنَ النَّاسِ مَن يَتَّخِذُ مِن دُونِ اللَّهِ أَندَادًا يُحِبُّونَهُمْ كَحُبِّ اللَّهِ",
+      "english": "Some people take rivals to Allah loving them as they should love Allah",
+      "highlight": "أَشَدُّ"
+    }
   },
   "246": {
     "category": "Superiority (Reverse)",
@@ -3713,7 +4323,17 @@
       "شر",
       "أَعْلَم"
     ],
-    "correct_answer": "أَعْلَم"
+    "correct_answer": "أَعْلَم",
+    "example": {
+      "arabic": "وَاللَّهُ أَعْلَمُ بِالظَّالِمِينَ",
+      "english": "And Allah is most knowing of the wrongdoers",
+      "highlight": "أَعْلَمُ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ أَعْلَمُ بِأَعْدَائِكُمْ وَكَفَىٰ بِاللَّهِ وَلِيًّا",
+      "english": "And Allah is most knowing of your enemies and sufficient is Allah as a protector",
+      "highlight": "أَعْلَمُ"
+    }
   },
   "247": {
     "category": "Superiority (Reverse)",
@@ -3724,7 +4344,17 @@
       "دين",
       "بَعَثَ"
     ],
-    "correct_answer": "أَكْبَر"
+    "correct_answer": "أَكْبَر",
+    "example": {
+      "arabic": "وَلَذِكْرُ اللَّهِ أَكْبَرُ وَاللَّهُ يَعْلَمُ مَا تَصْنَعُونَ",
+      "english": "The remembrance of Allah is greater — and Allah knows what you do",
+      "highlight": "أَكْبَرُ"
+    },
+    "example2": {
+      "arabic": "اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا",
+      "english": "Allah is the Greatest and all praise belongs to Allah abundantly",
+      "highlight": "أَكْبَرُ"
+    }
   },
   "248": {
     "category": "Superiority (Reverse)",
@@ -3735,7 +4365,17 @@
       "أَحْسَن",
       "سَمَاء"
     ],
-    "correct_answer": "أَحْسَن"
+    "correct_answer": "أَحْسَن",
+    "example": {
+      "arabic": "وَمَنْ أَحْسَنُ دِينًا مِّمَّنْ أَسْلَمَ وَجْهَهُ لِلَّهِ",
+      "english": "Who is better in religion than one who submits his face to Allah",
+      "highlight": "أَحْسَنُ"
+    },
+    "example2": {
+      "arabic": "إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ",
+      "english": "Indeed Allah commands justice and excellence",
+      "highlight": "الْإِحْسَانِ"
+    }
   },
   "249": {
     "category": "Superiority (Reverse)",
@@ -3746,7 +4386,17 @@
       "قَدَرَ",
       "أَظْلَم"
     ],
-    "correct_answer": "أَظْلَم"
+    "correct_answer": "أَظْلَم",
+    "example": {
+      "arabic": "وَمَنْ أَظْلَمُ مِمَّن مَّنَعَ مَسَاجِدَ اللَّهِ",
+      "english": "Who is more unjust than one who prevents the mosques of Allah from being used",
+      "highlight": "أَظْلَمُ"
+    },
+    "example2": {
+      "arabic": "وَمَنْ أَظْلَمُ مِمَّنِ افْتَرَىٰ عَلَى اللَّهِ الْكَذِبَ",
+      "english": "Who is more unjust than one who fabricates a lie against Allah",
+      "highlight": "أَظْلَمُ"
+    }
   },
   "250": {
     "category": "Superiority (Reverse)",
@@ -3757,7 +4407,17 @@
       "أَقْرَب",
       "لَا"
     ],
-    "correct_answer": "أَقْرَب"
+    "correct_answer": "أَقْرَب",
+    "example": {
+      "arabic": "وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْكُمْ وَلَٰكِن لَّا تُبْصِرُونَ",
+      "english": "And We are nearer to him than you but you do not see",
+      "highlight": "أَقْرَبُ"
+    },
+    "example2": {
+      "arabic": "فَلَوْلَا إِذَا بَلَغَتِ الْحُلْقُومَ وَأَنتُمْ حِينَئِذٍ تَنظُرُونَ",
+      "english": "So when the soul reaches the throat and you are at that moment looking on",
+      "highlight": "أَقْرَبُ"
+    }
   },
   "251": {
     "category": "Signs (Reverse)",
@@ -3768,7 +4428,12 @@
       "آية",
       "حَشَرَ"
     ],
-    "correct_answer": "آية"
+    "correct_answer": "آية",
+    "example": {
+      "arabic": "إِنَّ فِي ذَٰلِكَ لَآيَةً لِّلْمُؤْمِنِينَ",
+      "english": "Indeed in that is a sign for the believers",
+      "highlight": "لَآيَةً"
+    }
   },
   "252": {
     "category": "Signs (Reverse)",
@@ -3779,7 +4444,12 @@
       "بَيِّنَة",
       "سَبَقَ"
     ],
-    "correct_answer": "بَيِّنَة"
+    "correct_answer": "بَيِّنَة",
+    "example": {
+      "arabic": "حَتَّىٰ تَأْتِيَهُمُ الْبَيِّنَةُ رَسُولٌ مِّنَ اللَّهِ",
+      "english": "Until there came to them clear evidence — a Messenger from Allah",
+      "highlight": "الْبَيِّنَةُ"
+    }
   },
   "253": {
     "category": "Signs (Reverse)",
@@ -3790,7 +4460,17 @@
       "فِي",
       "بلى"
     ],
-    "correct_answer": "أَنْعَام"
+    "correct_answer": "أَنْعَام",
+    "example": {
+      "arabic": "وَالْأَنْعَامَ خَلَقَهَا لَكُمْ فِيهَا دِفْءٌ",
+      "english": "And the cattle He created for you — in them is warmth",
+      "highlight": "الْأَنْعَامَ"
+    },
+    "example2": {
+      "arabic": "وَإِنَّ لَكُمْ فِي الْأَنْعَامِ لَعِبْرَةً",
+      "english": "And indeed for you in the cattle is a lesson",
+      "highlight": "الْأَنْعَامِ"
+    }
   },
   "254": {
     "category": "Signs (Reverse)",
@@ -3801,7 +4481,12 @@
       "مع",
       "جَبَل"
     ],
-    "correct_answer": "جَبَل"
+    "correct_answer": "جَبَل",
+    "example": {
+      "arabic": "وَإِلَى الْجِبَالِ كَيْفَ نُصِبَتْ",
+      "english": "And at the mountains — how they were erected",
+      "highlight": "الْجِبَالِ"
+    }
   },
   "255": {
     "category": "Signs (Reverse)",
@@ -3812,7 +4497,17 @@
       "بَحْر",
       "عَلِمَ"
     ],
-    "correct_answer": "بَحْر"
+    "correct_answer": "بَحْر",
+    "example": {
+      "arabic": "وَهُوَ الَّذِي سَخَّرَ الْبَحْرَ لِتَأْكُلُوا مِنْهُ لَحْمًا طَرِيًّا",
+      "english": "And it is He who subjected the sea so you may eat fresh fish from it",
+      "highlight": "الْبَحْرَ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ الَّذِي سَخَّرَ الْبَحْرَ لِتَأْكُلُوا مِنْهُ لَحْمًا طَرِيًّا",
+      "english": "And it is Allah who subjected the sea for you to eat fresh meat from it",
+      "highlight": "الْبَحْرَ"
+    }
   },
   "256": {
     "category": "Signs (Reverse)",
@@ -3823,7 +4518,12 @@
       "لَمْ",
       "حَكَمَ"
     ],
-    "correct_answer": "شَمْس"
+    "correct_answer": "شَمْس",
+    "example": {
+      "arabic": "وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا",
+      "english": "And the sun runs on its fixed course",
+      "highlight": "وَالشَّمْسُ"
+    }
   },
   "257": {
     "category": "Signs (Reverse)",
@@ -3834,7 +4534,12 @@
       "خَيْر",
       "حَكِيم"
     ],
-    "correct_answer": "قَمَر"
+    "correct_answer": "قَمَر",
+    "example": {
+      "arabic": "وَالْقَمَرَ قَدَّرْنَاهُ مَنَازِلَ",
+      "english": "And for the moon We have determined phases",
+      "highlight": "وَالْقَمَرَ"
+    }
   },
   "258": {
     "category": "Signs (Reverse)",
@@ -3845,7 +4550,12 @@
       "لَيْل",
       "جَعَلَ"
     ],
-    "correct_answer": "لَيْل"
+    "correct_answer": "لَيْل",
+    "example": {
+      "arabic": "وَاللَّيْلِ إِذَا يَغْشَىٰ",
+      "english": "By the night when it covers",
+      "highlight": "وَاللَّيْلِ"
+    }
   },
   "259": {
     "category": "Signs (Reverse)",
@@ -3856,7 +4566,12 @@
       "نَهَار",
       "نَفَخَ"
     ],
-    "correct_answer": "نَهَار"
+    "correct_answer": "نَهَار",
+    "example": {
+      "arabic": "وَالنَّهَارِ إِذَا جَلَّاهَا",
+      "english": "And the day when it displays it",
+      "highlight": "وَالنَّهَارِ"
+    }
   },
   "260": {
     "category": "Signs (Reverse)",
@@ -3867,7 +4582,12 @@
       "مَنَعَ",
       "أَرْض"
     ],
-    "correct_answer": "أَرْض"
+    "correct_answer": "أَرْض",
+    "example": {
+      "arabic": "وَلِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
+      "english": "To Allah belongs what is in the heavens and in the earth",
+      "highlight": "الْأَرْضِ"
+    }
   },
   "261": {
     "category": "Signs (Reverse)",
@@ -3878,7 +4598,17 @@
       "سَمَاء",
       "دين"
     ],
-    "correct_answer": "سَمَاء"
+    "correct_answer": "سَمَاء",
+    "example": {
+      "arabic": "أَلَمْ نَجْعَلِ السَّمَاءَ سَقْفًا مَّحْفُوظًا",
+      "english": "Have We not made the sky a protected ceiling",
+      "highlight": "السَّمَاءَ"
+    },
+    "example2": {
+      "arabic": "وَنَزَّلْنَا مِنَ السَّمَاءِ مَاءً مُّبَارَكًا",
+      "english": "And We sent down from the sky blessed water",
+      "highlight": "السَّمَاءِ"
+    }
   },
   "262": {
     "category": "Signs (Reverse)",
@@ -3889,7 +4619,17 @@
       "كَبِير",
       "أخ"
     ],
-    "correct_answer": "رِيح"
+    "correct_answer": "رِيح",
+    "example": {
+      "arabic": "وَأَرْسَلْنَا الرِّيَاحَ لَوَاقِحَ",
+      "english": "And We sent the winds as fertilizers",
+      "highlight": "الرِّيَاحَ"
+    },
+    "example2": {
+      "arabic": "وَمِنْ آيَاتِهِ أَن يُرْسِلَ الرِّيَاحَ مُبَشِّرَاتٍ",
+      "english": "And of His signs is that He sends the winds as bringers of good tidings",
+      "highlight": "الرِّيَاحَ"
+    }
   },
   "263": {
     "category": "Hereafter (Reverse)",
@@ -3900,7 +4640,17 @@
       "جَمَعَ",
       "رَجُل"
     ],
-    "correct_answer": "الآخِرَة"
+    "correct_answer": "الآخِرَة",
+    "example": {
+      "arabic": "وَالدَّارُ الْآخِرَةُ خَيْرٌ لِّلَّذِينَ يَتَّقُونَ",
+      "english": "And the home of the Hereafter is better for those who fear Allah",
+      "highlight": "الْآخِرَةُ"
+    },
+    "example2": {
+      "arabic": "وَمَا الْحَيَاةُ الدُّنْيَا فِي الْآخِرَةِ إِلَّا مَتَاعٌ",
+      "english": "And what is worldly life compared to the Hereafter except enjoyment",
+      "highlight": "الْآخِرَةِ"
+    }
   },
   "264": {
     "category": "Hereafter (Reverse)",
@@ -3911,7 +4661,12 @@
       "أولئك",
       "قَدَرَ"
     ],
-    "correct_answer": "قِيَامَة"
+    "correct_answer": "قِيَامَة",
+    "example": {
+      "arabic": "وَأَنَّ السَّاعَةَ آتِيَةٌ لَّا رَيْبَ فِيهَا",
+      "english": "And that the Hour is coming — there is no doubt about it",
+      "highlight": "السَّاعَةَ"
+    }
   },
   "265": {
     "category": "Hereafter (Reverse)",
@@ -3922,7 +4677,12 @@
       "ساعة",
       "أب"
     ],
-    "correct_answer": "ساعة"
+    "correct_answer": "ساعة",
+    "example": {
+      "arabic": "إِنَّ السَّاعَةَ لَآتِيَةٌ لَّا رَيْبَ فِيهَا",
+      "english": "Indeed the Hour is coming — there is no doubt in it",
+      "highlight": "السَّاعَةَ"
+    }
   },
   "266": {
     "category": "Hereafter (Reverse)",
@@ -3933,7 +4693,12 @@
       "ضَرَبَ",
       "يَوْم"
     ],
-    "correct_answer": "يَوْم"
+    "correct_answer": "يَوْم",
+    "example": {
+      "arabic": "مَالِكِ يَوْمِ الدِّينِ",
+      "english": "Master of the Day of Recompense",
+      "highlight": "يَوْمِ"
+    }
   },
   "267": {
     "category": "Hereafter (Reverse)",
@@ -3944,7 +4709,12 @@
       "ظُلُمَات",
       "جَنَّة"
     ],
-    "correct_answer": "جَنَّة"
+    "correct_answer": "جَنَّة",
+    "example": {
+      "arabic": "إِنَّ الْمُتَّقِينَ فِي جَنَّاتٍ وَنَعِيمٍ",
+      "english": "Indeed the righteous will be in gardens and bliss",
+      "highlight": "جَنَّاتٍ"
+    }
   },
   "268": {
     "category": "Hereafter (Reverse)",
@@ -3955,7 +4725,12 @@
       "أَشَدّ",
       "جَهَنَّم"
     ],
-    "correct_answer": "جَهَنَّم"
+    "correct_answer": "جَهَنَّم",
+    "example": {
+      "arabic": "إِنَّ جَهَنَّمَ كَانَتْ مِرْصَادًا لِّلطَّاغِينَ مَآبًا",
+      "english": "Indeed Hell has been lying in wait as a return for the transgressors",
+      "highlight": "جَهَنَّمَ"
+    }
   },
   "269": {
     "category": "Hereafter (Reverse)",
@@ -3966,7 +4741,12 @@
       "خَرَجَ",
       "بَحْر"
     ],
-    "correct_answer": "نار"
+    "correct_answer": "نار",
+    "example": {
+      "arabic": "وَاتَّقُوا النَّارَ الَّتِي أُعِدَّتْ لِلْكَافِرِينَ",
+      "english": "And fear the Fire prepared for the disbelievers",
+      "highlight": "النَّارَ"
+    }
   },
   "270": {
     "category": "Hereafter (Reverse)",
@@ -3977,7 +4757,12 @@
       "أجر",
       "عَلِيم"
     ],
-    "correct_answer": "عَذَاب"
+    "correct_answer": "عَذَاب",
+    "example": {
+      "arabic": "وَلَهُمْ عَذَابٌ أَلِيمٌ",
+      "english": "And for them is a painful punishment",
+      "highlight": "عَذَابٌ"
+    }
   },
   "271": {
     "category": "Hereafter (Reverse)",
@@ -3988,7 +4773,17 @@
       "ثَوَاب",
       "وَكِيل"
     ],
-    "correct_answer": "ثَوَاب"
+    "correct_answer": "ثَوَاب",
+    "example": {
+      "arabic": "وَاللَّهُ عِندَهُ حُسْنُ الثَّوَابِ",
+      "english": "And with Allah is the best reward",
+      "highlight": "الثَّوَابِ"
+    },
+    "example2": {
+      "arabic": "فَآتَاهُمُ اللَّهُ ثَوَابَ الدُّنْيَا وَحُسْنَ ثَوَابِ الْآخِرَةِ",
+      "english": "So Allah gave them the reward of this world and the good reward of the Hereafter",
+      "highlight": "ثَوَابَ"
+    }
   },
   "272": {
     "category": "Hereafter (Reverse)",
@@ -3999,7 +4794,17 @@
       "لِسَان",
       "أجر"
     ],
-    "correct_answer": "أجر"
+    "correct_answer": "أجر",
+    "example": {
+      "arabic": "وَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ",
+      "english": "And Allah does not allow the reward of good-doers to be lost",
+      "highlight": "أَجْرَ"
+    },
+    "example2": {
+      "arabic": "فَأَتِمُّوا إِلَيْهِمْ عَهْدَهُمْ إِلَىٰ مُدَّتِهِمْ",
+      "english": "Then indeed those who fear Allah will have a great reward",
+      "highlight": "أَجْرًا"
+    }
   },
   "273": {
     "category": "Hereafter (Reverse)",
@@ -4010,7 +4815,17 @@
       "خَيْر",
       "قران"
     ],
-    "correct_answer": "مَصِير"
+    "correct_answer": "مَصِير",
+    "example": {
+      "arabic": "وَإِلَى اللَّهِ الْمَصِيرُ",
+      "english": "And to Allah is the final destination",
+      "highlight": "الْمَصِيرُ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَعْصِ اللَّهَ وَرَسُولَهُ فَإِنَّ لَهُ نَارَ جَهَنَّمَ",
+      "english": "Whoever disobeys Allah and His Messenger — for him is the fire of Hell",
+      "highlight": "الْمَصِيرُ"
+    }
   },
   "274": {
     "category": "Hereafter (Reverse)",
@@ -4021,7 +4836,17 @@
       "نَفَخَ",
       "حَكِيم"
     ],
-    "correct_answer": "أَبَدًا"
+    "correct_answer": "أَبَدًا",
+    "example": {
+      "arabic": "خَالِدِينَ فِيهَا أَبَدًا ذَٰلِكَ الْفَوْزُ الْعَظِيمُ",
+      "english": "Abiding therein forever — that is the great attainment",
+      "highlight": "أَبَدًا"
+    },
+    "example2": {
+      "arabic": "لَا يَذُوقُونَ فِيهَا الْمَوْتَ إِلَّا الْمَوْتَةَ الْأُولَىٰ",
+      "english": "They will not taste death therein except the first death",
+      "highlight": "أَبَدًا"
+    }
   },
   "275": {
     "category": "Deen (Reverse)",
@@ -4032,7 +4857,17 @@
       "دين",
       "صَدْر"
     ],
-    "correct_answer": "دين"
+    "correct_answer": "دين",
+    "example": {
+      "arabic": "إِنَّ الدِّينَ عِندَ اللَّهِ الْإِسْلَامُ",
+      "english": "Indeed the religion in the sight of Allah is Islam",
+      "highlight": "الدِّينَ"
+    },
+    "example2": {
+      "arabic": "يَوْمَئِذٍ يُوَفِّيهِمُ اللَّهُ دِينَهُمُ الْحَقَّ",
+      "english": "That Day Allah will pay them in full their true account",
+      "highlight": "دِينَهُمُ"
+    }
   },
   "276": {
     "category": "Deen (Reverse)",
@@ -4043,7 +4878,17 @@
       "غَيْب",
       "صَبَرَ"
     ],
-    "correct_answer": "حَقّ"
+    "correct_answer": "حَقّ",
+    "example": {
+      "arabic": "ذَٰلِكَ بِأَنَّ اللَّهَ هُوَ الْحَقُّ وَأَنَّهُ يُحْيِي الْمَوْتَىٰ",
+      "english": "That is because Allah is the Truth and He gives life to the dead",
+      "highlight": "الْحَقُّ"
+    },
+    "example2": {
+      "arabic": "وَقُلِ الْحَقُّ مِن رَّبِّكُمْ فَمَن شَاءَ فَلْيُؤْمِن",
+      "english": "And say: The truth is from your Lord — so whoever wills let him believe",
+      "highlight": "الْحَقُّ"
+    }
   },
   "277": {
     "category": "Deen (Reverse)",
@@ -4054,7 +4899,17 @@
       "فَسَقَ",
       "أَنْتِ"
     ],
-    "correct_answer": "باطل"
+    "correct_answer": "باطل",
+    "example": {
+      "arabic": "وَقُلْ جَاءَ الْحَقُّ وَزَهَقَ الْبَاطِلُ",
+      "english": "And say: Truth has come and falsehood has departed",
+      "highlight": "الْبَاطِلُ"
+    },
+    "example2": {
+      "arabic": "لَا يَأْتِيهِ الْبَاطِلُ مِن بَيْنِ يَدَيْهِ وَلَا مِنْ خَلْفِهِ",
+      "english": "Falsehood cannot approach it from before or behind",
+      "highlight": "الْبَاطِلُ"
+    }
   },
   "278": {
     "category": "Deen (Reverse)",
@@ -4065,7 +4920,12 @@
       "أَلَا",
       "بَصِير"
     ],
-    "correct_answer": "نُور"
+    "correct_answer": "نُور",
+    "example": {
+      "arabic": "اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "Allah is the light of the heavens and the earth",
+      "highlight": "نُورُ"
+    }
   },
   "279": {
     "category": "Deen (Reverse)",
@@ -4076,7 +4936,17 @@
       "أَعْمَال",
       "ظُلُمَات"
     ],
-    "correct_answer": "ظُلُمَات"
+    "correct_answer": "ظُلُمَات",
+    "example": {
+      "arabic": "يُخْرِجُهُم مِّنَ الظُّلُمَاتِ إِلَى النُّورِ",
+      "english": "He brings them out from darkness into light",
+      "highlight": "الظُّلُمَاتِ"
+    },
+    "example2": {
+      "arabic": "قُلِ اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "He brings them out of darkness into light",
+      "highlight": "الظُّلُمَاتِ"
+    }
   },
   "280": {
     "category": "Deen (Reverse)",
@@ -4087,7 +4957,12 @@
       "أَظْلَم",
       "ابن"
     ],
-    "correct_answer": "كتاب"
+    "correct_answer": "كتاب",
+    "example": {
+      "arabic": "ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِّلْمُتَّقِينَ",
+      "english": "That is the Book — no doubt about it — guidance for the righteous",
+      "highlight": "الْكِتَابُ"
+    }
   },
   "281": {
     "category": "Deen (Reverse)",
@@ -4098,7 +4973,12 @@
       "شَكَرَ",
       "قران"
     ],
-    "correct_answer": "قران"
+    "correct_answer": "قران",
+    "example": {
+      "arabic": "شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ",
+      "english": "The month of Ramadan in which the Quran was revealed",
+      "highlight": "الْقُرْآنُ"
+    }
   },
   "282": {
     "category": "Deen (Reverse)",
@@ -4109,7 +4989,12 @@
       "حِكْمَة",
       "سَيِّئَة"
     ],
-    "correct_answer": "حِكْمَة"
+    "correct_answer": "حِكْمَة",
+    "example": {
+      "arabic": "يُؤْتِي الْحِكْمَةَ مَن يَشَاءُ وَمَن يُؤْتَ الْحِكْمَةَ فَقَدْ أُوتِيَ خَيْرًا كَثِيرًا",
+      "english": "He gives wisdom to whom He wills; whoever receives wisdom has received great good",
+      "highlight": "الْحِكْمَةَ"
+    }
   },
   "283": {
     "category": "Deen (Reverse)",
@@ -4120,7 +5005,12 @@
       "أَنَا",
       "قَرِيب"
     ],
-    "correct_answer": "صلوة"
+    "correct_answer": "صلوة",
+    "example": {
+      "arabic": "إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا",
+      "english": "Indeed prayer is an obligation on believers at set times",
+      "highlight": "الصَّلَاةَ"
+    }
   },
   "284": {
     "category": "Deen (Reverse)",
@@ -4131,7 +5021,17 @@
       "هُنَّ",
       "إله"
     ],
-    "correct_answer": "إله"
+    "correct_answer": "إله",
+    "example": {
+      "arabic": "لَا إِلَٰهَ إِلَّا هُوَ الرَّحْمَٰنُ الرَّحِيمُ",
+      "english": "There is no deity except Him, the Compassionate, the Merciful",
+      "highlight": "إِلَٰهَ"
+    },
+    "example2": {
+      "arabic": "وَإِلَٰهُكُمْ إِلَٰهٌ وَاحِدٌ لَّا إِلَٰهَ إِلَّا هُوَ",
+      "english": "And your god is one God — there is no deity except Him",
+      "highlight": "إِلَٰهٌ"
+    }
   },
   "285": {
     "category": "Deen (Reverse)",
@@ -4142,7 +5042,17 @@
       "عَيْن",
       "نَعَمْ"
     ],
-    "correct_answer": "مَلَكَ"
+    "correct_answer": "مَلَكَ",
+    "example": {
+      "arabic": "لِلَّهِ مُلْكُ السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "To Allah belongs the dominion of the heavens and earth",
+      "highlight": "مُلْكُ"
+    },
+    "example2": {
+      "arabic": "وَالْمَلَائِكَةُ صَافُّونَ وَيُسَبِّحُونَ بِحَمْدِ رَبِّهِمْ",
+      "english": "And the angels stand in rows glorifying the praise of their Lord",
+      "highlight": "وَالْمَلَائِكَةُ"
+    }
   },
   "286": {
     "category": "Deen (Reverse)",
@@ -4153,7 +5063,12 @@
       "قوة",
       "شَكُور"
     ],
-    "correct_answer": "عَرْش"
+    "correct_answer": "عَرْش",
+    "example": {
+      "arabic": "رَبُّ الْعَرْشِ الْعَظِيمِ",
+      "english": "Lord of the Magnificent Throne",
+      "highlight": "الْعَرْشِ"
+    }
   },
   "287": {
     "category": "Deen (Reverse)",
@@ -4164,7 +5079,12 @@
       "قران",
       "غَيْب"
     ],
-    "correct_answer": "غَيْب"
+    "correct_answer": "غَيْب",
+    "example": {
+      "arabic": "عَالِمُ الْغَيْبِ وَالشَّهَادَةِ الْكَبِيرُ الْمُتَعَالِ",
+      "english": "Knower of the unseen and witnessed, the Grand, the Most High",
+      "highlight": "الْغَيْبِ"
+    }
   },
   "288": {
     "category": "Deen (Reverse)",
@@ -4175,7 +5095,17 @@
       "عَلِمَ",
       "عَذَاب"
     ],
-    "correct_answer": "شَهَادَة"
+    "correct_answer": "شَهَادَة",
+    "example": {
+      "arabic": "عَالِمُ الْغَيْبِ وَالشَّهَادَةِ الْكَبِيرُ الْمُتَعَالِ",
+      "english": "Knower of the unseen and the witnessed, the Grand, the Exalted",
+      "highlight": "الشَّهَادَةِ"
+    },
+    "example2": {
+      "arabic": "وَمَا اللَّهُ بِغَافِلٍ عَمَّا تَعْمَلُونَ",
+      "english": "And Allah is not unaware of what you do",
+      "highlight": "شَهِيدٌ"
+    }
   },
   "289": {
     "category": "Deeds (Reverse)",
@@ -4186,7 +5116,17 @@
       "أَعْمَال",
       "حَلِيم"
     ],
-    "correct_answer": "أَعْمَال"
+    "correct_answer": "أَعْمَال",
+    "example": {
+      "arabic": "حَبِطَتْ أَعْمَالُهُمْ فِي الدُّنْيَا وَالْآخِرَةِ",
+      "english": "Their deeds have become worthless in this world and the Hereafter",
+      "highlight": "أَعْمَالُهُمْ"
+    },
+    "example2": {
+      "arabic": "أُولَٰئِكَ الَّذِينَ حَبِطَتْ أَعْمَالُهُمْ فِي الدُّنْيَا وَالْآخِرَةِ",
+      "english": "Those are the ones whose deeds have become worthless in this world and the Hereafter",
+      "highlight": "أَعْمَالُهُمْ"
+    }
   },
   "290": {
     "category": "Deeds (Reverse)",
@@ -4197,7 +5137,17 @@
       "روح",
       "فَقِهَ"
     ],
-    "correct_answer": "حسَنَة"
+    "correct_answer": "حسَنَة",
+    "example": {
+      "arabic": "مَن جَاءَ بِالْحَسَنَةِ فَلَهُ عَشْرُ أَمْثَالِهَا",
+      "english": "Whoever comes with a good deed will have ten times its like",
+      "highlight": "بِالْحَسَنَةِ"
+    },
+    "example2": {
+      "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً",
+      "english": "Our Lord give us good in this world and good in the Hereafter",
+      "highlight": "حَسَنَةً"
+    }
   },
   "291": {
     "category": "Deeds (Reverse)",
@@ -4208,7 +5158,12 @@
       "عَرَفَ",
       "عَلِيم"
     ],
-    "correct_answer": "سَيِّئَة"
+    "correct_answer": "سَيِّئَة",
+    "example": {
+      "arabic": "وَجَزَاءُ سَيِّئَةٍ سَيِّئَةٌ مِّثْلُهَا",
+      "english": "The recompense of an evil deed is an evil deed like it",
+      "highlight": "سَيِّئَةٍ"
+    }
   },
   "292": {
     "category": "Deeds (Reverse)",
@@ -4219,7 +5174,17 @@
       "خَيْر",
       "مع"
     ],
-    "correct_answer": "خَيْر"
+    "correct_answer": "خَيْر",
+    "example": {
+      "arabic": "وَمَا تَفْعَلُوا مِنْ خَيْرٍ يَعْلَمْهُ اللَّهُ",
+      "english": "And whatever good you do, Allah knows it",
+      "highlight": "خَيْرٍ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَعْمَلْ خَيْرًا فَإِنَّ اللَّهَ كَانَ شَاكِرًا عَلِيمًا",
+      "english": "And whoever does good — then indeed Allah is Appreciative, Knowing",
+      "highlight": "خَيْرًا"
+    }
   },
   "293": {
     "category": "Deeds (Reverse)",
@@ -4230,7 +5195,17 @@
       "حَتَّى",
       "تَرَكَ"
     ],
-    "correct_answer": "شر"
+    "correct_answer": "شر",
+    "example": {
+      "arabic": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ",
+      "english": "And whoever does an atom's weight of evil will see it",
+      "highlight": "شَرًّا"
+    },
+    "example2": {
+      "arabic": "وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ",
+      "english": "And whoever does an atom's weight of evil will see it",
+      "highlight": "شَرًّا"
+    }
   },
   "294": {
     "category": "Deeds (Reverse)",
@@ -4241,7 +5216,17 @@
       "إِثْم",
       "رِيح"
     ],
-    "correct_answer": "إِثْم"
+    "correct_answer": "إِثْم",
+    "example": {
+      "arabic": "وَلَا تَعَاوَنُوا عَلَى الْإِثْمِ وَالْعُدْوَانِ",
+      "english": "And do not cooperate in sin and aggression",
+      "highlight": "الْإِثْمِ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَكْسِبْ إِثْمًا فَإِنَّمَا يَكْسِبُهُ عَلَىٰ نَفْسِهِ",
+      "english": "Whoever earns sin only earns it against himself",
+      "highlight": "إِثْمًا"
+    }
   },
   "295": {
     "category": "Deeds (Reverse)",
@@ -4252,7 +5237,17 @@
       "بَصِير",
       "أَعْلَم"
     ],
-    "correct_answer": "ذَنْب"
+    "correct_answer": "ذَنْب",
+    "example": {
+      "arabic": "وَمَن يَغْفِرُ الذُّنُوبَ إِلَّا اللَّهُ",
+      "english": "And who forgives sins except Allah",
+      "highlight": "الذُّنُوبَ"
+    },
+    "example2": {
+      "arabic": "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا",
+      "english": "Our Lord we have believed so forgive us our sins",
+      "highlight": "ذُنُوبَنَا"
+    }
   },
   "296": {
     "category": "Deeds (Reverse)",
@@ -4263,7 +5258,12 @@
       "حرام",
       "ذَلِكَ"
     ],
-    "correct_answer": "حرام"
+    "correct_answer": "حرام",
+    "example": {
+      "arabic": "وَلَا تَقْرَبُوا الزِّنَا إِنَّهُ كَانَ فَاحِشَةً وَسَاءَ سَبِيلًا",
+      "english": "And do not approach immorality — it is ever an immorality and is evil as a way",
+      "highlight": "حَرَامًا"
+    }
   },
   "297": {
     "category": "Deeds (Reverse)",
@@ -4274,7 +5274,17 @@
       "صلوة",
       "خَيْر"
     ],
-    "correct_answer": "فَضْل"
+    "correct_answer": "فَضْل",
+    "example": {
+      "arabic": "وَاللَّهُ ذُو الْفَضْلِ الْعَظِيمِ",
+      "english": "And Allah is the possessor of great bounty",
+      "highlight": "الْفَضْلِ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ يُضَاعِفُ لِمَن يَشَاءُ وَاللَّهُ وَاسِعٌ عَلِيمٌ",
+      "english": "And Allah multiplies for whom He wills — Allah is Encompassing, Knowing",
+      "highlight": "فَضْلِهِ"
+    }
   },
   "298": {
     "category": "Deeds (Reverse)",
@@ -4285,7 +5295,17 @@
       "هُوَ",
       "شَهَادَة"
     ],
-    "correct_answer": "نِعْمَة"
+    "correct_answer": "نِعْمَة",
+    "example": {
+      "arabic": "وَإِن تَعُدُّوا نِعْمَةَ اللَّهِ لَا تُحْصُوهَا",
+      "english": "And if you count Allah's favors you could not enumerate them",
+      "highlight": "نِعْمَةَ"
+    },
+    "example2": {
+      "arabic": "وَأَسْبَغَ عَلَيْكُمْ نِعَمَهُ ظَاهِرَةً وَبَاطِنَةً",
+      "english": "And He has given you His blessings both apparent and hidden",
+      "highlight": "نِعَمَهُ"
+    }
   },
   "299": {
     "category": "Deeds (Reverse)",
@@ -4296,7 +5316,12 @@
       "ماء",
       "سَحَرَ"
     ],
-    "correct_answer": "ماء"
+    "correct_answer": "ماء",
+    "example": {
+      "arabic": "وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ",
+      "english": "And We made from water every living thing",
+      "highlight": "الْمَاءِ"
+    }
   },
   "300": {
     "category": "Deeds (Reverse)",
@@ -4307,7 +5332,17 @@
       "بَصَر",
       "رِيح"
     ],
-    "correct_answer": "ملك"
+    "correct_answer": "ملك",
+    "example": {
+      "arabic": "قُلِ اللَّهُمَّ مَالِكَ الْمُلْكِ تُؤْتِي الْمُلْكَ مَن تَشَاءُ",
+      "english": "Say: O Allah, Owner of Sovereignty — You give sovereignty to whom You will",
+      "highlight": "الْمُلْكِ"
+    },
+    "example2": {
+      "arabic": "تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+      "english": "Blessed is He in whose hand is dominion and He is over all things competent",
+      "highlight": "الْمُلْكُ"
+    }
   },
   "301": {
     "category": "Relatives (Reverse)",
@@ -4318,7 +5353,17 @@
       "بَصَر",
       "أُمّ"
     ],
-    "correct_answer": "أُمّ"
+    "correct_answer": "أُمّ",
+    "example": {
+      "arabic": "وَوَصَّيْنَا الْإِنسَانَ بِوَالِدَيْهِ حَمَلَتْهُ أُمُّهُ وَهْنًا عَلَىٰ وَهْنٍ",
+      "english": "We enjoined man to be dutiful to his parents — his mother carried him in weakness",
+      "highlight": "أُمُّهُ"
+    },
+    "example2": {
+      "arabic": "وَبِالْوَالِدَيْنِ إِحْسَانًا إِمَّا يَبْلُغَنَّ عِندَكَ الْكِبَرَ أَحَدُهُمَا",
+      "english": "And be good to parents — if one of them reaches old age with you",
+      "highlight": "أُمُّهُ"
+    }
   },
   "302": {
     "category": "Relatives (Reverse)",
@@ -4329,7 +5374,12 @@
       "هُمَا",
       "أب"
     ],
-    "correct_answer": "أب"
+    "correct_answer": "أب",
+    "example": {
+      "arabic": "وَإِذْ قَالَ إِبْرَاهِيمُ لِأَبِيهِ آزَرَ",
+      "english": "And when Abraham said to his father Azar",
+      "highlight": "لِأَبِيهِ"
+    }
   },
   "303": {
     "category": "Relatives (Reverse)",
@@ -4340,7 +5390,17 @@
       "فَضْل",
       "زوج"
     ],
-    "correct_answer": "زوج"
+    "correct_answer": "زوج",
+    "example": {
+      "arabic": "وَخَلَقَ مِنْهَا زَوْجَهَا وَبَثَّ مِنْهُمَا رِجَالًا كَثِيرًا وَنِسَاءً",
+      "english": "And created from it its mate and dispersed many men and women from them",
+      "highlight": "زَوْجَهَا"
+    },
+    "example2": {
+      "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا يَحِلُّ لَكُمْ أَن تَرِثُوا النِّسَاءَ كَرْهًا",
+      "english": "O believers it is not lawful for you to inherit women by compulsion",
+      "highlight": "أَزْوَاجًا"
+    }
   },
   "304": {
     "category": "Relatives (Reverse)",
@@ -4351,7 +5411,12 @@
       "رَجُل",
       "خَبِير"
     ],
-    "correct_answer": "رَجُل"
+    "correct_answer": "رَجُل",
+    "example": {
+      "arabic": "وَجَاءَ رَجُلٌ مِّنْ أَقْصَى الْمَدِينَةِ يَسْعَىٰ",
+      "english": "And a man came running from the far end of the city",
+      "highlight": "رَجُلٌ"
+    }
   },
   "305": {
     "category": "Relatives (Reverse)",
@@ -4362,7 +5427,12 @@
       "قَمَر",
       "امْرَأَة"
     ],
-    "correct_answer": "امْرَأَة"
+    "correct_answer": "امْرَأَة",
+    "example": {
+      "arabic": "وَضَرَبَ اللَّهُ مَثَلًا لِّلَّذِينَ آمَنُوا امْرَأَتَ فِرْعَوْنَ",
+      "english": "Allah presents the example of the wife of Pharaoh for the believers",
+      "highlight": "امْرَأَتَ"
+    }
   },
   "306": {
     "category": "Relatives (Reverse)",
@@ -4373,7 +5443,17 @@
       "قَرِيب",
       "وَلَد"
     ],
-    "correct_answer": "وَلَد"
+    "correct_answer": "وَلَد",
+    "example": {
+      "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+      "english": "He neither begets nor is He born",
+      "highlight": "يَلِدْ"
+    },
+    "example2": {
+      "arabic": "الْمَالُ وَالْبَنُونَ زِينَةُ الْحَيَاةِ الدُّنْيَا",
+      "english": "Wealth and children are the adornments of worldly life",
+      "highlight": "الْبَنُونَ"
+    }
   },
   "307": {
     "category": "Relatives (Reverse)",
@@ -4384,7 +5464,12 @@
       "قِيَامَة",
       "شَهِدَ"
     ],
-    "correct_answer": "ابن"
+    "correct_answer": "ابن",
+    "example": {
+      "arabic": "مَا كَانَ مُحَمَّدٌ أَبَا أَحَدٍ مِّن رِّجَالِكُمْ",
+      "english": "Muhammad is not the father of any of your men",
+      "highlight": "ابْنَ"
+    }
   },
   "308": {
     "category": "Relatives (Reverse)",
@@ -4395,7 +5480,12 @@
       "آية",
       "لَمْ"
     ],
-    "correct_answer": "أخ"
+    "correct_answer": "أخ",
+    "example": {
+      "arabic": "إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ فَأَصْلِحُوا بَيْنَ أَخَوَيْكُمْ",
+      "english": "The believers are but brothers so make peace between your brothers",
+      "highlight": "إِخْوَةٌ"
+    }
   },
   "309": {
     "category": "Self (Reverse)",
@@ -4406,7 +5496,12 @@
       "وجه",
       "رَحِيم"
     ],
-    "correct_answer": "وجه"
+    "correct_answer": "وجه",
+    "example": {
+      "arabic": "فَأَيْنَمَا تُوَلُّوا فَثَمَّ وَجْهُ اللَّهِ",
+      "english": "So wherever you turn — there is the face of Allah",
+      "highlight": "وَجْهُ"
+    }
   },
   "310": {
     "category": "Self (Reverse)",
@@ -4417,7 +5512,12 @@
       "بلى",
       "سَيِّئَة"
     ],
-    "correct_answer": "عَيْن"
+    "correct_answer": "عَيْن",
+    "example": {
+      "arabic": "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا",
+      "english": "And be patient for the judgment of your Lord for you are under Our eyes",
+      "highlight": "بِأَعْيُنِنَا"
+    }
   },
   "311": {
     "category": "Self (Reverse)",
@@ -4428,7 +5528,17 @@
       "عَذَاب",
       "ك"
     ],
-    "correct_answer": "بَصَر"
+    "correct_answer": "بَصَر",
+    "example": {
+      "arabic": "لَا تُدْرِكُهُ الْأَبْصَارُ وَهُوَ يُدْرِكُ الْأَبْصَارَ",
+      "english": "Vision perceives Him not but He perceives all vision",
+      "highlight": "الْأَبْصَارُ"
+    },
+    "example2": {
+      "arabic": "فَكَشَفْنَا عَنكَ غِطَاءَكَ فَبَصَرُكَ الْيَوْمَ حَدِيدٌ",
+      "english": "So We have removed your cover and your sight today is sharp",
+      "highlight": "فَبَصَرُكَ"
+    }
   },
   "312": {
     "category": "Self (Reverse)",
@@ -4439,7 +5549,12 @@
       "صَدَقَ",
       "عَلِيم"
     ],
-    "correct_answer": "أَفْوَاه"
+    "correct_answer": "أَفْوَاه",
+    "example": {
+      "arabic": "يَقُولُونَ بِأَفْوَاهِهِم مَّا لَيْسَ فِي قُلُوبِهِمْ",
+      "english": "They say with their mouths what is not in their hearts",
+      "highlight": "بِأَفْوَاهِهِم"
+    }
   },
   "313": {
     "category": "Self (Reverse)",
@@ -4450,7 +5565,17 @@
       "إلى",
       "جَعَلَ"
     ],
-    "correct_answer": "لِسَان"
+    "correct_answer": "لِسَان",
+    "example": {
+      "arabic": "وَمِنْ آيَاتِهِ خَلْقُ السَّمَاوَاتِ وَالْأَرْضِ وَاخْتِلَافُ أَلْسِنَتِكُمْ",
+      "english": "And of His signs is the creation of the heavens and the diversity of your languages",
+      "highlight": "أَلْسِنَتِكُمْ"
+    },
+    "example2": {
+      "arabic": "وَجَعَلْنَا لَهُ لِسَانَ صِدْقٍ عَلِيًّا",
+      "english": "And We gave him a lofty mention of truthfulness",
+      "highlight": "لِسَانَ"
+    }
   },
   "314": {
     "category": "Self (Reverse)",
@@ -4461,7 +5586,12 @@
       "إله",
       "وَكِيل"
     ],
-    "correct_answer": "قَلب"
+    "correct_answer": "قَلب",
+    "example": {
+      "arabic": "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
+      "english": "Verily in the remembrance of Allah do hearts find rest",
+      "highlight": "الْقُلُوبُ"
+    }
   },
   "315": {
     "category": "Self (Reverse)",
@@ -4472,7 +5602,17 @@
       "صَدْر",
       "شر"
     ],
-    "correct_answer": "صَدْر"
+    "correct_answer": "صَدْر",
+    "example": {
+      "arabic": "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
+      "english": "Did We not expand for you your breast",
+      "highlight": "صَدْرَكَ"
+    },
+    "example2": {
+      "arabic": "وَنَعْلَمُ مَا تُوَسْوِسُ بِهِ نَفْسُهُ وَنَحْنُ أَقْرَبُ إِلَيْهِ",
+      "english": "And We know what his soul whispers — We are closer to him than his jugular vein",
+      "highlight": "صُدُورِ"
+    }
   },
   "316": {
     "category": "Self (Reverse)",
@@ -4483,7 +5623,12 @@
       "يد",
       "كتاب"
     ],
-    "correct_answer": "يد"
+    "correct_answer": "يد",
+    "example": {
+      "arabic": "يَدُ اللَّهِ فَوْقَ أَيْدِيهِمْ",
+      "english": "The hand of Allah is over their hands",
+      "highlight": "يَدُ"
+    }
   },
   "317": {
     "category": "Self (Reverse)",
@@ -4494,7 +5639,12 @@
       "سَمِيع",
       "ساعة"
     ],
-    "correct_answer": "رجل"
+    "correct_answer": "رجل",
+    "example": {
+      "arabic": "وَاضْرِبْ بِرِجْلِكَ هَٰذَا مُغْتَسَلٌ بَارِدٌ وَشَرَابٌ",
+      "english": "And strike with your foot — this is a cool spring to wash in and a drink",
+      "highlight": "بِرِجْلِكَ"
+    }
   },
   "318": {
     "category": "Self (Reverse)",
@@ -4505,7 +5655,12 @@
       "ملك",
       "نَفْس"
     ],
-    "correct_answer": "نَفْس"
+    "correct_answer": "نَفْس",
+    "example": {
+      "arabic": "لَا تُكَلَّفُ نَفْسٌ إِلَّا وُسْعَهَا",
+      "english": "No soul is burdened beyond its capacity",
+      "highlight": "نَفْسٌ"
+    }
   },
   "319": {
     "category": "Self (Reverse)",
@@ -4516,7 +5671,12 @@
       "كَبِير",
       "روح"
     ],
-    "correct_answer": "روح"
+    "correct_answer": "روح",
+    "example": {
+      "arabic": "وَيَسْأَلُونَكَ عَنِ الرُّوحِ قُلِ الرُّوحُ مِنْ أَمْرِ رَبِّي",
+      "english": "They ask you about the spirit; say: the spirit is from the command of my Lord",
+      "highlight": "الرُّوحِ"
+    }
   },
   "320": {
     "category": "Self (Reverse)",
@@ -4527,7 +5687,12 @@
       "قوة",
       "رَحِيم"
     ],
-    "correct_answer": "قوة"
+    "correct_answer": "قوة",
+    "example": {
+      "arabic": "وَأَعِدُّوا لَهُم مَّا اسْتَطَعْتُم مِّن قُوَّةٍ",
+      "english": "And prepare against them whatever you are able of strength",
+      "highlight": "قُوَّةٍ"
+    }
   },
   "321": {
     "category": "Verbs (Reverse)",
@@ -4538,7 +5703,12 @@
       "قَدَرَ",
       "حسَنَة"
     ],
-    "correct_answer": "فَعَلَ"
+    "correct_answer": "فَعَلَ",
+    "example": {
+      "arabic": "وَمَا تَفْعَلُوا مِنْ خَيْرٍ فَإِنَّ اللَّهَ بِهِ عَلِيمٌ",
+      "english": "And whatever good you do — indeed Allah is Knowing of it",
+      "highlight": "تَفْعَلُوا"
+    }
   },
   "322": {
     "category": "Verbs (Reverse)",
@@ -4549,7 +5719,12 @@
       "رَحْمٰن",
       "فَتَحَ"
     ],
-    "correct_answer": "فَتَحَ"
+    "correct_answer": "فَتَحَ",
+    "example": {
+      "arabic": "إِنَّا فَتَحْنَا لَكَ فَتْحًا مُّبِينًا",
+      "english": "Indeed We have granted you a clear victory",
+      "highlight": "فَتَحْنَا"
+    }
   },
   "323": {
     "category": "Verbs (Reverse)",
@@ -4560,7 +5735,12 @@
       "قَمَر",
       "رَحْمٰن"
     ],
-    "correct_answer": "بَعَثَ"
+    "correct_answer": "بَعَثَ",
+    "example": {
+      "arabic": "ثُمَّ بَعَثْنَا مِن بَعْدِهِم مُّوسَىٰ وَهَارُونَ",
+      "english": "Then We sent after them Moses and Aaron",
+      "highlight": "بَعَثْنَا"
+    }
   },
   "324": {
     "category": "Verbs (Reverse)",
@@ -4571,7 +5751,12 @@
       "خَيْر",
       "أَشَدّ"
     ],
-    "correct_answer": "جَعَلَ"
+    "correct_answer": "جَعَلَ",
+    "example": {
+      "arabic": "وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ",
+      "english": "And We made from water every living thing",
+      "highlight": "وَجَعَلْنَا"
+    }
   },
   "325": {
     "category": "Verbs (Reverse)",
@@ -4582,7 +5767,12 @@
       "لَنْ",
       "على"
     ],
-    "correct_answer": "جَمَعَ"
+    "correct_answer": "جَمَعَ",
+    "example": {
+      "arabic": "يَجْمَعُكُمْ لِيَوْمِ الْقِيَامَةِ لَا رَيْبَ فِيهِ",
+      "english": "He will gather you for the Day of Resurrection about which there is no doubt",
+      "highlight": "يَجْمَعُكُمْ"
+    }
   },
   "326": {
     "category": "Verbs (Reverse)",
@@ -4593,7 +5783,12 @@
       "ظُلُمَات",
       "ذَهَبَ"
     ],
-    "correct_answer": "ذَهَبَ"
+    "correct_answer": "ذَهَبَ",
+    "example": {
+      "arabic": "إِن يَشَأْ يُذْهِبْكُمْ وَيَأْتِ بِخَلْقٍ جَدِيدٍ",
+      "english": "If He wills He could take you away and bring a new creation",
+      "highlight": "يُذْهِبْكُمْ"
+    }
   },
   "327": {
     "category": "Verbs (Reverse)",
@@ -4604,7 +5799,12 @@
       "ب",
       "رَفَعَ"
     ],
-    "correct_answer": "رَفَعَ"
+    "correct_answer": "رَفَعَ",
+    "example": {
+      "arabic": "وَرَفَعَ بَعْضَهُمْ دَرَجَاتٍ",
+      "english": "And He raised some of them in degrees",
+      "highlight": "وَرَفَعَ"
+    }
   },
   "328": {
     "category": "Verbs (Reverse)",
@@ -4615,7 +5815,12 @@
       "سَحَرَ",
       "هذا"
     ],
-    "correct_answer": "سَحَرَ"
+    "correct_answer": "سَحَرَ",
+    "example": {
+      "arabic": "قَالُوا إِنَّمَا أَنتَ مِنَ الْمُسَحَّرِينَ",
+      "english": "They said: You are only of those who have been bewitched",
+      "highlight": "الْمُسَحَّرِينَ"
+    }
   },
   "329": {
     "category": "Verbs (Reverse)",
@@ -4626,7 +5831,12 @@
       "سَمَاء",
       "صَلَحَ"
     ],
-    "correct_answer": "صَلَحَ"
+    "correct_answer": "صَلَحَ",
+    "example": {
+      "arabic": "وَمَن يَعْمَلْ مِنَ الصَّالِحَاتِ مِن ذَكَرٍ أَوْ أُنثَىٰ",
+      "english": "Whoever does righteous deeds whether male or female",
+      "highlight": "الصَّالِحَاتِ"
+    }
   },
   "330": {
     "category": "Verbs (Reverse)",
@@ -4637,7 +5847,12 @@
       "قَلب",
       "لَعَنَ"
     ],
-    "correct_answer": "لَعَنَ"
+    "correct_answer": "لَعَنَ",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ لَعَنَ الْكَافِرِينَ وَأَعَدَّ لَهُمْ سَعِيرًا",
+      "english": "Indeed Allah has cursed the disbelievers and prepared for them a Blaze",
+      "highlight": "لَعَنَ"
+    }
   },
   "331": {
     "category": "Verbs (Reverse)",
@@ -4648,7 +5863,12 @@
       "مَنَعَ",
       "حَكِيم"
     ],
-    "correct_answer": "مَنَعَ"
+    "correct_answer": "مَنَعَ",
+    "example": {
+      "arabic": "وَمَا مَنَعَ النَّاسَ أَن يُؤْمِنُوا إِذْ جَاءَهُمُ الْهُدَىٰ",
+      "english": "What prevented people from believing when guidance came to them",
+      "highlight": "مَنَعَ"
+    }
   },
   "332": {
     "category": "Verbs (Reverse)",
@@ -4659,7 +5879,12 @@
       "رجل",
       "نَفَعَ"
     ],
-    "correct_answer": "نَفَعَ"
+    "correct_answer": "نَفَعَ",
+    "example": {
+      "arabic": "لَا يَنفَعُ نَفْسًا إِيمَانُهَا لَمْ تَكُنْ آمَنَتْ مِن قَبْلُ",
+      "english": "No soul's belief will benefit it if it had not believed before",
+      "highlight": "يَنفَعُ"
+    }
   },
   "333": {
     "category": "Verbs (Reverse)",
@@ -4670,7 +5895,17 @@
       "رَبّ",
       "ظُلُمَات"
     ],
-    "correct_answer": "نَصَرَ"
+    "correct_answer": "نَصَرَ",
+    "example": {
+      "arabic": "إِن يَنصُرْكُمُ اللَّهُ فَلَا غَالِبَ لَكُمْ",
+      "english": "If Allah helps you — none can overcome you",
+      "highlight": "يَنصُرْكُمُ"
+    },
+    "example2": {
+      "arabic": "وَمَا النَّصْرُ إِلَّا مِنْ عِندِ اللَّهِ",
+      "english": "And victory is not except from Allah",
+      "highlight": "النَّصْرُ"
+    }
   },
   "334": {
     "category": "Verbs (Reverse)",
@@ -4681,7 +5916,12 @@
       "سَبَقَ",
       "خَبِير"
     ],
-    "correct_answer": "بلَغَ"
+    "correct_answer": "بلَغَ",
+    "example": {
+      "arabic": "فَلَمَّا بَلَغَ أَشُدَّهُ وَاسْتَوَىٰ آتَيْنَاهُ حُكْمًا وَعِلْمًا",
+      "english": "When he reached maturity and became full grown We gave him wisdom and knowledge",
+      "highlight": "بَلَغَ"
+    }
   },
   "335": {
     "category": "Verbs (Reverse)",
@@ -4692,7 +5932,12 @@
       "تَرَكَ",
       "سَيِّئَة"
     ],
-    "correct_answer": "تَرَكَ"
+    "correct_answer": "تَرَكَ",
+    "example": {
+      "arabic": "وَتَرَكَهُمْ فِي ظُلُمَاتٍ لَّا يُبْصِرُونَ",
+      "english": "And He left them in darkness — not seeing",
+      "highlight": "وَتَرَكَهُمْ"
+    }
   },
   "336": {
     "category": "Verbs (Reverse)",
@@ -4703,7 +5948,12 @@
       "أَنْتُنَّ",
       "إِثْم"
     ],
-    "correct_answer": "حَشَرَ"
+    "correct_answer": "حَشَرَ",
+    "example": {
+      "arabic": "وَيَوْمَ نَحْشُرُهُمْ جَمِيعًا ثُمَّ نَقُولُ لِلَّذِينَ أَشْرَكُوا",
+      "english": "The day We will gather them all — then say to those who associated partners",
+      "highlight": "نَحْشُرُهُمْ"
+    }
   },
   "337": {
     "category": "Verbs (Reverse)",
@@ -4714,7 +5964,17 @@
       "خَبِير",
       "حَكَمَ"
     ],
-    "correct_answer": "حَكَمَ"
+    "correct_answer": "حَكَمَ",
+    "example": {
+      "arabic": "وَاللَّهُ يَحْكُمُ لَا مُعَقِّبَ لِحُكْمِهِ",
+      "english": "And Allah judges — there is no adjuster of His judgment",
+      "highlight": "يَحْكُمُ"
+    },
+    "example2": {
+      "arabic": "إِنِ الْحُكْمُ إِلَّا لِلَّهِ يَقُصُّ الْحَقَّ",
+      "english": "Legislation is not but for Allah — He relates the truth",
+      "highlight": "الْحُكْمُ"
+    }
   },
   "338": {
     "category": "Verbs (Reverse)",
@@ -4725,7 +5985,12 @@
       "خَرَجَ",
       "مِنْ"
     ],
-    "correct_answer": "خَرَجَ"
+    "correct_answer": "خَرَجَ",
+    "example": {
+      "arabic": "فَخَرَجَ عَلَىٰ قَوْمِهِ مِنَ الْمِحْرَابِ",
+      "english": "So he came out to his people from the sanctuary",
+      "highlight": "فَخَرَجَ"
+    }
   },
   "339": {
     "category": "Verbs (Reverse)",
@@ -4736,7 +6001,12 @@
       "عَقَلَ",
       "خَرَجَ"
     ],
-    "correct_answer": "خَلَدَ"
+    "correct_answer": "خَلَدَ",
+    "example": {
+      "arabic": "يَحْسَبُ أَنَّ مَالَهُ أَخْلَدَهُ",
+      "english": "He thinks his wealth will make him live forever",
+      "highlight": "أَخْلَدَهُ"
+    }
   },
   "340": {
     "category": "Verbs (Reverse)",
@@ -4747,7 +6017,17 @@
       "تِلْكَ",
       "كَلا"
     ],
-    "correct_answer": "خَلَقَ"
+    "correct_answer": "خَلَقَ",
+    "example": {
+      "arabic": "خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ وَجَعَلَ الظُّلُمَاتِ وَالنُّورَ",
+      "english": "He created the heavens and earth and made the darkness and light",
+      "highlight": "خَلَقَ"
+    },
+    "example2": {
+      "arabic": "وَلَقَدْ خَلَقْنَاكُمْ ثُمَّ صَوَّرْنَاكُمْ",
+      "english": "And We created you then shaped you",
+      "highlight": "خَلَقْنَاكُمْ"
+    }
   },
   "341": {
     "category": "Verbs (Reverse)",
@@ -4758,7 +6038,12 @@
       "ملك",
       "أخ"
     ],
-    "correct_answer": "دَخَلَ"
+    "correct_answer": "دَخَلَ",
+    "example": {
+      "arabic": "ادْخُلُوهَا بِسَلَامٍ آمِنِينَ",
+      "english": "Enter it in peace, secure",
+      "highlight": "ادْخُلُوهَا"
+    }
   },
   "342": {
     "category": "Verbs (Reverse)",
@@ -4769,7 +6054,17 @@
       "ذَكَرَ",
       "تِلْكَ"
     ],
-    "correct_answer": "ذَكَرَ"
+    "correct_answer": "ذَكَرَ",
+    "example": {
+      "arabic": "فَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ",
+      "english": "So remember Allah often that you may succeed",
+      "highlight": "فَاذْكُرُوا"
+    },
+    "example2": {
+      "arabic": "وَاذْكُر رَّبَّكَ فِي نَفْسِكَ تَضَرُّعًا وَخِيفَةً",
+      "english": "And remember your Lord within yourself humbly and with fear",
+      "highlight": "وَاذْكُر"
+    }
   },
   "343": {
     "category": "Verbs (Reverse)",
@@ -4780,7 +6075,12 @@
       "فَسَقَ",
       "نَعَمْ"
     ],
-    "correct_answer": "رَزَقَ"
+    "correct_answer": "رَزَقَ",
+    "example": {
+      "arabic": "وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ",
+      "english": "And He will provide for him from where he does not expect",
+      "highlight": "يَرْزُقْهُ"
+    }
   },
   "344": {
     "category": "Verbs (Reverse)",
@@ -4791,7 +6091,17 @@
       "لَيْل",
       "فِي"
     ],
-    "correct_answer": "سَجَدَ"
+    "correct_answer": "سَجَدَ",
+    "example": {
+      "arabic": "وَلِلَّهِ يَسْجُدُ مَن فِي السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "To Allah prostrates whoever is in the heavens and earth",
+      "highlight": "يَسْجُدُ"
+    },
+    "example2": {
+      "arabic": "أَلَا يَسْجُدُوا لِلَّهِ الَّذِي يُخْرِجُ الْخَبْءَ فِي السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "That they do not prostrate to Allah who brings forth what is hidden in the heavens",
+      "highlight": "يَسْجُدُوا"
+    }
   },
   "345": {
     "category": "Verbs (Reverse)",
@@ -4802,7 +6112,12 @@
       "جَمَعَ",
       "أَرْض"
     ],
-    "correct_answer": "شَعَرَ"
+    "correct_answer": "شَعَرَ",
+    "example": {
+      "arabic": "وَمَا يَشْعُرُونَ أَيَّانَ يُبْعَثُونَ",
+      "english": "And they do not perceive when they will be resurrected",
+      "highlight": "يَشْعُرُونَ"
+    }
   },
   "346": {
     "category": "Verbs (Reverse)",
@@ -4813,7 +6128,17 @@
       "تَرَكَ",
       "شَكَرَ"
     ],
-    "correct_answer": "شَكَرَ"
+    "correct_answer": "شَكَرَ",
+    "example": {
+      "arabic": "لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ",
+      "english": "If you are grateful I will increase you; if you deny — My punishment is severe",
+      "highlight": "شَكَرْتُمْ"
+    },
+    "example2": {
+      "arabic": "وَسَيَجْزِي اللَّهُ الشَّاكِرِينَ",
+      "english": "And Allah will reward the grateful",
+      "highlight": "الشَّاكِرِينَ"
+    }
   },
   "347": {
     "category": "Verbs (Reverse)",
@@ -4824,7 +6149,12 @@
       "بَصَر",
       "حَكِيم"
     ],
-    "correct_answer": "صَدَقَ"
+    "correct_answer": "صَدَقَ",
+    "example": {
+      "arabic": "وَمَنْ أَصْدَقُ مِنَ اللَّهِ قِيلًا",
+      "english": "And who is more truthful than Allah in statement",
+      "highlight": "أَصْدَقُ"
+    }
   },
   "348": {
     "category": "Verbs (Reverse)",
@@ -4835,7 +6165,17 @@
       "عَبَدَ",
       "خَبِير"
     ],
-    "correct_answer": "عَبَدَ"
+    "correct_answer": "عَبَدَ",
+    "example": {
+      "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "english": "You alone we worship and You alone we ask for help",
+      "highlight": "نَعْبُدُ"
+    },
+    "example2": {
+      "arabic": "وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ",
+      "english": "I did not create jinn and mankind except to worship Me",
+      "highlight": "لِيَعْبُدُونِ"
+    }
   },
   "349": {
     "category": "Verbs (Reverse)",
@@ -4846,7 +6186,12 @@
       "كَسَبَ",
       "فَسَقَ"
     ],
-    "correct_answer": "فَسَقَ"
+    "correct_answer": "فَسَقَ",
+    "example": {
+      "arabic": "وَمَا يُضِلُّ بِهِ إِلَّا الْفَاسِقِينَ",
+      "english": "And He misleads by it only the defiantly disobedient",
+      "highlight": "الْفَاسِقِينَ"
+    }
   },
   "350": {
     "category": "Verbs (Reverse)",
@@ -4857,7 +6202,12 @@
       "وَلَد",
       "قَتَلَ"
     ],
-    "correct_answer": "قَتَلَ"
+    "correct_answer": "قَتَلَ",
+    "example": {
+      "arabic": "مَن قَتَلَ نَفْسًا بِغَيْرِ نَفْسٍ فَكَأَنَّمَا قَتَلَ النَّاسَ جَمِيعًا",
+      "english": "Whoever kills a soul without right — it is as if he killed all mankind",
+      "highlight": "قَتَلَ"
+    }
   },
   "351": {
     "category": "Verbs (Reverse)",
@@ -4868,7 +6218,12 @@
       "الَّذِينَ",
       "هُوَ"
     ],
-    "correct_answer": "قَعَدَ"
+    "correct_answer": "قَعَدَ",
+    "example": {
+      "arabic": "لَا يَسْتَوِي الْقَاعِدُونَ مِنَ الْمُؤْمِنِينَ",
+      "english": "Not equal are those believers who sit at home",
+      "highlight": "الْقَاعِدُونَ"
+    }
   },
   "352": {
     "category": "Verbs (Reverse)",
@@ -4879,7 +6234,17 @@
       "رِيح",
       "أَشَدّ"
     ],
-    "correct_answer": "كَتَبَ"
+    "correct_answer": "كَتَبَ",
+    "example": {
+      "arabic": "كَتَبَ اللَّهُ لَأَغْلِبَنَّ أَنَا وَرُسُلِي",
+      "english": "Allah has written: I will surely overcome — I and My messengers",
+      "highlight": "كَتَبَ"
+    },
+    "example2": {
+      "arabic": "كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ الرَّحْمَةَ",
+      "english": "Your Lord has decreed upon Himself mercy",
+      "highlight": "كَتَبَ"
+    }
   },
   "353": {
     "category": "Verbs (Reverse)",
@@ -4890,7 +6255,12 @@
       "كَرِهَ",
       "كَتَمَ"
     ],
-    "correct_answer": "كَتَمَ"
+    "correct_answer": "كَتَمَ",
+    "example": {
+      "arabic": "إِنَّ الَّذِينَ يَكْتُمُونَ مَا أَنزَلْنَا مِنَ الْبَيِّنَاتِ",
+      "english": "Indeed those who conceal what We sent down of clear evidence",
+      "highlight": "يَكْتُمُونَ"
+    }
   },
   "354": {
     "category": "Verbs (Reverse)",
@@ -4901,7 +6271,17 @@
       "عَلِيم",
       "غَفُور"
     ],
-    "correct_answer": "كَفَرَ"
+    "correct_answer": "كَفَرَ",
+    "example": {
+      "arabic": "إِنَّ الَّذِينَ كَفَرُوا سَوَاءٌ عَلَيْهِمْ أَأَنذَرْتَهُمْ",
+      "english": "Indeed those who disbelieve — it is the same whether you warn them or not",
+      "highlight": "كَفَرُوا"
+    },
+    "example2": {
+      "arabic": "وَمَن يَكْفُرْ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ",
+      "english": "Whoever disbelieves in Allah, His angels, His books and His messengers",
+      "highlight": "يَكْفُرْ"
+    }
   },
   "355": {
     "category": "Verbs (Reverse)",
@@ -4912,7 +6292,12 @@
       "مَكَرَ",
       "حَفِظَ"
     ],
-    "correct_answer": "مَكَرَ"
+    "correct_answer": "مَكَرَ",
+    "example": {
+      "arabic": "وَمَكَرُوا وَمَكَرَ اللَّهُ وَاللَّهُ خَيْرُ الْمَاكِرِينَ",
+      "english": "They plotted and Allah plotted — and Allah is the best of plotters",
+      "highlight": "مَكَرَ"
+    }
   },
   "356": {
     "category": "Verbs (Reverse)",
@@ -4923,7 +6308,17 @@
       "فَقِهَ",
       "عَنْ"
     ],
-    "correct_answer": "نَظَرَ"
+    "correct_answer": "نَظَرَ",
+    "example": {
+      "arabic": "أَفَلَا يَنظُرُونَ إِلَى الْإِبِلِ كَيْفَ خُلِقَتْ",
+      "english": "Do they not look at the camels — how they are created",
+      "highlight": "يَنظُرُونَ"
+    },
+    "example2": {
+      "arabic": "أَفَلَا يَنظُرُونَ إِلَى السَّمَاءِ فَوْقَهُمْ",
+      "english": "Do they not look at the sky above them",
+      "highlight": "يَنظُرُونَ"
+    }
   },
   "357": {
     "category": "Verbs (Reverse)",
@@ -4934,7 +6329,12 @@
       "أب",
       "ب"
     ],
-    "correct_answer": "نَفَخَ"
+    "correct_answer": "نَفَخَ",
+    "example": {
+      "arabic": "وَنَفَخَ فِيهِ مِن رُّوحِهِ وَجَعَلَ لَكُمُ السَّمْعَ وَالْأَبْصَارَ",
+      "english": "And He breathed into him of His spirit and made for you hearing and sight",
+      "highlight": "وَنَفَخَ"
+    }
   },
   "358": {
     "category": "Verbs (Reverse)",
@@ -4945,7 +6345,12 @@
       "ضَرَبَ",
       "كَلا"
     ],
-    "correct_answer": "ضَرَبَ"
+    "correct_answer": "ضَرَبَ",
+    "example": {
+      "arabic": "وَلَقَدْ ضَرَبْنَا لِلنَّاسِ فِي هَٰذَا الْقُرْآنِ مِن كُلِّ مَثَلٍ",
+      "english": "We have set forth every kind of example in this Quran for people",
+      "highlight": "ضَرَبْنَا"
+    }
   },
   "359": {
     "category": "Verbs (Reverse)",
@@ -4956,7 +6361,12 @@
       "حَمَلَ",
       "وجه"
     ],
-    "correct_answer": "حَمَلَ"
+    "correct_answer": "حَمَلَ",
+    "example": {
+      "arabic": "وَحَمَلْنَاهُمْ فِي الْبَرِّ وَالْبَحْرِ وَرَزَقْنَاهُم",
+      "english": "We carried them on land and sea and provided for them",
+      "highlight": "وَحَمَلْنَاهُمْ"
+    }
   },
   "360": {
     "category": "Verbs (Reverse)",
@@ -4967,7 +6377,12 @@
       "عَيْن",
       "سَبَقَ"
     ],
-    "correct_answer": "سَبَقَ"
+    "correct_answer": "سَبَقَ",
+    "example": {
+      "arabic": "لَا يَسْبِقُونَهُ بِالْقَوْلِ وَهُم بِأَمْرِهِ يَعْمَلُونَ",
+      "english": "They do not precede Him in speech and they act by His command",
+      "highlight": "يَسْبِقُونَهُ"
+    }
   },
   "361": {
     "category": "Verbs (Reverse)",
@@ -4978,7 +6393,17 @@
       "ضَرَبَ",
       "دون"
     ],
-    "correct_answer": "رَجَعَ"
+    "correct_answer": "رَجَعَ",
+    "example": {
+      "arabic": "إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ",
+      "english": "Indeed to Allah we belong and to Him we return",
+      "highlight": "رَاجِعُونَ"
+    },
+    "example2": {
+      "arabic": "وَإِلَيْهِ تُرْجَعُونَ",
+      "english": "And to Him you will be returned",
+      "highlight": "تُرْجَعُونَ"
+    }
   },
   "362": {
     "category": "Verbs (Reverse)",
@@ -4989,7 +6414,17 @@
       "صَبَرَ",
       "سَيِّئَة"
     ],
-    "correct_answer": "صَبَرَ"
+    "correct_answer": "صَبَرَ",
+    "example": {
+      "arabic": "وَاصْبِرُوا إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+      "english": "And be patient; indeed Allah is with the patient",
+      "highlight": "اصْبِرُوا"
+    },
+    "example2": {
+      "arabic": "وَالصَّابِرِينَ فِي الْبَأْسَاءِ وَالضَّرَّاءِ",
+      "english": "And those who are patient in poverty and hardship",
+      "highlight": "وَالصَّابِرِينَ"
+    }
   },
   "363": {
     "category": "Verbs (Reverse)",
@@ -5000,7 +6435,17 @@
       "هُنَّ",
       "باطل"
     ],
-    "correct_answer": "ظَلَمَ"
+    "correct_answer": "ظَلَمَ",
+    "example": {
+      "arabic": "وَلَا يَظْلِمُ رَبُّكَ أَحَدًا",
+      "english": "And your Lord does not wrong anyone",
+      "highlight": "يَظْلِمُ"
+    },
+    "example2": {
+      "arabic": "وَلَا يَرْضَىٰ لِعِبَادِهِ الْكُفْرَ وَإِن تَشْكُرُوا يَرْضَهُ لَكُمْ",
+      "english": "He does not approve of disbelief for His servants — if you are grateful He approves",
+      "highlight": "ظَلَمُوا"
+    }
   },
   "364": {
     "category": "Verbs (Reverse)",
@@ -5011,7 +6456,12 @@
       "ظَلَمَ",
       "زوج"
     ],
-    "correct_answer": "عَرَفَ"
+    "correct_answer": "عَرَفَ",
+    "example": {
+      "arabic": "يَعْرِفُونَهُ كَمَا يَعْرِفُونَ أَبْنَاءَهُمْ",
+      "english": "They recognize him just as they recognize their own sons",
+      "highlight": "يَعْرِفُونَهُ"
+    }
   },
   "365": {
     "category": "Verbs (Reverse)",
@@ -5022,7 +6472,12 @@
       "عَذَاب",
       "هذا"
     ],
-    "correct_answer": "عَقَلَ"
+    "correct_answer": "عَقَلَ",
+    "example": {
+      "arabic": "أَفَلَا تَعْقِلُونَ",
+      "english": "Do you not reason",
+      "highlight": "تَعْقِلُونَ"
+    }
   },
   "366": {
     "category": "Verbs (Reverse)",
@@ -5033,7 +6488,17 @@
       "قَدَرَ",
       "حَكِيم"
     ],
-    "correct_answer": "غَفَرَ"
+    "correct_answer": "غَفَرَ",
+    "example": {
+      "arabic": "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا",
+      "english": "Our Lord, forgive us our sins and remove our evil deeds",
+      "highlight": "اغْفِرْ"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ يَغْفِرُ لِمَن يَشَاءُ وَاللَّهُ غَفُورٌ رَّحِيمٌ",
+      "english": "And Allah forgives whom He wills — Allah is Forgiving, Merciful",
+      "highlight": "يَغْفِرُ"
+    }
   },
   "367": {
     "category": "Verbs (Reverse)",
@@ -5044,7 +6509,12 @@
       "عَذَاب",
       "مَكَرَ"
     ],
-    "correct_answer": "قَدَرَ"
+    "correct_answer": "قَدَرَ",
+    "example": {
+      "arabic": "وَمَا قَدَرُوا اللَّهَ حَقَّ قَدْرِهِ",
+      "english": "And they did not appraise Allah with true appraisal",
+      "highlight": "قَدَرُوا"
+    }
   },
   "368": {
     "category": "Verbs (Reverse)",
@@ -5055,7 +6525,12 @@
       "مَكَرَ",
       "عَمِلَ"
     ],
-    "correct_answer": "كَذَبَ"
+    "correct_answer": "كَذَبَ",
+    "example": {
+      "arabic": "إِنَّمَا يَفْتَرِي الْكَذِبَ الَّذِينَ لَا يُؤْمِنُونَ",
+      "english": "Falsehood is only invented by those who do not believe",
+      "highlight": "الْكَذِبَ"
+    }
   },
   "369": {
     "category": "Verbs (Reverse)",
@@ -5066,7 +6541,17 @@
       "يَوْم",
       "كَسَبَ"
     ],
-    "correct_answer": "كَسَبَ"
+    "correct_answer": "كَسَبَ",
+    "example": {
+      "arabic": "لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ",
+      "english": "For it is what it has earned and against it what it has incurred",
+      "highlight": "كَسَبَتْ"
+    },
+    "example2": {
+      "arabic": "يَوْمَ تَجِدُ كُلُّ نَفْسٍ مَّا عَمِلَتْ مِنْ خَيْرٍ مُّحْضَرًا",
+      "english": "The day every soul finds what it has earned of good presented",
+      "highlight": "كَسَبَتْ"
+    }
   },
   "370": {
     "category": "Verbs (Reverse)",
@@ -5077,7 +6562,17 @@
       "نَهَار",
       "كَرِهَ"
     ],
-    "correct_answer": "مَلَكَ"
+    "correct_answer": "مَلَكَ",
+    "example": {
+      "arabic": "لِلَّهِ مُلْكُ السَّمَاوَاتِ وَالْأَرْضِ",
+      "english": "To Allah belongs the dominion of the heavens and earth",
+      "highlight": "مُلْكُ"
+    },
+    "example2": {
+      "arabic": "وَالْمَلَائِكَةُ صَافُّونَ وَيُسَبِّحُونَ بِحَمْدِ رَبِّهِمْ",
+      "english": "And the angels stand in rows glorifying the praise of their Lord",
+      "highlight": "وَالْمَلَائِكَةُ"
+    }
   },
   "371": {
     "category": "Verbs (Reverse)",
@@ -5088,7 +6583,12 @@
       "كَلا",
       "إِلَّا"
     ],
-    "correct_answer": "سَمِعَ"
+    "correct_answer": "سَمِعَ",
+    "example": {
+      "arabic": "قَدْ سَمِعَ اللَّهُ قَوْلَ الَّتِي تُجَادِلُكَ فِي زَوْجِهَا",
+      "english": "Allah has heard the words of the woman who argues with you about her husband",
+      "highlight": "سَمِعَ"
+    }
   },
   "372": {
     "category": "Verbs (Reverse)",
@@ -5099,7 +6599,12 @@
       "كَتَبَ",
       "رَزَقَ"
     ],
-    "correct_answer": "حَزِنَ"
+    "correct_answer": "حَزِنَ",
+    "example": {
+      "arabic": "لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
+      "english": "Do not grieve — indeed Allah is with us",
+      "highlight": "تَحْزَنْ"
+    }
   },
   "373": {
     "category": "Verbs (Reverse)",
@@ -5110,7 +6615,12 @@
       "قران",
       "حَسَبَ"
     ],
-    "correct_answer": "حَسَبَ"
+    "correct_answer": "حَسَبَ",
+    "example": {
+      "arabic": "أَيَحْسَبُ الْإِنسَانُ أَن يُتْرَكَ سُدًى",
+      "english": "Does man think he will be left unattended",
+      "highlight": "أَيَحْسَبُ"
+    }
   },
   "374": {
     "category": "Verbs (Reverse)",
@@ -5121,7 +6631,12 @@
       "بلَغَ",
       "بَصَر"
     ],
-    "correct_answer": "حَفِظَ"
+    "correct_answer": "حَفِظَ",
+    "example": {
+      "arabic": "يَحْفَظُونَهُ مِنْ أَمْرِ اللَّهِ",
+      "english": "They guard him by the command of Allah",
+      "highlight": "يَحْفَظُونَهُ"
+    }
   },
   "375": {
     "category": "Verbs (Reverse)",
@@ -5132,7 +6647,12 @@
       "قِيَامَة",
       "قوة"
     ],
-    "correct_answer": "خَسِرَ"
+    "correct_answer": "خَسِرَ",
+    "example": {
+      "arabic": "قَدْ خَسِرَ الَّذِينَ كَذَّبُوا بِلِقَاءِ اللَّهِ",
+      "english": "Those who denied the meeting with Allah have truly lost",
+      "highlight": "خَسِرَ"
+    }
   },
   "376": {
     "category": "Verbs (Reverse)",
@@ -5143,7 +6663,12 @@
       "ذَلِكَ",
       "رَحِمَ"
     ],
-    "correct_answer": "رَحِمَ"
+    "correct_answer": "رَحِمَ",
+    "example": {
+      "arabic": "وَكَانَ بِالْمُؤْمِنِينَ رَحِيمًا",
+      "english": "And He is ever Merciful to the believers",
+      "highlight": "رَحِيمًا"
+    }
   },
   "377": {
     "category": "Verbs (Reverse)",
@@ -5154,7 +6679,17 @@
       "الَّذِينَ",
       "تَرَكَ"
     ],
-    "correct_answer": "شَهِدَ"
+    "correct_answer": "شَهِدَ",
+    "example": {
+      "arabic": "شَهِدَ اللَّهُ أَنَّهُ لَا إِلَٰهَ إِلَّا هُوَ",
+      "english": "Allah witnesses that there is no deity except Him",
+      "highlight": "شَهِدَ"
+    },
+    "example2": {
+      "arabic": "وَمَا اللَّهُ بِغَافِلٍ عَمَّا تَعْمَلُونَ وَاللَّهُ شَهِيدٌ",
+      "english": "Allah is not unaware of what you do and Allah is Witness",
+      "highlight": "شَهِيدٌ"
+    }
   },
   "378": {
     "category": "Verbs (Reverse)",
@@ -5165,7 +6700,12 @@
       "الآخِرَة",
       "عَلِمَ"
     ],
-    "correct_answer": "عَلِمَ"
+    "correct_answer": "عَلِمَ",
+    "example": {
+      "arabic": "وَاللَّهُ يَعْلَمُ مَا تُسِرُّونَ وَمَا تُعْلِنُونَ",
+      "english": "And Allah knows what you conceal and what you reveal",
+      "highlight": "يَعْلَمُ"
+    }
   },
   "379": {
     "category": "Verbs (Reverse)",
@@ -5176,7 +6716,12 @@
       "عَمِلَ",
       "بَعَثَ"
     ],
-    "correct_answer": "عَمِلَ"
+    "correct_answer": "عَمِلَ",
+    "example": {
+      "arabic": "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ",
+      "english": "Whoever does an atom's weight of good will see it",
+      "highlight": "يَعْمَلْ"
+    }
   },
   "380": {
     "category": "Verbs (Reverse)",
@@ -5187,7 +6732,12 @@
       "ساعة",
       "رَزَقَ"
     ],
-    "correct_answer": "فَقِهَ"
+    "correct_answer": "فَقِهَ",
+    "example": {
+      "arabic": "وَلَكِن لَّا تَفْقَهُونَ تَسْبِيحَهُمْ",
+      "english": "But you do not understand their glorification",
+      "highlight": "تَفْقَهُونَ"
+    }
   },
   "381": {
     "category": "Verbs (Reverse)",
@@ -5198,7 +6748,12 @@
       "شَكَرَ",
       "عَظِيم"
     ],
-    "correct_answer": "فَرِحَ"
+    "correct_answer": "فَرِحَ",
+    "example": {
+      "arabic": "لَا تَفْرَحْ إِنَّ اللَّهَ لَا يُحِبُّ الْفَرِحِينَ",
+      "english": "Do not exult — indeed Allah does not like the exultant",
+      "highlight": "تَفْرَحْ"
+    }
   },
   "382": {
     "category": "Verbs (Reverse)",
@@ -5209,7 +6764,12 @@
       "غَيْب",
       "جَنَّة"
     ],
-    "correct_answer": "كَرِهَ"
+    "correct_answer": "كَرِهَ",
+    "example": {
+      "arabic": "كَرِهَ اللَّهُ انبِعَاثَهُمْ فَثَبَّطَهُمْ",
+      "english": "Allah disliked their setting out so He kept them back",
+      "highlight": "كَرِهَ"
+    }
   },
   "383": {
     "category": "Verbs (Reverse)",
@@ -5220,7 +6780,12 @@
       "جَنَّة",
       "كَبِير"
     ],
-    "correct_answer": "لَبِثَ"
+    "correct_answer": "لَبِثَ",
+    "example": {
+      "arabic": "لَبِثْتُمْ فِي الْأَرْضِ عَدَدَ سِنِينَ",
+      "english": "How many years did you remain on earth",
+      "highlight": "لَبِثْتُمْ"
+    }
   },
   "384": {
     "category": "Particles (Reverse)",
@@ -5231,7 +6796,12 @@
       "لَا",
       "الَّذِي"
     ],
-    "correct_answer": "لَا"
+    "correct_answer": "لَا",
+    "example": {
+      "arabic": "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ",
+      "english": "There is no deity except Allah alone — no partner for Him",
+      "highlight": "لَا"
+    }
   },
   "385": {
     "category": "Particles (Reverse)",
@@ -5242,7 +6812,12 @@
       "خَيْر",
       "غَفُور"
     ],
-    "correct_answer": "إِلَّا"
+    "correct_answer": "إِلَّا",
+    "example": {
+      "arabic": "وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ",
+      "english": "I did not create jinn and mankind except to worship Me",
+      "highlight": "إِلَّا"
+    }
   },
   "386": {
     "category": "Particles (Reverse)",
@@ -5253,7 +6828,12 @@
       "كَلا",
       "ماء"
     ],
-    "correct_answer": "كَلا"
+    "correct_answer": "كَلا",
+    "example": {
+      "arabic": "كَلَّا إِنَّ الْإِنسَانَ لَيَطْغَىٰ",
+      "english": "Nay! Indeed man transgresses",
+      "highlight": "كَلَّا"
+    }
   },
   "387": {
     "category": "Particles (Reverse)",
@@ -5264,7 +6844,12 @@
       "نار",
       "رَحِمَ"
     ],
-    "correct_answer": "لَنْ"
+    "correct_answer": "لَنْ",
+    "example": {
+      "arabic": "لَن تَنَالُوا الْبِرَّ حَتَّىٰ تُنفِقُوا مِمَّا تُحِبُّونَ",
+      "english": "You will never attain righteousness until you spend of what you love",
+      "highlight": "لَن"
+    }
   },
   "388": {
     "category": "Particles (Reverse)",
@@ -5275,7 +6860,12 @@
       "هِيَ",
       "عَزِيز"
     ],
-    "correct_answer": "لَمْ"
+    "correct_answer": "لَمْ",
+    "example": {
+      "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+      "english": "He neither begot nor was He born",
+      "highlight": "لَمْ"
+    }
   },
   "389": {
     "category": "Particles (Reverse)",
@@ -5286,7 +6876,12 @@
       "بلى",
       "آية"
     ],
-    "correct_answer": "بلى"
+    "correct_answer": "بلى",
+    "example": {
+      "arabic": "بَلَىٰ مَن كَسَبَ سَيِّئَةً وَأَحَاطَتْ بِهِ خَطِيئَتُهُ",
+      "english": "Yes — whoever earns evil and his sin surrounds him",
+      "highlight": "بَلَىٰ"
+    }
   },
   "390": {
     "category": "Particles (Reverse)",
@@ -5297,7 +6892,12 @@
       "بلى",
       "على"
     ],
-    "correct_answer": "غَيْر"
+    "correct_answer": "غَيْر",
+    "example": {
+      "arabic": "غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+      "english": "Not of those who have earned anger nor of those who are astray",
+      "highlight": "غَيْرِ"
+    }
   },
   "391": {
     "category": "Particles (Reverse)",
@@ -5308,7 +6908,12 @@
       "أولئك",
       "دون"
     ],
-    "correct_answer": "دون"
+    "correct_answer": "دون",
+    "example": {
+      "arabic": "أَتَعْبُدُونَ مِن دُونِ اللَّهِ مَا لَا يَنفَعُكُمْ",
+      "english": "Do you worship besides Allah that which does not benefit you",
+      "highlight": "دُونِ"
+    }
   },
   "392": {
     "category": "Particles (Reverse)",
@@ -5319,7 +6924,12 @@
       "ملك",
       "صلوة"
     ],
-    "correct_answer": "نَعَمْ"
+    "correct_answer": "نَعَمْ",
+    "example": {
+      "arabic": "وَيَوْمَ يُنفَخُ فِي الصُّورِ فَفَزِعَ مَن فِي السَّمَاوَاتِ",
+      "english": "The day the horn is blown — whoever is in the heavens will be terrified",
+      "highlight": "نَعَمْ"
+    }
   },
   "393": {
     "category": "Particles (Reverse)",
@@ -5330,7 +6940,12 @@
       "أَلَا",
       "ساعة"
     ],
-    "correct_answer": "أَلَا"
+    "correct_answer": "أَلَا",
+    "example": {
+      "arabic": "أَلَا إِنَّ أَوْلِيَاءَ اللَّهِ لَا خَوْفٌ عَلَيْهِمْ",
+      "english": "Unquestionably — the allies of Allah — no fear will there be on them",
+      "highlight": "أَلَا"
+    }
   },
   "394": {
     "category": "Particles (Reverse)",
@@ -5341,7 +6956,12 @@
       "فِي",
       "بَعَثَ"
     ],
-    "correct_answer": "فِي"
+    "correct_answer": "فِي",
+    "example": {
+      "arabic": "وَلَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
+      "english": "And to Him belongs what is in the heavens and what is in the earth",
+      "highlight": "فِي"
+    }
   },
   "395": {
     "category": "Particles (Reverse)",
@@ -5352,7 +6972,12 @@
       "يَوْم",
       "عَنْ"
     ],
-    "correct_answer": "عَنْ"
+    "correct_answer": "عَنْ",
+    "example": {
+      "arabic": "وَيَعْفُو عَن كَثِيرٍ",
+      "english": "And He pardons much",
+      "highlight": "عَنْ"
+    }
   },
   "396": {
     "category": "Particles (Reverse)",
@@ -5363,7 +6988,12 @@
       "سَبَقَ",
       "قران"
     ],
-    "correct_answer": "ك"
+    "correct_answer": "ك",
+    "example": {
+      "arabic": "لَيْسَ كَمِثْلِهِ شَيْءٌ وَهُوَ السَّمِيعُ الْبَصِيرُ",
+      "english": "There is nothing like Him — and He is the Hearing, the Seeing",
+      "highlight": "كَمِثْلِهِ"
+    }
   },
   "397": {
     "category": "Particles (Reverse)",
@@ -5374,7 +7004,12 @@
       "الَّذِي",
       "ك"
     ],
-    "correct_answer": "ل"
+    "correct_answer": "ل",
+    "example": {
+      "arabic": "لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
+      "english": "To Allah belongs whatever is in the heavens and earth",
+      "highlight": "لِلَّهِ"
+    }
   },
   "398": {
     "category": "Particles (Reverse)",
@@ -5385,7 +7020,12 @@
       "أَحْسَن",
       "مِنْ"
     ],
-    "correct_answer": "مِنْ"
+    "correct_answer": "مِنْ",
+    "example": {
+      "arabic": "وَمِنَ النَّاسِ مَن يَتَّخِذُ مِن دُونِ اللَّهِ أَندَادًا",
+      "english": "And among people are those who take rivals to Allah",
+      "highlight": "مِنَ"
+    }
   },
   "399": {
     "category": "Particles (Reverse)",
@@ -5396,7 +7036,12 @@
       "صلوة",
       "سَمِعَ"
     ],
-    "correct_answer": "إلى"
+    "correct_answer": "إلى",
+    "example": {
+      "arabic": "وَإِلَى اللَّهِ تُرْجَعُ الْأُمُورُ",
+      "english": "And to Allah all matters are returned",
+      "highlight": "إِلَى"
+    }
   },
   "400": {
     "category": "Particles (Reverse)",
@@ -5407,7 +7052,12 @@
       "وَكِيل",
       "ب"
     ],
-    "correct_answer": "ب"
+    "correct_answer": "ب",
+    "example": {
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+      "english": "In the name of Allah, the Compassionate, the Merciful",
+      "highlight": "بِسْمِ"
+    }
   },
   "401": {
     "category": "Particles (Reverse)",
@@ -5418,7 +7068,12 @@
       "مَكَرَ",
       "حَتَّى"
     ],
-    "correct_answer": "حَتَّى"
+    "correct_answer": "حَتَّى",
+    "example": {
+      "arabic": "كُلُوا وَاشْرَبُوا حَتَّىٰ يَتَبَيَّنَ لَكُمُ الْخَيْطُ الْأَبْيَضُ",
+      "english": "Eat and drink until the white thread becomes distinct to you at dawn",
+      "highlight": "حَتَّىٰ"
+    }
   },
   "402": {
     "category": "Particles (Reverse)",
@@ -5429,7 +7084,12 @@
       "شَكَرَ",
       "ظَلَمَ"
     ],
-    "correct_answer": "على"
+    "correct_answer": "على",
+    "example": {
+      "arabic": "وَهُوَ الْقَاهِرُ فَوْقَ عِبَادِهِ وَهُوَ الْحَكِيمُ الْخَبِيرُ",
+      "english": "And He is the Subjugator over His servants and He is the Wise, the Aware",
+      "highlight": "عَلَىٰ"
+    }
   },
   "403": {
     "category": "Particles (Reverse)",
@@ -5440,7 +7100,12 @@
       "فَقِهَ",
       "عَبَدَ"
     ],
-    "correct_answer": "مع"
+    "correct_answer": "مع",
+    "example": {
+      "arabic": "إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوا",
+      "english": "Indeed Allah is with those who fear Him",
+      "highlight": "مَعَ"
+    }
   },
   "404": {
     "category": "Particles (Reverse)",
@@ -5451,7 +7116,12 @@
       "كَفَرَ",
       "سَمَاء"
     ],
-    "correct_answer": "يَا"
+    "correct_answer": "يَا",
+    "example": {
+      "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ",
+      "english": "O you who believe, fear Allah as He should be feared",
+      "highlight": "يَا"
+    }
   },
   "405": {
     "category": "Grammar",
@@ -5621,7 +7291,12 @@
       "نَبَّأَ",
       "سَيِّئَة"
     ],
-    "correct_answer": "نَبَّأَ"
+    "correct_answer": "نَبَّأَ",
+    "example": {
+      "arabic": "نَبِّئْ عِبَادِي أَنِّي أَنَا الْغَفُورُ الرَّحِيمُ",
+      "english": "Inform My servants that I am the Forgiving, the Merciful",
+      "highlight": "نَبِّئْ"
+    }
   },
   "420": {
     "category": "Verbs",
@@ -5648,7 +7323,17 @@
       "نَزَّلَ",
       "جَنَّة"
     ],
-    "correct_answer": "نَزَّلَ"
+    "correct_answer": "نَزَّلَ",
+    "example": {
+      "arabic": "نَزَّلَ عَلَيْكَ الْكِتَابَ بِالْحَقِّ مُصَدِّقًا",
+      "english": "He sent down upon you the Book in truth confirming what was before it",
+      "highlight": "نَزَّلَ"
+    },
+    "example2": {
+      "arabic": "إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ",
+      "english": "Indeed We sent it down during the Night of Decree",
+      "highlight": "أَنزَلْنَاهُ"
+    }
   },
   "422": {
     "category": "Verbs",
@@ -5675,7 +7360,12 @@
       "ماء",
       "نَجَّى"
     ],
-    "correct_answer": "نَجَّى"
+    "correct_answer": "نَجَّى",
+    "example": {
+      "arabic": "فَنَجَّيْنَاهُ وَأَهْلَهُ مِنَ الْكَرْبِ الْعَظِيمِ",
+      "english": "So We saved him and his family from the great distress",
+      "highlight": "فَنَجَّيْنَاهُ"
+    }
   },
   "424": {
     "category": "Verbs",
@@ -5702,7 +7392,12 @@
       "تِلْكَ",
       "غَيْر"
     ],
-    "correct_answer": "وَلَّى"
+    "correct_answer": "وَلَّى",
+    "example": {
+      "arabic": "فَلَنُوَلِّيَنَّكَ قِبْلَةً تَرْضَاهَا",
+      "english": "We will surely turn you toward a qibla that you will be pleased with",
+      "highlight": "فَلَنُوَلِّيَنَّكَ"
+    }
   },
   "426": {
     "category": "Verbs",
@@ -5718,6 +7413,11 @@
       "arabic": "وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا",
       "english": "Those who strive for Us — We will surely guide them to Our ways",
       "highlight": "جَاهَدُوا"
+    },
+    "example2": {
+      "arabic": "وَجَاهِدُوا فِي اللَّهِ حَقَّ جِهَادِهِ",
+      "english": "And strive for Allah with the striving due to Him",
+      "highlight": "وَجَاهِدُوا"
     }
   },
   "427": {
@@ -5729,7 +7429,17 @@
       "هُوَ",
       "شَعَرَ"
     ],
-    "correct_answer": "جَاهَدَ"
+    "correct_answer": "جَاهَدَ",
+    "example": {
+      "arabic": "وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا",
+      "english": "Those who strive for Us — We will surely guide them to Our ways",
+      "highlight": "جَاهَدُوا"
+    },
+    "example2": {
+      "arabic": "وَجَاهِدُوا فِي اللَّهِ حَقَّ جِهَادِهِ",
+      "english": "And strive for Allah with the striving due to Him",
+      "highlight": "وَجَاهِدُوا"
+    }
   },
   "428": {
     "category": "Verbs",
@@ -5756,7 +7466,12 @@
       "بَصَر",
       "أَنْتُمْ"
     ],
-    "correct_answer": "قَاتَلَ"
+    "correct_answer": "قَاتَلَ",
+    "example": {
+      "arabic": "وَقَاتِلُوا فِي سَبِيلِ اللَّهِ وَاعْلَمُوا أَنَّ اللَّهَ سَمِيعٌ عَلِيمٌ",
+      "english": "And fight in the cause of Allah and know that Allah is Hearing, Knowing",
+      "highlight": "وَقَاتِلُوا"
+    }
   },
   "430": {
     "category": "Verbs",
@@ -5783,7 +7498,12 @@
       "خَبِير",
       "جَنَّة"
     ],
-    "correct_answer": "نَادَى"
+    "correct_answer": "نَادَى",
+    "example": {
+      "arabic": "وَنَادَيْنَاهُ مِن جَانِبِ الطُّورِ الْأَيْمَنِ",
+      "english": "And We called to him from the right side of the mount",
+      "highlight": "وَنَادَيْنَاهُ"
+    }
   },
   "432": {
     "category": "Verbs",
@@ -5810,7 +7530,12 @@
       "أَنْتُنَّ",
       "بَيِّنَة"
     ],
-    "correct_answer": "هَاجَرَ"
+    "correct_answer": "هَاجَرَ",
+    "example": {
+      "arabic": "وَمَن يُهَاجِرْ فِي سَبِيلِ اللَّهِ يَجِدْ فِي الْأَرْضِ مُرَاغَمًا كَثِيرًا",
+      "english": "Whoever emigrates in the cause of Allah will find many places of refuge",
+      "highlight": "يُهَاجِرْ"
+    }
   },
   "434": {
     "category": "Verbs",
@@ -5826,6 +7551,11 @@
       "arabic": "وَمَنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ فَلَهُ أَجْرُهُ عِندَ رَبِّهِ",
       "english": "Whoever submits his face to Allah while doing good — his reward is with his Lord",
       "highlight": "أَسْلَمَ"
+    },
+    "example2": {
+      "arabic": "بَلَىٰ مَنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ",
+      "english": "Yes — whoever submits his face to Allah while doing good",
+      "highlight": "أَسْلَمَ"
     }
   },
   "435": {
@@ -5837,7 +7567,17 @@
       "أَبَدًا",
       "أَكْبَر"
     ],
-    "correct_answer": "أَسْلَمَ"
+    "correct_answer": "أَسْلَمَ",
+    "example": {
+      "arabic": "وَمَنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ فَلَهُ أَجْرُهُ عِندَ رَبِّهِ",
+      "english": "Whoever submits his face to Allah while doing good — his reward is with his Lord",
+      "highlight": "أَسْلَمَ"
+    },
+    "example2": {
+      "arabic": "بَلَىٰ مَنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ",
+      "english": "Yes — whoever submits his face to Allah while doing good",
+      "highlight": "أَسْلَمَ"
+    }
   },
   "436": {
     "category": "Verbs",
@@ -5853,6 +7593,11 @@
       "arabic": "إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ",
       "english": "Indeed those who believed and did righteous deeds",
       "highlight": "آمَنُوا"
+    },
+    "example2": {
+      "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا آمِنُوا بِاللَّهِ وَرَسُولِهِ",
+      "english": "O you who believe — believe in Allah and His Messenger",
+      "highlight": "آمَنُوا"
     }
   },
   "437": {
@@ -5864,7 +7609,17 @@
       "يد",
       "نَفْس"
     ],
-    "correct_answer": "آمَنَ"
+    "correct_answer": "آمَنَ",
+    "example": {
+      "arabic": "إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ",
+      "english": "Indeed those who believed and did righteous deeds",
+      "highlight": "آمَنُوا"
+    },
+    "example2": {
+      "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا آمِنُوا بِاللَّهِ وَرَسُولِهِ",
+      "english": "O you who believe — believe in Allah and His Messenger",
+      "highlight": "آمَنُوا"
+    }
   },
   "438": {
     "category": "Verbs",
@@ -5880,6 +7635,11 @@
       "arabic": "هُوَ الَّذِي أَنزَلَ عَلَيْكَ الْكِتَابَ مِنْهُ آيَاتٌ مُّحْكَمَاتٌ",
       "english": "It is He who sent down upon you the Book — in it are verses that are precise",
       "highlight": "أَنزَلَ"
+    },
+    "example2": {
+      "arabic": "إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ",
+      "english": "Indeed We sent it down during the Night of Decree",
+      "highlight": "أَنزَلْنَاهُ"
     }
   },
   "439": {
@@ -5891,7 +7651,17 @@
       "شَمْس",
       "أَنْزَلَ"
     ],
-    "correct_answer": "أَنْزَلَ"
+    "correct_answer": "أَنْزَلَ",
+    "example": {
+      "arabic": "هُوَ الَّذِي أَنزَلَ عَلَيْكَ الْكِتَابَ مِنْهُ آيَاتٌ مُّحْكَمَاتٌ",
+      "english": "It is He who sent down upon you the Book — in it are verses that are precise",
+      "highlight": "أَنزَلَ"
+    },
+    "example2": {
+      "arabic": "إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ",
+      "english": "Indeed We sent it down during the Night of Decree",
+      "highlight": "أَنزَلْنَاهُ"
+    }
   },
   "440": {
     "category": "Verbs",
@@ -5907,6 +7677,11 @@
       "arabic": "وَأَنفِقُوا فِي سَبِيلِ اللَّهِ وَلَا تُلْقُوا بِأَيْدِيكُمْ إِلَى التَّهْلُكَةِ",
       "english": "And spend in the cause of Allah and do not throw yourselves into destruction",
       "highlight": "وَأَنفِقُوا"
+    },
+    "example2": {
+      "arabic": "مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ",
+      "english": "The example of those who spend their wealth in the cause of Allah",
+      "highlight": "يُنفِقُونَ"
     }
   },
   "441": {
@@ -5918,7 +7693,17 @@
       "رجل",
       "أَنْفَقَ"
     ],
-    "correct_answer": "أَنْفَقَ"
+    "correct_answer": "أَنْفَقَ",
+    "example": {
+      "arabic": "وَأَنفِقُوا فِي سَبِيلِ اللَّهِ وَلَا تُلْقُوا بِأَيْدِيكُمْ إِلَى التَّهْلُكَةِ",
+      "english": "And spend in the cause of Allah and do not throw yourselves into destruction",
+      "highlight": "وَأَنفِقُوا"
+    },
+    "example2": {
+      "arabic": "مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ",
+      "english": "The example of those who spend their wealth in the cause of Allah",
+      "highlight": "يُنفِقُونَ"
+    }
   },
   "442": {
     "category": "Verbs",
@@ -5945,7 +7730,12 @@
       "تَوَّاب",
       "حَكِيم"
     ],
-    "correct_answer": "أَهْلَكَ"
+    "correct_answer": "أَهْلَكَ",
+    "example": {
+      "arabic": "وَكَمْ أَهْلَكْنَا مِن قَرْيَةٍ بَطِرَتْ مَعِيشَتَهَا",
+      "english": "How many a city We destroyed that was insolent in its way of living",
+      "highlight": "أَهْلَكْنَا"
+    }
   },
   "444": {
     "category": "Verbs",
@@ -5961,6 +7751,11 @@
       "arabic": "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ",
       "english": "And establish prayer and give zakah",
       "highlight": "وَأَقِيمُوا"
+    },
+    "example2": {
+      "arabic": "إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ",
+      "english": "The mosques of Allah are only maintained by those who believe",
+      "highlight": "يُقِيمُونَ"
     }
   },
   "445": {
@@ -5972,7 +7767,17 @@
       "نار",
       "فَضْل"
     ],
-    "correct_answer": "أَقَامَ"
+    "correct_answer": "أَقَامَ",
+    "example": {
+      "arabic": "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ",
+      "english": "And establish prayer and give zakah",
+      "highlight": "وَأَقِيمُوا"
+    },
+    "example2": {
+      "arabic": "إِنَّمَا يَعْمُرُ مَسَاجِدَ اللَّهِ مَنْ آمَنَ بِاللَّهِ",
+      "english": "The mosques of Allah are only maintained by those who believe",
+      "highlight": "يُقِيمُونَ"
+    }
   },
   "446": {
     "category": "Verbs",
@@ -5988,6 +7793,11 @@
       "arabic": "يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ",
       "english": "Allah intends ease for you and does not intend hardship",
       "highlight": "يُرِيدُ"
+    },
+    "example2": {
+      "arabic": "وَإِذَا أَرَادَ اللَّهُ بِقَوْمٍ سُوءًا فَلَا مَرَدَّ لَهُ",
+      "english": "And when Allah intends for a people ill there is no repelling it",
+      "highlight": "أَرَادَ"
     }
   },
   "447": {
@@ -5999,7 +7809,17 @@
       "قَدَرَ",
       "أَنْتُمَا"
     ],
-    "correct_answer": "أَرَادَ"
+    "correct_answer": "أَرَادَ",
+    "example": {
+      "arabic": "يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ",
+      "english": "Allah intends ease for you and does not intend hardship",
+      "highlight": "يُرِيدُ"
+    },
+    "example2": {
+      "arabic": "وَإِذَا أَرَادَ اللَّهُ بِقَوْمٍ سُوءًا فَلَا مَرَدَّ لَهُ",
+      "english": "And when Allah intends for a people ill there is no repelling it",
+      "highlight": "أَرَادَ"
+    }
   },
   "448": {
     "category": "Verbs",
@@ -6015,6 +7835,11 @@
       "arabic": "وَأَنَّهُ هُوَ أَمَاتَ وَأَحْيَا",
       "english": "And that it is He who causes death and gives life",
       "highlight": "وَأَحْيَا"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ أَنبَتَكُم مِّنَ الْأَرْضِ نَبَاتًا ثُمَّ يُعِيدُكُمْ فِيهَا",
+      "english": "And He will restore you into it and bring you forth again",
+      "highlight": "يُحْيِيكُمْ"
     }
   },
   "449": {
@@ -6026,7 +7851,17 @@
       "وَكِيل",
       "أَحْيَا"
     ],
-    "correct_answer": "أَحْيَا"
+    "correct_answer": "أَحْيَا",
+    "example": {
+      "arabic": "وَأَنَّهُ هُوَ أَمَاتَ وَأَحْيَا",
+      "english": "And that it is He who causes death and gives life",
+      "highlight": "وَأَحْيَا"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ أَنبَتَكُم مِّنَ الْأَرْضِ نَبَاتًا ثُمَّ يُعِيدُكُمْ فِيهَا",
+      "english": "And He will restore you into it and bring you forth again",
+      "highlight": "يُحْيِيكُمْ"
+    }
   },
   "450": {
     "category": "Verbs",
@@ -6042,6 +7877,11 @@
       "arabic": "وَأَوْحَيْنَا إِلَىٰ مُوسَىٰ وَأَخِيهِ",
       "english": "And We revealed to Moses and his brother",
       "highlight": "أَوْحَيْنَا"
+    },
+    "example2": {
+      "arabic": "وَمَا يَنطِقُ عَنِ الْهَوَىٰ إِنْ هُوَ إِلَّا وَحْيٌ يُوحَىٰ",
+      "english": "He does not speak from desire — it is nothing but revelation revealed",
+      "highlight": "وَحْيٌ"
     }
   },
   "451": {
@@ -6053,7 +7893,17 @@
       "قوة",
       "لَبِثَ"
     ],
-    "correct_answer": "أَوْحَى"
+    "correct_answer": "أَوْحَى",
+    "example": {
+      "arabic": "وَأَوْحَيْنَا إِلَىٰ مُوسَىٰ وَأَخِيهِ",
+      "english": "And We revealed to Moses and his brother",
+      "highlight": "أَوْحَيْنَا"
+    },
+    "example2": {
+      "arabic": "وَمَا يَنطِقُ عَنِ الْهَوَىٰ إِنْ هُوَ إِلَّا وَحْيٌ يُوحَىٰ",
+      "english": "He does not speak from desire — it is nothing but revelation revealed",
+      "highlight": "وَحْيٌ"
+    }
   },
   "452": {
     "category": "Verbs",
@@ -6080,7 +7930,12 @@
       "عَبَدَ",
       "حَكِيم"
     ],
-    "correct_answer": "أَحَبَّ"
+    "correct_answer": "أَحَبَّ",
+    "example": {
+      "arabic": "وَالَّذِينَ آمَنُوا أَشَدُّ حُبًّا لِّلَّهِ",
+      "english": "And those who believe are stronger in love for Allah",
+      "highlight": "حُبًّا"
+    }
   },
   "454": {
     "category": "Verbs",
@@ -6107,7 +7962,12 @@
       "اتَّبَعَ",
       "ثَوَاب"
     ],
-    "correct_answer": "اتَّبَعَ"
+    "correct_answer": "اتَّبَعَ",
+    "example": {
+      "arabic": "وَاتَّبِعُوا أَحْسَنَ مَا أُنزِلَ إِلَيْكُم مِّن رَّبِّكُمْ",
+      "english": "And follow the best of what has been revealed to you from your Lord",
+      "highlight": "وَاتَّبِعُوا"
+    }
   },
   "456": {
     "category": "Verbs",
@@ -6134,7 +7994,12 @@
       "رَزَقَ",
       "فَضْل"
     ],
-    "correct_answer": "اتَّقَى"
+    "correct_answer": "اتَّقَى",
+    "example": {
+      "arabic": "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا",
+      "english": "And whoever fears Allah — He will make for him a way out",
+      "highlight": "يَتَّقِ"
+    }
   },
   "458": {
     "category": "Verbs",
@@ -6150,6 +8015,11 @@
       "arabic": "وَاسْتَغْفِرُوا اللَّهَ إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ",
       "english": "And seek forgiveness of Allah — indeed Allah is Forgiving, Merciful",
       "highlight": "وَاسْتَغْفِرُوا"
+    },
+    "example2": {
+      "arabic": "فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا",
+      "english": "And I said: Ask forgiveness of your Lord — indeed He is Perpetually Forgiving",
+      "highlight": "اسْتَغْفِرُوا"
     }
   },
   "459": {
@@ -6161,7 +8031,17 @@
       "أَنْتُمَا",
       "عَمِلَ"
     ],
-    "correct_answer": "اسْتَغْفَرَ"
+    "correct_answer": "اسْتَغْفَرَ",
+    "example": {
+      "arabic": "وَاسْتَغْفِرُوا اللَّهَ إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ",
+      "english": "And seek forgiveness of Allah — indeed Allah is Forgiving, Merciful",
+      "highlight": "وَاسْتَغْفِرُوا"
+    },
+    "example2": {
+      "arabic": "فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا",
+      "english": "And I said: Ask forgiveness of your Lord — indeed He is Perpetually Forgiving",
+      "highlight": "اسْتَغْفِرُوا"
+    }
   },
   "460": {
     "category": "Verbs",
@@ -6177,6 +8057,11 @@
       "arabic": "إِنَّ الَّذِينَ يَسْتَكْبِرُونَ عَنْ عِبَادَتِي سَيَدْخُلُونَ جَهَنَّمَ",
       "english": "Those who are arrogant about worshipping Me will enter Hell humiliated",
       "highlight": "يَسْتَكْبِرُونَ"
+    },
+    "example2": {
+      "arabic": "وَقَالَ الَّذِينَ لَا يَرْجُونَ لِقَاءَنَا لَوْلَا أُنزِلَ عَلَيْنَا الْمَلَائِكَةُ",
+      "english": "Those who do not expect to meet Us said: Why were angels not sent to us",
+      "highlight": "اسْتَكْبَرُوا"
     }
   },
   "461": {
@@ -6188,7 +8073,17 @@
       "ضَرَبَ",
       "اسْتَكْبَرَ"
     ],
-    "correct_answer": "اسْتَكْبَرَ"
+    "correct_answer": "اسْتَكْبَرَ",
+    "example": {
+      "arabic": "إِنَّ الَّذِينَ يَسْتَكْبِرُونَ عَنْ عِبَادَتِي سَيَدْخُلُونَ جَهَنَّمَ",
+      "english": "Those who are arrogant about worshipping Me will enter Hell humiliated",
+      "highlight": "يَسْتَكْبِرُونَ"
+    },
+    "example2": {
+      "arabic": "وَقَالَ الَّذِينَ لَا يَرْجُونَ لِقَاءَنَا لَوْلَا أُنزِلَ عَلَيْنَا الْمَلَائِكَةُ",
+      "english": "Those who do not expect to meet Us said: Why were angels not sent to us",
+      "highlight": "اسْتَكْبَرُوا"
+    }
   },
   "462": {
     "category": "Verbs",
@@ -6204,6 +8099,11 @@
       "arabic": "وَلِلَّهِ عَلَى النَّاسِ حِجُّ الْبَيْتِ مَنِ اسْتَطَاعَ إِلَيْهِ سَبِيلًا",
       "english": "Pilgrimage to the House is a duty for whoever is able to find a way",
       "highlight": "اسْتَطَاعَ"
+    },
+    "example2": {
+      "arabic": "فَمَنِ اسْتَطَاعَ مِنكُمْ أَن يَمُدَّ بَصَرَهُ",
+      "english": "So whoever of you is able to extend his gaze",
+      "highlight": "اسْتَطَاعَ"
     }
   },
   "463": {
@@ -6215,7 +8115,17 @@
       "كَلا",
       "ك"
     ],
-    "correct_answer": "اسْتَطَاعَ"
+    "correct_answer": "اسْتَطَاعَ",
+    "example": {
+      "arabic": "وَلِلَّهِ عَلَى النَّاسِ حِجُّ الْبَيْتِ مَنِ اسْتَطَاعَ إِلَيْهِ سَبِيلًا",
+      "english": "Pilgrimage to the House is a duty for whoever is able to find a way",
+      "highlight": "اسْتَطَاعَ"
+    },
+    "example2": {
+      "arabic": "فَمَنِ اسْتَطَاعَ مِنكُمْ أَن يَمُدَّ بَصَرَهُ",
+      "english": "So whoever of you is able to extend his gaze",
+      "highlight": "اسْتَطَاعَ"
+    }
   },
   "464": {
     "category": "Verbs",
@@ -6242,7 +8152,12 @@
       "غَيْب",
       "اسْتَقَامَ"
     ],
-    "correct_answer": "اسْتَقَامَ"
+    "correct_answer": "اسْتَقَامَ",
+    "example": {
+      "arabic": "إِنَّ الَّذِينَ قَالُوا رَبُّنَا اللَّهُ ثُمَّ اسْتَقَامُوا",
+      "english": "Indeed those who say our Lord is Allah and then remain steadfast",
+      "highlight": "اسْتَقَامُوا"
+    }
   },
   "466": {
     "category": "Misc",
@@ -6269,7 +8184,12 @@
       "قَوْم",
       "أَحْسَن"
     ],
-    "correct_answer": "قَوْم"
+    "correct_answer": "قَوْم",
+    "example": {
+      "arabic": "وَلَقَدْ أَرْسَلْنَا إِلَىٰ ثَمُودَ أَخَاهُمْ",
+      "english": "And We sent to Thamud their brother",
+      "highlight": "قَوْمٌ"
+    }
   },
   "468": {
     "category": "Misc",
@@ -6296,7 +8216,12 @@
       "ضَرَبَ",
       "صَدْر"
     ],
-    "correct_answer": "أُمَّة"
+    "correct_answer": "أُمَّة",
+    "example": {
+      "arabic": "كُنتُمْ خَيْرَ أُمَّةٍ أُخْرِجَتْ لِلنَّاسِ",
+      "english": "You are the best nation produced for mankind",
+      "highlight": "أُمَّةٍ"
+    }
   },
   "470": {
     "category": "Misc",
@@ -6323,7 +8248,12 @@
       "إنسان",
       "قَعَدَ"
     ],
-    "correct_answer": "إنسان"
+    "correct_answer": "إنسان",
+    "example": {
+      "arabic": "وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ",
+      "english": "And We have certainly honored the children of Adam",
+      "highlight": "الْإِنسَانَ"
+    }
   },
   "472": {
     "category": "Misc",
@@ -6350,7 +8280,12 @@
       "حِكْمَة",
       "رِيح"
     ],
-    "correct_answer": "بشر"
+    "correct_answer": "بشر",
+    "example": {
+      "arabic": "مَا كَانَ لِبَشَرٍ أَن يُكَلِّمَهُ اللَّهُ إِلَّا وَحْيًا",
+      "english": "It is not for any human that Allah should speak to him except by revelation",
+      "highlight": "لِبَشَرٍ"
+    }
   },
   "474": {
     "category": "Misc",
@@ -6366,6 +8301,11 @@
       "arabic": "إِنَّ الشَّيْطَانَ لَكُمْ عَدُوٌّ فَاتَّخِذُوهُ عَدُوًّا",
       "english": "Indeed Satan is an enemy to you so take him as an enemy",
       "highlight": "عَدُوٌّ"
+    },
+    "example2": {
+      "arabic": "وَكَذَٰلِكَ جَعَلْنَا لِكُلِّ نَبِيٍّ عَدُوًّا مِّنَ الْمُجْرِمِينَ",
+      "english": "And thus We made for every prophet an enemy from the criminals",
+      "highlight": "عَدُوًّا"
     }
   },
   "475": {
@@ -6377,7 +8317,17 @@
       "نار",
       "أَنْعَام"
     ],
-    "correct_answer": "عَدُوّ"
+    "correct_answer": "عَدُوّ",
+    "example": {
+      "arabic": "إِنَّ الشَّيْطَانَ لَكُمْ عَدُوٌّ فَاتَّخِذُوهُ عَدُوًّا",
+      "english": "Indeed Satan is an enemy to you so take him as an enemy",
+      "highlight": "عَدُوٌّ"
+    },
+    "example2": {
+      "arabic": "وَكَذَٰلِكَ جَعَلْنَا لِكُلِّ نَبِيٍّ عَدُوًّا مِّنَ الْمُجْرِمِينَ",
+      "english": "And thus We made for every prophet an enemy from the criminals",
+      "highlight": "عَدُوًّا"
+    }
   },
   "476": {
     "category": "Misc",
@@ -6404,7 +8354,12 @@
       "وَلِي",
       "جَبَل"
     ],
-    "correct_answer": "وَلِي"
+    "correct_answer": "وَلِي",
+    "example": {
+      "arabic": "اللَّهُ وَلِيُّ الَّذِينَ آمَنُوا",
+      "english": "Allah is the protector of those who believe",
+      "highlight": "وَلِيُّ"
+    }
   },
   "478": {
     "category": "Misc",
@@ -6420,6 +8375,11 @@
       "arabic": "وَكَأَيِّن مِّن قَرْيَةٍ عَتَتْ عَنْ أَمْرِ رَبِّهَا",
       "english": "And how many a city defied the command of its Lord",
       "highlight": "قَرْيَةٍ"
+    },
+    "example2": {
+      "arabic": "وَمَا كَانَ رَبُّكَ لِيُهْلِكَ الْقُرَىٰ بِظُلْمٍ وَأَهْلُهَا مُصْلِحُونَ",
+      "english": "Your Lord would not destroy cities unjustly while their people are reformers",
+      "highlight": "الْقُرَىٰ"
     }
   },
   "479": {
@@ -6431,7 +8391,17 @@
       "حسَنَة",
       "فَسَقَ"
     ],
-    "correct_answer": "قَرْيَة"
+    "correct_answer": "قَرْيَة",
+    "example": {
+      "arabic": "وَكَأَيِّن مِّن قَرْيَةٍ عَتَتْ عَنْ أَمْرِ رَبِّهَا",
+      "english": "And how many a city defied the command of its Lord",
+      "highlight": "قَرْيَةٍ"
+    },
+    "example2": {
+      "arabic": "وَمَا كَانَ رَبُّكَ لِيُهْلِكَ الْقُرَىٰ بِظُلْمٍ وَأَهْلُهَا مُصْلِحُونَ",
+      "english": "Your Lord would not destroy cities unjustly while their people are reformers",
+      "highlight": "الْقُرَىٰ"
+    }
   },
   "480": {
     "category": "Misc",
@@ -6458,7 +8428,12 @@
       "مَال",
       "رجل"
     ],
-    "correct_answer": "مَال"
+    "correct_answer": "مَال",
+    "example": {
+      "arabic": "الْمَالُ وَالْبَنُونَ زِينَةُ الْحَيَاةِ الدُّنْيَا",
+      "english": "Wealth and children are adornments of worldly life",
+      "highlight": "الْمَالُ"
+    }
   },
   "482": {
     "category": "Misc",
@@ -6485,7 +8460,12 @@
       "عَرَفَ",
       "وجه"
     ],
-    "correct_answer": "دُنْيَا"
+    "correct_answer": "دُنْيَا",
+    "example": {
+      "arabic": "وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا مَتَاعُ الْغُرُورِ",
+      "english": "The life of this world is only the enjoyment of delusion",
+      "highlight": "الدُّنْيَا"
+    }
   },
   "484": {
     "category": "Misc",
@@ -6512,7 +8492,12 @@
       "أَنَا",
       "رِيح"
     ],
-    "correct_answer": "سبيل"
+    "correct_answer": "سبيل",
+    "example": {
+      "arabic": "قُلْ هَٰذِهِ سَبِيلِي أَدْعُو إِلَى اللَّهِ عَلَىٰ بَصِيرَةٍ",
+      "english": "Say: This is my way — I invite to Allah with insight",
+      "highlight": "سَبِيلِي"
+    }
   },
   "486": {
     "category": "Misc",
@@ -6539,7 +8524,12 @@
       "أَبَدًا",
       "صِرَاط"
     ],
-    "correct_answer": "صِرَاط"
+    "correct_answer": "صِرَاط",
+    "example": {
+      "arabic": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+      "english": "Guide us to the straight path",
+      "highlight": "الصِّرَاطَ"
+    }
   },
   "488": {
     "category": "Misc",
@@ -6566,7 +8556,12 @@
       "حَتَّى",
       "سَبَقَ"
     ],
-    "correct_answer": "مَسْجِد"
+    "correct_answer": "مَسْجِد",
+    "example": {
+      "arabic": "وَأَنَّ الْمَسَاجِدَ لِلَّهِ فَلَا تَدْعُوا مَعَ اللَّهِ أَحَدًا",
+      "english": "And the mosques are for Allah so do not invoke anyone along with Allah",
+      "highlight": "الْمَسَاجِدَ"
+    }
   },
   "490": {
     "category": "Grammar Basics",
@@ -6658,6 +8653,11 @@
       "arabic": "كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ",
       "english": "Every soul shall taste death",
       "highlight": "الْمَوْتِ"
+    },
+    "example2": {
+      "arabic": "أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ وَلَوْ كُنتُمْ فِي بُرُوجٍ",
+      "english": "Wherever you are death will reach you even in fortified towers",
+      "highlight": "الْمَوْتُ"
     }
   },
   "497": {
@@ -7218,6 +9218,11 @@
       "arabic": "وَاللَّهُ يَحْكُمُ لَا مُعَقِّبَ لِحُكْمِهِ",
       "english": "And Allah judges — there is no adjuster of His judgment",
       "highlight": "يَحْكُمُ"
+    },
+    "example2": {
+      "arabic": "إِنِ الْحُكْمُ إِلَّا لِلَّهِ يَقُصُّ الْحَقَّ",
+      "english": "Legislation is not but for Allah — He relates the truth",
+      "highlight": "الْحُكْمُ"
     }
   },
   "532": {
@@ -7234,6 +9239,11 @@
       "arabic": "كَتَبَ اللَّهُ لَأَغْلِبَنَّ أَنَا وَرُسُلِي",
       "english": "Allah has written: I will surely overcome — I and My messengers",
       "highlight": "كَتَبَ"
+    },
+    "example2": {
+      "arabic": "كَتَبَ رَبُّكُمْ عَلَىٰ نَفْسِهِ الرَّحْمَةَ",
+      "english": "Your Lord has decreed upon Himself mercy",
+      "highlight": "كَتَبَ"
     }
   },
   "533": {
@@ -7249,6 +9259,11 @@
     "example": {
       "arabic": "أَفَلَا يَنظُرُونَ إِلَى الْإِبِلِ كَيْفَ خُلِقَتْ",
       "english": "Do they not look at the camels — how they are created",
+      "highlight": "يَنظُرُونَ"
+    },
+    "example2": {
+      "arabic": "أَفَلَا يَنظُرُونَ إِلَى السَّمَاءِ فَوْقَهُمْ",
+      "english": "Do they not look at the sky above them",
       "highlight": "يَنظُرُونَ"
     }
   },
@@ -7362,6 +9377,11 @@
       "arabic": "وَوَهَبْنَا لَهُ إِسْحَاقَ وَيَعْقُوبَ وَجَعَلْنَا فِي ذُرِّيَّتِهِ النُّبُوَّةَ",
       "english": "And We granted him Isaac and Jacob and placed prophethood in his descendants",
       "highlight": "وَوَهَبْنَا"
+    },
+    "example2": {
+      "arabic": "رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً",
+      "english": "My Lord grant me from Yourself a good offspring",
+      "highlight": "هَبْ"
     }
   },
   "541": {
@@ -7394,6 +9414,11 @@
       "arabic": "إِذَا وَقَعَتِ الْوَاقِعَةُ",
       "english": "When the Inevitable Event occurs",
       "highlight": "وَقَعَتِ"
+    },
+    "example2": {
+      "arabic": "فَإِذَا وَقَعَتِ الْوَاقِعَةُ لَيْسَ لِوَقْعَتِهَا كَاذِبَةٌ",
+      "english": "When the Inevitable Event occurs — about its occurrence there is no lie",
+      "highlight": "وَقَعَتِ"
     }
   },
   "543": {
@@ -7409,6 +9434,11 @@
     "example": {
       "arabic": "وَالسَّمَاءَ رَفَعَهَا وَوَضَعَ الْمِيزَانَ",
       "english": "And the sky He raised and set the balance",
+      "highlight": "وَوَضَعَ"
+    },
+    "example2": {
+      "arabic": "وَوَضَعَ الْمِيزَانَ أَلَّا تَطْغَوْا فِي الْمِيزَانِ",
+      "english": "And He set up the balance so that you do not transgress in the balance",
       "highlight": "وَوَضَعَ"
     }
   },
@@ -7426,6 +9456,11 @@
       "arabic": "وَعَدَ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَعَمِلُوا الصَّالِحَاتِ",
       "english": "Allah has promised those who believe among you and do good deeds",
       "highlight": "وَعَدَ"
+    },
+    "example2": {
+      "arabic": "إِنَّ اللَّهَ لَا يُخْلِفُ الْمِيعَادَ",
+      "english": "Indeed Allah does not break His promise",
+      "highlight": "الْمِيعَادَ"
     }
   },
   "545": {
@@ -7457,6 +9492,11 @@
     "example": {
       "arabic": "وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ",
       "english": "And no bearer of burdens will bear the burden of another",
+      "highlight": "وِزْرَ"
+    },
+    "example2": {
+      "arabic": "وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ",
+      "english": "No bearer of burdens will bear the burden of another",
       "highlight": "وِزْرَ"
     }
   },
@@ -7538,6 +9578,11 @@
       "arabic": "وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ",
       "english": "His Throne extends over the heavens and the earth",
       "highlight": "وَسِعَ"
+    },
+    "example2": {
+      "arabic": "رَبَّنَا وَسِعْتَ كُلَّ شَيْءٍ رَّحْمَةً وَعِلْمًا",
+      "english": "Our Lord You encompass all things in mercy and knowledge",
+      "highlight": "وَسِعْتَ"
     }
   },
   "552": {
@@ -7602,6 +9647,11 @@
       "arabic": "وَتُوبُوا إِلَى اللَّهِ جَمِيعًا أَيُّهَ الْمُؤْمِنُونَ",
       "english": "And turn to Allah in repentance, all of you, O believers",
       "highlight": "تُوبُوا"
+    },
+    "example2": {
+      "arabic": "أَلَمْ يَعْلَمُوا أَنَّ اللَّهَ هُوَ يَقْبَلُ التَّوْبَةَ",
+      "english": "Do they not know that it is Allah who accepts repentance",
+      "highlight": "التَّوْبَةَ"
     }
   },
   "556": {
@@ -7634,6 +9684,11 @@
       "arabic": "كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ",
       "english": "Every soul shall taste death",
       "highlight": "الْمَوْتِ"
+    },
+    "example2": {
+      "arabic": "أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ وَلَوْ كُنتُمْ فِي بُرُوجٍ",
+      "english": "Wherever you are death will reach you even in fortified towers",
+      "highlight": "الْمَوْتُ"
     }
   },
   "558": {
@@ -7665,6 +9720,11 @@
     "example": {
       "arabic": "سَاءَ مَثَلًا الْقَوْمُ الَّذِينَ كَذَّبُوا بِآيَاتِنَا",
       "english": "Evil is the example of the people who denied Our signs",
+      "highlight": "سَاءَ"
+    },
+    "example2": {
+      "arabic": "إِنَّ الَّذِينَ يُحِبُّونَ أَن تَشِيعَ الْفَاحِشَةُ فِي الَّذِينَ آمَنُوا",
+      "english": "Indeed those who love that immorality should spread among the believers",
       "highlight": "سَاءَ"
     }
   },
@@ -7826,6 +9886,11 @@
       "arabic": "جَنَّاتٌ تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ",
       "english": "Gardens beneath which rivers flow",
       "highlight": "تَجْرِي"
+    },
+    "example2": {
+      "arabic": "وَالْأَنْهَارُ تَجْرِي مِن تَحْتِهِمْ وَيَقُولُونَ الْحَمْدُ لِلَّهِ",
+      "english": "And rivers flow beneath them and they say: Praise be to Allah",
+      "highlight": "تَجْرِي"
     }
   },
   "570": {
@@ -7858,6 +9923,11 @@
       "arabic": "وَقَضَىٰ رَبُّكَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ",
       "english": "Your Lord has decreed that you worship none but Him",
       "highlight": "وَقَضَىٰ"
+    },
+    "example2": {
+      "arabic": "وَكَانَ أَمْرًا مَّقْضِيًّا",
+      "english": "And it was a matter decreed",
+      "highlight": "مَّقْضِيًّا"
     }
   },
   "572": {
@@ -7873,6 +9943,11 @@
     "example": {
       "arabic": "وَكَفَىٰ بِاللَّهِ شَهِيدًا",
       "english": "And sufficient is Allah as Witness",
+      "highlight": "وَكَفَىٰ"
+    },
+    "example2": {
+      "arabic": "وَكَفَىٰ بِرَبِّكَ هَادِيًا وَنَصِيرًا",
+      "english": "And sufficient is your Lord as Guide and Helper",
       "highlight": "وَكَفَىٰ"
     }
   },
@@ -7890,6 +9965,11 @@
       "arabic": "إِنَّكَ لَا تَهْدِي مَنْ أَحْبَبْتَ وَلَٰكِنَّ اللَّهَ يَهْدِي مَن يَشَاءُ",
       "english": "You do not guide whom you love but Allah guides whom He wills",
       "highlight": "تَهْدِي"
+    },
+    "example2": {
+      "arabic": "وَاللَّهُ يَهْدِي مَن يَشَاءُ إِلَىٰ صِرَاطٍ مُّسْتَقِيمٍ",
+      "english": "And Allah guides whom He wills to a straight path",
+      "highlight": "يَهْدِي"
     }
   },
   "574": {
@@ -7906,6 +9986,11 @@
       "arabic": "إِنَّمَا يَخْشَى اللَّهَ مِنْ عِبَادِهِ الْعُلَمَاءُ",
       "english": "Only those fear Allah from among His servants who have knowledge",
       "highlight": "يَخْشَى"
+    },
+    "example2": {
+      "arabic": "وَالَّذِينَ هُم مِّنْ عَذَابِ رَبِّهِم مُّشْفِقُونَ",
+      "english": "And those who are fearful of the punishment of their Lord",
+      "highlight": "يَخْشَوْنَ"
     }
   },
   "575": {
@@ -7922,6 +10007,11 @@
       "arabic": "رَّضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ",
       "english": "Allah is pleased with them and they are pleased with Him",
       "highlight": "رَّضِيَ"
+    },
+    "example2": {
+      "arabic": "يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً",
+      "english": "O reassured soul return to your Lord well-pleased and pleasing",
+      "highlight": "رَاضِيَةً"
     }
   },
   "576": {
@@ -8002,6 +10092,11 @@
       "arabic": "وَإِن يَمْسَسْكَ اللَّهُ بِضُرٍّ فَلَا كَاشِفَ لَهُ إِلَّا هُوَ",
       "english": "And if Allah touches you with adversity there is no remover except Him",
       "highlight": "بِضُرٍّ"
+    },
+    "example2": {
+      "arabic": "وَإِن يَمْسَسْكَ بِخَيْرٍ فَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+      "english": "And if He touches you with good — He is competent over all things",
+      "highlight": "بِضُرٍّ"
     }
   },
   "581": {
@@ -8017,6 +10112,11 @@
     "example": {
       "arabic": "وَمَن يَضْلِلِ اللَّهُ فَمَا لَهُ مِنْ هَادٍ",
       "english": "And whoever Allah sends astray — there is no guide for him",
+      "highlight": "يَضْلِلِ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَضْلِلِ اللَّهُ فَلَن تَجِدَ لَهُ وَلِيًّا مُّرْشِدًا",
+      "english": "Whoever Allah sends astray you will never find a guiding protector",
       "highlight": "يَضْلِلِ"
     }
   },
@@ -8066,6 +10166,11 @@
       "arabic": "لَا تَغُرَّنَّكُمُ الْحَيَاةُ الدُّنْيَا",
       "english": "Let not the worldly life deceive you",
       "highlight": "تَغُرَّنَّكُمُ"
+    },
+    "example2": {
+      "arabic": "يَا أَيُّهَا الْإِنسَانُ مَا غَرَّكَ بِرَبِّكَ الْكَرِيمِ",
+      "english": "O mankind what has deceived you concerning your Lord the Generous",
+      "highlight": "غَرَّكَ"
     }
   },
   "585": {
@@ -8114,6 +10219,11 @@
       "arabic": "وَدُّوا لَوْ تَكْفُرُونَ كَمَا كَفَرُوا فَتَكُونُونَ سَوَاءً",
       "english": "They wish you would disbelieve as they disbelieved so you would be alike",
       "highlight": "وَدُّوا"
+    },
+    "example2": {
+      "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَتَّخِذُوا بِطَانَةً مِّن دُونِكُمْ",
+      "english": "O believers do not take as intimates those other than yourselves",
+      "highlight": "وَدُّوا"
     }
   },
   "588": {
@@ -8130,6 +10240,11 @@
       "arabic": "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
       "english": "And when My servants ask you about Me — I am near",
       "highlight": "سَأَلَكَ"
+    },
+    "example2": {
+      "arabic": "وَلَيَسْأَلُنَّ يَوْمَ الْقِيَامَةِ عَمَّا كَانُوا يَعْمَلُونَ",
+      "english": "And they will surely be questioned on the Day of Resurrection about what they used to do",
+      "highlight": "يَسْأَلُنَّ"
     }
   },
   "589": {
@@ -8162,6 +10277,11 @@
       "arabic": "فَأَخَذَهُمُ اللَّهُ بِذُنُوبِهِمْ",
       "english": "So Allah seized them for their sins",
       "highlight": "فَأَخَذَهُمُ"
+    },
+    "example2": {
+      "arabic": "وَكَذَٰلِكَ أَخْذُ رَبِّكَ إِذَا أَخَذَ الْقُرَىٰ وَهِيَ ظَالِمَةٌ",
+      "english": "Such is the seizure of your Lord when He seizes cities while they are doing wrong",
+      "highlight": "أَخَذَ"
     }
   },
   "591": {
@@ -8290,6 +10410,11 @@
       "arabic": "وَبَشِّرِ الصَّابِرِينَ الَّذِينَ إِذَا أَصَابَتْهُم مُّصِيبَةٌ",
       "english": "And give good tidings to the patient — those who when afflicted with calamity",
       "highlight": "وَبَشِّرِ"
+    },
+    "example2": {
+      "arabic": "وَإِذْ قَالَتِ الْمَلَائِكَةُ يَا مَرْيَمُ إِنَّ اللَّهَ يُبَشِّرُكِ بِكَلِمَةٍ مِّنْهُ",
+      "english": "When the angels said: O Mary Allah gives you good news of a word from Him",
+      "highlight": "يُبَشِّرُكِ"
     }
   },
   "599": {
@@ -8306,6 +10431,11 @@
       "arabic": "قَدْ بَيَّنَّا لَكُمُ الْآيَاتِ لَعَلَّكُمْ تَعْقِلُونَ",
       "english": "We have made clear to you the signs that perhaps you will reason",
       "highlight": "بَيَّنَّا"
+    },
+    "example2": {
+      "arabic": "يُبَيِّنُ اللَّهُ لَكُمْ أَن تَضِلُّوا",
+      "english": "Allah makes clear to you so that you not go astray",
+      "highlight": "يُبَيِّنُ"
     }
   },
   "600": {
@@ -8321,6 +10451,11 @@
     "example": {
       "arabic": "زَيَّنَّا السَّمَاءَ الدُّنْيَا بِمَصَابِيحَ",
       "english": "We adorned the lowest heaven with lamps",
+      "highlight": "زَيَّنَّا"
+    },
+    "example2": {
+      "arabic": "إِنَّا زَيَّنَّا السَّمَاءَ الدُّنْيَا بِزِينَةٍ الْكَوَاكِبِ",
+      "english": "Indeed We adorned the nearest heaven with the adornment of stars",
       "highlight": "زَيَّنَّا"
     }
   },
@@ -8338,6 +10473,11 @@
       "arabic": "سَبَّحَ لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
       "english": "Whatever is in the heavens and earth glorifies Allah",
       "highlight": "سَبَّحَ"
+    },
+    "example2": {
+      "arabic": "يُسَبِّحُ لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
+      "english": "Whatever is in the heavens and earth glorifies Allah",
+      "highlight": "يُسَبِّحُ"
     }
   },
   "602": {
@@ -8418,6 +10558,11 @@
       "arabic": "عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ",
       "english": "He taught man what he did not know",
       "highlight": "عَلَّمَ"
+    },
+    "example2": {
+      "arabic": "وَعَلَّمَكَ مَا لَمْ تَكُن تَعْلَمُ",
+      "english": "And taught you what you did not know",
+      "highlight": "وَعَلَّمَكَ"
     }
   },
   "607": {
@@ -8450,6 +10595,11 @@
       "arabic": "إِنَّ الَّذِينَ كَذَّبُوا بِآيَاتِنَا وَاسْتَكْبَرُوا عَنْهَا",
       "english": "Indeed those who denied Our signs and were arrogant toward them",
       "highlight": "كَذَّبُوا"
+    },
+    "example2": {
+      "arabic": "وَكَذَّبَ الَّذِينَ مِن قَبْلِهِمْ وَمَا بَلَغُوا مِعْشَارَ مَا آتَيْنَاهُمْ",
+      "english": "Those before them denied and they did not reach a tenth of what We gave them",
+      "highlight": "وَكَذَّبَ"
     }
   },
   "609": {
@@ -8482,6 +10632,11 @@
       "arabic": "وَكَلَّمَ اللَّهُ مُوسَىٰ تَكْلِيمًا",
       "english": "And Allah spoke to Moses with direct speech",
       "highlight": "وَكَلَّمَ"
+    },
+    "example2": {
+      "arabic": "وَلَمَّا جَاءَ مُوسَىٰ لِمِيقَاتِنَا وَكَلَّمَهُ رَبُّهُ",
+      "english": "And when Moses arrived at Our appointed time and his Lord spoke to him",
+      "highlight": "وَكَلَّمَهُ"
     }
   },
   "611": {
@@ -8530,6 +10685,11 @@
       "arabic": "فَنَجَّيْنَاهُ وَأَهْلَهُ مِنَ الْكَرْبِ الْعَظِيمِ",
       "english": "So We saved him and his family from the great distress",
       "highlight": "فَنَجَّيْنَاهُ"
+    },
+    "example2": {
+      "arabic": "وَنَجَّيْنَا الَّذِينَ آمَنُوا وَكَانُوا يَتَّقُونَ",
+      "english": "And We saved those who believed and used to fear Allah",
+      "highlight": "وَنَجَّيْنَا"
     }
   },
   "614": {
@@ -8562,6 +10722,11 @@
       "arabic": "وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا",
       "english": "Those who strive for Us — We will surely guide them to Our ways",
       "highlight": "جَاهَدُوا"
+    },
+    "example2": {
+      "arabic": "وَجَاهِدُوا فِي اللَّهِ حَقَّ جِهَادِهِ",
+      "english": "And strive for Allah with the striving due to Him",
+      "highlight": "وَجَاهِدُوا"
     }
   },
   "616": {
@@ -8674,6 +10839,11 @@
       "arabic": "وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ",
       "english": "And We have not sent you except as a mercy to the worlds",
       "highlight": "أَرْسَلْنَاكَ"
+    },
+    "example2": {
+      "arabic": "وَمَا أَرْسَلْنَا مِن رَّسُولٍ إِلَّا بِلِسَانِ قَوْمِهِ",
+      "english": "We did not send any messenger except in the language of his people",
+      "highlight": "أَرْسَلْنَا"
     }
   },
   "623": {
@@ -8706,6 +10876,11 @@
       "arabic": "وَمَنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ فَلَهُ أَجْرُهُ عِندَ رَبِّهِ",
       "english": "Whoever submits his face to Allah while doing good — his reward is with his Lord",
       "highlight": "أَسْلَمَ"
+    },
+    "example2": {
+      "arabic": "بَلَىٰ مَنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ",
+      "english": "Yes — whoever submits his face to Allah while doing good",
+      "highlight": "أَسْلَمَ"
     }
   },
   "625": {
@@ -8722,6 +10897,11 @@
       "arabic": "إِنَّ اللَّهَ لَا يَغْفِرُ أَن يُشْرَكَ بِهِ وَيَغْفِرُ مَا دُونَ ذَٰلِكَ",
       "english": "Indeed Allah does not forgive association with Him but forgives what is less than that",
       "highlight": "يُشْرَكَ"
+    },
+    "example2": {
+      "arabic": "وَمَن يُشْرِكْ بِاللَّهِ فَقَدِ افْتَرَىٰ إِثْمًا عَظِيمًا",
+      "english": "Whoever associates with Allah has fabricated a tremendous sin",
+      "highlight": "يُشْرِكْ"
     }
   },
   "626": {
@@ -8754,6 +10934,11 @@
       "arabic": "فَمَنْ عَفَا وَأَصْلَحَ فَأَجْرُهُ عَلَى اللَّهِ",
       "english": "Whoever pardons and reforms — his reward is with Allah",
       "highlight": "وَأَصْلَحَ"
+    },
+    "example2": {
+      "arabic": "وَلَا تُفْسِدُوا فِي الْأَرْضِ بَعْدَ إِصْلَاحِهَا",
+      "english": "And do not cause corruption after its reformation",
+      "highlight": "إِصْلَاحِهَا"
     }
   },
   "628": {
@@ -8770,6 +10955,11 @@
       "arabic": "وَمَنْ أَعْرَضَ عَن ذِكْرِي فَإِنَّ لَهُ مَعِيشَةً ضَنكًا",
       "english": "Whoever turns away from My remembrance will have a difficult life",
       "highlight": "أَعْرَضَ"
+    },
+    "example2": {
+      "arabic": "فَأَعْرِضْ عَن مَّن تَوَلَّىٰ عَن ذِكْرِنَا",
+      "english": "So turn away from whoever turns his back on Our remembrance",
+      "highlight": "فَأَعْرِضْ"
     }
   },
   "629": {
@@ -8818,6 +11008,11 @@
       "arabic": "قَدْ أَفْلَحَ الْمُؤْمِنُونَ",
       "english": "Certainly will the believers have succeeded",
       "highlight": "أَفْلَحَ"
+    },
+    "example2": {
+      "arabic": "قَدْ أَفْلَحَ مَن زَكَّاهَا وَقَدْ خَابَ مَن دَسَّاهَا",
+      "english": "He has succeeded who purifies it and failed who instills it with corruption",
+      "highlight": "أَفْلَحَ"
     }
   },
   "632": {
@@ -8850,6 +11045,11 @@
       "arabic": "لِتُنذِرَ قَوْمًا مَّا أُنذِرَ آبَاؤُهُمْ فَهُمْ غَافِلُونَ",
       "english": "To warn a people whose forefathers were not warned — so they are heedless",
       "highlight": "لِتُنذِرَ"
+    },
+    "example2": {
+      "arabic": "نَذِيرًا لِّلْبَشَرِ",
+      "english": "As a warner to mankind",
+      "highlight": "نَذِيرًا"
     }
   },
   "634": {
@@ -8882,6 +11082,11 @@
       "arabic": "فَأَذَاقَهَا اللَّهُ لِبَاسَ الْجُوعِ وَالْخَوْفِ",
       "english": "So Allah made it taste the clothing of hunger and fear",
       "highlight": "فَأَذَاقَهَا"
+    },
+    "example2": {
+      "arabic": "وَلَنُذِيقَنَّهُمْ مِنَ الْعَذَابِ الْأَدْنَىٰ دُونَ الْعَذَابِ الْأَكْبَرِ",
+      "english": "And We will surely make them taste the nearer punishment before the greater punishment",
+      "highlight": "وَلَنُذِيقَنَّهُمْ"
     }
   },
   "636": {
@@ -8898,6 +11103,11 @@
       "arabic": "وَأَنَّهُ هُوَ أَمَاتَ وَأَحْيَا",
       "english": "And that it is He who causes death and gives life",
       "highlight": "أَمَاتَ"
+    },
+    "example2": {
+      "arabic": "الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا",
+      "english": "Who created death and life to test you as to which of you is best in deed",
+      "highlight": "الْمَوْتَ"
     }
   },
   "637": {
@@ -8914,6 +11124,11 @@
       "arabic": "يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ",
       "english": "Allah intends ease for you and does not intend hardship",
       "highlight": "يُرِيدُ"
+    },
+    "example2": {
+      "arabic": "وَإِذَا أَرَادَ اللَّهُ بِقَوْمٍ سُوءًا فَلَا مَرَدَّ لَهُ",
+      "english": "And when Allah intends for a people ill there is no repelling it",
+      "highlight": "أَرَادَ"
     }
   },
   "638": {
@@ -8945,6 +11160,11 @@
     "example": {
       "arabic": "مَّن يُطِعِ الرَّسُولَ فَقَدْ أَطَاعَ اللَّهَ",
       "english": "Whoever obeys the Messenger has obeyed Allah",
+      "highlight": "يُطِعِ"
+    },
+    "example2": {
+      "arabic": "وَمَن يُطِعِ اللَّهَ وَالرَّسُولَ فَأُولَٰئِكَ مَعَ الَّذِينَ أَنْعَمَ اللَّهُ عَلَيْهِم",
+      "english": "Whoever obeys Allah and the Messenger — those will be with those Allah has blessed",
       "highlight": "يُطِعِ"
     }
   },
@@ -8994,6 +11214,11 @@
       "arabic": "وَأَوْحَيْنَا إِلَىٰ مُوسَىٰ وَأَخِيهِ",
       "english": "And We revealed to Moses and his brother",
       "highlight": "أَوْحَيْنَا"
+    },
+    "example2": {
+      "arabic": "وَمَا يَنطِقُ عَنِ الْهَوَىٰ إِنْ هُوَ إِلَّا وَحْيٌ يُوحَىٰ",
+      "english": "He does not speak from desire — it is nothing but revelation revealed",
+      "highlight": "وَحْيٌ"
     }
   },
   "643": {
@@ -9026,6 +11251,11 @@
       "arabic": "آتَى اللَّهُ الْمُلْكَ مَن يَشَاءُ",
       "english": "Allah gives sovereignty to whom He wills",
       "highlight": "آتَى"
+    },
+    "example2": {
+      "arabic": "وَآتَيْنَاهُ مِنَ الْكُنُوزِ مَا إِنَّ مَفَاتِحَهُ",
+      "english": "And We gave him of treasures whose keys were burdensome",
+      "highlight": "وَآتَيْنَاهُ"
     }
   },
   "645": {
@@ -9042,6 +11272,11 @@
       "arabic": "وَمَن يُضْلِلِ اللَّهُ فَمَا لَهُ مِنْ هَادٍ",
       "english": "Whoever Allah sends astray — there is no guide for him",
       "highlight": "يُضْلِلِ"
+    },
+    "example2": {
+      "arabic": "وَلَقَدْ أَضَلَّ مِنكُمْ جِبِلًّا كَثِيرًا",
+      "english": "And he had already led astray from among you a great multitude",
+      "highlight": "أَضَلَّ"
     }
   },
   "646": {
@@ -9074,6 +11309,11 @@
       "arabic": "وَأَحَلَّ اللَّهُ الْبَيْعَ وَحَرَّمَ الرِّبَا",
       "english": "Allah has permitted trade and forbidden interest",
       "highlight": "وَأَحَلَّ"
+    },
+    "example2": {
+      "arabic": "يَا أَيُّهَا النَّاسُ كُلُوا مِمَّا فِي الْأَرْضِ حَلَالًا طَيِّبًا",
+      "english": "O people eat of what is lawful and good on earth",
+      "highlight": "أَحَلَّ"
     }
   },
   "648": {
@@ -9138,6 +11378,11 @@
       "arabic": "وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ",
       "english": "And whoever relies upon Allah — He is sufficient for him",
       "highlight": "يَتَوَكَّلْ"
+    },
+    "example2": {
+      "arabic": "فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى اللَّهِ إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ",
+      "english": "And when you decide then rely upon Allah — indeed Allah loves those who rely on Him",
+      "highlight": "فَتَوَكَّلْ"
     }
   },
   "652": {
@@ -9170,6 +11415,11 @@
       "arabic": "اللَّهُ يَتَوَفَّى الْأَنفُسَ حِينَ مَوْتِهَا",
       "english": "Allah takes the souls at the time of their death",
       "highlight": "يَتَوَفَّى"
+    },
+    "example2": {
+      "arabic": "اللَّهُ يَتَوَفَّى الْأَنفُسَ حِينَ مَوْتِهَا",
+      "english": "Allah takes the souls at the time of their death",
+      "highlight": "يَتَوَفَّى"
     }
   },
   "654": {
@@ -9186,6 +11436,11 @@
       "arabic": "وَمَا اخْتَلَفَ الَّذِينَ أُوتُوا الْكِتَابَ إِلَّا مِن بَعْدِ مَا جَاءَهُمُ الْعِلْمُ",
       "english": "Those given the Scripture did not differ except after knowledge came to them",
       "highlight": "اخْتَلَفَ"
+    },
+    "example2": {
+      "arabic": "وَلَوْ شَاءَ رَبُّكَ لَجَعَلَ النَّاسَ أُمَّةً وَاحِدَةً وَلَا يَزَالُونَ مُخْتَلِفِينَ",
+      "english": "And if your Lord had willed He could have made people one nation — but they will remain differing",
+      "highlight": "مُخْتَلِفِينَ"
     }
   },
   "655": {
@@ -9202,6 +11457,11 @@
       "arabic": "وَلَا تَتَّخِذُوا عَدُوِّي وَعَدُوَّكُمْ أَوْلِيَاءَ",
       "english": "Do not take My enemies and your enemies as allies",
       "highlight": "تَتَّخِذُوا"
+    },
+    "example2": {
+      "arabic": "وَاتَّخَذَ اللَّهُ إِبْرَاهِيمَ خَلِيلًا",
+      "english": "And Allah took Abraham as an intimate friend",
+      "highlight": "وَاتَّخَذَ"
     }
   },
   "656": {
@@ -9218,6 +11478,11 @@
       "arabic": "إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ",
       "english": "The most noble of you in the sight of Allah is the most righteous",
       "highlight": "أَتْقَاكُمْ"
+    },
+    "example2": {
+      "arabic": "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا وَيَرْزُقْهُ",
+      "english": "Whoever fears Allah — He makes for him a way out and provides for him",
+      "highlight": "يَتَّقِ"
     }
   },
   "657": {
@@ -9234,6 +11499,11 @@
       "arabic": "وَمَنْ أَظْلَمُ مِمَّنِ افْتَرَىٰ عَلَى اللَّهِ كَذِبًا",
       "english": "Who is more unjust than one who fabricates a lie against Allah",
       "highlight": "افْتَرَىٰ"
+    },
+    "example2": {
+      "arabic": "أَمْ يَقُولُونَ افْتَرَاهُ قُلْ فَأْتُوا بِسُورَةٍ مِّثْلِهِ",
+      "english": "Or do they say he fabricated it — say then bring a surah like it",
+      "highlight": "افْتَرَاهُ"
     }
   },
   "658": {
@@ -9314,6 +11584,11 @@
       "arabic": "فَاسْتَجَابَ لَهُمْ رَبُّهُمْ أَنِّي لَا أُضِيعُ عَمَلَ عَامِلٍ",
       "english": "Their Lord responded: I will not allow the deeds of any doer to be lost",
       "highlight": "فَاسْتَجَابَ"
+    },
+    "example2": {
+      "arabic": "وَالَّذِينَ اسْتَجَابُوا لِرَبِّهِمْ وَأَقَامُوا الصَّلَاةَ",
+      "english": "Those who responded to their Lord and established prayer",
+      "highlight": "اسْتَجَابُوا"
     }
   },
   "663": {
@@ -9325,7 +11600,12 @@
       "Salaha",
       "Rabb"
     ],
-    "correct_answer": "Ma"
+    "correct_answer": "Ma",
+    "example": {
+      "arabic": "مَا كَانَ مُحَمَّدٌ أَبَا أَحَدٍ مِّن رِّجَالِكُمْ",
+      "english": "Muhammad is not the father of any of your men",
+      "highlight": "مَا"
+    }
   },
   "664": {
     "category": "Interrogatives (Reverse)",
@@ -9336,7 +11616,17 @@
       "Kada",
       "Nafs"
     ],
-    "correct_answer": "Mata"
+    "correct_answer": "Mata",
+    "example": {
+      "arabic": "كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ",
+      "english": "Every soul shall taste death",
+      "highlight": "الْمَوْتِ"
+    },
+    "example2": {
+      "arabic": "أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ وَلَوْ كُنتُمْ فِي بُرُوجٍ",
+      "english": "Wherever you are death will reach you even in fortified towers",
+      "highlight": "الْمَوْتُ"
+    }
   },
   "665": {
     "category": "Interrogatives (Reverse)",
@@ -9347,7 +11637,12 @@
       "Kafa",
       "Bayna yadayhi"
     ],
-    "correct_answer": "Ayna"
+    "correct_answer": "Ayna",
+    "example": {
+      "arabic": "أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ",
+      "english": "Wherever you are, death will overtake you",
+      "highlight": "أَيْنَمَا"
+    }
   },
   "666": {
     "category": "Interrogatives (Reverse)",
@@ -9358,7 +11653,12 @@
       "Kayfa",
       "Amina"
     ],
-    "correct_answer": "Kayfa"
+    "correct_answer": "Kayfa",
+    "example": {
+      "arabic": "أَفَلَا يَنظُرُونَ إِلَى الْإِبِلِ كَيْفَ خُلِقَتْ",
+      "english": "Do they not look at the camels — how they are created",
+      "highlight": "كَيْفَ"
+    }
   },
   "667": {
     "category": "Interrogatives (Reverse)",
@@ -9369,7 +11669,12 @@
       "Kataba",
       "Haram"
     ],
-    "correct_answer": "Kam"
+    "correct_answer": "Kam",
+    "example": {
+      "arabic": "كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّنَ الْقُرُونِ",
+      "english": "How many generations We destroyed before them",
+      "highlight": "كَمْ"
+    }
   },
   "668": {
     "category": "Interrogatives (Reverse)",
@@ -9380,7 +11685,12 @@
       "Alpa",
       "Sha'ara"
     ],
-    "correct_answer": "Ayyu"
+    "correct_answer": "Ayyu",
+    "example": {
+      "arabic": "أَيُّكُمْ يَأْتِينِي بِعَرْشِهَا",
+      "english": "Which of you will bring me her throne",
+      "highlight": "أَيُّكُمْ"
+    }
   },
   "669": {
     "category": "Interrogatives (Reverse)",
@@ -9391,7 +11701,12 @@
       "Ibtagha",
       "Covenant"
     ],
-    "correct_answer": "Anna"
+    "correct_answer": "Anna",
+    "example": {
+      "arabic": "أَنَّىٰ يَكُونُ لَهُ وَلَدٌ وَلَمْ تَكُن لَّهُ صَاحِبَةٌ",
+      "english": "How could He have a son when He had no companion",
+      "highlight": "أَنَّىٰ"
+    }
   },
   "670": {
     "category": "Interrogatives (Reverse)",
@@ -9402,7 +11717,12 @@
       "Nafakha",
       "Bagha"
     ],
-    "correct_answer": "Hal"
+    "correct_answer": "Hal",
+    "example": {
+      "arabic": "هَلْ أَتَاكَ حَدِيثُ الْغَاشِيَةِ",
+      "english": "Has there reached you the report of the Overwhelming Event",
+      "highlight": "هَلْ"
+    }
   },
   "671": {
     "category": "Interrogatives (Reverse)",
@@ -9413,7 +11733,12 @@
       "Salaha",
       "Madha"
     ],
-    "correct_answer": "Madha"
+    "correct_answer": "Madha",
+    "example": {
+      "arabic": "مَاذَا أَرَادَ اللَّهُ بِهَٰذَا مَثَلًا",
+      "english": "What did Allah intend by this as an example",
+      "highlight": "مَاذَا"
+    }
   },
   "672": {
     "category": "Interrogatives (Reverse)",
@@ -9424,7 +11749,12 @@
       "Arsala",
       "Baddala"
     ],
-    "correct_answer": "Lima"
+    "correct_answer": "Lima",
+    "example": {
+      "arabic": "لِمَ تَقُولُونَ مَا لَا تَفْعَلُونَ",
+      "english": "Why do you say what you do not do",
+      "highlight": "لِمَ"
+    }
   },
   "673": {
     "category": "Interrogatives (Reverse)",
@@ -9435,7 +11765,12 @@
       "Sahara",
       "Limadha"
     ],
-    "correct_answer": "Limadha"
+    "correct_answer": "Limadha",
+    "example": {
+      "arabic": "لِمَ تَقُولُونَ مَا لَا تَفْعَلُونَ",
+      "english": "Why do you say what you do not do",
+      "highlight": "لِمَ"
+    }
   },
   "674": {
     "category": "Interrogatives (Reverse)",
@@ -9446,7 +11781,12 @@
       "Ja'ala",
       "Liman"
     ],
-    "correct_answer": "Liman"
+    "correct_answer": "Liman",
+    "example": {
+      "arabic": "لِمَنِ الْمُلْكُ الْيَوْمَ لِلَّهِ الْوَاحِدِ الْقَهَّارِ",
+      "english": "For whom is the dominion today — for Allah, the One, the Prevailing",
+      "highlight": "لِمَنِ"
+    }
   },
   "675": {
     "category": "Locatives (Reverse)",
@@ -9457,7 +11797,12 @@
       "Ruh",
       "Hafiza"
     ],
-    "correct_answer": "Fawqa"
+    "correct_answer": "Fawqa",
+    "example": {
+      "arabic": "وَهُوَ الْقَاهِرُ فَوْقَ عِبَادِهِ",
+      "english": "And He is the Subjugator above His servants",
+      "highlight": "فَوْقَ"
+    }
   },
   "676": {
     "category": "Locatives (Reverse)",
@@ -9468,7 +11813,12 @@
       "Fawqa",
       "Tawakkala"
     ],
-    "correct_answer": "Tahta"
+    "correct_answer": "Tahta",
+    "example": {
+      "arabic": "تَجْرِي مِن تَحْتِهَا الْأَنْهَارُ خَالِدِينَ فِيهَا",
+      "english": "Beneath which rivers flow — abiding therein forever",
+      "highlight": "تَحْتِهَا"
+    }
   },
   "677": {
     "category": "Locatives (Reverse)",
@@ -9479,7 +11829,12 @@
       "Bashara",
       "Bayna yadayhi"
     ],
-    "correct_answer": "Bayna yadayhi"
+    "correct_answer": "Bayna yadayhi",
+    "example": {
+      "arabic": "لَا يَأْتِيهِ الْبَاطِلُ مِن بَيْنِ يَدَيْهِ وَلَا مِنْ خَلْفِهِ",
+      "english": "Falsehood cannot approach it from before it or from behind it",
+      "highlight": "بَيْنِ يَدَيْهِ"
+    }
   },
   "678": {
     "category": "Locatives (Reverse)",
@@ -9490,7 +11845,12 @@
       "Intaha",
       "Dhakara"
     ],
-    "correct_answer": "Khalfa"
+    "correct_answer": "Khalfa",
+    "example": {
+      "arabic": "يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ",
+      "english": "He knows what is before them and what is behind them",
+      "highlight": "خَلْفَهُمْ"
+    }
   },
   "679": {
     "category": "Locatives (Reverse)",
@@ -9501,7 +11861,12 @@
       "Zanna",
       "Amama"
     ],
-    "correct_answer": "Amama"
+    "correct_answer": "Amama",
+    "example": {
+      "arabic": "فَكَانَ وَرَاءَهُمْ مَّلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ غَصْبًا",
+      "english": "Before them was a king who seized every good ship by force",
+      "highlight": "أَمَامَهُمْ"
+    }
   },
   "680": {
     "category": "Locatives (Reverse)",
@@ -9512,7 +11877,12 @@
       "Shimal",
       "Wara'a"
     ],
-    "correct_answer": "Wara'a"
+    "correct_answer": "Wara'a",
+    "example": {
+      "arabic": "وَكَانَ وَرَاءَهُم مَّلِكٌ يَأْخُذُ كُلَّ سَفِينَةٍ غَصْبًا",
+      "english": "And beyond them was a king who seized every ship by force",
+      "highlight": "وَرَاءَهُم"
+    }
   },
   "681": {
     "category": "Locatives (Reverse)",
@@ -9523,7 +11893,12 @@
       "Hayya",
       "Yamin"
     ],
-    "correct_answer": "Yamin"
+    "correct_answer": "Yamin",
+    "example": {
+      "arabic": "فَأَصْحَابُ الْمَيْمَنَةِ مَا أَصْحَابُ الْمَيْمَنَةِ",
+      "english": "The companions of the right — what are the companions of the right",
+      "highlight": "الْمَيْمَنَةِ"
+    }
   },
   "682": {
     "category": "Locatives (Reverse)",
@@ -9534,7 +11909,12 @@
       "Fataha",
       "Qaddama"
     ],
-    "correct_answer": "Shimal"
+    "correct_answer": "Shimal",
+    "example": {
+      "arabic": "وَأَصْحَابُ الشِّمَالِ مَا أَصْحَابُ الشِّمَالِ",
+      "english": "The companions of the left — what are the companions of the left",
+      "highlight": "الشِّمَالِ"
+    }
   },
   "683": {
     "category": "Locatives (Reverse)",
@@ -9545,7 +11925,12 @@
       "Fasaqa",
       "Kadhiba"
     ],
-    "correct_answer": "Bayna"
+    "correct_answer": "Bayna",
+    "example": {
+      "arabic": "وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
+      "english": "And He placed between you affection and mercy",
+      "highlight": "بَيْنَكُم"
+    }
   },
   "684": {
     "category": "Locatives (Reverse)",
@@ -9556,7 +11941,12 @@
       "Hashara",
       "Jama'a"
     ],
-    "correct_answer": "Hawla"
+    "correct_answer": "Hawla",
+    "example": {
+      "arabic": "وَالْمَلَائِكَةُ حَافِّينَ مِنْ حَوْلِ الْعَرْشِ",
+      "english": "And the angels will be surrounding the Throne",
+      "highlight": "حَوْلِ"
+    }
   },
   "685": {
     "category": "Locatives (Reverse)",
@@ -9567,7 +11957,12 @@
       "Nar",
       "Aynama"
     ],
-    "correct_answer": "Haythu"
+    "correct_answer": "Haythu",
+    "example": {
+      "arabic": "أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ وَلَوْ كُنتُمْ فِي بُرُوجٍ مُّشَيَّدَةٍ",
+      "english": "Wherever you may be death will overtake you even in fortified towers",
+      "highlight": "أَيْنَمَا"
+    }
   },
   "686": {
     "category": "Locatives (Reverse)",
@@ -9578,7 +11973,12 @@
       "Aynama",
       "Batil"
     ],
-    "correct_answer": "Aynama"
+    "correct_answer": "Aynama",
+    "example": {
+      "arabic": "أَيْنَمَا تَكُونُوا يُدْرِككُّمُ الْمَوْتُ وَلَوْ كُنتُمْ فِي بُرُوجٍ مُّشَيَّدَةٍ",
+      "english": "Wherever you may be death will overtake you even in fortified towers",
+      "highlight": "أَيْنَمَا"
+    }
   },
   "687": {
     "category": "Locatives (Reverse)",
@@ -9589,7 +11989,12 @@
       "Wajada",
       "Huna"
     ],
-    "correct_answer": "Huna"
+    "correct_answer": "Huna",
+    "example": {
+      "arabic": "إِنَّا هَاهُنَا قَاعِدُونَ",
+      "english": "Indeed we are sitting right here",
+      "highlight": "هَاهُنَا"
+    }
   },
   "688": {
     "category": "Locatives (Reverse)",
@@ -9600,7 +12005,12 @@
       "Fa'ala",
       "Hunalika"
     ],
-    "correct_answer": "Hunalika"
+    "correct_answer": "Hunalika",
+    "example": {
+      "arabic": "هُنَالِكَ ابْتُلِيَ الْمُؤْمِنُونَ وَزُلْزِلُوا زِلْزَالًا شَدِيدًا",
+      "english": "There the believers were tested and shaken with a severe shaking",
+      "highlight": "هُنَالِكَ"
+    }
   },
   "689": {
     "category": "Grammar Logic",

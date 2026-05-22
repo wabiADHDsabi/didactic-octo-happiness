@@ -4984,7 +4984,8 @@ function qwNextCard(){
   var newDone=qwState.todayNewCount||0;
   var revDone=qwState.todayReviewCount||0;
   var revTarget=qwState.todayReviewQueue?qwState.todayReviewQueue.length:0;
-  if(newDone>=6&&revDone>=revTarget)return null;
+  var _qwNT=qwState._ultra?21:6;
+  if(newDone>=_qwNT&&revDone>=revTarget)return null;
   var _lastId=qwState._lastAnswered||null;
   var queue=(qwState.queue||[]).filter(function(id){return QW_CARDS.some(function(c){return c.id===id;});});
   qwState.queue=queue;
@@ -5006,7 +5007,20 @@ function qwNextCard(){
     var revId=(qwState.todayReviewQueue||[])[revDone];
     if(revId){var rc2=QW_CARDS.find(function(c){return c.id===revId;});if(rc2)return rc2;}
   }
-  if(newDone<6){
+  var _newTarget=qwState._ultra?21:6;
+  if(newDone<_newTarget){
+    // Ultra mode: work through todayNewQueue if set
+    var _newQ=qwState.todayNewQueue||[];
+    if(_newQ.length>0&&qwState._ultra){
+      // Find next unfinished card in todayNewQueue
+      for(var ni=0;ni<_newQ.length;ni++){
+        var nid=_newQ[ni];
+        if(nid!==_lastId&&!qwState.seen[nid]){
+          return QW_CARDS.find(function(c){return c.id===nid;})||null;
+        }
+      }
+    }
+    // Normal mode: random unseen
     var unseen=QW_CARDS.filter(function(c){return !qwState.seen[c.id]&&(qwState.wrong||[]).indexOf(c.id)<0&&c.id!==_lastId;});
     if(!unseen.length)unseen=QW_CARDS.filter(function(c){return !qwState.seen[c.id]&&(qwState.wrong||[]).indexOf(c.id)<0;});
     if(!unseen.length){qwState.seen={};unseen=QW_CARDS.filter(function(c){return (qwState.wrong||[]).indexOf(c.id)<0;});}
@@ -5024,12 +5038,12 @@ function qwRenderStudy(){
   var badge=document.getElementById('qw-badge');
   if(!el)return;
   qwEnsureState();
+  var ultraQW=!!qwState._ultra;
   var nd=qwState.todayNewCount||0;
   var rd=qwState.todayReviewCount||0;
   var rt=qwState.todayReviewQueue?qwState.todayReviewQueue.length:0;
   var qwLimit=ultraQW?21:6;
   var allDone=nd>=qwLimit&&rd>=(ultraQW?rt+25:rt);
-  var ultraQW=!!qwState._ultra;
   if(badge){
     badge.textContent=nd+'/'+(ultraQW?21:6);
     badge.style.display='';
@@ -5191,18 +5205,20 @@ function qwRenderStudy(){
           if(!isLearned)h+='<button data-qwlearned="'+w.id+'" style="padding:2px 8px;background:rgba(80,250,123,.06);border:1px solid rgba(80,250,123,.3);color:rgba(80,250,123,.8);font-family:monospace;font-size:var(--t-xxs);cursor:pointer;letter-spacing:1px">✓ LEARNED</button>';
           else h+='<span style="font-size:var(--t-xxs);color:rgba(80,250,123,.5)">✓</span>';
           h+='</div>';
-          // Example sentence from Quran
+          // Example sentence(s) from Quran
           var _qwEx=QW_CARDS&&QW_CARDS.find(function(c){return String(c.id)===String(w.id);});
-          var _qwExData=_qwEx&&_qwEx.example;
-          if(_qwExData&&_qwExData.arabic){
-            var _qwAr=_qwExData.arabic;
-            var _qwHL=_qwExData.highlight||'';
-            if(_qwHL)_qwAr=_qwAr.replace(_qwHL,'<span style="color:#ffcc00">'+_qwHL+'</span>');
+          function _qwRenderEx(exData){
+            if(!exData||!exData.arabic)return;
+            var _ar=exData.arabic;
+            var _hl=exData.highlight||'';
+            if(_hl)_ar=_ar.replace(_hl,'<span style="color:#ffcc00">'+_hl+'</span>');
             h+='<div style="margin-top:8px;padding:8px 10px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.12);border-right:3px solid rgba(255,204,0,.3)">';
-            h+='<div style="font-size:var(--t-base);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;color:var(--text)">'+_qwAr+'</div>';
-            h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;font-style:italic">'+(_qwExData.english||'')+'</div>';
+            h+='<div style="font-size:var(--t-base);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;color:var(--text)">'+_ar+'</div>';
+            h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;font-style:italic">'+(exData.english||'')+'</div>';
             h+='</div>';
           }
+          _qwRenderEx(_qwEx&&_qwEx.example);
+          _qwRenderEx(_qwEx&&_qwEx.example2);
         } else {
           h+='<button data-qwreveal="'+w.id+'" style="padding:4px 10px;background:transparent;border:1px solid var(--c-faint);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SHOW</button>';
         }
