@@ -132,8 +132,11 @@ body.bigcat-mode #bigcat-panel { display:block !important; }
 .tpr{border-color:#c77dff55;box-shadow:inset 0 0 12px #c77dff12}.tpr:not(.dragging):hover{box-shadow:0 0 24px #c77dff40,inset 0 0 30px #c77dff20}
 .to{border-color:#ff8c4255;box-shadow:inset 0 0 12px #ff8c4212}.to:not(.dragging):hover{box-shadow:0 0 24px #ff8c4240,inset 0 0 30px #ff8c4220}
 .tl{border-color:#aaff0055;box-shadow:inset 0 0 12px #aaff0012}.tl:not(.dragging):hover{box-shadow:0 0 24px #aaff0040,inset 0 0 30px #aaff0020}
-.tile.tile.scroll-top-btn{position:absolute;bottom:8px;right:10px;background:transparent;border:none;color:rgba(255,255,255,.2);font-size:16px;cursor:pointer;padding:4px 8px;line-height:1;transition:color .15s;z-index:10}
-.scroll-top-btn:hover{color:rgba(255,255,255,.6)}
+.tile.dragging{opacity:.3;transform:scale(.97) !important;box-shadow:none !important}
+.tile.drag-over{outline:2px dashed rgba(255,255,255,.35);outline-offset:3px}
+.drag-handle{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:repeat(3,4px);gap:3px;width:18px;padding:4px 8px;cursor:grab;z-index:10;color:var(--dim);transition:color .15s;touch-action:none;user-select:none}
+.drag-handle span{width:3px;height:3px;background:currentColor;border-radius:50%;display:block}
+.drag-handle:hover{color:var(--text)}
 .export-btn{font-size:10px;cursor:pointer;padding:2px 7px;border:1px solid var(--dim);color:var(--dim);background:transparent;transition:all .12s;user-select:none}
 .export-btn:hover{color:var(--text);border-color:var(--text)}
 .th{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)}
@@ -186,7 +189,8 @@ body.bigcat-mode #bigcat-panel { display:block !important; }
 .ti{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;cursor:pointer}
 .ti:last-child{border-bottom:none}
 .ti.reorder-ready{cursor:grab;-webkit-user-select:none;user-select:none}
-.ti.ti.reorder-ready .ttx{-webkit-user-select:none;user-select:none;touch-action:none}
+.ti.dragging{opacity:.6;outline:1px dashed var(--cp);outline-offset:3px}
+.ti.reorder-ready .ttx{-webkit-user-select:none;user-select:none;touch-action:none}
 .ti.done .ttx{text-decoration:line-through;color:var(--dim)}
 .tbox{width:14px;height:14px;flex-shrink:0;margin-top:1px;border:1px solid var(--cp);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--cp)}
 .tdel{margin-left:auto;font-size:11px;color:var(--cr);flex-shrink:0;padding:2px 4px;opacity:.5;transition:opacity .15s}
@@ -383,6 +387,7 @@ body.bigcat-mode #bigcat-panel { display:block !important; }
 /* COMPACT MODE — meaningful size reduction across all cards */
 body.compact-mode #grid{gap:7px;padding:10px;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr))}
 body.compact-mode .tile{padding:12px;padding-bottom:32px}
+body.compact-mode .drag-handle{padding:6px 16px;bottom:8px}
 body.compact-mode .th{margin-bottom:8px;padding-bottom:7px}
 body.compact-mode .th-icon{font-size:15px}
 body.compact-mode .th-label{font-size:9px}
@@ -468,7 +473,7 @@ body.compact-mode #raft-canvas{max-height:80px}
 /* ACCORDION MODE */
 body.accordion-mode [data-id] .th{cursor:pointer}
 body.accordion-mode [data-id] .th:hover{opacity:.85}
-[data-id].acc-closed > *:not(.th):not(.scroll-top-btn){display:none}
+[data-id].acc-closed > *:not(.th):not(.drag-handle){display:none}
 [data-id].acc-closed{padding-bottom:14px}
 
 /* ═══ ICON MODE ═══ */
@@ -1922,12 +1927,12 @@ body.theme-bw input:focus,body.theme-bw textarea:focus{border-color:#FFFFFF}
 body.theme-bw input::placeholder,body.theme-bw textarea::placeholder{color:#404040}
 
 /* Buttons — all unified */
-body.theme-bw button:not(.scroll-top-btn){
+body.theme-bw button:not(.drag-handle){
   background:transparent;
   border-color:#404040;
   color:#C0C0C0;
 }
-body.theme-bw button:not(.scroll-top-btn):hover{border-color:#FFFFFF;color:#FFFFFF}
+body.theme-bw button:not(.drag-handle):hover{border-color:#FFFFFF;color:#FFFFFF}
 body.theme-bw .pomo-btn.primary{background:#FFFFFF;border-color:#FFFFFF;color:#000000;font-weight:bold}
 body.theme-bw .pomo-btn.primary:hover{background:#C0C0C0}
 body.theme-bw .pomo-btn.danger{border-color:#404040;color:#808080}
@@ -2365,7 +2370,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 <div id="bigcat-panel"></div>
 <div id="grid">
   <div class="tile" data-id="quick-nav" style="border-color:rgba(255,255,255,.2)"><div class="icon-label-wrap"><span class="icon-emoji">⚡</span><span class="icon-label">NAV</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,255,255,.15);display:flex;align-items:center">
       <span class="th-icon" style="color:var(--text)">&#9889;</span>
       <span class="th-label" style="color:var(--text);flex:1">Quick Nav</span>
@@ -2374,7 +2379,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="qnav-body"></div>
   </div>
   <div class="tile tg" data-id="clock" onclick="toggleClockMode()" style="cursor:pointer"><div class="icon-label-wrap"><span class="icon-emoji">🕐</span><span class="icon-label">CLOCK</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});event.stopPropagation()">↑</button>
+    <div class="drag-handle" onclick="event.stopPropagation()"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9201;</span><span class="th-label cg">Clock / Date</span><span class="th-badge cg" id="clock-mode-badge">24H</span></div>
     <div id="pomo-clock-overlay" onclick="pomoGoToCard()">
       <div class="pomo-ov-time" id="pomo-ov-time">25:00</div>
@@ -2386,13 +2391,13 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="big-moon"></div>
   </div>
   <div class="tile ta" data-id="prayer" onclick="openModal('prayer')" style="cursor:pointer"><div class="icon-label-wrap"><span class="icon-emoji">☪</span><span class="icon-label">PRAYER</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});event.stopPropagation()">↑</button>
+    <div class="drag-handle" onclick="event.stopPropagation()"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9770;</span><span class="th-label ca">Prayer Times &middot; 21044</span><div style="margin-left:auto;text-align:right"><div style="font-size:10px;color:var(--ca);letter-spacing:1px" id="nbadge">--</div><div style="font-size:20px;color:var(--ca);text-shadow:var(--ga);line-height:1" id="prayer-countdown">--:--</div></div></div>
     <div id="plist"><div class="cdm" style="font-size:12px">Fetching...</div></div>
     <div id="forbidden-times-panel"></div>
   </div>
   <div class="tile tc" data-id="weather" onclick="openModal('weather')" style="cursor:pointer"><div class="icon-label-wrap"><span class="icon-emoji">⛅</span><span class="icon-label">WEATHER</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});event.stopPropagation()">↑</button>
+    <div class="drag-handle" onclick="event.stopPropagation()"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9672;</span><span class="th-label cc">Weather &middot; 21044</span><span class="th-badge cc" id="wbadge">LOADING</span></div>
     <div id="walert"></div>
     <div id="walert2"></div>
@@ -2405,12 +2410,12 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="wfc"></div>
   </div>
   <div class="tile tl" data-id="stocks" onclick="openModal('stocks')" style="cursor:pointer"><div class="icon-label-wrap"><span class="icon-emoji">◆</span><span class="icon-label">MARKETS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'});event.stopPropagation()">↑</button>
+    <div class="drag-handle" onclick="event.stopPropagation()"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9670;</span><span class="th-label cl">Markets</span><span class="th-badge cl" id="mkbadge">CLOSED</span></div>
     <div id="slist"></div>
   </div>
   <div class="tile tp" data-id="todo"><div class="icon-label-wrap"><span class="icon-emoji">▣</span><span class="icon-label">TO-DO</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9635;</span><span class="th-label cp">To-Do</span><span class="th-badge cp" id="tdbadge">0 left</span><div style="margin-left:auto;display:flex;gap:4px;align-items:center;flex-wrap:wrap"><span class="th-badge" id="td-tab-main" style="color:var(--cp);border-color:var(--cp);cursor:pointer" onclick="todoSwitchTab('main')">MAIN</span><span class="th-badge" id="td-tab-done" style="color:var(--dim);border-color:var(--dim);cursor:pointer" onclick="todoSwitchTab('done')">DONE</span><button class="export-btn" onclick="exportTodos()" title="Copy to clipboard">&#128203;</button><button class="export-btn" id="todo-clear-btn" onclick="clearAllTodos()" title="Delete all tasks" style="color:var(--cr);border-color:rgba(255,68,68,.3)">&#128465;</button><span class="th-badge" id="td-import-toggle" style="color:var(--dim);border-color:var(--dim);cursor:pointer" onclick="todoToggleImport()">&#128229; IMPORT</span></div></div>
     <div id="td-main-panel">
     <div class="tdr"><input type="text" id="tdinp" placeholder="add task..." onkeydown="if(event.key==='Enter')addTodo()"><button onclick="addTodo()">+ADD</button></div>
@@ -2442,19 +2447,19 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     </div>
   </div>
   <div class="tile to" data-id="meals"><div class="icon-label-wrap"><span class="icon-emoji">◉</span><span class="icon-label">MEALS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9673;</span><span class="th-label co">Meals This Week</span></div>
     <div id="mlist"></div>
   </div>
   <div class="tile tpr" data-id="calendar"><div class="icon-label-wrap"><span class="icon-emoji">▦</span><span class="icon-label">CALENDAR</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9638;</span><span class="th-label cpr">Calendar</span></div>
     <div id="calhdr" class="cal-hdr"></div>
     <div id="calgrid" class="cal-grid"></div>
     <div id="cal-notes" class="cal-notes"></div>
   </div>
   <div class="tile tc" data-id="notes"><div class="icon-label-wrap"><span class="icon-emoji">▤</span><span class="icon-label">NOTES</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9636;</span><span class="th-label cc">Quick Notes</span><span class="th-badge cc" id="notes-count">0</span><div style="margin-left:auto;display:flex;gap:4px;align-items:center"><span class="th-badge" id="notes-tab-main" style="color:var(--cc);border-color:var(--cc);cursor:pointer" onclick="notesSwitchTab('main')">MAIN</span><span class="th-badge" id="notes-tab-done" style="color:var(--dim);border-color:var(--dim);cursor:pointer" onclick="notesSwitchTab('done')">DONE</span><button class="export-btn" onclick="exportNotes()" title="Copy all notes">&#128203;</button></div></div>
     <div id="notes-main-panel">
     <div id="notes-feed"></div>
@@ -2475,7 +2480,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div class="ns cdm" id="nsaved"></div>
   </div>
   <div class="tile tg" data-id="schedule"><div class="icon-label-wrap"><span class="icon-emoji">🕖</span><span class="icon-label">SCHEDULE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#128336;</span><span class="th-label cg">Work Arrival</span><button class="export-btn" onclick="exportSchedule()" title="Copy schedule" style="margin-left:auto">&#128203;</button><button class="export-btn" onclick="exportScheduleWife()" title="Copy for wife" style="margin-left:4px;color:var(--cp);border-color:var(--cp)">&#128149;</button></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
       <button onclick="schedNav(-1)" style="background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);padding:3px 10px;cursor:pointer;font-size:13px">&#8592;</button>
@@ -2485,7 +2490,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="schlist"></div>
   </div>
   <div class="tile" style="border-color:#ff5fa038;" data-id="s-tracker"><div class="icon-label-wrap"><span class="icon-emoji">⬛</span><span class="icon-label">S</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
     <!-- ROW 1: title + tabs + export -->
     <div class="th" style="border-color:rgba(255,95,160,.2)">
@@ -2522,7 +2527,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 
   </div>
   <div class="tile pt-tile" data-id="prayer-tracker" style="border-color:rgba(255,204,0,.2);"><div class="icon-label-wrap"><span class="icon-emoji">📈</span><span class="icon-label">SALAH</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)">
       <span class="th-icon">&#128200;</span>
       <span class="th-label ca">Salah Tracker</span>
@@ -2538,34 +2543,34 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="pt-balance-panel" style="display:none"></div>
     <div id="pt-focus-panel" style="display:none"></div>
   </div>  <div class="tile tg" data-id="weekly-review"><div class="icon-label-wrap"><span class="icon-emoji">📋</span><span class="icon-label">REVIEW</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,255,136,.2)"><span class="th-icon cg">&#128203;</span><span class="th-label cg">Weekly Review</span><span id="wr-badge" class="th-badge" style="color:var(--dim);border-color:var(--dim);margin-left:auto">—</span><span class="th-badge" id="wr-tab-write" style="color:var(--cg);border-color:var(--cg);cursor:pointer;margin-left:4px" onclick="wrTab('write')">WRITE</span><span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="wr-tab-history" onclick="wrTab('history')">HISTORY</span><button class="export-btn" onclick="wrExport()" title="Export as .txt" style="margin-left:4px">&#128229;</button><button class="export-btn" onclick="showHelp('wr')" title="About this card" style="margin-left:2px">?</button></div>
     <div id="wr-panel-write"></div>
     <div id="wr-panel-history" style="display:none;max-height:320px;overflow-y:auto"></div>
   </div>
   <div class="tile tpr" data-id="decision-log"><div class="icon-label-wrap"><span class="icon-emoji">⚖</span><span class="icon-label">DECISIONS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(199,125,255,.2)"><span class="th-icon cpr">&#9878;</span><span class="th-label cpr">Decision Log</span><span id="dl-badge" class="th-badge" style="color:var(--cpr);border-color:rgba(199,125,255,.3);margin-left:auto">0</span><span class="th-badge" id="dl-tab-add" style="color:var(--cpr);border-color:var(--cpr);cursor:pointer;margin-left:4px" onclick="dlTab('add')">ADD</span><span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="dl-tab-log" onclick="dlTab('log')">LOG</span><button class="export-btn" onclick="dlExport()" title="Export as .txt" style="margin-left:4px">&#128229;</button><button class="export-btn" onclick="showHelp('dl')" title="About this card" style="margin-left:2px">?</button></div>
     <div id="dl-panel-add"></div>
     <div id="dl-panel-log" style="display:none;max-height:360px;overflow-y:auto"></div>
   </div>
   <div class="tile tc" data-id="energy-map"><div class="icon-label-wrap"><span class="icon-emoji">⚡</span><span class="icon-label">ENERGY</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.2)"><span class="th-icon cc">&#9889;</span><span class="th-label cc">Energy Map</span><span id="em-badge" class="th-badge" style="color:var(--cc);border-color:rgba(0,229,255,.3);margin-left:auto">—</span><span class="th-badge" id="em-tab-hours" style="color:var(--cc);border-color:var(--cc);cursor:pointer;margin-left:4px" onclick="emTab('hours')">HOURS</span><span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="em-tab-days" onclick="emTab('days')">DAYS</span><button class="export-btn" onclick="emExport()" title="Export as .txt" style="margin-left:4px">&#128229;</button><button class="export-btn" onclick="showHelp('em')" title="About this card" style="margin-left:2px">?</button></div>
     <div id="em-body"></div>
   </div>
   <div class="tile tp" data-id="life-streaks"><div class="icon-label-wrap"><span class="icon-emoji">🔥</span><span class="icon-label">STREAKS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,95,160,.2)"><span class="th-icon cp">&#128293;</span><span class="th-label cp">Life Streaks</span><button class="export-btn" onclick="lsExport()" title="Export as .txt" style="margin-left:auto">&#128229;</button><button class="export-btn" onclick="showHelp('ls')" title="About this card" style="margin-left:2px">?</button></div>
     <div id="ls-body"></div>
   </div>
   <div class="tile ta" data-id="weekly-moments"><div class="icon-label-wrap"><span class="icon-emoji">✨</span><span class="icon-label">WEEKLY</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)"><span class="th-icon ca">&#10024;</span><span class="th-label ca">Weekly Routines</span><span id="wm-badge" class="th-badge" style="color:var(--ca);border-color:rgba(255,204,0,.3);margin-left:auto">0/0</span></div>
     <div id="wm-body"></div>
   </div>
   <div class="tile" data-id="mood-log" style="border-color:rgba(99,83,120,.25)"><div class="icon-label-wrap"><span class="icon-emoji">🌊</span><span class="icon-label">MOOD</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(99,83,120,.3)">
       <span class="th-icon" style="color:#869BAB">&#127754;</span>
       <span class="th-label" style="color:#869BAB">Mood Log</span>
@@ -2580,7 +2585,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="ml-panel-history" style="display:none;max-height:380px;overflow-y:auto"></div>
   </div>
   <div class="tile tg" data-id="milestone"><div class="icon-label-wrap"><span class="icon-emoji">🎯</span><span class="icon-label">MILESTONE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,255,136,.2)">
       <span class="th-icon cg">&#127937;</span>
       <span class="th-label cg">Days Until</span>
@@ -2591,7 +2596,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="mil-body"></div>
   </div>
   <div class="tile tpr" data-id="day-blocks" style="border-color:rgba(199,125,255,.2)"><div class="icon-label-wrap"><span class="icon-emoji">🟧</span><span class="icon-label">DAY BLOCKS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(199,125,255,.2)">
       <span class="th-icon cpr">&#9632;</span>
       <span class="th-label cpr">Day Blocks</span>
@@ -2600,7 +2605,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="db-body"></div>
   </div>
   <div class="tile" data-id="workout-log" style="border-color:rgba(255,95,160,.2)"><div class="icon-label-wrap"><span class="icon-emoji">💪</span><span class="icon-label">WORKOUT</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,95,160,.2)">
       <span class="th-icon cp">&#9654;</span>
       <span class="th-label cp">Workout Log</span>
@@ -2609,7 +2614,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="wl-body"></div>
   </div>
   <div class="tile tcc" data-id="quran-cards" style="border-color:rgba(0,229,255,.2);"><div class="icon-label-wrap"><span class="icon-emoji">🃏</span><span class="icon-label">QCARDS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.2)">
       <span class="th-icon cc">&#9670;</span>
       <span class="th-label cc">Quran Cards</span>
@@ -2626,7 +2631,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="qc-panel-stats" style="display:none"></div>
   </div>
   <div class="tile" data-id="gratitude-log" style="border-color:rgba(0,255,136,.2)"><div class="icon-label-wrap"><span class="icon-emoji">🌿</span><span class="icon-label">GRATITUDE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,255,136,.2)">
       <span class="th-icon cg">&#9835;</span>
       <span class="th-label cg">Gratitude Log</span>
@@ -2638,7 +2643,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="grat-panel-history" style="display:none;max-height:360px;overflow-y:auto"></div>
   </div>
   <div class="tile ta" data-id="dua-card" style="border-color:rgba(255,204,0,.2)"><div class="icon-label-wrap"><span class="icon-emoji">🤲</span><span class="icon-label">DUA</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)">
       <span class="th-icon ca">&#127768;</span>
       <span class="th-label ca">Dua</span>
@@ -2649,7 +2654,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="dua-body" style="max-height:700px;overflow-y:auto;overflow-x:hidden"></div>
   </div>
   <div class="tile ta" data-id="for-akhira" style="border-color:rgba(255,204,0,.2)"><div class="icon-label-wrap"><span class="icon-emoji">🌙</span><span class="icon-label">AKHIRA</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)">
       <span class="th-icon ca">&#9790;</span>
       <span class="th-label ca">For Akhira</span>
@@ -2665,7 +2670,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="akhira-panel-intentions" style="display:none"></div>
   </div>
   <div class="tile" data-id="rent-payments" style="border-color:rgba(255,45,120,.2)"><div class="icon-label-wrap"><span class="icon-emoji">🏠</span><span class="icon-label">RENT</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,45,120,.2)">
       <span class="th-icon" style="color:var(--cp)">&#127968;</span>
       <span class="th-label" style="color:var(--cp)">Rent Payments</span>
@@ -2674,7 +2679,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="rent-body"></div>
   </div>
   <div class="tile" data-id="countdown" style="border-color:rgba(0,229,255,.2)"><div class="icon-label-wrap"><span class="icon-emoji">⏳</span><span class="icon-label">COUNTDOWN</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.2)">
       <span class="th-icon" style="color:var(--cc)">⏳</span>
       <span class="th-label" style="color:var(--cc)">In X Days</span>
@@ -2684,7 +2689,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
   <div class="tile soul-card" data-id="reframe">
     <div class="icon-label-wrap"><span class="icon-emoji">🔄</span><span class="icon-label">REFRAME</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">🔄</span><span class="th-label" style="color:#7eb8ff">Reframe</span><span class="th-badge" id="reframe-badge" style="color:var(--dim);border-color:var(--dim)">AI</span></div>
     <div id="reframe-body" style="max-height:700px;overflow-y:auto;overflow-x:hidden"></div>
   </div>
@@ -2692,7 +2697,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- ── LEGACY LETTER ── -->
   <div class="tile soul-card" data-id="legacy-letter">
     <div class="icon-label-wrap"><span class="icon-emoji">✉️</span><span class="icon-label">LETTER</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">✉️</span><span class="th-label" style="color:#f5a623">Legacy Letter</span></div>
     <div id="legacy-body"></div>
   </div>
@@ -2700,7 +2705,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- ── SHADOW LOG ── -->
   <div class="tile soul-card" data-id="shadow-log">
     <div class="icon-label-wrap"><span class="icon-emoji">🌑</span><span class="icon-label">SHADOW</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">🌑</span><span class="th-label" style="color:#bf5fff">Shadow Log</span></div>
     <div id="shadow-body"></div>
   </div>
@@ -2708,7 +2713,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- ── FEAR + MEMENTO MORI ── -->
   <div class="tile soul-card" data-id="fear-inventory">
     <div class="icon-label-wrap"><span class="icon-emoji">💀</span><span class="icon-label">FEARS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">💀</span><span class="th-label" style="color:#ff8c42">Fear Inventory</span></div>
     <div id="fear-body"></div>
   </div>
@@ -2717,7 +2722,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- PEOPLE I WANT TO BECOME -->
   <div class="tile" data-id="people-become">
     <div class="icon-label-wrap"><span class="icon-emoji">⭐</span><span class="icon-label">BECOME</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">⭐</span><span class="th-label" style="color:#f5a623">People I Want to Become</span></div>
     <div id="people-body"></div>
   </div>
@@ -2726,7 +2731,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- WEEKLY SUMMARY -->
   <div class="tile" data-id="weekly-summary" id="weekly-summary-tile">
     <div class="icon-label-wrap"><span class="icon-emoji">📋</span><span class="icon-label">WEEK</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">📋</span><span class="th-label" style="color:#7eb8ff">Weekly Summary</span></div>
     <div id="weekly-summary-body"></div>
   </div>
@@ -2735,7 +2740,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- CREATIVE WRITING LOG -->
   <div class="tile" data-id="writing-log">
     <div class="icon-label-wrap"><span class="icon-emoji">✍️</span><span class="icon-label">WRITE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">✍️</span><span class="th-label" style="color:#bf5fff">Creative Writing</span><span class="th-badge" id="write-streak-badge" style="color:#bf5fff;border-color:#bf5fff;display:none"></span></div>
     <div id="writing-body"></div>
   </div>
@@ -2744,7 +2749,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- STRESS DEMESS -->
   <div class="tile tpr" data-id="stress-demess">
     <div class="icon-label-wrap"><span class="icon-emoji">🌊</span><span class="icon-label">DEMESS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">🌊</span><span class="th-label" style="color:#c77dff">Stress Demess</span></div>
     <div id="stress-body"></div>
   </div>
@@ -2753,7 +2758,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- CALORIE LOG -->
   <div class="tile tc" data-id="calorie-counter">
     <div class="icon-label-wrap"><span class="icon-emoji">🍽</span><span class="icon-label">CALORIES</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">🍽</span><span class="th-label" style="color:#00e5ff">Calorie Log</span></div>
     <div id="calorie-body"></div>
   </div>
@@ -2762,7 +2767,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- QURAN WORDS -->
   <div class="tile tc" data-id="quran-words">
     <div class="icon-label-wrap"><span class="icon-emoji">📗</span><span class="icon-label">WORDS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">📗</span><span class="th-label" style="color:#00ff88">Quran Words</span><span class="th-badge" id="qw-badge" style="color:#00ff88;border-color:#00ff88;display:none"></span></div>
     <div id="qw-body"></div>
   </div>
@@ -2771,7 +2776,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- AYAH RECALL -->
   <div class="tile" style="border-color:rgba(255,204,0,.3)" data-id="ayah-recall">
     <div class="icon-label-wrap"><span class="icon-emoji">🕌</span><span class="icon-label">AYAH</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.3)">
       <span class="th-icon">🕌</span>
       <span class="th-label" style="color:#ffcc00">Ayah Recall</span>
@@ -2784,7 +2789,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- AYAH COMPLETION -->
   <div class="tile" style="border-color:rgba(0,229,255,.3)" data-id="ayah-completion">
     <div class="icon-label-wrap"><span class="icon-emoji">📖</span><span class="icon-label">COMPLETE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.3)">
       <span class="th-icon">📖</span>
       <span class="th-label" style="color:#00e5ff">Ayah Completion</span>
@@ -2797,7 +2802,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- SURAH MAP -->
   <div class="tile" style="border-color:rgba(126,184,255,.3)" data-id="surah-map">
     <div class="icon-label-wrap"><span class="icon-emoji">🗺️</span><span class="icon-label">MAP</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(126,184,255,.3)">
       <span class="th-icon">🗺️</span>
       <span class="th-label" style="color:#7eb8ff">Surah Map</span>
@@ -2810,7 +2815,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- VOICE STUDY -->
   <div class="tile tg" data-id="voice-study">
     <div class="icon-label-wrap"><span class="icon-emoji">✍️</span><span class="icon-label">VOICE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th">
       <span class="th-icon">✍️</span>
       <span class="th-label" style="color:var(--cg)">Voice Study</span>
@@ -2823,7 +2828,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <!-- ARTICULATE -->
   <div class="tile" style="border-color:rgba(255,184,108,.3)" data-id="articulate">
     <div class="icon-label-wrap"><span class="icon-emoji">🗣️</span><span class="icon-label">SPEAK</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,184,108,.3)">
       <span class="th-icon">🗣️</span>
       <span class="th-label" style="color:#ffb86c">Articulate</span>
@@ -2833,11 +2838,11 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
 
   <div class="tile" style="border-color:rgba(255,255,255,.15);" data-id="settings"><div class="icon-label-wrap"><span class="icon-emoji">⚙</span><span class="icon-label">SETTINGS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,255,255,.1)">
       <span class="th-icon">&#9881;</span>
       <span class="th-label" style="color:var(--text)">Settings</span>
-      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-05-22</span>
+      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-05-24</span>
     </div>
     <div id="settings-body" style="display:flex;flex-direction:column;gap:0">
 
@@ -3047,7 +3052,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
 
   <div class="tile" style="border-color:rgba(200,150,255,.25);" data-id="medicine"><div class="icon-label-wrap"><span class="icon-emoji">💊</span><span class="icon-label">MEDICINE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(200,150,255,.2)">
       <span class="th-icon" style="color:#c896ff">💊</span>
       <span class="th-label" style="color:#c896ff">Medicine</span>
@@ -3057,7 +3062,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
 
   <div class="tile ta" data-id="quran-tafsir"><div class="icon-label-wrap"><span class="icon-emoji">📖</span><span class="icon-label">TAFSIR</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)">
       <span class="th-icon" style="color:var(--ca)">📖</span>
       <span class="th-label" style="color:var(--ca)">Quran Tafsir</span>
@@ -3066,7 +3071,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
 
   <div class="tile" style="border-color:rgba(255,165,0,.25);" data-id="quest"><div class="icon-label-wrap"><span class="icon-emoji">⚔</span><span class="icon-label">QUEST</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,165,0,.2)">
       <span class="th-icon" style="color:#ffa500">⚔</span>
       <span class="th-label" style="color:#ffa500">Quest</span>
@@ -3077,7 +3082,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 
 
   <div class="tile" style="border-color:rgba(80,250,200,.25);" data-id="certifications"><div class="icon-label-wrap"><span class="icon-emoji">🏅</span><span class="icon-label">CERTS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(80,250,200,.2)">
       <span class="th-icon" style="color:#50fac8">🏅</span>
       <span class="th-label" style="color:#50fac8">Certifications</span>
@@ -3087,7 +3092,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
 
   <div class="tile" style="border-color:rgba(255,105,180,.25);" data-id="birthdays"><div class="icon-label-wrap"><span class="icon-emoji">🎂</span><span class="icon-label">BDAYS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,105,180,.2)">
       <span class="th-icon">🎂</span>
       <span class="th-label" style="color:#ff69b4">Birthdays</span>
@@ -3117,7 +3122,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     </div>
   </div>
   <div class="tile tpr" data-id="season-traditions"><div class="icon-label-wrap"><span class="icon-emoji">&#127810;</span><span class="icon-label">SEASON</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(199,125,255,.2)">
       <span class="th-icon">&#127810;</span>
       <span class="th-label cpr">Season Traditions</span>
@@ -3144,7 +3149,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="st-status" style="font-size:10px;color:var(--dim);margin-top:8px;min-height:12px"></div>
   </div>
   <div class="tile tg" data-id="pickleball"><div class="icon-label-wrap"><span class="icon-emoji">🏓</span><span class="icon-label">PICKLE</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,255,136,.2)">
       <span class="th-icon">🏓</span>
       <span class="th-label cg">Pickleball</span>
@@ -3156,12 +3161,12 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="pb-list"><div style="color:var(--dim);font-size:12px">Fetching weather...</div></div>
   </div>
   <div class="tile tl span2" data-id="bookmarks" style="grid-column:span 2"><div class="icon-label-wrap"><span class="icon-emoji">◈</span><span class="icon-label">LINKS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#11041;</span><span class="th-label cl">Bookmarks</span><span class="th-badge cl" style="cursor:pointer;margin-left:auto" onclick="addBookmark()">+ADD</span><span class="th-badge" id="bm-manage-btn" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" onclick="bmToggleManage()">MANAGE</span></div>
     <div class="bmg" id="bmgrid" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))"></div>
   </div>
   <div class="tile" style="border-color:#7a4fff40;" data-id="books"><div class="icon-label-wrap"><span class="icon-emoji">📖</span><span class="icon-label">BOOKS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(122,79,255,.2);flex-wrap:wrap;gap:4px">
       <span class="th-icon" style="flex-shrink:0">&#128214;</span>
       <span class="th-label" style="color:#9b6fff;flex-shrink:0">Books</span>
@@ -3220,7 +3225,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     </div>
   </div>
   <div class="tile tc" data-id="quran-tracker"><div class="icon-label-wrap"><span class="icon-emoji">&#128214;</span><span class="icon-label">QURAN</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.2)"><span class="th-icon">&#128214;</span><span class="th-label cc">Quran Pages</span><div style="margin-left:auto;display:flex;gap:4px"><span class="qt-tab active" id="qt-tab-today" onclick="qtSwitch('today')">TODAY</span><span class="qt-tab" id="qt-tab-log" onclick="qtSwitch('log')">LOG</span><span class="qt-tab" id="qt-tab-graph" onclick="qtSwitch('graph')">GRAPH</span><button class="export-btn" onclick="qtExport()" style="margin-left:4px">&#128203;</button></div></div>
     <div id="qt-notice" style="display:none"></div>
     <div id="qt-today-panel"><div class="qt-today-num" id="qt-big-num">0</div><div class="qt-today-lbl">PAGES TODAY</div><div class="qt-adj"><button class="qt-adj-btn" onclick="qtAdjust(-5)">-5</button><button class="qt-adj-btn" onclick="qtAdjust(-1)">-</button><button class="qt-adj-btn" onclick="qtAdjust(1)">+</button><button class="qt-adj-btn" onclick="qtAdjust(5)">+5</button></div><div class="qt-manual"><input class="qt-inp" id="qt-manual-inp" type="number" min="0" max="604" placeholder="set exact" onkeydown="if(event.key===&apos;Enter&apos;)qtSetManual()"><button class="qt-save-btn" onclick="qtSetManual()">SET</button></div><div style="display:flex;align-items:center;gap:6px;margin-top:8px"><input class="qt-inp" id="qt-pg-start" type="number" min="1" max="604" placeholder="from pg" style="font-size:12px" oninput="qtCalcRange()"><span style="color:var(--dim);font-size:11px;flex-shrink:0">→</span><input class="qt-inp" id="qt-pg-end" type="number" min="1" max="604" placeholder="to pg" style="font-size:12px" oninput="qtCalcRange()"><button class="qt-save-btn" id="qt-range-btn" onclick="qtSetRange()" style="opacity:.4;pointer-events:none">SET</button></div><div id="qt-range-preview" style="font-size:10px;color:var(--cc);text-align:center;margin-top:4px;min-height:14px"></div><div id="qt-streak" class="qt-streak"></div></div>
@@ -3228,7 +3233,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="qt-graph-panel" style="display:none"><div style="display:flex;gap:4px;margin-bottom:10px"><button class="qt-period-btn active" id="qt-gperiod-week" onclick="qtSetGraphPeriod('week')">WEEK</button><button class="qt-period-btn" id="qt-gperiod-month" onclick="qtSetGraphPeriod('month')">MONTH</button><button class="qt-period-btn" id="qt-gperiod-year" onclick="qtSetGraphPeriod('year')">YEAR</button></div><div id="qt-graph-list"></div><div id="qt-graph-totals" style="margin-top:8px;font-size:10px;color:var(--dim)"></div></div>
   </div>
   <div class="tile" style="border-color:rgba(255,204,0,.2);" data-id="juz-amma"><div class="icon-label-wrap"><span class="icon-emoji">📚</span><span class="icon-label">JUZ AMMA</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)">
       <span class="th-icon" style="color:var(--ca)">📚</span>
       <span class="th-label" style="color:var(--ca)">Juz Amma Facts</span>
@@ -3237,7 +3242,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="jua-body"></div>
   </div>
   <div class="tile ta" data-id="islamic-topics"><div class="icon-label-wrap"><span class="icon-emoji">&#9770;</span><span class="icon-label">ISLAMIC</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)">
       <span class="th-icon ca">&#9770;</span>
       <span class="th-label ca">Islamic Topics</span>
@@ -3251,18 +3256,18 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="it-body"><div class="it-loading">&#9770; Loading...</div></div>
   </div>
   <div class="tile ta" data-id="goals"><div class="icon-label-wrap"><span class="icon-emoji">&#127919;</span><span class="icon-label">GOALS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,204,0,.2)"><span class="th-icon">&#127919;</span><span class="th-label ca">Goals</span><div style="margin-left:auto;display:flex;gap:4px"><span class="goal-tab active" id="gtab-active" onclick="goalSwitch('active')">ACTIVE</span><span class="goal-tab" id="gtab-done" onclick="goalSwitch('done')">DONE</span></div></div>
     <div id="goals-notice"></div>
     <div id="goal-active-panel" style="max-height:700px;overflow-y:auto;overflow-x:hidden"></div><div id="goal-done-panel" style="display:none;max-height:700px;overflow-y:auto;overflow-x:hidden"></div>
   </div>
   <div class="tile to" data-id="meal-prep"><div class="icon-label-wrap"><span class="icon-emoji">&#127809;</span><span class="icon-label">MEAL PREP</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,140,66,.2)"><span class="th-icon co">&#127809;</span><span class="th-label co">Meal Prep</span><span style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">COMING SOON</span></div>
     <div style="padding:20px 0;text-align:center;color:var(--dim);font-size:11px;letter-spacing:2px">&#9881; UNDER CONSTRUCTION</div>
   </div>
   <div class="tile tp" data-id="pomodoro" style="position:relative;overflow:hidden"><div class="icon-label-wrap"><span class="icon-emoji">⏱</span><span class="icon-label">POMO</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(255,95,160,.2)">
       <span class="th-icon cp">&#9719;</span>
       <span class="th-label cp">Pomodoro</span>
@@ -3316,7 +3321,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="ppanel-stats" style="display:none"></div>
   </div>
   <div class="tile tpr" data-id="writers-den"><div class="icon-label-wrap"><span class="icon-emoji">✍</span><span class="icon-label">WRITER</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.2)">
       <span class="th-icon cc">&#9998;</span>
       <span class="th-label cc">Writer's Den</span>
@@ -3330,7 +3335,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="wd-body"><div class="it-loading">&#9998; Loading...</div></div>
   </div>
   <div class="tile" style="border-color:rgba(0,229,255,.2);background:linear-gradient(135deg,#001a24 0%,#080c0a 100%);" data-id="ebook-library"><div class="icon-label-wrap"><span class="icon-emoji">📚</span><span class="icon-label">EBOOKS</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.2)">
       <span class="th-icon cc">&#128218;</span>
       <span class="th-label cc">E-Book Library</span>
@@ -3344,7 +3349,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     </div>
   </div>
   <div class="tile ta" data-id="weekend-warrior"><div class="icon-label-wrap"><span class="icon-emoji">⚔</span><span class="icon-label">WEEKEND</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.2)">
       <span class="th-icon cc">⚔</span>
       <span class="th-label cc">Weekend Warrior</span>
@@ -3356,11 +3361,11 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   </div>
   <div class="tile" style="border-color:#1a3a5c;background:#0a1628;" data-id="raft"><div class="icon-label-wrap"><span class="icon-emoji">🚣</span><span class="icon-label">RAFT</span></div>
   <div class="tile tv" data-id="button-log" style="border-color:rgba(180,130,255,.3)"><div class="icon-label-wrap"><span class="icon-emoji">📊</span><span class="icon-label">BUTTON LOG</span></div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(180,130,255,.3)"><span class="th-icon cv">📊</span><span class="th-label cv">Button Log</span><span id="bl-badge" class="th-badge" style="color:var(--c-purple);border-color:rgba(180,130,255,.3);margin-left:auto;display:none"></span></div>
     <div id="bl-body"></div>
   </div>
-    <button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <div class="drag-handle" style="color:#2a5a8c"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(26,90,140,.3)">
       <span class="th-icon">&#x1F6F6;</span>
       <span class="th-label" style="color:#4a9edd">The Raft</span>
@@ -3490,17 +3495,7 @@ function dbgCopyAll(){
 <div id="dz-down5" class="drag-zone">&#8681; MOVE 5 DOWN</div>
 <div id="dz-bottom" class="drag-zone">&#9660; MOVE TO BOTTOM</div>
 
-<button id="float-reorder-btn" onclick="openReorder()" title="Reorder cards" style="
-  position:fixed;bottom:20px;right:20px;z-index:9100;
-  width:48px;height:48px;border-radius:50%;
-  background:rgba(0,0,0,.85);
-  border:1.5px solid rgba(255,255,255,.2);
-  color:var(--dim);font-size:20px;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 12px rgba(0,0,0,.5);
-  transition:all .2s;
-  backdrop-filter:blur(4px);
-">&#8942;</button>
+
 
 <div id="sb-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);align-items:center;justify-content:center">
   <div style="background:#08100a;border:1px solid rgba(0,255,136,.35);padding:22px;min-width:280px;max-width:92vw;box-shadow:0 0 40px rgba(0,255,136,.12);max-height:90vh;overflow-y:auto">
