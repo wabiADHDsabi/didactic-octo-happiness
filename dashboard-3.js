@@ -5081,6 +5081,21 @@ function qwNextCard(){
 }
 
 var qwAnswered=false;
+function qwShowExample(card, container){
+  if(!card||!card.example)return;
+  function _renderEx(ex){
+    if(!ex||!ex.arabic)return;
+    var _ar=ex.arabic;
+    if(ex.highlight)_ar=_ar.replace(ex.highlight,'<span style="color:#ffcc00">'+ex.highlight+'</span>');
+    var d=document.createElement('div');
+    d.style.cssText='margin-top:8px;padding:8px 10px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.12);border-right:3px solid rgba(255,204,0,.3)';
+    d.innerHTML='<div style="font-size:var(--t-base);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;color:var(--text)">'+_ar+'</div>'
+      +'<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;font-style:italic">'+(ex.english||'')+'</div>';
+    container.appendChild(d);
+  }
+  _renderEx(card.example);
+  _renderEx(card.example2);
+}
 var qwCurrentCard=null;
 
 function qwRenderStudy(){
@@ -5497,6 +5512,7 @@ function qwRenderStudy(){
     };
         var _studyArea=el.querySelector('.qw-card-area')||el;
         _studyArea.appendChild(_ansDiv);
+        qwShowExample(card,_studyArea);
         _studyArea.appendChild(_nxt);
       };
       dkBtn.onclick=dkFn;
@@ -5567,6 +5583,9 @@ function qwRenderStudy(){
         qwState.todayCount=(qwState.todayCount||0)+1;
         qwSave();
         if(isCorrect){
+          // Show example sentence
+          var _exArea=el.querySelector('.qw-card-area')||el.querySelector('#qw-choices')||el;
+          qwShowExample(card,_exArea);
           // Auto-advance on correct
           setTimeout(function(){qwRenderStudy();},2000);
         } else {
@@ -5585,6 +5604,9 @@ function qwRenderStudy(){
           var _dkEl=el.querySelector('[data-qwdontknow]');
           if(_dkEl&&_dkEl.parentNode)_dkEl.parentNode.insertBefore(_nBtn,_dkEl.nextSibling);
           else{var _qwc=el.querySelector('#qw-choices');if(_qwc)_qwc.parentNode.appendChild(_nBtn);}
+          // Show example sentence
+          var _exArea2=el.querySelector('.qw-card-area')||el.querySelector('#qw-choices')||el;
+          qwShowExample(card,_exArea2);
         }
       };
     });
