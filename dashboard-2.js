@@ -7104,7 +7104,7 @@ function semRender(){
   h += '<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">';
   [{t:'progress',l:'PROGRESS'},{t:'edit',l:'EDIT'}].forEach(function(x){
     var a = tab===x.t;
-    h += '<span data-semtab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?CB+'.5)':'var(--c-border)')+';color:'+(a?CA:'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+    h += '<button data-semtab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?CB+'.5)':'var(--c-border)')+';color:'+(a?CA:'var(--dim)')+';cursor:pointer;letter-spacing:1px;background:'+(a?CB+'.08)':'transparent')+';font-family:monospace">'+x.l+'</button>';
   });
   h += '</div>';
 
@@ -7130,18 +7130,20 @@ function semRender(){
       // Column headers
       h += '<div style="display:flex;align-items:center;gap:6px;padding:0 4px;margin-bottom:4px">';
       h += '<div style="flex:1;font-size:var(--t-xxs);color:var(--dim)">CHAPTER</div>';
-      h += '<div style="font-size:var(--t-xxs);color:var(--dim);width:28px;text-align:center">T</div>';
-      h += '<div style="font-size:var(--t-xxs);color:var(--dim);width:28px;text-align:center">A</div>';
-      h += '<div style="font-size:var(--t-xxs);color:var(--dim);width:28px;text-align:center">S</div>';
+      h += '<div style="font-size:var(--t-xxs);color:#ffcc00;width:52px;text-align:center;letter-spacing:1px">GPT NOTES</div>';
+      h += '<div style="font-size:var(--t-xxs);color:#00e5ff;width:52px;text-align:center;letter-spacing:1px">ANKI</div>';
+      h += '<div style="font-size:var(--t-xxs);color:#00ff88;width:52px;text-align:center;letter-spacing:1px">STUDY</div>';
       h += '</div>';
 
       active.chapters.forEach(function(ch, idx){
         var allDone = ch.t&&ch.a&&ch.s;
         h += '<div style="display:flex;align-items:center;gap:6px;padding:6px 4px;border-bottom:1px solid rgba(255,255,255,.04);background:'+(allDone?CB+'.04)':'transparent')+';">';
         h += '<div style="flex:1;font-size:var(--t-sm);color:'+(allDone?CA:'var(--text)')+';line-height:1.3">'+ch.title+'</div>';
+        var _stageColors={t:'#ffcc00',a:'#00e5ff',s:'#00ff88'};
         ['t','a','s'].forEach(function(stage){
-          var done = ch[stage];
-          h += '<button data-semstage data-chid="'+ch.id+'" data-subid="'+active.id+'" data-stage="'+stage+'" style="width:28px;height:28px;flex-shrink:0;background:'+(done?CB+'.15)':'transparent')+';border:1px solid '+(done?CB+'.5)':CB+'.15)')+';color:'+(done?CA:'rgba(255,255,255,.2)')+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;border-radius:2px">'+(done?'✓':'·')+'</button>';
+          var done=ch[stage];
+          var sc=_stageColors[stage];
+          h += '<button data-semstage data-chid="'+ch.id+'" data-subid="'+active.id+'" data-stage="'+stage+'" style="width:52px;height:28px;flex-shrink:0;background:'+(done?'rgba('+hexToRgb(sc)+',.12)':'transparent')+';border:1px solid '+(done?sc:'rgba(255,255,255,.1)')+';color:'+(done?sc:'rgba(255,255,255,.2)')+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;border-radius:2px">'+(done?'✓':'·')+'</button>';
         });
         h += '</div>';
       });
@@ -7202,7 +7204,13 @@ function semRender(){
 
   // Wire tabs
   el.querySelectorAll('[data-semtab]').forEach(function(btn){
-    btn.onclick=function(){semData._tab=this.dataset.semtab;semSave();semRender();};
+    var _stx=0,_sty=0;
+    btn.ontouchstart=function(e){_stx=e.touches[0].clientX;_sty=e.touches[0].clientY;};
+    btn.ontouchend=function(e){
+      if(Math.abs(e.changedTouches[0].clientX-_stx)>8||Math.abs(e.changedTouches[0].clientY-_sty)>8)return;
+      e.preventDefault();semData._tab=this.dataset.semtab;semSave();semRender();
+    };
+    btn.onclick=function(e){if(e.detail===0)return;semData._tab=this.dataset.semtab;semSave();semRender();};
   });
 
   if(tab==='progress'){
@@ -7343,7 +7351,14 @@ function semToggle(btn){
   var ch=sub.chapters.find(function(c){return c.id===chId;});
   if(!ch)return;
   ch[stage]=!ch[stage];
-  safeHap(ch[stage]?HAP.check:HAP.soft);
+  if(ch[stage]){
+    safeHap(HAP.check);
+    var stageColors={t:'#ffcc00',a:'#00e5ff',s:'#00ff88'};
+    var r=btn.getBoundingClientRect();
+    if(typeof confetti==='function')confetti(r.left+r.width/2,r.top+r.height/2,stageColors[stage]);
+  } else {
+    safeHap(HAP.soft);
+  }
   semSave();semRender();
 }
 
