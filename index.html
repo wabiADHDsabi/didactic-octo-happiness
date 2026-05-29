@@ -2252,18 +2252,18 @@ body.slim-screen-mode #cat-nav{top:42px}
 
 /* QUICK NAV */
 .qnav-btn{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:6px 13px;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px;
   border:1px solid rgba(255,255,255,.12);
   background:rgba(255,255,255,.03);
-  color:var(--text);font-family:monospace;font-size:11px;
+  color:var(--text);font-family:monospace;font-size:12px;
   cursor:pointer;
   transition:background .12s;
   white-space:nowrap;
 }
 .qnav-btn:hover{background:rgba(255,255,255,.08);}
-.qnav-btn .qnav-emoji{font-size:13px;flex-shrink:0}
-.qnav-grid{display:flex;flex-wrap:wrap;gap:8px}
+.qnav-btn .qnav-emoji{font-size:12px;flex-shrink:0}
+.qnav-grid{display:flex;flex-wrap:wrap;gap:6px}
 
 /* QURAN CARDS */
 .qc-card{background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.2);border-left:3px solid var(--cc);padding:14px 14px 12px;margin-bottom:8px}
@@ -2842,7 +2842,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div class="th" style="border-color:rgba(255,255,255,.1)">
       <span class="th-icon">&#9881;</span>
       <span class="th-label" style="color:var(--text)">Settings</span>
-      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-05-24</span>
+      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-05-29</span>
     </div>
     <div id="settings-body" style="display:flex;flex-direction:column;gap:0">
 
@@ -3573,6 +3573,16 @@ function dbgCopyAll(){
     <button data-pbsnap="fit"     class="pb-nav-btn">⊡ FIT</button>
   </div>
 
+  <div class="tile ta" data-id="consistency-log" style="border-color:rgba(255,184,108,.3)"><div class="icon-label-wrap"><span class="icon-emoji">🔗</span><span class="icon-label">CONSISTENCY</span></div>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="th" style="border-color:rgba(255,184,108,.3)"><span class="th-icon" style="color:var(--ca)">🔗</span><span class="th-label" style="color:var(--ca)">Consistency Log</span><span id="cl-badge" class="th-badge" style="color:var(--ca);border-color:rgba(255,184,108,.3);margin-left:auto;display:none"></span></div>
+    <div id="cl-body"></div>
+  </div>
+  <div class="tile" data-id="semester" style="border-color:rgba(0,229,255,.3)"><div class="icon-label-wrap"><span class="icon-emoji">📚</span><span class="icon-label">SEMESTER</span></div>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="th" style="border-color:rgba(0,229,255,.3)"><span class="th-icon" style="color:#00e5ff">📚</span><span class="th-label" style="color:#00e5ff">Semester</span><span id="sem-badge" class="th-badge" style="color:#00e5ff;border-color:rgba(0,229,255,.3);margin-left:auto;display:none"></span></div>
+    <div id="sem-body"></div>
+  </div>
 </div>
 
 

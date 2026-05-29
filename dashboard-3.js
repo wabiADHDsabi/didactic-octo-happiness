@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-28 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-26 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -4989,9 +4989,7 @@ var QW_CARDS=[];
           cat:v.category,
           q:v.question,
           a:v.correct_answer,
-          wrong:v.options.filter(function(o){return o!==v.correct_answer;}),
-          example:v.example||null,
-          example2:v.example2||null
+          wrong:v.options.filter(function(o){return o!==v.correct_answer;})
         };
       });
       qwRenderStudy();
@@ -5081,21 +5079,6 @@ function qwNextCard(){
 }
 
 var qwAnswered=false;
-function qwShowExample(card, container){
-  if(!card||!card.example)return;
-  function _renderEx(ex){
-    if(!ex||!ex.arabic)return;
-    var _ar=ex.arabic;
-    if(ex.highlight)_ar=_ar.replace(ex.highlight,'<span style="color:#ffcc00">'+ex.highlight+'</span>');
-    var d=document.createElement('div');
-    d.style.cssText='margin-top:8px;padding:8px 10px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.12);border-right:3px solid rgba(255,204,0,.3)';
-    d.innerHTML='<div style="font-size:var(--t-base);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;color:var(--text)">'+_ar+'</div>'
-      +'<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;font-style:italic">'+(ex.english||'')+'</div>';
-    container.appendChild(d);
-  }
-  _renderEx(card.example);
-  _renderEx(card.example2);
-}
 var qwCurrentCard=null;
 
 function qwRenderStudy(){
@@ -5512,7 +5495,6 @@ function qwRenderStudy(){
     };
         var _studyArea=el.querySelector('.qw-card-area')||el;
         _studyArea.appendChild(_ansDiv);
-        qwShowExample(card,_studyArea);
         _studyArea.appendChild(_nxt);
       };
       dkBtn.onclick=dkFn;
@@ -5583,9 +5565,6 @@ function qwRenderStudy(){
         qwState.todayCount=(qwState.todayCount||0)+1;
         qwSave();
         if(isCorrect){
-          // Show example sentence
-          var _exArea=el.querySelector('.qw-card-area')||el.querySelector('#qw-choices')||el;
-          qwShowExample(card,_exArea);
           // Auto-advance on correct
           setTimeout(function(){qwRenderStudy();},2000);
         } else {
@@ -5604,9 +5583,6 @@ function qwRenderStudy(){
           var _dkEl=el.querySelector('[data-qwdontknow]');
           if(_dkEl&&_dkEl.parentNode)_dkEl.parentNode.insertBefore(_nBtn,_dkEl.nextSibling);
           else{var _qwc=el.querySelector('#qw-choices');if(_qwc)_qwc.parentNode.appendChild(_nBtn);}
-          // Show example sentence
-          var _exArea2=el.querySelector('.qw-card-area')||el.querySelector('#qw-choices')||el;
-          qwShowExample(card,_exArea2);
         }
       };
     });
@@ -5814,12 +5790,6 @@ function arRender(){
   el.style.maxHeight='800px';
   el.style.overflowY='auto';
 
-  // Persistent audio element
-  if(!document.getElementById('ar-audio')){
-    var _aud=document.createElement('audio');_aud.id='ar-audio';
-    document.body.appendChild(_aud);
-  }
-
   // Arabic size controls
   var _arBar=el.querySelector('.ar-size-bar');
   if(!_arBar){_arBar=document.createElement('div');_arBar.className='ar-size-bar';el.insertBefore(_arBar,el.firstChild);}
@@ -5916,9 +5886,6 @@ function arRender(){
         h+='<div style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,204,0,.05);border:1px solid rgba(255,204,0,.25);margin-bottom:6px">';
         h+='<div style="font-size:'+_arArabicSize+'px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:var(--text)">'+card.text+'</div>';
         h+='<div style="font-size:36px;font-family:monospace;color:rgba(255,204,0,.7);flex-shrink:0;min-width:36px;text-align:center;line-height:1">'+_an+'</div>';
-        var _sn=String(card.surah.n).padStart(3,'0'),_an2=String(_an).padStart(3,'0');
-        var _aUrl='https://everyayah.com/data/Alafasy_128kbps/'+_sn+_an2+'.mp3';
-        h+='<button onclick="var _a=document.getElementById(\'ar-audio\');if(_a){_a.src=\''+_aUrl+'\';_a.play();}" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:rgba(255,204,0,.6);font-size:18px;cursor:pointer;padding:4px 8px;flex-shrink:0">🔊</button>';
         h+='</div>';
         // Next ayah
         if(_nextText){

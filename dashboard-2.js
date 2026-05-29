@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-28 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-05-26 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -6442,7 +6442,7 @@ function blRender(){
 
   // Tabs
   h += '<div style="display:flex;gap:6px;margin-bottom:10px">';
-  ['log','trends','history'].forEach(function(t){
+  ['log','trends'].forEach(function(t){
     var a = _blTab===t;
     h += '<span data-bltab="'+t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(180,130,255,.5)':'var(--c-border)')+';color:'+(a?'var(--c-purple)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+t.toUpperCase()+'</span>';
   });
@@ -6591,134 +6591,13 @@ function blRender(){
 
   el.innerHTML = h;
 
-  if(_blTab === 'history'){
-    h += '<div style="margin-bottom:10px;display:flex;gap:6px;flex-wrap:wrap">';
-    h += '<button id="bl-load-hist" style="background:transparent;border:1px solid rgba(180,130,255,.4);color:var(--c-purple);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:4px 12px;letter-spacing:1px">⬇ LOAD FROM SUPABASE</button>';
-    if(_blHistData&&_blHistData.length){
-      h += '<button id="bl-export-hist" style="background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:4px 12px;letter-spacing:1px">⬇ EXPORT CSV</button>';
-    }
-    h += '</div>';
-    if(_blHistLoading){
-      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:16px 0">Loading from Supabase...</div>';
-    } else if(_blHistData&&_blHistData.length){
-      var _hd = _blHistData;
-      var _htotal = _hd.length;
-      var _hcards = {};
-      var _hactions = {};
-      var _hhours = Array(24).fill(0);
-      var _hdows = Array(7).fill(0);
-      var _hdates = {};
-      _hd.forEach(function(e){
-        _hcards[e.card]=(_hcards[e.card]||0)+1;
-        _hactions[e.action]=(_hactions[e.action]||0)+1;
-        if(e.hour>=0&&e.hour<24)_hhours[e.hour]++;
-        if(e.dow>=0&&e.dow<7)_hdows[e.dow]++;
-        var _date=e.ts?e.ts.slice(0,10):'';
-        if(_date)_hdates[_date]=(_hdates[_date]||0)+1;
-      });
-      // Summary
-      var _hdays=Object.keys(_hdates).length;
-      var _havg=_hdays>0?Math.round(_htotal/_hdays):0;
-      h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px">';
-      [['Total Events',_htotal],['Days Active',_hdays],['Avg/Day',_havg]].forEach(function(x){
-        h += '<div style="border:1px solid rgba(180,130,255,.2);padding:8px;text-align:center">';
-        h += '<div style="font-size:var(--t-lg);color:var(--c-purple);font-family:monospace">'+x[1]+'</div>';
-        h += '<div style="font-size:var(--t-xs);color:var(--dim)">'+x[0]+'</div></div>';
-      });
-      h += '</div>';
-      // Top cards
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TOP CARDS (ALL TIME)</div>';
-      var _hcardSort=Object.entries(_hcards).sort(function(a,b){return b[1]-a[1];}).slice(0,10);
-      var _hcMax=_hcardSort[0]?_hcardSort[0][1]:1;
-      _hcardSort.forEach(function(x){
-        h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">';
-        h += '<div style="font-size:var(--t-xs);color:var(--text);min-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+x[0]+'</div>';
-        h += '<div style="flex:1;height:6px;background:rgba(180,130,255,.1);border-radius:1px"><div style="height:100%;width:'+(x[1]/_hcMax*100).toFixed(0)+'%;background:var(--c-purple);border-radius:1px"></div></div>';
-        h += '<div style="font-size:var(--t-xs);color:var(--dim);min-width:30px;text-align:right">'+x[1]+'</div></div>';
-      });
-      // Busiest hours
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">BUSIEST HOURS (ALL TIME)</div>';
-      h += '<div style="display:flex;align-items:flex-end;gap:2px;height:40px">';
-      var _hmaxH=Math.max.apply(null,_hhours)||1;
-      _hhours.forEach(function(v,i){
-        var _pct=(v/_hmaxH*100).toFixed(0);
-        h += '<div style="flex:1;display:flex;flex-direction:column;align-items:center">';
-        h += '<div style="width:100%;background:rgba(180,130,255,'+(v>0?'.6':'.1')+');height:'+_pct+'%;min-height:'+(v>0?'2':'0')+'px;border-radius:1px 1px 0 0" title="'+i+':00 — '+v+' events"></div>';
-        h += '</div>';
-      });
-      h += '</div>';
-      h += '<div style="display:flex;justify-content:space-between;font-size:var(--t-xxs);color:var(--dim);margin-top:2px"><span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>11pm</span></div>';
-      // Action types
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">ACTION TYPES</div>';
-      h += '<div style="display:flex;flex-wrap:wrap;gap:4px">';
-      Object.entries(_hactions).sort(function(a,b){return b[1]-a[1];}).forEach(function(x){
-        h += '<div style="font-size:var(--t-xxs);padding:2px 8px;border:1px solid rgba(180,130,255,.2);color:var(--dim)">'+x[0]+' <span style="color:var(--c-purple)">'+x[1]+'</span></div>';
-      });
-      h += '</div>';
-      // Recent entries table
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">RECENT ENTRIES</div>';
-      _hd.slice(0,30).forEach(function(e){
-        h += '<div style="display:flex;gap:6px;font-size:var(--t-xxs);color:var(--dim);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
-        h += '<span style="color:var(--c-purple);min-width:70px">'+(e.ts?e.ts.slice(0,10):'')+'</span>';
-        h += '<span style="min-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e.card||'')+'</span>';
-        h += '<span>'+(e.action||'')+'</span>';
-        h += '</div>';
-      });
-    } else {
-      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No data loaded.<br>Press LOAD FROM SUPABASE to fetch all history.</div>';
-    }
-  }
-
   // Wire tabs
   el.querySelectorAll('[data-bltab]').forEach(function(btn){
     btn.onclick = function(){
       _blTab = this.dataset.bltab;
-      blData._tab = _blTab;
       blRender();
     };
   });
-
-  // Wire history load button
-  var _blLoadBtn=document.getElementById('bl-load-hist');
-  if(_blLoadBtn){
-    var _blLTX=0,_blLTY=0;
-    _blLoadBtn.ontouchstart=function(e){_blLTX=e.touches[0].clientX;_blLTY=e.touches[0].clientY;};
-    _blLoadBtn.ontouchend=function(e){
-      if(Math.abs(e.changedTouches[0].clientX-_blLTX)>8||Math.abs(e.changedTouches[0].clientY-_blLTY)>8)return;
-      e.preventDefault();_blLoadBtn.onclick();
-    };
-    _blLoadBtn.onclick=async function(){
-      var cfg=sbGetConfig();
-      if(!cfg||!cfg.url||!cfg.key||!cfg.account){alert('Supabase not configured');return;}
-      blData._histLoading=true;blRender();
-      try{
-        var endpoint=cfg.url.replace(/\/+$/,'')+'/rest/v1/button_log?user_id=eq.'+encodeURIComponent(cfg.account)+'&order=ts.desc&limit=10000';
-        var res=await fetch(endpoint,{headers:{'apikey':cfg.key,'Authorization':'Bearer '+cfg.key}});
-        var rows=await res.json();
-        blData._histData=Array.isArray(rows)?rows:[];
-        blData._histLoading=false;
-        blRender();
-      }catch(err){
-        blData._histLoading=false;
-        alert('Load failed: '+err.message);
-        blRender();
-      }
-    };
-  }
-
-  // Wire export button
-  var _blExBtn=document.getElementById('bl-export-hist');
-  if(_blExBtn)_blExBtn.onclick=function(){
-    var rows=blData._histData||[];
-    var csv='ts,dow,hour,type,card,action,detail,device_id\n';
-    rows.forEach(function(e){
-      csv+=[e.ts||'',e.dow||'',e.hour||'',e.type||'',e.card||'',e.action||'',(e.detail||'').replace(/,/g,';'),e.device_id||''].join(',')+'\n';
-    });
-    var blob=new Blob([csv],{type:'text/csv'});
-    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-    a.download='button_log_'+new Date().toISOString().slice(0,10)+'.csv';
-    a.click();
-  };
 }
 
 window.addEventListener('load', function(){
