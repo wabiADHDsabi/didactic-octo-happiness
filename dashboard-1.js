@@ -53,7 +53,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-26 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-05-29 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -2323,9 +2323,10 @@ function submitAddBook(){
   var isLib=bfGetLibrary();
   var dueDays=parseInt((document.getElementById('bf-due')||{}).value)||0;
   var dueDate=null;
-  if(isLib&&dueDays>0){
+  if(dueDays>0){
     var dd=new Date();dd.setDate(dd.getDate()+dueDays);
     dueDate=localDateStr(dd);
+    isLib=true;
   }
   var _rpEl=document.getElementById('bf-real-pages');
 var _realPages=_rpEl&&_rpEl.value?parseInt(_rpEl.value)||null:null;
@@ -2677,6 +2678,19 @@ function submitEditBook(id){
   if(!title||!total)return;
   b.title=title;b.author=author;b.total=total;
   b.current=Math.min(Math.max(0,cur),total);
+  // Update library & due date
+  b.library=bfGetLibrary()||false;
+  var _eDueDays=parseInt((document.getElementById('bf-due')||{}).value)||0;
+  if(_eDueDays>0){
+    var _eDd=new Date();_eDd.setDate(_eDd.getDate()+_eDueDays);
+    b.dueDate=localDateStr(_eDd);
+    b.library=true;
+  } else if(!b.library){
+    b.dueDate=null;
+  }
+  // Update genre
+  var _eGenre=bfGetGenre();
+  if(_eGenre)b.genre=_eGenre;
   saveBooks();
   var btn=document.querySelector('.book-form-btn');
   if(btn){btn.textContent='ADD BOOK';btn.onclick=submitAddBook;}
@@ -7791,6 +7805,10 @@ function questRender(){
 
 window.addEventListener('load', function(){
   if(typeof questRender==='function') questRender();
+  setTimeout(function(){
+    if(typeof clRender==='function') clRender();
+    if(typeof semRender==='function') semRender();
+  }, 200);
 });
 // ── END QUEST ──
 
