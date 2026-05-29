@@ -7060,7 +7060,9 @@ function semId(){ return 's_'+Date.now()+'_'+Math.random().toString(36).slice(2,
 function semGetActive(){
   if(!semData.subjects.length) return null;
   var found = semData.subjects.find(function(s){ return s.id===semData._active; });
-  return found || semData.subjects[0];
+  var result = found || semData.subjects[0];
+  if(result && semData._active !== result.id){ semData._active=result.id; semSave(); }
+  return result;
 }
 
 function semRender(){
@@ -7153,6 +7155,10 @@ function semRender(){
     h += '<input id="sem-new-sub" placeholder="Subject name..." style="flex:1;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none">';
     h += '<button id="sem-add-sub" style="padding:5px 12px;background:'+CB+'.08);border:1px solid '+CB+'.3);color:'+CA+';font-family:monospace;font-size:var(--t-xs);cursor:pointer">ADD</button>';
     h += '</div></div>';
+    // Export to clipboard
+    if(active&&active.chapters.length){
+      h += '<button id="sem-export" style="width:100%;padding:7px;margin-bottom:10px;background:transparent;border:1px solid rgba(0,229,255,.2);color:rgba(0,229,255,.6);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">📋 COPY PROGRESS TO CLIPBOARD</button>';
+    }
 
     if(active){
       // Rename subject
@@ -7232,6 +7238,22 @@ function semRender(){
         semSave();semRender();
       };
     }
+
+    // Export to clipboard
+    var expBtn=document.getElementById('sem-export');
+    if(expBtn) expBtn.onclick=function(){
+      var a2=semGetActive();if(!a2)return;
+      var lines=[a2.name,''];
+      a2.chapters.forEach(function(ch,i){
+        lines.push((i+1)+'. '+ch.title+'  [T:'+(ch.t?'✓':'○')+' A:'+(ch.a?'✓':'○')+' S:'+(ch.s?'✓':'○')+']');
+      });
+      var done=a2.chapters.filter(function(c){return c.t&&c.a&&c.s;}).length;
+      lines.push('','Total: '+done+'/'+a2.chapters.length+' complete');
+      navigator.clipboard.writeText(lines.join('\n')).then(function(){
+        expBtn.textContent='✓ COPIED!';
+        setTimeout(function(){expBtn.textContent='📋 COPY PROGRESS TO CLIPBOARD';},2000);
+      });
+    };
 
     if(active){
       // Rename
