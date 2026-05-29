@@ -5717,6 +5717,10 @@ function applySettings(){
   if(!tgStyle){tgStyle=document.createElement('style');tgStyle.id='textglow-style';document.head.appendChild(tgStyle);}
   tgStyle.textContent=getSetting('textGlow')?'body{--text-stroke:0 0 1px rgba(0,0,0,.9),-1px 0 1px rgba(0,0,0,.6),1px 0 1px rgba(0,0,0,.6)}body *{text-shadow:var(--text-stroke,none)}':'';
   if(window.applyLetterNav)window.applyLetterNav(getSetting('letterNav'));
+  // Purge any new cards accidentally added to hidden list
+  ['consistency-log','semester'].forEach(function(id){
+    var i=hiddenTiles.indexOf(id);if(i>=0){hiddenTiles.splice(i,1);saveHiddenTiles();}
+  });
   // No Google Fonts
   var gfLink=document.getElementById('gfonts-link');
   if(gfLink)gfLink.disabled=getSetting('noGoogleFonts');
