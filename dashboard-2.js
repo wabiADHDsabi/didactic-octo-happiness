@@ -7108,11 +7108,9 @@ function semRender(){
   });
   h += '</div>';
 
-  if(tab==='edit'){
-    // Edit tab always renders — handled in its own block below
-  } else if(!semData.subjects.length){
+  if(!semData.subjects.length && tab!=='edit'){
     h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No subjects yet.<br>Go to EDIT to add one.</div>';
-  } else if(!active){
+  } else if(!active && tab!=='edit'){
     h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">Select a subject above.</div>';
   } else if(tab==='progress'){
     // Progress bar
