@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-26 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-05-29 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -955,10 +955,9 @@ var QNAV_CARDS=[
   ['certifications', '🏅', 'Certifications', '#50fac8'],
   ['medicine', '💊', 'Medicine', '#c896ff'],
   ['quest', '⚔', 'Quest', '#ffa500'],
-  ['study', 'learn', 'review', 'stats'],
-  ['none', 'learning', 'memorized', 'revision']
-,
-  ['button-log','📊','Button Log','var(--c-purple)']
+  ['button-log','📊','Button Log','var(--c-purple)'],
+  ['consistency-log','🔗','Consistency','var(--ca)'],
+  ['semester','📚','Semester','#00e5ff']
 ];
 
 var _qnavMode=localStorage.getItem('qnav_mode')||'both'; // 'both','labels','icons'
@@ -4989,7 +4988,9 @@ var QW_CARDS=[];
           cat:v.category,
           q:v.question,
           a:v.correct_answer,
-          wrong:v.options.filter(function(o){return o!==v.correct_answer;})
+          wrong:v.options.filter(function(o){return o!==v.correct_answer;}),
+          example:v.example||null,
+          example2:v.example2||null
         };
       });
       qwRenderStudy();
@@ -5078,7 +5079,25 @@ function qwNextCard(){
   return null;
 }
 
+var _qwExSize=parseInt(localStorage.getItem('qw_ex_size')||'0');
+// _qwExSize is em multiplier offset: 0=default(2em), -1=1.5em, +1=2.5em etc
+function qwExFontSize(){return Math.max(1,Math.min(5,(2+_qwExSize*0.5)))+'em';}
 var qwAnswered=false;
+function qwShowExample(card, container){
+  if(!card||!card.example)return;
+  function _renderEx(ex){
+    if(!ex||!ex.arabic)return;
+    var _ar=ex.arabic;
+    if(ex.highlight)_ar=_ar.replace(ex.highlight,'<span style="color:#ffcc00">'+ex.highlight+'</span>');
+    var d=document.createElement('div');
+    d.style.cssText='margin-top:8px;padding:8px 10px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.12);border-right:3px solid rgba(255,204,0,.3)';
+    d.innerHTML='<div style="font-size:'+qwExFontSize()+';font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.6;color:var(--text)">'+_ar+'</div>'
+      +'<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;font-style:italic">'+(ex.english||'')+'</div>';
+    container.appendChild(d);
+  }
+  _renderEx(card.example);
+  _renderEx(card.example2);
+}
 var qwCurrentCard=null;
 
 function qwRenderStudy(){
@@ -5261,7 +5280,7 @@ function qwRenderStudy(){
             var _hl=exData.highlight||'';
             if(_hl)_ar=_ar.replace(_hl,'<span style="color:#ffcc00">'+_hl+'</span>');
             h+='<div style="margin-top:8px;padding:8px 10px;background:rgba(255,204,0,.04);border:1px solid rgba(255,204,0,.12);border-right:3px solid rgba(255,204,0,.3)">';
-            h+='<div style="font-size:var(--t-base);font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;color:var(--text)">'+_ar+'</div>';
+            h+='<div style="font-size:'+qwExFontSize()+';font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.6;color:var(--text)">'+_ar+'</div>';
             h+='<div style="font-size:var(--t-xs);color:var(--dim);margin-top:4px;font-style:italic">'+(exData.english||'')+'</div>';
             h+='</div>';
           }
@@ -5344,6 +5363,13 @@ function qwRenderStudy(){
       if(active)h+='<span style="color:#00ff88;font-size:var(--t-title)">\u2713</span>';
       h+='</div>';
     });
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:12px 0 8px">EXAMPLE SIZE</div>';
+    h+='<div style="display:flex;align-items:center;gap:8px">';
+    h+='<button data-qwexsize="-1" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer;padding:2px 12px">A-</button>';
+    h+='<span style="font-size:var(--t-xs);color:var(--dim);min-width:40px;text-align:center">'+qwExFontSize()+'</span>';
+    h+='<button data-qwexsize="0" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:2px 10px">&#8635;</button>';
+    h+='<button data-qwexsize="1" style="background:transparent;border:1px solid var(--c-border);color:var(--dim);font-family:monospace;font-size:var(--t-md);cursor:pointer;padding:2px 12px">A+</button>';
+    h+='</div>';
   }
 
   el.innerHTML=h;
@@ -5430,6 +5456,15 @@ function qwRenderStudy(){
   el.querySelectorAll('[data-qwfont]').forEach(function(b){
     b.onclick=function(){_qwFont=this.dataset.qwfont;localStorage.setItem('qw_font',_qwFont);qwRenderStudy();};
   });
+  el.querySelectorAll('[data-qwexsize]').forEach(function(b){
+    b.onclick=function(){
+      var v=parseInt(this.dataset.qwexsize);
+      if(v===0){_qwExSize=0;}
+      else{_qwExSize=Math.max(-2,Math.min(6,_qwExSize+v));}
+      localStorage.setItem('qw_ex_size',_qwExSize);
+      qwRenderStudy();
+    };
+  });
 
   if(tab==='study'&&card&&!allDone){
     // Wire "I Don't Know" — reveal correct answer then mark wrong
@@ -5495,6 +5530,7 @@ function qwRenderStudy(){
     };
         var _studyArea=el.querySelector('.qw-card-area')||el;
         _studyArea.appendChild(_ansDiv);
+        qwShowExample(card,_studyArea);
         _studyArea.appendChild(_nxt);
       };
       dkBtn.onclick=dkFn;
@@ -5565,6 +5601,9 @@ function qwRenderStudy(){
         qwState.todayCount=(qwState.todayCount||0)+1;
         qwSave();
         if(isCorrect){
+          // Show example sentence
+          var _exArea=el.querySelector('.qw-card-area')||el.querySelector('#qw-choices')||el;
+          qwShowExample(card,_exArea);
           // Auto-advance on correct
           setTimeout(function(){qwRenderStudy();},2000);
         } else {
@@ -5583,6 +5622,9 @@ function qwRenderStudy(){
           var _dkEl=el.querySelector('[data-qwdontknow]');
           if(_dkEl&&_dkEl.parentNode)_dkEl.parentNode.insertBefore(_nBtn,_dkEl.nextSibling);
           else{var _qwc=el.querySelector('#qw-choices');if(_qwc)_qwc.parentNode.appendChild(_nBtn);}
+          // Show example sentence
+          var _exArea2=el.querySelector('.qw-card-area')||el.querySelector('#qw-choices')||el;
+          qwShowExample(card,_exArea2);
         }
       };
     });
@@ -5790,6 +5832,12 @@ function arRender(){
   el.style.maxHeight='800px';
   el.style.overflowY='auto';
 
+  // Persistent audio element
+  if(!document.getElementById('ar-audio')){
+    var _aud=document.createElement('audio');_aud.id='ar-audio';
+    document.body.appendChild(_aud);
+  }
+
   // Arabic size controls
   var _arBar=el.querySelector('.ar-size-bar');
   if(!_arBar){_arBar=document.createElement('div');_arBar.className='ar-size-bar';el.insertBefore(_arBar,el.firstChild);}
@@ -5886,6 +5934,9 @@ function arRender(){
         h+='<div style="display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,204,0,.05);border:1px solid rgba(255,204,0,.25);margin-bottom:6px">';
         h+='<div style="font-size:'+_arArabicSize+'px;font-family:\'Scheherazade New\',serif;direction:rtl;text-align:right;line-height:1.8;flex:1;color:var(--text)">'+card.text+'</div>';
         h+='<div style="font-size:36px;font-family:monospace;color:rgba(255,204,0,.7);flex-shrink:0;min-width:36px;text-align:center;line-height:1">'+_an+'</div>';
+        var _sn=String(card.surah.n).padStart(3,'0'),_an2=String(_an).padStart(3,'0');
+        var _aUrl='https://everyayah.com/data/Alafasy_128kbps/'+_sn+_an2+'.mp3';
+        h+='<button onclick="var _a=document.getElementById(\'ar-audio\');if(_a){_a.src=\''+_aUrl+'\';_a.play();}" style="background:transparent;border:1px solid rgba(255,204,0,.3);color:rgba(255,204,0,.6);font-size:18px;cursor:pointer;padding:4px 8px;flex-shrink:0">🔊</button>';
         h+='</div>';
         // Next ayah
         if(_nextText){
