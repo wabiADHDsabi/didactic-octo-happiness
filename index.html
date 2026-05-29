@@ -3374,6 +3374,17 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <canvas id="raft-canvas" width="400" height="200" style="width:100%;height:auto;display:block;image-rendering:pixelated"></canvas>
     <div style="font-size:12px;color:#8ad4ff;margin-top:8px;letter-spacing:1px;text-align:center;font-style:italic;opacity:1;transition:opacity 2s ease;padding:0 12px;line-height:1.5" id="raft-msg">stay on the raft.</div>
   </div>
+
+  <div class="tile ta" data-id="consistency-log" style="border-color:rgba(255,184,108,.3)"><div class="icon-label-wrap"><span class="icon-emoji">🔗</span><span class="icon-label">CONSISTENCY</span></div>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="th" style="border-color:rgba(255,184,108,.3)"><span class="th-icon" style="color:var(--ca)">🔗</span><span class="th-label" style="color:var(--ca)">Consistency Log</span><span id="cl-badge" class="th-badge" style="color:var(--ca);border-color:rgba(255,184,108,.3);margin-left:auto;display:none"></span></div>
+    <div id="cl-body"></div>
+  </div>
+  <div class="tile" data-id="semester" style="border-color:rgba(0,229,255,.3)"><div class="icon-label-wrap"><span class="icon-emoji">📚</span><span class="icon-label">SEMESTER</span></div>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="th" style="border-color:rgba(0,229,255,.3)"><span class="th-icon" style="color:#00e5ff">📚</span><span class="th-label" style="color:#00e5ff">Semester</span><span id="sem-badge" class="th-badge" style="color:#00e5ff;border-color:rgba(0,229,255,.3);margin-left:auto;display:none"></span></div>
+    <div id="sem-body"></div>
+  </div>
 </div>
 <div id="mo" onclick="if(event.target===this)closeModal()">
   <div id="mb">
@@ -3571,17 +3582,6 @@ function dbgCopyAll(){
     <button data-pbsnap="reading" class="pb-nav-btn">📖 READING</button>
     <button data-pbsnap="hidden"  class="pb-nav-btn" style="color:rgba(255,255,255,.3)">✕ HIDDEN</button>
     <button data-pbsnap="fit"     class="pb-nav-btn">⊡ FIT</button>
-  </div>
-
-  <div class="tile ta" data-id="consistency-log" style="border-color:rgba(255,184,108,.3)"><div class="icon-label-wrap"><span class="icon-emoji">🔗</span><span class="icon-label">CONSISTENCY</span></div>
-    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    <div class="th" style="border-color:rgba(255,184,108,.3)"><span class="th-icon" style="color:var(--ca)">🔗</span><span class="th-label" style="color:var(--ca)">Consistency Log</span><span id="cl-badge" class="th-badge" style="color:var(--ca);border-color:rgba(255,184,108,.3);margin-left:auto;display:none"></span></div>
-    <div id="cl-body"></div>
-  </div>
-  <div class="tile" data-id="semester" style="border-color:rgba(0,229,255,.3)"><div class="icon-label-wrap"><span class="icon-emoji">📚</span><span class="icon-label">SEMESTER</span></div>
-    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    <div class="th" style="border-color:rgba(0,229,255,.3)"><span class="th-icon" style="color:#00e5ff">📚</span><span class="th-label" style="color:#00e5ff">Semester</span><span id="sem-badge" class="th-badge" style="color:#00e5ff;border-color:rgba(0,229,255,.3);margin-left:auto;display:none"></span></div>
-    <div id="sem-body"></div>
   </div>
 </div>
 
