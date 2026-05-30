@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-05-29 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-05-30 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -1502,7 +1502,9 @@ function snapshotData(){
     certData:lsGet('dash_cert',[]),
     medData:JSON.parse(localStorage.getItem('dash_med')||'{"meds":[],"log":[]}'),
     peopleData:lsGet('dash_people',[]),
-    stressDemess:JSON.parse(localStorage.getItem('dash_stress_demess')||'{"log":[]}')
+    stressDemess:JSON.parse(localStorage.getItem('dash_stress_demess')||'{"log":[]}'),
+    clData:lsGet('dash_cl',{activities:[],log:{}}),
+    semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'})
   };
 }
 
@@ -1582,6 +1584,8 @@ function restoreSnapshot(snap){
   if(snap.medData)localStorage.setItem('dash_med',JSON.stringify(snap.medData));
   if(snap.peopleData)localStorage.setItem('dash_people',JSON.stringify(snap.peopleData));
   if(snap.stressDemess)localStorage.setItem('dash_stress_demess',JSON.stringify(snap.stressDemess));
+  if(snap.clData)localStorage.setItem('dash_cl',JSON.stringify(snap.clData));
+  if(snap.semData)localStorage.setItem('dash_sem',JSON.stringify(snap.semData));
   if(snap.syncLogAll&&Array.isArray(snap.syncLogAll)){
     var _curAll=lsGet('dash_sync_log_all',[]);
     var _allMap={};
@@ -1774,6 +1778,8 @@ function exportAllData(){
     zipConfig:lsGet('dash_zip',{}),
     milData:lsGet('dash_mil',{}),
     wlData:lsGet('dash_wl',[]),
+    clData:lsGet('dash_cl',{activities:[],log:{}}),
+    semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
     // Supabase credentials
     sbCfg:localStorage.getItem('dash_sb_config')||'{}'
   };
@@ -1836,6 +1842,8 @@ function importAllData(evt){
       if(data.fearData)localStorage.setItem('dash_fear',JSON.stringify(data.fearData));
       if(data.peopleData)localStorage.setItem('dash_people',JSON.stringify(data.peopleData));
       if(data.sbCfg)localStorage.setItem('dash_sb_config',data.sbCfg);
+      if(data.clData)localStorage.setItem('dash_cl',JSON.stringify(data.clData));
+      if(data.semData)localStorage.setItem('dash_sem',JSON.stringify(data.semData));
       alert('Import successful! Refreshing...');
       location.reload();
     }catch(err){alert('Import failed: '+err.message);}
