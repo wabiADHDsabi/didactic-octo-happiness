@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-05-29 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-05-31 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -1848,7 +1848,7 @@ function qcReset(){
   qcTab('study');
 }
 
-setTimeout(function(){qcEnsureState();qcRenderStudy();},500);
+lazyRender('quran-cards',function(){qcEnsureState();qcRenderStudy();});
 
 // ── STARRING for Islamic Topics + Writer's Den ──
 
@@ -2930,7 +2930,7 @@ function rentRender(){
   });
 }
 
-setTimeout(function(){rentRender();},500);
+lazyRender('rent-payments',function(){rentRender();});
 
 function bookUploadCover(bookId,input){
   var file=input.files[0];
@@ -3351,7 +3351,7 @@ function cdMarkDone(id){
   confetti(window.innerWidth/2,200,'#00ff88');
 }
 
-setTimeout(function(){cdRender();},450);
+lazyRender('countdown',function(){cdRender();});
 
 // Contains: Pinboard mode
 // Requires dashboard-1.js and dashboard-2.js to be loaded first
@@ -4019,7 +4019,7 @@ function rfSetKey(k){
   showToast('API key saved');
 }
 
-setTimeout(function(){rfRender();},600);
+lazyRender('reframe',function(){rfRender();});
 
 // ──────────────────────────────────────────
 // ── LEGACY LETTER ──
@@ -4079,7 +4079,7 @@ function legacyRender(){
   };
 }
 
-setTimeout(function(){legacyRender();},650);
+lazyRender('legacy-letter',function(){legacyRender();});
 
 // ──────────────────────────────────────────
 // ── SHADOW LOG ──
@@ -4128,7 +4128,7 @@ function shadowRender(){
   };
 }
 
-setTimeout(function(){shadowRender();},700);
+lazyRender('shadow-log',function(){shadowRender();});
 
 // ──────────────────────────────────────────
 // ── FEAR INVENTORY + MEMENTO MORI ──
@@ -4248,7 +4248,7 @@ function fearRender(){
   };
 }
 
-setTimeout(function(){fearRender();},750);
+lazyRender('fear-inventory',function(){fearRender();});
 
 // ── AYAH RECALL ──
 var AR_DATA = null;
@@ -4433,7 +4433,7 @@ function qmSyncSurahMemorized(surahNum, memorized){
 // Status per ayah: 'memorized' | 'reviewing' | 'struggling' | null
 
 
-setTimeout(function(){smRender();},1000);
+lazyRender('surah-map',function(){smRender();});
 
 // ── VOICE STUDY ──
 var VS_DATA = null;
@@ -4519,7 +4519,7 @@ function vsMarkDone(entryId, type){
 }
 
 
-setTimeout(function(){vsRender();},1100);
+lazyRender('voice-study',function(){vsRender();});
 
 // ── ARTICULATE ──
 var ART_DATA = null;
@@ -4605,7 +4605,7 @@ function artMarkDone(entryId, type){
 }
 
 
-setTimeout(function(){artRender();},1200);
+lazyRender('articulate',function(){artRender();});
 
 // ── FOCUS MODES ──
 var FOCUS_MODES = [
@@ -5631,7 +5631,7 @@ function qwRenderStudy(){
   }
 }
 
-setTimeout(function(){qwRenderStudy();},700);
+lazyRender('quran-words',function(){qwRenderStudy();});
 
 // ── AYAH RECALL ──
 var AR_DATA = null;

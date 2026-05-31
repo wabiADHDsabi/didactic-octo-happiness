@@ -26,14 +26,46 @@ function safeHap(type, card, detail){
   }
 }
 function safeToast(msg){ if(typeof showToast==='function')showToast(msg); }
+var _lsPending={}, _lsTimers={};
 function lsGet(key,def){
+  // Check pending debounced write first
+  if(_lsPending[key]!==undefined){
+    try{ return JSON.parse(_lsPending[key]); }catch(e){}
+  }
   try{ var v=localStorage.getItem(key); return v?JSON.parse(v):def; }
   catch(e){ return def; }
 }
-function lsSet(key,val){
-  try{ localStorage.setItem(key,JSON.stringify(val)); }
-  catch(e){ console.warn('lsSet failed:',key,e); }
+function _lsFlush(key){
+  if(_lsPending[key]!==undefined){
+    try{ localStorage.setItem(key,_lsPending[key]); }
+    catch(e){ console.warn('lsSet failed:',key,e); }
+    delete _lsPending[key];
+  }
+  if(_lsTimers[key]){ clearTimeout(_lsTimers[key]); delete _lsTimers[key]; }
 }
+function lsSet(key,val){
+  // Debounce rapid writes to the same key (250ms), flush on hide
+  try{ _lsPending[key]=JSON.stringify(val); }
+  catch(e){ console.warn('lsSet stringify failed:',key,e); return; }
+  if(_lsTimers[key]) clearTimeout(_lsTimers[key]);
+  _lsTimers[key]=setTimeout(function(){ _lsFlush(key); }, 250);
+}
+function _lsFlushAll(){ Object.keys(_lsPending).forEach(_lsFlush); }
+// Lazy render: run fn when card[data-id] nears viewport, else defer
+function lazyRender(cardId, fn){
+  var tile=document.querySelector('[data-id="'+cardId+'"]');
+  if(!tile||!('IntersectionObserver' in window)){ try{fn();}catch(e){} return; }
+  var done=false;
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting&&!done){ done=true; obs.disconnect(); try{fn();}catch(e){console.warn('lazyRender',cardId,e);} }
+    });
+  },{rootMargin:'400px'});
+  obs.observe(tile);
+}
+window.addEventListener('visibilitychange',function(){ if(document.hidden)_lsFlushAll(); });
+window.addEventListener('pagehide',_lsFlushAll);
+window.addEventListener('beforeunload',_lsFlushAll);
 function copyToClipboard(text){
   if(navigator.clipboard){
     navigator.clipboard.writeText(text).catch(function(){
@@ -53,7 +85,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-05-29 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-05-31 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),

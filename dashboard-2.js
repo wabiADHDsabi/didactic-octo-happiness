@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-05-30 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-05-31 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -1434,6 +1434,7 @@ function wwNextWeek(){if(wwOffset<5){wwOffset++;wwExpandedKey='';wwRender();}}
 window.addEventListener('load',function(){if(typeof wwRender==='function')wwRender();});
 
 function snapshotData(){
+  if(typeof _lsFlushAll==='function')_lsFlushAll();
   return {
     version:3,
     ts:new Date().toISOString(),
