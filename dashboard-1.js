@@ -7742,15 +7742,15 @@ function questRender(){
       var step = steps.find(function(s){ return s.step === current; });
       if(!step){ h += '<div style="color:var(--dim)">Step not found.</div>'; }
       else {
+        // Phase label — shown right at top
+        h += '<div style="font-size:var(--t-xxs);color:rgba(255,165,0,.4);letter-spacing:1px;margin-bottom:2px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
+        h += '<div style="font-size:var(--t-xs);color:rgba(255,165,0,.6);letter-spacing:2px;margin-bottom:10px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
+
         // Progress bar
         var pct = Math.round((current-1)/100*100);
         h += '<div style="height:3px;background:var(--c-ghost);margin-bottom:14px">';
         h += '<div style="height:100%;width:'+pct+'%;background:#ffa500;transition:width .4s"></div>';
         h += '</div>';
-
-        // Phase label
-        h += '<div style="font-size:var(--t-xxs);color:rgba(255,165,0,.3);letter-spacing:1px;margin-bottom:4px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
-        h+='<div style="font-size:var(--t-xs);color:rgba(255,165,0,.5);letter-spacing:2px;margin-bottom:8px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
 
         // Step card
         h += '<div style="padding:20px 16px;border:1px solid rgba(255,165,0,.2);background:rgba(255,165,0,.04);margin-bottom:16px">';

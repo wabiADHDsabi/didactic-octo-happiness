@@ -1505,7 +1505,8 @@ function snapshotData(){
     peopleData:lsGet('dash_people',[]),
     stressDemess:JSON.parse(localStorage.getItem('dash_stress_demess')||'{"log":[]}'),
     clData:lsGet('dash_cl',{activities:[],log:{}}),
-    semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'})
+    semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
+    questState:lsGet('dash_quest',{})
   };
 }
 
@@ -1587,6 +1588,7 @@ function restoreSnapshot(snap){
   if(snap.stressDemess)localStorage.setItem('dash_stress_demess',JSON.stringify(snap.stressDemess));
   if(snap.clData)localStorage.setItem('dash_cl',JSON.stringify(snap.clData));
   if(snap.semData)localStorage.setItem('dash_sem',JSON.stringify(snap.semData));
+  if(snap.questState)localStorage.setItem('dash_quest',JSON.stringify(snap.questState));
   if(snap.syncLogAll&&Array.isArray(snap.syncLogAll)){
     var _curAll=lsGet('dash_sync_log_all',[]);
     var _allMap={};
