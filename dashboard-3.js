@@ -1,12 +1,12 @@
 // ── LOCAL UTILITY DEFINITIONS (always available, even before dash-1 loads) ──
 function todayKey(){var n=new Date();if(n.getHours()<4)n=new Date(n.getTime()-864e5);return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
-function todayKeyRaw(){return new Date().toISOString().slice(0,10);}
+function todayKeyRaw(){return localDateStr(new Date());}
 function lsGet(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){console.warn('lsSet failed:',k,e);}}
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-05-31 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-06-04 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -287,14 +287,14 @@ function wlLoadActive(){
 function wlFmt(ms){var s=Math.floor(ms/1000);var m=Math.floor(s/60);s=s%60;var h=Math.floor(m/60);m=m%60;return (h?h+'h ':'')+m+'m '+String(s).padStart(2,'0')+'s';}
 
 function wlStartManual(){
-  var dateStr=new Date().toISOString().slice(0,10);
+  var dateStr=localDateStr(new Date());
   wlActiveSession={id:Date.now(),date:dateStr,startTs:Date.now(),endTs:Date.now(),exercises:[],note:'',manual:true};
   wlSaveActive();
   wlTab='log';
   wlRender();
 }
 function wlStartSession(){
-  wlActiveSession={id:Date.now(),date:new Date().toISOString().slice(0,10),startTs:Date.now(),endTs:null,exercises:[],note:''};
+  wlActiveSession={id:Date.now(),date:localDateStr(new Date()),startTs:Date.now(),endTs:null,exercises:[],note:''};
   wlSaveActive();
   wlTab='log';
   wlRender();
@@ -957,7 +957,8 @@ var QNAV_CARDS=[
   ['quest', '⚔', 'Quest', '#ffa500'],
   ['button-log','📊','Button Log','var(--c-purple)'],
   ['consistency-log','🔗','Consistency','var(--ca)'],
-  ['semester','📚','Semester','#00e5ff']
+  ['semester','📚','Semester','#00e5ff'],
+  ['letter-son','💚','Son','var(--cg)']
 ];
 
 var _qnavMode=localStorage.getItem('qnav_mode')||'both'; // 'both','labels','icons'
@@ -3344,7 +3345,7 @@ function cdMarkDone(id){
   var it=cdData.items.find(function(x){return x.id===id;});
   if(!it)return;
   if(!cdData.log)cdData.log=[];
-  cdData.log.unshift({label:it.label,completedOn:new Date().toISOString().slice(0,10)});
+  cdData.log.unshift({label:it.label,completedOn:localDateStr(new Date())});
   if(cdData.log.length>33)cdData.log=cdData.log.slice(0,33);
   cdData.items=cdData.items.filter(function(x){return x.id!==id;});
   cdSave();cdRender();
@@ -3994,7 +3995,7 @@ async function rfSubmit(){
     }
     var reframe=data.choices&&data.choices[0]&&data.choices[0].message&&data.choices[0].message.content||'Could not generate reframe.';
     resp.innerHTML='<div style="font-size:var(--t-md);color:var(--text);line-height:1.8;padding:10px;background:rgba(126,184,255,.05);border-left:2px solid rgba(126,184,255,.4)">'+reframe+'</div>';
-    rfData.unshift({thought:thought,reframe:reframe,date:new Date().toISOString().slice(0,10),ts:Date.now()});
+    rfData.unshift({thought:thought,reframe:reframe,date:localDateStr(new Date()),ts:Date.now()});
     if(rfData.length>30)rfData=rfData.slice(0,30);
     rfSave();
     inp.value='';
@@ -4071,7 +4072,7 @@ function legacyRender(){
     var inp=document.getElementById('legacy-inp');
     if(!inp||!inp.value.trim())return;
     if(!legacyData.entries)legacyData.entries=[];
-    legacyData.entries.push({text:inp.value.trim(),date:new Date().toISOString().slice(0,10),ts:Date.now()});
+    legacyData.entries.push({text:inp.value.trim(),date:localDateStr(new Date()),ts:Date.now()});
     legacyData.draft='';
     legacySave();
     showToast('Added to your letter ✉️');
@@ -4120,7 +4121,7 @@ function shadowRender(){
     var t=document.getElementById('shadow-trigger');
     var r=document.getElementById('shadow-reflection');
     if(!t||!t.value.trim()||!r||!r.value.trim())return;
-    shadowData.unshift({trigger:t.value.trim(),reflection:r.value.trim(),date:new Date().toISOString().slice(0,10),ts:Date.now()});
+    shadowData.unshift({trigger:t.value.trim(),reflection:r.value.trim(),date:localDateStr(new Date()),ts:Date.now()});
     if(shadowData.length>100)shadowData=shadowData.slice(0,100);
     shadowSave();
     showToast('Shadow logged 🌑');
@@ -4188,7 +4189,7 @@ function fearRender(){
     }
   } else {
     // Deathbed test
-    var todayStr=new Date().toISOString().slice(0,10);
+    var todayStr=localDateStr(new Date());
     var doy=Math.floor((new Date()-new Date(new Date().getFullYear(),0,0))/(864e5));
     var prompt=MORI_PROMPTS[doy%MORI_PROMPTS.length];
     var todayMori=(fearData.mori||[]).find(function(m){return m.date===todayStr;});
@@ -4223,7 +4224,7 @@ function fearRender(){
   if(fearAddBtn)fearAddBtn.onclick=function(){
     if(!fearInp||!fearInp.value.trim())return;
     if(!fearData.fears)fearData.fears=[];
-    fearData.fears.unshift({text:fearInp.value.trim(),date:new Date().toISOString().slice(0,10),faced:false,ts:Date.now()});
+    fearData.fears.unshift({text:fearInp.value.trim(),date:localDateStr(new Date()),faced:false,ts:Date.now()});
     fearSave();safeHap(HAP.save);fearRender();
   };
   if(fearInp)fearInp.onkeydown=function(e){if(e.keyCode===13)fearAddBtn&&fearAddBtn.click();};
@@ -4242,7 +4243,7 @@ function fearRender(){
     var inp=document.getElementById('mori-inp');
     if(!inp||!inp.value.trim())return;
     if(!fearData.mori)fearData.mori=[];
-    fearData.mori.push({date:new Date().toISOString().slice(0,10),answer:inp.value.trim(),prompt:prompt,ts:Date.now()});
+    fearData.mori.push({date:localDateStr(new Date()),answer:inp.value.trim(),prompt:prompt,ts:Date.now()});
     if(fearData.mori.length>200)fearData.mori=fearData.mori.slice(-200);
     fearSave();safeHap(HAP.save);fearRender();
   };
@@ -4397,7 +4398,7 @@ function qmSyncSurahState(surahNum, newState){
   // Juz Amma sync — only for memorized
   if(typeof jmData!=='undefined'){
     if(newState==='memorized'){
-      jmData[surahNum]={status:'done',date:new Date().toISOString().slice(0,10)};
+      jmData[surahNum]={status:'done',date:localDateStr(new Date())};
     } else if(newState===null&&jmData[surahNum]&&jmData[surahNum].status==='done'){
       jmData[surahNum]={status:'todo'};
     }
@@ -4871,7 +4872,7 @@ function stressRender(){
   el.querySelectorAll('[data-stresstool]').forEach(function(b){b.onclick=function(){
     var parts=this.dataset.stresstool.split('-');var cat=STRESS_MENU.find(function(c){return c.id===parts[0];});var tool=cat?cat.tools[parseInt(parts[1])]:'';
     var now=new Date();if(!stressData.log)stressData.log=[];
-    stressData.log.unshift({date:now.toISOString().slice(0,10),time:now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),tool:tool,used:true,ts:Date.now()});
+    stressData.log.unshift({date:localDateStr(now),time:now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),tool:tool,used:true,ts:Date.now()});
     if(stressData.log.length>33)stressData.log=stressData.log.slice(0,33);
     stressSave();this.querySelector('span:first-child').textContent='\u25cf';this.querySelector('span:first-child').style.color='#58e8c8';
     safeHap(HAP.stress);
@@ -4880,7 +4881,7 @@ function stressRender(){
   var tapBtn=document.getElementById('stress-tap-btn');
   if(tapBtn)tapBtn.onclick=function(){
     var now=new Date();if(!stressData.log)stressData.log=[];
-    stressData.log.unshift({date:now.toISOString().slice(0,10),time:now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),tool:null,used:false,note:'Overwhelmed \u2014 opened menu',ts:Date.now()});
+    stressData.log.unshift({date:localDateStr(now),time:now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),tool:null,used:false,note:'Overwhelmed \u2014 opened menu',ts:Date.now()});
     if(stressData.log.length>33)stressData.log=stressData.log.slice(0,33);
     stressSave();window._stressOpen_privacy=true;stressRender();
     safeToast('\uD83C\uDF0A Pick one tool. 3 minutes.');
@@ -4966,7 +4967,7 @@ function calRender(){
   el.querySelectorAll('[data-calconfirmdel]').forEach(function(b){b.onclick=function(){calData.splice(parseInt(this.dataset.calconfirmdel),1);window._calDelPending=null;calSave();calRender();};});
   el.querySelectorAll('[data-calcanceldet]').forEach(function(b){b.onclick=function(){window._calDelPending=null;calRender();};});
   var addBtn=document.getElementById('cal-add-btn');var inp=document.getElementById('cal-inp');
-  function doAdd(){if(!inp||!inp.value.trim())return;var c=parseInt(document.getElementById('cal-cal').value)||null;var m=document.getElementById('cal-meal').value||'snack';var n=new Date();calData.unshift({id:String(Date.now()),date:n.toISOString().slice(0,10),time:n.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),food:inp.value.trim(),cal:c,meal:m,ts:Date.now()});if(calData.length>500)calData=calData.slice(0,500);calSave();inp.value='';document.getElementById('cal-cal').value='';calRender();safeToast('Logged');}
+  function doAdd(){if(!inp||!inp.value.trim())return;var c=parseInt(document.getElementById('cal-cal').value)||null;var m=document.getElementById('cal-meal').value||'snack';var n=new Date();calData.unshift({id:String(Date.now()),date:localDateStr(n),time:n.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),food:inp.value.trim(),cal:c,meal:m,ts:Date.now()});if(calData.length>500)calData=calData.slice(0,500);calSave();inp.value='';document.getElementById('cal-cal').value='';calRender();safeToast('Logged');}
   if(addBtn)addBtn.onclick=doAdd;
   if(inp)inp.onkeydown=function(e){if(e.keyCode===13)doAdd();};
   var copy=document.getElementById('cal-copy');

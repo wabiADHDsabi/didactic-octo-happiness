@@ -1,12 +1,13 @@
 // ── LOCAL UTILITY DEFINITIONS (always available, even before dash-1 loads) ──
 function todayKey(){var n=new Date();if(n.getHours()<4)n=new Date(n.getTime()-864e5);return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
-function todayKeyRaw(){return new Date().toISOString().slice(0,10);}
+function localDateStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function todayKeyRaw(){ return localDateStr(new Date()); }
 function lsGet(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){console.warn('lsSet failed:',k,e);}}
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-05-31 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-06-09 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -1506,7 +1507,8 @@ function snapshotData(){
     stressDemess:JSON.parse(localStorage.getItem('dash_stress_demess')||'{"log":[]}'),
     clData:lsGet('dash_cl',{activities:[],log:{}}),
     semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
-    questState:lsGet('dash_quest',{})
+    questState:lsGet('dash_quest',{}),
+    ltsData:lsGet('dash_lts',{entries:[]})
   };
 }
 
@@ -1589,6 +1591,7 @@ function restoreSnapshot(snap){
   if(snap.clData)localStorage.setItem('dash_cl',JSON.stringify(snap.clData));
   if(snap.semData)localStorage.setItem('dash_sem',JSON.stringify(snap.semData));
   if(snap.questState)localStorage.setItem('dash_quest',JSON.stringify(snap.questState));
+  if(snap.ltsData)localStorage.setItem('dash_lts',JSON.stringify(snap.ltsData));
   if(snap.syncLogAll&&Array.isArray(snap.syncLogAll)){
     var _curAll=lsGet('dash_sync_log_all',[]);
     var _allMap={};
@@ -3642,7 +3645,7 @@ function wmRender(){
 
   if(tab==='routines'){
     // Show current week number
-    var curWkNum=wrGetISOWeek?wrGetISOWeek(new Date().toISOString().slice(0,10)):0;
+    var curWkNum=wrGetISOWeek?wrGetISOWeek(localDateStr(new Date())):0;
     if(curWkNum)h+='<div class="label-dim">WEEK #'+curWkNum+'</div>';
     if(!wmData.items.length){
       h+='<div style="color:var(--dim);font-size:var(--t-md);padding:8px 0">No routines yet. Add one below.</div>';
@@ -4046,13 +4049,13 @@ function dlRenderAdd(){
     };
   }
 }
-function dlSaveQuick(){var el=document.getElementById('dl-inp-quick');if(!el||!el.value.trim())return;var entry={id:Date.now(),date:new Date().toISOString().slice(0,10),decision:el.value.trim(),why:'',alts:'',outcome:'',quick:true};dlData.unshift(entry);if(dlData.length>200)dlData=dlData.slice(0,200);dlSave();el.value='';dlTab('log');}
+function dlSaveQuick(){var el=document.getElementById('dl-inp-quick');if(!el||!el.value.trim())return;var entry={id:Date.now(),date:localDateStr(new Date()),decision:el.value.trim(),why:'',alts:'',outcome:'',quick:true};dlData.unshift(entry);if(dlData.length>200)dlData=dlData.slice(0,200);dlSave();el.value='';dlTab('log');}
 function dlSaveEntry(){
   var d=document.getElementById('dl-inp-decision');
   var w=document.getElementById('dl-inp-why');
   var a=document.getElementById('dl-inp-alts');
   if(!d||!d.value.trim())return;
-  var entry={id:Date.now(),date:new Date().toISOString().slice(0,10),decision:d.value.trim(),why:(w&&w.value.trim())||'',alts:(a&&a.value.trim())||'',outcome:''};
+  var entry={id:Date.now(),date:localDateStr(new Date()),decision:d.value.trim(),why:(w&&w.value.trim())||'',alts:(a&&a.value.trim())||'',outcome:''};
   dlData.unshift(entry);if(dlData.length>200)dlData=dlData.slice(0,200);dlSave();
   ['dl-inp-decision','dl-inp-why','dl-inp-alts'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
   dlTab('log');
@@ -4153,7 +4156,7 @@ function emRender(){
     }
   }
   if(typeof pomoState!=='undefined'&&pomoState.sessionLog){
-    var today=new Date().toISOString().slice(0,10);
+    var today=localDateStr(new Date());
     pomoState.sessionLog.forEach(function(m){var mode=typeof m==='object'?m.mode:m;if(mode==='work'){var mts=typeof m==='object'&&m.ts?m.ts:new Date().toISOString();allSessions.push({date:today,mins:typeof m==='object'?m.mins:0,ts:mts});}});
   }
   if(!allSessions.length){el.innerHTML='<div class="empty-msg">No session data yet. Complete some pomodoros first.</div>';return;}
@@ -4531,10 +4534,10 @@ function mlRenderLog(){
   var el=document.getElementById('ml-panel-log');
   var badge=document.getElementById('ml-badge');
   if(!el)return;
-  var today=new Date().toISOString().slice(0,10);
+  var today=localDateStr(new Date());
   // today's entries checked below
   if(badge){
-    var todayC=mlData.filter(function(e){return e.date===new Date().toISOString().slice(0,10);}).length;
+    var todayC=mlData.filter(function(e){return e.date===localDateStr(new Date());}).length;
     var avg7=mlData.length?Math.round(mlData.slice(0,14).reduce(function(a,e){return a+e.mood;},0)/Math.min(14,mlData.length)*10)/10:null;
     badge.textContent=(todayC?todayC+'/3 today · ':'')+(avg7?'avg '+avg7:'—');
   }
@@ -4667,7 +4670,7 @@ function mlSaveEntry(){
     return;
   }
   var noteEl=document.getElementById('ml-note');
-  var today=new Date().toISOString().slice(0,10);
+  var today=localDateStr(new Date());
   var entry={
     id:Date.now(),
     date:today,
@@ -5714,10 +5717,8 @@ function certRender(){
     h+='<input id="cert-inp-issuer" placeholder="Issuer (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:6px;outline:none">';
     h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><span style="font-size:var(--t-xs);color:var(--dim);flex-shrink:0">EXPIRES</span><input id="cert-inp-expiry" type="date" style="flex:1;background:transparent;border:1px solid rgba(80,250,200,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:5px 8px;outline:none"></div>';
     h+='<textarea id="cert-inp-notes" placeholder="Notes (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none;resize:vertical;min-height:48px"></textarea>';
-    h+=
     h+='<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none">';
-    '<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none">';
-    '<button id="cert-add-btn" style="width:100%;padding:9px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.3);color:#50fac8;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px;margin-bottom:16px">+ ADD CERTIFICATION</button>';
+    h+='<button id="cert-add-btn" style="width:100%;padding:9px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.3);color:#50fac8;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px;margin-bottom:16px">+ ADD CERTIFICATION</button>';
     // Keyword section at bottom of add tab
     h+='<div style="border-top:1px solid rgba(255,255,255,.08);padding-top:12px">';
     h+='<div style="font-size:var(--t-xs);color:rgba(80,250,200,.5);letter-spacing:1px;margin-bottom:6px">GMAIL SEARCH KEYWORD</div>';
@@ -5862,7 +5863,7 @@ function medRender(){
       medData.meds.forEach(function(m){
         var col=m.color||'#c896ff';
         // Find last taken ever
-        var todayStr=now.toISOString().slice(0,10);
+        var _n=now;var todayStr=_n.getFullYear()+'-'+String(_n.getMonth()+1).padStart(2,'0')+'-'+String(_n.getDate()).padStart(2,'0');
         var lastLog=null;
         for(var i=medData.log.length-1;i>=0;i--){
           if(medData.log[i].mid===m.id){lastLog=medData.log[i];break;}
@@ -5949,7 +5950,7 @@ function medRender(){
         var c=dayCounts[i];
         var pct=maxPerDay?c/maxPerDay:0;
         var barH=Math.max(pct*52,c>0?4:0);
-        var isToday=d===now.toISOString().slice(0,10);
+        var isToday=d===localDateStr(now);
         h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:60px">';
         if(c>0)h+='<div style="font-size:var(--t-xxs);color:var(--dim);margin-bottom:2px">'+c+'</div>';
         h+='<div style="width:100%;height:'+barH+'px;background:'+(isToday?'#c896ff':'rgba(200,150,255,.4)')+';min-height:'+(c>0?'4px':'0')+'"></div>';
@@ -6492,7 +6493,7 @@ function blRender(){
       var actionTypes={};
       var todayStr2=todayKey();
       var todayCount=0, yesterdayCount=0;
-      var yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+      var yesterday=localDateStr(new Date(Date.now()-86400000));
 
       log.forEach(function(e){
         cardCounts[e.card]=(cardCounts[e.card]||0)+1;
@@ -6727,7 +6728,7 @@ function blRender(){
     });
     var blob=new Blob([csv],{type:'text/csv'});
     var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-    a.download='button_log_'+new Date().toISOString().slice(0,10)+'.csv';
+    a.download='button_log_'+localDateStr(new Date())+'.csv';
     a.click();
   };
 }
@@ -7375,5 +7376,436 @@ function semToggle(btn){
 
 window.addEventListener('load',function(){if(typeof semRender==='function')semRender();});
 // ══════════════════════════════════════════
+
+// ══════════════════════════════════════════
+// LETTER TO MY SON
+// ══════════════════════════════════════════
+var ltsData = lsGet('dash_lts', {entries:[]});
+if(!ltsData.entries) ltsData.entries = [];
+
+function ltsSave(){ lsSet('dash_lts', ltsData); }
+function ltsId(){ return 'lts_'+Date.now()+'_'+Math.random().toString(36).slice(2,5); }
+
+function ltsRender(){
+  var el = document.getElementById('lts-body');
+  var badge = document.getElementById('lts-badge');
+  if(!el) return;
+  el.style.maxHeight = '700px';
+  el.style.overflowY = 'auto';
+
+  var CG = 'var(--cg)';
+  var CB = 'rgba(0,255,136,';
+  var tab = ltsData._tab || 'write';
+  var entries = ltsData.entries || [];
+
+  if(badge){
+    badge.textContent = entries.length + (entries.length===1?' entry':' entries');
+    badge.style.display = '';
+  }
+
+  var h = '';
+
+  // Tabs
+  h += '<div style="display:flex;gap:6px;margin-bottom:10px">';
+  [{t:'write',l:'WRITE'},{t:'log',l:'LOG'},{t:'stats',l:'STATS'},{t:'export',l:'EXPORT'}].forEach(function(x){
+    var a = tab===x.t;
+    h += '<button data-ltstab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?CB+'.5)':'var(--c-border)')+';color:'+(a?'var(--cg)':'var(--dim)')+';cursor:pointer;background:'+(a?CB+'.08)':'transparent')+';font-family:monospace;letter-spacing:1px">'+x.l+'</button>';
+  });
+  h += '</div>';
+
+  if(tab === 'write'){
+    h += '<input id="lts-title" placeholder="Title..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;outline:none;margin-bottom:6px">';
+    h += '<textarea id="lts-body-inp" placeholder="Dear son..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:8px;outline:none;resize:none;min-height:140px;line-height:1.6;margin-bottom:8px"></textarea>';
+    h += '<button id="lts-save-btn" style="width:100%;padding:9px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:var(--cg);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">💚 SAVE ENTRY</button>';
+
+  } else {
+    if(!entries.length){
+      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No entries yet.</div>';
+    } else {
+      entries.forEach(function(e){
+        var editing = ltsData._editing === e.id;
+        h += '<div style="border-bottom:1px solid rgba(0,255,136,.08);padding:12px 0">';
+        h += '<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px">';
+        h += '<div style="flex:1">';
+        h += '<div style="font-size:var(--t-base);color:var(--cg);font-family:monospace;margin-bottom:2px">'+e.title+'</div>';
+        h += '<div style="font-size:var(--t-xxs);color:var(--dim)">'+e.date+'&nbsp;&nbsp;'+e.time+'</div>';
+        h += '</div>';
+        h += '<button data-ltsedit="'+e.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.25);font-size:var(--t-sm);cursor:pointer;padding:0 4px">✏️</button>';
+        h += '<button data-ltsdel="'+e.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-base);cursor:pointer;padding:0 2px">✕</button>';
+        h += '</div>';
+        if(editing){
+          h += '<input id="lts-edit-title-'+e.id+'" value="'+e.title.replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none;margin-bottom:6px">';
+          h += '<textarea id="lts-edit-body-'+e.id+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:6px 8px;outline:none;resize:none;min-height:100px;line-height:1.6;margin-bottom:6px">'+e.body+'</textarea>';
+          h += '<button data-ltssaveedit="'+e.id+'" style="padding:5px 14px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:var(--cg);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SAVE</button>';
+          h += '<button data-ltscanceledit="'+e.id+'" style="padding:5px 12px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;margin-left:6px">CANCEL</button>';
+        } else {
+          h += '<div style="font-size:var(--t-sm);color:var(--text);line-height:1.7;white-space:pre-wrap">'+e.body+'</div>';
+        }
+        h += '</div>';
+      });
+    }
+  }
+
+  if(tab==='stats'){
+    if(!entries.length){
+      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No entries yet.</div>';
+    } else {
+      // Totals
+      var totalWords=entries.reduce(function(a,e){return a+(e.body?e.body.trim().split(/\s+/).filter(Boolean).length:0);},0);
+      var avgWords=Math.round(totalWords/entries.length);
+      var firstDate=entries[entries.length-1].date;
+      h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">';
+      [
+        ['Total Entries', entries.length],
+        ['Total Words', totalWords.toLocaleString()],
+        ['Avg Words/Entry', avgWords],
+        ['Since', firstDate]
+      ].forEach(function(x){
+        h += '<div style="border:1px solid rgba(0,255,136,.12);padding:10px;text-align:center">';
+        h += '<div style="font-size:var(--t-md);color:var(--cg);font-family:monospace">'+x[1]+'</div>';
+        h += '<div style="font-size:var(--t-xxs);color:var(--dim);margin-top:2px">'+x[0]+'</div>';
+        h += '</div>';
+      });
+      h += '</div>';
+      // Entries per month
+      var byMonth={};
+      entries.forEach(function(e){
+        var m=e.date?e.date.slice(0,7):'';
+        if(m) byMonth[m]=(byMonth[m]||0)+1;
+      });
+      var months=Object.keys(byMonth).sort().reverse();
+      var maxM=Math.max.apply(null,Object.values(byMonth))||1;
+      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">ENTRIES PER MONTH</div>';
+      months.forEach(function(m){
+        var n=byMonth[m];
+        var pct=(n/maxM*100).toFixed(0);
+        var label=new Date(m+'-02').toLocaleDateString('en-US',{month:'short',year:'numeric'});
+        h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">';
+        h += '<div style="font-size:var(--t-xs);color:var(--dim);min-width:70px">'+label+'</div>';
+        h += '<div style="flex:1;height:8px;background:rgba(0,255,136,.08);border-radius:2px">';
+        h += '<div style="height:100%;width:'+pct+'%;background:var(--cg);border-radius:2px"></div></div>';
+        h += '<div style="font-size:var(--t-xs);color:var(--cg);min-width:20px;text-align:right">'+n+'</div>';
+        h += '</div>';
+      });
+      // Longest entry
+      var longest=entries.slice().sort(function(a,b){
+        return (b.body?b.body.split(/\s+/).length:0)-(a.body?a.body.split(/\s+/).length:0);
+      })[0];
+      if(longest){
+        h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">LONGEST ENTRY</div>';
+        h += '<div style="border:1px solid rgba(0,255,136,.12);padding:8px">';
+        h += '<div style="font-size:var(--t-sm);color:var(--cg)">'+longest.title+'</div>';
+        h += '<div style="font-size:var(--t-xxs);color:var(--dim)">'+longest.date+' · '+(longest.body?longest.body.trim().split(/\s+/).filter(Boolean).length:0)+' words</div>';
+        h += '</div>';
+      }
+    }
+  }
+
+  if(tab==='export'){
+    var hasEntries = entries.length > 0;
+    h += '<div style="margin-bottom:12px;font-size:var(--t-xs);color:var(--dim);line-height:1.6">';
+    h += entries.length + ' entries · sorted oldest to newest by year and season';
+    h += '</div>';
+    h += '<button id="lts-export-md" style="width:100%;padding:10px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px;margin-bottom:8px"'+(hasEntries?'':' disabled')+'>⬇ EXPORT MARKDOWN</button>';
+    h += '<button id="lts-export-epub" style="width:100%;padding:10px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.3);color:#00e5ff;font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px"'+(hasEntries?'':' disabled')+'>⬇ EXPORT EPUB</button>';
+    if(!hasEntries) h += '<div style="color:var(--dim);font-size:var(--t-xs);margin-top:10px;text-align:center">No entries to export yet.</div>';
+  }
+
+  el.innerHTML = h;
+
+  // Wire tabs
+  el.querySelectorAll('[data-ltstab]').forEach(function(btn){
+    var _tx=0,_ty=0;
+    btn.ontouchstart=function(e){_tx=e.touches[0].clientX;_ty=e.touches[0].clientY;};
+    btn.ontouchend=function(e){
+      if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
+      e.preventDefault();ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();
+    };
+    btn.onclick=function(e){if(e.detail===0)return;ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();};
+  });
+
+  if(tab==='write'){
+    var saveBtn = document.getElementById('lts-save-btn');
+    if(saveBtn){
+      var _stx=0,_sty=0;
+      saveBtn.ontouchstart=function(e){_stx=e.touches[0].clientX;_sty=e.touches[0].clientY;};
+      saveBtn.ontouchend=function(e){
+        if(Math.abs(e.changedTouches[0].clientX-_stx)>8||Math.abs(e.changedTouches[0].clientY-_sty)>8)return;
+        e.preventDefault();ltsDoSave();
+      };
+      saveBtn.onclick=function(e){if(e.detail===0)return;ltsDoSave();};
+    }
+  }
+
+  if(tab==='export'){
+    var mdBtn=document.getElementById('lts-export-md');
+    if(mdBtn) mdBtn.onclick=function(){ ltsExportMarkdown(); };
+    var epubBtn=document.getElementById('lts-export-epub');
+    if(epubBtn) epubBtn.onclick=function(){ ltsExportEpub(); };
+  }
+
+  if(tab==='log'){
+    // Delete
+    el.querySelectorAll('[data-ltsdel]').forEach(function(btn){
+      btn.onclick=function(){
+        var id=this.dataset.ltsdel;
+        if(!confirm('Delete this entry?'))return;
+        ltsData.entries=ltsData.entries.filter(function(e){return e.id!==id;});
+        ltsSave();ltsRender();
+      };
+    });
+
+    // Edit toggle
+    el.querySelectorAll('[data-ltsedit]').forEach(function(btn){
+      btn.onclick=function(){
+        var id=this.dataset.ltsedit;
+        ltsData._editing=(ltsData._editing===id)?null:id;
+        ltsRender();
+      };
+    });
+
+    // Save edit
+    el.querySelectorAll('[data-ltssaveedit]').forEach(function(btn){
+      btn.onclick=function(){
+        var id=this.dataset.ltssaveedit;
+        var e=ltsData.entries.find(function(x){return x.id===id;});
+        if(!e)return;
+        var titleEl=document.getElementById('lts-edit-title-'+id);
+        var bodyEl=document.getElementById('lts-edit-body-'+id);
+        if(!titleEl||!bodyEl)return;
+        var newTitle=titleEl.value.trim();
+        var newBody=bodyEl.value.trim();
+        if(!newTitle||!newBody)return;
+        e.title=newTitle;e.body=newBody;
+        ltsData._editing=null;
+        ltsSave();ltsRender();safeHap(HAP.save);
+      };
+    });
+
+    // Cancel edit
+    el.querySelectorAll('[data-ltscanceledit]').forEach(function(btn){
+      btn.onclick=function(){ltsData._editing=null;ltsRender();};
+    });
+  }
+}
+
+function ltsDoSave(){
+  var titleEl=document.getElementById('lts-title');
+  var bodyEl=document.getElementById('lts-body-inp');
+  if(!titleEl||!bodyEl)return;
+  var title=titleEl.value.trim();
+  var body=bodyEl.value.trim();
+  if(!title||!body)return;
+  var now=new Date();
+  var date=localDateStr(now);
+  var time=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  ltsData.entries.unshift({id:ltsId(),title:title,body:body,date:date,time:time,ts:Date.now()});
+  ltsData._tab='log';
+  ltsSave();ltsRender();safeHap(HAP.save);
+  if(typeof confetti==='function')confetti(window.innerWidth/2,200,'#00ff88');
+}
+
+window.addEventListener('load',function(){if(typeof ltsRender==='function')ltsRender();});
+// ══════════════════════════════════════════
+
+// ── LTS EXPORT HELPERS ──
+function ltsSeason(dateStr){
+  var m=parseInt((dateStr||'').slice(5,7));
+  if(m>=3&&m<=5)return'Spring';
+  if(m>=6&&m<=8)return'Summer';
+  if(m>=9&&m<=11)return'Fall';
+  return'Winter';
+}
+function ltsSeasonOrder(s){return{Winter:0,Spring:1,Summer:2,Fall:3}[s]||0;}
+function ltsGroupEntries(){
+  var entries=(ltsData.entries||[]).slice().sort(function(a,b){return (a.ts||0)-(b.ts||0);});
+  var groups={};
+  entries.forEach(function(e){
+    var year=(e.date||'').slice(0,4)||'Unknown';
+    var season=ltsSeason(e.date);
+    var key=year+'|'+season;
+    if(!groups[key])groups[key]={year:year,season:season,entries:[]};
+    groups[key].entries.push(e);
+  });
+  return Object.values(groups).sort(function(a,b){
+    if(a.year!==b.year)return a.year.localeCompare(b.year);
+    return ltsSeasonOrder(a.season)-ltsSeasonOrder(b.season);
+  });
+}
+
+function ltsExportMarkdown(){
+  var groups=ltsGroupEntries();
+  var lines=['# Letter to My Son',''];
+  // TOC
+  lines.push('## Table of Contents','');
+  groups.forEach(function(g){
+    lines.push('- **'+g.season+' '+g.year+'**');
+    g.entries.forEach(function(e){
+      lines.push('  - '+e.title+' *('+e.date+')*');
+    });
+  });
+  lines.push('','---','');
+  // Content
+  groups.forEach(function(g){
+    lines.push('## '+g.season+' '+g.year,'');
+    g.entries.forEach(function(e){
+      lines.push('### '+e.title);
+      lines.push('*'+e.date+(e.time?' · '+e.time:'')+'*','');
+      lines.push(e.body||'','');
+      lines.push('---','');
+    });
+  });
+  var blob=new Blob([lines.join('\n')],{type:'text/markdown'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='letter-to-my-son.md';
+  a.click();
+}
+
+function ltsExportEpub(){
+  // Load JSZip dynamically then build epub
+  if(typeof JSZip==='undefined'){
+    var s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    s.onload=function(){_ltsBuildEpub();};
+    s.onerror=function(){alert('Could not load JSZip. Check your connection.');};
+    document.head.appendChild(s);
+  } else {
+    _ltsBuildEpub();
+  }
+}
+
+function _ltsBuildEpub(){
+  var groups=ltsGroupEntries();
+  var allEntries=[];
+  groups.forEach(function(g){g.entries.forEach(function(e){allEntries.push(e);});});
+  var zip=new JSZip();
+
+  // mimetype (must be first, uncompressed)
+  zip.file('mimetype','application/epub+zip',{compression:'STORE'});
+
+  // container.xml
+  zip.folder('META-INF').file('container.xml',
+    '<?xml version="1.0"?>\n'+
+    '<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n'+
+    '  <rootfiles>\n'+
+    '    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>\n'+
+    '  </rootfiles>\n'+
+    '</container>');
+
+  var oebps=zip.folder('OEBPS');
+
+  // CSS
+  oebps.file('style.css',
+    'body{font-family:Georgia,serif;margin:2em;line-height:1.8;color:#222;max-width:600px;}\n'+
+    'h1{font-size:2em;margin-bottom:0.2em;}\n'+
+    'h2{font-size:1.4em;color:#444;border-bottom:1px solid #ddd;padding-bottom:0.3em;margin-top:2em;}\n'+
+    'h3{font-size:1.1em;color:#333;margin-top:1.6em;}\n'+
+    '.meta{color:#888;font-size:0.85em;font-style:italic;margin-bottom:1em;}\n'+
+    '.entry-body{white-space:pre-wrap;}\n'+
+    'hr{border:none;border-top:1px solid #eee;margin:2em 0;}\n'+
+    'nav ol{list-style:none;padding:0;}\n'+
+    'nav ol li{margin:0.3em 0;}\n'+
+    'nav ol li a{color:#333;text-decoration:none;}\n'+
+    'nav ol li.section{font-weight:bold;margin-top:0.8em;}\n'+
+    'nav ol li.chapter{padding-left:1.2em;font-size:0.9em;}');
+
+  // Build chapter files + manifest items
+  var manifestItems='';
+  var spineItems='';
+  var tocItems='';
+  var tocPlayOrder=1;
+
+  // Cover/title page
+  var titleHtml='<?xml version="1.0" encoding="UTF-8"?>\n'+
+    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'+
+    '<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Letter to My Son</title>'+
+    '<link rel="stylesheet" type="text/css" href="style.css"/></head><body>'+
+    '<h1>Letter to My Son</h1>'+
+    '<p class="meta">'+allEntries.length+' entries · '+
+    (allEntries[0]?allEntries[0].date:'')+(allEntries.length>1?' – '+allEntries[allEntries.length-1].date:'')+
+    '</p></body></html>';
+  oebps.file('title.xhtml',titleHtml);
+  manifestItems+='<item id="title" href="title.xhtml" media-type="application/xhtml+xml"/>\n';
+  spineItems+='<itemref idref="title"/>\n';
+
+  // TOC page (HTML nav)
+  var tocHtml='<?xml version="1.0" encoding="UTF-8"?>\n'+
+    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'+
+    '<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Contents</title>'+
+    '<link rel="stylesheet" type="text/css" href="style.css"/></head><body>'+
+    '<h2>Table of Contents</h2><nav><ol>';
+  groups.forEach(function(g,gi){
+    tocHtml+='<li class="section">'+g.season+' '+g.year+'</li>';
+    g.entries.forEach(function(e,ei){
+      var chId='ch'+gi+'_'+ei;
+      tocHtml+='<li class="chapter"><a href="'+chId+'.xhtml">'+e.title+'</a></li>';
+    });
+  });
+  tocHtml+='</ol></nav></body></html>';
+  oebps.file('toc.xhtml',tocHtml);
+  manifestItems+='<item id="toc-page" href="toc.xhtml" media-type="application/xhtml+xml"/>\n';
+  spineItems+='<itemref idref="toc-page"/>\n';
+  tocItems+='<navPoint id="np-toc" playOrder="'+(tocPlayOrder++)+'"><navLabel><text>Table of Contents</text></navLabel><content src="toc.xhtml"/></navPoint>\n';
+
+  // Chapter files
+  groups.forEach(function(g,gi){
+    var secId='sec'+gi;
+    tocItems+='<navPoint id="np-'+secId+'" playOrder="'+(tocPlayOrder++)+'"><navLabel><text>'+g.season+' '+g.year+'</text></navLabel><content src="ch'+gi+'_0.xhtml">\n';
+    g.entries.forEach(function(e,ei){
+      var chId='ch'+gi+'_'+ei;
+      var bodyEsc=(e.body||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      var chHtml='<?xml version="1.0" encoding="UTF-8"?>\n'+
+        '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'+
+        '<html xmlns="http://www.w3.org/1999/xhtml"><head><title>'+e.title+'</title>'+
+        '<link rel="stylesheet" type="text/css" href="style.css"/></head><body>'+
+        '<h3>'+e.title+'</h3>'+
+        '<p class="meta">'+e.date+(e.time?' · '+e.time:'')+'</p>'+
+        '<div class="entry-body">'+bodyEsc+'</div>'+
+        '</body></html>';
+      oebps.file(chId+'.xhtml',chHtml);
+      manifestItems+='<item id="'+chId+'" href="'+chId+'.xhtml" media-type="application/xhtml+xml"/>\n';
+      spineItems+='<itemref idref="'+chId+'"/>\n';
+      tocItems+='  <navPoint id="np-'+chId+'" playOrder="'+(tocPlayOrder++)+'"><navLabel><text>'+e.title+'</text></navLabel><content src="'+chId+'.xhtml"/></navPoint>\n';
+    });
+    tocItems+='</navPoint>\n';
+  });
+
+  // content.opf
+  var now=new Date().toISOString().slice(0,10);
+  oebps.file('content.opf',
+    '<?xml version="1.0" encoding="UTF-8"?>\n'+
+    '<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">\n'+
+    '<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">\n'+
+    '  <dc:title>Letter to My Son</dc:title>\n'+
+    '  <dc:language>en</dc:language>\n'+
+    '  <dc:identifier id="uid">letter-to-my-son-'+Date.now()+'</dc:identifier>\n'+
+    '  <dc:date>'+now+'</dc:date>\n'+
+    '</metadata>\n'+
+    '<manifest>\n'+
+    '  <item id="style" href="style.css" media-type="text/css"/>\n'+
+    '  <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>\n'+
+    manifestItems+
+    '</manifest>\n'+
+    '<spine toc="ncx">\n'+spineItems+'</spine>\n'+
+    '</package>');
+
+  // toc.ncx
+  oebps.file('toc.ncx',
+    '<?xml version="1.0" encoding="UTF-8"?>\n'+
+    '<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">\n'+
+    '<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">\n'+
+    '<head><meta name="dtb:uid" content="letter-to-my-son"/><meta name="dtb:depth" content="2"/></head>\n'+
+    '<docTitle><text>Letter to My Son</text></docTitle>\n'+
+    '<navMap>\n'+tocItems+'</navMap>\n</ncx>');
+
+  // Generate and download
+  zip.generateAsync({type:'blob',mimeType:'application/epub+zip'}).then(function(blob){
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='letter-to-my-son.epub';
+    a.click();
+  });
+}
 
 // ── END OF dashboard-2.js (Part 2 of 3) — continues in dashboard-3.js ──

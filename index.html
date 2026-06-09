@@ -3,9 +3,6 @@
 <head>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAEf0lEQVR4nO1WuY4cVRQ9575XVd3Ts2hmPLZBYMALGAckCCQQIiLhAwggRYiAjIQPQCIhQWIJQOIDyCEjIEBCQpawQTarARmDwfZ0T08vU8u7h6Cr7R6QwRIiQVw9VZX06rx76y7nFPC//eeNN+7cv6OF662ccRN4nB1N7vehdmnx7Zsc3WJt/5ZDAoDI2Z6RBoS5jwQ5kAT/u49o4WAkDCSkFk4XHBEBMDLCcrCg5VCCKvievAIB+U0+Yha+AQHMGLpgYTQoyUuphGqKigxEBusgrlpYI7sg2Fz1ZiA5JRCSAIELWZbmiTUyIHQR1i0eMHagkdJQzUA+FWpGZmCBuGb5HZbdbkef7nUOxjMv9b2GSncH2Ma6WCT6vDgBzGA9C+t84JW1vBfOv7uzdyExeH0NDkXmCD3mhy07YiefXb3/8dXfBnudO0P1kzMDHfA2uTcqJMAhB0QAjKAh27Clw/Ge+3q9A+H0a9t0qPLGFS1nXLOwxduf6Jx6fG1wtfrsjUF5OXFWmwwMYk5msECEeYckeC1VQiIMIHyis68Pwgs8ev/yzlP1ubeHcRdeKbKDsMb8iB17YsXArz4aTi42mkK1EBBy2LKFFYZVskPG1oGX8F1PQ6URVElJPlbq6+sPdw/e1Tn28PKljyfbv1a2w2gFucTVY9nmbcV2v+x/V2mItOtKsIiwwuLu0DsZs8MWV4gMINAgjVVf8em3afpNavqCwyfygaaXmss/TO89tbp5quh/WocOo0WiwNLBWMAGP1f1jnwirwGAGZVh89H8oRc3c1oMZiQASXXjTpx7f+f8q0MrzKfuDXwiH6F/qcIprRzKrEvmjDfGWHAHZmuh2a3DbifksAxm4KwEWaQD2bL9ef49LYw3EdVAFcqd1FArB2JYhnXBAABqZA37p6tP3rqWbVnskREglJAmara9f6ZiBa80mzgWsC5WtyLAySCplGpErxxTDi/UO8N681CxfEdWfuuhZ2mUVMFHGn/RTC+O4wZtichaIvEp0sBTHz6Sl2KEdRnXLTtoh452S6Ttr0vfle959D2koabfp+8/Hj345Mbxx5YHn1XWg2VsJkoVvJSNkK7IMiAQAiQ18BIq5RVAWIGwTF/SkUd6G+v5hS9H/bOVhkgTRS/VDBSu4McPxhvH8yMneuVzfublfnnR4fBKKJEmooEBLV1Img1aAgjLAJr1eOKZ1fseW9neLc+/N6x/UrPtPkVUhTT2+jIQdfbNQfO88i1rdqUGaqQabcicUcWc82YsS8DghDnSRGvH47Ur1efvDIan6/oXbwbSnmhdMoMtMW4wrDHbslBwfK5JA6UdeQ242r5alJSZI2uZOK4wrHPpZLQepz80GqG+6mksVSBzcEYJBcISmdFrzUZJJdRI2t+4+xmbBgRagdAjCyKAQhrLS6mCGpBhHkhA+wyogVIrOPoLzWkZG4i0OGdDn2GhJPichGnXJZMg4Gop86+V+bpk2oJqipCgNjLeSO4i3c/U+FZ0f469Lkf7gPrDv8Cfy3jr9k+w/9u/ar8Dbxh/AEizNPAAAAAASUVORK5CYII=">
 <meta charset="UTF-8">
-<link rel="preconnect" href="https://everyayah.com" crossorigin>
-<link rel="dns-prefetch" href="https://everyayah.com">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1606,8 +1603,14 @@ body.extra-large-text .goal-text{font-size:26px!important}
 body.extra-large-text .it-title{font-size:28px!important}
 body.extra-large-text .ptime{font-size:45px!important}
 
-.pomo-tab{font-size:16px;padding:4px 10px;border:1px solid rgba(255,255,255,.15);color:var(--dim);cursor:pointer;background:rgba(0,0,0,.75);transition:all .15s;letter-spacing:1px}
-.pomo-tab.active{color:var(--cp);border-color:var(--cp);background:rgba(255,95,160,.06)}
+
+.pomo-work-seg{color:#39ff88;font-weight:bold}
+.pomo-break-seg{color:#00e5ff}
+.pomo-log-day{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.pomo-log-day:last-child{border-bottom:none}
+.pomo-stat-num{font-family:'VT323',monospace;font-size:36px;line-height:1}
+.pomo-stat-lbl{font-size:10px;color:var(--dim);letter-spacing:1px}
+.pomo-log-date{font-size:11px;letter-spacing:1px;color:var(--ca);margin-bottom:4px}
 .pomo-work-seg{color:#39ff88;font-weight:bold}
 .pomo-break-seg{color:#00e5ff}
 .pomo-log-day{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -1641,6 +1644,7 @@ body.compact-mode .pomo-display{padding:9px 0 4px}
   transform-origin:center;
 }
 .inactivity-notice span{font-size:18px;color:var(--ca);letter-spacing:.3px;line-height:1.4}
+.inactivity-notice span{font-size:12px;color:var(--ca);letter-spacing:.3px;line-height:1.4}
 .inactivity-notice button{
   background:transparent;border:none;color:var(--dim);
   font-size:21px;cursor:pointer;padding:0 2px;flex-shrink:0;line-height:1;
@@ -2356,6 +2360,8 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 
 
 
+.pomo-tab1{font-size:12px;padding:4px 12px;border:1px solid rgba(255,255,255,.15);color:var(--dim);cursor:pointer;background:transparent;font-family:monospace;letter-spacing:1px;display:inline-block}
+.pomo-tab1.active{color:var(--cp);border-color:rgba(255,95,160,.6);background:rgba(255,95,160,.08)}
 </style>
 </head>
 <body>
@@ -2845,7 +2851,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div class="th" style="border-color:rgba(255,255,255,.1)">
       <span class="th-icon">&#9881;</span>
       <span class="th-label" style="color:var(--text)">Settings</span>
-      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-05-31</span>
+      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-06-09</span>
     </div>
     <div id="settings-body" style="display:flex;flex-direction:column;gap:0">
 
@@ -3277,9 +3283,9 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
       <span id="pomo-sessions-badge" class="th-badge" style="color:var(--dim);border-color:var(--dim);margin-left:auto">0 sessions</span>
     </div>
     <div style="display:flex;gap:4px;margin-bottom:8px">
-      <span class="pomo-tab active" id="ptab-timer" onclick="pomoTab('timer')">TIMER</span>
-      <span class="pomo-tab" id="ptab-log" onclick="pomoTab('log')">LOG</span>
-      <span class="pomo-tab" id="ptab-stats" onclick="pomoTab('stats')">STATS</span>
+      <span class="pomo-tab1 active" id="ptab-timer" onclick="pomoTab('timer')">TIMER</span>
+      <span class="pomo-tab1" id="ptab-log" onclick="pomoTab('log')">LOG</span>
+      <span class="pomo-tab1" id="ptab-stats" onclick="pomoTab('stats')">STATS</span>
     </div>
     <div id="ppanel-timer">
       <div id="pomo-trail" style="font-size:11px;letter-spacing:.5px;padding:2px 0 4px;min-height:18px;word-break:break-all;line-height:1.6"></div>
@@ -3387,6 +3393,14 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,229,255,.3)"><span class="th-icon" style="color:#00e5ff">📚</span><span class="th-label" style="color:#00e5ff">Semester</span><span id="sem-badge" class="th-badge" style="color:#00e5ff;border-color:rgba(0,229,255,.3);margin-left:auto;display:none"></span></div>
     <div id="sem-body"></div>
+  </div>
+
+
+  <!-- LETTER TO MY SON -->
+  <div class="tile" data-id="letter-son" style="border-color:rgba(0,255,136,.3)"><div class="icon-label-wrap"><span class="icon-emoji">💚</span><span class="icon-label">SON</span></div>
+    <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="th" style="border-color:rgba(0,255,136,.2)"><span class="th-icon" style="color:var(--cg)">💚</span><span class="th-label" style="color:var(--cg)">Letter to My Son</span><span id="lts-badge" class="th-badge" style="color:var(--cg);border-color:rgba(0,255,136,.3);margin-left:auto;display:none"></span></div>
+    <div id="lts-body"></div>
   </div>
 </div>
 <div id="mo" onclick="if(event.target===this)closeModal()">
@@ -3529,12 +3543,16 @@ function dbgCopyAll(){
     </div>
     <div id="sb-modal-status" style="font-size:11px;min-height:14px;text-align:center"></div>
     <!-- Auto sync -->
-    <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(0,255,136,.12);display:flex;align-items:center;gap:10px">
-      <input type="checkbox" id="sb-autosync-cb" style="width:16px;height:16px;cursor:pointer;accent-color:var(--cg)">
-      <div style="flex:1">
-        <div style="font-size:11px;color:var(--cg)">Auto-sync for 1 hour</div>
-        <div style="font-size:9px;color:var(--dim)" id="sb-autosync-status">Pushes every 10 min for 60 min, then stops</div>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(0,255,136,.12);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:6px">
+        <input type="checkbox" id="sb-autosync-cb" style="width:16px;height:16px;cursor:pointer;accent-color:var(--cg)">
+        <div style="font-size:11px;color:var(--cg)">1 hr</div>
       </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <input type="checkbox" id="sb-autosync-3h-cb" style="width:16px;height:16px;cursor:pointer;accent-color:var(--cg)">
+        <div style="font-size:11px;color:var(--cg)">3 hrs</div>
+      </div>
+      <div style="font-size:9px;color:var(--dim);width:100%" id="sb-autosync-status">Auto-sync — pushes every 10 min</div>
     </div>
   </div>
 </div>

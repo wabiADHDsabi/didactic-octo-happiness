@@ -6,7 +6,8 @@ function todayKey(){
 }
 window._dash1_todayKey=todayKey;
 window.addEventListener('load',function(){if(typeof blPrune==='function')blPrune();});
-function todayKeyRaw(){ return new Date().toISOString().slice(0,10); }
+function localDateStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function todayKeyRaw(){ return localDateStr(new Date()); }
 function safeHap(type, card, detail){
   if(typeof hap==='function')hap(type);
   // Log to button log
@@ -28,7 +29,6 @@ function safeHap(type, card, detail){
 function safeToast(msg){ if(typeof showToast==='function')showToast(msg); }
 var _lsPending={}, _lsTimers={};
 function lsGet(key,def){
-  // Check pending debounced write first
   if(_lsPending[key]!==undefined){
     try{ return JSON.parse(_lsPending[key]); }catch(e){}
   }
@@ -44,21 +44,19 @@ function _lsFlush(key){
   if(_lsTimers[key]){ clearTimeout(_lsTimers[key]); delete _lsTimers[key]; }
 }
 function lsSet(key,val){
-  // Debounce rapid writes to the same key (250ms), flush on hide
   try{ _lsPending[key]=JSON.stringify(val); }
   catch(e){ console.warn('lsSet stringify failed:',key,e); return; }
   if(_lsTimers[key]) clearTimeout(_lsTimers[key]);
   _lsTimers[key]=setTimeout(function(){ _lsFlush(key); }, 250);
 }
 function _lsFlushAll(){ Object.keys(_lsPending).forEach(_lsFlush); }
-// Lazy render: run fn when card[data-id] nears viewport, else defer
-function lazyRender(cardId, fn){
+function lazyRender(cardId,fn){
   var tile=document.querySelector('[data-id="'+cardId+'"]');
   if(!tile||!('IntersectionObserver' in window)){ try{fn();}catch(e){} return; }
   var done=false;
   var obs=new IntersectionObserver(function(entries){
     entries.forEach(function(en){
-      if(en.isIntersecting&&!done){ done=true; obs.disconnect(); try{fn();}catch(e){console.warn('lazyRender',cardId,e);} }
+      if(en.isIntersecting&&!done){ done=true; obs.disconnect(); try{fn();}catch(e){} }
     });
   },{rootMargin:'400px'});
   obs.observe(tile);
@@ -85,7 +83,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-05-31 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-06-08 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -2147,7 +2145,7 @@ function openModal(type){
 function closeModal(){document.getElementById('mo').classList.remove('open');}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 
-var DEF_ORDER=['quick-nav','clock','prayer','weather','stocks','todo','meals','calendar','notes','schedule','books','birthdays','season-traditions','pickleball','s-tracker','prayer-tracker','quran-tracker','juz-amma','islamic-topics','pomodoro','weekly-review','decision-log','energy-map','life-streaks','weekly-moments','weekend-warrior','goals','writers-den','meal-prep','ebook-library','raft','day-blocks','workout-log','quran-cards','quran-words','for-akhira','the-wall','countdown','gratitude-log','dua-card','rent-payments','settings','bookmarks','mood-log','milestone','reframe','legacy-letter','shadow-log','fear-inventory','people-become','writing-log','stress-demess','calorie-counter','weekly-summary','ayah-recall','ayah-completion','surah-map','voice-study','articulate','consistency-log','semester'];
+var DEF_ORDER=['quick-nav','clock','prayer','weather','stocks','todo','meals','calendar','notes','schedule','books','birthdays','season-traditions','pickleball','s-tracker','prayer-tracker','quran-tracker','juz-amma','islamic-topics','pomodoro','weekly-review','decision-log','energy-map','life-streaks','weekly-moments','weekend-warrior','goals','writers-den','meal-prep','ebook-library','raft','day-blocks','workout-log','quran-cards','quran-words','for-akhira','the-wall','countdown','gratitude-log','dua-card','rent-payments','settings','bookmarks','mood-log','milestone','reframe','legacy-letter','shadow-log','fear-inventory','people-become','writing-log','stress-demess','calorie-counter','weekly-summary','ayah-recall','ayah-completion','surah-map','voice-study','articulate','consistency-log','semester','letter-son'];
 var tileOrder=JSON.parse(localStorage.getItem('dash_tile_order')||'null')||DEF_ORDER;
 // Merge any new cards from DEF_ORDER that aren't in saved tileOrder
 if(localStorage.getItem('dash_tile_order')){
@@ -2444,10 +2442,10 @@ function deleteBook(id){
 function booksPruneCoversByDate(){
   // Keep covers only for the 15 most recently read/updated books
   var withCovers=books.filter(function(b){return b.cover;});
-  if(withCovers.length<=15)return;
+  if(withCovers.length<=35)return;
   // Sort by most recently started or updated (use id as proxy for recency)
   withCovers.sort(function(a,b){return b.id-a.id;});
-  var toStrip=withCovers.slice(15);
+  var toStrip=withCovers.slice(35);
   toStrip.forEach(function(b){delete b.cover;});
   saveBooks();
 }
@@ -2831,7 +2829,7 @@ function booksEnforceCoverLimit(){
     return b.id-a.id;
   });
   // Remove covers from books beyond position 15
-  sorted.slice(15).forEach(function(b){delete b.cover;});
+  sorted.slice(35).forEach(function(b){delete b.cover;});
 }
 // ── BOOKS BLOCK PROGRESS BAR ENGINE ──
 var _bkLastAnimTime = 0;
@@ -5750,7 +5748,7 @@ function applySettings(){
   tgStyle.textContent=getSetting('textGlow')?'body{--text-stroke:0 0 1px rgba(0,0,0,.9),-1px 0 1px rgba(0,0,0,.6),1px 0 1px rgba(0,0,0,.6)}body *{text-shadow:var(--text-stroke,none)}':'';
   if(window.applyLetterNav)window.applyLetterNav(getSetting('letterNav'));
   // Purge any new cards accidentally added to hidden list
-  ['consistency-log','semester'].forEach(function(id){
+  ['consistency-log','semester','letter-son'].forEach(function(id){
     var i=hiddenTiles.indexOf(id);if(i>=0){hiddenTiles.splice(i,1);saveHiddenTiles();}
   });
   // No Google Fonts
@@ -5859,7 +5857,8 @@ function qtCheckNotice(){
   var el=document.getElementById('qt-notice');
   if(!el)return;
   // Check if dismissed this session
-  if(sessionStorage.getItem('qt-notice-dismissed'))return;
+  var _qtDismissed=localStorage.getItem('qt-notice-dismissed');
+  if(_qtDismissed&&(Date.now()-parseInt(_qtDismissed))<86400000)return;
   // Find last day with pages > 0
   var keys=Object.keys(qtData).filter(function(k){return qtData[k]>0;}).sort().reverse();
   if(!keys.length){
@@ -5882,7 +5881,7 @@ function qtCheckNotice(){
 }
 
 function qtDismissNotice(){
-  sessionStorage.setItem('qt-notice-dismissed','1');
+  localStorage.setItem('qt-notice-dismissed',String(Date.now()));
   var el=document.getElementById('qt-notice');
   if(el)el.style.display='none';
 }
@@ -6702,9 +6701,19 @@ function sbShowModal(){
   // Wire auto-sync checkbox
   var _cb=document.getElementById('sb-autosync-cb');
   if(_cb){
-    _cb.checked=!!_autoSyncInterval;
+    var _hrs=parseInt(localStorage.getItem('dash_autosync_hrs')||'1');
+    _cb.checked=!!_autoSyncInterval&&_hrs===1;
     _cb.onchange=function(){
-      if(this.checked)sbStartAutoSync();
+      if(this.checked){var c3=document.getElementById('sb-autosync-3h-cb');if(c3)c3.checked=false;sbStartAutoSync(1);}
+      else sbStopAutoSync();
+    };
+  }
+  var _cb3=document.getElementById('sb-autosync-3h-cb');
+  if(_cb3){
+    var _hrs3=parseInt(localStorage.getItem('dash_autosync_hrs')||'1');
+    _cb3.checked=!!_autoSyncInterval&&_hrs3===3;
+    _cb3.onchange=function(){
+      if(this.checked){var c1=document.getElementById('sb-autosync-cb');if(c1)c1.checked=false;sbStartAutoSync(3);}
       else sbStopAutoSync();
     };
   }
@@ -7165,26 +7174,26 @@ window._dbgCheckpoints['jua_data_assign']=true;
 var JUA_DATA=[{"order":78,"surah":"An-Naba","meaning":"The Tidings","key_points":["Confirms the reality of the Day of Judgment.","Highlights the signs of Allah’s power in nature (mountains, Earth, sky).","Describes the rewards for the righteous in Paradise.","Warns of the consequences for those who deny the afterlife."]},{"order":79,"surah":"An-Nazi'at","meaning":"Those Who Drag Forth","key_points":["Describes the soul being taken at the time of death.","Recounts the story of Prophet Musa and Pharaoh as a warning.","Emphasizes that only Allah knows the exact timing of the Last Hour.","Contrasts the fate of the arrogant with those who fear Allah."]},{"order":80,"surah":"Abasa","meaning":"He Frowned","key_points":["Gentle correction to the Prophet regarding priority given to seekers of truth.","Reminds humanity of their humble origins from a drop of fluid.","Lists Allah’s blessings in providing food and vegetation.","Describes the chaos of the Day of Judgment where families flee from each other."]},{"order":81,"surah":"At-Takwir","meaning":"The Overthrowing","key_points":["Vividly describes the cosmic end of the world (stars falling, sun darkening).","Mentions the accountability for the 'buried alive' female infant.","Defends the integrity of the Quran as a message delivered by Angel Jibril.","Affirms that the Quran is a reminder for all of humanity."]},{"order":82,"surah":"Al-Infitar","meaning":"The Cleaving Asunder","key_points":["Describes the sky splitting and the graves being overturned.","Asks man what has deceived him regarding his Generous Lord.","Mentions the recording angels (Kiraman Katibin) who note every deed.","States that on the Last Day, no soul will have power over another."]},{"order":83,"surah":"Al-Mutaffifin","meaning":"The Defrauders","key_points":["Condemns those who give less in weight and measure (dishonesty in trade).","Defines 'Sijjin' as the register of the wicked.","Defines 'Illiyyun' as the register of the righteous.","Describes the mockery the believers faced and how the tables will turn."]},{"order":84,"surah":"Al-Inshiqaq","meaning":"The Sundering","key_points":["Describes the Earth being flattened and 'throwing out' its contents.","Explains that everyone is laboring toward a meeting with their Lord.","Contrasts those given their record in the right hand vs. behind their back.","Encourages prostration and submission to Allah’s word."]},{"order":85,"surah":"Al-Buruj","meaning":"The Mansions of the Stars","key_points":["Recounts the story of the People of the Ditch (martyrs of faith).","Assures that Allah witnesses all things, even when justice seems delayed.","Warns of the punishment for those who persecute believers.","Affirms the preservation of the Quran in the 'Guarded Tablet'."]},{"order":86,"surah":"At-Tariq","meaning":"The Night-Comer","key_points":["Points to the piercing star as a sign of divine oversight.","Reflects on the creation of man to prove that resurrection is easy for Allah.","States that on Judgment Day, all secrets will be laid bare.","Describes the Quran as a decisive word, not a matter for jest."]},{"order":87,"surah":"Al-A'la","meaning":"The Most High","key_points":["Commands the glorification of Allah, the Creator and Proportioner.","Promises the Prophet that he will not forget the revelation (except as Allah wills).","Emphasizes that success comes to those who purify their souls.","Notes that these teachings were also in the scriptures of Ibrahim and Musa."]},{"order":88,"surah":"Al-Ghashiyah","meaning":"The Overwhelming Event","key_points":["Describes the faces of the burdened vs. the joyful on Judgment Day.","Details the comforts of Paradise (running springs, raised couches).","Invites reflection on camels, the sky, mountains, and the Earth.","Reminds the Prophet that his role is to remind, not to manage people's hearts."]},{"order":89,"surah":"Al-Fajr","meaning":"The Dawn","key_points":["Swears by the dawn and the ten nights (of Dhul-Hijjah).","Mentions the destruction of powerful past nations like 'Ad and Thamud.","Critiques the human tendency to be greedy and neglect orphans.","Addresses the 'soul at peace' (An-Nafs al-Mutma'innah) with a call to enter Paradise."]},{"order":90,"surah":"Al-Balad","meaning":"The City","key_points":["Highlights that man was created for a life of struggle and test.","Lists the 'steep path' of virtue: freeing slaves and feeding the hungry.","Critiques those who brag about their wealth while ignoring the needy.","Identifies the believers as the 'Companions of the Right'."]},{"order":91,"surah":"Ash-Shams","meaning":"The Sun","key_points":["Swears by various celestial objects to emphasize the soul’s potential.","Teaches that success is achieved by purifying the soul (Tazkiyah).","Teaches that failure comes from corrupting the soul.","Uses the story of the She-Camel and Thamud as a warning against rebellion."]},{"order":92,"surah":"Al-Layl","meaning":"The Night","key_points":["Contrasts the paths of the generous believer and the stingy denier.","Explains that Allah makes the path to ease easy for the righteous.","Warns that wealth will not benefit a person once they perish.","Assures that those who give for the sake of Allah will be satisfied."]},{"order":93,"surah":"Ad-Duha","meaning":"The Morning Hours","key_points":["Consoles the Prophet during a period when revelation had paused.","Assures that the hereafter is better than the present life.","Reminds the Prophet of Allah’s care for him when he was an orphan.","Commands kindness to the needy and proclaiming Allah's favors."]},{"order":94,"surah":"Ash-Sharh","meaning":"The Expansion","key_points":["Speaks of Allah 'opening the chest' of the Prophet for guidance.","Mentions the removal of the heavy burden of anxiety/sin.","Repeats the famous promise: 'With every hardship, there is ease.'","Encourages turning to Allah in worship once worldly tasks are finished."]},{"order":95,"surah":"At-Tin","meaning":"The Fig","key_points":["Swears by the fig, the olive, Mount Sinai, and the city of Makkah.","States that man was created in the 'best of molds'.","Warns that man can fall to the 'lowest of the low' without faith.","Affirms Allah as the Most Just of all judges."]},{"order":96,"surah":"Al-Alaq","meaning":"The Clot","key_points":["Contains the first five verses revealed to the Prophet (Read!).","Emphasizes the importance of seeking knowledge and the pen.","Warns against the arrogance of man who thinks he is self-sufficient.","Condemns those who try to stop others from praying."]},{"order":97,"surah":"Al-Qadr","meaning":"The Power/Decree","key_points":["Commemorates the night the Quran was first sent down.","States that Laylat al-Qadr is better than a thousand months.","Mentions the descent of angels and the Spirit (Jibril).","Describes the night as one of peace until the break of dawn."]},{"order":98,"surah":"Al-Bayyinah","meaning":"The Clear Evidence","key_points":["Explains that people of the book needed clear evidence to change.","Defines the 'straight religion' as sincere worship, prayer, and charity.","Labels those who reject truth as the 'worst of creatures'.","Labels the righteous believers as the 'best of creatures'."]},{"order":99,"surah":"Al-Zalzalah","meaning":"The Earthquake","key_points":["Describes the final, violent shaking of the Earth.","States that the Earth will 'speak' and testify about human actions.","Teaches that people will see their deeds in the smallest detail.","Emphasizes the weight of an atom’s worth of good or evil."]},{"order":100,"surah":"Al-Adiyat","meaning":"The Chargers","key_points":["Uses the imagery of war horses to describe human intensity.","Critiques man for being ungrateful to his Lord.","Points out man's intense love for material wealth.","Reminds that what is hidden in the hearts will be made known."]},{"order":101,"surah":"Al-Qari'ah","meaning":"The Striking Hour","key_points":["Describes the Day of Judgment making people like scattered moths.","Mentions the mountains becoming like fluffed wool.","Introduces the concept of the 'Heavy Scales' for good deeds.","Warns of the 'Hawiyah' (a bottomless pit of fire) for the light scales."]},{"order":102,"surah":"At-Takathur","meaning":"Competition in Increase","key_points":["Warns that the distraction of gaining wealth lasts until death.","Tells humans that they will eventually see the 'certainty' of the fire.","Reminds that everyone will be questioned about the blessings they enjoyed.","Teaches that materialism blinds people to the purpose of life."]},{"order":103,"surah":"Al-Asr","meaning":"The Declining Day/Time","key_points":["Swears by time to show that humanity is in a state of loss.","Identifies the four traits of success: Faith, Good Deeds, Truth, and Patience.","Teaches the necessity of communal encouragement toward righteousness.","Summarizes the entire philosophy of life in three short verses."]},{"order":104,"surah":"Al-Humazah","meaning":"The Scorner","key_points":["Condemns backbiting, slandering, and mocking others.","Critiques the hoarding of wealth as a false sense of immortality.","Describes 'Hutamah', the fire that reaches the hearts.","Warns that arrogance and gossip lead to spiritual and literal ruin."]},{"order":105,"surah":"Al-Fil","meaning":"The Elephant","key_points":["Recounts the historical event of Abrahah’s failed attack on the Kaaba.","Shows how Allah protects His sanctuary with the smallest of means (birds).","Reminds the Quraish of Allah’s favor and power over their enemies.","Demonstrates that no human plot can overcome Allah’s plan."]},{"order":106,"surah":"Quraish","meaning":"The Quraish","key_points":["Mentions the winter and summer trade caravans of the tribe.","Urges the Quraish to worship the Lord of the House (Kaaba).","Attributes their security and food to Allah's grace.","Teaches that economic stability should lead to gratitude and worship."]},{"order":107,"surah":"Al-Ma'un","meaning":"Small Kindnesses","key_points":["Defines the 'denier of faith' as one who repels the orphan.","Critiques those who pray only to be seen (hypocrisy).","Condemns those who are heedless of their prayers.","Warns against those who withhold basic necessities/kindness from others."]},{"order":108,"surah":"Al-Kawthar","meaning":"The Abundance","key_points":["Consoles the Prophet by promising him the River of Abundance.","Commands the Prophet to pray and sacrifice for his Lord.","Declares that the enemies of the Prophet are the ones truly 'cut off'.","The shortest Surah, emphasizing quality of message over length."]},{"order":109,"surah":"Al-Kafirun","meaning":"The Disbelievers","key_points":["Establishes a clear distinction between Islamic monotheism and polytheism.","Refuses compromise in matters of core theology/worship.","Concludes with the famous principle: 'To you your religion, to me mine.'","Protects the integrity of the believer’s faith from external influence."]},{"order":110,"surah":"An-Nasr","meaning":"The Divine Support","key_points":["Foresees the final victory of Islam and the conquest of Makkah.","Describes people entering the religion in large crowds.","Instructs the Prophet to glorify Allah and seek forgiveness.","Signals the completion of the Prophet’s mission on Earth."]},{"order":111,"surah":"Al-Masad","meaning":"The Palm Fiber","key_points":["Condemns Abu Lahab for his active opposition to the Prophet.","Mentions that his wealth and children did not save him.","Condemns his wife for her role in spreading slander.","Serves as a historical miracle (it was revealed while they were still alive)."]},{"order":112,"surah":"Al-Ikhlas","meaning":"The Sincerity/Purity","key_points":["Defines the absolute Oneness of Allah (Tawhid).","States that Allah is Self-Sufficient and Eternal (As-Samad).","Negates the concept of Allah having parents or children.","Declares that nothing is comparable or equal to Him."]},{"order":113,"surah":"Al-Falaq","meaning":"The Daybreak","key_points":["A prayer for protection from the evil of created things.","Seeks refuge from the darkness of the night when it spreads.","Seeks protection from the evil of those who practice 'magic/knots'.","Seeks protection from the evil of the envious person."]},{"order":114,"surah":"An-Nas","meaning":"Mankind","key_points":["A prayer for protection from internal whispers (Waswas).","Recognizes Allah as the Lord, King, and God of mankind.","Identifies the whisperer as one who retreats (Al-Khannas).","Notes that whispers can come from both Jinns and Men."]}];
 var juaState=lsGet('dash_jua',{});
 if(!juaState.cards)juaState.cards={};
-if(!juaState.section)juaState.section='facts';
+if(!juaState.section)juaState.section='meanings';
 if(!juaState._tab)juaState._tab='study';
 if(!juaState._revealed)juaState._revealed=0;
 function juaSave(){lsSet('dash_jua',juaState);}
 
 var SECTIONS=[
-  {id:'facts',label:'Facts',desc:'4 key points per surah'},
   {id:'meanings',label:'Meanings',desc:'Surah name meanings'},
   {id:'forward',label:'Order ►',desc:'78 → 114 sequence'},
-  {id:'backward',label:'Order ◄',desc:'114 → 78 sequence'}
+  {id:'backward',label:'Order ◄',desc:'114 → 78 sequence'},
+  {id:'facts',label:'Facts',desc:'4 key points per surah'}
 ];
 var JUA_INTERVALS={again:1,hard:2,good:5,easy:14};
 
 // todayKey() → now uses global todayKey()
 function juaCardKey(s,i){return s+'_'+i;}
 function juaSectionUnlocked(s){
-  if(s==='facts')return true;
-  if(s==='meanings')return juaAllSeen('facts');
+  if(s==='meanings')return true;
   if(s==='forward')return juaAllSeen('meanings');
   if(s==='backward')return juaAllSeen('forward');
+  if(s==='facts')return juaAllSeen('backward');
   return false;
 }
 function juaAllSeen(s){
@@ -7243,7 +7252,7 @@ function juaRender(){
   }
   if(!juaState)juaState={};
   if(!juaState.cards)juaState.cards={};
-  if(!juaState.section)juaState.section='facts';
+  if(!juaState.section)juaState.section='meanings';
   if(!juaState._tab)juaState._tab='study';
   juaRenderBadge();
   var tab=juaState._tab||'study';
@@ -7742,11 +7751,8 @@ function questRender(){
       var step = steps.find(function(s){ return s.step === current; });
       if(!step){ h += '<div style="color:var(--dim)">Step not found.</div>'; }
       else {
-        // Phase label — shown right at top
         h += '<div style="font-size:var(--t-xxs);color:rgba(255,165,0,.4);letter-spacing:1px;margin-bottom:2px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
         h += '<div style="font-size:var(--t-xs);color:rgba(255,165,0,.6);letter-spacing:2px;margin-bottom:10px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
-
-        // Progress bar
         var pct = Math.round((current-1)/100*100);
         h += '<div style="height:3px;background:var(--c-ghost);margin-bottom:14px">';
         h += '<div style="height:100%;width:'+pct+'%;background:#ffa500;transition:width .4s"></div>';
@@ -7844,6 +7850,7 @@ window.addEventListener('load', function(){
   setTimeout(function(){
     if(typeof clRender==='function') clRender();
     if(typeof semRender==='function') semRender();
+    if(typeof ltsRender==='function') ltsRender();
   }, 200);
 });
 // ── END QUEST ──
@@ -7853,17 +7860,20 @@ var _autoSyncTimer=null;
 var _autoSyncInterval=null;
 var _autoSyncEnd=0;
 
-function sbStartAutoSync(){
+function sbStartAutoSync(hours){
   if(_autoSyncInterval)return; // already running
-  _autoSyncEnd=Date.now()+60*60*1000; // 1 hour from now
+  _autoSyncEnd=Date.now()+(hours||1)*60*60*1000;
   localStorage.setItem('dash_autosync_end',String(_autoSyncEnd));
+  localStorage.setItem('dash_autosync_hrs',String(hours||1));
   _sbDoAutoSync();
   _autoSyncInterval=setInterval(function(){
     if(Date.now()>=_autoSyncEnd){
       sbStopAutoSync();
-      safeToast('Auto-sync ended after 1 hour');
+      safeToast('Auto-sync ended');
       var cb=document.getElementById('sb-autosync-cb');
       if(cb)cb.checked=false;
+      var cb3=document.getElementById('sb-autosync-3h-cb');
+      if(cb3)cb3.checked=false;
       return;
     }
     _sbDoAutoSync();
@@ -7908,7 +7918,7 @@ window.addEventListener('load',function(){
     _autoSyncInterval=setInterval(function(){
       if(Date.now()>=_autoSyncEnd){
         sbStopAutoSync();
-        safeToast('Auto-sync ended after 1 hour');
+        safeToast('Auto-sync ended');
         var cb=document.getElementById('sb-autosync-cb');
         if(cb)cb.checked=false;
         return;
