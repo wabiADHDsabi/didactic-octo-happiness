@@ -7,7 +7,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-06-09 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-06-11 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -1508,7 +1508,8 @@ function snapshotData(){
     clData:lsGet('dash_cl',{activities:[],log:{}}),
     semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
     questState:lsGet('dash_quest',{}),
-    ltsData:lsGet('dash_lts',{entries:[]})
+    ltsData:lsGet('dash_lts',{entries:[]}),
+    mipData:lsGet('dash_mip',{months:{}})
   };
 }
 
@@ -1592,6 +1593,7 @@ function restoreSnapshot(snap){
   if(snap.semData)localStorage.setItem('dash_sem',JSON.stringify(snap.semData));
   if(snap.questState)localStorage.setItem('dash_quest',JSON.stringify(snap.questState));
   if(snap.ltsData)localStorage.setItem('dash_lts',JSON.stringify(snap.ltsData));
+  if(snap.mipData)localStorage.setItem('dash_mip',JSON.stringify(snap.mipData));
   if(snap.syncLogAll&&Array.isArray(snap.syncLogAll)){
     var _curAll=lsGet('dash_sync_log_all',[]);
     var _allMap={};
@@ -7807,5 +7809,246 @@ function _ltsBuildEpub(){
     a.click();
   });
 }
+
+// ══════════════════════════════════════════
+// MONTHLY IMPOSSIBLE PROJECT (MIP)
+// ══════════════════════════════════════════
+var mipData = lsGet('dash_mip', {months:{}});
+if(!mipData.months) mipData.months = {};
+
+function mipSave(){ lsSet('dash_mip', mipData); }
+function mipNoteId(){ return 'n_'+Date.now()+'_'+Math.random().toString(36).slice(2,4); }
+function mipMonthKey(d){ var n=d||new Date(); return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0'); }
+function mipMonthLabel(key){ var d=new Date(key+'-02'); return d.toLocaleDateString('en-US',{month:'long',year:'numeric'}); }
+function mipShift(key, delta){
+  var d=new Date(key+'-02');
+  d.setMonth(d.getMonth()+delta);
+  return mipMonthKey(d);
+}
+
+function mipRender(){
+  var el=document.getElementById('mip-body');
+  var badge=document.getElementById('mip-badge');
+  if(!el) return;
+  el.style.maxHeight='700px'; el.style.overflowY='auto';
+
+  var CA='var(--ca)', CB='rgba(255,184,108,';
+  var tab = mipData._tab||'this';
+  var viewKey = mipData._viewKey||mipMonthKey();
+  var thisKey = mipMonthKey();
+  var entry = mipData.months[viewKey]||{title:'',notes:[],done:false};
+  var isThisMonth = viewKey===thisKey;
+
+  // Badge
+  if(badge){
+    var thisEntry = mipData.months[thisKey];
+    badge.textContent = thisEntry&&thisEntry.title ? (thisEntry.done?'✓ Done':'In progress') : 'No project';
+    badge.style.display='';
+  }
+
+  var h='';
+
+  // Tabs
+  h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
+  [{t:'this',l:'THIS MONTH'},{t:'log',l:'LOG'}].forEach(function(x){
+    var a=tab===x.t;
+    h+='<button data-miptab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?CB+'.5)':'var(--c-border)')+';color:'+(a?CA:'var(--dim)')+';cursor:pointer;background:'+(a?CB+'.08)':'transparent')+';font-family:monospace;letter-spacing:1px">'+x.l+'</button>';
+  });
+  h+='</div>';
+
+  if(tab==='this'){
+    // Month nav
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
+    h+='<button data-mipnav="-1" style="background:transparent;border:1px solid rgba(255,184,108,.2);color:var(--ca);font-family:monospace;cursor:pointer;padding:2px 10px;font-size:var(--t-md)">←</button>';
+    h+='<div style="flex:1;text-align:center;font-size:var(--t-sm);color:'+(isThisMonth?CA:'var(--dim)')+'">'+mipMonthLabel(viewKey)+(isThisMonth?' <span style="font-size:var(--t-xxs);color:var(--cg)">● NOW</span>':'')+'</div>';
+    h+='<button data-mipnav="1" style="background:transparent;border:1px solid rgba(255,184,108,.2);color:var(--ca);font-family:monospace;cursor:pointer;padding:2px 10px;font-size:var(--t-md)">→</button>';
+    h+='</div>';
+
+    // Title input
+    h+='<input id="mip-title-inp" placeholder="This month\'s impossible project..." value="'+((entry.title||'').replace(/"/g,'&quot;'))+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:8px;outline:none;margin-bottom:8px">';
+
+    // Done toggle
+    var doneCol = entry.done ? 'var(--cg)' : CB+'.3)';
+    h+='<button id="mip-done-btn" style="width:100%;padding:8px;background:'+(entry.done?'rgba(0,255,136,.08)':'transparent')+';border:1px solid '+doneCol+';color:'+(entry.done?'var(--cg)':CB+'.5)')+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px;margin-bottom:10px">'+(entry.done?'✓ COMPLETED — TAP TO UNDO':'MARK AS COMPLETED')+'</button>';
+
+    // Add note
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">UPDATES</div>';
+    h+='<textarea id="mip-note-inp" placeholder="Add an update..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:6px 8px;outline:none;resize:none;min-height:60px;margin-bottom:6px"></textarea>';
+    h+='<button id="mip-note-btn" style="width:100%;padding:7px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:'+CA+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px;margin-bottom:12px">+ ADD UPDATE</button>';
+
+    // Notes log
+    var notes = (entry.notes||[]).slice().reverse();
+    if(notes.length){
+      notes.forEach(function(n){
+        var editing = mipData._editNote===n.id;
+        h+='<div style="border-bottom:1px solid rgba(255,184,108,.08);padding:8px 0" data-mipnote="'+n.id+'">';
+        h+='<div style="display:flex;align-items:flex-start;gap:6px">';
+        h+='<div style="flex:1">';
+        h+='<div style="font-size:var(--t-xxs);color:var(--dim);margin-bottom:4px">'+new Date(n.ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})+'</div>';
+        if(editing){
+          h+='<textarea id="mip-edit-'+n.id+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none;resize:none;min-height:50px">'+n.text+'</textarea>';
+          h+='<div style="display:flex;gap:6px;margin-top:4px">';
+          h+='<button data-mipsavenote="'+n.id+'" style="padding:3px 10px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:'+CA+';font-family:monospace;font-size:var(--t-xxs);cursor:pointer">SAVE</button>';
+          h+='<button data-mipcancelnote="'+n.id+'" style="padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:var(--t-xxs);cursor:pointer">CANCEL</button>';
+          h+='</div>';
+        } else {
+          h+='<div style="font-size:var(--t-sm);color:var(--text);white-space:pre-wrap;line-height:1.6">'+n.text+'</div>';
+        }
+        h+='</div>';
+        if(!editing){
+          h+='<button data-mipeditnote="'+n.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-sm);cursor:pointer;padding:0 4px">✏️</button>';
+          h+='<button data-mipdelnote="'+n.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-base);cursor:pointer;padding:0 2px">✕</button>';
+        }
+        h+='</div></div>';
+      });
+    } else {
+      h+='<div style="color:var(--dim);font-size:var(--t-sm);text-align:center;padding:10px 0">No updates yet.</div>';
+    }
+
+  } else {
+    // LOG tab — past + future months with entries
+    var keys = Object.keys(mipData.months).filter(function(k){ return mipData.months[k].title; }).sort().reverse();
+    if(!keys.length){
+      h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No projects yet.</div>';
+    } else {
+      keys.forEach(function(k){
+        var m = mipData.months[k];
+        var isCurr = k===thisKey;
+        var isFuture = k>thisKey;
+        var col = m.done?'var(--cg)':isFuture?'rgba(255,255,255,.3)':CA;
+        h+='<div style="border:1px solid rgba(255,184,108,.1);padding:10px;margin-bottom:8px">';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:'+(m.notes&&m.notes.length?'6':'0')+'px">';
+        h+='<div style="font-size:var(--t-xs);color:var(--dim);min-width:80px">'+mipMonthLabel(k)+'</div>';
+        h+='<div style="flex:1;font-size:var(--t-sm);color:'+col+'">'+m.title+'</div>';
+        if(m.done) h+='<span style="font-size:var(--t-xxs);color:var(--cg)">✓</span>';
+        if(isFuture) h+='<span style="font-size:var(--t-xxs);color:rgba(255,255,255,.3)">planned</span>';
+        h+='</div>';
+        if(m.notes&&m.notes.length){
+          h+='<div style="font-size:var(--t-xxs);color:var(--dim)">'+m.notes.length+' update'+(m.notes.length>1?'s':'')+'</div>';
+        }
+        h+='</div>';
+      });
+    }
+  }
+
+  el.innerHTML=h;
+
+  // Wire tabs
+  el.querySelectorAll('[data-miptab]').forEach(function(btn){
+    var _tx=0,_ty=0;
+    btn.ontouchstart=function(e){_tx=e.touches[0].clientX;_ty=e.touches[0].clientY;};
+    btn.ontouchend=function(e){
+      if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
+      e.preventDefault(); mipData._tab=this.dataset.miptab; mipSave(); mipRender();
+    };
+    btn.onclick=function(e){if(e.detail===0)return; mipData._tab=this.dataset.miptab; mipSave(); mipRender();};
+  });
+
+  if(tab==='this'){
+    // Nav arrows
+    el.querySelectorAll('[data-mipnav]').forEach(function(btn){
+      var _tx=0,_ty=0;
+      btn.ontouchstart=function(e){_tx=e.touches[0].clientX;_ty=e.touches[0].clientY;};
+      btn.ontouchend=function(e){
+        if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
+        e.preventDefault(); mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav)); mipSave(); mipRender();
+      };
+      btn.onclick=function(e){if(e.detail===0)return; mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav)); mipSave(); mipRender();};
+    });
+
+    // Title save on input
+    var titleInp=document.getElementById('mip-title-inp');
+    if(titleInp) titleInp.oninput=function(){
+      if(!mipData.months[viewKey])mipData.months[viewKey]={title:'',notes:[],done:false};
+      mipData.months[viewKey].title=this.value;
+      mipSave();
+    };
+
+    // Done toggle
+    var doneBtn=document.getElementById('mip-done-btn');
+    if(doneBtn){
+      var _dtx=0,_dty=0;
+      doneBtn.ontouchstart=function(e){_dtx=e.touches[0].clientX;_dty=e.touches[0].clientY;};
+      doneBtn.ontouchend=function(e){
+        if(Math.abs(e.changedTouches[0].clientX-_dtx)>8||Math.abs(e.changedTouches[0].clientY-_dty)>8)return;
+        e.preventDefault(); mipToggleDone();
+      };
+      doneBtn.onclick=function(e){if(e.detail===0)return; mipToggleDone();};
+    }
+
+    // Add note
+    var noteBtn=document.getElementById('mip-note-btn');
+    if(noteBtn){
+      var _ntx=0,_nty=0;
+      noteBtn.ontouchstart=function(e){_ntx=e.touches[0].clientX;_nty=e.touches[0].clientY;};
+      noteBtn.ontouchend=function(e){
+        if(Math.abs(e.changedTouches[0].clientX-_ntx)>8||Math.abs(e.changedTouches[0].clientY-_nty)>8)return;
+        e.preventDefault(); mipAddNote();
+      };
+      noteBtn.onclick=function(e){if(e.detail===0)return; mipAddNote();};
+    }
+
+    // Edit note
+    el.querySelectorAll('[data-mipeditnote]').forEach(function(btn){
+      btn.onclick=function(){
+        var id=this.dataset.mipeditnote;
+        mipData._editNote=(mipData._editNote===id)?null:id;
+        mipRender();
+      };
+    });
+
+    // Save edited note
+    el.querySelectorAll('[data-mipsavenote]').forEach(function(btn){
+      btn.onclick=function(){
+        var id=this.dataset.mipsavenote;
+        var ta=document.getElementById('mip-edit-'+id);
+        if(!ta||!ta.value.trim())return;
+        var e=mipData.months[viewKey];
+        if(!e)return;
+        var note=e.notes.find(function(n){return n.id===id;});
+        if(note){note.text=ta.value.trim();}
+        mipData._editNote=null;
+        mipSave(); mipRender(); safeHap(HAP.save);
+      };
+    });
+
+    // Cancel edit
+    el.querySelectorAll('[data-mipcancelnote]').forEach(function(btn){
+      btn.onclick=function(){mipData._editNote=null; mipRender();};
+    });
+
+    // Delete note
+    el.querySelectorAll('[data-mipdelnote]').forEach(function(btn){
+      btn.onclick=function(){
+        if(!confirm('Delete this update?'))return;
+        var id=this.dataset.mipdelnote;
+        var e=mipData.months[viewKey];
+        if(!e)return;
+        e.notes=e.notes.filter(function(n){return n.id!==id;});
+        mipSave(); mipRender();
+      };
+    });
+  }
+}
+
+function mipToggleDone(){
+  var viewKey=mipData._viewKey||mipMonthKey();
+  if(!mipData.months[viewKey])mipData.months[viewKey]={title:'',notes:[],done:false};
+  mipData.months[viewKey].done=!mipData.months[viewKey].done;
+  if(mipData.months[viewKey].done&&typeof confetti==='function')confetti(window.innerWidth/2,200,'#ffcc00');
+  mipSave(); mipRender();
+}
+
+function mipAddNote(){
+  var viewKey=mipData._viewKey||mipMonthKey();
+  var ta=document.getElementById('mip-note-inp');
+  if(!ta||!ta.value.trim())return;
+  if(!mipData.months[viewKey])mipData.months[viewKey]={title:'',notes:[],done:false};
+  mipData.months[viewKey].notes.push({id:mipNoteId(),text:ta.value.trim(),ts:Date.now()});
+  mipSave(); mipRender(); safeHap(HAP.check);
+}
+
+window.addEventListener('load',function(){if(typeof mipRender==='function')mipRender();});
+// ══════════════════════════════════════════
 
 // ── END OF dashboard-2.js (Part 2 of 3) — continues in dashboard-3.js ──

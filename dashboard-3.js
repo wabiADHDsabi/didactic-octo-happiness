@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-06-04 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-06-11 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -958,7 +958,8 @@ var QNAV_CARDS=[
   ['button-log','📊','Button Log','var(--c-purple)'],
   ['consistency-log','🔗','Consistency','var(--ca)'],
   ['semester','📚','Semester','#00e5ff'],
-  ['letter-son','💚','Son','var(--cg)']
+  ['letter-son','💚','Son','var(--cg)'],
+  ['mip','🔥','MIP','var(--ca)']
 ];
 
 var _qnavMode=localStorage.getItem('qnav_mode')||'both'; // 'both','labels','icons'

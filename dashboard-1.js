@@ -6,7 +6,7 @@ function todayKey(){
 }
 window._dash1_todayKey=todayKey;
 window.addEventListener('load',function(){if(typeof blPrune==='function')blPrune();});
-function localDateStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function localDateStr(d){var _d=d||new Date();return _d.getFullYear()+'-'+String(_d.getMonth()+1).padStart(2,'0')+'-'+String(_d.getDate()).padStart(2,'0');}
 function todayKeyRaw(){ return localDateStr(new Date()); }
 function safeHap(type, card, detail){
   if(typeof hap==='function')hap(type);
@@ -83,7 +83,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-06-08 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-06-11 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -2145,7 +2145,7 @@ function openModal(type){
 function closeModal(){document.getElementById('mo').classList.remove('open');}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 
-var DEF_ORDER=['quick-nav','clock','prayer','weather','stocks','todo','meals','calendar','notes','schedule','books','birthdays','season-traditions','pickleball','s-tracker','prayer-tracker','quran-tracker','juz-amma','islamic-topics','pomodoro','weekly-review','decision-log','energy-map','life-streaks','weekly-moments','weekend-warrior','goals','writers-den','meal-prep','ebook-library','raft','day-blocks','workout-log','quran-cards','quran-words','for-akhira','the-wall','countdown','gratitude-log','dua-card','rent-payments','settings','bookmarks','mood-log','milestone','reframe','legacy-letter','shadow-log','fear-inventory','people-become','writing-log','stress-demess','calorie-counter','weekly-summary','ayah-recall','ayah-completion','surah-map','voice-study','articulate','consistency-log','semester','letter-son'];
+var DEF_ORDER=['quick-nav','clock','prayer','weather','stocks','todo','meals','calendar','notes','schedule','books','birthdays','season-traditions','pickleball','s-tracker','prayer-tracker','quran-tracker','juz-amma','islamic-topics','pomodoro','weekly-review','decision-log','energy-map','life-streaks','weekly-moments','weekend-warrior','goals','writers-den','meal-prep','ebook-library','raft','day-blocks','workout-log','quran-cards','quran-words','for-akhira','the-wall','countdown','gratitude-log','dua-card','rent-payments','settings','bookmarks','mood-log','milestone','reframe','legacy-letter','shadow-log','fear-inventory','people-become','writing-log','stress-demess','calorie-counter','weekly-summary','ayah-recall','ayah-completion','surah-map','voice-study','articulate','consistency-log','semester','letter-son','mip'];
 var tileOrder=JSON.parse(localStorage.getItem('dash_tile_order')||'null')||DEF_ORDER;
 // Merge any new cards from DEF_ORDER that aren't in saved tileOrder
 if(localStorage.getItem('dash_tile_order')){
@@ -4681,8 +4681,11 @@ function ptSetStatus(dateKey,prayer,status,evt){
   }
   ptTouchDay(dateKey);
   ptSave();
-  if(ptTab==='today')ptRenderToday();
-  else ptRenderLog();
+  if(ptTab==='today'){
+    try{ptRenderToday();}catch(e){console.error('ptRenderToday error:',e);}
+  } else {
+    try{ptRenderLog();}catch(e){console.error('ptRenderLog error:',e);}
+  }
   setTimeout(checkPrayerSparkle,200);
 }
 
@@ -5076,7 +5079,18 @@ function ptRenderToday(){
   if(isToday&&prayers)renderForbiddenTimes();  el.innerHTML=h;
   // Wire prayer status buttons
   el.querySelectorAll('[data-pt-status]').forEach(function(btn){
-    btn.onclick=function(){
+    var _ptx=0,_pty=0;
+    btn.ontouchstart=function(e){_ptx=e.touches[0].clientX;_pty=e.touches[0].clientY;};
+    btn.ontouchend=function(e){
+      if(Math.abs(e.changedTouches[0].clientX-_ptx)>8||Math.abs(e.changedTouches[0].clientY-_pty)>8)return;
+      e.preventDefault();
+      var status=this.dataset.ptStatus;
+      var dateKey=this.dataset.ptDate;
+      var prayer=this.dataset.ptPrayer;
+      ptSetStatus(dateKey,prayer,status,{target:this});
+    };
+    btn.onclick=function(e){
+      if(e.detail===0)return;
       var status=this.dataset.ptStatus;
       var dateKey=this.dataset.ptDate;
       var prayer=this.dataset.ptPrayer;
@@ -5748,7 +5762,7 @@ function applySettings(){
   tgStyle.textContent=getSetting('textGlow')?'body{--text-stroke:0 0 1px rgba(0,0,0,.9),-1px 0 1px rgba(0,0,0,.6),1px 0 1px rgba(0,0,0,.6)}body *{text-shadow:var(--text-stroke,none)}':'';
   if(window.applyLetterNav)window.applyLetterNav(getSetting('letterNav'));
   // Purge any new cards accidentally added to hidden list
-  ['consistency-log','semester','letter-son'].forEach(function(id){
+  ['consistency-log','semester','letter-son','mip'].forEach(function(id){
     var i=hiddenTiles.indexOf(id);if(i>=0){hiddenTiles.splice(i,1);saveHiddenTiles();}
   });
   // No Google Fonts
@@ -7851,6 +7865,7 @@ window.addEventListener('load', function(){
     if(typeof clRender==='function') clRender();
     if(typeof semRender==='function') semRender();
     if(typeof ltsRender==='function') ltsRender();
+    if(typeof mipRender==='function') mipRender();
   }, 200);
 });
 // ── END QUEST ──
