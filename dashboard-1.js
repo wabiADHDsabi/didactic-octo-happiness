@@ -83,7 +83,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-06-11 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-06-12 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -4681,11 +4681,19 @@ function ptSetStatus(dateKey,prayer,status,evt){
   }
   ptTouchDay(dateKey);
   ptSave();
-  if(ptTab==='today'){
-    try{ptRenderToday();}catch(e){console.error('ptRenderToday error:',e);}
-  } else {
-    try{ptRenderLog();}catch(e){console.error('ptRenderLog error:',e);}
-  }
+  // Update button visuals directly without full re-render
+  document.querySelectorAll('[data-pt-status][data-pt-prayer="'+prayer+'"][data-pt-date="'+dateKey+'"]').forEach(function(b){
+    var s=b.dataset.ptStatus;
+    var active=(ptData[dateKey]&&ptData[dateKey][prayer]===s);
+    var colors={ontime:'#00ff88',late:'#ffcc00',missed:'rgba(255,68,68,.8)'};
+    var col=colors[s]||'var(--dim)';
+    b.style.borderColor=active?col:'rgba(255,255,255,.1)';
+    b.style.color=active?col:'var(--dim)';
+    b.style.background=active?'rgba('+( s==='ontime'?'0,255,136':s==='late'?'255,204,0':'255,68,68')+', .08)':'transparent';
+  });
+  // Also update streak/badge without full rebuild
+  if(ptTab==='today') try{ptRenderToday();}catch(e){console.error('ptRenderToday:',e);}
+  else try{ptRenderLog();}catch(e){console.error('ptRenderLog:',e);}
   setTimeout(checkPrayerSparkle,200);
 }
 
@@ -5090,7 +5098,8 @@ function ptRenderToday(){
       ptSetStatus(dateKey,prayer,status,{target:this});
     };
     btn.onclick=function(e){
-      if(e.detail===0)return;
+      // ontouchend handles mobile; onclick handles desktop mouse clicks
+      if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;
       var status=this.dataset.ptStatus;
       var dateKey=this.dataset.ptDate;
       var prayer=this.dataset.ptPrayer;
@@ -7855,7 +7864,7 @@ function questRender(){
       e.preventDefault(); e.stopPropagation();
       questDoneFn();
     };
-    doneBtn.onclick = function(e){ if(e.detail===0)return; questDoneFn(); }; // mouse only, not synthetic
+    doneBtn.onclick = function(e){ if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; questDoneFn(); }; // mouse only, not synthetic
   }
 }
 
