@@ -7,7 +7,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-06-11 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-06-12 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -6976,7 +6976,7 @@ function clRender(){
         safeHap(idx>=0?HAP.soft:HAP.check);
         clSave();clRender();
       };
-      btn.onclick=function(e){if(e.detail===0)return;
+      btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;
         var id=this.dataset.cllog;
         var log=clData.log[today]||[];
         var idx=log.indexOf(id);
@@ -7224,7 +7224,7 @@ function semRender(){
       if(Math.abs(e.changedTouches[0].clientX-_stx)>8||Math.abs(e.changedTouches[0].clientY-_sty)>8)return;
       e.preventDefault();semData._tab=this.dataset.semtab;semSave();semRender();
     };
-    btn.onclick=function(e){if(e.detail===0)return;semData._tab=this.dataset.semtab;semSave();semRender();};
+    btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;semData._tab=this.dataset.semtab;semSave();semRender();};
   });
 
   if(tab==='progress'){
@@ -7236,7 +7236,7 @@ function semRender(){
         if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
         e.preventDefault();semToggle(this);
       };
-      btn.onclick=function(e){if(e.detail===0)return;semToggle(this);};
+      btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;semToggle(this);};
     });
   }
 
@@ -7523,7 +7523,7 @@ function ltsRender(){
       if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
       e.preventDefault();ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();
     };
-    btn.onclick=function(e){if(e.detail===0)return;ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();};
+    btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();};
   });
 
   if(tab==='write'){
@@ -7535,7 +7535,7 @@ function ltsRender(){
         if(Math.abs(e.changedTouches[0].clientX-_stx)>8||Math.abs(e.changedTouches[0].clientY-_sty)>8)return;
         e.preventDefault();ltsDoSave();
       };
-      saveBtn.onclick=function(e){if(e.detail===0)return;ltsDoSave();};
+      saveBtn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;ltsDoSave();};
     }
   }
 
@@ -7941,7 +7941,7 @@ function mipRender(){
       if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
       e.preventDefault(); mipData._tab=this.dataset.miptab; mipSave(); mipRender();
     };
-    btn.onclick=function(e){if(e.detail===0)return; mipData._tab=this.dataset.miptab; mipSave(); mipRender();};
+    btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipData._tab=this.dataset.miptab; mipSave(); mipRender();};
   });
 
   if(tab==='this'){
@@ -7953,7 +7953,7 @@ function mipRender(){
         if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
         e.preventDefault(); mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav)); mipSave(); mipRender();
       };
-      btn.onclick=function(e){if(e.detail===0)return; mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav)); mipSave(); mipRender();};
+      btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav)); mipSave(); mipRender();};
     });
 
     // Title save on input
@@ -7973,7 +7973,7 @@ function mipRender(){
         if(Math.abs(e.changedTouches[0].clientX-_dtx)>8||Math.abs(e.changedTouches[0].clientY-_dty)>8)return;
         e.preventDefault(); mipToggleDone();
       };
-      doneBtn.onclick=function(e){if(e.detail===0)return; mipToggleDone();};
+      doneBtn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipToggleDone();};
     }
 
     // Add note
@@ -7985,7 +7985,7 @@ function mipRender(){
         if(Math.abs(e.changedTouches[0].clientX-_ntx)>8||Math.abs(e.changedTouches[0].clientY-_nty)>8)return;
         e.preventDefault(); mipAddNote();
       };
-      noteBtn.onclick=function(e){if(e.detail===0)return; mipAddNote();};
+      noteBtn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipAddNote();};
     }
 
     // Edit note

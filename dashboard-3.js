@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-06-11 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v14 ── BUILD 2026-06-12 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -2383,7 +2383,7 @@ function duaRender(){
       duaSave();
       duaRender();
     };
-    btn.onclick=function(e){if(e.detail===0)return;fn.call(this);};
+    btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;fn.call(this);};
     var _dTX=0,_dTY=0;
     btn.ontouchstart=function(e){_dTX=e.touches[0].clientX;_dTY=e.touches[0].clientY;};
     btn.ontouchend=function(e){
