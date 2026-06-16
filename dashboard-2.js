@@ -1,13 +1,12 @@
 // ── LOCAL UTILITY DEFINITIONS (always available, even before dash-1 loads) ──
 function todayKey(){var n=new Date();if(n.getHours()<4)n=new Date(n.getTime()-864e5);return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');}
-function localDateStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function todayKeyRaw(){ return localDateStr(new Date()); }
+function todayKeyRaw(){return new Date().toISOString().slice(0,10);}
 function lsGet(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){console.warn('lsSet failed:',k,e);}}
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v14 ── BUILD 2026-06-12 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-06-16 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -1507,9 +1506,9 @@ function snapshotData(){
     stressDemess:JSON.parse(localStorage.getItem('dash_stress_demess')||'{"log":[]}'),
     clData:lsGet('dash_cl',{activities:[],log:{}}),
     semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
-    questState:lsGet('dash_quest',{}),
     ltsData:lsGet('dash_lts',{entries:[]}),
-    mipData:lsGet('dash_mip',{months:{}})
+    mipData:lsGet('dash_mip',{months:{}}),
+    questState:lsGet('dash_quest',{})
   };
 }
 
@@ -1591,9 +1590,9 @@ function restoreSnapshot(snap){
   if(snap.stressDemess)localStorage.setItem('dash_stress_demess',JSON.stringify(snap.stressDemess));
   if(snap.clData)localStorage.setItem('dash_cl',JSON.stringify(snap.clData));
   if(snap.semData)localStorage.setItem('dash_sem',JSON.stringify(snap.semData));
-  if(snap.questState)localStorage.setItem('dash_quest',JSON.stringify(snap.questState));
   if(snap.ltsData)localStorage.setItem('dash_lts',JSON.stringify(snap.ltsData));
   if(snap.mipData)localStorage.setItem('dash_mip',JSON.stringify(snap.mipData));
+  if(snap.questState)localStorage.setItem('dash_quest',JSON.stringify(snap.questState));
   if(snap.syncLogAll&&Array.isArray(snap.syncLogAll)){
     var _curAll=lsGet('dash_sync_log_all',[]);
     var _allMap={};
@@ -1786,8 +1785,6 @@ function exportAllData(){
     zipConfig:lsGet('dash_zip',{}),
     milData:lsGet('dash_mil',{}),
     wlData:lsGet('dash_wl',[]),
-    clData:lsGet('dash_cl',{activities:[],log:{}}),
-    semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
     // Supabase credentials
     sbCfg:localStorage.getItem('dash_sb_config')||'{}'
   };
@@ -1850,8 +1847,6 @@ function importAllData(evt){
       if(data.fearData)localStorage.setItem('dash_fear',JSON.stringify(data.fearData));
       if(data.peopleData)localStorage.setItem('dash_people',JSON.stringify(data.peopleData));
       if(data.sbCfg)localStorage.setItem('dash_sb_config',data.sbCfg);
-      if(data.clData)localStorage.setItem('dash_cl',JSON.stringify(data.clData));
-      if(data.semData)localStorage.setItem('dash_sem',JSON.stringify(data.semData));
       alert('Import successful! Refreshing...');
       location.reload();
     }catch(err){alert('Import failed: '+err.message);}
@@ -3647,7 +3642,7 @@ function wmRender(){
 
   if(tab==='routines'){
     // Show current week number
-    var curWkNum=wrGetISOWeek?wrGetISOWeek(localDateStr(new Date())):0;
+    var curWkNum=wrGetISOWeek?wrGetISOWeek(new Date().toISOString().slice(0,10)):0;
     if(curWkNum)h+='<div class="label-dim">WEEK #'+curWkNum+'</div>';
     if(!wmData.items.length){
       h+='<div style="color:var(--dim);font-size:var(--t-md);padding:8px 0">No routines yet. Add one below.</div>';
@@ -3767,12 +3762,7 @@ function wmRender(){
   }
   if(addBtn){
     addBtn.onclick=function(){wmAdd();};
-    var _gTX1=0,_gTY1=0;
-    addBtn.ontouchstart=function(e){_gTX1=e.touches[0].clientX;_gTY1=e.touches[0].clientY;};
-    addBtn.ontouchend=function(e){
-      if(Math.abs(e.changedTouches[0].clientX-_gTX1)>8||Math.abs(e.changedTouches[0].clientY-_gTY1)>8)return;
-      e.preventDefault();wmAdd();
-    };
+    addBtn.ontouchend=function(e){e.preventDefault();wmAdd();};
   }
   el.querySelectorAll('[data-wmtab]').forEach(function(btn){
     btn.onclick=function(){wmSwitchTab(this.dataset.wmtab);};
@@ -4051,13 +4041,13 @@ function dlRenderAdd(){
     };
   }
 }
-function dlSaveQuick(){var el=document.getElementById('dl-inp-quick');if(!el||!el.value.trim())return;var entry={id:Date.now(),date:localDateStr(new Date()),decision:el.value.trim(),why:'',alts:'',outcome:'',quick:true};dlData.unshift(entry);if(dlData.length>200)dlData=dlData.slice(0,200);dlSave();el.value='';dlTab('log');}
+function dlSaveQuick(){var el=document.getElementById('dl-inp-quick');if(!el||!el.value.trim())return;var entry={id:Date.now(),date:new Date().toISOString().slice(0,10),decision:el.value.trim(),why:'',alts:'',outcome:'',quick:true};dlData.unshift(entry);if(dlData.length>200)dlData=dlData.slice(0,200);dlSave();el.value='';dlTab('log');}
 function dlSaveEntry(){
   var d=document.getElementById('dl-inp-decision');
   var w=document.getElementById('dl-inp-why');
   var a=document.getElementById('dl-inp-alts');
   if(!d||!d.value.trim())return;
-  var entry={id:Date.now(),date:localDateStr(new Date()),decision:d.value.trim(),why:(w&&w.value.trim())||'',alts:(a&&a.value.trim())||'',outcome:''};
+  var entry={id:Date.now(),date:new Date().toISOString().slice(0,10),decision:d.value.trim(),why:(w&&w.value.trim())||'',alts:(a&&a.value.trim())||'',outcome:''};
   dlData.unshift(entry);if(dlData.length>200)dlData=dlData.slice(0,200);dlSave();
   ['dl-inp-decision','dl-inp-why','dl-inp-alts'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
   dlTab('log');
@@ -4158,7 +4148,7 @@ function emRender(){
     }
   }
   if(typeof pomoState!=='undefined'&&pomoState.sessionLog){
-    var today=localDateStr(new Date());
+    var today=new Date().toISOString().slice(0,10);
     pomoState.sessionLog.forEach(function(m){var mode=typeof m==='object'?m.mode:m;if(mode==='work'){var mts=typeof m==='object'&&m.ts?m.ts:new Date().toISOString();allSessions.push({date:today,mins:typeof m==='object'?m.mins:0,ts:mts});}});
   }
   if(!allSessions.length){el.innerHTML='<div class="empty-msg">No session data yet. Complete some pomodoros first.</div>';return;}
@@ -4536,10 +4526,10 @@ function mlRenderLog(){
   var el=document.getElementById('ml-panel-log');
   var badge=document.getElementById('ml-badge');
   if(!el)return;
-  var today=localDateStr(new Date());
+  var today=new Date().toISOString().slice(0,10);
   // today's entries checked below
   if(badge){
-    var todayC=mlData.filter(function(e){return e.date===localDateStr(new Date());}).length;
+    var todayC=mlData.filter(function(e){return e.date===new Date().toISOString().slice(0,10);}).length;
     var avg7=mlData.length?Math.round(mlData.slice(0,14).reduce(function(a,e){return a+e.mood;},0)/Math.min(14,mlData.length)*10)/10:null;
     badge.textContent=(todayC?todayC+'/3 today · ':'')+(avg7?'avg '+avg7:'—');
   }
@@ -4672,7 +4662,7 @@ function mlSaveEntry(){
     return;
   }
   var noteEl=document.getElementById('ml-note');
-  var today=localDateStr(new Date());
+  var today=new Date().toISOString().slice(0,10);
   var entry={
     id:Date.now(),
     date:today,
@@ -5719,8 +5709,10 @@ function certRender(){
     h+='<input id="cert-inp-issuer" placeholder="Issuer (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:6px;outline:none">';
     h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><span style="font-size:var(--t-xs);color:var(--dim);flex-shrink:0">EXPIRES</span><input id="cert-inp-expiry" type="date" style="flex:1;background:transparent;border:1px solid rgba(80,250,200,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:5px 8px;outline:none"></div>';
     h+='<textarea id="cert-inp-notes" placeholder="Notes (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none;resize:vertical;min-height:48px"></textarea>';
+    h+=
     h+='<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none">';
-    h+='<button id="cert-add-btn" style="width:100%;padding:9px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.3);color:#50fac8;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px;margin-bottom:16px">+ ADD CERTIFICATION</button>';
+    '<input id="cert-inp-key" placeholder="Unique key / reference (optional)" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(80,250,200,.1);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;margin-bottom:8px;outline:none">';
+    '<button id="cert-add-btn" style="width:100%;padding:9px;background:rgba(80,250,200,.06);border:1px solid rgba(80,250,200,.3);color:#50fac8;font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px;margin-bottom:16px">+ ADD CERTIFICATION</button>';
     // Keyword section at bottom of add tab
     h+='<div style="border-top:1px solid rgba(255,255,255,.08);padding-top:12px">';
     h+='<div style="font-size:var(--t-xs);color:rgba(80,250,200,.5);letter-spacing:1px;margin-bottom:6px">GMAIL SEARCH KEYWORD</div>';
@@ -5864,12 +5856,12 @@ function medRender(){
       h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">';
       medData.meds.forEach(function(m){
         var col=m.color||'#c896ff';
-        // Find last taken ever
-        var _n=now;var todayStr=_n.getFullYear()+'-'+String(_n.getMonth()+1).padStart(2,'0')+'-'+String(_n.getDate()).padStart(2,'0');
+        // Find last taken — search ALL history
         var lastLog=null;
         for(var i=medData.log.length-1;i>=0;i--){
           if(medData.log[i].mid===m.id){lastLog=medData.log[i];break;}
         }
+        var todayStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
         var takenToday=!!(lastLog&&lastLog.ts.slice(0,10)===todayStr);
         var pending=medPending===m.id;
         var bg=takenToday?'rgba('+hexToRgb(col)+',.12)':'rgba(255,255,255,.03)';
@@ -5880,11 +5872,17 @@ function medRender(){
         if(pending){
           h+='<div style="font-size:var(--t-sm);color:rgba(255,184,108,.9);letter-spacing:1px">TAP AGAIN ✓</div>';
         } else if(lastLog){
-          var _msAgo=now-new Date(lastLog.ts);
-          var _hrsAgo=Math.floor(_msAgo/36e5);
-          var _minsAgo=Math.floor(_msAgo/6e4)%60;
-          var _daysAgo=Math.floor(_msAgo/864e5);
-          var timeStr=_daysAgo>0?_daysAgo+'d ago':_hrsAgo>0?_hrsAgo+'h '+_minsAgo+'m ago':_minsAgo+'m ago';
+          var _ms=now-new Date(lastLog.ts);
+          var _days=_ms/864e5;
+          var timeStr;
+          if(_days>=7){
+            timeStr=(_days/7).toFixed(1)+' weeks ago';
+          } else if(_days>=1){
+            timeStr=_days.toFixed(1)+'d ago';
+          } else {
+            var _hrs=Math.floor(_ms/36e5),_mins=Math.floor(_ms/6e4)%60;
+            timeStr=_hrs>0?_hrs+'h '+_mins+'m ago':_mins+'m ago';
+          }
           var timeColor=takenToday?col:'rgba(255,255,255,.4)';
           h+='<div style="font-size:var(--t-sm);color:'+timeColor+'">'+(takenToday?'✓ ':'')+timeStr+'</div>';
         } else {
@@ -5952,7 +5950,7 @@ function medRender(){
         var c=dayCounts[i];
         var pct=maxPerDay?c/maxPerDay:0;
         var barH=Math.max(pct*52,c>0?4:0);
-        var isToday=d===localDateStr(now);
+        var isToday=d===now.toISOString().slice(0,10);
         h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:60px">';
         if(c>0)h+='<div style="font-size:var(--t-xxs);color:var(--dim);margin-bottom:2px">'+c+'</div>';
         h+='<div style="width:100%;height:'+barH+'px;background:'+(isToday?'#c896ff':'rgba(200,150,255,.4)')+';min-height:'+(c>0?'4px':'0')+'"></div>';
@@ -6054,9 +6052,6 @@ function medRender(){
         medData.log.push({ts:new Date().toISOString(),mid:mid,mname:m?m.name:'?'});
         medSave();medPending=null;medRender();
         safeHap(HAP.check);
-        // Confetti
-        var _r=this.getBoundingClientRect();
-        if(typeof confetti==='function')confetti(_r.left+_r.width/2,_r.top+_r.height/2,'#c896ff');
       } else {
         medPending=mid;
         medRender();
@@ -6442,8 +6437,6 @@ function blRender(){
   var el = document.getElementById('bl-body');
   var badge = document.getElementById('bl-badge');
   if(!el) return;
-  el.style.maxHeight='700px';
-  el.style.overflowY='auto';
 
   var log = lsGet('dash_button_log', []);
   var unsynced = log.filter(function(e){return !e._synced;}).length;
@@ -6495,7 +6488,7 @@ function blRender(){
       var actionTypes={};
       var todayStr2=todayKey();
       var todayCount=0, yesterdayCount=0;
-      var yesterday=localDateStr(new Date(Date.now()-86400000));
+      var yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
 
       log.forEach(function(e){
         cardCounts[e.card]=(cardCounts[e.card]||0)+1;
@@ -6608,136 +6601,83 @@ function blRender(){
   if(_blTab === 'history'){
     h += '<div style="margin-bottom:10px;display:flex;gap:6px;flex-wrap:wrap">';
     h += '<button id="bl-load-hist" style="background:transparent;border:1px solid rgba(180,130,255,.4);color:var(--c-purple);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:4px 12px;letter-spacing:1px">⬇ LOAD FROM SUPABASE</button>';
-    if(_blHistData&&_blHistData.length){
-      h += '<button id="bl-export-hist" style="background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:4px 12px;letter-spacing:1px">⬇ EXPORT CSV</button>';
-    }
+    if(_blHistData&&_blHistData.length)h += '<button id="bl-export-hist" style="background:transparent;border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:var(--t-xs);cursor:pointer;padding:4px 12px;letter-spacing:1px">⬇ EXPORT CSV</button>';
     h += '</div>';
     if(_blHistLoading){
       h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:16px 0">Loading from Supabase...</div>';
     } else if(_blHistData&&_blHistData.length){
-      var _hd = _blHistData;
-      var _htotal = _hd.length;
-      var _hcards = {};
-      var _hactions = {};
-      var _hhours = Array(24).fill(0);
-      var _hdows = Array(7).fill(0);
-      var _hdates = {};
+      var _hd=_blHistData,_ht=_hd.length;
+      var _hcards={},_hactions={},_hhours=Array(24).fill(0),_hdates={};
       _hd.forEach(function(e){
         _hcards[e.card]=(_hcards[e.card]||0)+1;
         _hactions[e.action]=(_hactions[e.action]||0)+1;
         if(e.hour>=0&&e.hour<24)_hhours[e.hour]++;
-        if(e.dow>=0&&e.dow<7)_hdows[e.dow]++;
-        var _date=e.ts?e.ts.slice(0,10):'';
-        if(_date)_hdates[_date]=(_hdates[_date]||0)+1;
+        var _dt=e.ts?e.ts.slice(0,10):'';if(_dt)_hdates[_dt]=(_hdates[_dt]||0)+1;
       });
-      // Summary
-      var _hdays=Object.keys(_hdates).length;
-      var _havg=_hdays>0?Math.round(_htotal/_hdays):0;
+      var _hdays=Object.keys(_hdates).length,_havg=_hdays>0?Math.round(_ht/_hdays):0;
       h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px">';
-      [['Total Events',_htotal],['Days Active',_hdays],['Avg/Day',_havg]].forEach(function(x){
-        h += '<div style="border:1px solid rgba(180,130,255,.2);padding:8px;text-align:center">';
-        h += '<div style="font-size:var(--t-lg);color:var(--c-purple);font-family:monospace">'+x[1]+'</div>';
-        h += '<div style="font-size:var(--t-xs);color:var(--dim)">'+x[0]+'</div></div>';
+      [['Total Events',_ht],['Days Active',_hdays],['Avg/Day',_havg]].forEach(function(x){
+        h += '<div style="border:1px solid rgba(180,130,255,.2);padding:8px;text-align:center"><div style="font-size:var(--t-lg);color:var(--c-purple);font-family:monospace">'+x[1]+'</div><div style="font-size:var(--t-xs);color:var(--dim)">'+x[0]+'</div></div>';
       });
       h += '</div>';
-      // Top cards
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TOP CARDS (ALL TIME)</div>';
-      var _hcardSort=Object.entries(_hcards).sort(function(a,b){return b[1]-a[1];}).slice(0,10);
-      var _hcMax=_hcardSort[0]?_hcardSort[0][1]:1;
-      _hcardSort.forEach(function(x){
-        h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">';
-        h += '<div style="font-size:var(--t-xs);color:var(--text);min-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+x[0]+'</div>';
-        h += '<div style="flex:1;height:6px;background:rgba(180,130,255,.1);border-radius:1px"><div style="height:100%;width:'+(x[1]/_hcMax*100).toFixed(0)+'%;background:var(--c-purple);border-radius:1px"></div></div>';
-        h += '<div style="font-size:var(--t-xs);color:var(--dim);min-width:30px;text-align:right">'+x[1]+'</div></div>';
+      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TOP CARDS</div>';
+      var _hcs=Object.entries(_hcards).sort(function(a,b){return b[1]-a[1];}).slice(0,10);
+      var _hcmax=_hcs[0]?_hcs[0][1]:1;
+      _hcs.forEach(function(x){
+        h += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><div style="font-size:var(--t-xs);min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+x[0]+'</div><div style="flex:1;height:6px;background:rgba(180,130,255,.1);border-radius:1px"><div style="height:100%;width:'+(x[1]/_hcmax*100).toFixed(0)+'%;background:var(--c-purple);border-radius:1px"></div></div><div style="font-size:var(--t-xs);color:var(--dim);min-width:28px;text-align:right">'+x[1]+'</div></div>';
       });
-      // Busiest hours
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">BUSIEST HOURS (ALL TIME)</div>';
+      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">BUSIEST HOURS</div>';
       h += '<div style="display:flex;align-items:flex-end;gap:2px;height:40px">';
-      var _hmaxH=Math.max.apply(null,_hhours)||1;
-      _hhours.forEach(function(v,i){
-        var _pct=(v/_hmaxH*100).toFixed(0);
-        h += '<div style="flex:1;display:flex;flex-direction:column;align-items:center">';
-        h += '<div style="width:100%;background:rgba(180,130,255,'+(v>0?'.6':'.1')+');height:'+_pct+'%;min-height:'+(v>0?'2':'0')+'px;border-radius:1px 1px 0 0" title="'+i+':00 — '+v+' events"></div>';
-        h += '</div>';
-      });
+      var _hmx=Math.max.apply(null,_hhours)||1;
+      _hhours.forEach(function(v,i){h += '<div style="flex:1;background:rgba(180,130,255,'+(v>0?'.6':'.1')+');height:'+(v/_hmx*100).toFixed(0)+'%;min-height:'+(v>0?'2':'0')+'px;border-radius:1px 1px 0 0" title="'+i+':00 — '+v+'"></div>';});
       h += '</div>';
-      h += '<div style="display:flex;justify-content:space-between;font-size:var(--t-xxs);color:var(--dim);margin-top:2px"><span>12am</span><span>6am</span><span>12pm</span><span>6pm</span><span>11pm</span></div>';
-      // Action types
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">ACTION TYPES</div>';
-      h += '<div style="display:flex;flex-wrap:wrap;gap:4px">';
-      Object.entries(_hactions).sort(function(a,b){return b[1]-a[1];}).forEach(function(x){
-        h += '<div style="font-size:var(--t-xxs);padding:2px 8px;border:1px solid rgba(180,130,255,.2);color:var(--dim)">'+x[0]+' <span style="color:var(--c-purple)">'+x[1]+'</span></div>';
-      });
-      h += '</div>';
-      // Recent entries table
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">RECENT ENTRIES</div>';
-      _hd.slice(0,30).forEach(function(e){
-        h += '<div style="display:flex;gap:6px;font-size:var(--t-xxs);color:var(--dim);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)">';
-        h += '<span style="color:var(--c-purple);min-width:70px">'+(e.ts?e.ts.slice(0,10):'')+'</span>';
-        h += '<span style="min-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e.card||'')+'</span>';
-        h += '<span>'+(e.action||'')+'</span>';
-        h += '</div>';
+      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">RECENT</div>';
+      _hd.slice(0,20).forEach(function(e){
+        h += '<div style="display:flex;gap:6px;font-size:var(--t-xxs);color:var(--dim);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:var(--c-purple);min-width:70px">'+(e.ts?e.ts.slice(0,10):'')+'</span><span style="min-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e.card||'')+'</span><span>'+(e.action||'')+'</span></div>';
       });
     } else {
-      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No data loaded.<br>Press LOAD FROM SUPABASE to fetch all history.</div>';
+      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">Press LOAD FROM SUPABASE to fetch all history.</div>';
     }
   }
 
   // Wire tabs
   el.querySelectorAll('[data-bltab]').forEach(function(btn){
     btn.onclick = function(){
+      blData._tab=this.dataset.bltab;
       _blTab = this.dataset.bltab;
-      blData._tab = _blTab;
       blRender();
     };
   });
 
-  // Wire history load button
+  // Wire history buttons
   var _blLoadBtn=document.getElementById('bl-load-hist');
-  if(_blLoadBtn){
-    var _blLTX=0,_blLTY=0;
-    _blLoadBtn.ontouchstart=function(e){_blLTX=e.touches[0].clientX;_blLTY=e.touches[0].clientY;};
-    _blLoadBtn.ontouchend=function(e){
-      if(Math.abs(e.changedTouches[0].clientX-_blLTX)>8||Math.abs(e.changedTouches[0].clientY-_blLTY)>8)return;
-      e.preventDefault();_blLoadBtn.onclick();
-    };
-    _blLoadBtn.onclick=async function(){
-      var cfg=sbGetConfig();
-      if(!cfg||!cfg.url||!cfg.key||!cfg.account){alert('Supabase not configured');return;}
-      blData._histLoading=true;blRender();
-      try{
-        var endpoint=cfg.url.replace(/\/+$/,'')+'/rest/v1/button_log?user_id=eq.'+encodeURIComponent(cfg.account)+'&order=ts.desc&limit=10000';
-        var res=await fetch(endpoint,{headers:{'apikey':cfg.key,'Authorization':'Bearer '+cfg.key}});
-        var rows=await res.json();
-        blData._histData=Array.isArray(rows)?rows:[];
-        blData._histLoading=false;
-        blRender();
-      }catch(err){
-        blData._histLoading=false;
-        alert('Load failed: '+err.message);
-        blRender();
-      }
-    };
-  }
-
-  // Wire export button
+  if(_blLoadBtn)_blLoadBtn.onclick=async function(){
+    var cfg=sbGetConfig();if(!cfg||!cfg.url||!cfg.key||!cfg.account){alert('Supabase not configured');return;}
+    blData._histLoading=true;blRender();
+    try{
+      var endpoint=cfg.url.replace(/\/+$/,'')+'/rest/v1/button_log?user_id=eq.'+encodeURIComponent(cfg.account)+'&order=ts.desc&limit=10000';
+      var res=await fetch(endpoint,{headers:{'apikey':cfg.key,'Authorization':'Bearer '+cfg.key}});
+      var rows=await res.json();
+      blData._histData=Array.isArray(rows)?rows:[];
+      blData._histLoading=false;blRender();
+    }catch(err){blData._histLoading=false;alert('Load failed: '+err.message);blRender();}
+  };
   var _blExBtn=document.getElementById('bl-export-hist');
   if(_blExBtn)_blExBtn.onclick=function(){
     var rows=blData._histData||[];
     var csv='ts,dow,hour,type,card,action,detail,device_id\n';
-    rows.forEach(function(e){
-      csv+=[e.ts||'',e.dow||'',e.hour||'',e.type||'',e.card||'',e.action||'',(e.detail||'').replace(/,/g,';'),e.device_id||''].join(',')+'\n';
-    });
+    rows.forEach(function(e){csv+=[e.ts||'',e.dow||'',e.hour||'',e.type||'',e.card||'',e.action||'',(e.detail||'').replace(/,/g,';'),e.device_id||''].join(',')+'\n';});
     var blob=new Blob([csv],{type:'text/csv'});
-    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-    a.download='button_log_'+localDateStr(new Date())+'.csv';
-    a.click();
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='button_log_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
   };
 }
 
 window.addEventListener('load', function(){
   if(typeof blRender==='function') blRender();
 });
+// ══════════════════════════════════════════
+
+
 
 // ══════════════════════════════════════════
 // CONSISTENCY LOG
@@ -6976,7 +6916,333 @@ function clRender(){
         safeHap(idx>=0?HAP.soft:HAP.check);
         clSave();clRender();
       };
-      btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;
+      btn.onclick=function(e){if(e.detail===0)return;
+        var id=this.dataset.cllog;
+        var log=clData.log[today]||[];
+        var idx=log.indexOf(id);
+        if(idx>=0) log.splice(idx,1);
+        else log.push(id);
+        clData.log[today]=log;
+        safeHap(idx>=0?HAP.soft:HAP.check);
+        clSave();clRender();
+      };
+    });
+  }
+
+  if(tab==='edit'){
+    // Day toggles for new activity
+    var _newDays=clData._newDays||[];
+    el.querySelectorAll('[data-clday]').forEach(function(btn){
+      var dow=parseInt(btn.dataset.clday);
+      if(_newDays.indexOf(dow)>=0){btn.style.background='rgba(255,184,108,.15)';btn.style.borderColor='rgba(255,184,108,.5)';btn.style.color='var(--ca)';}
+      btn.onclick=function(){
+        var d=parseInt(this.dataset.clday);
+        var idx=_newDays.indexOf(d);
+        if(idx>=0)_newDays.splice(idx,1); else _newDays.push(d);
+        clData._newDays=_newDays;
+        clRender();
+      };
+    });
+
+    // Add activity button — scroll-safe
+    var addBtn=document.getElementById('cl-add-btn');
+    if(addBtn){
+      var _atx=0,_aty=0;
+      addBtn.ontouchstart=function(e){_atx=e.touches[0].clientX;_aty=e.touches[0].clientY;};
+      addBtn.ontouchend=function(e){
+        if(Math.abs(e.changedTouches[0].clientX-_atx)>8||Math.abs(e.changedTouches[0].clientY-_aty)>8)return;
+        e.preventDefault();addBtn.onclick();
+      };
+      addBtn.onclick=function(){
+        var name=(document.getElementById('cl-new-name')||{}).value||'';
+        name=name.trim();
+        if(!name){alert('Enter a name');return;}
+        var days=clData._newDays||[];
+        if(!days.length){alert('Pick at least one day');return;}
+        clData.activities.push({id:clId(),name:name,days:days.slice()});
+        clData._newDays=[];
+        clSave();clRender();
+      };
+    }
+
+    // Rename inputs
+    el.querySelectorAll('[data-clrename]').forEach(function(inp){
+      inp.oninput=function(){
+        var id=this.dataset.clrename;
+        var act=clData.activities.find(function(a){return a.id===id;});
+        if(act)act.name=this.value;
+        clSave();
+      };
+    });
+
+    // Delete buttons
+    el.querySelectorAll('[data-cldel]').forEach(function(btn){
+      btn.onclick=function(){
+        var id=this.dataset.cldel;
+        clData.activities=clData.activities.filter(function(a){return a.id!==id;});
+        clSave();clRender();
+      };
+    });
+
+    // Day toggles for existing activities
+    el.querySelectorAll('[data-cldaytog]').forEach(function(btn){
+      btn.onclick=function(){
+        var id=this.dataset.cldaytog;
+        var dow=parseInt(this.dataset.dow);
+        var act=clData.activities.find(function(a){return a.id===id;});
+        if(!act)return;
+        var idx=act.days.indexOf(dow);
+        if(idx>=0) act.days.splice(idx,1); else act.days.push(dow);
+        clSave();clRender();
+      };
+    });
+  }
+}
+
+window.addEventListener('load',function(){if(typeof clRender==='function')clRender();});
+// ══════════════════════════════════════════
+
+// ══════════════════════════════════════════
+// SEMESTER TRACKER
+
+// ══════════════════════════════════════════
+// CONSISTENCY LOG
+// ══════════════════════════════════════════
+var clData = lsGet('dash_cl', {activities:[], log:{}});
+if(!clData.activities) clData.activities = [];
+if(!clData.log) clData.log = {};
+
+function clSave(){ lsSet('dash_cl', clData); }
+function clId(){ return 'cl_' + Date.now() + '_' + Math.random().toString(36).slice(2,6); }
+function clTodayKey(){
+  var n=new Date();
+  return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
+}
+function clTodayDow(){ return new Date().getDay(); } // 0=Sun
+
+function clStreak(act){
+  // Count consecutive past scheduled occurrences completed
+  var streak=0, longest=0, cur=0;
+  var today = new Date(); today.setHours(0,0,0,0);
+  // Go back 365 days
+  for(var i=1; i<=365; i++){
+    var d=new Date(today); d.setDate(d.getDate()-i);
+    var dow=d.getDay();
+    if(act.days.indexOf(dow)<0) continue; // not scheduled
+    var key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    var done = clData.log[key] && clData.log[key].indexOf(act.id)>=0;
+    if(done){ cur++; if(cur>longest)longest=cur; }
+    else { if(streak===0)streak=cur; cur=0; }
+  }
+  if(streak===0)streak=cur;
+  return {current:streak, longest:Math.max(longest,streak)};
+}
+
+function clWeekDots(act){
+  // Last 8 weeks — return array of {scheduled, done} per week
+  var weeks=[];
+  var today=new Date(); today.setHours(0,0,0,0);
+  for(var w=7; w>=0; w--){
+    var weekDone=0, weekSched=0;
+    for(var d=0; d<7; d++){
+      var dt=new Date(today);
+      dt.setDate(dt.getDate() - w*7 - (today.getDay()-d));
+      if(dt>today) continue;
+      var dow=dt.getDay();
+      if(act.days.indexOf(dow)<0) continue;
+      weekSched++;
+      var key=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+      if(clData.log[key]&&clData.log[key].indexOf(act.id)>=0) weekDone++;
+    }
+    if(weekSched>0) weeks.push({sched:weekSched, done:weekDone});
+  }
+  return weeks;
+}
+
+function clRender(){
+  var el=document.getElementById('cl-body');
+  var badge=document.getElementById('cl-badge');
+  if(!el) return;
+  el.style.maxHeight='700px';
+  el.style.overflowY='auto';
+
+  var tab=clData._tab||'today';
+  var today=clTodayKey();
+  var todayDow=clTodayDow();
+  var todayLog=clData.log[today]||[];
+  var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  // Badge — completions today
+  var todaySched=clData.activities.filter(function(a){return a.days.indexOf(todayDow)>=0;});
+  var todayDone=todaySched.filter(function(a){return todayLog.indexOf(a.id)>=0;});
+  if(badge){
+    badge.textContent=todayDone.length+'/'+todaySched.length+' today';
+    badge.style.display='';
+  }
+
+  var h='';
+
+  // Tabs
+  h+='<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">';
+  [{t:'today',l:'TODAY'},{t:'chain',l:'CHAIN'},{t:'stats',l:'STATS'},{t:'edit',l:'EDIT'}].forEach(function(x){
+    var a=tab===x.t;
+    h+='<span data-cltab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?'rgba(255,184,108,.5)':'var(--c-border)')+';color:'+(a?'var(--ca)':'var(--dim)')+';cursor:pointer;letter-spacing:1px">'+x.l+'</span>';
+  });
+  h+='</div>';
+
+  if(tab==='today'){
+    if(!clData.activities.length){
+      h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No activities yet.<br>Go to EDIT to add one.</div>';
+    } else {
+      // Today's activities first, then others
+      var sched=clData.activities.filter(function(a){return a.days.indexOf(todayDow)>=0;});
+      var other=clData.activities.filter(function(a){return a.days.indexOf(todayDow)<0;});
+
+      if(sched.length){
+        h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TODAY — '+DAYS[todayDow].toUpperCase()+'</div>';
+        sched.forEach(function(act){
+          var done=todayLog.indexOf(act.id)>=0;
+          h+='<button data-cllog="'+act.id+'" style="width:100%;padding:12px;margin-bottom:6px;background:'+(done?'rgba(255,184,108,.12)':'transparent')+';border:1px solid '+(done?'rgba(255,184,108,.5)':'rgba(255,184,108,.2)')+';color:'+(done?'var(--ca)':'var(--text)')+';font-family:monospace;font-size:var(--t-base);cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px">';
+          h+='<span style="font-size:var(--t-lg)">'+(done?'✓':'○')+'</span>';
+          h+='<span>'+act.name+'</span>';
+          h+='</button>';
+        });
+      }
+
+      if(other.length){
+        h+='<div style="font-size:var(--t-xs);color:rgba(255,255,255,.2);letter-spacing:1px;margin:10px 0 6px">OTHER DAYS</div>';
+        other.forEach(function(act){
+          var done=todayLog.indexOf(act.id)>=0;
+          h+='<div style="padding:8px 10px;margin-bottom:4px;border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.3);font-size:var(--t-sm);display:flex;align-items:center;gap:8px">';
+          h+='<span>'+(done?'✓':'·')+'</span><span>'+act.name+'</span>';
+          h+='<span style="margin-left:auto;font-size:var(--t-xs)">'+act.days.map(function(d){return DAYS[d];}).join(', ')+'</span>';
+          h+='</div>';
+        });
+      }
+    }
+
+  } else if(tab==='chain'){
+    if(!clData.activities.length){
+      h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No activities yet.</div>';
+    } else {
+      clData.activities.forEach(function(act){
+        var s=clStreak(act);
+        var dots=clWeekDots(act);
+        h+='<div style="border:1px solid rgba(255,184,108,.15);padding:10px;margin-bottom:8px">';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">';
+        h+='<span style="font-size:var(--t-base);color:var(--text)">'+act.name+'</span>';
+        h+='<span style="font-size:var(--t-xs);color:var(--dim)">'+act.days.map(function(d){return DAYS[d];}).join(', ')+'</span>';
+        h+='<span style="margin-left:auto;font-size:var(--t-xs);color:var(--ca)">🔥 '+s.current+'</span>';
+        h+='</div>';
+        // Week dots
+        h+='<div style="display:flex;gap:4px;align-items:center">';
+        dots.forEach(function(w){
+          var col=w.done>=w.sched?'var(--ca)':w.done>0?'rgba(255,184,108,.4)':'rgba(255,255,255,.1)';
+          h+='<div style="width:18px;height:18px;background:'+col+';border-radius:2px" title="'+w.done+'/'+w.sched+'"></div>';
+        });
+        h+='<span style="font-size:var(--t-xxs);color:var(--dim);margin-left:4px">←8wks</span>';
+        h+='</div>';
+        h+='</div>';
+      });
+    }
+
+  } else if(tab==='stats'){
+    if(!clData.activities.length){
+      h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No activities yet.</div>';
+    } else {
+      clData.activities.forEach(function(act){
+        var s=clStreak(act);
+        // Count total scheduled vs done
+        var totalSched=0, totalDone=0;
+        Object.keys(clData.log).forEach(function(dateKey){
+          var d=new Date(dateKey+'T00:00:00');
+          if(act.days.indexOf(d.getDay())>=0){
+            totalSched++;
+            if(clData.log[dateKey].indexOf(act.id)>=0) totalDone++;
+          }
+        });
+        var rate=totalSched>0?Math.round(totalDone/totalSched*100):0;
+        h+='<div style="border:1px solid rgba(255,184,108,.15);padding:10px;margin-bottom:8px">';
+        h+='<div style="font-size:var(--t-base);color:var(--text);margin-bottom:8px">'+act.name+'</div>';
+        h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px">';
+        [
+          ['Current','🔥 '+s.current],
+          ['Best','⭐ '+s.longest],
+          ['Done',totalDone],
+          ['Rate',rate+'%']
+        ].forEach(function(x){
+          h+='<div style="text-align:center;border:1px solid rgba(255,184,108,.1);padding:6px">';
+          h+='<div style="font-size:var(--t-md);color:var(--ca);font-family:monospace">'+x[1]+'</div>';
+          h+='<div style="font-size:var(--t-xxs);color:var(--dim)">'+x[0]+'</div>';
+          h+='</div>';
+        });
+        h+='</div>';
+        // Mini progress bar
+        h+='<div style="margin-top:8px;height:3px;background:rgba(255,184,108,.1);border-radius:1px">';
+        h+='<div style="height:100%;width:'+rate+'%;background:var(--ca);border-radius:1px;transition:width .4s"></div>';
+        h+='</div>';
+        h+='</div>';
+      });
+    }
+
+  } else if(tab==='edit'){
+    // Add new activity
+    h+='<div style="margin-bottom:12px;padding:10px;border:1px solid rgba(255,184,108,.2)">';
+    h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">ADD ACTIVITY</div>';
+    h+='<input id="cl-new-name" placeholder="Activity name..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(255,184,108,.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:6px 8px;outline:none;margin-bottom:6px">';
+    h+='<div style="display:flex;gap:4px;margin-bottom:8px">';
+    DAYS.forEach(function(d,i){
+      h+='<button data-clday="'+i+'" style="flex:1;padding:4px 2px;background:transparent;border:1px solid rgba(255,184,108,.2);color:var(--dim);font-family:monospace;font-size:var(--t-xxs);cursor:pointer">'+d+'</button>';
+    });
+    h+='</div>';
+    h+='<button id="cl-add-btn" style="width:100%;padding:8px;background:rgba(255,184,108,.08);border:1px solid rgba(255,184,108,.3);color:var(--ca);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">+ ADD</button>';
+    h+='</div>';
+
+    // Existing activities
+    if(clData.activities.length){
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">ACTIVITIES</div>';
+      clData.activities.forEach(function(act){
+        h+='<div style="border:1px solid rgba(255,255,255,.07);padding:8px;margin-bottom:6px">';
+        h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">';
+        h+='<input data-clrename="'+act.id+'" value="'+act.name.replace(/"/g,'&quot;')+'" style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:4px 6px;outline:none">';
+        h+='<button data-cldel="'+act.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-md);cursor:pointer">✕</button>';
+        h+='</div>';
+        h+='<div style="display:flex;gap:4px">';
+        DAYS.forEach(function(d,i){
+          var active=act.days.indexOf(i)>=0;
+          h+='<button data-cldaytog="'+act.id+'" data-dow="'+i+'" style="flex:1;padding:3px 2px;background:'+(active?'rgba(255,184,108,.15)':'transparent')+';border:1px solid '+(active?'rgba(255,184,108,.5)':'rgba(255,255,255,.08)')+';color:'+(active?'var(--ca)':'var(--dim)')+';font-family:monospace;font-size:var(--t-xxs);cursor:pointer">'+d+'</button>';
+        });
+        h+='</div>';
+        h+='</div>';
+      });
+    }
+  }
+
+  el.innerHTML=h;
+
+  // Wire tabs
+  el.querySelectorAll('[data-cltab]').forEach(function(btn){
+    btn.onclick=function(){clData._tab=this.dataset.cltab;clSave();clRender();};
+  });
+
+  if(tab==='today'){
+    // Wire log buttons — scroll-safe
+    el.querySelectorAll('[data-cllog]').forEach(function(btn){
+      var _tx=0,_ty=0;
+      btn.ontouchstart=function(e){_tx=e.touches[0].clientX;_ty=e.touches[0].clientY;};
+      btn.ontouchend=function(e){
+        if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
+        e.preventDefault();e.stopPropagation();
+        var id=this.dataset.cllog;
+        var log=clData.log[today]||[];
+        var idx=log.indexOf(id);
+        if(idx>=0) log.splice(idx,1);
+        else log.push(id);
+        clData.log[today]=log;
+        safeHap(idx>=0?HAP.soft:HAP.check);
+        clSave();clRender();
+      };
+      btn.onclick=function(e){if(e.detail===0)return;
         var id=this.dataset.cllog;
         var log=clData.log[today]||[];
         var idx=log.indexOf(id);
@@ -7224,7 +7490,7 @@ function semRender(){
       if(Math.abs(e.changedTouches[0].clientX-_stx)>8||Math.abs(e.changedTouches[0].clientY-_sty)>8)return;
       e.preventDefault();semData._tab=this.dataset.semtab;semSave();semRender();
     };
-    btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;semData._tab=this.dataset.semtab;semSave();semRender();};
+    btn.onclick=function(e){if(e.detail===0)return;semData._tab=this.dataset.semtab;semSave();semRender();};
   });
 
   if(tab==='progress'){
@@ -7236,7 +7502,7 @@ function semRender(){
         if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
         e.preventDefault();semToggle(this);
       };
-      btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;semToggle(this);};
+      btn.onclick=function(e){if(e.detail===0)return;semToggle(this);};
     });
   }
 
@@ -7384,671 +7650,258 @@ window.addEventListener('load',function(){if(typeof semRender==='function')semRe
 // ══════════════════════════════════════════
 var ltsData = lsGet('dash_lts', {entries:[]});
 if(!ltsData.entries) ltsData.entries = [];
-
 function ltsSave(){ lsSet('dash_lts', ltsData); }
 function ltsId(){ return 'lts_'+Date.now()+'_'+Math.random().toString(36).slice(2,5); }
-
 function ltsRender(){
-  var el = document.getElementById('lts-body');
-  var badge = document.getElementById('lts-badge');
+  var el=document.getElementById('lts-body');
+  var badge=document.getElementById('lts-badge');
   if(!el) return;
-  el.style.maxHeight = '700px';
-  el.style.overflowY = 'auto';
-
-  var CG = 'var(--cg)';
-  var CB = 'rgba(0,255,136,';
-  var tab = ltsData._tab || 'write';
-  var entries = ltsData.entries || [];
-
-  if(badge){
-    badge.textContent = entries.length + (entries.length===1?' entry':' entries');
-    badge.style.display = '';
-  }
-
-  var h = '';
-
-  // Tabs
-  h += '<div style="display:flex;gap:6px;margin-bottom:10px">';
+  el.style.maxHeight='700px'; el.style.overflowY='auto';
+  var CG='var(--cg)', CB='rgba(0,255,136,';
+  var tab=ltsData._tab||'write';
+  var entries=ltsData.entries||[];
+  if(badge){ badge.textContent=entries.length+(entries.length===1?' entry':' entries'); badge.style.display=''; }
+  var h='';
+  h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
   [{t:'write',l:'WRITE'},{t:'log',l:'LOG'},{t:'stats',l:'STATS'},{t:'export',l:'EXPORT'}].forEach(function(x){
-    var a = tab===x.t;
-    h += '<button data-ltstab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?CB+'.5)':'var(--c-border)')+';color:'+(a?'var(--cg)':'var(--dim)')+';cursor:pointer;background:'+(a?CB+'.08)':'transparent')+';font-family:monospace;letter-spacing:1px">'+x.l+'</button>';
+    var a=tab===x.t;
+    h+='<button data-ltstab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?CB+'.5)':'var(--c-border)')+';color:'+(a?CG:'var(--dim)')+';cursor:pointer;background:'+(a?CB+'.08)':'transparent')+';font-family:monospace;letter-spacing:1px">'+x.l+'</button>';
   });
-  h += '</div>';
-
-  if(tab === 'write'){
-    h += '<input id="lts-title" placeholder="Title..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;outline:none;margin-bottom:6px">';
-    h += '<textarea id="lts-body-inp" placeholder="Dear son..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:8px;outline:none;resize:none;min-height:140px;line-height:1.6;margin-bottom:8px"></textarea>';
-    h += '<button id="lts-save-btn" style="width:100%;padding:9px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:var(--cg);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">💚 SAVE ENTRY</button>';
-
-  } else {
-    if(!entries.length){
-      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No entries yet.</div>';
-    } else {
-      entries.forEach(function(e){
-        var editing = ltsData._editing === e.id;
-        h += '<div style="border-bottom:1px solid rgba(0,255,136,.08);padding:12px 0">';
-        h += '<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px">';
-        h += '<div style="flex:1">';
-        h += '<div style="font-size:var(--t-base);color:var(--cg);font-family:monospace;margin-bottom:2px">'+e.title+'</div>';
-        h += '<div style="font-size:var(--t-xxs);color:var(--dim)">'+e.date+'&nbsp;&nbsp;'+e.time+'</div>';
-        h += '</div>';
-        h += '<button data-ltsedit="'+e.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.25);font-size:var(--t-sm);cursor:pointer;padding:0 4px">✏️</button>';
-        h += '<button data-ltsdel="'+e.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-base);cursor:pointer;padding:0 2px">✕</button>';
-        h += '</div>';
-        if(editing){
-          h += '<input id="lts-edit-title-'+e.id+'" value="'+e.title.replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none;margin-bottom:6px">';
-          h += '<textarea id="lts-edit-body-'+e.id+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:6px 8px;outline:none;resize:none;min-height:100px;line-height:1.6;margin-bottom:6px">'+e.body+'</textarea>';
-          h += '<button data-ltssaveedit="'+e.id+'" style="padding:5px 14px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:var(--cg);font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SAVE</button>';
-          h += '<button data-ltscanceledit="'+e.id+'" style="padding:5px 12px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;margin-left:6px">CANCEL</button>';
-        } else {
-          h += '<div style="font-size:var(--t-sm);color:var(--text);line-height:1.7;white-space:pre-wrap">'+e.body+'</div>';
-        }
-        h += '</div>';
-      });
-    }
-  }
-
-  if(tab==='stats'){
-    if(!entries.length){
-      h += '<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No entries yet.</div>';
-    } else {
-      // Totals
+  h+='</div>';
+  if(tab==='write'){
+    h+='<input id="lts-title" placeholder="Title..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:6px 8px;outline:none;margin-bottom:6px">';
+    h+='<textarea id="lts-body-inp" placeholder="Dear son..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:8px;outline:none;resize:none;min-height:140px;line-height:1.6;margin-bottom:8px"></textarea>';
+    h+='<button id="lts-save-btn" style="width:100%;padding:9px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:'+CG+';font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">💚 SAVE ENTRY</button>';
+  } else if(tab==='log'){
+    if(!entries.length){ h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No entries yet.</div>'; }
+    else { entries.forEach(function(e){
+      var editing=ltsData._editing===e.id;
+      h+='<div style="border-bottom:1px solid rgba(0,255,136,.08);padding:12px 0">';
+      h+='<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><div style="flex:1">';
+      h+='<div style="font-size:var(--t-base);color:'+CG+';font-family:monospace;margin-bottom:2px">'+e.title+'</div>';
+      h+='<div style="font-size:var(--t-xxs);color:var(--dim)">'+e.date+'&nbsp;&nbsp;'+e.time+'</div></div>';
+      h+='<button data-ltsedit="'+e.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.25);font-size:var(--t-sm);cursor:pointer;padding:0 4px">✏️</button>';
+      h+='<button data-ltsdel="'+e.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-base);cursor:pointer;padding:0 2px">✕</button></div>';
+      if(editing){
+        h+='<input id="lts-edit-title-'+e.id+'" value="'+e.title.replace(/"/g,'&quot;')+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none;margin-bottom:6px">';
+        h+='<textarea id="lts-edit-body-'+e.id+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:6px 8px;outline:none;resize:none;min-height:100px;line-height:1.6;margin-bottom:6px">'+e.body+'</textarea>';
+        h+='<button data-ltssaveedit="'+e.id+'" style="padding:5px 14px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:'+CG+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px">SAVE</button>';
+        h+='<button data-ltscanceledit="'+e.id+'" style="padding:5px 12px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:var(--t-xs);cursor:pointer;margin-left:6px">CANCEL</button>';
+      } else {
+        h+='<div style="font-size:var(--t-sm);color:var(--text);line-height:1.7;white-space:pre-wrap">'+e.body+'</div>';
+      }
+      h+='</div>';
+    }); }
+  } else if(tab==='stats'){
+    if(!entries.length){ h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No entries yet.</div>'; }
+    else {
       var totalWords=entries.reduce(function(a,e){return a+(e.body?e.body.trim().split(/\s+/).filter(Boolean).length:0);},0);
       var avgWords=Math.round(totalWords/entries.length);
-      var firstDate=entries[entries.length-1].date;
-      h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">';
-      [
-        ['Total Entries', entries.length],
-        ['Total Words', totalWords.toLocaleString()],
-        ['Avg Words/Entry', avgWords],
-        ['Since', firstDate]
-      ].forEach(function(x){
-        h += '<div style="border:1px solid rgba(0,255,136,.12);padding:10px;text-align:center">';
-        h += '<div style="font-size:var(--t-md);color:var(--cg);font-family:monospace">'+x[1]+'</div>';
-        h += '<div style="font-size:var(--t-xxs);color:var(--dim);margin-top:2px">'+x[0]+'</div>';
-        h += '</div>';
+      h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">';
+      [['Total Entries',entries.length],['Total Words',totalWords.toLocaleString()],['Avg Words/Entry',avgWords],['Since',entries[entries.length-1].date]].forEach(function(x){
+        h+='<div style="border:1px solid rgba(0,255,136,.12);padding:10px;text-align:center"><div style="font-size:var(--t-md);color:'+CG+';font-family:monospace">'+x[1]+'</div><div style="font-size:var(--t-xxs);color:var(--dim);margin-top:2px">'+x[0]+'</div></div>';
       });
-      h += '</div>';
-      // Entries per month
+      h+='</div>';
       var byMonth={};
-      entries.forEach(function(e){
-        var m=e.date?e.date.slice(0,7):'';
-        if(m) byMonth[m]=(byMonth[m]||0)+1;
-      });
+      entries.forEach(function(e){ var m=e.date?e.date.slice(0,7):''; if(m)byMonth[m]=(byMonth[m]||0)+1; });
       var months=Object.keys(byMonth).sort().reverse();
       var maxM=Math.max.apply(null,Object.values(byMonth))||1;
-      h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">ENTRIES PER MONTH</div>';
+      h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">ENTRIES PER MONTH</div>';
       months.forEach(function(m){
-        var n=byMonth[m];
-        var pct=(n/maxM*100).toFixed(0);
+        var n=byMonth[m], pct=(n/maxM*100).toFixed(0);
         var label=new Date(m+'-02').toLocaleDateString('en-US',{month:'short',year:'numeric'});
-        h += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">';
-        h += '<div style="font-size:var(--t-xs);color:var(--dim);min-width:70px">'+label+'</div>';
-        h += '<div style="flex:1;height:8px;background:rgba(0,255,136,.08);border-radius:2px">';
-        h += '<div style="height:100%;width:'+pct+'%;background:var(--cg);border-radius:2px"></div></div>';
-        h += '<div style="font-size:var(--t-xs);color:var(--cg);min-width:20px;text-align:right">'+n+'</div>';
-        h += '</div>';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="font-size:var(--t-xs);color:var(--dim);min-width:70px">'+label+'</div><div style="flex:1;height:8px;background:rgba(0,255,136,.08);border-radius:2px"><div style="height:100%;width:'+pct+'%;background:'+CG+';border-radius:2px"></div></div><div style="font-size:var(--t-xs);color:'+CG+';min-width:20px;text-align:right">'+n+'</div></div>';
       });
-      // Longest entry
-      var longest=entries.slice().sort(function(a,b){
-        return (b.body?b.body.split(/\s+/).length:0)-(a.body?a.body.split(/\s+/).length:0);
-      })[0];
-      if(longest){
-        h += '<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 6px">LONGEST ENTRY</div>';
-        h += '<div style="border:1px solid rgba(0,255,136,.12);padding:8px">';
-        h += '<div style="font-size:var(--t-sm);color:var(--cg)">'+longest.title+'</div>';
-        h += '<div style="font-size:var(--t-xxs);color:var(--dim)">'+longest.date+' · '+(longest.body?longest.body.trim().split(/\s+/).filter(Boolean).length:0)+' words</div>';
-        h += '</div>';
-      }
     }
+  } else if(tab==='export'){
+    h+='<div style="margin-bottom:12px;font-size:var(--t-xs);color:var(--dim)">'+entries.length+' entries · sorted oldest to newest</div>';
+    h+='<button id="lts-export-md" style="width:100%;padding:10px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.3);color:'+CG+';font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px;margin-bottom:8px"'+(entries.length?'':' disabled')+'>⬇ EXPORT MARKDOWN</button>';
+    h+='<button id="lts-export-epub" style="width:100%;padding:10px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.3);color:#00e5ff;font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px"'+(entries.length?'':' disabled')+'>⬇ EXPORT EPUB</button>';
   }
-
-  if(tab==='export'){
-    var hasEntries = entries.length > 0;
-    h += '<div style="margin-bottom:12px;font-size:var(--t-xs);color:var(--dim);line-height:1.6">';
-    h += entries.length + ' entries · sorted oldest to newest by year and season';
-    h += '</div>';
-    h += '<button id="lts-export-md" style="width:100%;padding:10px;background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.3);color:var(--cg);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px;margin-bottom:8px"'+(hasEntries?'':' disabled')+'>⬇ EXPORT MARKDOWN</button>';
-    h += '<button id="lts-export-epub" style="width:100%;padding:10px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.3);color:#00e5ff;font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:1px"'+(hasEntries?'':' disabled')+'>⬇ EXPORT EPUB</button>';
-    if(!hasEntries) h += '<div style="color:var(--dim);font-size:var(--t-xs);margin-top:10px;text-align:center">No entries to export yet.</div>';
-  }
-
-  el.innerHTML = h;
-
-  // Wire tabs
+  el.innerHTML=h;
   el.querySelectorAll('[data-ltstab]').forEach(function(btn){
     var _tx=0,_ty=0;
     btn.ontouchstart=function(e){_tx=e.touches[0].clientX;_ty=e.touches[0].clientY;};
-    btn.ontouchend=function(e){
-      if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
-      e.preventDefault();ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();
-    };
+    btn.ontouchend=function(e){if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;e.preventDefault();ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();};
     btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;ltsData._tab=this.dataset.ltstab;ltsSave();ltsRender();};
   });
-
   if(tab==='write'){
-    var saveBtn = document.getElementById('lts-save-btn');
+    var saveBtn=document.getElementById('lts-save-btn');
     if(saveBtn){
       var _stx=0,_sty=0;
       saveBtn.ontouchstart=function(e){_stx=e.touches[0].clientX;_sty=e.touches[0].clientY;};
-      saveBtn.ontouchend=function(e){
-        if(Math.abs(e.changedTouches[0].clientX-_stx)>8||Math.abs(e.changedTouches[0].clientY-_sty)>8)return;
-        e.preventDefault();ltsDoSave();
-      };
+      saveBtn.ontouchend=function(e){if(Math.abs(e.changedTouches[0].clientX-_stx)>8||Math.abs(e.changedTouches[0].clientY-_sty)>8)return;e.preventDefault();ltsDoSave();};
       saveBtn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;ltsDoSave();};
     }
   }
-
-  if(tab==='export'){
-    var mdBtn=document.getElementById('lts-export-md');
-    if(mdBtn) mdBtn.onclick=function(){ ltsExportMarkdown(); };
-    var epubBtn=document.getElementById('lts-export-epub');
-    if(epubBtn) epubBtn.onclick=function(){ ltsExportEpub(); };
-  }
-
   if(tab==='log'){
-    // Delete
     el.querySelectorAll('[data-ltsdel]').forEach(function(btn){
-      btn.onclick=function(){
-        var id=this.dataset.ltsdel;
-        if(!confirm('Delete this entry?'))return;
-        ltsData.entries=ltsData.entries.filter(function(e){return e.id!==id;});
-        ltsSave();ltsRender();
-      };
+      btn.onclick=function(){var id=this.dataset.ltsdel;if(!confirm('Delete this entry?'))return;ltsData.entries=ltsData.entries.filter(function(e){return e.id!==id;});ltsSave();ltsRender();};
     });
-
-    // Edit toggle
     el.querySelectorAll('[data-ltsedit]').forEach(function(btn){
-      btn.onclick=function(){
-        var id=this.dataset.ltsedit;
-        ltsData._editing=(ltsData._editing===id)?null:id;
-        ltsRender();
-      };
+      btn.onclick=function(){var id=this.dataset.ltsedit;ltsData._editing=(ltsData._editing===id)?null:id;ltsRender();};
     });
-
-    // Save edit
     el.querySelectorAll('[data-ltssaveedit]').forEach(function(btn){
-      btn.onclick=function(){
-        var id=this.dataset.ltssaveedit;
-        var e=ltsData.entries.find(function(x){return x.id===id;});
-        if(!e)return;
-        var titleEl=document.getElementById('lts-edit-title-'+id);
-        var bodyEl=document.getElementById('lts-edit-body-'+id);
-        if(!titleEl||!bodyEl)return;
-        var newTitle=titleEl.value.trim();
-        var newBody=bodyEl.value.trim();
-        if(!newTitle||!newBody)return;
-        e.title=newTitle;e.body=newBody;
-        ltsData._editing=null;
-        ltsSave();ltsRender();safeHap(HAP.save);
-      };
+      btn.onclick=function(){var id=this.dataset.ltssaveedit;var e=ltsData.entries.find(function(x){return x.id===id;});if(!e)return;var t=document.getElementById('lts-edit-title-'+id);var b=document.getElementById('lts-edit-body-'+id);if(!t||!b||!t.value.trim()||!b.value.trim())return;e.title=t.value.trim();e.body=b.value.trim();ltsData._editing=null;ltsSave();ltsRender();};
     });
-
-    // Cancel edit
     el.querySelectorAll('[data-ltscanceledit]').forEach(function(btn){
       btn.onclick=function(){ltsData._editing=null;ltsRender();};
     });
   }
-}
-
-function ltsDoSave(){
-  var titleEl=document.getElementById('lts-title');
-  var bodyEl=document.getElementById('lts-body-inp');
-  if(!titleEl||!bodyEl)return;
-  var title=titleEl.value.trim();
-  var body=bodyEl.value.trim();
-  if(!title||!body)return;
-  var now=new Date();
-  var date=localDateStr(now);
-  var time=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-  ltsData.entries.unshift({id:ltsId(),title:title,body:body,date:date,time:time,ts:Date.now()});
-  ltsData._tab='log';
-  ltsSave();ltsRender();safeHap(HAP.save);
-  if(typeof confetti==='function')confetti(window.innerWidth/2,200,'#00ff88');
-}
-
-window.addEventListener('load',function(){if(typeof ltsRender==='function')ltsRender();});
-// ══════════════════════════════════════════
-
-// ── LTS EXPORT HELPERS ──
-function ltsSeason(dateStr){
-  var m=parseInt((dateStr||'').slice(5,7));
-  if(m>=3&&m<=5)return'Spring';
-  if(m>=6&&m<=8)return'Summer';
-  if(m>=9&&m<=11)return'Fall';
-  return'Winter';
-}
-function ltsSeasonOrder(s){return{Winter:0,Spring:1,Summer:2,Fall:3}[s]||0;}
-function ltsGroupEntries(){
-  var entries=(ltsData.entries||[]).slice().sort(function(a,b){return (a.ts||0)-(b.ts||0);});
-  var groups={};
-  entries.forEach(function(e){
-    var year=(e.date||'').slice(0,4)||'Unknown';
-    var season=ltsSeason(e.date);
-    var key=year+'|'+season;
-    if(!groups[key])groups[key]={year:year,season:season,entries:[]};
-    groups[key].entries.push(e);
-  });
-  return Object.values(groups).sort(function(a,b){
-    if(a.year!==b.year)return a.year.localeCompare(b.year);
-    return ltsSeasonOrder(a.season)-ltsSeasonOrder(b.season);
-  });
-}
-
-function ltsExportMarkdown(){
-  var groups=ltsGroupEntries();
-  var lines=['# Letter to My Son',''];
-  // TOC
-  lines.push('## Table of Contents','');
-  groups.forEach(function(g){
-    lines.push('- **'+g.season+' '+g.year+'**');
-    g.entries.forEach(function(e){
-      lines.push('  - '+e.title+' *('+e.date+')*');
-    });
-  });
-  lines.push('','---','');
-  // Content
-  groups.forEach(function(g){
-    lines.push('## '+g.season+' '+g.year,'');
-    g.entries.forEach(function(e){
-      lines.push('### '+e.title);
-      lines.push('*'+e.date+(e.time?' · '+e.time:'')+'*','');
-      lines.push(e.body||'','');
-      lines.push('---','');
-    });
-  });
-  var blob=new Blob([lines.join('\n')],{type:'text/markdown'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='letter-to-my-son.md';
-  a.click();
-}
-
-function ltsExportEpub(){
-  // Load JSZip dynamically then build epub
-  if(typeof JSZip==='undefined'){
-    var s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-    s.onload=function(){_ltsBuildEpub();};
-    s.onerror=function(){alert('Could not load JSZip. Check your connection.');};
-    document.head.appendChild(s);
-  } else {
-    _ltsBuildEpub();
+  if(tab==='export'){
+    var mdBtn=document.getElementById('lts-export-md');
+    if(mdBtn) mdBtn.onclick=function(){ltsExportMarkdown();};
+    var epubBtn=document.getElementById('lts-export-epub');
+    if(epubBtn) epubBtn.onclick=function(){ltsExportEpub();};
   }
 }
-
-function _ltsBuildEpub(){
-  var groups=ltsGroupEntries();
-  var allEntries=[];
-  groups.forEach(function(g){g.entries.forEach(function(e){allEntries.push(e);});});
-  var zip=new JSZip();
-
-  // mimetype (must be first, uncompressed)
-  zip.file('mimetype','application/epub+zip',{compression:'STORE'});
-
-  // container.xml
-  zip.folder('META-INF').file('container.xml',
-    '<?xml version="1.0"?>\n'+
-    '<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n'+
-    '  <rootfiles>\n'+
-    '    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>\n'+
-    '  </rootfiles>\n'+
-    '</container>');
-
-  var oebps=zip.folder('OEBPS');
-
-  // CSS
-  oebps.file('style.css',
-    'body{font-family:Georgia,serif;margin:2em;line-height:1.8;color:#222;max-width:600px;}\n'+
-    'h1{font-size:2em;margin-bottom:0.2em;}\n'+
-    'h2{font-size:1.4em;color:#444;border-bottom:1px solid #ddd;padding-bottom:0.3em;margin-top:2em;}\n'+
-    'h3{font-size:1.1em;color:#333;margin-top:1.6em;}\n'+
-    '.meta{color:#888;font-size:0.85em;font-style:italic;margin-bottom:1em;}\n'+
-    '.entry-body{white-space:pre-wrap;}\n'+
-    'hr{border:none;border-top:1px solid #eee;margin:2em 0;}\n'+
-    'nav ol{list-style:none;padding:0;}\n'+
-    'nav ol li{margin:0.3em 0;}\n'+
-    'nav ol li a{color:#333;text-decoration:none;}\n'+
-    'nav ol li.section{font-weight:bold;margin-top:0.8em;}\n'+
-    'nav ol li.chapter{padding-left:1.2em;font-size:0.9em;}');
-
-  // Build chapter files + manifest items
-  var manifestItems='';
-  var spineItems='';
-  var tocItems='';
-  var tocPlayOrder=1;
-
-  // Cover/title page
-  var titleHtml='<?xml version="1.0" encoding="UTF-8"?>\n'+
-    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'+
-    '<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Letter to My Son</title>'+
-    '<link rel="stylesheet" type="text/css" href="style.css"/></head><body>'+
-    '<h1>Letter to My Son</h1>'+
-    '<p class="meta">'+allEntries.length+' entries · '+
-    (allEntries[0]?allEntries[0].date:'')+(allEntries.length>1?' – '+allEntries[allEntries.length-1].date:'')+
-    '</p></body></html>';
-  oebps.file('title.xhtml',titleHtml);
-  manifestItems+='<item id="title" href="title.xhtml" media-type="application/xhtml+xml"/>\n';
-  spineItems+='<itemref idref="title"/>\n';
-
-  // TOC page (HTML nav)
-  var tocHtml='<?xml version="1.0" encoding="UTF-8"?>\n'+
-    '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'+
-    '<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Contents</title>'+
-    '<link rel="stylesheet" type="text/css" href="style.css"/></head><body>'+
-    '<h2>Table of Contents</h2><nav><ol>';
-  groups.forEach(function(g,gi){
-    tocHtml+='<li class="section">'+g.season+' '+g.year+'</li>';
-    g.entries.forEach(function(e,ei){
-      var chId='ch'+gi+'_'+ei;
-      tocHtml+='<li class="chapter"><a href="'+chId+'.xhtml">'+e.title+'</a></li>';
-    });
-  });
-  tocHtml+='</ol></nav></body></html>';
-  oebps.file('toc.xhtml',tocHtml);
-  manifestItems+='<item id="toc-page" href="toc.xhtml" media-type="application/xhtml+xml"/>\n';
-  spineItems+='<itemref idref="toc-page"/>\n';
-  tocItems+='<navPoint id="np-toc" playOrder="'+(tocPlayOrder++)+'"><navLabel><text>Table of Contents</text></navLabel><content src="toc.xhtml"/></navPoint>\n';
-
-  // Chapter files
-  groups.forEach(function(g,gi){
-    var secId='sec'+gi;
-    tocItems+='<navPoint id="np-'+secId+'" playOrder="'+(tocPlayOrder++)+'"><navLabel><text>'+g.season+' '+g.year+'</text></navLabel><content src="ch'+gi+'_0.xhtml">\n';
-    g.entries.forEach(function(e,ei){
-      var chId='ch'+gi+'_'+ei;
-      var bodyEsc=(e.body||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      var chHtml='<?xml version="1.0" encoding="UTF-8"?>\n'+
-        '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'+
-        '<html xmlns="http://www.w3.org/1999/xhtml"><head><title>'+e.title+'</title>'+
-        '<link rel="stylesheet" type="text/css" href="style.css"/></head><body>'+
-        '<h3>'+e.title+'</h3>'+
-        '<p class="meta">'+e.date+(e.time?' · '+e.time:'')+'</p>'+
-        '<div class="entry-body">'+bodyEsc+'</div>'+
-        '</body></html>';
-      oebps.file(chId+'.xhtml',chHtml);
-      manifestItems+='<item id="'+chId+'" href="'+chId+'.xhtml" media-type="application/xhtml+xml"/>\n';
-      spineItems+='<itemref idref="'+chId+'"/>\n';
-      tocItems+='  <navPoint id="np-'+chId+'" playOrder="'+(tocPlayOrder++)+'"><navLabel><text>'+e.title+'</text></navLabel><content src="'+chId+'.xhtml"/></navPoint>\n';
-    });
-    tocItems+='</navPoint>\n';
-  });
-
-  // content.opf
-  var now=new Date().toISOString().slice(0,10);
-  oebps.file('content.opf',
-    '<?xml version="1.0" encoding="UTF-8"?>\n'+
-    '<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">\n'+
-    '<metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">\n'+
-    '  <dc:title>Letter to My Son</dc:title>\n'+
-    '  <dc:language>en</dc:language>\n'+
-    '  <dc:identifier id="uid">letter-to-my-son-'+Date.now()+'</dc:identifier>\n'+
-    '  <dc:date>'+now+'</dc:date>\n'+
-    '</metadata>\n'+
-    '<manifest>\n'+
-    '  <item id="style" href="style.css" media-type="text/css"/>\n'+
-    '  <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>\n'+
-    manifestItems+
-    '</manifest>\n'+
-    '<spine toc="ncx">\n'+spineItems+'</spine>\n'+
-    '</package>');
-
-  // toc.ncx
-  oebps.file('toc.ncx',
-    '<?xml version="1.0" encoding="UTF-8"?>\n'+
-    '<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">\n'+
-    '<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">\n'+
-    '<head><meta name="dtb:uid" content="letter-to-my-son"/><meta name="dtb:depth" content="2"/></head>\n'+
-    '<docTitle><text>Letter to My Son</text></docTitle>\n'+
-    '<navMap>\n'+tocItems+'</navMap>\n</ncx>');
-
-  // Generate and download
-  zip.generateAsync({type:'blob',mimeType:'application/epub+zip'}).then(function(blob){
-    var a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download='letter-to-my-son.epub';
-    a.click();
-  });
+function ltsDoSave(){
+  var t=document.getElementById('lts-title');var b=document.getElementById('lts-body-inp');
+  if(!t||!b||!t.value.trim()||!b.value.trim())return;
+  var now=new Date();
+  ltsData.entries.unshift({id:ltsId(),title:t.value.trim(),body:b.value.trim(),date:localDateStr(now),time:now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}),ts:Date.now()});
+  ltsData._tab='log';ltsSave();ltsRender();safeHap(HAP.save);
+  if(typeof confetti==='function')confetti(window.innerWidth/2,200,'#00ff88');
 }
+function ltsSeason(d){var m=parseInt((d||'').slice(5,7));if(m>=3&&m<=5)return'Spring';if(m>=6&&m<=8)return'Summer';if(m>=9&&m<=11)return'Fall';return'Winter';}
+function ltsGroupEntries(){
+  var sorted=(ltsData.entries||[]).slice().sort(function(a,b){return(a.ts||0)-(b.ts||0);});
+  var groups={};
+  sorted.forEach(function(e){var y=(e.date||'').slice(0,4)||'?';var s=ltsSeason(e.date);var k=y+'|'+s;if(!groups[k])groups[k]={year:y,season:s,entries:[]};groups[k].entries.push(e);});
+  return Object.values(groups).sort(function(a,b){if(a.year!==b.year)return a.year.localeCompare(b.year);return{Winter:0,Spring:1,Summer:2,Fall:3}[a.season]-{Winter:0,Spring:1,Summer:2,Fall:3}[b.season];});
+}
+function ltsExportMarkdown(){
+  var groups=ltsGroupEntries();var lines=['# Letter to My Son',''];
+  lines.push('## Table of Contents','');
+  groups.forEach(function(g){lines.push('- **'+g.season+' '+g.year+'**');g.entries.forEach(function(e){lines.push('  - '+e.title+' *('+e.date+')*');});});
+  lines.push('','---','');
+  groups.forEach(function(g){lines.push('## '+g.season+' '+g.year,'');g.entries.forEach(function(e){lines.push('### '+e.title,'*'+e.date+(e.time?' · '+e.time:'')+'*','',e.body||'','---','');});});
+  var blob=new Blob([lines.join('\n')],{type:'text/markdown'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='letter-to-my-son.md';a.click();
+}
+function ltsExportEpub(){
+  if(typeof JSZip==='undefined'){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';s.onload=function(){_ltsBuildEpub();};document.head.appendChild(s);}
+  else _ltsBuildEpub();
+}
+function _ltsBuildEpub(){
+  var groups=ltsGroupEntries();var allEntries=[];groups.forEach(function(g){g.entries.forEach(function(e){allEntries.push(e);});});
+  var zip=new JSZip();zip.file('mimetype','application/epub+zip',{compression:'STORE'});
+  zip.folder('META-INF').file('container.xml','<?xml version="1.0"?>\n<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>');
+  var oebps=zip.folder('OEBPS');
+  oebps.file('style.css','body{font-family:Georgia,serif;margin:2em;line-height:1.8;color:#222;max-width:600px}h1{font-size:2em}h2{font-size:1.4em;color:#444;border-bottom:1px solid #ddd;padding-bottom:.3em;margin-top:2em}h3{font-size:1.1em;color:#333;margin-top:1.6em}.meta{color:#888;font-size:.85em;font-style:italic;margin-bottom:1em}.entry-body{white-space:pre-wrap}');
+  var mItems='',sItems='',tItems='',po=1;
+  oebps.file('title.xhtml','<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Letter to My Son</title><link rel="stylesheet" type="text/css" href="style.css"/></head><body><h1>Letter to My Son</h1><p class="meta">'+allEntries.length+' entries</p></body></html>');
+  mItems+='<item id="title" href="title.xhtml" media-type="application/xhtml+xml"/>\n';sItems+='<itemref idref="title"/>\n';
+  groups.forEach(function(g,gi){
+    tItems+='<navPoint id="np-sec'+gi+'" playOrder="'+(po++)+'"><navLabel><text>'+g.season+' '+g.year+'</text></navLabel><content src="ch'+gi+'_0.xhtml">\n';
+    g.entries.forEach(function(e,ei){
+      var chId='ch'+gi+'_'+ei;var bodyEsc=(e.body||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      oebps.file(chId+'.xhtml','<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>'+e.title+'</title><link rel="stylesheet" type="text/css" href="style.css"/></head><body><h3>'+e.title+'</h3><p class="meta">'+e.date+(e.time?' · '+e.time:'')+'</p><div class="entry-body">'+bodyEsc+'</div></body></html>');
+      mItems+='<item id="'+chId+'" href="'+chId+'.xhtml" media-type="application/xhtml+xml"/>\n';sItems+='<itemref idref="'+chId+'"/>\n';
+      tItems+='<navPoint id="np-'+chId+'" playOrder="'+(po++)+'"><navLabel><text>'+e.title+'</text></navLabel><content src="'+chId+'.xhtml"/></navPoint>\n';
+    });
+    tItems+='</navPoint>\n';
+  });
+  oebps.file('content.opf','<?xml version="1.0" encoding="UTF-8"?>\n<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">\n<metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>Letter to My Son</dc:title><dc:language>en</dc:language><dc:identifier id="uid">lts-'+Date.now()+'</dc:identifier></metadata>\n<manifest><item id="style" href="style.css" media-type="text/css"/><item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>\n'+mItems+'</manifest>\n<spine toc="ncx">\n'+sItems+'</spine>\n</package>');
+  oebps.file('toc.ncx','<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"><ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1"><head><meta name="dtb:uid" content="lts"/></head><docTitle><text>Letter to My Son</text></docTitle><navMap>\n'+tItems+'</navMap>\n</ncx>');
+  zip.generateAsync({type:'blob',mimeType:'application/epub+zip'}).then(function(blob){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='letter-to-my-son.epub';a.click();});
+}
+window.addEventListener('load',function(){if(typeof ltsRender==='function')ltsRender();});
 
 // ══════════════════════════════════════════
 // MONTHLY IMPOSSIBLE PROJECT (MIP)
 // ══════════════════════════════════════════
-var mipData = lsGet('dash_mip', {months:{}});
-if(!mipData.months) mipData.months = {};
-
-function mipSave(){ lsSet('dash_mip', mipData); }
-function mipNoteId(){ return 'n_'+Date.now()+'_'+Math.random().toString(36).slice(2,4); }
-function mipMonthKey(d){ var n=d||new Date(); return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0'); }
-function mipMonthLabel(key){ var d=new Date(key+'-02'); return d.toLocaleDateString('en-US',{month:'long',year:'numeric'}); }
-function mipShift(key, delta){
-  var d=new Date(key+'-02');
-  d.setMonth(d.getMonth()+delta);
-  return mipMonthKey(d);
-}
-
+var mipData=lsGet('dash_mip',{months:{}});
+if(!mipData.months)mipData.months={};
+function mipSave(){lsSet('dash_mip',mipData);}
+function mipNoteId(){return 'n_'+Date.now()+'_'+Math.random().toString(36).slice(2,4);}
+function mipMonthKey(d){var n=d||new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0');}
+function mipMonthLabel(key){var d=new Date(key+'-02');return d.toLocaleDateString('en-US',{month:'long',year:'numeric'});}
+function mipShift(key,delta){var d=new Date(key+'-02');d.setMonth(d.getMonth()+delta);return mipMonthKey(d);}
 function mipRender(){
-  var el=document.getElementById('mip-body');
-  var badge=document.getElementById('mip-badge');
-  if(!el) return;
-  el.style.maxHeight='700px'; el.style.overflowY='auto';
-
-  var CA='var(--ca)', CB='rgba(255,184,108,';
-  var tab = mipData._tab||'this';
-  var viewKey = mipData._viewKey||mipMonthKey();
-  var thisKey = mipMonthKey();
-  var entry = mipData.months[viewKey]||{title:'',notes:[],done:false};
-  var isThisMonth = viewKey===thisKey;
-
-  // Badge
-  if(badge){
-    var thisEntry = mipData.months[thisKey];
-    badge.textContent = thisEntry&&thisEntry.title ? (thisEntry.done?'✓ Done':'In progress') : 'No project';
-    badge.style.display='';
-  }
-
+  var el=document.getElementById('mip-body');var badge=document.getElementById('mip-badge');
+  if(!el)return;
+  el.style.maxHeight='700px';el.style.overflowY='auto';
+  var CA='var(--ca)',CB='rgba(255,184,108,';
+  var tab=mipData._tab||'this';
+  var viewKey=mipData._viewKey||mipMonthKey();
+  var thisKey=mipMonthKey();
+  var entry=mipData.months[viewKey]||{title:'',notes:[],done:false};
+  var isThisMonth=viewKey===thisKey;
+  if(badge){var te=mipData.months[thisKey];badge.textContent=te&&te.title?(te.done?'✓ Done':'In progress'):'No project';badge.style.display='';}
   var h='';
-
-  // Tabs
   h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
   [{t:'this',l:'THIS MONTH'},{t:'log',l:'LOG'}].forEach(function(x){
     var a=tab===x.t;
     h+='<button data-miptab="'+x.t+'" style="font-size:var(--t-xs);padding:3px 10px;border:1px solid '+(a?CB+'.5)':'var(--c-border)')+';color:'+(a?CA:'var(--dim)')+';cursor:pointer;background:'+(a?CB+'.08)':'transparent')+';font-family:monospace;letter-spacing:1px">'+x.l+'</button>';
   });
   h+='</div>';
-
   if(tab==='this'){
-    // Month nav
     h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">';
-    h+='<button data-mipnav="-1" style="background:transparent;border:1px solid rgba(255,184,108,.2);color:var(--ca);font-family:monospace;cursor:pointer;padding:2px 10px;font-size:var(--t-md)">←</button>';
+    h+='<button data-mipnav="-1" style="background:transparent;border:1px solid rgba(255,184,108,.2);color:'+CA+';font-family:monospace;cursor:pointer;padding:2px 10px;font-size:var(--t-md)">←</button>';
     h+='<div style="flex:1;text-align:center;font-size:var(--t-sm);color:'+(isThisMonth?CA:'var(--dim)')+'">'+mipMonthLabel(viewKey)+(isThisMonth?' <span style="font-size:var(--t-xxs);color:var(--cg)">● NOW</span>':'')+'</div>';
-    h+='<button data-mipnav="1" style="background:transparent;border:1px solid rgba(255,184,108,.2);color:var(--ca);font-family:monospace;cursor:pointer;padding:2px 10px;font-size:var(--t-md)">→</button>';
+    h+='<button data-mipnav="1" style="background:transparent;border:1px solid rgba(255,184,108,.2);color:'+CA+';font-family:monospace;cursor:pointer;padding:2px 10px;font-size:var(--t-md)">→</button>';
     h+='</div>';
-
-    // Title input
     h+='<input id="mip-title-inp" placeholder="This month\'s impossible project..." value="'+((entry.title||'').replace(/"/g,'&quot;'))+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:8px;outline:none;margin-bottom:8px">';
-
-    // Done toggle
-    var doneCol = entry.done ? 'var(--cg)' : CB+'.3)';
-    h+='<button id="mip-done-btn" style="width:100%;padding:8px;background:'+(entry.done?'rgba(0,255,136,.08)':'transparent')+';border:1px solid '+doneCol+';color:'+(entry.done?'var(--cg)':CB+'.5)')+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px;margin-bottom:10px">'+(entry.done?'✓ COMPLETED — TAP TO UNDO':'MARK AS COMPLETED')+'</button>';
-
-    // Add note
+    h+='<button id="mip-done-btn" style="width:100%;padding:8px;background:'+(entry.done?'rgba(0,255,136,.08)':'transparent')+';border:1px solid '+(entry.done?'var(--cg)':CB+'.3)')+';color:'+(entry.done?'var(--cg)':CB+'.5)')+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px;margin-bottom:10px">'+(entry.done?'✓ COMPLETED — TAP TO UNDO':'MARK AS COMPLETED')+'</button>';
     h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">UPDATES</div>';
     h+='<textarea id="mip-note-inp" placeholder="Add an update..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.15);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:6px 8px;outline:none;resize:none;min-height:60px;margin-bottom:6px"></textarea>';
     h+='<button id="mip-note-btn" style="width:100%;padding:7px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:'+CA+';font-family:monospace;font-size:var(--t-xs);cursor:pointer;letter-spacing:1px;margin-bottom:12px">+ ADD UPDATE</button>';
-
-    // Notes log
-    var notes = (entry.notes||[]).slice().reverse();
-    if(notes.length){
-      notes.forEach(function(n){
-        var editing = mipData._editNote===n.id;
-        h+='<div style="border-bottom:1px solid rgba(255,184,108,.08);padding:8px 0" data-mipnote="'+n.id+'">';
-        h+='<div style="display:flex;align-items:flex-start;gap:6px">';
-        h+='<div style="flex:1">';
-        h+='<div style="font-size:var(--t-xxs);color:var(--dim);margin-bottom:4px">'+new Date(n.ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})+'</div>';
-        if(editing){
-          h+='<textarea id="mip-edit-'+n.id+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none;resize:none;min-height:50px">'+n.text+'</textarea>';
-          h+='<div style="display:flex;gap:6px;margin-top:4px">';
-          h+='<button data-mipsavenote="'+n.id+'" style="padding:3px 10px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:'+CA+';font-family:monospace;font-size:var(--t-xxs);cursor:pointer">SAVE</button>';
-          h+='<button data-mipcancelnote="'+n.id+'" style="padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:var(--t-xxs);cursor:pointer">CANCEL</button>';
-          h+='</div>';
-        } else {
-          h+='<div style="font-size:var(--t-sm);color:var(--text);white-space:pre-wrap;line-height:1.6">'+n.text+'</div>';
-        }
-        h+='</div>';
-        if(!editing){
-          h+='<button data-mipeditnote="'+n.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-sm);cursor:pointer;padding:0 4px">✏️</button>';
-          h+='<button data-mipdelnote="'+n.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-base);cursor:pointer;padding:0 2px">✕</button>';
-        }
-        h+='</div></div>';
-      });
-    } else {
-      h+='<div style="color:var(--dim);font-size:var(--t-sm);text-align:center;padding:10px 0">No updates yet.</div>';
-    }
-
+    var notes=(entry.notes||[]).slice().reverse();
+    if(notes.length){notes.forEach(function(n){
+      var editing=mipData._editNote===n.id;
+      h+='<div style="border-bottom:1px solid rgba(255,184,108,.08);padding:8px 0">';
+      h+='<div style="display:flex;align-items:flex-start;gap:6px"><div style="flex:1">';
+      h+='<div style="font-size:var(--t-xxs);color:var(--dim);margin-bottom:4px">'+new Date(n.ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})+'</div>';
+      if(editing){
+        h+='<textarea id="mip-edit-'+n.id+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid '+CB+'.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:5px 8px;outline:none;resize:none;min-height:50px">'+n.text+'</textarea>';
+        h+='<div style="display:flex;gap:6px;margin-top:4px"><button data-mipsavenote="'+n.id+'" style="padding:3px 10px;background:'+CB+'.06);border:1px solid '+CB+'.3);color:'+CA+';font-family:monospace;font-size:var(--t-xxs);cursor:pointer">SAVE</button><button data-mipcancelnote="'+n.id+'" style="padding:3px 10px;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--dim);font-family:monospace;font-size:var(--t-xxs);cursor:pointer">CANCEL</button></div>';
+      } else { h+='<div style="font-size:var(--t-sm);color:var(--text);white-space:pre-wrap;line-height:1.6">'+n.text+'</div>'; }
+      h+='</div>';
+      if(!editing){h+='<button data-mipeditnote="'+n.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-sm);cursor:pointer;padding:0 4px">✏️</button><button data-mipdelnote="'+n.id+'" style="background:transparent;border:none;color:rgba(255,255,255,.2);font-size:var(--t-base);cursor:pointer;padding:0 2px">✕</button>';}
+      h+='</div></div>';
+    });}else{h+='<div style="color:var(--dim);font-size:var(--t-sm);text-align:center;padding:10px 0">No updates yet.</div>';}
   } else {
-    // LOG tab — past + future months with entries
-    var keys = Object.keys(mipData.months).filter(function(k){ return mipData.months[k].title; }).sort().reverse();
-    if(!keys.length){
-      h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No projects yet.</div>';
-    } else {
-      keys.forEach(function(k){
-        var m = mipData.months[k];
-        var isCurr = k===thisKey;
-        var isFuture = k>thisKey;
-        var col = m.done?'var(--cg)':isFuture?'rgba(255,255,255,.3)':CA;
-        h+='<div style="border:1px solid rgba(255,184,108,.1);padding:10px;margin-bottom:8px">';
-        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:'+(m.notes&&m.notes.length?'6':'0')+'px">';
-        h+='<div style="font-size:var(--t-xs);color:var(--dim);min-width:80px">'+mipMonthLabel(k)+'</div>';
-        h+='<div style="flex:1;font-size:var(--t-sm);color:'+col+'">'+m.title+'</div>';
-        if(m.done) h+='<span style="font-size:var(--t-xxs);color:var(--cg)">✓</span>';
-        if(isFuture) h+='<span style="font-size:var(--t-xxs);color:rgba(255,255,255,.3)">planned</span>';
-        h+='</div>';
-        if(m.notes&&m.notes.length){
-          h+='<div style="font-size:var(--t-xxs);color:var(--dim)">'+m.notes.length+' update'+(m.notes.length>1?'s':'')+'</div>';
-        }
-        h+='</div>';
-      });
-    }
+    var keys=Object.keys(mipData.months).filter(function(k){return mipData.months[k].title;}).sort().reverse();
+    if(!keys.length){h+='<div style="color:var(--dim);font-size:var(--t-sm);padding:20px 0;text-align:center">No projects yet.</div>';}
+    else{keys.forEach(function(k){
+      var m=mipData.months[k];var isFuture=k>thisKey;var col=m.done?'var(--cg)':isFuture?'rgba(255,255,255,.3)':CA;
+      h+='<div style="border:1px solid rgba(255,184,108,.1);padding:10px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:'+(m.notes&&m.notes.length?'6':'0')+'px"><div style="font-size:var(--t-xs);color:var(--dim);min-width:80px">'+mipMonthLabel(k)+'</div><div style="flex:1;font-size:var(--t-sm);color:'+col+'">'+m.title+'</div>';
+      if(m.done)h+='<span style="font-size:var(--t-xxs);color:var(--cg)">✓</span>';
+      if(isFuture)h+='<span style="font-size:var(--t-xxs);color:rgba(255,255,255,.3)">planned</span>';
+      h+='</div>';
+      if(m.notes&&m.notes.length)h+='<div style="font-size:var(--t-xxs);color:var(--dim)">'+m.notes.length+' update'+(m.notes.length>1?'s':'')+'</div>';
+      h+='</div>';
+    });}
   }
-
   el.innerHTML=h;
-
-  // Wire tabs
   el.querySelectorAll('[data-miptab]').forEach(function(btn){
     var _tx=0,_ty=0;
     btn.ontouchstart=function(e){_tx=e.touches[0].clientX;_ty=e.touches[0].clientY;};
-    btn.ontouchend=function(e){
-      if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
-      e.preventDefault(); mipData._tab=this.dataset.miptab; mipSave(); mipRender();
-    };
-    btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipData._tab=this.dataset.miptab; mipSave(); mipRender();};
+    btn.ontouchend=function(e){if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;e.preventDefault();mipData._tab=this.dataset.miptab;mipSave();mipRender();};
+    btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;mipData._tab=this.dataset.miptab;mipSave();mipRender();};
   });
-
   if(tab==='this'){
-    // Nav arrows
     el.querySelectorAll('[data-mipnav]').forEach(function(btn){
       var _tx=0,_ty=0;
       btn.ontouchstart=function(e){_tx=e.touches[0].clientX;_ty=e.touches[0].clientY;};
-      btn.ontouchend=function(e){
-        if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;
-        e.preventDefault(); mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav)); mipSave(); mipRender();
-      };
-      btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav)); mipSave(); mipRender();};
+      btn.ontouchend=function(e){if(Math.abs(e.changedTouches[0].clientX-_tx)>8||Math.abs(e.changedTouches[0].clientY-_ty)>8)return;e.preventDefault();mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav));mipSave();mipRender();};
+      btn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;mipData._viewKey=mipShift(viewKey,parseInt(this.dataset.mipnav));mipSave();mipRender();};
     });
-
-    // Title save on input
-    var titleInp=document.getElementById('mip-title-inp');
-    if(titleInp) titleInp.oninput=function(){
-      if(!mipData.months[viewKey])mipData.months[viewKey]={title:'',notes:[],done:false};
-      mipData.months[viewKey].title=this.value;
-      mipSave();
-    };
-
-    // Done toggle
-    var doneBtn=document.getElementById('mip-done-btn');
-    if(doneBtn){
-      var _dtx=0,_dty=0;
-      doneBtn.ontouchstart=function(e){_dtx=e.touches[0].clientX;_dty=e.touches[0].clientY;};
-      doneBtn.ontouchend=function(e){
-        if(Math.abs(e.changedTouches[0].clientX-_dtx)>8||Math.abs(e.changedTouches[0].clientY-_dty)>8)return;
-        e.preventDefault(); mipToggleDone();
-      };
-      doneBtn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipToggleDone();};
-    }
-
-    // Add note
-    var noteBtn=document.getElementById('mip-note-btn');
-    if(noteBtn){
-      var _ntx=0,_nty=0;
-      noteBtn.ontouchstart=function(e){_ntx=e.touches[0].clientX;_nty=e.touches[0].clientY;};
-      noteBtn.ontouchend=function(e){
-        if(Math.abs(e.changedTouches[0].clientX-_ntx)>8||Math.abs(e.changedTouches[0].clientY-_nty)>8)return;
-        e.preventDefault(); mipAddNote();
-      };
-      noteBtn.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; mipAddNote();};
-    }
-
-    // Edit note
-    el.querySelectorAll('[data-mipeditnote]').forEach(function(btn){
-      btn.onclick=function(){
-        var id=this.dataset.mipeditnote;
-        mipData._editNote=(mipData._editNote===id)?null:id;
-        mipRender();
-      };
-    });
-
-    // Save edited note
-    el.querySelectorAll('[data-mipsavenote]').forEach(function(btn){
-      btn.onclick=function(){
-        var id=this.dataset.mipsavenote;
-        var ta=document.getElementById('mip-edit-'+id);
-        if(!ta||!ta.value.trim())return;
-        var e=mipData.months[viewKey];
-        if(!e)return;
-        var note=e.notes.find(function(n){return n.id===id;});
-        if(note){note.text=ta.value.trim();}
-        mipData._editNote=null;
-        mipSave(); mipRender(); safeHap(HAP.save);
-      };
-    });
-
-    // Cancel edit
-    el.querySelectorAll('[data-mipcancelnote]').forEach(function(btn){
-      btn.onclick=function(){mipData._editNote=null; mipRender();};
-    });
-
-    // Delete note
-    el.querySelectorAll('[data-mipdelnote]').forEach(function(btn){
-      btn.onclick=function(){
-        if(!confirm('Delete this update?'))return;
-        var id=this.dataset.mipdelnote;
-        var e=mipData.months[viewKey];
-        if(!e)return;
-        e.notes=e.notes.filter(function(n){return n.id!==id;});
-        mipSave(); mipRender();
-      };
-    });
+    var ti=document.getElementById('mip-title-inp');
+    if(ti)ti.oninput=function(){if(!mipData.months[viewKey])mipData.months[viewKey]={title:'',notes:[],done:false};mipData.months[viewKey].title=this.value;mipSave();};
+    var db=document.getElementById('mip-done-btn');
+    if(db){var _dtx=0,_dty=0;db.ontouchstart=function(e){_dtx=e.touches[0].clientX;_dty=e.touches[0].clientY;};db.ontouchend=function(e){if(Math.abs(e.changedTouches[0].clientX-_dtx)>8||Math.abs(e.changedTouches[0].clientY-_dty)>8)return;e.preventDefault();mipToggleDone();};db.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;mipToggleDone();};}
+    var nb=document.getElementById('mip-note-btn');
+    if(nb){var _ntx=0,_nty=0;nb.ontouchstart=function(e){_ntx=e.touches[0].clientX;_nty=e.touches[0].clientY;};nb.ontouchend=function(e){if(Math.abs(e.changedTouches[0].clientX-_ntx)>8||Math.abs(e.changedTouches[0].clientY-_nty)>8)return;e.preventDefault();mipAddNote();};nb.onclick=function(e){if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;mipAddNote();};}
+    el.querySelectorAll('[data-mipeditnote]').forEach(function(btn){btn.onclick=function(){var id=this.dataset.mipeditnote;mipData._editNote=(mipData._editNote===id)?null:id;mipRender();};});
+    el.querySelectorAll('[data-mipsavenote]').forEach(function(btn){btn.onclick=function(){var id=this.dataset.mipsavenote;var ta=document.getElementById('mip-edit-'+id);if(!ta||!ta.value.trim())return;var ent=mipData.months[viewKey];if(!ent)return;var note=ent.notes.find(function(n){return n.id===id;});if(note)note.text=ta.value.trim();mipData._editNote=null;mipSave();mipRender();};});
+    el.querySelectorAll('[data-mipcancelnote]').forEach(function(btn){btn.onclick=function(){mipData._editNote=null;mipRender();};});
+    el.querySelectorAll('[data-mipdelnote]').forEach(function(btn){btn.onclick=function(){if(!confirm('Delete this update?'))return;var id=this.dataset.mipdelnote;var ent=mipData.months[viewKey];if(!ent)return;ent.notes=ent.notes.filter(function(n){return n.id!==id;});mipSave();mipRender();};});
   }
 }
-
-function mipToggleDone(){
-  var viewKey=mipData._viewKey||mipMonthKey();
-  if(!mipData.months[viewKey])mipData.months[viewKey]={title:'',notes:[],done:false};
-  mipData.months[viewKey].done=!mipData.months[viewKey].done;
-  if(mipData.months[viewKey].done&&typeof confetti==='function')confetti(window.innerWidth/2,200,'#ffcc00');
-  mipSave(); mipRender();
-}
-
-function mipAddNote(){
-  var viewKey=mipData._viewKey||mipMonthKey();
-  var ta=document.getElementById('mip-note-inp');
-  if(!ta||!ta.value.trim())return;
-  if(!mipData.months[viewKey])mipData.months[viewKey]={title:'',notes:[],done:false};
-  mipData.months[viewKey].notes.push({id:mipNoteId(),text:ta.value.trim(),ts:Date.now()});
-  mipSave(); mipRender(); safeHap(HAP.check);
-}
-
+function mipToggleDone(){var vk=mipData._viewKey||mipMonthKey();if(!mipData.months[vk])mipData.months[vk]={title:'',notes:[],done:false};mipData.months[vk].done=!mipData.months[vk].done;if(mipData.months[vk].done&&typeof confetti==='function')confetti(window.innerWidth/2,200,'#ffcc00');mipSave();mipRender();}
+function mipAddNote(){var vk=mipData._viewKey||mipMonthKey();var ta=document.getElementById('mip-note-inp');if(!ta||!ta.value.trim())return;if(!mipData.months[vk])mipData.months[vk]={title:'',notes:[],done:false};mipData.months[vk].notes.push({id:mipNoteId(),text:ta.value.trim(),ts:Date.now()});mipSave();mipRender();safeHap(HAP.check);}
 window.addEventListener('load',function(){if(typeof mipRender==='function')mipRender();});
 // ══════════════════════════════════════════
 
-// ── END OF dashboard-2.js (Part 2 of 3) — continues in dashboard-3.js ──
+// ── END OF dashboard-2.js

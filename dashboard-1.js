@@ -6,8 +6,7 @@ function todayKey(){
 }
 window._dash1_todayKey=todayKey;
 window.addEventListener('load',function(){if(typeof blPrune==='function')blPrune();});
-function localDateStr(d){var _d=d||new Date();return _d.getFullYear()+'-'+String(_d.getMonth()+1).padStart(2,'0')+'-'+String(_d.getDate()).padStart(2,'0');}
-function todayKeyRaw(){ return localDateStr(new Date()); }
+function todayKeyRaw(){ return new Date().toISOString().slice(0,10); }
 function safeHap(type, card, detail){
   if(typeof hap==='function')hap(type);
   // Log to button log
@@ -83,7 +82,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v14 ── BUILD 2026-06-12 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-06-16 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -140,17 +139,30 @@ var MONTHS=['January','February','March','April','May','June','July','August','S
 var MO3=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 var DAY3=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
+var _hijriCache=null;
 function hijri(date){
-  // Epoch-based: 1 Muharram 1447 = 7 July 2025 (verified)
-  var EPOCH=new Date(2025,6,7);
-  var HM=['Muharram','Safar','Rabi al-Awwal','Rabi al-Thani','Jumada al-Awwal','Jumada al-Thani','Rajab','Shaban','Ramadan','Shawwal','Dhu al-Qidah','Dhu al-Hijjah'];
-  function isLeap(y){return [2,5,7,10,13,15,18,21,24,26,29].indexOf(y%30)>=0;}
-  function dim(m,y){if(m%2===1)return 30;if(m===12)return isLeap(y)?30:29;return 29;}
-  var hy=1447,hm=1,hd=1;
-  var d=Math.round((date-EPOCH)/86400000);
-  if(d>=0){while(d>0){var left=dim(hm,hy)-hd+1;if(d<left){hd+=d;d=0;}else{d-=left;hd=1;hm++;if(hm>12){hm=1;hy++;}}}}
-  else{d=-d;while(d>0){if(d<hd){hd-=d;d=0;}else{d-=hd;hm--;if(hm<1){hm=12;hy--;}hd=dim(hm,hy);}}}
-  return hd+' '+HM[hm-1]+' '+hy+' AH';
+  // Return cached value if available
+  if(_hijriCache)return _hijriCache;
+  // Fallback while loading
+  return '';
+}
+function hijriFetch(){
+  var now=new Date();
+  var d=String(now.getDate()).padStart(2,'0');
+  var m=String(now.getMonth()+1).padStart(2,'0');
+  var y=now.getFullYear();
+  fetch('https://api.aladhan.com/v1/gToH?date='+d+'-'+m+'-'+y)
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var h=data&&data.data&&data.data.hijri;
+      if(h){
+        _hijriCache=h.day+' '+h.month.en+' '+h.year+' AH';
+        // Re-render clock if visible
+        var el=document.getElementById('big-hijri');
+        if(el)el.textContent=_hijriCache;
+      }
+    })
+    .catch(function(){});
 }
 
 function moonEmoji(date){
@@ -2353,10 +2365,9 @@ function submitAddBook(){
   var isLib=bfGetLibrary();
   var dueDays=parseInt((document.getElementById('bf-due')||{}).value)||0;
   var dueDate=null;
-  if(dueDays>0){
+  if(isLib&&dueDays>0){
     var dd=new Date();dd.setDate(dd.getDate()+dueDays);
     dueDate=localDateStr(dd);
-    isLib=true;
   }
   var _rpEl=document.getElementById('bf-real-pages');
 var _realPages=_rpEl&&_rpEl.value?parseInt(_rpEl.value)||null:null;
@@ -2708,19 +2719,6 @@ function submitEditBook(id){
   if(!title||!total)return;
   b.title=title;b.author=author;b.total=total;
   b.current=Math.min(Math.max(0,cur),total);
-  // Update library & due date
-  b.library=bfGetLibrary()||false;
-  var _eDueDays=parseInt((document.getElementById('bf-due')||{}).value)||0;
-  if(_eDueDays>0){
-    var _eDd=new Date();_eDd.setDate(_eDd.getDate()+_eDueDays);
-    b.dueDate=localDateStr(_eDd);
-    b.library=true;
-  } else if(!b.library){
-    b.dueDate=null;
-  }
-  // Update genre
-  var _eGenre=bfGetGenre();
-  if(_eGenre)b.genre=_eGenre;
   saveBooks();
   var btn=document.querySelector('.book-form-btn');
   if(btn){btn.textContent='ADD BOOK';btn.onclick=submitAddBook;}
@@ -3029,13 +3027,10 @@ function renderBooks(){
     // Scroll-aware touch — only fire if finger didn't move (not a swipe)
     var _rAddTY=0,_rAddTX=0;
     rAddBtn.ontouchstart=function(e){_rAddTX=e.touches[0].clientX;_rAddTY=e.touches[0].clientY;};
-    var _gTXA1=0,_gTYA1=0;
-    rAddBtn.ontouchstart=function(e){_gTXA1=e.touches[0].clientX;_gTYA1=e.touches[0].clientY;};
     rAddBtn.ontouchend=function(e){
       var dx=Math.abs(e.changedTouches[0].clientX-_rAddTX);
       var dy=Math.abs(e.changedTouches[0].clientY-_rAddTY);
       if(dx>10||dy>10)return; // was a swipe, ignore
-      if(Math.abs(e.changedTouches[0].clientX-_gTXA1)>8||Math.abs(e.changedTouches[0].clientY-_gTYA1)>8)return;
       e.preventDefault();
       _switchAdd();
     };
@@ -3499,126 +3494,8 @@ setTimeout(initSettings,200);
   var waveSpeedTarget=0.5;
   var stormTimer=0;
   var stormCooldown=0;
-  var MSGS_CALM=[
-    'stay on the raft.','breathe.','you got this.','one wave at a time.','still here.','grounded.',
-    'the water is beneath you, not inside you.','float. just float.','the horizon is steady.',
-    'you have survived every wave so far.','rest. the raft holds you.','it is okay to just exist.',
-    'the ocean does not ask permission.','you are not the water.','this moment is enough.',
-    'be still.','look at the horizon.','you are allowed to rest.','the raft is solid.',
-    'your weight is held.','drift gently.','peace is not the absence of waves.',
-    'you are doing it right now.','keep your eyes soft.','the water reflects the sky.',
-    'nothing is required of you right now.','breathe in. breathe out.','you belong here.',
-    'let the ocean carry what you cannot.','stillness is not weakness.','anchor yourself in now.',
-    'the raft knows your weight.','you are enough as you are.','gentleness is strength.',
-    'not every moment needs to mean something.','stay. just stay.','here. present. alive.',
-    'the stars have always been there.','float like you mean it.','rest is not retreat.',
-    'you have made it to today.','slow down. the destination can wait.',
-    'your breath is the only compass you need.','trust the raft.','you are not lost.',
-    'the sea has seen storms before. so have you.','small movements. steady hands.',
-    'you were built for this.','peace finds those who wait for it.',
-    'the raft is your ground.','you do not need to paddle right now.',
-    'watch the light on the water.','nothing is permanent, not even the storm.',
-    'you are more than the waves.','one breath. then another.',
-    'what is not in your control is not your concern.',
-    'the obstacle is the way.',
-    'you suffer more in imagination than in reality.',
-    'how long will you wait before you demand the best of yourself?',
-    'the impediment to action advances action. what stands in the way becomes the way.',
-    'do not indulge in dreams of what you do not have.',
-    'confine yourself to the present.',
-    'the happiness of your life depends on the quality of your thoughts.',
-    'you have power over your mind, not outside events.',
-    'waste no more time arguing what a good person should be. be one.',
-    'if it is not right, do not do it. if it is not true, do not say it.',
-    'never let the future disturb you. you will meet it with the same reason you bring today.',
-    'look within. within is the fountain of good.',
-    'the soul becomes dyed with the color of its thoughts.',
-    'dwell on the beauty of life. watch the stars, and see yourself running with them.',
-    'he who lives in harmony with himself lives in harmony with the universe.',
-    'nothing is as it seems to be at first glance.',
-    'this life is a single breath in eternity. breathe it with intention.',
-    'sabr is not waiting. it is trusting while you wait.',
-    'the dunya is a bridge. cross it. do not build your house upon it.',
-    'every soul shall taste death. what will you have given before that moment?',
-    'you were not created for this world. you were sent through it.',
-    'be patient. what Allah has decreed will reach you even if it is between two mountains.',
-    'the believer who perseveres through difficulty has already won.',
-    'this hardship is a station. not a destination.',
-    'what is destined for you will find you even if you are behind locked doors.',
-    'the world is the prison of the believer and the paradise of the disbeliever. so rest easy — your true home is ahead.',
-    'do not grieve over what has passed. it was written before you were born.',
-    'your sustenance will not stop because you are patient. it stops when it is finished.'
-  ];
-  var MSGS_STORM=[
-    'hold on.','this too shall pass.','breathe through it.','still on the raft.',
-    'you are not the storm.','steady.','the storm is not you.',
-    'grip the raft. breathe.','you have been through worse.',
-    'wild water, steady heart.','the raft holds in storms too.',
-    'this wave will end. they always do.','you are stronger than the sea.',
-    'do not fight it. ride it.','let the wave pass through you.',
-    'the storm does not define you.','you are the raft, not the water.',
-    'chaos outside. stillness inside.','lean into the raft.',
-    'every storm has a last wave.','you are still here. that matters.',
-    'breathe. the air is still there.','the horizon has not moved.',
-    'storms cannot last forever.','hold on. morning comes.',
-    'you are not alone on this water.','the raft was made for this.',
-    'do not mistake the storm for the truth.','rough water makes strong sailors.',
-    'this intensity will soften.','your presence here is an act of courage.',
-    'the waves are loud but you are louder.',
-    'pain moves through. it does not stay.',
-    'even in the storm, you are afloat.','breathe first. everything else second.',
-    'you are not required to be okay right now.','just stay on the raft.',
-    'the sea tests everyone eventually.','wild outside. you choose inside.',
-    'the storm thinks it owns you. it does not.',
-    'one moment at a time. just this one.','endure. then rest.',
-    'the raft does not sink in storms.','neither do you.',
-    'somewhere beyond this, there is calm water.',
-    'trust yourself the way you trust the raft.',
-    'it is okay to feel the waves. feel them. stay.',
-    'indeed, with hardship comes ease.',
-    'and He found you lost and guided you.',
-    'verily, Allah is with the patient.',
-    'do not grieve. indeed Allah is with us.',
-    'put your trust in Allah. He loves those who trust.',
-    'Allah does not burden a soul beyond what it can bear.',
-    'whoever fears Allah, He will make for him a way out.',
-    'be patient. the earth is wide and the mercy of Allah is wider.',
-    'turn to Allah before you return to Allah.',
-    'the heart finds rest in the remembrance of Allah.',
-    'be in this world as though you were a stranger or a traveler.',
-    'speak good or remain silent.',
-    'the strong person is not the one who wrestles. it is the one who controls himself in anger.',
-    'make things easy and do not make them difficult.',
-    'none of you truly believes until he loves for his brother what he loves for himself.',
-    'take benefit of five before five: youth before old age, health before sickness.',
-    'the best of you are those who are best to their families.',
-    'feed the hungry, visit the sick, free the captive.',
-    'whoever saves one life it is as though he saved all of mankind.',
-    'seek knowledge from the cradle to the grave.',
-    'the ink of the scholar is more sacred than the blood of the martyr.',
-    'be merciful to others and Allah will be merciful to you.',
-    'the world is a prison for the believer and a paradise for the disbeliever.',
-    'O turner of hearts, keep our hearts firm on your religion.',
-    'Allah is beautiful and loves beauty.',
-    'charity does not decrease wealth.',
-    'pray as though everything depends on Allah. work as though everything depends on you.',
-    'the greatest jihad is to battle your own soul.',
-    'make dua. the door of Allah is always open.',
-    'this life is but a moment. spend it in obedience.',
-    'patience is half of faith.',
-    'gratitude turns what we have into enough.',
-    'everything happens by the will of Allah. find peace in that.',
-    'verily, with hardship comes ease. with hardship comes ease. twice He said it.',
-    'Allah does not burden a soul beyond what it can bear. you can bear this.',
-    'the prophets were tested more than anyone. and they were the most beloved.',
-    'sabr has no expiry date. hold.',
-    'call upon Allah in the darkest hour. that is exactly what this hour is for.',
-    'your pain is not punishment. sometimes it is elevation.',
-    'the darkest point of the night is just before fajr.',
-    'do not despair of the mercy of Allah. He is closer than you think.',
-    'this too is written. and everything written has a wisdom you cannot yet see.',
-    'Allah is with those who are patient. you are not alone on this water.'
-  ];
+  var MSGS_CALM=['stay on the raft.','the sea does not apologize.','breathe. keep rowing.','you have survived every storm so far.','the horizon is always honest.','stillness is not emptiness.','trust the current.','what you resist, you carry.','the water holds you.','rest. you earned it.','let the night be quiet.','one stroke at a time.'];
+  var MSGS_STORM=['stay on the raft.','this too shall pass.','hold on.','the storm is not forever.','you are stronger than the waves.','breathe through it.','keep your hands on the oar.','fear is not the enemy. stopping is.','rough seas make skilled sailors.','do not let go.'];
   var curMsg=MSGS_CALM[0];
   var msgTimer=300;
 
@@ -4681,19 +4558,8 @@ function ptSetStatus(dateKey,prayer,status,evt){
   }
   ptTouchDay(dateKey);
   ptSave();
-  // Update button visuals directly without full re-render
-  document.querySelectorAll('[data-pt-status][data-pt-prayer="'+prayer+'"][data-pt-date="'+dateKey+'"]').forEach(function(b){
-    var s=b.dataset.ptStatus;
-    var active=(ptData[dateKey]&&ptData[dateKey][prayer]===s);
-    var colors={ontime:'#00ff88',late:'#ffcc00',missed:'rgba(255,68,68,.8)'};
-    var col=colors[s]||'var(--dim)';
-    b.style.borderColor=active?col:'rgba(255,255,255,.1)';
-    b.style.color=active?col:'var(--dim)';
-    b.style.background=active?'rgba('+( s==='ontime'?'0,255,136':s==='late'?'255,204,0':'255,68,68')+', .08)':'transparent';
-  });
-  // Also update streak/badge without full rebuild
-  if(ptTab==='today') try{ptRenderToday();}catch(e){console.error('ptRenderToday:',e);}
-  else try{ptRenderLog();}catch(e){console.error('ptRenderLog:',e);}
+  if(ptTab==='today')ptRenderToday();
+  else ptRenderLog();
   setTimeout(checkPrayerSparkle,200);
 }
 
@@ -5087,19 +4953,7 @@ function ptRenderToday(){
   if(isToday&&prayers)renderForbiddenTimes();  el.innerHTML=h;
   // Wire prayer status buttons
   el.querySelectorAll('[data-pt-status]').forEach(function(btn){
-    var _ptx=0,_pty=0;
-    btn.ontouchstart=function(e){_ptx=e.touches[0].clientX;_pty=e.touches[0].clientY;};
-    btn.ontouchend=function(e){
-      if(Math.abs(e.changedTouches[0].clientX-_ptx)>8||Math.abs(e.changedTouches[0].clientY-_pty)>8)return;
-      e.preventDefault();
-      var status=this.dataset.ptStatus;
-      var dateKey=this.dataset.ptDate;
-      var prayer=this.dataset.ptPrayer;
-      ptSetStatus(dateKey,prayer,status,{target:this});
-    };
-    btn.onclick=function(e){
-      // ontouchend handles mobile; onclick handles desktop mouse clicks
-      if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;
+    btn.onclick=function(){
       var status=this.dataset.ptStatus;
       var dateKey=this.dataset.ptDate;
       var prayer=this.dataset.ptPrayer;
@@ -5770,7 +5624,6 @@ function applySettings(){
   if(!tgStyle){tgStyle=document.createElement('style');tgStyle.id='textglow-style';document.head.appendChild(tgStyle);}
   tgStyle.textContent=getSetting('textGlow')?'body{--text-stroke:0 0 1px rgba(0,0,0,.9),-1px 0 1px rgba(0,0,0,.6),1px 0 1px rgba(0,0,0,.6)}body *{text-shadow:var(--text-stroke,none)}':'';
   if(window.applyLetterNav)window.applyLetterNav(getSetting('letterNav'));
-  // Purge any new cards accidentally added to hidden list
   ['consistency-log','semester','letter-son','mip'].forEach(function(id){
     var i=hiddenTiles.indexOf(id);if(i>=0){hiddenTiles.splice(i,1);saveHiddenTiles();}
   });
@@ -5880,8 +5733,7 @@ function qtCheckNotice(){
   var el=document.getElementById('qt-notice');
   if(!el)return;
   // Check if dismissed this session
-  var _qtDismissed=localStorage.getItem('qt-notice-dismissed');
-  if(_qtDismissed&&(Date.now()-parseInt(_qtDismissed))<86400000)return;
+  if(sessionStorage.getItem('qt-notice-dismissed'))return;
   // Find last day with pages > 0
   var keys=Object.keys(qtData).filter(function(k){return qtData[k]>0;}).sort().reverse();
   if(!keys.length){
@@ -5904,7 +5756,7 @@ function qtCheckNotice(){
 }
 
 function qtDismissNotice(){
-  localStorage.setItem('qt-notice-dismissed',String(Date.now()));
+  sessionStorage.setItem('qt-notice-dismissed','1');
   var el=document.getElementById('qt-notice');
   if(el)el.style.display='none';
 }
@@ -7227,16 +7079,9 @@ function juaAllSeen(s){
 function juaGetCard(s){
   var today=todayKey();
   var count=s==='forward'||s==='backward'?JUA_DATA.length-1:JUA_DATA.length;
-  // Build shuffled index array so surahs come in random order
-  var indices=[];for(var i=0;i<count;i++)indices.push(i);
-  // Seeded shuffle based on today so order is consistent within a day
-  var seed=today.split('-').join('')%997;
-  for(var i=indices.length-1;i>0;i--){var j=(seed*31+i*17)%i|0;var t=indices[i];indices[i]=indices[j];indices[j]=t;}
-  // Review cards first (due today)
-  for(var n=0;n<indices.length;n++){var i=indices[n];var k=juaCardKey(s,i);var c=juaState.cards[k];if(c&&c.seen&&c.nextReview&&c.nextReview<=today)return i;}
-  // Then new cards
+  for(var i=0;i<count;i++){var k=juaCardKey(s,i);var c=juaState.cards[k];if(c&&c.seen&&c.nextReview&&c.nextReview<=today)return i;}
   var newCount=0;
-  for(var n=0;n<indices.length;n++){var i=indices[n];var k=juaCardKey(s,i);var c=juaState.cards[k];if(!c||!c.seen){if(newCount<5)return i;newCount++;}}
+  for(var i=0;i<count;i++){var k=juaCardKey(s,i);var c=juaState.cards[k];if(!c||!c.seen){if(newCount<5)return i;newCount++;}}
   return null;
 }
 function juaAnswerCard(s,idx,result){
@@ -7352,21 +7197,18 @@ function juaRenderStudy(){
   return h+juaRenderOrder(surah,idx,sec);
 }
 function juaCloze(text, seed){
-  // Blank ~30% of meaningful words, max 3 blanks per sentence
+  // Split into words, blank ~50% of meaningful words (not stopwords)
   var stopwords=['a','an','the','and','or','but','of','in','on','at','to','for',
     'is','are','was','were','be','been','being','it','its','that','this','which',
     'with','as','by','from','into','through','during','before','after','about',
     'against','between','into','through','he','she','they','we','you','who','what'];
   var words=text.split(' ');
+  // Seeded pseudo-random so same card shows same blanks in same session
   var rng=function(i){return ((seed*31+i*17)%100)/100;};
-  var blanked=0;
-  var maxBlanks=Math.max(1,Math.min(3,Math.floor(words.length*0.25)));
   return words.map(function(w,i){
     var clean=w.replace(/[^a-zA-Z]/g,'').toLowerCase();
     if(clean.length<=2||stopwords.indexOf(clean)>=0)return w;
-    if(blanked>=maxBlanks)return w;
-    if(rng(i)<0.3){blanked++;return '<span style="color:rgba(255,204,0,.25);border-bottom:1px solid rgba(255,204,0,.3);min-width:40px;display:inline-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';}
-    return w;
+    return rng(i)<0.5?'<span style="color:rgba(255,204,0,.25);border-bottom:1px solid rgba(255,204,0,.3);min-width:40px;display:inline-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>':w;
   }).join(' ');
 }
 
@@ -7774,8 +7616,10 @@ function questRender(){
       var step = steps.find(function(s){ return s.step === current; });
       if(!step){ h += '<div style="color:var(--dim)">Step not found.</div>'; }
       else {
-        h += '<div style="font-size:var(--t-xxs);color:rgba(255,165,0,.4);letter-spacing:1px;margin-bottom:2px">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
-        h += '<div style="font-size:var(--t-xs);color:rgba(255,165,0,.6);letter-spacing:2px;margin-bottom:10px">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
+        // Level label — above progress bar, bigger
+        h += '<div style="font-size:var(--t-sm);color:rgba(255,165,0,.7);letter-spacing:1px;margin-bottom:4px;font-family:monospace">LEVEL 1 · JUZ AMMA MEMORIZATION</div>';
+        h += '<div style="font-size:var(--t-base);color:rgba(255,165,0,.85);letter-spacing:2px;margin-bottom:10px;font-weight:bold">'+step.phase.toUpperCase()+(step.surah?' · '+step.surah:'')+'</div>';
+        // Progress bar
         var pct = Math.round((current-1)/100*100);
         h += '<div style="height:3px;background:var(--c-ghost);margin-bottom:14px">';
         h += '<div style="height:100%;width:'+pct+'%;background:#ffa500;transition:width .4s"></div>';
@@ -7854,21 +7698,19 @@ function questRender(){
   }
     var _qtX=0,_qtY=0;
     doneBtn.ontouchstart = function(e){ _qtX=e.touches[0].clientX; _qtY=e.touches[0].clientY; };
-    var _gTXA2=0,_gTYA2=0;
-    doneBtn.ontouchstart=function(e){_gTXA2=e.touches[0].clientX;_gTYA2=e.touches[0].clientY;};
     doneBtn.ontouchend = function(e){
       var dx=Math.abs(e.changedTouches[0].clientX-_qtX);
       var dy=Math.abs(e.changedTouches[0].clientY-_qtY);
       if(dx>8||dy>8)return; // was a scroll, ignore
-      if(Math.abs(e.changedTouches[0].clientX-_gTXA2)>8||Math.abs(e.changedTouches[0].clientY-_gTYA2)>8)return;
       e.preventDefault(); e.stopPropagation();
       questDoneFn();
     };
-    doneBtn.onclick = function(e){ if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return; questDoneFn(); }; // mouse only, not synthetic
+    doneBtn.onclick = function(e){ if(e.detail===0)return; questDoneFn(); }; // mouse only, not synthetic
   }
 }
 
 window.addEventListener('load', function(){
+  hijriFetch();
   if(typeof questRender==='function') questRender();
   setTimeout(function(){
     if(typeof clRender==='function') clRender();
@@ -7885,7 +7727,7 @@ var _autoSyncInterval=null;
 var _autoSyncEnd=0;
 
 function sbStartAutoSync(hours){
-  if(_autoSyncInterval)return; // already running
+  if(_autoSyncInterval)return;
   _autoSyncEnd=Date.now()+(hours||1)*60*60*1000;
   localStorage.setItem('dash_autosync_end',String(_autoSyncEnd));
   localStorage.setItem('dash_autosync_hrs',String(hours||1));
@@ -7893,7 +7735,7 @@ function sbStartAutoSync(hours){
   _autoSyncInterval=setInterval(function(){
     if(Date.now()>=_autoSyncEnd){
       sbStopAutoSync();
-      safeToast('Auto-sync ended');
+      safeToast('Auto-sync ended after 1 hour');
       var cb=document.getElementById('sb-autosync-cb');
       if(cb)cb.checked=false;
       var cb3=document.getElementById('sb-autosync-3h-cb');
@@ -7942,7 +7784,7 @@ window.addEventListener('load',function(){
     _autoSyncInterval=setInterval(function(){
       if(Date.now()>=_autoSyncEnd){
         sbStopAutoSync();
-        safeToast('Auto-sync ended');
+        safeToast('Auto-sync ended after 1 hour');
         var cb=document.getElementById('sb-autosync-cb');
         if(cb)cb.checked=false;
         return;
