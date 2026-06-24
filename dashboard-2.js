@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-06-16 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-06-22 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -125,7 +125,11 @@ function pomoTab(tab){
   pomoCurrentTab=tab;_pomoTabPrev=tab;
   _pomoOrder.forEach(function(t){
     var btn=document.getElementById('ptab-'+t);
-    if(btn)btn.classList.toggle('active',t===tab);
+    if(btn){
+      btn.classList.toggle('active',t===tab);
+      if(t===tab){btn.style.color='#ff5fa0';btn.style.borderColor='#ff5fa0';btn.style.background='rgba(255,95,160,.1)';}
+      else{btn.style.color='#B3B3DB';btn.style.borderColor='rgba(255,255,255,.25)';btn.style.background='rgba(0,0,0,.85)';}
+    }
   });
   _tabSlide2('ppanel-'+prev,'ppanel-'+tab,_pomoOrder.indexOf(tab)>_pomoOrder.indexOf(prev));
   if(tab==='log')pomoRenderLog();
@@ -135,8 +139,8 @@ function pomoTab(tab){
 function pomoTrailSegment(m,idx,log){
   var workCount=log.slice(0,idx+1).filter(function(x){return x.type==='work';}).length;
   var breakCount=log.slice(0,idx+1).filter(function(x){return x.type==='break';}).length;
-  if(m.type==='work') return '<span class="pomo-work-seg">['+workCount+']</span>';
-  return '<span class="pomo-break-seg">('+breakCount+')</span>';
+  if(m.type==='work') return '<span class="pomo-work-seg_2">['+workCount+']</span>';
+  return '<span class="pomo-break-seg_2">('+breakCount+')</span>';
 }
 
 function pomoGetAllLog(){
@@ -177,7 +181,7 @@ function pomoRenderLog(){
       var log=allLog[d]||[];
       var workSessions=log.filter(function(e){return e.type==='work';}).length;
       var breakSessions=log.filter(function(e){return e.type==='break';}).length;
-      var trail=log.map(function(e){var mode=e.type||e;var mins=e.mins||'';if(mode==='work')return '<span class="pomo-work-seg">['+mins+']</span>';return '<span class="pomo-break-seg">('+mins+')</span>';}).join(' <span style="color:var(--dim);font-size:var(--t-sm)">&rarr;</span> ');
+      var trail=log.map(function(e){var mode=e.type||e;var mins=e.mins||'';if(mode==='work')return '<span class="pomo-work-seg_2">['+mins+']</span>';return '<span class="pomo-break-seg_2">('+mins+')</span>';}).join(' <span style="color:var(--dim);font-size:var(--t-sm)">&rarr;</span> ');
       h+='<div class="pomo-log-day">';
       h+='<div class="pomo-log-date" style="display:flex;justify-content:space-between;align-items:baseline">'+
         '<span>'+d+' &mdash; <span style="color:#39ff88">'+workSessions+'w</span> <span style="color:#00e5ff">'+breakSessions+'b</span></span>'+
@@ -186,7 +190,7 @@ function pomoRenderLog(){
       h+='<div style="font-size:var(--t-base);line-height:2;word-break:break-all">';
       log.forEach(function(e,ei){
         var mode=e.type||e;var mins=e.mins||'';
-        var pill=mode==='work'?'<span class="pomo-work-seg">['+mins+']</span>':'<span class="pomo-break-seg">('+mins+')</span>';
+        var pill=mode==='work'?'<span class="pomo-work-seg_2">['+mins+']</span>':'<span class="pomo-break-seg_2">('+mins+')</span>';
         var isPendingPomoDel=window._pomoPendingDel&&window._pomoPendingDel.d===d&&window._pomoPendingDel.i===ei;
         if(isPendingPomoDel){
           h+=pill+'<span data-pomocanceldel="1" style="font-size:var(--t-xs);color:var(--dim);cursor:pointer;margin-right:2px;vertical-align:super">no</span>';
@@ -376,8 +380,8 @@ function pomoRender(){
       trailEl.innerHTML=trailLog.map(function(m){
         var mode=typeof m==='object'?m.mode:m;
         var mins=typeof m==='object'?m.mins:'';
-        if(mode==='work')return '<span class="pomo-work-seg">['+mins+']</span>';
-        return '<span class="pomo-break-seg">('+mins+')</span>';
+        if(mode==='work')return '<span class="pomo-work-seg_2">['+mins+']</span>';
+        return '<span class="pomo-break-seg_2">('+mins+')</span>';
       }).join(' <span style="color:var(--dim);font-size:var(--t-sm)">&rarr;</span> ');
     }
   }
@@ -4556,42 +4560,25 @@ function mlRenderLog(){
   });
   h+='</div>';
   h+='</div>';
-  // Tags — section grid then flat adjective pool
-  h+='<div class="label-dim">WHAT\'S PRESENT?</div>';
-  // Section buttons grid
-  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px">';
+  // Tags — always visible, grouped by category with color
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:10px 0 8px">WHAT\'S PRESENT?</div>';
+  h+='<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px">';
   ML_TAG_CATS.forEach(function(cat){
-    var expanded=!!mlCatExpanded[cat.id];
     var selInCat=cat.tags.filter(function(t){return mlSelectedTags.indexOf(t)>=0;}).length;
-    var borderCol=expanded?cat.color.replace('0.7','0.8'):'var(--c-border)';
-    var bgCol=expanded?cat.color.replace('0.7','0.12'):'transparent';
-    var textCol=expanded?'var(--text)':'var(--dim)';
-    h+='<div data-mlcat="'+cat.id+'" onclick="mlCatExpanded[this.dataset.mlcat]=!mlCatExpanded[this.dataset.mlcat];mlRenderLog()" style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid '+borderCol+';background:'+bgCol+';cursor:pointer;user-select:none">';
-    h+='<span style="font-size:var(--t-sub)">'+cat.emoji+'</span>';
-    h+='<div class="flex-1">';
-    h+='<div style="font-size:var(--t-sm);color:'+textCol+';line-height:1.3">'+cat.label+'</div>';
-    if(selInCat>0)h+='<div style="font-size:var(--t-xs);color:'+cat.color.replace('0.7','0.9')+'">'+selInCat+' selected</div>';
-    h+='</div>';
-    h+='</div>';
+    var col=cat.color;
+    h+='<div>';
+    h+='<div style="font-size:var(--t-xs);color:'+col.replace('0.7','0.6')+';letter-spacing:1px;margin-bottom:5px">'+cat.emoji+' '+cat.label.toUpperCase()+(selInCat?' · '+selInCat+' selected':'')+'</div>';
+    h+='<div style="display:flex;flex-wrap:wrap;gap:4px">';
+    cat.tags.forEach(function(tag){
+      var sel=mlSelectedTags.indexOf(tag)>=0;
+      var borderCol=sel?col.replace('0.7','0.9'):'rgba(255,255,255,.1)';
+      var bgCol=sel?col.replace('0.7','0.18'):'transparent';
+      var textCol=sel?'var(--text)':'rgba(255,255,255,.4)';
+      h+='<span data-tag="'+tag+'" style="font-size:var(--t-xs);padding:3px 9px;border:1px solid '+borderCol+';background:'+bgCol+';color:'+textCol+';cursor:pointer;border-radius:2px">'+tag+'</span>';
+    });
+    h+='</div></div>';
   });
   h+='</div>';
-  // Flat adjective pool from active sections
-  var activeCats=ML_TAG_CATS.filter(function(c){return !!mlCatExpanded[c.id];});
-  if(activeCats.length){
-    h+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;padding:10px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02)">';
-    activeCats.forEach(function(cat){
-      cat.tags.forEach(function(tag){
-        var sel=mlSelectedTags.indexOf(tag)>=0;
-        var borderCol=sel?cat.color.replace('0.7','0.8'):'var(--c-border)';
-        var bgCol=sel?cat.color.replace('0.7','0.2'):'transparent';
-        var textCol=sel?'var(--text)':'rgba(255,255,255,.45)';
-        h+='<span data-tag="'+tag+'" onclick="mlToggleTag(this.dataset.tag)" style="font-size:var(--t-sm);padding:4px 10px;border:1px solid '+borderCol+';background:'+bgCol+';color:'+textCol+';cursor:pointer">'+tag+'</span>';
-      });
-    });
-    h+='</div>';
-  } else {
-    h+='<div class="mb-12"></div>';
-  }
   // Note
   h+='<textarea class="wr-inp" id="ml-note" placeholder="Write anything... or nothing. You don&apos;t have to explain yourself." style="min-height:72px;font-size:var(--t-md)"></textarea>';
   // Affirmation if low mood selected
@@ -5836,6 +5823,8 @@ var MED_COLORS=['#c896ff','#50fac8','#ff85c2','#fb923c','#7dd3fc','#86efac'];
 function medRender(){
   var el=document.getElementById('med-body');
   if(!el)return;
+  el.style.maxHeight='700px';
+  el.style.overflowY='auto';
   var h='';
 
   // Tabs
@@ -6437,6 +6426,9 @@ function blRender(){
   var el = document.getElementById('bl-body');
   var badge = document.getElementById('bl-badge');
   if(!el) return;
+  el.style.maxHeight='1000px';
+  el.style.overflowY='auto';
+  _blTab = blData._tab || 'log';
 
   var log = lsGet('dash_button_log', []);
   var unsynced = log.filter(function(e){return !e._synced;}).length;
@@ -6642,9 +6634,19 @@ function blRender(){
 
   // Wire tabs
   el.querySelectorAll('[data-bltab]').forEach(function(btn){
-    btn.onclick = function(){
+    var _btx=0,_bty=0;
+    btn.ontouchstart=function(e){_btx=e.touches[0].clientX;_bty=e.touches[0].clientY;};
+    btn.ontouchend=function(e){
+      if(Math.abs(e.changedTouches[0].clientX-_btx)>8||Math.abs(e.changedTouches[0].clientY-_bty)>8)return;
+      e.preventDefault();
       blData._tab=this.dataset.bltab;
-      _blTab = this.dataset.bltab;
+      _blTab=this.dataset.bltab;
+      blRender();
+    };
+    btn.onclick=function(e){
+      if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;
+      blData._tab=this.dataset.bltab;
+      _blTab=this.dataset.bltab;
       blRender();
     };
   });

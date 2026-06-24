@@ -1609,6 +1609,10 @@ body.extra-large-text .ptime{font-size:45px!important}
 .pomo-tab.active{color:var(--cp);border-color:var(--cp);background:rgba(255,95,160,.06)}
 .pomo-work-seg{color:#39ff88;font-weight:bold}
 .pomo-break-seg{color:#00e5ff}
+.pomo-tab_2{font-family:'Share Tech Mono',monospace!important;font-size:13px!important;padding:4px 10px!important;border:2px solid rgba(255,255,255,.25)!important;color:#B3B3DB!important;cursor:pointer!important;background:rgba(0,0,0,.85)!important;letter-spacing:1px!important;display:inline-block!important;border-radius:2px!important}
+.pomo-tab_2.active{color:#ff5fa0!important;border-color:#ff5fa0!important;background:rgba(255,95,160,.1)!important}
+.pomo-work-seg_2{color:#39ff88!important;font-weight:bold!important;font-family:'Share Tech Mono',monospace!important}
+.pomo-break-seg_2{color:#00e5ff!important;font-family:'Share Tech Mono',monospace!important}
 .pomo-log-day{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .pomo-log-day:last-child{border-bottom:none}
 .pomo-log-date{font-size:16px;letter-spacing:1px;color:var(--ca);margin-bottom:4px}
@@ -2254,8 +2258,9 @@ body.slim-screen-mode #cat-nav{top:42px}
 
 /* QUICK NAV */
 .qnav-btn{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:6px 13px;
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 10px;
+  font-size:11px;
   border:1px solid rgba(255,255,255,.12);
   background:rgba(255,255,255,.03);
   color:var(--text);font-family:monospace;font-size:11px;
@@ -2264,8 +2269,8 @@ body.slim-screen-mode #cat-nav{top:42px}
   white-space:nowrap;
 }
 .qnav-btn:hover{background:rgba(255,255,255,.08);}
-.qnav-btn .qnav-emoji{font-size:13px;flex-shrink:0}
-.qnav-grid{display:flex;flex-wrap:wrap;gap:8px;max-height:1100px;overflow-y:auto}
+.qnav-btn .qnav-emoji{font-size:11px;flex-shrink:0}
+.qnav-grid{display:flex;flex-wrap:wrap;gap:5px;max-height:1100px;overflow-y:auto}
 
 /* QURAN CARDS */
 .qc-card{background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.2);border-left:3px solid var(--cc);padding:14px 14px 12px;margin-bottom:8px}
@@ -2844,7 +2849,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div class="th" style="border-color:rgba(255,255,255,.1)">
       <span class="th-icon">&#9881;</span>
       <span class="th-label" style="color:var(--text)">Settings</span>
-      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-06-16</span>
+      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-06-22</span>
     </div>
     <div id="settings-body" style="display:flex;flex-direction:column;gap:0">
 
@@ -3276,9 +3281,9 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
       <span id="pomo-sessions-badge" class="th-badge" style="color:var(--dim);border-color:var(--dim);margin-left:auto">0 sessions</span>
     </div>
     <div style="display:flex;gap:4px;margin-bottom:8px">
-      <span class="pomo-tab active" id="ptab-timer" onclick="pomoTab('timer')">TIMER</span>
-      <span class="pomo-tab" id="ptab-log" onclick="pomoTab('log')">LOG</span>
-      <span class="pomo-tab" id="ptab-stats" onclick="pomoTab('stats')">STATS</span>
+      <span class="pomo-tab_2 active" id="ptab-timer" onclick="pomoTab('timer')">TIMER</span>
+      <span class="pomo-tab_2" id="ptab-log" onclick="pomoTab('log')">LOG</span>
+      <span class="pomo-tab_2" id="ptab-stats" onclick="pomoTab('stats')">STATS</span>
     </div>
     <div id="ppanel-timer">
       <div id="pomo-trail" style="font-size:11px;letter-spacing:.5px;padding:2px 0 4px;min-height:18px;word-break:break-all;line-height:1.6"></div>
