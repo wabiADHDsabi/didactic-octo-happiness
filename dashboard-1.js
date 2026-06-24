@@ -82,7 +82,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-06-16 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-06-24 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -7153,6 +7153,15 @@ function juaRender(){
   });
   var revBtn=el.querySelector('[data-juareveal]');
   if(revBtn)revBtn.onclick=function(){juaState._revealed=(juaState._revealed||0)+1;safeHap(HAP.soft);juaSave();juaRender();};
+  var dkBtn=el.querySelector('[data-juadk]');
+  if(dkBtn)dkBtn.onclick=function(){
+    var idx=parseInt(this.getAttribute('data-juaidx'));
+    safeHap(HAP.error);
+    juaAnswerCard(juaState.section,idx,'again');
+    juaState._revealed=0;
+    juaSave();
+    juaRender();
+  };
   el.querySelectorAll('[data-juachoice]').forEach(function(b){
     b.onclick=function(){
       var correct=this.getAttribute('data-juacorrect')==='1';
@@ -7223,7 +7232,10 @@ function juaRenderFacts(surah,idx){
     // Show cloze version of point 1
     h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:6px">KEY POINT 1 — fill in the blanks:</div>';
     h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.9;margin-bottom:12px;padding:10px;border:1px solid rgba(255,204,0,.1);background:rgba(255,204,0,.03)">'+juaCloze(surah.key_points[0],seed)+'</div>';
-    h+='<button data-juareveal="1" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">REVEAL FULL POINT 1</button>';
+    h+='<div style="display:flex;gap:8px">';
+    h+='<button data-juareveal="1" style="flex:1;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">REVEAL FULL POINT 1</button>';
+    h+='<button data-juadk="1" data-juaidx="'+idx+'" style="padding:9px 14px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer">I DON\'T KNOW</button>';
+    h+='</div>';
   } else {
     h+='<div class="mb-10">';
     for(var i=0;i<Math.min(revealed,surah.key_points.length);i++){
@@ -7242,7 +7254,10 @@ function juaRenderFacts(surah,idx){
       // Show cloze of next point
       h+='<div style="font-size:var(--t-xs);color:rgba(255,204,0,.5);letter-spacing:1px;margin-bottom:6px">KEY POINT '+(revealed+1)+' — fill in the blanks:</div>';
       h+='<div style="font-size:var(--t-md);color:var(--text);line-height:1.9;margin-bottom:12px;padding:10px;border:1px solid rgba(255,204,0,.1);background:rgba(255,204,0,.03)">'+juaCloze(surah.key_points[revealed],seed+revealed)+'</div>';
-      h+='<button data-juareveal="1" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">REVEAL POINT '+(revealed+1)+'</button>';
+      h+='<div style="display:flex;gap:8px">';
+      h+='<button data-juareveal="1" style="flex:1;padding:9px;background:transparent;border:1px solid rgba(255,204,0,.3);color:var(--ca);font-family:monospace;font-size:var(--t-sm);cursor:pointer;letter-spacing:2px">REVEAL POINT '+(revealed+1)+'</button>';
+      h+='<button data-juadk="1" data-juaidx="'+idx+'" style="padding:9px 14px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer">I DON\'T KNOW</button>';
+      h+='</div>';
     } else {
       h+='<div style="display:flex;gap:8px;margin-top:12px">';
       h+='<button data-juaans="again" data-juaidx="'+idx+'" style="flex:1;padding:10px;background:transparent;border:1px solid rgba(255,68,68,.4);color:rgba(255,68,68,.8);font-family:monospace;font-size:var(--t-sm);cursor:pointer">✗ MISSED</button>';
