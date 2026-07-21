@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-06-22 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-06-25 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -1512,7 +1512,8 @@ function snapshotData(){
     semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
     ltsData:lsGet('dash_lts',{entries:[]}),
     mipData:lsGet('dash_mip',{months:{}}),
-    questState:lsGet('dash_quest',{})
+    questState:lsGet('dash_quest',{}),
+    calEvents:lsGet('dash_cal_events',[])
   };
 }
 
@@ -1597,6 +1598,7 @@ function restoreSnapshot(snap){
   if(snap.ltsData)localStorage.setItem('dash_lts',JSON.stringify(snap.ltsData));
   if(snap.mipData)localStorage.setItem('dash_mip',JSON.stringify(snap.mipData));
   if(snap.questState)localStorage.setItem('dash_quest',JSON.stringify(snap.questState));
+  if(snap.calEvents)localStorage.setItem('dash_cal_events',JSON.stringify(snap.calEvents));
   if(snap.syncLogAll&&Array.isArray(snap.syncLogAll)){
     var _curAll=lsGet('dash_sync_log_all',[]);
     var _allMap={};
@@ -1790,7 +1792,13 @@ function exportAllData(){
     milData:lsGet('dash_mil',{}),
     wlData:lsGet('dash_wl',[]),
     // Supabase credentials
-    sbCfg:localStorage.getItem('dash_sb_config')||'{}'
+    sbCfg:localStorage.getItem('dash_sb_config')||'{}',
+    clData:lsGet('dash_cl',{activities:[],log:{}}),
+    semData:lsGet('dash_sem',{subjects:[],_active:null,_tab:'progress'}),
+    ltsData:lsGet('dash_lts',{entries:[]}),
+    mipData:lsGet('dash_mip',{months:{}}),
+    questState:lsGet('dash_quest',{}),
+    calEvents:lsGet('dash_cal_events',[])
   };
   var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   var url=URL.createObjectURL(blob);
@@ -1851,6 +1859,12 @@ function importAllData(evt){
       if(data.fearData)localStorage.setItem('dash_fear',JSON.stringify(data.fearData));
       if(data.peopleData)localStorage.setItem('dash_people',JSON.stringify(data.peopleData));
       if(data.sbCfg)localStorage.setItem('dash_sb_config',data.sbCfg);
+      if(data.clData)localStorage.setItem('dash_cl',JSON.stringify(data.clData));
+      if(data.semData)localStorage.setItem('dash_sem',JSON.stringify(data.semData));
+      if(data.ltsData)localStorage.setItem('dash_lts',JSON.stringify(data.ltsData));
+      if(data.mipData)localStorage.setItem('dash_mip',JSON.stringify(data.mipData));
+      if(data.questState)localStorage.setItem('dash_quest',JSON.stringify(data.questState));
+      if(data.calEvents)localStorage.setItem('dash_cal_events',JSON.stringify(data.calEvents));
       alert('Import successful! Refreshing...');
       location.reload();
     }catch(err){alert('Import failed: '+err.message);}
@@ -6426,6 +6440,8 @@ function blRender(){
   var el = document.getElementById('bl-body');
   var badge = document.getElementById('bl-badge');
   if(!el) return;
+  el.style.maxHeight='700px';
+  el.style.overflowY='auto';
   el.style.maxHeight='1000px';
   el.style.overflowY='auto';
   _blTab = blData._tab || 'log';

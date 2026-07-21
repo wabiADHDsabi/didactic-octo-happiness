@@ -82,7 +82,7 @@ if(!window._dbgCheckpoints)window._dbgCheckpoints={};
 window._dbgCheckpoints['dash1_start']=true;
 console.log('dashboard-1.js started');
 if(!window._dbgCheckpoints)window._dbgCheckpoints={};
-// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-06-24 ──
+// ── dashboard-1.js ── Part 1 of 3 ── v13 ── BUILD 2026-07-21 ──
 // Contains: core setup, device sync, haptic engine, magnet mode,
 //           todos, quick notes, meals, schedule, books (+ Kindle locations),
 //           birthdays, weather, stocks, prayer times, calendar (week numbers),
@@ -1697,6 +1697,27 @@ function renderCal(){
     h+='<div class="'+cls+'">'+d+dot+'</div>';
   }
   document.getElementById('calgrid').innerHTML=h;
+  // ── Inject custom calendar events into noteMap (dots + notes text) ──
+  if(typeof calEvents!=='undefined'&&typeof CAL_EVENT_TYPES!=='undefined'){
+    var _monthPrefix=y+'-'+String(mo+1).padStart(2,'0')+'-';
+    calEvents.forEach(function(ce){
+      if(ce.date.indexOf(_monthPrefix)!==0)return;
+      var ceDay=parseInt(ce.date.slice(8,10));
+      var typ=CAL_EVENT_TYPES.find(function(t){return t.id===ce.type;})||CAL_EVENT_TYPES[0];
+      if(!noteMap[ceDay])noteMap[ceDay]={};
+      if(!noteMap[ceDay].extra)noteMap[ceDay].extra=[];
+      noteMap[ceDay].extra.push({col:typ.color,text:ce.title});
+      // Add dot to the day cell
+      var _cells=document.querySelectorAll('#calgrid .cday.in');
+      _cells.forEach(function(cell){
+        if(parseInt(cell.textContent,10)===ceDay){
+          var dot=document.createElement('span');
+          dot.style.cssText='display:inline-block;width:4px;height:4px;border-radius:50%;margin-left:2px;background:'+typ.color;
+          cell.appendChild(dot);
+        }
+      });
+    });
+  }
   // ── Inject birthdays into noteMap ──
   // ── Inject birthdays (stored as {month:1-12, day:1-31, name}) ──
   if(window.birthdays&&Array.isArray(window.birthdays)){
@@ -2016,11 +2037,45 @@ function selectTime(key,time){
   if(cur===time){schedule[key]=time+'?';}
   else if(cur===time+'?'){schedule[key]=null;}
   else{schedule[key]=time;}
-  saveSched();renderSched();
+  saveSched();
+  schedRipple(key,time);
+  setTimeout(function(){renderSched();},80);
+}
+
+function schedRipple(key,time){
+  // Find all pill spans in this day's row by their onclick attribute
+  var allPills=Array.from(document.querySelectorAll('.pill'));
+  // Filter to this day's row
+  var rowPills=allPills.filter(function(p){
+    return p.getAttribute('onclick')&&p.getAttribute('onclick').indexOf("'"+key+"'")>=0;
+  });
+  if(!rowPills.length)return;
+  var ti=rowPills.findIndex(function(p){return p.textContent.trim()===time;});
+  if(ti<0)return;
+  rowPills.forEach(function(p,i){
+    var dist=Math.abs(i-ti);
+    if(dist===0)return;
+    var opacity=Math.max(0, 1-(dist*0.28));
+    if(opacity<=0)return;
+    setTimeout(function(){
+      p.classList.remove('pill-ripple');
+      void p.offsetWidth;
+      p.classList.add('pill-ripple');
+      setTimeout(function(){p.classList.remove('pill-ripple');},650);
+    }, dist*130);
+  });
 }
 
 function toggleOff(key){
-  schedule[key]=schedule[key]==='OFF'?null:'OFF';
+  if(schedule[key]==='OFF'){
+    // Restore previous time if saved, else clear
+    schedule[key]=schedule[key+'_prev']||null;
+    delete schedule[key+'_prev'];
+  } else {
+    // Save current time before marking OFF
+    if(schedule[key]&&schedule[key]!=='OFF')schedule[key+'_prev']=schedule[key];
+    schedule[key]='OFF';
+  }
   saveSched();renderSched();
 }
 
@@ -4867,6 +4922,8 @@ function ptMonthPct(){
 function ptRenderToday(){
   var el=document.getElementById('pt-today');
   if(!el)return;
+  el.style.maxHeight='1100px';
+  el.style.overflowY='auto';
 
   ptCheckNotices();
   var today=ptTodayKey();
@@ -4899,6 +4956,14 @@ function ptRenderToday(){
       +'</div>'
       +'</div>';
   });
+
+  // Witr row
+  var _witr=day._witr||null;
+  h+='<div style="display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.02)">';
+  h+='<div style="flex:1;font-size:var(--t-sm);color:var(--dim);letter-spacing:1px">WITR</div>';
+  h+='<button data-ptwitr="yes" data-ptdate="'+ptViewDate+'" style="padding:6px 18px;border:1px solid '+(_witr==='yes'?'var(--cg)':'rgba(255,255,255,.15)')+';background:'+(_witr==='yes'?'rgba(0,255,136,.12)':'transparent')+';color:'+(_witr==='yes'?'var(--cg)':'rgba(255,255,255,.3)')+';font-size:var(--t-base);cursor:pointer;border-radius:2px">✓</button>';
+  h+='<button data-ptwitr="no" data-ptdate="'+ptViewDate+'" style="padding:6px 18px;border:1px solid '+(_witr==='no'?'#00e5ff':'rgba(255,255,255,.15)')+';background:'+(_witr==='no'?'rgba(0,229,255,.12)':'transparent')+';color:'+(_witr==='no'?'#00e5ff':'rgba(255,255,255,.3)')+';font-size:var(--t-base);cursor:pointer;border-radius:2px">✕</button>';
+  h+='</div>';
 
   h+='<div onclick="ptToggleExtraInfo()" style="margin-top:10px;display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid rgba(255,255,255,.12);cursor:pointer;background:rgba(255,255,255,.02)">';
   h+='<span style="font-size:var(--t-sm);letter-spacing:2px;color:var(--dim)">EXTRA INFO</span>';
@@ -4951,6 +5016,27 @@ function ptRenderToday(){
   h+='</div>';
   // ── Forbidden prayer times rendered in prayer tile ──
   if(isToday&&prayers)renderForbiddenTimes();  el.innerHTML=h;
+  // Wire witr buttons
+  el.querySelectorAll('[data-ptwitr]').forEach(function(b){
+    var _wx=0,_wy=0;
+    b.ontouchstart=function(e){_wx=e.touches[0].clientX;_wy=e.touches[0].clientY;};
+    b.ontouchend=function(e){
+      if(Math.abs(e.changedTouches[0].clientX-_wx)>8||Math.abs(e.changedTouches[0].clientY-_wy)>8)return;
+      e.preventDefault();
+      var dk=this.dataset.ptdate,wv=this.dataset.ptwitr;
+      if(!ptData[dk])ptData[dk]={};
+      ptData[dk]._witr=(ptData[dk]._witr===wv)?null:wv;
+      ptTouchDay(dk);ptSave();ptRenderToday();
+    };
+    b.onclick=function(e){
+      if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;
+      var dk=this.dataset.ptdate,wv=this.dataset.ptwitr;
+      if(!ptData[dk])ptData[dk]={};
+      ptData[dk]._witr=(ptData[dk]._witr===wv)?null:wv;
+      ptTouchDay(dk);ptSave();ptRenderToday();
+    };
+  });
+
   // Wire prayer status buttons
   el.querySelectorAll('[data-pt-status]').forEach(function(btn){
     btn.onclick=function(){
@@ -4973,6 +5059,8 @@ function ptToggleMonth(key){
 function ptRenderLog(){
   var el=document.getElementById('pt-log');
   if(!el)return;
+  el.style.maxHeight='1100px';
+  el.style.overflowY='auto';
   var keys=Object.keys(ptData).sort().reverse();
   if(!keys.length){el.innerHTML='<div class="empty-msg-sm">No entries yet. Log some prayers first.</div>';return;}
   // Group by YYYY-MM
@@ -5213,16 +5301,18 @@ function ptSetBalPeriod(p){
 function exportPrayerLog(){
   var keys=Object.keys(ptData).filter(function(k){return Object.values(ptData[k]).some(function(v){return v&&v!=='not logged';});}).sort().reverse();
   if(!keys.length){clipCopy('(no prayer log entries)','Prayer log');return;}
-  var lines=['SALAH LOG','DATE       F  D  A  M  I   SCORE  FOCUS  EASY'];
+  var lines=['SALAH LOG','DATE       F  D  A  M  I  W   SCORE  FOCUS  EASY'];
   var statusChar=function(s){return s==='ontime'?'\u2713':s==='late'?'~':s==='missed'?'\u2717':'-';};
   keys.forEach(function(dk){
     var day=ptData[dk]||{};
     var row=dk+'  ';
     PT_PRAYERS.forEach(function(p){row+=statusChar(day[p])+'  ';});
+    var witrChar=day._witr==='yes'?'\u2713':day._witr==='no'?'\u2717':'-';
+    row+=witrChar+'  ';
     var on=PT_PRAYERS.filter(function(p){return day[p]==='ontime';}).length;
     var miss=PT_PRAYERS.filter(function(p){return day[p]==='missed';}).length;
     row+=on+'/'+PT_PRAYERS.length;if(miss)row+='(-'+miss+')';
-    row=row.padEnd(23);
+    row=row.padEnd(26);
     if(day._focus)row+=' f'+day._focus;
     if(day._easy&&Object.values(day._easy).some(Boolean)){var ep=Object.keys(day._easy).filter(function(p){return day._easy[p];}).map(function(p){return p[0];}).join('');row+=' e['+ep+']';}
     lines.push(row);
@@ -7156,11 +7246,28 @@ function juaRender(){
   var dkBtn=el.querySelector('[data-juadk]');
   if(dkBtn)dkBtn.onclick=function(){
     var idx=parseInt(this.getAttribute('data-juaidx'));
+    var sec=juaState.section;
     safeHap(HAP.error);
-    juaAnswerCard(juaState.section,idx,'again');
-    juaState._revealed=0;
-    juaSave();
-    juaRender();
+    juaAnswerCard(sec,idx,'again');
+    if(sec==='facts'){
+      juaState._revealed=0;
+      juaSave();
+      juaRender();
+    } else {
+      // Meanings/Order — reveal correct choice, disable buttons, show NEXT
+      this.style.display='none';
+      el.querySelectorAll('[data-juachoice]').forEach(function(b){
+        b.style.pointerEvents='none';
+        if(b.getAttribute('data-juacorrect')==='1'){b.style.borderColor='var(--cg)';b.style.color='var(--cg)';}
+        else{b.style.opacity='.4';}
+      });
+      juaSave();
+      var nb=document.createElement('button');
+      nb.textContent='NEXT →';
+      nb.style.cssText='width:100%;margin-top:8px;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:2px';
+      nb.onclick=function(){juaRender();};
+      el.appendChild(nb);
+    }
   };
   el.querySelectorAll('[data-juachoice]').forEach(function(b){
     b.onclick=function(){
@@ -7279,6 +7386,7 @@ function juaRenderMeanings(surah,idx){
   choices.forEach(function(c){
     h+='<button data-juachoice="1" data-juacorrect="'+(c.correct?'1':'0')+'" data-juaidx="'+idx+'" style="width:100%;padding:10px;text-align:left;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;margin-bottom:6px">'+c.text+'</button>';
   });
+  h+='<button data-juadk="1" data-juaidx="'+idx+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;margin-top:4px">I DON\'T KNOW</button>';
   return h+'</div>';
 }
 function juaRenderOrder(surah,idx,dir){
@@ -7307,6 +7415,7 @@ function juaRenderOrder(surah,idx,dir){
   choices.forEach(function(c){
     h+='<button data-juachoice="1" data-juacorrect="'+(c.correct?'1':'0')+'" data-juaidx="'+idx+'" style="width:100%;padding:10px;text-align:left;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text);font-family:monospace;font-size:var(--t-base);cursor:pointer;margin-bottom:6px">'+c.text+'</button>';
   });
+  h+='<button data-juadk="1" data-juaidx="'+idx+'" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--dim);font-family:monospace;font-size:var(--t-sm);cursor:pointer;margin-top:4px">I DON\'T KNOW</button>';
   return h+'</div>';
 }
 function juaRenderProgress(){
@@ -7811,3 +7920,130 @@ window.addEventListener('load',function(){
 // ── END AUTO SYNC ──
 
 // ── END OF dashboard-1.js (Part 1 of 3) — continues in dashboard-2.js ──
+
+// ══════════════════════════════════════════
+// CALENDAR — CUSTOM EVENTS
+// ══════════════════════════════════════════
+var calEvents = lsGet('dash_cal_events', []);
+function calEventsSave(){ lsSet('dash_cal_events', calEvents); }
+function calEventId(){ return 'ce_'+Date.now()+'_'+Math.random().toString(36).slice(2,5); }
+
+var CAL_EVENT_TYPES = [
+  {id:'personal', label:'Personal', color:'#00e5ff'},
+  {id:'work',     label:'Work',     color:'#ff5fa0'},
+  {id:'birthday', label:'Birthday', color:'#ffcc00'},
+  {id:'reminder', label:'Reminder', color:'#39ff88'},
+  {id:'other',    label:'Other',    color:'#c77dff'}
+];
+
+function calSwitchTab2(tab){
+  var vp=document.getElementById('cal-view-panel'), ap=document.getElementById('cal-add-panel');
+  document.querySelectorAll('[data-caltab2]').forEach(function(b){b.classList.toggle('active', b.dataset.caltab2===tab);});
+  if(tab==='view'){
+    if(vp)vp.style.display='';
+    if(ap)ap.style.display='none';
+    renderCal();
+  } else {
+    if(vp)vp.style.display='none';
+    if(ap)ap.style.display='';
+    calRenderAdd();
+  }
+}
+
+function calRenderAdd(){
+  var el=document.getElementById('cal-add-panel');
+  if(!el)return;
+  var today=localDateStr(new Date());
+  var editing=window._calEditId;
+  var ev=editing?calEvents.find(function(e){return e.id===editing;}):null;
+
+  var h='';
+  h+='<input type="date" id="cal-ev-date" value="'+(ev?ev.date:today)+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(199,125,255,.25);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:7px 9px;outline:none;margin-bottom:8px">';
+  h+='<input type="text" id="cal-ev-title" placeholder="Event title..." value="'+(ev?ev.title.replace(/"/g,'&quot;'):'')+'" style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(199,125,255,.25);color:var(--text);font-family:monospace;font-size:var(--t-base);padding:7px 9px;outline:none;margin-bottom:8px">';
+
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin-bottom:6px">TYPE</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';
+  function _hexA(hex,a){var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return 'rgba('+r+','+g+','+b+','+a+')';}
+  CAL_EVENT_TYPES.forEach(function(t){
+    var sel=(window._calPendingType||(ev?ev.type:'personal'))===t.id;
+    h+='<span data-calevtype="'+t.id+'" style="font-size:var(--t-xs);padding:4px 10px;border:1px solid '+(sel?t.color:'rgba(255,255,255,.15)')+';color:'+(sel?t.color:'var(--dim)')+';background:'+(sel?_hexA(t.color,.12):'transparent')+';cursor:pointer;border-radius:2px">'+t.label+'</span>';
+  });
+  h+='</div>';
+
+  h+='<textarea id="cal-ev-notes" placeholder="Notes (optional)..." style="width:100%;box-sizing:border-box;background:transparent;border:1px solid rgba(199,125,255,.2);color:var(--text);font-family:monospace;font-size:var(--t-sm);padding:7px 9px;outline:none;resize:none;min-height:50px;margin-bottom:10px">'+(ev?ev.notes||'':'')+'</textarea>';
+
+  h+='<button id="cal-ev-save" style="width:100%;padding:9px;background:rgba(199,125,255,.06);border:1px solid rgba(199,125,255,.4);color:var(--cpr);font-family:monospace;font-size:var(--t-base);cursor:pointer;letter-spacing:1px">'+(editing?'SAVE CHANGES':'+ ADD EVENT')+'</button>';
+
+  if(editing){
+    h+='<button id="cal-ev-delete" style="width:100%;margin-top:6px;padding:8px;background:transparent;border:1px solid rgba(255,68,68,.3);color:var(--cr);font-family:monospace;font-size:var(--t-sm);cursor:pointer">✕ DELETE EVENT</button>';
+  }
+
+  // Upcoming events list
+  h+='<div style="font-size:var(--t-xs);color:var(--dim);letter-spacing:1px;margin:16px 0 8px">UPCOMING</div>';
+  var upcoming=calEvents.filter(function(e){return e.date>=today;}).sort(function(a,b){return a.date.localeCompare(b.date);}).slice(0,10);
+  if(!upcoming.length){
+    h+='<div style="color:var(--dim);font-size:var(--t-sm);text-align:center;padding:10px 0">No upcoming events.</div>';
+  } else {
+    upcoming.forEach(function(e){
+      var typ=CAL_EVENT_TYPES.find(function(t){return t.id===e.type;})||CAL_EVENT_TYPES[0];
+      h+='<div data-caleventedit="'+e.id+'" style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer">';
+      h+='<span style="width:8px;height:8px;border-radius:50%;background:'+typ.color+';flex-shrink:0"></span>';
+      h+='<div style="flex:1"><div style="font-size:var(--t-sm);color:var(--text)">'+e.title+'</div><div style="font-size:var(--t-xxs);color:var(--dim)">'+e.date+' · '+typ.label+'</div></div>';
+      h+='</div>';
+    });
+  }
+
+  el.innerHTML=h;
+
+  // Wire type pills
+  el.querySelectorAll('[data-calevtype]').forEach(function(b){
+    b.onclick=function(){
+      window._calPendingType=this.dataset.calevtype;
+      calRenderAdd();
+    };
+  });
+
+  // Wire save
+  var saveBtn=document.getElementById('cal-ev-save');
+  if(saveBtn)saveBtn.onclick=function(){
+    var dateEl=document.getElementById('cal-ev-date');
+    var titleEl=document.getElementById('cal-ev-title');
+    var notesEl=document.getElementById('cal-ev-notes');
+    if(!dateEl.value||!titleEl.value.trim())return;
+    var typeSel=window._calPendingType||(ev?ev.type:'personal');
+    if(editing){
+      ev.date=dateEl.value;ev.title=titleEl.value.trim();ev.type=typeSel;ev.notes=notesEl.value.trim();
+      window._calEditId=null;
+    } else {
+      calEvents.push({id:calEventId(),date:dateEl.value,title:titleEl.value.trim(),type:typeSel,notes:notesEl.value.trim(),ts:Date.now()});
+      if(typeof confetti==='function')confetti(window.innerWidth/2,200,'#c77dff');
+    }
+    window._calPendingType=null;
+    calEventsSave();
+    safeHap(HAP.save);
+    calRenderAdd();
+    if(typeof renderCal==='function')renderCal();
+  };
+
+  // Wire delete
+  var delBtn=document.getElementById('cal-ev-delete');
+  if(delBtn)delBtn.onclick=function(){
+    if(!confirm('Delete this event?'))return;
+    calEvents=calEvents.filter(function(e){return e.id!==editing;});
+    window._calEditId=null;
+    calEventsSave();
+    calRenderAdd();
+    if(typeof renderCal==='function')renderCal();
+  };
+
+  // Wire edit-on-tap for upcoming list
+  el.querySelectorAll('[data-caleventedit]').forEach(function(row){
+    row.onclick=function(){
+      window._calEditId=this.dataset.caleventedit;
+      window._calPendingType=null;
+      calRenderAdd();
+    };
+  });
+}
+
+

@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-06-16 ──
+// ── dashboard-3.js ── Part 3 of 3 ── v13 ── BUILD 2026-06-25 ──
 // Contains: Day Blocks, Workout Log, Rent Payments, S-Tracker,
 //           Quran Cards (SRS, 6/day), Quran Words (695 cards, SRS, Arabic fonts),
 //           Quick Nav, Gratitude Log, Dua, For Akhira, Countdown / In X Days,
@@ -2345,8 +2345,17 @@ function duaRender(){
       duaSave();
       duaRender();
     };
-    btn.onclick=fn;
-    btn.ontouchend=function(e){e.preventDefault();fn.call(this);};
+    var _dtx=0,_dty=0;
+    btn.ontouchstart=function(e){_dtx=e.touches[0].clientX;_dty=e.touches[0].clientY;};
+    btn.ontouchend=function(e){
+      if(Math.abs(e.changedTouches[0].clientX-_dtx)>8||Math.abs(e.changedTouches[0].clientY-_dty)>8)return;
+      e.preventDefault();
+      fn.call(this);
+    };
+    btn.onclick=function(e){
+      if(e.sourceCapabilities&&e.sourceCapabilities.firesTouchEvents)return;
+      fn.call(this);
+    };
   });
   // Wire font buttons
   el.querySelectorAll('[data-duafont]').forEach(function(btn){
