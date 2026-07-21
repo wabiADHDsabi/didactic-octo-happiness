@@ -2038,9 +2038,9 @@ function selectTime(key,time){
   else if(cur===time+'?'){schedule[key]=null;}
   else{schedule[key]=time;}
   saveSched();
-  // Ripple first on existing DOM, then re-render after animation
-  var _rippleDuration=schedRipple(key,time);
-  setTimeout(function(){renderSched();},_rippleDuration+50);
+  renderSched();
+  // Ripple on the freshly rendered DOM
+  schedRipple(key,time);
 }
 
 function schedRipple(key,time){
