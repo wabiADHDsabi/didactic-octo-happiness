@@ -2038,32 +2038,40 @@ function selectTime(key,time){
   else if(cur===time+'?'){schedule[key]=null;}
   else{schedule[key]=time;}
   saveSched();
-  schedRipple(key,time);
-  setTimeout(function(){renderSched();},80);
+  // Ripple first on existing DOM, then re-render after animation
+  var _rippleDuration=schedRipple(key,time);
+  setTimeout(function(){renderSched();},_rippleDuration+50);
 }
 
 function schedRipple(key,time){
-  // Find all pill spans in this day's row by their onclick attribute
   var allPills=Array.from(document.querySelectorAll('.pill'));
-  // Filter to this day's row
   var rowPills=allPills.filter(function(p){
     return p.getAttribute('onclick')&&p.getAttribute('onclick').indexOf("'"+key+"'")>=0;
   });
-  if(!rowPills.length)return;
+  if(!rowPills.length)return 0;
   var ti=rowPills.findIndex(function(p){return p.textContent.trim()===time;});
-  if(ti<0)return;
+  if(ti<0)return 0;
+  var maxDelay=0;
   rowPills.forEach(function(p,i){
     var dist=Math.abs(i-ti);
-    if(dist===0)return;
-    var opacity=Math.max(0, 1-(dist*0.28));
-    if(opacity<=0)return;
+    if(dist===0){
+      // Flash the tapped pill bright
+      p.classList.remove('pill-ripple');
+      void p.offsetWidth;
+      p.classList.add('pill-ripple');
+      return;
+    }
+    var delay=dist*130;
+    var fade=Math.max(0,1-(dist*0.28));
+    if(fade<=0)return;
+    maxDelay=Math.max(maxDelay,delay+650);
     setTimeout(function(){
       p.classList.remove('pill-ripple');
       void p.offsetWidth;
       p.classList.add('pill-ripple');
-      setTimeout(function(){p.classList.remove('pill-ripple');},650);
-    }, dist*130);
+    }, delay);
   });
+  return maxDelay;
 }
 
 function toggleOff(key){
