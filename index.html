@@ -2270,7 +2270,7 @@ body.slim-screen-mode #cat-nav{top:42px}
 }
 .qnav-btn:hover{background:rgba(255,255,255,.08);}
 .qnav-btn .qnav-emoji{font-size:11px;flex-shrink:0}
-.qnav-grid{display:flex;flex-wrap:wrap;gap:5px;max-height:1100px;overflow-y:auto}
+.qnav-grid{display:flex;flex-wrap:wrap;gap:5px;max-height:700px;overflow-y:auto}
 
 /* QURAN CARDS */
 .qc-card{background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.2);border-left:3px solid var(--cc);padding:14px 14px 12px;margin-bottom:8px}
@@ -2360,6 +2360,14 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
 
 
 
+.cal-tab2{font-size:var(--t-xs);padding:3px 10px;border:1px solid var(--c-border);color:var(--dim);cursor:pointer;font-family:monospace;letter-spacing:1px;background:transparent}
+.cal-tab2.active{color:var(--cpr);border-color:rgba(199,125,255,.5);background:rgba(199,125,255,.08)}
+@keyframes pillWave{
+  0%{box-shadow:0 0 0px 0px rgba(0,255,136,0);background:transparent;border-color:rgba(255,255,255,.12);}
+  35%{box-shadow:0 0 10px 3px rgba(0,255,136,.7);background:rgba(0,255,136,.22)!important;border-color:var(--cg)!important;color:var(--cg)!important;}
+  100%{box-shadow:0 0 0px 0px rgba(0,255,136,0);background:transparent;border-color:rgba(255,255,255,.12);}
+}
+.pill-ripple{animation:pillWave 0.65s ease-out forwards!important;transition:none!important;}
 </style>
 </head>
 <body>
@@ -2461,9 +2469,16 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
   <div class="tile tpr" data-id="calendar"><div class="icon-label-wrap"><span class="icon-emoji">▦</span><span class="icon-label">CALENDAR</span></div>
     <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th"><span class="th-icon">&#9638;</span><span class="th-label cpr">Calendar</span></div>
+    <div style="display:flex;gap:6px;margin-bottom:10px">
+      <span data-caltab2="view" class="cal-tab2 active" onclick="calSwitchTab2('view')">VIEW</span>
+      <span data-caltab2="add" class="cal-tab2" onclick="calSwitchTab2('add')">+ ADD EVENT</span>
+    </div>
+    <div id="cal-view-panel">
     <div id="calhdr" class="cal-hdr"></div>
     <div id="calgrid" class="cal-grid"></div>
     <div id="cal-notes" class="cal-notes"></div>
+    </div>
+    <div id="cal-add-panel" style="display:none"></div>
   </div>
   <div class="tile tc" data-id="notes"><div class="icon-label-wrap"><span class="icon-emoji">▤</span><span class="icon-label">NOTES</span></div>
     <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -2547,8 +2562,8 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div id="pt-notices"></div>
     <div id="pt-today"></div>
     <div id="pt-log" style="display:none;max-height:260px;overflow-y:auto"></div>
-    <div id="pt-balance-panel" style="display:none"></div>
-    <div id="pt-focus-panel" style="display:none"></div>
+    <div id="pt-balance-panel" style="display:none;max-height:1100px;overflow-y:auto"></div>
+    <div id="pt-focus-panel" style="display:none;max-height:1100px;overflow-y:auto"></div>
   </div>  <div class="tile tg" data-id="weekly-review"><div class="icon-label-wrap"><span class="icon-emoji">📋</span><span class="icon-label">REVIEW</span></div>
     <div class="drag-handle"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="th" style="border-color:rgba(0,255,136,.2)"><span class="th-icon cg">&#128203;</span><span class="th-label cg">Weekly Review</span><span id="wr-badge" class="th-badge" style="color:var(--dim);border-color:var(--dim);margin-left:auto">—</span><span class="th-badge" id="wr-tab-write" style="color:var(--cg);border-color:var(--cg);cursor:pointer;margin-left:4px" onclick="wrTab('write')">WRITE</span><span class="th-badge" style="color:var(--dim);border-color:var(--dim);cursor:pointer;margin-left:4px" id="wr-tab-history" onclick="wrTab('history')">HISTORY</span><button class="export-btn" onclick="wrExport()" title="Export as .txt" style="margin-left:4px">&#128229;</button><button class="export-btn" onclick="showHelp('wr')" title="About this card" style="margin-left:2px">?</button></div>
@@ -2849,7 +2864,7 @@ body.single-col-mode .dhikr-tap{padding:36px 18px;font-size:26px}
     <div class="th" style="border-color:rgba(255,255,255,.1)">
       <span class="th-icon">&#9881;</span>
       <span class="th-label" style="color:var(--text)">Settings</span>
-      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-06-22</span>
+      <span id="settings-build" style="margin-left:auto;font-size:9px;color:var(--dim);letter-spacing:1px">BUILD 2026-07-21</span>
     </div>
     <div id="settings-body" style="display:flex;flex-direction:column;gap:0">
 
