@@ -6,7 +6,7 @@ function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){cons
 function safeHap(t){if(typeof hap==='function')hap(t);}
 // ── END LOCAL UTILITIES ──
 
-// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-06-25 ──
+// ── dashboard-2.js ── Part 2 of 3 ── v13 ── BUILD 2026-08-09 ──
 // Contains: pomodoro (maroon/blue SRS animation, haptics),
 //           Islamic topics, writers den, weekend warrior,
 //           weekly routines (Fri–Sun only), weekly review,
@@ -5988,7 +5988,20 @@ function medRender(){
         h+='<div style="width:10px;height:10px;border-radius:50%;background:'+col+'"></div>';
         h+='<span class="text-11">'+m.name+'</span>';
         h+='</div>';
-        h+='<div class="dim-10">'+total+' doses total · '+streak+' day streak · last: '+lastStr+'</div>';
+        // Last 14 and 30 day counts
+        var cut14=new Date(now);cut14.setDate(cut14.getDate()-14);
+        var cut30=new Date(now);cut30.setDate(cut30.getDate()-30);
+        var last14=logs.filter(function(e){return new Date(e.ts)>=cut14;}).length;
+        var last30=logs.filter(function(e){return new Date(e.ts)>=cut30;}).length;
+        h+='<div class="dim-10">'+total+' total · '+streak+' day streak · last: '+lastStr+'</div>';
+        h+='<div style="display:flex;gap:10px;margin-top:4px">';
+        h+='<div style="font-size:var(--t-xs);border:1px solid rgba(200,150,255,.25);padding:3px 10px;text-align:center">';
+        h+='<div style="font-size:var(--t-md);color:'+col+';font-family:monospace">'+last14+'</div>';
+        h+='<div style="color:var(--dim)">last 14d</div></div>';
+        h+='<div style="font-size:var(--t-xs);border:1px solid rgba(200,150,255,.25);padding:3px 10px;text-align:center">';
+        h+='<div style="font-size:var(--t-md);color:'+col+';font-family:monospace">'+last30+'</div>';
+        h+='<div style="color:var(--dim)">last 30d</div></div>';
+        h+='</div>';
         h+='</div>';
       });
     }
